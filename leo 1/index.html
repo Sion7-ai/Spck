@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo der Löwe beim Zahnarzt - Das Abenteuer-Kinderbuch, das Zahnarztangst spielerisch überwindet!</title>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <span class="iconify" data-icon="emojione:lion-face" data-width="36" data-height="36"></span>
+                    Leo der Löwe
+                </a>
+                <nav class="nav-menu">
+                    <a href="#features">Besonderheiten</a>
+                    <a href="#preview">Buchvorschau</a>
+                    <a href="#testimonials">Leserstimmen</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+                <div class="cart-icon">
+                    <span class="iconify" data-icon="material-symbols:shopping-cart" data-width="24" data-height="24"></span>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="limited-offer">
+                        <span class="iconify" data-icon="material-symbols:timer" data-width="16" data-height="16"></span>
+                        Limitiertes Angebot: 20% Rabatt – Nur noch <span class="offer-time">3 Tage</span>!
+                    </div>
+                    <h1 class="animate-title">Leo überwindet seine Zahnarztangst!</h1>
+                    <p class="hero-subtitle">Ein spannendes Abenteuer, das Kindern hilft, ihre Angst vorm Zahnarzt zu besiegen</p>
+                    <p class="hero-description">Begleite Leo den Löwen auf seiner mutigen Reise zum Zahnarzt und entdecke, wie selbst der König des Dschungels seine Ängste überwinden kann. Dieses liebevoll illustrierte Kinderbuch beruhigt, macht Mut und verwandelt den Zahnarztbesuch in ein positives Erlebnis.</p>
+                    
+                    <div class="highlights">
+                        <div class="highlight-item">
+                            <span class="iconify" data-icon="material-symbols:check-circle" data-width="20" data-height="20"></span>
+                            Für Kinder ab 3 Jahren
+                        </div>
+                        <div class="highlight-item">
+                            <span class="iconify" data-icon="material-symbols:check-circle" data-width="20" data-height="20"></span>
+                            Pädagogisch wertvoll
+                        </div>
+                        <div class="highlight-item">
+                            <span class="iconify" data-icon="material-symbols:check-circle" data-width="20" data-height="20"></span>
+                            Von Zahnärzten empfohlen
+                        </div>
+                    </div>
+                    
+                    <div class="review-highlight">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-count">Über 500 begeisterte Eltern und Kinder!</p>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="#pricing" class="btn btn-primary btn-lg btn-float">
+                            <span class="iconify" data-icon="material-symbols:shopping-cart-checkout" data-width="20" data-height="20"></span>
+                            Jetzt bestellen
+                        </a>
+                        <a href="#preview" class="btn btn-outline btn-lg">
+                            <span class="iconify" data-icon="material-symbols:auto-stories" data-width="20" data-height="20"></span>
+                            Buchvorschau
+                        </a>
+                    </div>
+                    
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <span class="iconify" data-icon="material-symbols:local-shipping" data-width="20" data-height="20"></span>
+                            Versandkostenfrei
+                        </div>
+                        <div class="trust-badge">
+                            <span class="iconify" data-icon="material-symbols:verified-user" data-width="20" data-height="20"></span>
+                            Sichere Zahlung
+                        </div>
+                        <div class="trust-badge">
+                            <span class="iconify" data-icon="material-symbols:update" data-width="20" data-height="20"></span>
+                            14 Tage Rückgaberecht
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-image">
+                    <div class="floating-elements">
+                        <div class="float-element float-1"></div>
+                        <div class="float-element float-2"></div>
+                        <div class="float-element float-3"></div>
+                        <div class="float-element float-4"></div>
+                    </div>
+                    <div class="book-wrapper" id="book-wrapper">
+                        <div class="book-sale-badge">-20%</div>
+                        <img src="https://via.placeholder.com/500x600" alt="Leo der Löwe beim Zahnarzt Buchcover" class="book-cover">
+                        <div class="book-spine"></div>
+                        <div class="book-page hidden">
+                            <div class="book-page-content">
+                                <p>Ein Blick ins Buch...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Features Section -->
+    <section class="special-features" id="features">
+        <div class="container">
+            <h2 class="section-title text-center">Was macht dieses Buch so besonders?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="iconify" data-icon="material-symbols:psychology" data-width="36" data-height="36"></span>
+                    </div>
+                    <h3 class="feature-title">Angstabbau</h3>
+                    <p class="feature-description">Hilft Kindern, ihre Zahnarztangst spielerisch zu überwinden und vermittelt ein positives Bild vom Zahnarztbesuch.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="iconify" data-icon="material-symbols:menu-book" data-width="36" data-height="36"></span>
+                    </div>
+                    <h3 class="feature-title">Interaktive Elemente</h3>
+                    <p class="feature-description">Mit Klappen zum Öffnen, Fühlseiten und Zahnputz-Anleitung zum Mitmachen für ein fesselndes Leseerlebnis.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="iconify" data-icon="emojione:artist-palette" data-width="36" data-height="36"></span>
+                    </div>
+                    <h3 class="feature-title">Wunderschöne Illustrationen</h3>
+                    <p class="feature-description">Liebevoll gestaltete, farbenfrohe Bilder, die Kinder begeistern und die Geschichte lebendig werden lassen.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="iconify" data-icon="material-symbols:water-drop" data-width="36" data-height="36"></span>
+                    </div>
+                    <h3 class="feature-title">Hochwertige Verarbeitung</h3>
+                    <p class="feature-description">Stabiles Hardcover, abgerundete Ecken und robuste Seiten, speziell für Kinderhände konzipiert.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Book Preview Section -->
+    <section class="book-preview" id="preview">
+        <div class="container">
+            <h2 class="section-title text-center">Blick ins Buch</h2>
+            <div class="book-preview-content">
+                <div class="preview-image">
+                    <img src="https://via.placeholder.com/500x400" alt="Leo der Löwe beim Zahnarzt - Innenseite" class="preview-main-image">
+                </div>
+                
+                <div class="preview-details">
+                    <h3 class="preview-title">Entdecke Leos aufregende Geschichte</h3>
+                    <p class="preview-text">Im Dschungel ist Leo der König, aber wenn es um den Zahnarzt geht, zittert selbst der mutigste Löwe. Als er plötzlich Zahnschmerzen bekommt, muss er seinen ganzen Mut zusammennehmen. Ob er es schaffen wird, seine Angst zu überwinden?</p>
+                    
+                    <div class="preview-pages">
+                        <div class="preview-page" data-page="1">
+                            <img src="https://via.placeholder.com/120x160" alt="Buchseite 1">
+                        </div>
+                        <div class="preview-page" data-page="2">
+                            <img src="https://via.placeholder.com/120x160" alt="Buchseite 2">
+                        </div>
+                        <div class="preview-page" data-page="3">
+                            <img src="https://via.placeholder.com/120x160" alt="Buchseite 3">
+                        </div>
+                        <div class="preview-page" data-page="4">
+                            <img src="https://via.placeholder.com/120x160" alt="Buchseite 4">
+                        </div>
+                        <div class="preview-page" data-page="5">
+                            <img src="https://via.placeholder.com/120x160" alt="Buchseite 5">
+                        </div>
+                    </div>
+                    
+                    <div class="page-nav">
+                        <span class="page-dot active" data-page="1"></span>
+                        <span class="page-dot" data-page="2"></span>
+                        <span class="page-dot" data-page="3"></span>
+                        <span class="page-dot" data-page="4"></span>
+                        <span class="page-dot" data-page="5"></span>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="#pricing" class="btn btn-secondary">
+                            <span class="iconify" data-icon="material-symbols:shopping-cart-checkout" data-width="20" data-height="20"></span>
+                            Jetzt bestellen
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo Section -->
+    <section class="interactive-demo" id="demo">
+        <div class="container">
+            <h2 class="section-title text-center">Interaktives Leseerlebnis</h2>
+            <div class="demo-wrapper">
+                <div class="interactive-book">
+                    <div class="book-page" id="page1">
+                        <div class="page-front">
+                            <div class="page-content">
+                                <img src="https://via.placeholder.com/400x250" alt="Interaktive Buchseite 1">
+                                <p>Leo wacht mit Zahnschmerzen auf. „Ich muss wohl zum Zahnarzt", denkt er ängstlich.</p>
+                                <span class="page-number">1</span>
+                            </div>
+                        </div>
+                        <div class="page-back">
+                            <div class="page-content">
+                                <img src="https://via.placeholder.com/400x250" alt="Interaktive Buchseite 2">
+                                <p>Seine Freunde raten ihm, zur freundlichen Dr. Giraffe zu gehen, die alle Tiere behandelt.</p>
+                                <span class="page-number">2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="turn-page-btn prev-page" id="prevBtn">
+                        <span class="iconify" data-icon="material-symbols:arrow-back" data-width="20" data-height="20"></span>
+                    </button>
+                    <button class="turn-page-btn next-page" id="nextBtn">
+                        <span class="iconify" data-icon="material-symbols:arrow-forward" data-width="20" data-height="20"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title text-center">Was Eltern und Kinder sagen</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-container">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"</div>
+                        <p class="testimonial-text">Meine Tochter hatte panische Angst vor dem Zahnarzt. Nach dem Lesen dieses wundervollen Buches hat sie sogar Spaß daran, zum Zahnarzt zu gehen! Die interaktiven Elemente machen es zu einem Hit.</p>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/60x60" alt="Sarah K." class="author-avatar">
+                            <div class="author-info">
+                                <div class="author-name">Sarah K.</div>
+                                <div class="author-title">Mutter von Emma (5)</div>
+                                <div class="rating">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"</div>
+                        <p class="testimonial-text">Als Kinderarzt empfehle ich dieses Buch ständig. Es erklärt auf kindgerechte Weise, was beim Zahnarzt passiert und nimmt so die Angst. Die Illustrationen sind einfach bezaubernd!</p>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/60x60" alt="Dr. Thomas M." class="author-avatar">
+                            <div class="author-info">
+                                <div class="author-name">Dr. Thomas M.</div>
+                                <div class="author-title">Kinderarzt</div>
+                                <div class="rating">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"</div>
+                        <p class="testimonial-text">Mein Sohn identifiziert sich total mit Leo! Das Buch ist sein absoluter Favorit und wir müssen es jeden Abend vorlesen. Seit wir es haben, putzt er sogar freiwillig seine Zähne - ein Wunder!</p>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/60x60" alt="Michael R." class="author-avatar">
+                            <div class="author-info">
+                                <div class="author-name">Michael R.</div>
+                                <div class="author-title">Vater von Lukas (4)</div>
+                                <div class="rating">
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                    <i class="fas fa-star star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slider-controls">
+                    <span class="slider-dot active" data-slide="0"></span>
+                    <span class="slider-dot" data-slide="1"></span>
+                    <span class="slider-dot" data-slide="2"></span>
+                </div>
+                
+                <button class="testimonial-nav prev-testimonial">
+                    <span class="iconify" data-icon="material-symbols:arrow-back" data-width="20" data-height="20"></span>
+                </button>
+                <button class="testimonial-nav next-testimonial">
+                    <span class="iconify" data-icon="material-symbols:arrow-forward" data-width="20" data-height="20"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title text-center">Hol dir Leo nach Hause!</h2>
+            <div class="pricing-options">
+                <div class="pricing-card premium">
+                    <div class="popular-tag">Beliebteste Wahl</div>
+                    <h3 class="pricing-title">Premium-Paket</h3>
+                    <div class="pricing-content">
+                        <div class="book-image">
+                            <img src="https://via.placeholder.com/200x250" alt="Leo der Löwe Premium-Paket">
+                        </div>
+                        <ul class="pricing-features">
+                            <li>
+                                <span class="iconify" data-icon="material-symbols:check-circle" data-width="20" data-height="20"></span>
+                                Hardcover-Buch "Leo der Löwe beim Zahnarzt"
+                            </li>
+                            <li>
+                                <span class="iconify" data-icon="material-symbols:check-circle" data-width="20" data-height="20"></span>
+        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Melde dich für unseren Newsletter an und erhalte 10% Rabatt auf deine erste Bestellung!</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Deine E-Mail-Adresse" required>
+                        <button type="submit" class="btn btn-secondary btn-sm">
+                            <span class="iconify" data-icon="material-symbols:send" data-width="16" data-height="16"></span>
+                            Anmelden
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Leo der Löwe. Alle Rechte vorbehalten.</p>
+                <div class="footer-legal">
+                    <a href="#">Datenschutz</a>
+                    <a href="#">AGB</a>
+                    <a href="#">Impressum</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Popup -->
+    <div class="popup" id="exit-popup">
+        <div class="popup-content">
+            <button class="close-popup">
+                <span class="iconify" data-icon="material-symbols:close" data-width="24" data-height="24"></span>
+            </button>
+            <div class="popup-image">
+                <img src="https://via.placeholder.com/150x150" alt="Leo der Löwe Miniatur">
+            </div>
+            <h3>Warte! Hier ist ein Spezialangebot für dich!</h3>
+            <p>Bestelle jetzt und erhalte eine Leo-Miniatur GRATIS dazu!</p>
+            <div class="popup-cta">
+                <a href="#pricing" class="btn btn-accent">Jetzt bestellen</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookie-banner">
+        <div class="cookie-content">
+            <p>Wir verwenden Cookies, um dein Erlebnis zu verbessern. <a href="#">Mehr erfahren</a></p>
+            <div class="cookie-buttons">
+                <button class="btn btn-outline btn-sm" id="cookie-decline">Ablehnen</button>
+                <button class="btn btn-primary btn-sm" id="cookie-accept">Akzeptieren</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <span class="iconify" data-icon="material-symbols:arrow-upward" data-width="24" data-height="24"></span>
+    </button>
+
+    <!-- Zahnputz-Spiel -->
+    <div class="mini-game" id="toothbrush-game">
+        <div class="game-container">
+            <div class="game-header">
+                <h3>Hilf Leo beim Zähneputzen!</h3>
+                <span class="game-close">
+                    <span class="iconify" data-icon="material-symbols:close" data-width="24" data-height="24"></span>
+                </span>
+            </div>
+            <div class="game-content">
+                <div class="lion-teeth">
+                    <div class="tooth tooth-1" data-clean="false"></div>
+                    <div class="tooth tooth-2" data-clean="false"></div>
+                    <div class="tooth tooth-3" data-clean="false"></div>
+                    <div class="tooth tooth-4" data-clean="false"></div>
+                    <div class="tooth tooth-5" data-clean="false"></div>
+                    <div class="tooth tooth-6" data-clean="false"></div>
+                </div>
+                <div class="toothbrush" id="toothbrush">
+                    <span class="iconify" data-icon="material-symbols:brush" data-width="40" data-height="40"></span>
+                </div>
+            </div>
+            <div class="game-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">0/6 Zähne geputzt</div>
+            </div>
+            <div class="game-message hidden">
+                <h3>Super gemacht!</h3>
+                <p>Leo hat jetzt strahlend saubere Zähne!</p>
+                <a href="#pricing" class="btn btn-primary">Buch holen & Zahnarztangst besiegen</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schatten-Overlay für Popup-Hintergrund -->
+    <div class="shadow-overlay" id="shadow-overlay"></div>
+
+    <!-- Scroll-Fortschrittsanzeige -->
+    <div class="scroll-progress-container">
+        <div class="tooth-progress-bar"></div>
+        <div class="toothbrush-icon">
+            <span class="iconify" data-icon="material-symbols:brush" data-width="24" data-height="24"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
