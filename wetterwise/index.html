@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherWise - Intelligente Kleidungsvorschläge</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="logo">
+                    <span class="iconify" data-icon="material-symbols:partly-cloudy" data-width="28"></span>
+                    <h1>WeatherWise</h1>
+                </div>
+                <button id="settings-toggle" class="btn-icon">
+                    <span class="iconify" data-icon="material-symbols:settings" data-width="24"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Location Search -->
+                <div class="search-container">
+                    <form id="location-form">
+                        <div class="search-input-wrapper">
+                            <span class="iconify search-icon" data-icon="material-symbols:location-on" data-width="20"></span>
+                            <input type="text" id="location-input" placeholder="Stadt eingeben...">
+                        </div>
+                        <button type="submit" class="btn-search">
+                            <span class="iconify" data-icon="material-symbols:search" data-width="24"></span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Settings Panel (Hidden by default) -->
+                <div id="settings-panel" class="settings-panel hidden">
+                    <h2>
+                        <span class="iconify" data-icon="material-symbols:tune" data-width="24"></span>
+                        Deine Präferenzen
+                    </h2>
+                    <div class="settings-grid">
+                        <div class="settings-item">
+                            <label for="style-select">Kleidungsstil</label>
+                            <select id="style-select">
+                                <option value="casual">Casual/Alltag</option>
+                                <option value="business">Business/Formal</option>
+                                <option value="sporty">Sportlich</option>
+                            </select>
+                        </div>
+                        <div class="settings-item">
+                            <label for="sensitivity-select">Wärmeempfinden</label>
+                            <select id="sensitivity-select">
+                                <option value="cold-sensitive">Kälteempfindlich</option>
+                                <option value="normal">Normal</option>
+                                <option value="warm-resistant">Hitzebeständig</option>
+                            </select>
+                        </div>
+                        <div class="settings-item">
+                            <label for="gender-select">Kleidungspräferenz</label>
+                            <select id="gender-select">
+                                <option value="neutral">Neutral</option>
+                                <option value="female">Weiblich</option>
+                                <option value="male">Männlich</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading Spinner (Hidden by default) -->
+                <div id="loading-spinner" class="spinner-container hidden">
+                    <div class="spinner"></div>
+                </div>
+
+                <!-- Error Message (Hidden by default) -->
+                <div id="error-message" class="error-message hidden"></div>
+
+                <!-- Weather Content Container -->
+                <div id="weather-content" class="weather-content hidden">
+                    <!-- Current Weather & Clothing Cards -->
+                    <div class="card-grid">
+                        <!-- Current Weather Card -->
+                        <div class="card weather-card">
+                            <div class="weather-header">
+                                <div>
+                                    <h2 id="weather-location">Berlin</h2>
+                                    <p>Heute</p>
+                                </div>
+                                <div id="weather-icon" class="weather-icon">
+                                    <span class="iconify" data-icon="material-symbols:partly-cloudy" data-width="48"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="temperature-display">
+                                <span id="current-temp" class="current-temp">12°C</span>
+                                <span id="feels-like" class="feels-like">Gefühlt: 10°C</span>
+                            </div>
+                            <p id="weather-condition" class="weather-condition">Leicht bewölkt</p>
+                            
+                            <div class="weather-details">
+                                <div class="weather-detail-item">
+                                    <span class="iconify" data-icon="material-symbols:water-drop" data-width="20"></span>
+                                    <span id="humidity">65% Luftfeuchtigkeit</span>
+                                </div>
+                                <div class="weather-detail-item">
+                                    <span class="iconify" data-icon="material-symbols:air" data-width="20"></span>
+                                    <span id="wind-speed">12 km/h Wind</span>
+                                </div>
+                                <div class="weather-detail-item">
+                                    <span class="iconify" data-icon="material-symbols:rainy" data-width="20"></span>
+                                    <span id="rain-chance">20% Regenwahrscheinlichkeit</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Clothing Suggestion Card -->
+                        <div class="card clothing-card">
+                            <h2>
+                                <span class="iconify" data-icon="material-symbols:checkroom" data-width="24"></span>
+                                Empfohlene Kleidung
+                            </h2>
+                            
+                            <div class="clothing-suggestions">
+                                <div class="clothing-grid">
+                                    <div class="clothing-section">
+                                        <h3>
+                                            <span class="iconify" data-icon="material-symbols:layers" data-width="20"></span>
+                                            Oberbekleidung & Schichten
+                                        </h3>
+                                        <ul id="layers-list" class="clothing-list">
+                                            <li>T-Shirt</li>
+                                            <li>Leichte Jacke oder Cardigan</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="clothing-section">
+                                        <h3>
+                                            <span class="iconify" data-icon="material-symbols:accessibility-new" data-width="20"></span>
+                                            Unterbekleidung & Schuhe
+                                        </h3>
+                                        <ul class="clothing-list">
+                                            <li id="lower-body">Jeans oder leichte Hose</li>
+                                            <li id="footwear">Sneaker oder geschlossene Schuhe</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="clothing-section">
+                                    <h3>
+                                        <span class="iconify" data-icon="material-symbols:add-circle" data-width="20"></span>
+                                        Accessoires & Extras
+                                    </h3>
+                                    <ul id="accessories-list" class="clothing-list">
+                                        <li>Keine speziellen Accessoires nötig</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Forecast Chart -->
+                    <div class="card forecast-chart-card">
+                        <h2>
+                            <span class="iconify" data-icon="material-symbols:calendar-month" data-width="24"></span>
+                            Wettervorhersage
+                        </h2>
+                        <div id="forecast-chart" class="forecast-chart">
+                            <!-- Chart will be inserted by JS -->
+                            <canvas id="temperature-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Forecast Cards -->
+                    <div id="forecast-cards" class="forecast-cards">
+                        <!-- Forecast cards will be dynamically inserted by JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>© 2025 WeatherWise - Kleidungsempfehlungen basierend auf lokalem Wetter</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/api/weather-api.js"></script>
+    <script src="js/components/clothing-engine.js"></script>
+    <script src="js/components/forecast.js"></script>
+    <script src="js/components/preferences.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
