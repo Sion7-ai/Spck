@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Portfolio | Your Name</title>
+    <meta name="description" content="Creative designer portfolio showcasing work in digital design, branding, and interactive experiences">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components/hero.css">
+    <link rel="stylesheet" href="css/components/projects.css">
+    <link rel="stylesheet" href="css/components/about.css">
+    <link rel="stylesheet" href="css/components/skills.css">
+    <link rel="stylesheet" href="css/components/contact.css">
+    
+    <!-- Iconify for icons -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+</head>
+<body>
+    <!-- Custom cursor elements -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    
+    <!-- Page loader -->
+    <div class="loader">
+        <span class="loader-text">Loading</span>
+        <div class="loader-progress"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">YN</a>
+            <div class="nav-links">
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle">
+                <span class="iconify" data-icon="tabler:menu" data-width="24"></span>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="hero-title-line">CREATIVE</span>
+                    <span class="hero-title-line accent">DESIGNER</span>
+                </h1>
+                <p class="hero-subtitle">Crafting digital experiences with precision and passion</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View Work</a>
+                    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+                </div>
+            </div>
+            <div class="hero-background">
+                <div class="hero-shape shape-1"></div>
+                <div class="hero-shape shape-2"></div>
+                <div class="hero-shape shape-3"></div>
+            </div>
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scroll</span>
+                <span class="iconify" data-icon="tabler:arrow-down" data-width="24"></span>
+            </div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="section-header">
+                <h2 class="section-title">Selected Work</h2>
+                <p class="section-subtitle">Explore my recent projects</p>
+            </div>
+            
+            <div class="projects-container">
+                <!-- Project 1 -->
+                <div class="project-item" data-category="Branding">
+                    <div class="project-image">
+                        <img src="assets/images/project-1.jpg" alt="Project 1">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Lunar Branding</h3>
+                        <p class="project-category">Branding / Identity</p>
+                        <div class="project-view">
+                            <span class="iconify" data-icon="tabler:arrow-up-right" data-width="24"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-item" data-category="Web Design">
+                    <div class="project-image">
+                        <img src="assets/images/project-2.jpg" alt="Project 2">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Nomad E-Commerce</h3>
+                        <p class="project-category">Web Design / Development</p>
+                        <div class="project-view">
+                            <span class="iconify" data-icon="tabler:arrow-up-right" data-width="24"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-item" data-category="UI/UX">
+                    <div class="project-image">
+                        <img src="assets/images/project-3.jpg" alt="Project 3">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Pulse App</h3>
+                        <p class="project-category">UI/UX / Interaction</p>
+                        <div class="project-view">
+                            <span class="iconify" data-icon="tabler:arrow-up-right" data-width="24"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-item" data-category="Print">
+                    <div class="project-image">
+                        <img src="assets/images/project-4.jpg" alt="Project 4">
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-title">Azure Magazine</h3>
+                        <p class="project-category">Print / Editorial</p>
+                        <div class="project-view">
+                            <span class="iconify" data-icon="tabler:arrow-up-right" data-width="24"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="projects-nav">
+                <button class="projects-nav-btn prev" aria-label="Previous project">
+                    <span class="iconify" data-icon="tabler:arrow-left" data-width="24"></span>
+                </button>
+                <div class="projects-pagination"></div>
+                <button class="projects-nav-btn next" aria-label="Next project">
+                    <span class="iconify" data-icon="tabler:arrow-right" data-width="24"></span>
+                </button>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="about-container">
+                <div class="about-content">
+                    <div class="section-header">
+                        <h2 class="section-title">About Me</h2>
+                        <p class="section-subtitle">My journey as a designer</p>
+                    </div>
+                    
+                    <div class="about-text">
+                        <p class="large-text">I'm a <span class="highlight">multidisciplinary designer</span> with a passion for creating meaningful digital experiences.</p>
+                        <p>With over 5 years of experience in the creative industry, I've collaborated with brands and startups to craft impactful design solutions. I believe in the power of thoughtful design to solve problems and create connections.</p>
+                        <p>My approach combines strategic thinking with creative execution, ensuring that every project not only looks exceptional but also achieves its core objectives.</p>
+                    </div>
+                    
+                    <div class="about-cta">
+                        <a href="#contact" class="btn btn-primary">Let's Work Together</a>
+                        <a href="#" class="btn btn-outline">Download Resume</a>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="image-container">
+                        <img src="assets/images/profile.jpg" alt="Your Name - Designer">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Skills Section -->
+        <section id="skills" class="skills">
+            <div class="section-header">
+                <h2 class="section-title">Skill Set</h2>
+                <p class="section-subtitle">What I bring to the table</p>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3 class="category-title">Design</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">UI/UX Design</span>
+                                <span class="skill-level">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Brand Identity</span>
+                                <span class="skill-level">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Typography</span>
+                                <span class="skill-level">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="category-title">Tools</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Figma</span>
+                                <span class="skill-level">98%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 98%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Adobe Creative Suite</span>
+                                <span class="skill-level">92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 92%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Blender</span>
+                                <span class="skill-level">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="category-title">Development</h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">HTML/CSS</span>
+                                <span class="skill-level">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-level">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">WordPress</span>
+                                <span class="skill-level">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="section-header">
+                        <h2 class="section-title">Get In Touch</h2>
+                        <p class="section-subtitle">Let's create something amazing together</p>
+                    </div>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <span class="iconify" data-icon="tabler:mail" data-width="24"></span>
+                            <a href="mailto:hello@yourname.com">hello@yourname.com</a>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="iconify" data-icon="tabler:phone" data-width="24"></span>
+                            <a href="tel:+123456789">+12 345 6789</a>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <span class="iconify" data-icon="tabler:map-pin" data-width="24"></span>
+                            <span>Berlin, Germany</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Dribbble">
+                            <span class="iconify" data-icon="tabler:brand-dribbble" data-width="24"></span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <span class="iconify" data-icon="tabler:brand-instagram" data-width="24"></span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <span class="iconify" data-icon="tabler:brand-linkedin" data-width="24"></span>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Behance">
+                            <span class="iconify" data-icon="tabler:brand-behance" data-width="24"></span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <span>Send Message</span>
+                            <span class="iconify" data-icon="tabler:send" data-width="20"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="#">YN</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; <span id="year">2025</span> Your Name. All Rights Reserved.</p>
+                </div>
+            </div>
+            <div class="back-to-top">
+                <a href="#hero" aria-label="Back to top">
+                    <span class="iconify" data-icon="tabler:arrow-up" data-width="24"></span>
+                </a>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript Files -->
+    <script src="js/main.js"></script>
+    <script src="js/components/scroll.js"></script>
+    <script src="js/components/cursor.js"></script>
+    <script src="js/components/projects.js"></script>
+    <script src="js/components/loader.js"></script>
+</body>
+</html>

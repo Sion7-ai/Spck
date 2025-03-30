@@ -1,0 +1,136 @@
+/* =========================================
+   About Section Styles
+   ========================================= */
+
+.about {
+  position: relative;
+  overflow: hidden;
+}
+
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.about-content {
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform var(--transition-medium), 
+              opacity var(--transition-medium);
+}
+
+.about-content.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.about-text {
+  margin-bottom: var(--space-xl);
+}
+
+.about-cta {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.about-image {
+  position: relative;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform var(--transition-medium), 
+              opacity var(--transition-medium);
+}
+
+.about-image.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.about-image .image-container {
+  position: relative;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.about-image .image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--color-accent), transparent);
+  opacity: 0.1;
+  z-index: 1;
+  transition: opacity var(--transition-medium);
+}
+
+.about-image:hover .image-container::before {
+  opacity: 0.2;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+
+.about-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Decorative elements */
+.about-bg-shape {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-gray-800) 0%, rgba(15, 15, 15, 0) 70%);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+.about-bg-shape:nth-child(1) {
+  bottom: -150px;
+  right: -150px;
+}
+
+.about-bg-shape:nth-child(2) {
+  top: -150px;
+  left: -150px;
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-image {
+    order: -1;
+    margin-bottom: var(--space-xl);
+  }
+  
+  .about-bg-shape {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-cta {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .about-cta .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
