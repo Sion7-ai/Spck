@@ -900,4 +900,79 @@ document.addEventListener('DOMContentLoaded', function() {
             // Kaufen-Buttons
             buyButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
-                    // Wenn Buttons Anker-Link
+                    // Wenn Buttons Anker-Links sind, verhindern, dass sie navigieren
+                    const href = button.getAttribute('href');
+                    if (href === '#' || href === '#pricing') {
+                        e.preventDefault();
+                    }
+                    
+                    // Artikel zum Warenkorb hinzufügen
+                    cartItems++;
+                    cartCount.textContent = cartItems;
+                    
+                    // Visuelle Effekte
+                    cartIcon.classList.add('pulse-animation');
+                    setTimeout(() => {
+                        cartIcon.classList.remove('pulse-animation');
+                    }, 1000);
+                    
+                    // Benachrichtigung
+                    showNotification('Produkt wurde zum Warenkorb hinzugefügt!');
+                    
+                    // Kaufen-Button-Animation
+                    button.classList.add('animate-success');
+                    setTimeout(() => {
+                        button.classList.remove('animate-success');
+                    }, 1000);
+                });
+            });
+        }
+    }
+    
+    // ==================== INITIALISIERUNG ====================
+    
+    // Alle Funktionen initialisieren
+    function init() {
+        // Grundlegende Effekte
+        createMouseTrail();
+        addSparkleEffect();
+        initGSAPAnimations();
+        
+        // Interaktive Komponenten
+        init3DBookEffect();
+        initBookPreview();
+        initInteractiveBook();
+        initTestimonialSlider();
+        initFaqAccordion();
+        initCountdownTimer();
+        
+        // Scroll-Effekte
+        initScrollProgress();
+        initBackToTop();
+        initHeaderScrollEffect();
+        initSmoothScroll();
+        
+        // Popups und Benachrichtigungen
+        initExitIntentPopup();
+        initCookieBanner();
+        
+        // Mini-Spiel
+        initToothbrushGame();
+        
+        // Warenkorb
+        initCart();
+    }
+    
+    // Alles initialisieren, wenn DOM bereit ist
+    init();
+});
+
+// CSS-Klasse für Button-Animation hinzufügen
+document.head.insertAdjacentHTML('beforeend', `
+    <style>
+        .animate-success {
+            background-color: #70E000 !important;
+            transform: scale(1.1) !important;
+        }
+    </style>
+`);
