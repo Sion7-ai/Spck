@@ -4,30 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-/* Nur die CSS für das Canvas-Element, das aktualisiert werden muss */
-#webgl-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Wichtig: Viewport Höhe */
-    z-index: 1; /* WICHTIG: War vorher -1, wodurch es hinter allem lag */
-    display: block; /* Verhindert kleinen Abstand unten */
-}
 
-/* Stelle sicher, dass der Inhalt über dem Canvas liegt */
-main {
-    position: relative;
-    z-index: 2; /* Höhere z-index als der Canvas */
-    width: 100%;
-}
-
-/* Die content-blocks sollten einen Hintergrund haben, damit sie lesbar sind */
-.content-block {
-    background-color: rgba(30, 30, 30, 0.75); /* Dunkler, leicht transparent */
-    backdrop-filter: blur(5px); /* Weichzeichner-Effekt */
-    z-index: 2; /* Stellt sicher, dass der Inhalt über dem Canvas liegt */
-}
 html {
     scroll-behavior: smooth; /* Sanftes Scrollen für Ankerlinks */
 }
@@ -48,7 +25,7 @@ body {
     left: 0;
     width: 100%;
     height: 100vh; /* Wichtig: Viewport Höhe */
-    z-index: -1;
+    z-index: 1; /* WICHTIG: Muss positiv sein, damit es über dem Hintergrund liegt */
     display: block; /* Verhindert kleinen Abstand unten */
 }
 
@@ -91,7 +68,7 @@ body {
 /* --- Inhalt Container & Sektionen --- */
 main {
     position: relative;
-    z-index: 1;
+    z-index: 2; /* Höhere z-index als der Canvas */
     width: 100%;
 }
 
@@ -113,12 +90,13 @@ section.full-screen {
 /* --- Content Block Styling --- */
 .content-block {
     background-color: rgba(30, 30, 30, 0.75); /* Dunkler, leicht transparent */
-    backdrop-filter: blur(5px); /* Weichzeichner-Effekt (optional, performance prüfen) */
+    backdrop-filter: blur(5px); /* Weichzeichner-Effekt */
     padding: 40px;
     border-radius: 12px;
     max-width: 650px; /* Begrenzte Breite für Lesbarkeit */
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 2; /* Stellt sicher, dass der Inhalt über dem Canvas liegt */
 }
 
 .hero-block {
