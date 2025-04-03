@@ -4,63 +4,124 @@ let mouseX = 0, mouseY = 0;
 const windowHalfX = window.innerWidth / 2;
 const windowHalfY = window.innerHeight / 2;
 let isMouseOverObject = false;
-const initialColor = new THREE.Color(0x3498db); // Blau
+let initialColor; // Wir deklarieren, aber initialisieren später wenn THREE verfügbar ist
 
 const loadingScreen = document.getElementById('loading-screen');
 const contentContainer = document.getElementById('content-container');
+const canvas = document.querySelector('#webgl-canvas');
+
+// --- WebGL-Unterstützungsprüfung ---
+function checkWebGLSupport() {
+    try {
+        const canvas = document.createElement('canvas');
+        return !!(window.WebGLRenderingContext && 
+                (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+    } catch (e) {
+        return false;
+    }
+}
 
 // --- Initialisierung ---
 function init() {
-    // Clock für Animationen
-    clock = new THREE.Clock();
+    // Prüfen, ob WebGL unterstützt wird
+    if (!checkWebGLSupport()) {
+        console.error('WebGL wird von diesem Browser nicht unterstützt!');
+        showWebGLError();
+        return; // Initialisierung abbrechen
+    }
 
-    // Szene
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x121212);
-    scene.fog = new THREE.Fog(0x121212, 5, 20);
+    try {
+        // Prüfen, ob THREE vorhanden ist
+        if (typeof THREE === 'undefined') {
+            console.error('THREE.js nicht geladen!');
+            return; // Initialisierung abbrechen
+        }
 
-    // Kamera
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+        // Jetzt können wir initialColor initialisieren
+        initialColor = new THREE.Color(0x3498db); // Blau
 
-    // Renderer
-    renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#webgl-canvas'),
-        antialias: true
-    });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        // Clock für Animationen
+        clock = new THREE.Clock();
 
-    // Lichter
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
+        // Szene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x121212);
+        scene.fog = new THREE.Fog(0x121212, 5, 20);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(5, 10, 7.5);
-    scene.add(directionalLight);
+        // Kamera
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
 
-    // 3D Hauptobjekt (z.B. Icosahedron)
-    const geometry = new THREE.IcosahedronGeometry(1.2, 0);
-    const material = new THREE.MeshStandardMaterial({
-        color: initialColor,
-        metalness: 0.3,
-        roughness: 0.6,
-    });
-    mainObject = new THREE.Mesh(geometry, material);
-    scene.add(mainObject);
+        // Renderer
+        renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: true
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Event Listener
-    document.addEventListener('mousemove', onDocumentMouseMove);
-    window.addEventListener('resize', onWindowResize);
+        // Lichter
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
 
-    // GSAP Scroll-Animationen initialisieren
-    setupScrollAnimations();
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(5, 10, 7.5);
+        scene.add(directionalLight);
 
-    // Raycaster für Maus-Hover
-    setupRaycasting();
+        // 3D Hauptobjekt (z.B. Icosahedron)
+        const geometry = new THREE.IcosahedronGeometry(1.2, 0);
+        const material = new THREE.MeshStandardMaterial({
+            color: initialColor,
+            metalness: 0.3,
+            roughness: 0.6,
+        });
+        mainObject = new THREE.Mesh(geometry, material);
+        mainObject.userData.enableIdleRotation = true; // Standardmäßig aktiviert
+        scene.add(mainObject);
 
-    // Start der Animationsschleife
-    animate();
+        // Event Listener
+        document.addEventListener('mousemove', onDocumentMouseMove);
+        window.addEventListener('resize', onWindowResize);
+
+        // GSAP Scroll-Animationen initialisieren
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            setupScrollAnimations();
+        } else {
+            console.warn('GSAP oder ScrollTrigger nicht geladen, Animationen deaktiviert');
+        }
+
+        // Raycaster für Maus-Hover
+        setupRaycasting();
+
+        // Start der Animationsschleife
+        animate();
+        
+        console.log('3D-Szene erfolgreich initialisiert');
+    } catch (error) {
+        console.error('Fehler bei der 3D-Initialisierung:', error);
+        showWebGLError();
+    }
+}
+
+// Zeigt eine Fehlermeldung an, wenn WebGL oder die 3D-Initialisierung fehlschlägt
+function showWebGLError() {
+    // Canvas verstecken
+    if (canvas) {
+        canvas.style.display = 'none';
+    }
+    
+    // Einfache Fehlermeldung erstellen und anzeigen
+    const errorMsg = document.createElement('div');
+    errorMsg.style.position = 'fixed';
+    errorMsg.style.top = '10px';
+    errorMsg.style.left = '10px';
+    errorMsg.style.padding = '10px';
+    errorMsg.style.background = 'rgba(255,0,0,0.7)';
+    errorMsg.style.color = 'white';
+    errorMsg.style.borderRadius = '5px';
+    errorMsg.style.zIndex = '1000';
+    errorMsg.innerHTML = '3D-Rendering nicht verfügbar. Bitte versuchen Sie einen anderen Browser.';
+    document.body.appendChild(errorMsg);
 }
 
 // --- Mausbewegung ---
@@ -88,6 +149,8 @@ function onWindowResize() {
 // --- Raycasting für Hover-Effekt ---
 let raycaster, mouseVector;
 function setupRaycasting() {
+    if (typeof THREE === 'undefined') return;
+    
     raycaster = new THREE.Raycaster();
     mouseVector = new THREE.Vector2();
 }
@@ -115,7 +178,9 @@ function checkIntersection() {
 
 // --- GSAP Scroll Animationen ---
 function setupScrollAnimations() {
-     gsap.registerPlugin(ScrollTrigger);
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    
+    gsap.registerPlugin(ScrollTrigger);
 
     // --- Globale Scroll-Timeline ---
     const tl = gsap.timeline({
@@ -150,7 +215,6 @@ function setupScrollAnimations() {
         trigger: '#features',
         start: 'top center+=100',
         end: 'bottom center-=100',
-        // markers: true, // Zum Debuggen
         onEnter: () => gsap.to(mainObject.material.color, { r: 0.9, g: 0.4, b: 0.1, duration: 0.5, ease: 'power2.out' }), // Orange
         onLeaveBack: () => gsap.to(mainObject.material.color, { r: initialColor.r, g: initialColor.g, b: initialColor.b, duration: 0.5, ease: 'power2.out'}), // Zurück zu Blau
         onLeave: () => gsap.to(mainObject.material.color, { r: initialColor.r, g: initialColor.g, b: initialColor.b, duration: 0.5, ease: 'power2.out'}), // Farbe am Ende wieder zurücksetzen
@@ -164,7 +228,6 @@ function setupScrollAnimations() {
             start: 'top center',
             end: 'bottom center',
             scrub: 1,
-            // markers: true,
         }
     });
     howTl.to(mainObject.scale, { x: 0.8, y: 1.5, z: 0.8, ease: 'power2.inOut' }) // Verformen
@@ -178,7 +241,6 @@ function setupScrollAnimations() {
             start: 'top center',
             end: 'bottom center',
             scrub: 1.5, // Langsamer
-           // markers: true
         }
     });
     testTl.to(mainObject.scale, { x: 0.9, y: 0.9, z: 0.9, ease: 'power1.inOut' }) // Kleiner, ruhiger
@@ -192,7 +254,6 @@ function setupScrollAnimations() {
             start: 'top center',
             end: 'center center', // Animation endet in der Mitte der Sektion
             scrub: 1,
-            // markers: true
         }
     });
     finalTl.to(mainObject.scale, { x: 1.3, y: 1.3, z: 1.3, ease: 'back.out(1.2)' }) // Größer, auffälliger
@@ -258,10 +319,8 @@ function animate() {
 }
 
 // --- Loading screen handling ---
-// FIX: Loading screen management moved outside of init function
-// and using addEventListener instead of window.onload assignment
 function hideLoadingScreen() {
-    console.log("Hiding loading screen"); // Debugging
+    console.log("Hiding loading screen");
     if (loadingScreen) {
         loadingScreen.classList.add('hidden');
     }
@@ -276,13 +335,39 @@ function hideLoadingScreen() {
     }
 }
 
-// Add event listener for page load
+// Warten auf das Laden aller Ressourcen
 window.addEventListener('load', hideLoadingScreen);
+
+// Library loading check - wichtig für mobile Browser
+function checkLibrariesLoaded() {
+    if (typeof THREE === 'undefined') {
+        console.error('THREE.js ist nicht geladen. Versuche es erneut in 100ms...');
+        setTimeout(checkLibrariesLoaded, 100);
+        return;
+    }
+    
+    if (typeof gsap === 'undefined') {
+        console.warn('GSAP ist nicht geladen. Einige Animationen werden deaktiviert.');
+    }
+    
+    console.log('Alle benötigten Bibliotheken geladen, starte Initialisierung...');
+    init();
+}
 
 // --- Start ---
 // Defensive Programmierung: Sicherstellen, dass DOM geladen ist
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function() {
+        // Canvas z-index beheben - das ist kritisch!
+        if (canvas) {
+            canvas.style.zIndex = '1'; // Muss über 0 sein, aber unter dem Inhalt
+        }
+        checkLibrariesLoaded();
+    });
 } else {
-    init();
+    // Canvas z-index beheben - das ist kritisch!
+    if (canvas) {
+        canvas.style.zIndex = '1'; // Muss über 0 sein, aber unter dem Inhalt
+    }
+    checkLibrariesLoaded();
 }
