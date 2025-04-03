@@ -1,13 +1,10 @@
-// Entferne diese Zeile:
-// import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js';
-
-// --- Globale Variablen ---
+// Globale Variablen
 let scene, camera, renderer, mainObject, clock;
 let mouseX = 0, mouseY = 0;
 const windowHalfX = window.innerWidth / 2;
 const windowHalfY = window.innerHeight / 2;
 let isMouseOverObject = false;
-const initialColor = new THREE.Color(0x3498db); // Blau // ACHTUNG: THREE muss jetzt global verfügbar sein
+const initialColor = new THREE.Color(0x3498db); // Blau
 
 const loadingScreen = document.getElementById('loading-screen');
 const contentContainer = document.getElementById('content-container');
@@ -15,19 +12,19 @@ const contentContainer = document.getElementById('content-container');
 // --- Initialisierung ---
 function init() {
     // Clock für Animationen
-    clock = new THREE.Clock(); // Verwende THREE direkt
+    clock = new THREE.Clock();
 
     // Szene
-    scene = new THREE.Scene(); // Verwende THREE direkt
-    scene.background = new THREE.Color(0x121212); // Verwende THREE direkt
-    scene.fog = new THREE.Fog(0x121212, 5, 20); // Verwende THREE direkt
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x121212);
+    scene.fog = new THREE.Fog(0x121212, 5, 20);
 
     // Kamera
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); // Verwende THREE direkt
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 5;
 
     // Renderer
-    renderer = new THREE.WebGLRenderer({ // Verwende THREE direkt
+    renderer = new THREE.WebGLRenderer({
         canvas: document.querySelector('#webgl-canvas'),
         antialias: true
     });
@@ -35,21 +32,21 @@ function init() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     // Lichter
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Verwende THREE direkt
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // Verwende THREE direkt
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(5, 10, 7.5);
     scene.add(directionalLight);
 
     // 3D Hauptobjekt (z.B. Icosahedron)
-    const geometry = new THREE.IcosahedronGeometry(1.2, 0); // Verwende THREE direkt
-    const material = new THREE.MeshStandardMaterial({ // Verwende THREE direkt
+    const geometry = new THREE.IcosahedronGeometry(1.2, 0);
+    const material = new THREE.MeshStandardMaterial({
         color: initialColor,
         metalness: 0.3,
         roughness: 0.6,
     });
-    mainObject = new THREE.Mesh(geometry, material); // Verwende THREE direkt
+    mainObject = new THREE.Mesh(geometry, material);
     scene.add(mainObject);
 
     // Event Listener
@@ -64,21 +61,6 @@ function init() {
 
     // Start der Animationsschleife
     animate();
-
-    // Ladebildschirm ausblenden
-     window.onload = () => {
-        if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-        }
-         // Make content visible after loading screen hides
-         if(contentContainer){
-             setTimeout(() => {
-                contentContainer.style.visibility = 'visible';
-                contentContainer.style.opacity = 1;
-                contentContainer.style.transition = 'opacity 0.5s ease-in';
-             }, 500); // Match CSS transition duration
-         }
-    };
 }
 
 // --- Mausbewegung ---
@@ -106,8 +88,8 @@ function onWindowResize() {
 // --- Raycasting für Hover-Effekt ---
 let raycaster, mouseVector;
 function setupRaycasting() {
-    raycaster = new THREE.Raycaster(); // Verwende THREE direkt
-    mouseVector = new THREE.Vector2(); // Verwende THREE direkt
+    raycaster = new THREE.Raycaster();
+    mouseVector = new THREE.Vector2();
 }
 
 function checkIntersection() {
@@ -133,7 +115,6 @@ function checkIntersection() {
 
 // --- GSAP Scroll Animationen ---
 function setupScrollAnimations() {
-    // ... (Der Rest der GSAP-Funktion bleibt gleich) ...
      gsap.registerPlugin(ScrollTrigger);
 
     // --- Globale Scroll-Timeline ---
@@ -275,6 +256,28 @@ function animate() {
     // Rendern
     renderer.render(scene, camera);
 }
+
+// --- Loading screen handling ---
+// FIX: Loading screen management moved outside of init function
+// and using addEventListener instead of window.onload assignment
+function hideLoadingScreen() {
+    console.log("Hiding loading screen"); // Debugging
+    if (loadingScreen) {
+        loadingScreen.classList.add('hidden');
+    }
+    
+    // Make content visible after loading screen hides
+    if (contentContainer) {
+        setTimeout(() => {
+            contentContainer.style.visibility = 'visible';
+            contentContainer.style.opacity = 1;
+            contentContainer.style.transition = 'opacity 0.5s ease-in';
+        }, 500); // Match CSS transition duration
+    }
+}
+
+// Add event listener for page load
+window.addEventListener('load', hideLoadingScreen);
 
 // --- Start ---
 // Defensive Programmierung: Sicherstellen, dass DOM geladen ist
