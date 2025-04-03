@@ -13,9 +13,8 @@ const canvas = document.querySelector('#webgl-canvas');
 // --- WebGL-Unterstützungsprüfung ---
 function checkWebGLSupport() {
     try {
-        const canvas = document.createElement('canvas');
-        return !!(window.WebGLRenderingContext && 
-                (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+        // Einfacher Test für WebGL-Unterstützung
+        return !!window.WebGLRenderingContext;
     } catch (e) {
         return false;
     }
@@ -23,18 +22,21 @@ function checkWebGLSupport() {
 
 // --- Initialisierung ---
 function init() {
-    // Prüfen, ob WebGL unterstützt wird
-    if (!checkWebGLSupport()) {
-        console.error('WebGL wird von diesem Browser nicht unterstützt!');
-        showWebGLError();
-        return; // Initialisierung abbrechen
-    }
-
     try {
         // Prüfen, ob THREE vorhanden ist
         if (typeof THREE === 'undefined') {
             console.error('THREE.js nicht geladen!');
             return; // Initialisierung abbrechen
+        }
+
+        // WebGL-Prüfung - aktiver Test ob Renderer erstellt werden kann
+        try {
+            const testRenderer = new THREE.WebGLRenderer();
+            testRenderer.dispose(); // Aufräumen nach dem Test
+        } catch (err) {
+            console.error('WebGL-Rendering nicht unterstützt:', err);
+            showWebGLError();
+            return;
         }
 
         // Jetzt können wir initialColor initialisieren
@@ -120,7 +122,7 @@ function showWebGLError() {
     errorMsg.style.color = 'white';
     errorMsg.style.borderRadius = '5px';
     errorMsg.style.zIndex = '1000';
-    errorMsg.innerHTML = '3D-Rendering nicht verfügbar. Bitte versuchen Sie einen anderen Browser.';
+    errorMsg.innerHTML = 'WebGL wird nicht vollständig unterstützt. Die 3D-Elemente werden möglicherweise nicht richtig angezeigt.';
     document.body.appendChild(errorMsg);
 }
 
@@ -340,34 +342,44 @@ window.addEventListener('load', hideLoadingScreen);
 
 // Library loading check - wichtig für mobile Browser
 function checkLibrariesLoaded() {
-    if (typeof THREE === 'undefined') {
-        console.error('THREE.js ist nicht geladen. Versuche es erneut in 100ms...');
-        setTimeout(checkLibrariesLoaded, 100);
-        return;
+    let maxRetries = 20; // Erhöht von vorher
+    let retryCount = 0;
+    let retryInterval = 200; // Millisekunden zwischen Versuchen
+    
+    function checkThree() {
+        if (typeof THREE !== 'undefined') {
+            console.log('THREE.js erfolgreich geladen!');
+            
+            // Wichtig: Setze den z-index des Canvas richtig
+            if (canvas) {
+                canvas.style.zIndex = '1';
+            }
+            
+            // Starten
+            init();
+            return;
+        }
+        
+        retryCount++;
+        if (retryCount <= maxRetries) {
+            console.log(`THREE.js noch nicht geladen. Versuch ${retryCount}/${maxRetries}...`);
+            setTimeout(checkThree, retryInterval);
+        } else {
+            console.error('THREE.js konnte nicht geladen werden nach mehreren Versuchen.');
+            showWebGLError();
+        }
     }
     
-    if (typeof gsap === 'undefined') {
-        console.warn('GSAP ist nicht geladen. Einige Animationen werden deaktiviert.');
-    }
-    
-    console.log('Alle benötigten Bibliotheken geladen, starte Initialisierung...');
-    init();
+    // Erster Check
+    checkThree();
 }
 
 // --- Start ---
 // Defensive Programmierung: Sicherstellen, dass DOM geladen ist
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-        // Canvas z-index beheben - das ist kritisch!
-        if (canvas) {
-            canvas.style.zIndex = '1'; // Muss über 0 sein, aber unter dem Inhalt
-        }
         checkLibrariesLoaded();
     });
 } else {
-    // Canvas z-index beheben - das ist kritisch!
-    if (canvas) {
-        canvas.style.zIndex = '1'; // Muss über 0 sein, aber unter dem Inhalt
-    }
     checkLibrariesLoaded();
 }
