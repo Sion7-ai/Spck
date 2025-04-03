@@ -41,7 +41,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 100;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
 }
 
 .loader {
@@ -61,7 +61,8 @@ body {
 
 .loading-screen.hidden {
     opacity: 0;
-    pointer-events: none; /* Nicht mehr klickbar */
+    visibility: hidden; /* Besser als pointer-events, um es vollständig zu entfernen */
+    pointer-events: none; /* Nicht klickbar */
 }
 
 /* --- Inhalt Container & Sektionen --- */
@@ -69,6 +70,11 @@ main {
     position: relative;
     z-index: 1;
     width: 100%;
+}
+
+#content-container {
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease-in;
 }
 
 section.full-screen {
