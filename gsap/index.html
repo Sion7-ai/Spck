@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSAP Parallax mit Pexels Medien</title>
+    <title>Mobil-optimierter GSAP Parallax</title>
     <style>
         body, html {
             margin: 0;
@@ -14,6 +14,8 @@
             font-family: Arial, sans-serif;
             background-color: #111;
             color: white;
+            overscroll-behavior: none; /* Verhindert Überscrollen */
+            -webkit-overflow-scrolling: touch; /* Glatteres Scrollen auf iOS */
         }
 
         section {
@@ -27,307 +29,229 @@
 
         .parallax-bg {
             position: absolute;
-            top: 0;
+            top: -10%;
             left: 0;
             width: 100%;
             height: 120%;
+            background-color: #444;
             background-size: cover;
             background-position: center;
             z-index: -1;
+            transform: translateZ(0); /* Hardware-Beschleunigung */
         }
 
         .content {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem;
             border-radius: 8px;
-            max-width: 600px;
+            width: 85%;
+            max-width: 500px;
             z-index: 1;
             text-align: center;
+            transform: translateZ(0); /* Hardware-Beschleunigung */
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
         }
 
         p {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
-        .scale-box {
-            width: 200px;
-            height: 200px;
-            background-color: rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            margin: 2rem auto;
-            border-radius: 10px;
+        /* Farben für bessere Unterscheidung */
+        #section1 .parallax-bg { background-color: #3498db; }
+        #section2 .parallax-bg { background-color: #2ecc71; }
+        #section3 .parallax-bg { background-color: #e74c3c; }
+
+        /* Optimierungen für mobile Geräte */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
         }
 
-        .depth-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            perspective: 1000px;
-            margin-top: 2rem;
-        }
-
-        .depth-layer {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .video-section {
-            position: relative;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        .video-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .video-container video {
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-        }
-
-        .pin-spacer {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #222;
-        }
-
-        .pin-content {
-            width: 80%;
-            max-width: 800px;
-            padding: 2rem;
-            background-color: #333;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .photo-credit {
-            position: absolute;
-            bottom: 10px;
+        .device-info {
+            position: fixed;
+            top: 10px;
             right: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0,0,0,0.7);
             padding: 5px 10px;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 12px;
-            z-index: 2;
+            z-index: 1000;
         }
 
-        .photo-credit a {
-            color: white;
-            text-decoration: none;
+        .toggle-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 8px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
         }
 
-        .photo-credit a:hover {
-            text-decoration: underline;
+        .toggle-switch label {
+            margin-right: 8px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <!-- Sektion 1: Parallax Hintergrund -->
-    <section id="section1">
-        <div class="parallax-bg" style="background-image: url('https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');"></div>
-        <div class="content">
-            <h1>Parallax Hintergrund</h1>
-            <p>Dieser Hintergrund bewegt sich mit einer anderen Geschwindigkeit als der Inhalt und erzeugt so einen Tiefeneffekt.</p>
-        </div>
-        <div class="photo-credit">
-            <a href="https://www.pexels.com/@mateusinlovephotos/" target="_blank">Foto von Mateus in Love</a>
-        </div>
-    </section>
+    <!-- Geräteinformationen -->
+    <div class="device-info">Gerät: <span id="device-type">Wird erkannt...</span></div>
 
-    <!-- Sektion 2: Skalierungseffekt -->
-    <section id="section2">
-        <div class="parallax-bg" style="background-image: url('https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');"></div>
-        <div class="content">
-            <h1>Skalierungseffekt</h1>
-            <p>Dieses Element verändert seine Größe beim Scrollen:</p>
-            <div class="scale-box" id="scale-element">Skalierung</div>
-        </div>
-        <div class="photo-credit">
-            <a href="https://www.pexels.com/@jannerboy62/" target="_blank">Foto von Jan Kopřiva</a>
-        </div>
-    </section>
-
-    <!-- Sektion 3: Tiefeneffekt -->
-    <section id="section3">
-        <div class="parallax-bg" style="background-image: url('https://images.pexels.com/photos/1366957/pexels-photo-1366957.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');"></div>
-        <div class="content">
-            <h1>Tiefeneffekt mit mehreren Ebenen</h1>
-            <p>Diese Elemente bewegen sich in verschiedenen Tiefen:</p>
-            <div class="depth-container">
-                <div class="depth-layer" data-depth="0.1">1</div>
-                <div class="depth-layer" data-depth="0.3" style="width: 80px; height: 80px; background-color: rgba(255,255,255,0.3);">2</div>
-                <div class="depth-layer" data-depth="0.5" style="width: 60px; height: 60px; background-color: rgba(255,255,255,0.4);">3</div>
-                <div class="depth-layer" data-depth="0.7" style="width: 40px; height: 40px; background-color: rgba(255,255,255,0.5);">4</div>
-            </div>
-        </div>
-        <div class="photo-credit">
-            <a href="https://www.pexels.com/@eberhard-grossgasteiger-233366/" target="_blank">Foto von Eberhard Grossgasteiger</a>
-        </div>
-    </section>
-
-    <!-- Sektion 4: Video Parallax -->
-    <section id="section4" class="video-section">
-        <div class="video-container">
-            <video autoplay muted loop>
-                <source src="https://player.vimeo.com/external/314181352.sd.mp4?s=d239cd8fa342068a992f72eeef4efab2b3655bd1&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
-                Ihr Browser unterstützt keine Videos.
-            </video>
-        </div>
-        <div class="content">
-            <h1>Video Parallax</h1>
-            <p>Videos können ebenfalls mit Parallax-Effekten versehen werden, um einen eindrucksvollen Scrolleffekt zu erzeugen.</p>
-        </div>
-        <div class="photo-credit">
-            <a href="https://www.pexels.com/@enginakyurt/" target="_blank">Video von Engin Akyurt</a>
-        </div>
-    </section>
-
-    <!-- Sektion 5: Gepinnter Bereich -->
-    <div id="pin-section" class="pin-spacer">
-        <div class="pin-content">
-            <h1>Gepinnter Bereich</h1>
-            <p>Dieser Bereich bleibt beim Scrollen für eine bestimmte Zeit fixiert.</p>
-            <p>Dies ist nützlich für Übergänge und fokussierte Inhalte.</p>
-        </div>
+    <!-- Parallax-Schalter -->
+    <div class="toggle-switch">
+        <label for="parallax-toggle">Parallax-Effekte:</label>
+        <input type="checkbox" id="parallax-toggle" checked>
     </div>
+    
+    <!-- Sektion 1: Parallax mit langsamerer Geschwindigkeit -->
+    <section id="section1">
+        <div class="parallax-bg" data-speed="0.3"></div>
+        <div class="content">
+            <h1>Parallax Beispiel 1</h1>
+            <p>Optimierter Parallax-Effekt für alle Geräte mit reduzierter Bewegung auf Mobilgeräten.</p>
+        </div>
+    </section>
+
+    <!-- Sektion 2: Parallax mit noch langsamerer Geschwindigkeit -->
+    <section id="section2">
+        <div class="parallax-bg" data-speed="0.2"></div>
+        <div class="content">
+            <h1>Parallax Beispiel 2</h1>
+            <p>Die Parallax-Geschwindigkeit ist für mobile Geräte reduziert, um die Performance zu verbessern.</p>
+        </div>
+    </section>
+
+    <!-- Sektion 3: Minimaler Parallax-Effekt -->
+    <section id="section3">
+        <div class="parallax-bg" data-speed="0.15"></div>
+        <div class="content">
+            <h1>Parallax Beispiel 3</h1>
+            <p>Sie können die Parallax-Effekte mit dem Schalter unten rechts ein- oder ausschalten.</p>
+        </div>
+    </section>
 
     <!-- GSAP und ScrollTrigger laden -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
-        // Warten bis das DOM vollständig geladen ist
-        document.addEventListener('DOMContentLoaded', function() {
-            // GSAP ScrollTrigger Plugin registrieren
-            gsap.registerPlugin(ScrollTrigger);
-
-            // 1. Parallax Hintergrund-Effekt
-            gsap.to("#section1 .parallax-bg", {
-                y: "20%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#section1",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-
-            // Gleiches für Sektion 2
-            gsap.to("#section2 .parallax-bg", {
-                y: "20%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#section2",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-
-            // Gleiches für Sektion 3
-            gsap.to("#section3 .parallax-bg", {
-                y: "20%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#section3",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-
-            // 2. Skalierungseffekt
-            gsap.fromTo("#scale-element", 
-                { scale: 0.5, opacity: 0.5 },
-                {
-                    scale: 1.5, 
-                    opacity: 1,
-                    scrollTrigger: {
-                        trigger: "#section2",
-                        start: "top bottom",
-                        end: "center center",
-                        scrub: true
-                    }
-                }
-            );
-
-            // 3. Tiefeneffekt mit mehreren Ebenen
-            document.querySelectorAll('.depth-layer').forEach(layer => {
-                const depth = layer.getAttribute('data-depth');
-                
-                gsap.fromTo(layer,
-                    { 
-                        z: -100,
-                        opacity: 0.3
-                    },
-                    {
-                        z: depth * 500,
-                        opacity: 1,
-                        scrollTrigger: {
-                            trigger: "#section3",
-                            start: "top bottom",
-                            end: "center center",
-                            scrub: true
-                        }
-                    }
-                );
-            });
-
-            // 4. Video Parallax
-            gsap.to(".video-container", {
-                y: "20%",
-                ease: "none",
-                scrollTrigger: {
-                    trigger: "#section4",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-
-            // 5. Gepinnter Bereich
-            ScrollTrigger.create({
-                trigger: "#pin-section",
-                start: "top top",
-                end: "+=100%",
-                pin: true,
-                pinSpacing: true
-            });
+        // Geräteerkennung
+        let isMobile = false;
+        const deviceInfo = document.getElementById('device-type');
+        
+        function detectDevice() {
+            // Einfache Geräteerkennung basierend auf Bildschirmbreite und Touch-Fähigkeit
+            isMobile = (window.innerWidth <= 768) || ('ontouchstart' in window);
+            deviceInfo.textContent = isMobile ? 'Mobil/Tablet' : 'Desktop';
+            return isMobile;
+        }
+        
+        detectDevice();
+        
+        // Toggle-Switch für Parallax-Effekte
+        const parallaxToggle = document.getElementById('parallax-toggle');
+        let parallaxEnabled = true;
+        
+        parallaxToggle.addEventListener('change', function() {
+            parallaxEnabled = this.checked;
+            
+            // Alle bestehenden ScrollTrigger-Instanzen löschen
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+            
+            // Parallax neu initialisieren falls aktiviert
+            if (parallaxEnabled) {
+                initParallax();
+            } else {
+                // Alle Parallax-Hintergründe zurücksetzen
+                gsap.set('.parallax-bg', { clearProps: 'all' });
+            }
         });
+        
+        // Parallax-Initialisierung
+        function initParallax() {
+            // Nur fortfahren, wenn Parallax aktiviert ist
+            if (!parallaxEnabled) return;
+            
+            console.log("Initialisiere Parallax... (Mobil: " + isMobile + ")");
+            
+            // ScrollTrigger Plugin registrieren
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Mobil-optimierte Konfiguration
+            ScrollTrigger.config({
+                ignoreMobileResize: true,  // Ignoriert einige Resize-Events auf Mobilgeräten
+                autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"  // Reduziert Auto-Refresh-Events
+            });
+            
+            // Für Mobilgeräte: Geringere Parallax-Geschwindigkeit
+            const mobileSpeedFactor = 0.5;  // Reduziert die Geschwindigkeit auf Mobilgeräten
+            
+            // Alle Parallax-Elemente selektieren
+            document.querySelectorAll('.parallax-bg').forEach(bg => {
+                // Basisgeschwindigkeit aus data-Attribut
+                let speed = parseFloat(bg.getAttribute('data-speed') || 0.3);
+                
+                // Für Mobilgeräte reduzieren
+                if (isMobile) {
+                    speed *= mobileSpeedFactor;
+                }
+                
+                // Simplifizierter Ansatz für bessere Mobilperformance
+                gsap.to(bg, {
+                    y: () => speed * window.innerHeight,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: bg.parentElement,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: isMobile ? 0.8 : 0.3,  // Erhöhter Wert für glattere Mobilanimation
+                        invalidateOnRefresh: true
+                    }
+                });
+            });
+        }
+        
+        // Initialisierung nach Seitenladung
+        window.addEventListener('load', function() {
+            // Prüfen und aktualisieren der Geräteerkennung
+            detectDevice();
+            
+            // Parallax initialisieren
+            initParallax();
+            
+            // Nur auf Desktop: Neu initialisieren bei Resize
+            if (!isMobile) {
+                let resizeTimeout;
+                window.addEventListener('resize', function() {
+                    // Debouncing für bessere Performance
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(function() {
+                        detectDevice();
+                        ScrollTrigger.refresh();
+                    }, 250);
+                });
+            }
+        });
+        
+        // Passive Scroll-Listener für bessere Mobilperformance
+        window.addEventListener('scroll', function() {}, { passive: true });
     </script>
 </body>
 </html>
