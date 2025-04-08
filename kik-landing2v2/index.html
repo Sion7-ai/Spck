@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kikeriki | Smarter Recruiting: Passende Bewerbungen finden</title>
+    <!-- Iconify Script -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+     <!-- Google Fonts (Beispiel: Lato) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Globale Stile - Identisch zur Lead-Gen Seite für Konsistenz */
+        :root {
+            --bg-color: #222222;
+            --text-color: #FFFFFF;
+            --primary-accent: #4DD0E1; /* Türkis/Teal */
+            --secondary-accent: #FF9800; /* Orange */
+            --card-bg: #333333;
+            --border-radius: 8px;
+            --font-family: 'Lato', sans-serif;
+            --success-color: #4CAF50; /* Grün für Vorteile */
+            --error-color: #F44336; /* Rot für Nachteile */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color); line-height: 1.7; font-size: 17px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+        section { padding: 70px 0; text-align: center; }
+        section:nth-child(even) { background-color: #2a2a2a; }
+        h1, h2, h3 { margin-bottom: 25px; font-weight: 700; line-height: 1.3; }
+        h1 { font-size: clamp(2.2rem, 5.5vw, 3.5rem); }
+        h2 { font-size: clamp(1.8rem, 4.5vw, 2.5rem); color: var(--primary-accent); margin-bottom: 40px; }
+        h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--secondary-accent); }
+        p { margin-bottom: 20px; max-width: 750px; margin-left: auto; margin-right: auto; color: #e0e0e0; }
+        p.lead { font-size: 1.2em; margin-bottom: 40px; color: var(--text-color); }
+        .cta-button { display: inline-block; background-color: var(--primary-accent); color: var(--bg-color); padding: 14px 30px; border: none; border-radius: var(--border-radius); text-decoration: none; font-weight: 700; font-size: 1.15rem; transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; margin-top: 25px; box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3); }
+        .cta-button:hover { background-color: var(--secondary-accent); color: var(--text-color); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); }
+
+        /* Header */
+        .main-header { padding: 25px 0; border-bottom: 1px solid #444; background-color: var(--bg-color); position: sticky; top: 0; z-index: 100; }
+        .main-header .container { display: flex; justify-content: center; align-items: center; }
+        .logo { font-size: 2rem; font-weight: 700; color: var(--text-color); text-decoration: none; }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.85)), url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover; /* Anderes Bild für Recruiting */
+            min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--text-color);
+        }
+        .hero h1 { color: var(--text-color); }
+        .hero p { font-size: 1.3rem; margin-bottom: 35px; }
+
+         /* Problem Section (Klassische Methoden) */
+        .problem p { margin-bottom: 30px; }
+        .problem-quote {
+            font-style: italic;
+            color: #ccc;
+            background: var(--card-bg);
+            padding: 20px 25px;
+            border-radius: var(--border-radius);
+            max-width: 550px;
+            margin: 20px auto 30px;
+            border-left: 5px solid var(--secondary-accent);
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .problem-quote span { /* Für Hervorhebung des Kernproblems */
+             display: block;
+             margin-top: 10px;
+             font-style: normal;
+             color: var(--text-color);
+             font-weight: bold;
+        }
+
+        /* Lösung/Stärke des Funnels Section mit Icons */
+         .icon-list ul { list-style: none; padding: 0; max-width: 700px; margin: 30px auto 0; text-align: left; display: grid; gap: 25px; }
+        @media (min-width: 768px) {
+            .icon-list ul { grid-template-columns: repeat(2, 1fr); column-gap: 40px; }
+             .icon-list ul.single-column { grid-template-columns: 1fr; }
+        }
+        .icon-list li { display: flex; align-items: flex-start; margin-bottom: 0; font-size: 1.1rem; }
+        .icon-list .iconify { margin-right: 18px; flex-shrink: 0; margin-top: 4px; }
+
+        .solution .iconify { color: var(--primary-accent); } /* Icons in der Lösungssektion */
+
+         .solution img { /* Bild im Lösungsbereich */
+             max-width: 450px;
+             width: 90%;
+             height: auto;
+             margin-top: 40px;
+             border-radius: var(--border-radius);
+             box-shadow: 0 5px 20px rgba(0,0,0, 0.3);
+         }
+
+        /* Vergleich Section */
+        .comparison { display: flex; flex-direction: column; /* Standard: Untereinander */ align-items: center; gap: 40px; margin-top: 40px; }
+        @media (min-width: 992px) { /* Nebeneinander auf größeren Screens */
+             .comparison { flex-direction: row; justify-content: center; align-items: flex-start; }
+        }
+
+        .comparison-column {
+            flex-basis: 100%; /* Volle Breite auf Mobile */
+            max-width: 480px; /* Maximale Breite pro Spalte */
+            text-align: left;
+            background: var(--card-bg);
+            padding: 30px 35px; /* Mehr Padding */
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0,0,0, 0.2);
+        }
+        .comparison-column h3 {
+            color: var(--text-color); /* Titel in Weiß */
+            margin-bottom: 25px;
+            text-align: center;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             gap: 10px;
+             font-size: 1.6rem; /* Größere Spalten-Titel */
+        }
+         .funnel-method h3 .iconify { color: var(--success-color); }
+         .classic-method h3 .iconify { color: var(--error-color); }
+
+        .comparison-column ul { list-style: none; padding: 0; }
+        .comparison-column li { display: flex; align-items: center; margin-bottom: 15px; /* Mehr Abstand */ font-size: 1.05rem; }
+        .comparison-column .iconify { margin-right: 12px; flex-shrink: 0; font-size: 1.3em; /* Größere Icons */ }
+        .funnel-method li .iconify { color: var(--success-color); }
+        .classic-method li .iconify { color: var(--error-color); }
+
+        /* Call to Action Section */
+        .cta-section { background-color: var(--primary-accent); color: var(--bg-color); padding: 80px 0; }
+        .cta-section h2 { color: var(--bg-color); }
+        .cta-section p { color: #111; font-size: 1.2rem; max-width: 800px; }
+        .cta-section .cta-button { background-color: var(--bg-color); color: var(--primary-accent); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        .cta-section .cta-button:hover { background-color: var(--secondary-accent); color: var(--text-color); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+
+        /* Footer */
+        .main-footer { text-align: center; padding: 30px 0; margin-top: 50px; border-top: 1px solid #444; font-size: 0.95rem; color: #aaa; }
+        .main-footer a { color: #bbb; text-decoration: none; margin: 0 10px; transition: color 0.3s ease; }
+        .main-footer a:hover { color: var(--primary-accent); }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+             <a href="https://kikeriki.net" class="logo" aria-label="Zurück zur Kikeriki Startseite">kikeriki</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Mehr passende Bewerbungen? Smart, schnell & ohne Umwege.</h1>
+                <p>Mit Recruiting-Funnels über Social Ads erreichen Sie Top-Talente (aktiv & passiv) – und machen die Bewerbung zum Kinderspiel.</p>
+                <a href="#cta" class="cta-button">Recruiting-Strategie starten</a>
+            </div>
+        </section>
+
+        <section class="problem">
+            <div class="container">
+                <h2>Das Problem mit klassischen Recruiting-Methoden</h2>
+                <p class="lead">Lange Formulare, aufwändige Prozesse – das schreckt viele qualifizierte Kandidat:innen ab.</p>
+                <div class="problem-quote">
+                     "Jetzt bewerben mit Lebenslauf & Motivationsschreiben."
+                    <span>Klingt wichtig. Ist aber abschreckend – vor allem für wechselwillige Fachkräfte, die nicht aktiv suchen.</span>
+                </div>
+                 <p>Herkömmliche Stellenanzeigen erreichen oft nur aktiv Suchende. Wertvolle Talente, die offen für einen Wechsel wären, gehen verloren.</p>
+            </div>
+        </section>
+
+        <section class="solution icon-list">
+            <div class="container">
+                <h2>Was macht unseren Funnel-Ansatz so stark?</h2>
+                <p class="lead">Wir holen die Richtigen ab – ohne Umwege. Gezielt, mobiloptimiert und niedrigschwellig.</p>
+                 <ul>
+                    <li><span class="iconify" data-icon="tabler:users-group" data-width="28" data-height="28"></span>**Gezielte Ansprache:** Wir finden wechselwillige Fachkräfte genau dort, wo sie online sind.</li>
+                    <li><span class="iconify" data-icon="tabler:device-mobile-message" data-width="28" data-height="28"></span>**Mobil & intuitiv:** Bewerbung einfach und schnell am Smartphone – jederzeit, überall.</li>
+                    <li><span class="iconify" data-icon="tabler:list-check" data-width="28" data-height="28"></span>**Niedrigschwelliger Einstieg:** Einfache Fragen statt sofortiger Bewerbungshürden.</li>
+                    <li><span class="iconify" data-icon="tabler:clock-hour-4" data-width="28" data-height="28"></span>**Schnelligkeit zählt:** Bewerbung oft in unter 60 Sekunden möglich.</li>
+                     <li><span class="iconify" data-icon="tabler:message-chatbot" data-width="28" data-height="28"></span>**Persönlicher Touch:** Der Funnel führt wie ein Gespräch, nicht wie ein starres Formular.</li>
+                      <li><span class="iconify" data-icon="tabler:adjustments-horizontal" data-width="28" data-height="28"></span>**Dynamisch & anpassbar:** Perfekt zugeschnitten auf Ihre Zielgruppe und Vakanz.</li>
+                </ul>
+                  <img src="https://images.pexels.com/photos/6801642/pexels-photo-6801642.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Grafik Recruiting Erfolg" width="450" height="300">
+            </div>
+        </section>
+
+        <section class="comparison-section">
+            <div class="container">
+                 <h2>Funnel Methode vs. Klassische Methode</h2>
+                 <p class="lead">Der direkte Vergleich zeigt die Vorteile des smarten Recruitings.</p>
+                <div class="comparison">
+                    <div class="comparison-column funnel-method">
+                        <h3><span class="iconify" data-icon="tabler:filter-check" data-width="30" data-height="30"></span> Funnel Methode</h3>
+                        <ul>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Einstieg mit 1-2 Klickfragen</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> In ~60 Sekunden bewerben</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Einfach am Handy ausfüllen</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Dynamisch & anpassbar</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Mehr Bewerbungen, weniger Absprünge</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Geführt wie ein Gespräch</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Erreicht auch passive Kandidat:innen</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-column classic-method">
+                        <h3><span class="iconify" data-icon="tabler:file-x" data-width="30" data-height="30"></span> Klassische Methode</h3>
+                         <ul>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Oft Anlegen von Bewerber-Accounts nötig</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Manuelles Hochladen von Dokumenten (CV, Anschreiben)</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Meist nur am Laptop praktikabel</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Starre „One fits all"-Formulare</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Viele Interessenten brechen frühzeitig ab</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Unpersönlich & oft frustrierend</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Erreicht primär aktiv Suchende</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <section id="cta" class="cta-section">
+            <div class="container">
+                <h2>Recruiting-Funnels sind der smartere Weg zu Top-Talenten.</h2>
+                <p>Schluss mit frustrierenden Bewerbungsprozessen! Gewinnen Sie die besten Köpfe für Ihr Unternehmen – effizient und zielgerichtet. Lassen Sie uns gemeinsam Ihre individuelle Recruiting-Strategie entwickeln.</p>
+                <a href="https://kikeriki.net/kontakt" target="_blank" class="cta-button">Unverbindliches Gespräch vereinbaren</a>
+                 <p style="margin-top: 20px; font-size: 1rem;">Oder kontaktieren Sie uns direkt: [Ihre Telefonnummer hier einfügen]</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+             <p>© 2024 kikeriki GmbH</p>
+             <p>
+                 <a href="https://kikeriki.net/impressum" target="_blank">Impressum</a> |
+                 <a href="https://kikeriki.net/datenschutz" target="_blank">Datenschutz</a>
+             </p>
+        </div>
+    </footer>
+
+</body>
+</html>
