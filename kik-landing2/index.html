@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kikeriki - Recruiting mit Social Ads & Mobile Funnel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconify für Icons -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        :root {
+            --primary: #4A7C7C; /* Petrol aus der Präsentation */
+            --primary-light: #A0D2DB; /* Helles Blaugrün */
+            --primary-dark: #3A6666; /* Dunkleres Petrol */
+            --secondary: #FF6F00; /* Orange aus Award-Logo */
+            --text-dark: #212121; /* Text auf hellem Grund */
+            --text-light: #FFFFFF; /* Text auf dunklem Grund */
+            --bg-dark: #1A1D21; /* Dunkler Hintergrund */
+            --bg-light: #FFFFFF; /* Heller Hintergrund */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 8rem;
+            --border-radius: 4px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: var(--space-sm);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        p {
+            margin-bottom: var(--space-sm);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-dark);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-sm);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text-light);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background-color: #E56500; /* Dunkleres Orange */
+            color: var(--text-light);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-1 {
+            margin-bottom: var(--space-xs);
+        }
+
+        .mb-2 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .mb-3 {
+            margin-bottom: var(--space-md);
+        }
+
+        .mb-4 {
+            margin-bottom: var(--space-lg);
+        }
+
+        .mb-5 {
+            margin-bottom: var(--space-xl);
+        }
+
+        .mt-1 {
+            margin-top: var(--space-xs);
+        }
+
+        .mt-2 {
+            margin-top: var(--space-sm);
+        }
+
+        .mt-3 {
+            margin-top: var(--space-md);
+        }
+
+        .mt-4 {
+            margin-top: var(--space-lg);
+        }
+
+        .mt-5 {
+            margin-top: var(--space-xl);
+        }
+
+        .pt-1 {
+            padding-top: var(--space-xs);
+        }
+
+        .pt-2 {
+            padding-top: var(--space-sm);
+        }
+
+        .pt-3 {
+            padding-top: var(--space-md);
+        }
+
+        .pt-4 {
+            padding-top: var(--space-lg);
+        }
+
+        .pt-5 {
+            padding-top: var(--space-xl);
+        }
+
+        .pb-1 {
+            padding-bottom: var(--space-xs);
+        }
+
+        .pb-2 {
+            padding-bottom: var(--space-sm);
+        }
+
+        .pb-3 {
+            padding-bottom: var(--space-md);
+        }
+
+        .pb-4 {
+            padding-bottom: var(--space-lg);
+        }
+
+        .pb-5 {
+            padding-bottom: var(--space-xl);
+        }
+      /* Header */
+        .header {
+            padding: var(--space-sm) 0;
+            background-color: var(--bg-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .logo span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-left: var(--space-xs);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1600');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            padding: 10rem 0 5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            margin-bottom: var(--space-md);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-md);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: var(--space-lg) 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-petrol {
+            background-color: var(--primary);
+            color: var(--text-light);
+        }
+
+        .section-dark {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        /* Feature Boxes */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .feature-box {
+            background-color: var(--bg-light);
+            border-radius: var(--border-radius);
+            padding: var(--space-md);
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-petrol .feature-box, .section-dark .feature-box {
+            color: var(--text-dark);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-petrol .feature-icon, .section-dark .feature-icon {
+            color: var(--primary);
+        }
+
+        /* Comparison Section */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        .comparison-column {
+            padding: var(--space-md);
+            border-radius: var(--border-radius);
+        }
+
+        .comparison-column h3 {
+            margin-bottom: var(--space-md);
+            text-align: center;
+            padding-bottom: var(--space-sm);
+            border-bottom: 2px solid;
+        }
+
+        .funnel-column {
+            background-color: var(--primary-light);
+            color: var(--text-dark);
+            border: 2px solid var(--primary);
+        }
+
+        .funnel-column h3 {
+            color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .traditional-column {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            border: 2px solid #ddd;
+            position: relative;
+        }
+
+        .traditional-column::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            bottom: -10px;
+            left: -10px;
+            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: var(--border-radius);
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            margin-bottom: var(--space-sm);
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .funnel-column .comparison-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: var(--primary);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+            background-size: 75%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .traditional-column .comparison-list li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background-color: #f44336;
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E");
+            background-size: 75%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Mobile Mockups */
+        .mockups {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            margin: var(--space-md) 0;
+        }
+
+        .mockup {
+            position: relative;
+            width: 280px;
+        }
+
+        .phone-frame {
+            width: 100%;
+            height: auto;
+        }
+
+        .phone-screen {
+            position: absolute;
+            top: 6%;
+            left: 7%;
+            width: 86%;
+            height: 88%;
+            border-radius: 20px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Steps Section */
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            margin-top: var(--space-lg);
+        }
+
+        .step {
+            position: relative;
+            padding-left: 4rem;
+            margin-bottom: var(--space-md);
+            counter-increment: step;
+        }
+
+        .step::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--primary);
+            color: var(--text-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Demo Form */
+        .demo-form {
+            background-color: var(--bg-light);
+            padding: var(--space-md);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-top: var(--space-md);
+        }
+
+        .demo-question {
+            margin-bottom: var(--space-md);
+        }
+
+        .demo-question h4 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .option-buttons {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .option-button {
+            padding: 8px 16px;
+            background-color: #f5f5f5;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .option-button:hover, .option-button.active {
+            border-color: var(--primary);
+            background-color: rgba(74, 124, 124, 0.1);
+        }
+
+        .option-button.active {
+            font-weight: 600;
+        }
+
+        /* Funnel Animation */
+        .funnel-animation {
+            position: relative;
+            margin: var(--space-lg) auto;
+            max-width: 600px;
+        }
+
+        .funnel-step {
+            position: relative;
+            padding: var(--space-sm) var(--space-md);
+            background-color: var(--primary-light);
+            margin-bottom: var(--space-sm);
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .funnel-step:nth-child(1) {
+            width: 100%;
+        }
+
+        .funnel-step:nth-child(2) {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .funnel-step:nth-child(3) {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .funnel-step:nth-child(4) {
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .funnel-step:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .funnel-step::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid var(--primary-light);
+            z-index: 1;
+        }
+
+        .funnel-step:last-child::after {
+            display: none;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--bg-light);
+            padding: var(--space-md);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: var(--space-md) 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            color: var(--text-light);
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(74, 124, 124, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(74, 124, 124, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(74, 124, 124, 0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .comparison {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+
+            .mockups {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature-box, .case-study {
+                padding: var(--space-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://via.placeholder.com/80x40?text=kikeriki" alt="kikeriki Logo">
+                <span>kikeriki</span>
+            </div>
+            <a href="#contact" class="btn btn-primary">Kontakt</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Recruiting-Funnels: Der smartere Weg zu mehr passenden Bewerbungen</h1>
+            <p>Weniger Hürden, mehr qualifizierte Kandidaten</p>
+            <a href="#contact" class="btn btn-secondary">Jetzt Recruiting optimieren</a>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="problem" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Probleme bei klassischen Bewerbungsmethoden</h2>
+                <p>Warum die herkömmlichen Ansätze oft nicht mehr ausreichen</p>
+            </div>
+
+            <div class="comparison">
+                <div class="comparison-column traditional-column">
+                    <h3>Klassische Methode</h3>
+                    <ul class="comparison-list">
+                        <li>"Jetzt bewerben mit Lebenslauf & Motivationsschreiben" klingt wichtig, ist aber abschreckend</li>
+                        <li>Anlegen von Bewerber-Accounts erforderlich</li>
+                        <li>Manuelles Hochladen von Anschreiben und CV</li>
+                        <li>Nur am Laptop praktikabel</li>
+                        <li>"One fits all"-Formulare</li>
+                        <li>Viele Kandidaten brechen früh ab</li>
+                        <li>Nur aktiv Suchende werden erreicht</li>
+                        <li>Unpersönlich & starr</li>
+                    </ul>
+                </div>
+                <div class="comparison-column funnel-column">
+                    <h3>Funnel-Methode</h3>
+                    <ul class="comparison-list">
+                        <li>Einstieg mit 1-2 einfachen Klickfragen</li>
+                        <li>In 60 Sekunden bewerben</li>
+                        <li>Dynamisch & anpassbar an die Kandidaten</li>
+                        <li>Einfach am Handy ausfüllbar</li>
+                        <li>Erreicht auch passive Kandidat:innen</li>
+                        <li>Geführt wie ein Gespräch</li>
+                        <li>Mehr Bewerbungen, weniger Absprünge</li>
+                        <li>Spricht wechselwillige Fachkräfte gezielt an</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Solution Section -->
+    <section id="solution" class="section section-petrol">
+        <div class="container">
+            <div class="section-header">
+                <h2>Was macht den Funnel so stark?</h2>
+                <p>Mobile optimierte Recruiting-Funnels machen den Unterschied</p>
+            </div>
+
+            <div class="features">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <iconify-icon icon="mdi:cellphone-check"></iconify-icon>
+                    </div>
+                    <h3>Mobile-First</h3>
+                    <p>Optimiert für Mobilgeräte - Bewerben von überall in nur 60 Sekunden möglich.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <iconify-icon icon="mdi:account-convert"></iconify-icon>
+                    </div>
+                    <h3>Passive Kandidaten erreichen</h3>
+                    <p>Sprechen Sie auch wechselwillige Fachkräfte an, die nicht aktiv auf Jobsuche sind.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <iconify-icon icon="mdi:chat-processing"></iconify-icon>
+                    </div>
+                    <h3>Gesprächsorientiert</h3>
+                    <p>Der Funnel führt Kandidaten wie in einem natürlichen Gespräch durch den Bewerbungsprozess.</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <iconify-icon icon="mdi:chart-line-variant"></iconify-icon>
+                    </div>
+                    <h3>Höhere Conversion</h3>
+                    <p>Deutlich mehr abgeschlossene Bewerbungen durch weniger Abbrüche im Prozess.</p>
+                </div>
+            </div>
+
+            <div class="mockups mt-4">
+                <div class="mockup">
+                    <img class="phone-frame" src="https://via.placeholder.com/280x600/222222/222222" alt="Smartphone Frame">
+                    <div class="phone-screen">
+                        <img src="https://images.pexels.com/photos/3760529/pexels-photo-3760529.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Recruiting Ad">
+                    </div>
+                </div>
+                <div class="mockup">
+                    <img class="phone-frame" src="https://via.placeholder.com/280x600/222222/222222" alt="Smartphone Frame">
+                    <div class="phone-screen">
+                        <img src="https://images.pexels.com/photos/4126743/pexels-photo-4126743.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Mobile Funnel">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>So einfach funktioniert der Recruiting-Funnel</h2>
+                <p>Erleben Sie den vereinfachten Bewerbungsprozess</p>
+            </div>
+
+            <div class="funnel-animation">
+                <div class="funnel-step">
+                    <h4>Schritt 1: Anzeige auf Social Media</h4>
+                    <p>Potenzielle Kandidaten sehen Ihre zielgerichtete Anzeige</p>
+                </div>
+                <div class="funnel-step">
+                    <h4>Schritt 2: Einfache Einstiegsfragen</h4>
+                    <p>1-2 Klickfragen statt komplexer Formulare</p>
+                </div>
+                <div class="funnel-step">
+                    <h4>Schritt 3: Dynamischer Dialog</h4>
+                    <p>Gesprächsbasierter Prozess zur Qualifikationserfassung</p>
+                </div>
+                <div class="funnel-step">
+                    <h4>Schritt 4: Direkter Kontakt</h4>
+                    <p>Qualifizierte Kandidaten für das persönliche Gespräch</p>
+                </div>
+            </div>
+
+            <div class="demo-form">
+                <h3 class="text-center mb-3">Testen Sie selbst</h3>
+                <div class="demo-question">
+                    <h4>Welche Position würden Sie besetzen wollen?</h4>
+                    <div class="option-buttons">
+                        <button class="option-button" data-value="vertrieb">Vertrieb</button>
+                        <button class="option-button" data-value="it">IT & Entwicklung</button>
+                        <button class="option-button" data-value="marketing">Marketing</button>
+                        <button class="option-button" data-value="produktion">Produktion</button>
+                        <button class="option-button" data-value="sonstige">Sonstige</button>
+                    </div>
+                </div>
+                <div class="demo-question" id="question2" style="display: none;">
+                    <h4>Welche Herausforderung haben Sie aktuell bei der Personalgewinnung?</h4>
+                    <div class="option-buttons">
+                        <button class="option-button" data-value="zu_wenig">Zu wenig Bewerbungen</button>
+                        <button class="option-button" data-value="unpassend">Unpassende Bewerberprofile</button>
+                        <button class="option-button" data-value="abbrüche">Hohe Abbruchraten im Prozess</button>
+                        <button class="option-button" data-value="kosten">Zu hohe Kosten pro Einstellung</button>
+                    </div>
+                </div>
+                <div id="result" class="mt-3 text-center" style="display: none;">
+                    <p>Vielen Dank für Ihre Angaben! Ein spezialisierter Recruiting-Funnel könnte Ihnen helfen, Ihre Herausforderungen zu lösen.</p>
+                    <a href="#contact" class="btn btn-primary mt-2">Jetzt Beratungsgespräch vereinbaren</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Story -->
+    <section id="success" class="section section-dark">
+        <div class="container">
+            <div class="section-header">
+                <h2>Erfolgreiche Umsetzungen</h2>
+                <p>Was unsere Kunden mit Recruiting-Funnels erreicht haben</p>
+            </div>
+
+            <div class="features">
+                <div class="feature-box">
+                    <h3>Produktionsunternehmen</h3>
+                    <p><strong>Ausgangslage:</strong> Schwierigkeiten, Fachkräfte für die Produktion zu finden.</p>
+                    <p><strong>Ergebnis:</strong> 200% mehr Bewerbungen innerhalb von 8 Wochen durch zielgerichtete Social-Ads und einfachen Bewerbungsprozess.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>IT-Dienstleister</h3>
+                    <p><strong>Ausgangslage:</strong> Hoher Wettbewerb um qualifizierte Entwickler:innen.</p>
+                    <p><strong>Ergebnis:</strong> 12 qualifizierte Bewerbungseinreichungen in 4 Wochen und 4 Neueinstellungen.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>Versicherungsagentur</h3>
+                    <p><strong>Ausgangslage:</strong> Schwierigkeiten bei der Besetzung von Stellen im Vertriebsinnendienst.</p>
+                    <p><strong>Ergebnis:</strong> Reduktion der Kosten pro Einstellung um 60% und Verkürzung der Besetzungszeit um 45%.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="section section-petrol">
+        <div class="container">
+            <div class="section-header">
+                <h2>Holen Sie sich mehr passende Bewerbungen – ohne lange Prozesse</h2>
+                <p>Kontaktieren Sie uns für eine kostenlose Beratung</p>
+            </div>
+
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Ihr Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="company" class="form-label">Unternehmen</label>
+                    <input type="text" id="company" class="form-control" placeholder="Ihr Unternehmen" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">E-Mail</label>
+                    <input type="email" id="email" class="form-control" placeholder="Ihre E-Mail-Adresse" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="form-label">Telefon</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Ihre Telefonnummer">
+                </div>
+                <div class="form-group">
+                    <label for="position" class="form-label">Zu besetzende Position</label>
+                    <input type="text" id="position" class="form-control" placeholder="Welche Position möchten Sie besetzen?">
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Nachricht</label>
+                    <textarea id="message" class="form-control" rows="4" placeholder="Ihre Nachricht"></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary">Jetzt Recruiting-Funnel testen</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="https://via.placeholder.com/120x60?text=kikeriki" alt="kikeriki Logo">
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+                <a href="#" class="social-link"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+                <a href="#" class="social-link"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                <a href="#" class="social-link"><iconify-icon icon="mdi:youtube"></iconify-icon></a>
+            </div>
+            <div class="footer-links">
+                <a href="#">Impressum</a>
+                <a href="#">Datenschutz</a>
+                <a href="#">AGB</a>
+                <a href="#">Kontakt</a>
+            </div>
+            <p class="copyright">© 2025 kikeriki GmbH. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <a href="#contact" class="btn btn-primary floating-cta">Jetzt Recruiting optimieren</a>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Sticky header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+
+        // Demo form interaction
+        const optionButtons = document.querySelectorAll('.option-button');
+        const question2 = document.getElementById('question2');
+        const result = document.getElementById('result');
+
+        optionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from siblings
+                this.parentNode.querySelectorAll('.option-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // If this is question 1, show question 2
+                if (this.parentNode.parentNode.id !== 'question2') {
+                    setTimeout(() => {
+                        question2.style.display = 'block';
+                    }, 300);
+                } else {
+                    // If this is question 2, show result
+                    setTimeout(() => {
+                        result.style.display = 'block';
+                    }, 300);
+                }
+            });
+        });
+
+        // Form validation
+        const form = document.querySelector('.contact-form');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Validate form
+            let valid = true;
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const company = document.getElementById('company');
+
+            if (!name.value.trim()) {
+                valid = false;
+                name.style.borderColor = 'red';
+            } else {
+                name.style.borderColor = '';
+            }
+
+            if (!company.value.trim()) {
+                valid = false;
+                company.style.borderColor = 'red';
+            } else {
+                company.style.borderColor = '';
+            }
+
+            if (!email.value.trim() || !validateEmail(email.value)) {
+                valid = false;
+                email.style.borderColor = 'red';
+            } else {
+                email.style.borderColor = '';
+            }
+
+            if (valid) {
+                // In real implementation, submit form data
+                alert('Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden.');
+                form.reset();
+            }
+        });
+
+        function validateEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+
+        // Funnel animation on scroll
+        const funnelSteps = document.querySelectorAll('.funnel-step');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.transform = 'translateY(-5px)';
+                        entry.target.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.1)';
+                    }, entries.indexOf(entry) * 200);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        funnelSteps.forEach(step => {
+            observer.observe(step);
+        });
+    </script>
+</body>
+</html>
