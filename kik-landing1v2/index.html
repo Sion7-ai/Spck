@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kikeriki | Mehr Leads durch Social Ads & Mobile Funnels</title>
+    <!-- Iconify Script -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <!-- Google Fonts (Beispiel: Lato) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Globale Stile */
+        :root {
+            --bg-color: #222222; /* Dunkles Grau */
+            --text-color: #FFFFFF;
+            --primary-accent: #4DD0E1; /* Türkis/Teal aus Präsentation */
+            --secondary-accent: #FF9800; /* Orange aus Präsentation */
+            --card-bg: #333333;
+            --border-radius: 8px;
+            --font-family: 'Lato', sans-serif; /* Kikeriki nutzt Lato oder ähnlich */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+             scroll-behavior: smooth; /* Für interne Links wie #cta */
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7; /* Etwas mehr Zeilenabstand für Lesbarkeit */
+            font-size: 17px; /* Etwas größere Basisschrift */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 25px; /* Etwas mehr Padding */
+        }
+
+        section {
+            padding: 70px 0; /* Mehr Abstand zwischen Sektionen */
+            text-align: center;
+        }
+
+        /* Optional: Leichter Wechsel für Sektionen */
+        section:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 25px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5.5vw, 3.5rem); /* Größere Headline */
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+            color: var(--primary-accent);
+            margin-bottom: 40px; /* Mehr Abstand unter H2 */
+        }
+
+         h3 {
+             font-size: clamp(1.3rem, 3vw, 1.8rem);
+             color: var(--secondary-accent); /* H3 in Orange? */
+         }
+
+        p {
+            margin-bottom: 20px;
+            max-width: 750px; /* Etwas breiter für Fließtext */
+            margin-left: auto;
+            margin-right: auto;
+            color: #e0e0e0; /* Leicht abgedunkeltes Weiß für bessere Lesbarkeit */
+        }
+         p.lead { /* Für Intro-Texte unter H2 */
+             font-size: 1.2em;
+             margin-bottom: 40px;
+             color: var(--text-color);
+         }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-accent);
+            color: var(--bg-color);
+            padding: 14px 30px; /* Größerer Button */
+            border: none;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.15rem;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 25px;
+            box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3); /* Leichter Schatten in Akzentfarbe */
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-accent);
+            color: var(--text-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); /* Stärkerer Schatten in Hover-Farbe */
+        }
+
+        /* Header */
+        .main-header {
+            padding: 25px 0;
+            border-bottom: 1px solid #444;
+            background-color: var(--bg-color); /* Sicherstellen, dass Header Hintergrund hat */
+            position: sticky; /* Optional: Header fixieren */
+            top: 0;
+            z-index: 100;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: center; /* Zentriert für Landingpage */
+            align-items: center;
+        }
+
+        .logo {
+            /* Kikeriki Logo als Text (Beispiel) - Besser: SVG oder PNG */
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+            /* Für Bild: <img src="path/to/kikeriki-logo.svg" alt="kikeriki Logo" height="40"> */
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.85)), url('https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover; /* Höhere Auflösung? */
+            min-height: 70vh; /* Etwas höher */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        .hero h1 {
+            color: var(--text-color); /* Überschrift explizit weiß */
+        }
+
+        .hero p {
+            font-size: 1.3rem; /* Größerer Lead-Text */
+            margin-bottom: 35px;
+        }
+
+        /* Problem/Herausforderung & Vorteile Sections mit Icons */
+        .icon-list ul {
+            list-style: none;
+            padding: 0;
+            max-width: 700px; /* Breiter für Listen */
+            margin: 30px auto 0;
+            text-align: left;
+            display: grid; /* Grid für bessere Ausrichtung */
+            gap: 25px; /* Abstand zwischen Listenelementen */
+        }
+
+        /* Optional: Zweispaltiges Grid für Listen auf größeren Screens */
+        @media (min-width: 768px) {
+            .icon-list ul {
+                grid-template-columns: repeat(2, 1fr);
+                 column-gap: 40px; /* Größerer Abstand zwischen Spalten */
+            }
+             .icon-list ul.single-column { /* Klasse für Listen, die einspaltig bleiben sollen */
+                  grid-template-columns: 1fr;
+             }
+        }
+
+        .icon-list li {
+            display: flex;
+            align-items: flex-start; /* Oben ausrichten für längeren Text */
+            margin-bottom: 0; /* Wird durch Grid-Gap gesteuert */
+            font-size: 1.1rem;
+        }
+
+        .icon-list .iconify {
+            margin-right: 18px;
+            flex-shrink: 0;
+            color: var(--secondary-accent); /* Orange für Problem-Icons */
+            margin-top: 4px; /* Kleine Anpassung für vertikale Ausrichtung */
+        }
+         .benefits .iconify {
+             color: var(--primary-accent); /* Türkis für Vorteile */
+         }
+
+        /* Lösung Section */
+        .solution {
+            background-color: #2a2a2a; /* Konsistent mit even/odd Sektionen */
+        }
+         .solution img { /* Bild im Lösungsbereich */
+             max-width: 450px;
+             width: 90%;
+             height: auto;
+             margin-top: 40px;
+             border-radius: var(--border-radius);
+             box-shadow: 0 5px 20px rgba(0,0,0, 0.3);
+         }
+
+
+        /* Beispiele/Success Story Section */
+        .examples {
+             background-color: var(--bg-color); /* Oder #2a2a2a je nach Position */
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Grid */
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .example-item {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0,0,0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .example-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0, 0.3);
+        }
+
+         .example-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+         }
+        .example-item h3 {
+            color: var(--primary-accent);
+            margin-bottom: 15px;
+        }
+        .example-item p {
+            font-size: 1rem; /* Kleinere Schrift in Beispiel-Cards */
+            color: #ccc;
+        }
+         .example-item strong {
+             color: var(--text-color);
+         }
+
+
+        /* Call to Action Section */
+        .cta-section {
+            background-color: var(--primary-accent);
+            color: var(--bg-color);
+            padding: 80px 0; /* Mehr Padding für CTA */
+        }
+        .cta-section h2 {
+            color: var(--bg-color);
+        }
+         .cta-section p {
+             color: #111; /* Dunklerer Text auf hellem Grund */
+             font-size: 1.2rem;
+             max-width: 800px;
+         }
+        .cta-section .cta-button {
+            background-color: var(--bg-color);
+            color: var(--primary-accent);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .cta-section .cta-button:hover {
+            background-color: var(--secondary-accent);
+            color: var(--text-color);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        .main-footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid #444;
+            font-size: 0.95rem;
+            color: #aaa;
+        }
+        .main-footer a {
+            color: #bbb; /* Etwas heller */
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        .main-footer a:hover {
+            color: var(--primary-accent);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <!-- Ersetzen durch Kikeriki Logo Bild -->
+            <a href="https://kikeriki.net" class="logo" aria-label="Zurück zur Kikeriki Startseite">
+                <!-- Beispiel für Text-Logo, besser Bild verwenden -->
+                kikeriki
+                <!-- <img src="pfad/zum/logo.svg" alt="kikeriki Logo" height="40"> -->
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Mehr qualifizierte Leads für Ihr Unternehmen?</h1>
+                <p>Wir machen Social Media zur Lead-Maschine – mit gezielten Ads und smarten Mobile Funnels, die wirklich konvertieren.</p>
+                <a href="#cta" class="cta-button">Jetzt Erstgespräch sichern</a>
+            </div>
+        </section>
+
+        <section class="problem icon-list">
+            <div class="container">
+                <h2>Kennen Sie das? Die typischen Hürden der Leadgenerierung</h2>
+                <p class="lead">(Besonders relevant z.B. für Versicherungsagenturen & Dienstleister)</p>
+                <ul>
+                    <li><span class="iconify" data-icon="material-symbols:signal-disconnected" data-width="28" data-height="28"></span>Die digitale Kundengewinnung stockt oder ist ineffizient.</li>
+                    <li><span class="iconify" data-icon="material-symbols:groups-outline" data-width="28" data-height="28"></span>Vergleichsportale und Wettbewerber machen Druck.</li>
+                    <li><span class="iconify" data-icon="material-symbols:euro-symbol" data-width="28" data-height="28"></span>Teuer eingekaufte Leads haben oft schlechte Qualität.</li>
+                    <li><span class="iconify" data-icon="material-symbols:network-intelligence" data-width="28" data-height="28"></span>Ihre Online-Sichtbarkeit könnte besser sein.</li>
+                    <li><span class="iconify" data-icon="material-symbols:person-alert-outline" data-width="28" data-height="28"></span>Es fehlt die Zeit, sich intensiv um Neukunden zu kümmern.</li>
+                    <li><span class="iconify" data-icon="material-symbols:trending-down" data-width="28" data-height="28"></span>Klassische Akquise-Methoden bringen kaum noch Erfolg.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="solution">
+            <div class="container">
+                <h2>Unsere Lösung: Social Ads + Mobile Funnels = Mehr Erfolg</h2>
+                <p class="lead">Wir kombinieren die enorme Reichweite von Social Media (Facebook, Instagram, LinkedIn & Co.) mit intelligenten Mobile Funnels. So werden Interessenten schnell und einfach zu hochwertigen, vorqualifizierten Leads.</p>
+                 <div class="icon-list benefits"> <!-- Nutzen der Vorteile-Liste Styling -->
+                     <ul class="single-column"> <!-- Diese Liste soll einspaltig bleiben -->
+                        <li><span class="iconify" data-icon="material-symbols:target" data-width="28" data-height="28"></span>**Präzises Targeting:** Wir erreichen genau Ihre Wunschzielgruppe – ohne Streuverluste.</li>
+                        <li><span class="iconify" data-icon="material-symbols:visibility" data-width="28" data-height="28"></span>**Hohe Sichtbarkeit:** Ihre Botschaft dort, wo Ihre potenziellen Kunden aktiv sind.</li>
+                        <li><span class="iconify" data-icon="material-symbols:mobile-friendly" data-width="28" data-height="28"></span>**Mobiloptimierte Funnels:** Einfache, intuitive Lead-Erfassung direkt am Smartphone.</li>
+                        <li><span class="iconify" data-icon="material-symbols:filter-alt-outline" data-width="28" data-height="28"></span>**Qualifizierte Anfragen:** Interessenten melden sich aktiv bei Ihnen – mit echtem Bedarf.</li>
+                         <li><span class="iconify" data-icon="material-symbols:timer-outline" data-width="28" data-height="28"></span>**Zeitersparnis:** Deutlich weniger Aufwand als bei Kaltakquise oder aufwändigen Kampagnen.</li>
+                    </ul>
+                </div>
+                 <!-- Beispielbild eines Mobile Funnel Mockups -->
+                 <img src="https://images.pexels.com/photos/6476259/pexels-photo-6476259.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Smartphone mit Funnel-Ansicht" width="450" height="300">
+            </div>
+        </section>
+
+        <section class="benefits icon-list">
+            <div class="container">
+                <h2>Ihre Vorteile auf einen Blick</h2>
+                <p class="lead">Profitieren Sie von einem modernen, datengetriebenen Ansatz.</p>
+                 <ul>
+                     <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="28" data-height="28"></span>**Qualität statt Quantität:** Fokussierte Leads mit hoher Abschlusswahrscheinlichkeit.</li>
+                    <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="28" data-height="28"></span>**Messbare Ergebnisse:** Volle Transparenz über Kosten pro Lead und Kampagnen-ROI.</li>
+                    <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="28" data-height="28"></span>**Passive Interessenten erreichen:** Wir wecken Bedarf bei denen, die noch nicht aktiv suchen.</li>
+                     <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="28" data-height="28"></span>**Effiziente Prozesse:** Schlanke, automatisierte Funnels sparen wertvolle Zeit.</li>
+                     <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="28" data-height="28"></span>**Starkes Markenimage:** Professionelle, moderne Kundenansprache.</li>
+                      <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="28" data-height="28"></span>**Skalierbare Erfolge:** Kontinuierlicher Fluss an Neukundenanfragen.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="examples">
+            <div class="container">
+                <h2>Erfolgsgeschichten aus unserer Praxis</h2>
+                <p class="lead">Sehen Sie, wie wir für unsere Kunden messbare Ergebnisse erzielen.</p>
+                <div class="example-grid">
+                    <!-- Beispiel 1 -->
+                    <div class="example-item">
+                         <img src="https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Dashboard mit Finanzdaten" width="600" height="400">
+                        <h3>Fallstudie: Finanzdienstleister</h3>
+                        <p><strong>Zielsetzung:</strong> Generierung von Leads für ein Festgeldkonto mit attraktiven Konditionen.</p>
+                        <p><strong>Ergebnis:</strong> **234 qualifizierte Leads** generiert. Kosten pro Lead: nur **24,02 €**. Erreichte Personen: 77.293.</p>
+                        <p><strong>Strategie:</strong> Gezielte Ansprache von Nutzern mit Interesse an Finanzen, Sparen und Investitionen auf Meta (Facebook/Instagram), kombiniert mit Retargeting von Website-Besuchern.</p>
+                        <p><strong>Fazit:** Effiziente Budgetnutzung und ein starker Fokus auf qualifizierte Leads führten zu überdurchschnittlichem Erfolg.</p>
+                    </div>
+                     <!-- Beispiel 2 -->
+                    <div class="example-item">
+                         <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Grafik mit Wachstumspfeilen" width="600" height="400">
+                         <h3>Fallstudie: Versicherungsagentur (Tierversicherung)</h3>
+                        <p><strong>Zielsetzung:</strong> Leads für eine Tierkrankenversicherung generieren (speziell Katzen).</p>
+                        <p><strong>Ergebnis:</strong> Innerhalb weniger Wochen **über 150 Leads** zu Leadkosten weit unter 20 €. Hohe Qualität der Anfragen.</p>
+                        <p><strong>Strategie:</strong> Ansprechende Social Ads auf Facebook/Instagram, die Tierbesitzer emotional ansprechen. Ein kurzer, mobiloptimierter Funnel fragt die wichtigsten Daten ab.</p>
+                        <p><strong>Fazit:** Die Kombination aus emotionaler Ansprache und einfachem Funnel überzeugte Tierbesitzer und lieferte kostengünstige, hochwertige Leads.</p>
+                    </div>
+                     <!-- Beispiel 3 (optional) -->
+                   <!-- <div class="example-item"> ... </div> -->
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section">
+            <div class="container">
+                <h2>Bereit für einen konstanten Strom qualifizierter Leads?</h2>
+                <p>Lassen Sie uns in einem unverbindlichen Erstgespräch herausfinden, wie Social Ads und Mobile Funnels Ihr Geschäft nachhaltig voranbringen können. Wir entwickeln eine maßgeschneiderte Strategie für Sie.</p>
+                <a href="https://kikeriki.net/kontakt" target="_blank" class="cta-button">Kostenloses Erstgespräch vereinbaren</a>
+                <p style="margin-top: 20px; font-size: 1rem;">Oder rufen Sie uns direkt an: [Ihre Telefonnummer hier einfügen]</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>© 2024 kikeriki GmbH</p>
+             <p>
+                 <a href="https://kikeriki.net/impressum" target="_blank">Impressum</a> |
+                 <a href="https://kikeriki.net/datenschutz" target="_blank">Datenschutz</a>
+             </p>
+        </div>
+    </footer>
+
+</body>
+</html>
