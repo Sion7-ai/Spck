@@ -3,243 +3,479 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kikeriki | Smarter Recruiting: Passende Bewerbungen finden</title>
-    <!-- Iconify Script -->
+    <title>kikeriki | Smarter Recruiting: Passende Bewerbungen einfach finden</title>
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-     <!-- Google Fonts (Beispiel: Lato) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Reset & Globale Stile - Identisch zur Lead-Gen Seite für Konsistenz */
+        /* Reset & Globale Stile - Kikeriki Style (Final v4.3 - Hover/Mobile Fixes) */
         :root {
-            --bg-color: #222222;
-            --text-color: #FFFFFF;
-            --primary-accent: #4DD0E1; /* Türkis/Teal */
-            --secondary-accent: #FF9800; /* Orange */
-            --card-bg: #333333;
-            --border-radius: 8px;
-            --font-family: 'Lato', sans-serif;
-            --success-color: #4CAF50; /* Grün für Vorteile */
-            --error-color: #F44336; /* Rot für Nachteile */
+            --bg-color: #FFFFFF; --alt-bg-color: #F8F9FA; --dark-bg-color: #040D21;
+            --text-color: #343A40; --text-color-dark-bg: #E9ECEF; --heading-color: #212529;
+            --heading-color-dark-bg: #FFFFFF; --button-bg: #212529; --button-text: #FFFFFF;
+            --card-bg: #FFFFFF; --border-color: #DEE2E6; --border-radius: 8px;
+            --font-heading: 'Montserrat', sans-serif; --font-body: 'Open Sans', sans-serif;
+            --spacing-unit: 1rem; --success-color: #28a745; --error-color: #dc3545;
+            --path-color: #495057;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color); line-height: 1.7; font-size: 17px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
-        section { padding: 70px 0; text-align: center; }
-        section:nth-child(even) { background-color: #2a2a2a; }
-        h1, h2, h3 { margin-bottom: 25px; font-weight: 700; line-height: 1.3; }
-        h1 { font-size: clamp(2.2rem, 5.5vw, 3.5rem); }
-        h2 { font-size: clamp(1.8rem, 4.5vw, 2.5rem); color: var(--primary-accent); margin-bottom: 40px; }
-        h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); color: var(--secondary-accent); }
-        p { margin-bottom: 20px; max-width: 750px; margin-left: auto; margin-right: auto; color: #e0e0e0; }
-        p.lead { font-size: 1.2em; margin-bottom: 40px; color: var(--text-color); }
-        .cta-button { display: inline-block; background-color: var(--primary-accent); color: var(--bg-color); padding: 14px 30px; border: none; border-radius: var(--border-radius); text-decoration: none; font-weight: 700; font-size: 1.15rem; transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; margin-top: 25px; box-shadow: 0 4px 15px rgba(77, 208, 225, 0.3); }
-        .cta-button:hover { background-color: var(--secondary-accent); color: var(--text-color); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); }
+        html { scroll-behavior: smooth; font-size: 100%; }
+        body { font-family: var(--font-body); background-color: var(--bg-color); color: var(--text-color); line-height: 1.65; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 calc(var(--spacing-unit) * 1.5); }
+        section { padding: calc(var(--spacing-unit) * 5) 0; text-align: center; }
+        section.light-section { background-color: var(--bg-color); }
+        section.alt-section { background-color: var(--alt-bg-color); }
+
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); margin-bottom: calc(var(--spacing-unit) * 1.25); font-weight: 700; color: var(--heading-color); line-height: 1.3; }
+        h1 { font-size: clamp(1.7rem, 3.9vw, 2.5rem); font-weight: 900; margin-bottom: var(--spacing-unit); }
+        h2 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); margin-bottom: calc(var(--spacing-unit) * 2.5); }
+        h3 { font-size: clamp(1.4rem, 3.5vw, 1.9rem); margin-bottom: calc(var(--spacing-unit) * 1.5); }
+        h4 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-bottom: var(--spacing-unit); }
+        h5 { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: calc(var(--spacing-unit)*0.5); }
+
+        p { margin-bottom: calc(var(--spacing-unit) * 1.5); max-width: 720px; margin-left: auto; margin-right: auto; font-size: 1.05rem; }
+        p.lead { font-size: 1.15em; margin-bottom: calc(var(--spacing-unit) * 2.5); color: #495057; max-width: 750px;}
+        strong, b { font-weight: 600; }
+
+        .cta-button { display: inline-block; background-color: var(--button-bg); color: var(--button-text); padding: calc(var(--spacing-unit) * 0.85) calc(var(--spacing-unit) * 2.2); border: 2px solid var(--button-bg); border-radius: var(--border-radius); text-decoration: none; font-weight: 700; font-size: 1rem; font-family: var(--font-heading); margin-top: calc(var(--spacing-unit) * 1.5); transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; letter-spacing: 0.5px; }
+        .cta-button:hover { background-color: var(--bg-color); color: var(--button-bg); transform: translateY(-2px); }
 
         /* Header */
-        .main-header { padding: 25px 0; border-bottom: 1px solid #444; background-color: var(--bg-color); position: sticky; top: 0; z-index: 100; }
-        .main-header .container { display: flex; justify-content: center; align-items: center; }
-        .logo { font-size: 2rem; font-weight: 700; color: var(--text-color); text-decoration: none; }
+        .main-header { padding: calc(var(--spacing-unit) * 1) 0; border-bottom: 1px solid var(--border-color); background-color: var(--bg-color); position: sticky; top: 0; z-index: 1000; }
+        .main-header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { display: block; height: 35px; width: auto; }
+        .header-nav a { font-family: var(--font-body); color: var(--text-color); text-decoration: none; margin-left: var(--spacing-unit); font-size: 0.95rem; font-weight: 600; }
+        .header-nav a:hover { text-decoration: underline; }
 
         /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(34, 34, 34, 0.85), rgba(34, 34, 34, 0.85)), url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') no-repeat center center/cover; /* Anderes Bild für Recruiting */
-            min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--text-color);
-        }
-        .hero h1 { color: var(--text-color); }
-        .hero p { font-size: 1.3rem; margin-bottom: 35px; }
+        .hero { display: flex; align-items: center; text-align: left; padding: calc(var(--spacing-unit) * 4) 0; }
+        .hero .container { display: flex; flex-direction: column; gap: calc(var(--spacing-unit) * 3); }
+        @media (min-width: 992px) { .hero .container { flex-direction: row; align-items: center; gap: calc(var(--spacing-unit) * 5); } .hero-content { flex: 1 1 55%; } .hero-image { flex: 1 1 45%; text-align: center;} }
+        .hero-content p { font-size: 1.15rem; max-width: 580px; }
+        .hero-image img { max-width: 100%; height: auto; border-radius: var(--border-radius); box-shadow: 0 12px 35px rgba(0,0,0, 0.12); }
 
-         /* Problem Section (Klassische Methoden) */
-        .problem p { margin-bottom: 30px; }
-        .problem-quote {
-            font-style: italic;
-            color: #ccc;
-            background: var(--card-bg);
-            padding: 20px 25px;
-            border-radius: var(--border-radius);
-            max-width: 550px;
-            margin: 20px auto 30px;
-            border-left: 5px solid var(--secondary-accent);
-            text-align: left;
-            font-size: 1.1rem;
-            line-height: 1.6;
+        /* Problem Section - *** KORREKTUR: Zentrierung & Zitat *** */
+        .problem { background-color: var(--alt-bg-color); }
+        .problem .container > p.lead { text-align: center; }
+        .problem-content {
+            display: flex; flex-direction: column; align-items: center; gap: calc(var(--spacing-unit) * 2.5);
+            margin: calc(var(--spacing-unit)*2) auto 0; /* Zentriert Block */
+            max-width: 750px; /* Maximale Breite des Blocks, wie im Screenshot angedeutet */
         }
-        .problem-quote span { /* Für Hervorhebung des Kernproblems */
-             display: block;
-             margin-top: 10px;
-             font-style: normal;
-             color: var(--text-color);
-             font-weight: bold;
+        @media (min-width: 768px) { .problem-content { flex-direction: row; align-items: center; max-width: 900px; /* Etwas breiter auf Desktop */ } }
+        .problem-image { flex-shrink: 0; text-align: center; margin-bottom: var(--spacing-unit); }
+        .problem-image img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .problem-quote { font-style: normal; color: var(--text-color); background: none; padding: 0; border: none; text-align: left; font-size: 1rem; /* Kleinere Grundschrift */ max-width: 550px; margin: 0; }
+        .problem-quote strong { /* Zitat-Headline größer */
+             font-family: var(--font-heading); font-weight: 700; font-size: 1.6em; /* Größer */
+             display: block; margin-bottom: calc(var(--spacing-unit)*1.2); line-height: 1.4;
+         }
+        .problem-quote span { display: block; margin-top: var(--spacing-unit); font-weight: 400; font-style: normal; color: var(--text-color); font-size: 1rem; }
+        .problem-outro { text-align: center; margin-top: calc(var(--spacing-unit)*2.5) !important; }
+
+        /* Lösung/Funnel Section - Grid Layout */
+        .solution { background-color: var(--bg-color); }
+        .solution h2 { margin-bottom: var(--spacing-unit); }
+        .solution-grid-container { display: flex; flex-direction: column; align-items: center; gap: calc(var(--spacing-unit) * 3); margin-top: calc(var(--spacing-unit)*2.5); }
+        @media(min-width: 992px) { .solution-grid-container { flex-direction: row; align-items: flex-start; } }
+        .solution-grid { flex: 1 1 60%; display: grid; grid-template-columns: 1fr; gap: calc(var(--spacing-unit) * 2); text-align: left; }
+        @media (min-width: 768px) { .solution-grid { grid-template-columns: repeat(2, 1fr); gap: calc(var(--spacing-unit) * 2.5); } }
+        .solution-grid-item { display: flex; align-items: flex-start; gap: var(--spacing-unit); }
+        .solution-grid-item .iconify { font-size: 2rem; color: var(--heading-color); opacity: 0.9; flex-shrink: 0; margin-top: 3px; }
+        .solution-grid-item h5 { font-family: var(--font-heading); font-size: 1.1rem; font-weight: 700; margin-bottom: calc(var(--spacing-unit)*0.3); color: var(--heading-color); }
+        .solution-grid-item p { font-family: var(--font-body); font-size: 0.95rem; margin-bottom: 0; line-height: 1.6; max-width: none; }
+        .solution-image-container { flex: 1 1 40%; text-align: center; }
+        .solution-image-container img { max-width: 100%; height: auto; border-radius: var(--border-radius); box-shadow: 0 8px 25px rgba(0,0,0, 0.1); }
+
+        /* Prozesspfad Sektion (Der Weg...) - *** KORREKTUR: Icons/Text/Hover/Mobile *** */
+        .process-path {
+            padding: calc(var(--spacing-unit) * 5) 0; background-color: var(--dark-bg-color);
+            color: var(--text-color-dark-bg); overflow: hidden; position: relative; /* Für mobile Anordnung */
+        }
+        .process-path h2 { color: var(--heading-color-dark-bg); margin-bottom: calc(var(--spacing-unit) * 4); }
+        .process-path-container { position: relative; width: 100%; max-width: 1000px; min-height: 250px; /* Höhe reduziert */ margin: 0 auto; }
+        .process-path-svg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            stroke: var(--path-color); stroke-width: 2; stroke-dasharray: 5 5; fill: none;
+            stroke-dashoffset: 1500; transition: stroke-dashoffset 3s ease-in-out;
+            display: none; /* Standardmäßig versteckt auf Mobile */
+        }
+        @media (min-width: 768px) { /* Pfad nur auf Desktop anzeigen */
+            .process-path-svg { display: block; }
+            .process-path-container { min-height: 300px; } /* Höhe auf Desktop */
         }
 
-        /* Lösung/Stärke des Funnels Section mit Icons */
-         .icon-list ul { list-style: none; padding: 0; max-width: 700px; margin: 30px auto 0; text-align: left; display: grid; gap: 25px; }
-        @media (min-width: 768px) {
-            .icon-list ul { grid-template-columns: repeat(2, 1fr); column-gap: 40px; }
-             .icon-list ul.single-column { grid-template-columns: 1fr; }
+        .path-step {
+            color: var(--text-color-dark-bg); text-align: left;
+            opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            margin-bottom: calc(var(--spacing-unit) * 2.5); /* Abstand für Mobile Stacking */
         }
-        .icon-list li { display: flex; align-items: flex-start; margin-bottom: 0; font-size: 1.1rem; }
-        .icon-list .iconify { margin-right: 18px; flex-shrink: 0; margin-top: 4px; }
-
-        .solution .iconify { color: var(--primary-accent); } /* Icons in der Lösungssektion */
-
-         .solution img { /* Bild im Lösungsbereich */
-             max-width: 450px;
-             width: 90%;
-             height: auto;
-             margin-top: 40px;
-             border-radius: var(--border-radius);
-             box-shadow: 0 5px 20px rgba(0,0,0, 0.3);
+         .path-step .iconify {
+             font-size: 2.8rem; /* Größere Icons */
+             color: var(--heading-color-dark-bg); margin-bottom: var(--spacing-unit); display: block;
+         }
+        .path-step h5 {
+            font-family: var(--font-heading); color: var(--heading-color-dark-bg);
+            font-size: 1.3rem; /* Größere Headline */ font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit)*0.5);
+        }
+        .path-step p { /* Text standardmäßig versteckt */
+            font-family: var(--font-body); font-size: 0.9rem; line-height: 1.5; color: #CED4DA;
+            margin-bottom: 0; max-width: 180px; /* Breite begrenzen */
+            max-height: 0; /* Höhe auf 0 kollabieren */
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, max-height 0.4s ease, visibility 0s linear 0.4s; /* Übergang definieren */
+        }
+         .path-step:hover p { /* Text bei Hover anzeigen */
+             opacity: 1;
+             visibility: visible;
+             max-height: 10em; /* Genug Höhe erlauben */
+             transition: opacity 0.4s ease, max-height 0.4s ease, visibility 0s linear 0s;
          }
 
+         /* Desktop Positionierung (Absolut) */
+         @media (min-width: 768px) {
+            .path-step {
+                position: absolute; width: 210px; /* Breite leicht erhöht */
+                margin-bottom: 0; /* Kein Margin bei absoluter Positionierung */
+            }
+            .path-step-1 { top: 10%; left: 3%; transition-delay: 0.6s; }
+            .path-step-2 { top: 60%; left: 28%; transition-delay: 0.9s; }
+            .path-step-3 { top: 15%; left: 58%; transition-delay: 1.2s; }
+            .path-step-4 { top: 50%; left: 85%; transition-delay: 1.5s; }
+
+            .process-path-container.animate-in .path-step {
+                opacity: 1; transform: translateY(0);
+            }
+         }
+         /* Mobile Stapelung (Statisch) */
+        @media (max-width: 767px) {
+            .process-path-container {
+                min-height: auto; /* Höhe automatisch */
+                display: flex; flex-direction: column; align-items: center; /* Zentrierte Stapelung */
+                gap: calc(var(--spacing-unit) * 3); /* Abstand zwischen Schritten */
+            }
+             .path-step {
+                 position: static; /* Normale Positionierung */
+                 transform: none; /* Kein Verschieben */
+                 width: 90%; max-width: 350px; /* Begrenzte Breite */
+                 text-align: center; /* Zentrierter Text */
+                 transition-delay: 0s !important; /* Keine Verzögerung */
+             }
+             .path-step .iconify { margin-left: auto; margin-right: auto; } /* Icon zentrieren */
+             .path-step p { max-width: none; } /* Volle Breite für Text auf Mobile */
+
+             /* Animation auf Mobile (optional, kann auch weggelassen werden) */
+             .process-path-container.animate-in .path-step {
+                 opacity: 1; transform: translateY(0);
+             }
+             /* Eventuell gestaffelte Verzögerung auch auf Mobile */
+             .process-path-container.animate-in .path-step:nth-child(1) { transition-delay: 0.2s; }
+             .process-path-container.animate-in .path-step:nth-child(2) { transition-delay: 0.4s; }
+             .process-path-container.animate-in .path-step:nth-child(3) { transition-delay: 0.6s; }
+             .process-path-container.animate-in .path-step:nth-child(4) { transition-delay: 0.8s; }
+        }
+
+
         /* Vergleich Section */
-        .comparison { display: flex; flex-direction: column; /* Standard: Untereinander */ align-items: center; gap: 40px; margin-top: 40px; }
-        @media (min-width: 992px) { /* Nebeneinander auf größeren Screens */
-             .comparison { flex-direction: row; justify-content: center; align-items: flex-start; }
-        }
-
-        .comparison-column {
-            flex-basis: 100%; /* Volle Breite auf Mobile */
-            max-width: 480px; /* Maximale Breite pro Spalte */
-            text-align: left;
-            background: var(--card-bg);
-            padding: 30px 35px; /* Mehr Padding */
-            border-radius: var(--border-radius);
-            box-shadow: 0 4px 10px rgba(0,0,0, 0.2);
-        }
-        .comparison-column h3 {
-            color: var(--text-color); /* Titel in Weiß */
-            margin-bottom: 25px;
-            text-align: center;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             gap: 10px;
-             font-size: 1.6rem; /* Größere Spalten-Titel */
-        }
-         .funnel-method h3 .iconify { color: var(--success-color); }
-         .classic-method h3 .iconify { color: var(--error-color); }
-
-        .comparison-column ul { list-style: none; padding: 0; }
-        .comparison-column li { display: flex; align-items: center; margin-bottom: 15px; /* Mehr Abstand */ font-size: 1.05rem; }
-        .comparison-column .iconify { margin-right: 12px; flex-shrink: 0; font-size: 1.3em; /* Größere Icons */ }
+        .comparison-section { background-color: var(--alt-bg-color); }
+        .comparison-section h2 { margin-bottom: var(--spacing-unit); }
+        .comparison { display: flex; flex-direction: column; align-items: center; gap: calc(var(--spacing-unit) * 2.5); margin-top: calc(var(--spacing-unit) * 3); }
+        @media (min-width: 992px) { .comparison { flex-direction: row; justify-content: center; align-items: stretch; gap: calc(var(--spacing-unit) * 2.5); } }
+        .comparison-column { flex: 1; max-width: 480px; text-align: left; background: var(--card-bg); padding: calc(var(--spacing-unit) * 2.5) calc(var(--spacing-unit) * 2.5); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: 0 6px 18px rgba(0,0,0, 0.07); display: flex; flex-direction: column; }
+        .comparison-column h3 { color: var(--heading-color); margin-bottom: calc(var(--spacing-unit) * 2); text-align: center; display: flex; align-items: center; justify-content: center; gap: calc(var(--spacing-unit) * 0.8); font-size: 1.6rem; font-family: var(--font-heading); }
+        .comparison-column h3 .iconify { font-size: 1.3em; }
+        .funnel-method h3 .iconify { color: var(--success-color); }
+        .classic-method h3 .iconify { color: var(--error-color); }
+        .comparison-column ul { list-style: none; padding: 0; margin-top: auto; }
+        .comparison-column li { display: flex; align-items: center; margin-bottom: calc(var(--spacing-unit) * 1.2); font-size: 1rem; line-height: 1.5; font-family: var(--font-body); }
+        .comparison-column .iconify { margin-right: calc(var(--spacing-unit) * 0.8); flex-shrink: 0; font-size: 1.5em; }
         .funnel-method li .iconify { color: var(--success-color); }
         .classic-method li .iconify { color: var(--error-color); }
 
-        /* Call to Action Section */
-        .cta-section { background-color: var(--primary-accent); color: var(--bg-color); padding: 80px 0; }
-        .cta-section h2 { color: var(--bg-color); }
-        .cta-section p { color: #111; font-size: 1.2rem; max-width: 800px; }
-        .cta-section .cta-button { background-color: var(--bg-color); color: var(--primary-accent); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
-        .cta-section .cta-button:hover { background-color: var(--secondary-accent); color: var(--text-color); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); }
+        /* CTA Section */
+        .cta-section { background-color: var(--bg-color); padding: calc(var(--spacing-unit) * 5) 0; }
+        .cta-section h2 { color: var(--heading-color); }
+        .cta-section p { color: var(--text-color); font-size: 1.15rem; max-width: 800px; }
 
         /* Footer */
-        .main-footer { text-align: center; padding: 30px 0; margin-top: 50px; border-top: 1px solid #444; font-size: 0.95rem; color: #aaa; }
-        .main-footer a { color: #bbb; text-decoration: none; margin: 0 10px; transition: color 0.3s ease; }
-        .main-footer a:hover { color: var(--primary-accent); }
+        .main-footer { text-align: center; padding: calc(var(--spacing-unit) * 2.5) 0; margin-top: calc(var(--spacing-unit) * 3.5); border-top: 1px solid var(--border-color); font-size: 0.9rem; color: #6C757D; }
+        .main-footer .container { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-unit); }
+        .footer-logo img { height: 30px; opacity: 0.7; }
+        .footer-links a { font-family: var(--font-body); color: #495057; text-decoration: none; margin: 0 calc(var(--spacing-unit) * 0.7); transition: color 0.3s ease; font-weight: 600; }
+        .footer-links a:hover { color: var(--heading-color); }
+        .footer-copy { font-family: var(--font-body); }
 
     </style>
 </head>
 <body>
 
     <header class="main-header">
-        <div class="container">
-             <a href="https://kikeriki.net" class="logo" aria-label="Zurück zur Kikeriki Startseite">kikeriki</a>
+         <div class="container">
+            <a href="https://kikeriki.net" class="logo" aria-label="Zurück zur Kikeriki Startseite">
+                 <img src="https://kikeriki.net/wp-content/uploads/2024/06/kikeriki-logo-black.svg" alt="kikeriki Logo">
+            </a>
+             <nav class="header-nav" aria-label="Hauptnavigation">
+                <a href="https://kikeriki.net/kontakt" target="_blank">Kontakt</a>
+            </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Mehr passende Bewerbungen? Smart, schnell & ohne Umwege.</h1>
-                <p>Mit Recruiting-Funnels über Social Ads erreichen Sie Top-Talente (aktiv & passiv) – und machen die Bewerbung zum Kinderspiel.</p>
-                <a href="#cta" class="cta-button">Recruiting-Strategie starten</a>
-            </div>
-        </section>
-
-        <section class="problem">
-            <div class="container">
-                <h2>Das Problem mit klassischen Recruiting-Methoden</h2>
-                <p class="lead">Lange Formulare, aufwändige Prozesse – das schreckt viele qualifizierte Kandidat:innen ab.</p>
-                <div class="problem-quote">
-                     "Jetzt bewerben mit Lebenslauf & Motivationsschreiben."
-                    <span>Klingt wichtig. Ist aber abschreckend – vor allem für wechselwillige Fachkräfte, die nicht aktiv suchen.</span>
+         <section class="hero light-section">
+             <div class="container">
+                <div class="hero-content">
+                     <h1>Recruiting neu gedacht: Mehr passende Talente, weniger Aufwand.</h1>
+                    <p>Schluss mit unpassenden Bewerbungen und langwierigen Prozessen. Mit kikeriki Recruiting-Funnels erreichen Sie gezielt Top-Kandidat:innen – auch die, die gar nicht aktiv suchen.</p>
+                    <a href="#cta" class="cta-button">Recruiting-Strategie anfragen</a>
                 </div>
-                 <p>Herkömmliche Stellenanzeigen erreichen oft nur aktiv Suchende. Wertvolle Talente, die offen für einen Wechsel wären, gehen verloren.</p>
+                <div class="hero-image">
+                     <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Motiviertes Team bei der Zusammenarbeit im Büro" width="800" height="533">
+                </div>
             </div>
         </section>
 
-        <section class="solution icon-list">
+        <section class="problem alt-section">
             <div class="container">
-                <h2>Was macht unseren Funnel-Ansatz so stark?</h2>
-                <p class="lead">Wir holen die Richtigen ab – ohne Umwege. Gezielt, mobiloptimiert und niedrigschwellig.</p>
-                 <ul>
-                    <li><span class="iconify" data-icon="tabler:users-group" data-width="28" data-height="28"></span>**Gezielte Ansprache:** Wir finden wechselwillige Fachkräfte genau dort, wo sie online sind.</li>
-                    <li><span class="iconify" data-icon="tabler:device-mobile-message" data-width="28" data-height="28"></span>**Mobil & intuitiv:** Bewerbung einfach und schnell am Smartphone – jederzeit, überall.</li>
-                    <li><span class="iconify" data-icon="tabler:list-check" data-width="28" data-height="28"></span>**Niedrigschwelliger Einstieg:** Einfache Fragen statt sofortiger Bewerbungshürden.</li>
-                    <li><span class="iconify" data-icon="tabler:clock-hour-4" data-width="28" data-height="28"></span>**Schnelligkeit zählt:** Bewerbung oft in unter 60 Sekunden möglich.</li>
-                     <li><span class="iconify" data-icon="tabler:message-chatbot" data-width="28" data-height="28"></span>**Persönlicher Touch:** Der Funnel führt wie ein Gespräch, nicht wie ein starres Formular.</li>
-                      <li><span class="iconify" data-icon="tabler:adjustments-horizontal" data-width="28" data-height="28"></span>**Dynamisch & anpassbar:** Perfekt zugeschnitten auf Ihre Zielgruppe und Vakanz.</li>
-                </ul>
-                  <img src="https://images.pexels.com/photos/6801642/pexels-photo-6801642.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Grafik Recruiting Erfolg" width="450" height="300">
+                <h2>Warum klassisches Recruiting oft scheitert</h2>
+                <p class="lead">Standard-Stellenanzeigen und komplizierte Bewerbungsportale sind für viele Talente unattraktiv.</p>
+                <div class="problem-content">
+                    <div class="problem-image">
+                         <img src="https://static.wixstatic.com/media/8ee62a_384f75635adf4e2e912fde732b883e01~mv2.jpg/v1/crop/x_0,y_1681,w_2731,h_1504/fill/w_655,h_361,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Untitled.jpg" alt="Katja Kenk" width="150" height="150">
+                    </div>
+                    <div class="problem-quote">
+                        <strong>"Lebenslauf, Anschreiben, Zeugnisse hochladen..."</strong>
+                        <span>Dieser Prozess kostet Zeit und Nerven – gerade für qualifizierte Fachkräfte, die vielleicht offen für einen Wechsel, aber nicht aktiv auf Jobsuche sind.</span>
+                    </div>
+                </div>
+                 <p class="problem-outro">Das Ergebnis: Sie verpassen wertvolle Kandidat:innen, erhalten unpassende Bewerbungen oder kämpfen mit hohen Abbruchraten im Prozess.</p>
             </div>
         </section>
 
-        <section class="comparison-section">
+        <section class="solution light-section">
+              <div class="container">
+                <h2>Der kikeriki Recruiting-Funnel: Kandidatenfreundlich & Effektiv</h2>
+                <p class="lead">Wir gestalten einen Recruiting-Prozess, der Talente begeistert statt abschreckt – schnell, einfach und mobiloptimiert.</p>
+                <div class="solution-grid-container">
+                    <div class="solution-grid">
+                        <div class="solution-grid-item">
+                            <span class="iconify" data-icon="tabler:target-arrow"></span>
+                            <div>
+                                <h5>Gezielte Ansprache</h5>
+                                <p>Wir finden Ihre Wunschkandidat:innen über präzise Social Media Kampagnen.</p>
+                            </div>
+                        </div>
+                         <div class="solution-grid-item">
+                            <span class="iconify" data-icon="tabler:rocket"></span> <!-- Icon hinzugefügt -->
+                            <div>
+                                <h5>Schneller Erstkontakt</h5>
+                                <p>Interessensbekundung oft in unter 60 Sekunden möglich.</p>
+                            </div>
+                        </div>
+                        <div class="solution-grid-item">
+                            <span class="iconify" data-icon="tabler:device-mobile-message"></span>
+                            <div>
+                                <h5>Einfach & Mobil</h5>
+                                <p>Bewerbung in wenigen Schritten direkt am Smartphone.</p>
+                            </div>
+                        </div>
+                         <div class="solution-grid-item">
+                            <span class="iconify" data-icon="tabler:mood-smile"></span>
+                             <div>
+                                <h5>Positive Candidate Experience</h5>
+                                <p>Ein Prozess, der Spaß macht statt frustriert.</p>
+                            </div>
+                        </div>
+                        <div class="solution-grid-item">
+                            <span class="iconify" data-icon="tabler:filter-check"></span>
+                             <div>
+                                <h5>Qualifizierte Interessenten</h5>
+                                <p>Niedrigschwelliger Einstieg weckt Interesse auch bei passiven Talenten.</p>
+                            </div>
+                        </div>
+                         <div class="solution-grid-item">
+                           <span class="iconify" data-icon="tabler:adjustments-horizontal"></span>
+                            <div>
+                                <h5>Flexibel Anpassbar</h5>
+                                <p>Perfekt zugeschnitten auf jede Vakanz und Zielgruppe.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="solution-image-container">
+                         <img src="https://images.pexels.com/photos/3184431/pexels-photo-3184431.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Person füllt entspannt am Laptop etwas aus" width="800" height="533">
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Prozesspfad Sektion -->
+        <section class="process-path">
             <div class="container">
+                 <h2>Der Weg zum passenden Talent:</h2>
+                <div class="process-path-container">
+                    <!-- SVG nur auf Desktop sichtbar -->
+                    <svg class="process-path-svg" viewBox="0 0 1000 250" preserveAspectRatio="none"> <!-- preserveAspectRatio none für besseres responsive Verhalten -->
+                        <path id="recruitingPath"
+                              d="M 50,100 Q 250,30 500,125 T 950,150"
+                              />
+                    </svg>
+                    <!-- Textblöcke (werden auf Mobile gestapelt) -->
+                    <div class="path-step path-step-1">
+                        <span class="iconify" data-icon="tabler:eye"></span>
+                        <h5>Sichtbarkeit</h5>
+                        <p>Ihre Zielgruppe sieht die ansprechende Stellenanzeige auf Social Media.</p>
+                    </div>
+                     <div class="path-step path-step-2">
+                        <span class="iconify" data-icon="tabler:pointer"></span>
+                        <h5>Interesse</h5>
+                        <p>Ein Klick führt zum einfachen, mobilen Funnel – keine Hürden.</p>
+                    </div>
+                     <div class="path-step path-step-3">
+                        <span class="iconify" data-icon="tabler:device-mobile-check"></span>
+                        <h5>Kurzbewerbung</h5>
+                        <p>Wenige, gezielte Fragen in unter 60 Sek. beantworten.</p>
+                    </div>
+                    <div class="path-step path-step-4">
+                        <span class="iconify" data-icon="tabler:user-search"></span>
+                         <h5>Qualifizierung</h5>
+                        <p>Sie erhalten passende, interessierte Kontakte für den nächsten Schritt.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="comparison-section alt-section">
+             <div class="container">
                  <h2>Funnel Methode vs. Klassische Methode</h2>
-                 <p class="lead">Der direkte Vergleich zeigt die Vorteile des smarten Recruitings.</p>
+                 <p class="lead">Der direkte Vergleich zeigt, warum smarte Funnels die Zukunft im Recruiting sind.</p>
                 <div class="comparison">
                     <div class="comparison-column funnel-method">
-                        <h3><span class="iconify" data-icon="tabler:filter-check" data-width="30" data-height="30"></span> Funnel Methode</h3>
+                         <h3><span class="iconify" data-icon="tabler:circle-check-filled"></span> Funnel Methode</h3>
                         <ul>
-                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Einstieg mit 1-2 Klickfragen</li>
-                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> In ~60 Sekunden bewerben</li>
-                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Einfach am Handy ausfüllen</li>
-                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Dynamisch & anpassbar</li>
-                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Mehr Bewerbungen, weniger Absprünge</li>
-                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Geführt wie ein Gespräch</li>
-                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline" data-width="24" data-height="24"></span> Erreicht auch passive Kandidat:innen</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span> Einfacher Einstieg (wenige Klicks)</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span> Express-Interesse in ~60 Sek.</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span> Mobilfreundlich & intuitiv</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span> Dynamisch & anpassbar</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span> Höhere Bewerberzahlen</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span> Gesprächsorientiert & persönlich</li>
+                            <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span> Erreicht passive Talente</li>
                         </ul>
                     </div>
                     <div class="comparison-column classic-method">
-                        <h3><span class="iconify" data-icon="tabler:file-x" data-width="30" data-height="30"></span> Klassische Methode</h3>
+                        <h3><span class="iconify" data-icon="tabler:circle-x-filled"></span> Klassische Methode</h3>
                          <ul>
-                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Oft Anlegen von Bewerber-Accounts nötig</li>
-                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Manuelles Hochladen von Dokumenten (CV, Anschreiben)</li>
-                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Meist nur am Laptop praktikabel</li>
-                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Starre „One fits all"-Formulare</li>
-                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Viele Interessenten brechen frühzeitig ab</li>
-                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Unpersönlich & oft frustrierend</li>
-                            <li><span class="iconify" data-icon="material-symbols:cancel-outline" data-width="24" data-height="24"></span> Erreicht primär aktiv Suchende</li>
+                             <li><span class="iconify" data-icon="material-symbols:cancel-outline-rounded"></span> Account-Erstellung oft nötig</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline-rounded"></span> Upload vieler Dokumente (CV etc.)</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline-rounded"></span> Oft nur am Desktop gut nutzbar</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline-rounded"></span> Starre, lange Formulare</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline-rounded"></span> Hohe Abbruchraten</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline-rounded"></span> Unpersönlich & bürokratisch</li>
+                            <li><span class="iconify" data-icon="material-symbols:cancel-outline-rounded"></span> Erreicht primär aktiv Suchende</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-         <section id="cta" class="cta-section">
-            <div class="container">
-                <h2>Recruiting-Funnels sind der smartere Weg zu Top-Talenten.</h2>
-                <p>Schluss mit frustrierenden Bewerbungsprozessen! Gewinnen Sie die besten Köpfe für Ihr Unternehmen – effizient und zielgerichtet. Lassen Sie uns gemeinsam Ihre individuelle Recruiting-Strategie entwickeln.</p>
-                <a href="https://kikeriki.net/kontakt" target="_blank" class="cta-button">Unverbindliches Gespräch vereinbaren</a>
-                 <p style="margin-top: 20px; font-size: 1rem;">Oder kontaktieren Sie uns direkt: [Ihre Telefonnummer hier einfügen]</p>
+         <section id="cta" class="cta-section light-section">
+              <div class="container">
+                <h2>Finden Sie die Talente, die Ihr Unternehmen voranbringen.</h2>
+                <p>Optimieren Sie Ihr Recruiting mit einem modernen, kandidatenzentrierten Ansatz. Sprechen Sie mit uns über Ihre Herausforderungen und entdecken Sie die Möglichkeiten der kikeriki Recruiting-Funnels.</p>
+                <a href="https://kikeriki.net/kontakt" target="_blank" class="cta-button">Unverbindliches Gespräch anfragen</a>
             </div>
         </section>
     </main>
 
     <footer class="main-footer">
-        <div class="container">
-             <p>© 2024 kikeriki GmbH</p>
-             <p>
+          <div class="container">
+             <div class="footer-logo">
+                 <a href="https://kikeriki.net" aria-label="Zurück zur Kikeriki Startseite">
+                    <img src="https://kikeriki.net/wp-content/uploads/2024/06/kikeriki-logo-black.svg" alt="kikeriki Logo">
+                 </a>
+            </div>
+            <div class="footer-links">
                  <a href="https://kikeriki.net/impressum" target="_blank">Impressum</a> |
                  <a href="https://kikeriki.net/datenschutz" target="_blank">Datenschutz</a>
-             </p>
+             </div>
+             <p class="footer-copy">&copy; 2024 kikeriki GmbH</p>
         </div>
     </footer>
+
+    <!-- JavaScript für die Pfad-Animation (Version 3.2 - Hover Fix) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pathSectionContainer = document.querySelector('.process-path-container');
+
+            if (pathSectionContainer) {
+                const svgPath = pathSectionContainer.querySelector('.process-path-svg');
+                let pathLength = 0;
+
+                const initializePathAnimation = () => {
+                    if (svgPath && !pathSectionContainer.classList.contains('path-initialized')) {
+                        setTimeout(() => {
+                            try {
+                                pathLength = svgPath.getTotalLength();
+                                if (pathLength > 0) {
+                                    svgPath.style.strokeDasharray = pathLength + ' ' + pathLength;
+                                    svgPath.style.strokeDashoffset = pathLength;
+                                    pathSectionContainer.classList.add('path-initialized');
+                                    console.log('Path initialized, length:', pathLength);
+                                } else {
+                                    console.warn('SVG Path length is 0.');
+                                    pathSectionContainer.classList.add('path-initialized');
+                                }
+                            } catch (e) {
+                                console.error('Error calculating SVG path length:', e);
+                                pathSectionContainer.classList.add('path-initialized');
+                            }
+                            pathSectionContainer.classList.add('animate-in');
+                            console.log('Animate-in class added after timeout.');
+                        }, 100); // Slightly increased delay
+                    } else if (svgPath && pathSectionContainer.classList.contains('path-initialized')) {
+                        pathSectionContainer.classList.add('animate-in');
+                        console.log('Animate-in class added (already initialized).');
+                    } else {
+                         // If no SVG, just animate the steps directly on mobile/fallback
+                         pathSectionContainer.classList.add('animate-in');
+                         console.log('Animate-in class added (no SVG path found or issue).');
+                    }
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            console.log('Element intersecting');
+                            if (!pathSectionContainer.classList.contains('animate-in')) {
+                                initializePathAnimation();
+                            }
+                            // observer.unobserve(entry.target); // Keep observing for potential reset logic
+                        }
+                        // Optional Reset Logic (Add if needed)
+                        /* else if (pathSectionContainer.classList.contains('animate-in')) {
+                            pathSectionContainer.classList.remove('animate-in');
+                            pathSectionContainer.classList.remove('path-initialized');
+                            if (svgPath && pathLength > 0) {
+                                // Reset logic...
+                            }
+                        } */
+                    });
+                }, {
+                    threshold: 0.2 // Trigger bei 20% Sichtbarkeit (noch früher)
+                });
+
+                window.addEventListener('load', () => {
+                    observer.observe(pathSectionContainer);
+                    console.log('Observer started on window load.');
+                });
+            } else {
+                 console.error('Element .process-path-container not found!');
+            }
+        });
+    </script>
+    <!-- ENDE: JavaScript -->
 
 </body>
 </html>
