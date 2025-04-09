@@ -151,19 +151,18 @@
             width: 100%;
         }
 
-        /* --- Enhanced Hero Section (Background Image) --- */
+        /* --- Enhanced Hero Section (Background Image & Centered Content) --- */
         .hero {
-            display: flex; /* Keep flex for alignment if needed */
-            align-items: center; /* Vertically center content */
-            text-align: left; /* Keep text left-aligned as per previous design */
-            padding: calc(var(--spacing-unit) * 7) 0 calc(var(--spacing-unit) * 8); /* Adjusted padding */
+            display: flex;
+            align-items: center;
+            text-align: center; /* Zentriert Inline/Inline-Block Elemente */
+            padding: calc(var(--spacing-unit) * 7) 0 calc(var(--spacing-unit) * 8);
             position: relative;
             overflow: hidden;
-            /* Background Image */
-            background-image: url('https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); /* Use appropriate resolution */
+            background-image: url('https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
             background-size: cover;
             background-position: center center;
-            color: var(--heading-color-dark-bg); /* Set default text color to white */
+            color: var(--heading-color-dark-bg);
         }
 
         /* Dark Overlay */
@@ -174,111 +173,115 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(4, 13, 33, 0.6); /* Dark overlay using --dark-bg-color with transparency */
-            z-index: 1; /* Place overlay behind content */
-            /* Remove old gradient background */
+            background-color: rgba(4, 13, 33, 0.6); /* Dunkles Overlay */
+            z-index: 1;
         }
-
-        /* No floating background elements needed */
-        /* @keyframes float removed */
 
         .hero .container {
-            /* Remove flex layout specific styles */
             position: relative;
-            z-index: 2; /* Ensure container is above overlay */
-            max-width: 1140px; /* Maintain max width */
-            margin: 0 auto; /* Center container */
-            padding: 0 calc(var(--spacing-unit) * 1.5); /* Keep horizontal padding */
-            /* text-align: center; /* Optional: Center text if desired */
+            z-index: 2;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 1.5);
+            text-align: center; /* Text im Container zentrieren */
         }
-
-        /* @media (min-width: 992px) rules for flex removed */
 
         .hero-content {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.8s var(--animation-timing) forwards;
-             position: relative; /* Ensure content is above overlay */
-             z-index: 2; /* Ensure content is above overlay */
-             max-width: 700px; /* Limit content width if needed */
-             margin-right: auto; /* Keep content left-aligned */
-             margin-left: 0;     /* Keep content left-aligned */
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            position: relative;
+            z-index: 2;
+            max-width: 700px; /* Maximale Breite für den Textblock */
+            margin-left: auto;  /* Zentriert den Block */
+            margin-right: auto; /* Zentriert den Block */
+            text-align: center; /* Zentriert den Text innerhalb des Blocks */
         }
 
         .hero-content h1 {
             line-height: 1.2;
             margin-bottom: calc(var(--spacing-unit) * 1.5);
             position: relative;
-            color: var(--heading-color-dark-bg); /* White text */
+            color: var(--heading-color-dark-bg); /* Weißer Text */
+            /* Wird durch text-align: center im Parent zentriert */
         }
 
-        .hero-content h1::after { /* Accent line */
+        .hero-content h1::after { /* Akzentlinie */
             content: '';
             display: block;
             width: 70px;
             height: 3px;
-            background-color: var(--heading-color-dark-bg); /* White line */
+            background-color: var(--heading-color-dark-bg); /* Weiße Linie */
             margin-top: calc(var(--spacing-unit) * 1);
             opacity: 0;
             transform: scaleX(0.7);
-            transform-origin: left;
+            transform-origin: center; /* Ursprung Mitte */
             transition: opacity 0.5s ease, transform 0.5s ease;
             animation: fadeInWidth 0.8s var(--animation-timing) 0.6s forwards;
-        }
-
-        @keyframes fadeInWidth {
-            to {
-                opacity: 1;
-                transform: scaleX(1);
-            }
+            margin-left: auto;     /* Zentriert die Linie */
+            margin-right: auto;    /* Zentriert die Linie */
         }
 
         .hero-content p {
             font-size: 1.2rem;
-            max-width: 580px;
+            max-width: 580px; /* Behält max-width für Lesbarkeit */
             margin-bottom: calc(var(--spacing-unit) * 2);
             opacity: 0;
             animation: fadeIn 0.8s var(--animation-timing) 0.3s forwards;
-            color: var(--text-color-dark-bg); /* Light text color */
-            margin-left: 0; /* Ensure left alignment within content block */
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
+            color: var(--text-color-dark-bg); /* Heller Text */
+            margin-left: auto;  /* Zentriert Absatz */
+            margin-right: auto; /* Zentriert Absatz */
         }
 
         /* Hero CTA Button adjustments */
         .hero .cta-button {
-            background-color: var(--heading-color-dark-bg); /* White background */
-            color: var(--dark-bg-color); /* Dark text */
-            border-color: var(--heading-color-dark-bg); /* White border */
+            background-color: var(--heading-color-dark-bg); /* Weißer Hintergrund */
+            color: var(--dark-bg-color); /* Dunkler Text */
+            border-color: var(--heading-color-dark-bg); /* Weiße Grenze */
+            /* Wird durch text-align: center im Parent zentriert */
         }
 
         .hero .cta-button:hover {
-            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+            background-color: rgba(255, 255, 255, 0.8);
             color: var(--dark-bg-color);
             border-color: rgba(255, 255, 255, 0.8);
             transform: translateY(-3px);
             box-shadow: 0 7px 14px rgba(0,0,0,0.12);
         }
 
-        /* Remove Pulse effect if it conflicts or adjust color */
-        .hero .pulse-button::after {
-            border: 2px solid var(--heading-color-dark-bg); /* White pulse border */
-            /* animation: pulse 2s infinite; /* Animation remains */
+        /* Pulse effect */
+        .pulse-button {
+            position: relative;
         }
 
-         /* Remove .hero-image styles */
-        /* Remove .hero-dots styles and keyframes */
+        .hero .pulse-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--heading-color-dark-bg); /* Weiße Puls-Grenze */
+            animation: pulse 2s infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.7;
+            }
+            70% {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+        }
+        /* --- Ende der Hero-Section-Anpassungen --- */
 
 
         /* Problem-Sektion mit Icon-Liste */
@@ -309,13 +312,13 @@
             transition: opacity 0.5s var(--animation-timing),
                         transform 0.5s var(--animation-timing),
                         background-color 0.3s var(--animation-timing),
-                        box-shadow 0.3s var(--animation-timing); /* Added missing transitions */
+                        box-shadow 0.3s var(--animation-timing);
             padding: calc(var(--spacing-unit) * 0.8);
             border-radius: var(--border-radius);
         }
 
         .problem li:hover {
-            background-color: var(--bg-color); /* Changed from #f8f9fa for potentially better contrast */
+            background-color: var(--bg-color);
             transform: translateY(-3px) !important;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
@@ -330,7 +333,7 @@
             flex-shrink: 0;
             color: var(--accent-color);
             margin-top: 4px;
-            font-size: 1.6em;
+            /* font-size: 1.6em; -> Ersetzt durch data-width/height */
             opacity: 0.9;
             transition: transform 0.3s var(--animation-timing);
         }
@@ -429,7 +432,7 @@
         }
 
         .process-step .iconify {
-             font-size: 3rem;
+             /* font-size: 3rem; -> Ersetzt durch data-width/height */
              color: var(--heading-color-dark-bg); /* White icon */
              margin-bottom: calc(var(--spacing-unit)*1.2);
              display: block;
@@ -477,12 +480,10 @@
         }
 
         .process-step:hover h5 {
-            /* color: var(--text-color-dark-bg); /* Optional color change */
             transform: translateY(-5px); /* Text moves up relative to card */
         }
 
          .process-step:hover p {
-            /* opacity: 1; */ /* Optional opacity change */
             transform: translateY(-5px); /* Text moves up relative to card */
         }
 
@@ -512,10 +513,10 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Delays werden jetzt per JS gesetzt
         .process-steps-container.animate-in .process-step:nth-child(1) { transition-delay: 0.2s; }
-        .process-steps-container.animate-in .process-step:nth-child(2) { transition-delay: 0.4s; }
-        .process-steps-container.animate-in .process-step:nth-child(3) { transition-delay: 0.6s; }
-        .process-steps-container.animate-in .process-step:nth-child(4) { transition-delay: 0.8s; }
+        ...
+        */
 
         /* Verbesserte Benefits Sektion mit Icon + Titel oben */
         .benefits-grid {
@@ -555,8 +556,8 @@
         }
 
         .benefit-item:hover {
-            background-color: var(--alt-bg-color); /* Use alt-bg for consistency */
-            transform: translateY(-3px) !important; /* Keep !important if needed */
+            background-color: var(--alt-bg-color);
+            transform: translateY(-3px) !important;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
@@ -568,7 +569,7 @@
         .benefit-item .iconify {
             margin-bottom: calc(var(--spacing-unit) * 0.8);
             color: var(--accent-color);
-            font-size: 2.4em;
+            /* font-size: 2.4em; -> Ersetzt durch data-width/height */
             opacity: 0.9;
             transition: transform 0.3s var(--animation-timing);
         }
@@ -633,7 +634,8 @@
             text-align: left;
             box-shadow: 0 10px 30px rgba(0,0,0, 0.07);
             transition: transform 0.4s var(--animation-timing),
-                       box-shadow 0.4s var(--animation-timing);
+                       box-shadow 0.4s var(--animation-timing),
+                       opacity 0.5s var(--animation-timing); /* Add opacity transition */
             display: flex;
             flex-direction: column;
             position: relative;
@@ -714,7 +716,7 @@
         }
 
         .metric-label .iconify {
-            font-size: 1.2em;
+             /* font-size: 1.2em; -> Ersetzt durch data-width/height */
             color: var(--accent-color);
             transition: transform 0.3s var(--animation-timing);
         }
@@ -742,9 +744,7 @@
         }
 
         /* Removed hover effect for highlight-metric */
-        /* .example-item:hover .highlight-metric {
-             transform: scale(1.1); NO LONGER NEEDED
-        } */
+        /* .example-item:hover .highlight-metric { transform: scale(1.1); } */
 
         .example-item .metric-content:last-child { margin-bottom: 0; }
 
@@ -883,6 +883,28 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+         /* Keyframes (für Hero Animationen) */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInWidth {
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -901,7 +923,7 @@
     </header>
 
     <main>
-        <!-- Enhanced Hero mit Hintergrundbild -->
+        <!-- Enhanced Hero mit Hintergrundbild und zentriertem Inhalt -->
         <section class="hero light-section">
              <!-- Overlay wird durch ::before CSS erzeugt -->
             <div class="container">
@@ -919,12 +941,12 @@
                 <h2 class="fade-in">Stolpersteine in der digitalen Kundengewinnung?</h2>
                 <p class="lead fade-in">Viele Unternehmen kämpfen mit ähnlichen Herausforderungen:</p>
                  <ul>
-                    <li><span class="iconify" data-icon="tabler:chart-arrows-vertical" data-width="24" data-height="24"></span>Hohe Marketing-Ausgaben, aber unklare Ergebnisse und geringer ROI.</li>
-                    <li><span class="iconify" data-icon="tabler:filter-off" data-width="24" data-height="24"></span>Eingekaufte Leads sind teuer und oft nicht passgenau oder qualifiziert.</li>
-                    <li><span class="iconify" data-icon="tabler:users-group" data-width="24" data-height="24"></span>Die richtigen Entscheider in der Zielgruppe werden kaum erreicht.</li>
-                    <li><span class="iconify" data-icon="tabler:puzzle-off" data-width="24" data-height="24"></span>Komplexe digitale Kanäle und Strategien überfordern interne Ressourcen.</li>
-                    <li><span class="iconify" data-icon="tabler:mouse-off" data-width="24" data-height="24"></span>Website-Besucher konvertieren zu selten zu konkreten Anfragen.</li>
-                    <li><span class="iconify" data-icon="tabler:hourglass-empty" data-width="24" data-height="24"></span>Klassische Akquise ist zeitaufwändig und immer weniger effektiv.</li>
+                    <li class="problem-list-item"><span class="iconify" data-icon="tabler:chart-arrows-vertical" data-width="24" data-height="24"></span>Hohe Marketing-Ausgaben, aber unklare Ergebnisse und geringer ROI.</li>
+                    <li class="problem-list-item"><span class="iconify" data-icon="tabler:filter-off" data-width="24" data-height="24"></span>Eingekaufte Leads sind teuer und oft nicht passgenau oder qualifiziert.</li>
+                    <li class="problem-list-item"><span class="iconify" data-icon="tabler:users-group" data-width="24" data-height="24"></span>Die richtigen Entscheider in der Zielgruppe werden kaum erreicht.</li>
+                    <li class="problem-list-item"><span class="iconify" data-icon="tabler:puzzle-off" data-width="24" data-height="24"></span>Komplexe digitale Kanäle und Strategien überfordern interne Ressourcen.</li>
+                    <li class="problem-list-item"><span class="iconify" data-icon="tabler:mouse-off" data-width="24" data-height="24"></span>Website-Besucher konvertieren zu selten zu konkreten Anfragen.</li>
+                    <li class="problem-list-item"><span class="iconify" data-icon="tabler:hourglass-empty" data-width="24" data-height="24"></span>Klassische Akquise ist zeitaufwändig und immer weniger effektiv.</li>
                 </ul>
             </div>
         </section>
@@ -1105,75 +1127,76 @@
      <!-- JavaScript für die verbesserten Animationen und Interaktionen -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Prozess-Schritte Animation
+            // Elementselektoren
             const processSectionContainer = document.querySelector('.process-steps-container');
+            const processSteps = document.querySelectorAll('.process-step');
             const exampleItems = document.querySelectorAll('.example-item');
             const fadeInElements = document.querySelectorAll('.fade-in');
             const ctaSection = document.querySelector('.cta-section');
             const header = document.querySelector('.main-header');
-            const problemListItems = document.querySelectorAll('.problem ul li'); // Select list items directly
-            const benefitsListItems = document.querySelectorAll('.benefit-item'); // Select benefit items directly
+            const problemListItems = document.querySelectorAll('.problem ul li');
+            const benefitsListItems = document.querySelectorAll('.benefit-item');
 
             // Scroll-Position merken für Header-Verstecken
             let lastScrollTop = 0;
 
             // --- Intersection Observer Setup ---
             const observerOptions = {
-                threshold: 0.15, // Adjust threshold for when animation triggers
-                rootMargin: '0px 0px -50px 0px' // Trigger slightly before fully in view
+                threshold: 0.15, // Wann die Animation auslösen (15% sichtbar)
+                rootMargin: '0px 0px -50px 0px' // Trigger etwas früher auslösen
             };
 
             const observerCallback = (entries, observerInstance) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Add 'animate-in' or 'show' class based on target
-                        if (entry.target.classList.contains('process-step') ||
-                            entry.target.classList.contains('example-item') ||
-                            entry.target.classList.contains('benefit-item') ||
-                            entry.target.classList.contains('problem-list-item')) { // Use a common class if possible, or check individual classes
-                             entry.target.classList.add('animate-in');
-                        } else if (entry.target.classList.contains('fade-in')) {
-                            entry.target.classList.add('show');
-                        } else if (entry.target.classList.contains('process-steps-container') || // Observe container for staggered effect trigger
-                                   entry.target.classList.contains('cta-section')) {
-                            entry.target.classList.add('animate-in'); // Trigger container animation class
+                        const target = entry.target;
+                        // Animationen hinzufügen
+                        if (target.classList.contains('process-step') ||
+                            target.classList.contains('example-item') ||
+                            target.classList.contains('benefit-item') ||
+                            target.classList.contains('problem-list-item')) {
+                             target.classList.add('animate-in');
+                        } else if (target.classList.contains('fade-in')) {
+                            target.classList.add('show');
+                        } else if (target.classList.contains('process-steps-container') ||
+                                   target.classList.contains('cta-section')) {
+                            target.classList.add('animate-in');
                         }
 
-                        // Optional: Unobserve after animation to save resources
-                        // observerInstance.unobserve(entry.target);
+                        // Optional: Beobachtung nach Animation beenden
+                        // observerInstance.unobserve(target);
                     }
                 });
             };
 
             const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-            // --- Observe Elements ---
-            if (processSectionContainer) observer.observe(processSectionContainer); // Observe container for overall section animation trigger
-            document.querySelectorAll('.process-step').forEach((el, index) => {
-                 el.style.transitionDelay = `${0.1 * index}s`; // Keep staggered delay for steps
+            // --- Elemente beobachten ---
+            if (processSectionContainer) observer.observe(processSectionContainer); // Gesamtcontainer für initiale Animation
+            processSteps.forEach((el, index) => {
+                 el.style.transitionDelay = `${0.1 * index}s`; // Gestaffelte Verzögerung
                  observer.observe(el);
             });
 
+            if (ctaSection) observer.observe(ctaSection); // CTA Sektion
 
-            if (ctaSection) observer.observe(ctaSection); // Observe CTA section container
-
-            fadeInElements.forEach(element => { // Observe general fade-in elements
+            fadeInElements.forEach(element => { // Allgemeine Fade-In Elemente
                 observer.observe(element);
             });
 
-            exampleItems.forEach((item, index) => { // Observe example cards
-                item.style.transitionDelay = `${0.1 * index}s`; // Staggered delay for cards
+            exampleItems.forEach((item, index) => { // Erfolgsbeispiele
+                item.style.transitionDelay = `${0.1 * index}s`;
                 observer.observe(item);
             });
 
-             problemListItems.forEach((item, index) => { // Observe problem list items
-                item.classList.add('problem-list-item'); // Add class for observer callback if needed
-                item.style.transitionDelay = `${0.08 * index}s`; // Staggered delay
+             problemListItems.forEach((item, index) => { // Problem-Liste
+                item.classList.add('problem-list-item'); // Klasse für Observer hinzugefügt
+                item.style.transitionDelay = `${0.08 * index}s`;
                 observer.observe(item);
             });
 
-            benefitsListItems.forEach((item, index) => { // Observe benefit items
-                item.style.transitionDelay = `${0.08 * index}s`; // Staggered delay
+            benefitsListItems.forEach((item, index) => { // Benefits-Liste
+                item.style.transitionDelay = `${0.08 * index}s`;
                 observer.observe(item);
             });
 
@@ -1183,14 +1206,10 @@
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
                 // Header Schatten
-                if (scrollTop > 10) {
-                    header.classList.add('shadow');
-                } else {
-                    header.classList.remove('shadow');
-                }
+                header.classList.toggle('shadow', scrollTop > 10);
 
                 // Header verstecken/zeigen
-                if (scrollTop > lastScrollTop && scrollTop > 200) { // Adjust scroll threshold if needed
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
                     header.classList.add('hidden');
                 } else {
                     header.classList.remove('hidden');
@@ -1207,8 +1226,7 @@
                     if (targetId === '#') return;
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                         // Calculate offset considering the sticky header height
-                         const headerOffset = header.offsetHeight + 20; // Add some extra space
+                         const headerOffset = header.offsetHeight + 20; // Offset + Puffer
                          const elementPosition = targetElement.getBoundingClientRect().top;
                          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -1221,7 +1239,6 @@
             });
         });
     </script>
-
 
 </body>
 </html>
