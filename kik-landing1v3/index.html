@@ -22,18 +22,18 @@
             --animation-timing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { 
-            scroll-behavior: smooth; 
+        html {
+            scroll-behavior: smooth;
             font-size: 100%;
             scroll-padding-top: 80px; /* Berücksichtigt den fixierten Header */
         }
-        body { 
-            font-family: var(--font-body); 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            line-height: 1.65; 
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale; 
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         .container { max-width: 1140px; margin: 0 auto; padding: 0 calc(var(--spacing-unit) * 1.5); }
         section { padding: calc(var(--spacing-unit) * 5) 0; text-align: center; }
@@ -45,127 +45,97 @@
         h2 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); margin-bottom: calc(var(--spacing-unit) * 2.5); }
         h3 { font-size: clamp(1.4rem, 3.5vw, 1.9rem); margin-bottom: calc(var(--spacing-unit) * 1.5); }
         h4 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-bottom: var(--spacing-unit); }
-        h5 { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: calc(var(--spacing-unit)*0.5); }p { margin-bottom: calc(var(--spacing-unit) * 1.5); max-width: 720px; margin-left: auto; margin-right: auto; font-size: 1.05rem; }
+        h5 { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: calc(var(--spacing-unit)*0.5); }
+        p { margin-bottom: calc(var(--spacing-unit) * 1.5); max-width: 720px; margin-left: auto; margin-right: auto; font-size: 1.05rem; }
         p.lead { font-size: 1.15em; margin-bottom: calc(var(--spacing-unit) * 2.5); color: #495057; max-width: 750px;}
         strong, b { font-weight: 600; }
 
         /* Verbesserte CTA-Buttons mit Animation */
-        .cta-button { 
-            display: inline-block; 
-            background-color: var(--button-bg); 
-            color: var(--button-text); 
-            padding: calc(var(--spacing-unit) * 0.85) calc(var(--spacing-unit) * 2.2); 
-            border: 2px solid var(--button-bg); 
-            border-radius: var(--border-radius); 
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 1rem; 
-            font-family: var(--font-heading); 
-            margin-top: calc(var(--spacing-unit) * 1.5); 
-            transition: background-color 0.3s var(--animation-timing), 
-                        color 0.3s var(--animation-timing), 
+        .cta-button {
+            display: inline-block;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: calc(var(--spacing-unit) * 0.85) calc(var(--spacing-unit) * 2.2);
+            border: 2px solid var(--button-bg);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: var(--font-heading);
+            margin-top: calc(var(--spacing-unit) * 1.5);
+            transition: background-color 0.3s var(--animation-timing),
+                        color 0.3s var(--animation-timing),
                         transform 0.2s var(--animation-timing),
-                        box-shadow 0.3s var(--animation-timing); 
+                        box-shadow 0.3s var(--animation-timing);
             letter-spacing: 0.5px;
             position: relative;
             overflow: hidden;
             z-index: 1;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        
-        .cta-button:hover { 
-            background-color: var(--bg-color); 
-            color: var(--button-bg); 
-            transform: translateY(-3px); 
+
+        .cta-button:hover {
+            background-color: var(--bg-color);
+            color: var(--button-bg);
+            transform: translateY(-3px);
             box-shadow: 0 7px 14px rgba(0,0,0,0.12);
         }
-        
+
         .cta-button:active {
             transform: translateY(-1px);
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
             transition: all 0.1s var(--animation-timing);
         }
-        
-        /* Button mit Pulse-Effekt für Hero-Bereich */
-        .pulse-button {
-            position: relative;
-        }
-        
-        .pulse-button::after {
-            content: '';
-            position: absolute;
+
+        /* Header mit erweiterten Effekten */
+        .main-header {
+            padding: calc(var(--spacing-unit) * 1) 0;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(255, 255, 255, 0.98);
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: var(--border-radius);
-            border: 2px solid var(--button-bg);
-            animation: pulse 2s infinite;
-            z-index: -1;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-            70% {
-                transform: scale(1.1);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1.1);
-                opacity: 0;
-            }
-        }/* Header mit erweiterten Effekten */
-        .main-header { 
-            padding: calc(var(--spacing-unit) * 1) 0; 
-            border-bottom: 1px solid var(--border-color); 
-            background-color: rgba(255, 255, 255, 0.98); 
-            position: sticky; 
-            top: 0; 
             z-index: 1000;
-            transition: box-shadow 0.3s var(--animation-timing), 
+            transition: box-shadow 0.3s var(--animation-timing),
                         transform 0.4s var(--animation-timing);
             box-shadow: 0 2px 10px rgba(0,0,0, 0.03);
         }
-        
+
         .main-header.shadow {
             box-shadow: 0 4px 20px rgba(0,0,0, 0.1);
         }
-        
+
         .main-header.hidden {
             transform: translateY(-100%);
         }
-        
-        .main-header .container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .logo img { 
-            display: block; 
-            height: 35px; 
+
+        .logo img {
+            display: block;
+            height: 35px;
             width: auto;
             transition: transform 0.3s var(--animation-timing);
         }
-        
+
         .logo:hover img {
             transform: scale(1.05);
         }
-        
-        .header-nav a { 
-            font-family: var(--font-body); 
-            color: var(--text-color); 
-            text-decoration: none; 
-            margin-left: var(--spacing-unit); 
-            font-size: 0.95rem; 
+
+        .header-nav a {
+            font-family: var(--font-body);
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: var(--spacing-unit);
+            font-size: 0.95rem;
             font-weight: 600;
             position: relative;
             padding: 5px 2px;
         }
-        
+
         .header-nav a::after {
             content: '';
             position: absolute;
@@ -176,90 +146,85 @@
             background-color: var(--accent-color);
             transition: width 0.3s var(--animation-timing);
         }
-        
+
         .header-nav a:hover::after {
             width: 100%;
         }
 
-        /* Enhanced Hero Section */
-        .hero { 
-            display: flex; 
-            align-items: center; 
-            text-align: left; 
-            padding: calc(var(--spacing-unit) * 6) 0 calc(var(--spacing-unit) * 7); 
+        /* --- Enhanced Hero Section (Background Image) --- */
+        .hero {
+            display: flex; /* Keep flex for alignment if needed */
+            align-items: center; /* Vertically center content */
+            text-align: left; /* Keep text left-aligned as per previous design */
+            padding: calc(var(--spacing-unit) * 7) 0 calc(var(--spacing-unit) * 8); /* Adjusted padding */
             position: relative;
             overflow: hidden;
+            /* Background Image */
+            background-image: url('https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); /* Use appropriate resolution */
+            background-size: cover;
+            background-position: center center;
+            color: var(--heading-color-dark-bg); /* Set default text color to white */
         }
-        
+
+        /* Dark Overlay */
         .hero::before {
             content: '';
             position: absolute;
-            width: 30%;
-            height: 200%;
-            background: linear-gradient(120deg, #212529 10%, transparent 80%);
-            opacity: 0.03;
-            top: -50%;
-            right: -10%;
-            border-radius: 100%;
-            transform: rotate(-15deg);
-            animation: float 15s infinite alternate var(--animation-timing);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(4, 13, 33, 0.6); /* Dark overlay using --dark-bg-color with transparency */
+            z-index: 1; /* Place overlay behind content */
+            /* Remove old gradient background */
         }
-        
-        @keyframes float {
-            0% {
-                transform: rotate(-15deg) translateY(0);
-            }
-            100% {
-                transform: rotate(-5deg) translateY(-2%);
-            }
-        }.hero .container { 
-            display: flex; 
-            flex-direction: column; 
-            gap: calc(var(--spacing-unit) * 3);
+
+        /* No floating background elements needed */
+        /* @keyframes float removed */
+
+        .hero .container {
+            /* Remove flex layout specific styles */
             position: relative;
-            z-index: 2;
+            z-index: 2; /* Ensure container is above overlay */
+            max-width: 1140px; /* Maintain max width */
+            margin: 0 auto; /* Center container */
+            padding: 0 calc(var(--spacing-unit) * 1.5); /* Keep horizontal padding */
+            /* text-align: center; /* Optional: Center text if desired */
         }
-        
-        @media (min-width: 992px) { 
-            .hero .container { 
-                flex-direction: row; 
-                align-items: center; 
-                gap: calc(var(--spacing-unit) * 5); 
-            } 
-            .hero-content { 
-                flex: 1 1 55%; 
-            } 
-            .hero-image { 
-                flex: 1 1 45%; 
-                text-align: center;
-            } 
-        }
-        
+
+        /* @media (min-width: 992px) rules for flex removed */
+
         .hero-content {
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 0.8s var(--animation-timing) forwards;
+             position: relative; /* Ensure content is above overlay */
+             z-index: 2; /* Ensure content is above overlay */
+             max-width: 700px; /* Limit content width if needed */
+             margin-right: auto; /* Keep content left-aligned */
+             margin-left: 0;     /* Keep content left-aligned */
         }
-        
+
         @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .hero-content h1 {
             line-height: 1.2;
             margin-bottom: calc(var(--spacing-unit) * 1.5);
             position: relative;
+            color: var(--heading-color-dark-bg); /* White text */
         }
-        
-        .hero-content h1::after {
+
+        .hero-content h1::after { /* Accent line */
             content: '';
             display: block;
             width: 70px;
             height: 3px;
-            background-color: var(--accent-color);
+            background-color: var(--heading-color-dark-bg); /* White line */
             margin-top: calc(var(--spacing-unit) * 1);
             opacity: 0;
             transform: scaleX(0.7);
@@ -267,251 +232,185 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
             animation: fadeInWidth 0.8s var(--animation-timing) 0.6s forwards;
         }
-        
+
         @keyframes fadeInWidth {
             to {
                 opacity: 1;
                 transform: scaleX(1);
             }
         }
-        
-        .hero-content p { 
-            font-size: 1.2rem; 
+
+        .hero-content p {
+            font-size: 1.2rem;
             max-width: 580px;
             margin-bottom: calc(var(--spacing-unit) * 2);
             opacity: 0;
             animation: fadeIn 0.8s var(--animation-timing) 0.3s forwards;
+            color: var(--text-color-dark-bg); /* Light text color */
+            margin-left: 0; /* Ensure left alignment within content block */
         }
-        
+
         @keyframes fadeIn {
             to {
                 opacity: 1;
             }
         }
-        
-        .hero-image {
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s var(--animation-timing) 0.4s forwards;
+
+        /* Hero CTA Button adjustments */
+        .hero .cta-button {
+            background-color: var(--heading-color-dark-bg); /* White background */
+            color: var(--dark-bg-color); /* Dark text */
+            border-color: var(--heading-color-dark-bg); /* White border */
         }
-        
-        .hero-image img { 
-            max-width: 100%; 
-            height: auto; 
-            border-radius: var(--border-radius);
-            box-shadow: 0 20px 40px rgba(0,0,0, 0.15);
-            transition: transform 0.5s var(--animation-timing),
-                        box-shadow 0.5s var(--animation-timing);
+
+        .hero .cta-button:hover {
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+            color: var(--dark-bg-color);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(0,0,0,0.12);
         }
-        
-        .hero-image:hover img {
-            transform: translateY(-7px) scale(1.01);
-            box-shadow: 0 25px 50px rgba(0,0,0, 0.2);
-        }/* Floating dots decorations */
-        .hero-dots {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            z-index: -1;
+
+        /* Remove Pulse effect if it conflicts or adjust color */
+        .hero .pulse-button::after {
+            border: 2px solid var(--heading-color-dark-bg); /* White pulse border */
+            /* animation: pulse 2s infinite; /* Animation remains */
         }
-        
-        .hero-dots.top-left {
-            top: 10%;
-            left: 5%;
-            animation: floatSlow 20s infinite alternate var(--animation-timing);
-        }
-        
-        .hero-dots.bottom-right {
-            bottom: 10%;
-            right: 5%;
-            animation: floatSlow 15s infinite alternate-reverse var(--animation-timing);
-        }
-        
-        @keyframes floatSlow {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(-15px, 15px);
-            }
-        }
-        
-        .dot {
-            position: absolute;
-            border-radius: 50%;
-            background-color: var(--accent-color);
-            opacity: 0.1;
-        }
-        
-        .dot:nth-child(1) { width: 20px; height: 20px; top: 10%; left: 20%; }
-        .dot:nth-child(2) { width: 15px; height: 15px; top: 30%; left: 50%; }
-        .dot:nth-child(3) { width: 25px; height: 25px; top: 60%; left: 30%; }
-        .dot:nth-child(4) { width: 12px; height: 12px; top: 40%; left: 70%; }
-        .dot:nth-child(5) { width: 18px; height: 18px; top: 70%; left: 10%; }
+
+         /* Remove .hero-image styles */
+        /* Remove .hero-dots styles and keyframes */
+
 
         /* Problem-Sektion mit Icon-Liste */
-        .problem ul { 
-            list-style: none; 
-            padding: 0; 
-            max-width: 850px; 
-            margin: calc(var(--spacing-unit) * 2.5) auto 0; 
-            text-align: left; 
-            display: grid; 
-            gap: calc(var(--spacing-unit) * 1.8); 
+        .problem ul {
+            list-style: none;
+            padding: 0;
+            max-width: 850px;
+            margin: calc(var(--spacing-unit) * 2.5) auto 0;
+            text-align: left;
+            display: grid;
+            gap: calc(var(--spacing-unit) * 1.8);
         }
-        
-        @media (min-width: 768px) { 
-            .problem ul { 
-                grid-template-columns: repeat(2, 1fr); 
-                column-gap: calc(var(--spacing-unit) * 3); 
-            } 
+
+        @media (min-width: 768px) {
+            .problem ul {
+                grid-template-columns: repeat(2, 1fr);
+                column-gap: calc(var(--spacing-unit) * 3);
+            }
         }
-        
-        .problem li { 
-            display: flex; 
-            align-items: flex-start; 
-            font-size: 1.0rem; 
+
+        .problem li {
+            display: flex;
+            align-items: flex-start;
+            font-size: 1.0rem;
             line-height: 1.6;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.5s var(--animation-timing), 
-                        transform 0.5s var(--animation-timing);
+            transition: opacity 0.5s var(--animation-timing),
+                        transform 0.5s var(--animation-timing),
+                        background-color 0.3s var(--animation-timing),
+                        box-shadow 0.3s var(--animation-timing); /* Added missing transitions */
             padding: calc(var(--spacing-unit) * 0.8);
             border-radius: var(--border-radius);
-            transition: background-color 0.3s var(--animation-timing),
-                        transform 0.3s var(--animation-timing),
-                        box-shadow 0.3s var(--animation-timing);
         }
-        
+
         .problem li:hover {
-            background-color: #f8f9fa;
+            background-color: var(--bg-color); /* Changed from #f8f9fa for potentially better contrast */
             transform: translateY(-3px) !important;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-        
+
         .problem li.animate-in {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .problem .iconify { 
-            margin-right: var(--spacing-unit); 
-            flex-shrink: 0; 
-            color: var(--accent-color); 
-            margin-top: 4px; 
-            font-size: 1.6em; 
+
+        .problem .iconify {
+            margin-right: var(--spacing-unit);
+            flex-shrink: 0;
+            color: var(--accent-color);
+            margin-top: 4px;
+            font-size: 1.6em;
             opacity: 0.9;
             transition: transform 0.3s var(--animation-timing);
         }
-        
+
         .problem li:hover .iconify {
             transform: scale(1.2);
         }
-        /* Improved Process-Schritte Sektion */
-        .process-section { 
-            padding: calc(var(--spacing-unit) * 6) 0; 
+
+        /* --- Improved Process-Schritte Sektion (Hover Effect for Text) --- */
+        .process-section {
+            padding: calc(var(--spacing-unit) * 6) 0;
             background-color: var(--dark-bg-color);
-            color: var(--text-color-dark-bg); 
-            overflow: hidden; 
+            color: var(--text-color-dark-bg);
+            overflow: hidden;
             position: relative;
         }
-        
-        /* Hintergrund-Effekt */
-        .process-section::before {
+
+        .process-section::before { /* Background effect */
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(33, 37, 41, 0.05) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(33, 37, 41, 0.05) 0%, transparent 40%);
             z-index: 0;
         }
-        
+
         .process-section .container {
             position: relative;
             z-index: 2;
         }
-        
-        .process-section h2 { 
+
+        .process-section h2 {
             color: var(--heading-color-dark-bg);
-            margin-bottom: calc(var(--spacing-unit) * 1.5); 
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
         }
-        
-        .process-section p.lead { 
+
+        .process-section p.lead {
             color: var(--text-color-dark-bg);
-            margin-bottom: calc(var(--spacing-unit) * 4); 
+            margin-bottom: calc(var(--spacing-unit) * 4);
         }
-        
-        .process-steps-container { 
-            width: 100%; 
-            max-width: 1100px; 
+
+        .process-steps-container {
+            width: 100%;
+            max-width: 1100px;
             margin: 0 auto;
-            display: grid; 
+            display: grid;
             grid-template-columns: 1fr;
             gap: calc(var(--spacing-unit) * 3);
             position: relative;
         }
-        
-        /* Verbindungslinien für Desktop */
+
+        /* Verbindungslinie entfernt */
         @media (min-width: 768px) {
-            .process-steps-container::before {
-                content: '';
-                position: absolute;
-                height: 2px;
-                background: linear-gradient(90deg, 
-                    transparent 0%, 
-                    rgba(255,255,255,0.1) 15%, 
-                    rgba(255,255,255,0.2) 50%, 
-                    rgba(255,255,255,0.1) 85%, 
-                    transparent 100%);
-                width: 80%;
-                top: 65px;
-                left: 10%;
-                z-index: 0;
-                opacity: 0;
-                transform: scaleX(0.7);
-                transition: opacity 1s var(--animation-timing) 0.7s, 
-                            transform 1s var(--animation-timing) 0.7s;
-            }
-            
-            .process-steps-container.animate-in::before {
-                opacity: 1;
-                transform: scaleX(1);
-            }
-            
             .process-steps-container {
                 grid-template-columns: repeat(4, 1fr);
                 gap: calc(var(--spacing-unit) * 2.5);
             }
         }
 
-        .process-step { 
-            color: var(--text-color-dark-bg); 
-            text-align: center; 
-            opacity: 0; 
+        .process-step {
+            color: var(--text-color-dark-bg);
+            text-align: center;
+            opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s var(--animation-timing), 
-                        transform 0.6s var(--animation-timing),
-                        background-color 0.3s var(--animation-timing); 
-            padding: calc(var(--spacing-unit) * 1.5); 
+            transition: opacity 0.6s var(--animation-timing),
+                        transform 0.6s var(--animation-timing), /* Card transform */
+                        background-color 0.3s var(--animation-timing);
+            padding: calc(var(--spacing-unit) * 1.5);
             cursor: default;
             border-radius: 12px;
             background-color: rgba(255,255,255,0.02);
             position: relative;
             z-index: 2;
         }
-        
-        @media (min-width: 768px) { 
-             .process-step { 
-                 text-align: center; 
-             }
-        }
-        
-        .process-step::before {
+
+        .process-step::before { /* Border effect */
             content: '';
             position: absolute;
             inset: 0;
@@ -524,63 +423,69 @@
             opacity: 0;
             transition: opacity 0.3s var(--animation-timing);
         }
-        
+
         .process-step:hover::before {
             opacity: 1;
         }
 
         .process-step .iconify {
-             font-size: 3rem; 
-             color: var(--accent-light);
-             margin-bottom: calc(var(--spacing-unit)*1.2); 
-             display: block; 
-             margin-left: auto; 
-             margin-right: auto; 
-             transition: transform 0.4s var(--animation-timing), color 0.3s var(--animation-timing); 
-             transform: translateY(0);
-        }
-        
-        .process-step:hover {
-            background-color: rgba(255,255,255,0.04);
-            transform: translateY(-8px);
-        }
-        
-        .process-step:hover .iconify { 
-            transform: translateY(-5px); 
-            color: var(--accent-color);
+             font-size: 3rem;
+             color: var(--heading-color-dark-bg); /* White icon */
+             margin-bottom: calc(var(--spacing-unit)*1.2);
+             display: block;
+             margin-left: auto;
+             margin-right: auto;
+             transition: transform 0.4s var(--animation-timing); /* Transition for icon move */
+             transform: translateY(0); /* Start position */
         }
 
         .process-step h5 {
-            font-family: var(--font-heading); 
+            font-family: var(--font-heading);
             color: var(--heading-color-dark-bg);
-            font-size: 1.3rem; 
+            font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: calc(var(--spacing-unit)*0.7);
-            transition: color 0.3s var(--animation-timing);
+            transition: color 0.3s var(--animation-timing),
+                        transform 0.4s var(--animation-timing); /* Transition for text move */
+            transform: translateY(0); /* Start position */
         }
-        
-        .process-step:hover h5 {
-            color: var(--accent-light);
-        }
-        
+
         .process-step p {
-            font-family: var(--font-body); 
-            font-size: 0.95rem; 
-            line-height: 1.5; 
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            line-height: 1.5;
             color: #CED4DA;
-            margin-bottom: 0; 
-            max-width: none; 
-            margin-left: auto; 
-            margin-right: auto; 
-            transition: opacity 0.4s var(--animation-timing), transform 0.4s var(--animation-timing);
+            margin-bottom: 0;
+            max-width: none;
+            margin-left: auto;
+            margin-right: auto;
+            transition: opacity 0.4s var(--animation-timing),
+                        transform 0.4s var(--animation-timing); /* Transition for text move */
             opacity: 0.85;
-            transform: translateY(0);
+            transform: translateY(0); /* Start position */
         }
-        
-        .process-step:hover p {
-            opacity: 1;
-            transform: translateY(0);
+
+
+        /* Hover effects for Process Step */
+        .process-step:hover {
+            background-color: rgba(255,255,255,0.04);
+            transform: translateY(-8px); /* Entire card moves up */
         }
+
+        .process-step:hover .iconify {
+            transform: translateY(-5px); /* Icon moves further up relative to card */
+        }
+
+        .process-step:hover h5 {
+            /* color: var(--text-color-dark-bg); /* Optional color change */
+            transform: translateY(-5px); /* Text moves up relative to card */
+        }
+
+         .process-step:hover p {
+            /* opacity: 1; */ /* Optional opacity change */
+            transform: translateY(-5px); /* Text moves up relative to card */
+        }
+
 
         /* Step number indicator */
         .step-number {
@@ -588,7 +493,7 @@
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--accent-color);
+            background-color: var(--accent-light);
             color: white;
             width: 30px;
             height: 30px;
@@ -603,9 +508,9 @@
         }
 
         /* Gestaffelte Animation für die Schritte */
-        .process-steps-container.animate-in .process-step { 
-            opacity: 1; 
-            transform: translateY(0); 
+        .process-steps-container.animate-in .process-step {
+            opacity: 1;
+            transform: translateY(0);
         }
         .process-steps-container.animate-in .process-step:nth-child(1) { transition-delay: 0.2s; }
         .process-steps-container.animate-in .process-step:nth-child(2) { transition-delay: 0.4s; }
@@ -613,66 +518,65 @@
         .process-steps-container.animate-in .process-step:nth-child(4) { transition-delay: 0.8s; }
 
         /* Verbesserte Benefits Sektion mit Icon + Titel oben */
-        .benefits-grid { 
-            display: grid; 
-            gap: calc(var(--spacing-unit) * 2.5); 
+        .benefits-grid {
+            display: grid;
+            gap: calc(var(--spacing-unit) * 2.5);
             max-width: 1000px;
             margin: calc(var(--spacing-unit) * 3) auto 0;
             text-align: center;
         }
-        
-        @media (min-width: 576px) { 
-            .benefits-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-            } 
+
+        @media (min-width: 576px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-        
-        @media (min-width: 992px) { 
-            .benefits-grid { 
-                grid-template-columns: repeat(3, 1fr); 
-            } 
+
+        @media (min-width: 992px) {
+            .benefits-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
-        
-        .benefit-item { 
-            display: flex; 
+
+        .benefit-item {
+            display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 1.0rem; 
+            font-size: 1.0rem;
             line-height: 1.6;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.5s var(--animation-timing), 
-                        transform 0.5s var(--animation-timing);
-            padding: calc(var(--spacing-unit) * 1.3);
+             padding: calc(var(--spacing-unit) * 1.3);
             border-radius: var(--border-radius);
-            transition: background-color 0.3s var(--animation-timing),
-                        transform 0.3s var(--animation-timing),
+            transition: opacity 0.5s var(--animation-timing),
+                        transform 0.5s var(--animation-timing),
+                        background-color 0.3s var(--animation-timing),
                         box-shadow 0.3s var(--animation-timing);
         }
-        
+
         .benefit-item:hover {
-            background-color: #f8f9fa;
-            transform: translateY(-3px) !important;
+            background-color: var(--alt-bg-color); /* Use alt-bg for consistency */
+            transform: translateY(-3px) !important; /* Keep !important if needed */
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
-        
+
         .benefit-item.animate-in {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .benefit-item .iconify { 
+
+        .benefit-item .iconify {
             margin-bottom: calc(var(--spacing-unit) * 0.8);
-            color: var(--accent-color); 
-            font-size: 2.4em; 
+            color: var(--accent-color);
+            font-size: 2.4em;
             opacity: 0.9;
             transition: transform 0.3s var(--animation-timing);
         }
-        
+
         .benefit-item:hover .iconify {
             transform: scale(1.2);
         }
-        
+
         .benefit-title {
             font-family: var(--font-heading);
             font-weight: 700;
@@ -680,76 +584,75 @@
             margin-bottom: calc(var(--spacing-unit) * 0.5);
             color: var(--heading-color);
         }
-        
+
         .benefit-item p {
             margin-bottom: 0;
             font-size: 0.95rem;
             color: var(--text-color);
         }
-        /* Verbesserte Erfolgsbeispiele Cards */
-        .examples { 
-            background-color: var(--bg-color); 
+
+        /* --- Verbesserte Erfolgsbeispiele Cards (Hover Effect Removed from Highlight) --- */
+        .examples {
+            background-color: var(--bg-color);
             position: relative;
             overflow: hidden;
         }
-        
-        /* Hintergrund-Akzente */
-        .examples::before {
+
+        .examples::before { /* Background accents */
             content: '';
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            background: 
+            background:
                 radial-gradient(circle at 10% 90%, rgba(33, 37, 41, 0.03) 0%, transparent 40%),
                 radial-gradient(circle at 90% 10%, rgba(33, 37, 41, 0.03) 0%, transparent 40%);
             z-index: 0;
         }
-        
+
         .examples .container {
             position: relative;
             z-index: 2;
         }
-        
+
         .examples h2 { margin-bottom: var(--spacing-unit); }
-        
-        .example-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: calc(var(--spacing-unit) * 2.2); 
-            margin-top: calc(var(--spacing-unit) * 3); 
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: calc(var(--spacing-unit) * 2.2);
+            margin-top: calc(var(--spacing-unit) * 3);
         }
-        
-        .example-item { 
-            background: var(--card-bg); 
-            padding: calc(var(--spacing-unit) * 1.8); 
-            border: 1px solid var(--border-color); 
-            border-radius: var(--border-radius); 
-            text-align: left; 
-            box-shadow: 0 10px 30px rgba(0,0,0, 0.07); 
-            transition: transform 0.4s var(--animation-timing), 
-                       box-shadow 0.4s var(--animation-timing); 
-            display: flex; 
+
+        .example-item {
+            background: var(--card-bg);
+            padding: calc(var(--spacing-unit) * 1.8);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0, 0.07);
+            transition: transform 0.4s var(--animation-timing),
+                       box-shadow 0.4s var(--animation-timing);
+            display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
             opacity: 0;
             transform: translateY(30px);
         }
-        
+
         .example-item.animate-in {
             opacity: 1;
             transform: translateY(0);
         }
-        
-        .example-item:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 20px 40px rgba(0,0,0, 0.1); 
+
+        .example-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0, 0.1);
         }
-        
-        /* Akzent Linie */
-        .example-item::before {
+
+        .example-item::before { /* Accent line */
             content: '';
             position: absolute;
             top: 0;
@@ -761,99 +664,99 @@
             transform-origin: left;
             transition: transform 0.4s var(--animation-timing);
         }
-        
+
         .example-item:hover::before {
             transform: scaleX(1);
         }
-        
-        .example-item img { 
-            max-width: 100%; 
-            height: 200px; 
-            object-fit: cover; 
-            border-radius: var(--border-radius); 
+
+        .example-item img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
             margin-bottom: calc(var(--spacing-unit) * 1.5);
             transform: scale(1);
             transition: transform 0.5s var(--animation-timing);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        
+
         .example-item:hover img {
             transform: scale(1.03);
         }
-        
-        .example-item h3 { 
-            font-family: var(--font-heading); 
-            color: var(--heading-color); 
-            font-size: 1.5rem; 
-            margin-bottom: calc(var(--spacing-unit) * 1.5); 
+
+        .example-item h3 {
+            font-family: var(--font-heading);
+            color: var(--heading-color);
+            font-size: 1.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 1.5);
         }
-        
-        .metric-block { 
+
+        .metric-block {
             margin-bottom: calc(var(--spacing-unit) * 1.5);
             transition: transform 0.3s var(--animation-timing);
         }
-        
+
         .example-item:hover .metric-block {
             transform: translateX(5px);
         }
-        
-        .metric-label { 
-            display: flex; 
-            align-items: center; 
-            gap: 0.6em; 
-            font-family: var(--font-heading); 
-            font-weight: 700; 
-            font-size: 0.9rem; 
-            color: #6C757D; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-            margin-bottom: calc(var(--spacing-unit) * 0.4); 
+
+        .metric-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #6C757D;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: calc(var(--spacing-unit) * 0.4);
         }
-        
-        .metric-label .iconify { 
-            font-size: 1.2em; 
-            color: var(--accent-color); 
+
+        .metric-label .iconify {
+            font-size: 1.2em;
+            color: var(--accent-color);
             transition: transform 0.3s var(--animation-timing);
         }
-        
+
         .example-item:hover .metric-label .iconify {
             transform: scale(1.2);
         }
-        
-        .metric-content { 
-            font-family: var(--font-body); 
-            font-size: 1rem; 
-            color: var(--text-color); 
-            margin-bottom: 0; 
-            line-height: 1.6; 
+
+        .metric-content {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 0;
+            line-height: 1.6;
         }
-        
-        .highlight-metric { 
-            font-family: var(--font-heading); 
-            font-weight: 900; 
-            font-size: 1.4rem; 
-            color: var(--accent-color); 
-            display: inline-block; 
+
+        .highlight-metric {
+            font-family: var(--font-heading);
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            display: inline-block;
             margin: 0 0.1em;
-            transition: color 0.3s var(--animation-timing), transform 0.3s var(--animation-timing);
+             transition: color 0.3s var(--animation-timing); /* Removed transform transition */
         }
-        
-        .example-item:hover .highlight-metric {
-            transform: scale(1.1);
-        }
-        
+
+        /* Removed hover effect for highlight-metric */
+        /* .example-item:hover .highlight-metric {
+             transform: scale(1.1); NO LONGER NEEDED
+        } */
+
         .example-item .metric-content:last-child { margin-bottom: 0; }
 
         /* Verbesserte CTA Section */
-        .cta-section { 
-            background-color: var(--alt-bg-color); 
+        .cta-section {
+            background-color: var(--alt-bg-color);
             padding: calc(var(--spacing-unit) * 6) 0;
             position: relative;
             overflow: hidden;
         }
-        
-        /* Hintergrund-Akzent */
-        .cta-section::before {
+
+        .cta-section::before { /* Background accent */
             content: '';
             position: absolute;
             top: 0;
@@ -863,118 +766,119 @@
             background: linear-gradient(120deg, transparent, rgba(33, 37, 41, 0.03));
             z-index: 0;
         }
-        
+
         .cta-section .container {
             position: relative;
             z-index: 2;
         }
-        
-        .cta-section h2 { 
+
+        .cta-section h2 {
             color: var(--heading-color);
             margin-bottom: calc(var(--spacing-unit) * 1.5);
             opacity: 0;
             transform: translateY(20px);
         }
-        
+
         .cta-section.animate-in h2 {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.6s var(--animation-timing), transform 0.6s var(--animation-timing);
         }
-        
-        .cta-section p { 
-            color: var(--text-color); 
-            font-size: 1.15rem; 
+
+        .cta-section p {
+            color: var(--text-color);
+            font-size: 1.15rem;
             max-width: 800px;
             opacity: 0;
             transform: translateY(20px);
         }
-        
+
         .cta-section.animate-in p {
             opacity: 1;
             transform: translateY(0);
             transition: opacity 0.6s var(--animation-timing) 0.2s, transform 0.6s var(--animation-timing) 0.2s;
         }
-        
+
         .cta-section .cta-button {
             opacity: 0;
             transform: translateY(20px);
         }
-        
+
         .cta-section.animate-in .cta-button {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.6s var(--animation-timing) 0.4s, 
+            transition: opacity 0.6s var(--animation-timing) 0.4s,
                         transform 0.6s var(--animation-timing) 0.4s,
                         background-color 0.3s var(--animation-timing),
                         color 0.3s var(--animation-timing),
                         box-shadow 0.3s var(--animation-timing);
         }
+
         /* Enhanced Footer */
-        .main-footer { 
-            text-align: center; 
-            padding: calc(var(--spacing-unit) * 3) 0; 
-            margin-top: calc(var(--spacing-unit) * 3.5); 
-            border-top: 1px solid var(--border-color); 
-            font-size: 0.9rem; 
+        .main-footer {
+            text-align: center;
+            padding: calc(var(--spacing-unit) * 3) 0;
+            margin-top: calc(var(--spacing-unit) * 3.5);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
             color: #6C757D;
             position: relative;
         }
-        
-        .main-footer .container { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
+
+        .main-footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: calc(var(--spacing-unit) * 1.2);
             position: relative;
             z-index: 2;
         }
-        
-        .footer-logo img { 
-            height: 30px; 
+
+        .footer-logo img {
+            height: 30px;
             opacity: 0.7;
             transition: opacity 0.3s var(--animation-timing), transform 0.3s var(--animation-timing);
         }
-        
+
         .footer-logo:hover img {
             opacity: 1;
             transform: scale(1.05);
         }
-        
+
         .footer-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: calc(var(--spacing-unit) * 0.7);
         }
-        
-        .footer-links a { 
-            font-family: var(--font-body); 
-            color: #495057; 
+
+        .footer-links a {
+            font-family: var(--font-body);
+            color: #495057;
             text-decoration: none;
             padding: 5px 10px;
             transition: color 0.3s var(--animation-timing), background-color 0.3s var(--animation-timing);
             border-radius: var(--border-radius);
             font-weight: 600;
         }
-        
-        .footer-links a:hover { 
+
+        .footer-links a:hover {
             color: var(--accent-color);
             background-color: rgba(0,0,0,0.03);
         }
-        
-        .footer-copy { 
+
+        .footer-copy {
             font-family: var(--font-body);
             margin-top: var(--spacing-unit);
         }
-        
+
         /* Animations - Allgemein */
         .fade-in {
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.6s var(--animation-timing), transform 0.6s var(--animation-timing);
         }
-        
+
         .fade-in.show {
             opacity: 1;
             transform: translateY(0);
@@ -997,46 +901,35 @@
     </header>
 
     <main>
-        <!-- Enhanced Hero mit Akzenten -->
+        <!-- Enhanced Hero mit Hintergrundbild -->
         <section class="hero light-section">
-            <!-- Dekorative Dots -->
-            <div class="hero-dots top-left">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            <div class="hero-dots bottom-right">
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            
+             <!-- Overlay wird durch ::before CSS erzeugt -->
             <div class="container">
                 <div class="hero-content">
                     <h1>Schluss mit Streuverlusten: Präzise Leadgenerierung für Ihr B2B-Wachstum.</h1>
                     <p>Wir nutzen die Kraft von Social Ads und intelligenten Mobile Funnels, um genau die Entscheider zu erreichen, die Sie suchen – effizient, messbar und nachhaltig.</p>
                     <a href="#cta" class="cta-button pulse-button">Unverbindliches Erstgespräch anfordern</a>
                 </div>
-                <div class="hero-image">
-                    <img src="https://images.pexels.com/photos/3184357/pexels-photo-3184357.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Professionelles Team bei der Strategieplanung" width="800" height="533">
-                </div>
+                 <!-- Bild-Element entfernt, da es jetzt Hintergrund ist -->
             </div>
         </section>
+
         <section class="problem icon-list alt-section">
             <div class="container">
                 <h2 class="fade-in">Stolpersteine in der digitalen Kundengewinnung?</h2>
                 <p class="lead fade-in">Viele Unternehmen kämpfen mit ähnlichen Herausforderungen:</p>
                  <ul>
-                    <li><span class="iconify" data-icon="tabler:chart-arrows-vertical"></span>Hohe Marketing-Ausgaben, aber unklare Ergebnisse und geringer ROI.</li>
-                    <li><span class="iconify" data-icon="tabler:filter-off"></span>Eingekaufte Leads sind teuer und oft nicht passgenau oder qualifiziert.</li>
-                    <li><span class="iconify" data-icon="tabler:users-group"></span>Die richtigen Entscheider in der Zielgruppe werden kaum erreicht.</li>
-                    <li><span class="iconify" data-icon="tabler:puzzle-off"></span>Komplexe digitale Kanäle und Strategien überfordern interne Ressourcen.</li>
-                    <li><span class="iconify" data-icon="tabler:mouse-off"></span>Website-Besucher konvertieren zu selten zu konkreten Anfragen.</li>
-                    <li><span class="iconify" data-icon="tabler:hourglass-empty"></span>Klassische Akquise ist zeitaufwändig und immer weniger effektiv.</li>
+                    <li><span class="iconify" data-icon="tabler:chart-arrows-vertical" data-width="24" data-height="24"></span>Hohe Marketing-Ausgaben, aber unklare Ergebnisse und geringer ROI.</li>
+                    <li><span class="iconify" data-icon="tabler:filter-off" data-width="24" data-height="24"></span>Eingekaufte Leads sind teuer und oft nicht passgenau oder qualifiziert.</li>
+                    <li><span class="iconify" data-icon="tabler:users-group" data-width="24" data-height="24"></span>Die richtigen Entscheider in der Zielgruppe werden kaum erreicht.</li>
+                    <li><span class="iconify" data-icon="tabler:puzzle-off" data-width="24" data-height="24"></span>Komplexe digitale Kanäle und Strategien überfordern interne Ressourcen.</li>
+                    <li><span class="iconify" data-icon="tabler:mouse-off" data-width="24" data-height="24"></span>Website-Besucher konvertieren zu selten zu konkreten Anfragen.</li>
+                    <li><span class="iconify" data-icon="tabler:hourglass-empty" data-width="24" data-height="24"></span>Klassische Akquise ist zeitaufwändig und immer weniger effektiv.</li>
                 </ul>
             </div>
         </section>
 
-        <!-- Verbesserte Prozess-Schritte Sektion mit Animation -->
+        <!-- Prozess-Schritte mit synchronem Text-Hover -->
         <section id="process" class="process-section dark-section">
             <div class="container">
                  <h2 class="fade-in">So funktioniert's: Leads mit System</h2>
@@ -1045,72 +938,75 @@
                       <!-- Schritt 1: Targeting -->
                      <div class="process-step">
                         <div class="step-number">1</div>
-                        <span class="iconify" data-icon="tabler:target-arrow"></span>
+                        <span class="iconify" data-icon="tabler:target-arrow" data-width="48" data-height="48"></span>
                         <h5>Präzises Targeting</h5>
                         <p>Wir identifizieren Ihre Kernzielgruppe auf den relevanten B2B- & B2C-Plattformen.</p>
                     </div>
                      <!-- Schritt 2: Ads -->
                      <div class="process-step">
                         <div class="step-number">2</div>
-                        <span class="iconify" data-icon="tabler:ad-2"></span>
+                        <span class="iconify" data-icon="tabler:ad-2" data-width="48" data-height="48"></span>
                         <h5>Ansprechende Ads</h5>
                         <p>Kreative Anzeigenformate wecken Aufmerksamkeit und Neugier bei Entscheidern.</p>
                     </div>
                      <!-- Schritt 3: Funnel -->
                      <div class="process-step">
                         <div class="step-number">3</div>
-                        <span class="iconify" data-icon="tabler:device-mobile-message"></span>
+                        <span class="iconify" data-icon="tabler:device-mobile-message" data-width="48" data-height="48"></span>
                         <h5>Smarte Funnels</h5>
                         <p>Intuitive, kurze Abfragen statt langer Formulare – ideal für mobile Nutzung.</p>
                     </div>
                      <!-- Schritt 4: Qualifizierung -->
                     <div class="process-step">
                         <div class="step-number">4</div>
-                        <span class="iconify" data-icon="tabler:filter-check"></span>
+                        <span class="iconify" data-icon="tabler:filter-check" data-width="48" data-height="48"></span>
                          <h5>Qualifizierte Leads</h5>
                         <p>Nur relevante Anfragen mit wichtigen Erstinformationen landen bei Ihnen.</p>
                     </div>
                  </div>
             </div>
         </section>
+
         <section class="benefits alt-section">
             <div class="container">
                 <h2 class="fade-in">Ihr Mehrwert: Planbares Wachstum & Effizienz</h2>
                 <p class="lead fade-in">Steigern Sie nicht nur die Anzahl, sondern vor allem die Qualität Ihrer Leads.</p>
                 <div class="benefits-grid">
                     <div class="benefit-item">
-                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="36" data-height="36"></span>
                         <h4 class="benefit-title">Hochwertige Kontakte</h4>
                         <p>Leads mit echtem Interesse und Bedarf.</p>
                     </div>
                     <div class="benefit-item">
-                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="36" data-height="36"></span>
                         <h4 class="benefit-title">Messbarer Erfolg</h4>
                         <p>Klare KPIs und transparente Kosten pro Lead.</p>
                     </div>
                     <div class="benefit-item">
-                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="36" data-height="36"></span>
                         <h4 class="benefit-title">Effizienter Vertrieb</h4>
                         <p>Ihr Team konzentriert sich auf vielversprechende Gespräche.</p>
                     </div>
                     <div class="benefit-item">
-                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="36" data-height="36"></span>
                         <h4 class="benefit-title">Markenpräsenz stärken</h4>
                         <p>Professionelle Ansprache auf digitalen Kanälen.</p>
                     </div>
                     <div class="benefit-item">
-                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="36" data-height="36"></span>
                         <h4 class="benefit-title">Passive Interessenten erreichen</h4>
                         <p>Wir wecken Bedarf auch bei (noch) nicht aktiv Suchenden.</p>
                     </div>
                     <div class="benefit-item">
-                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="36" data-height="36"></span>
                         <h4 class="benefit-title">Nachhaltiger Leadflow</h4>
                         <p>Kontinuierliche Generierung neuer Geschäftschancen.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Erfolgsbeispiele ohne Text-Skalierung auf Hover -->
         <section id="examples" class="examples light-section">
             <div class="container">
                 <h2 class="fade-in">Erfolgsbeispiele unserer Kunden</h2>
@@ -1120,19 +1016,19 @@
                          <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Person analysiert Finanzdaten auf Laptop" width="600" height="400">
                         <h3>Finanzdienstleister</h3>
                         <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:target"></span> Ziel:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:target" data-width="18" data-height="18"></span> Ziel:</p>
                             <p class="metric-content">Qualifizierte Leads für Festgeld.</p>
                         </div>
                         <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:chart-infographic"></span> Ergebnis:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:chart-infographic" data-width="18" data-height="18"></span> Ergebnis:</p>
                             <p class="metric-content"><span class="highlight-metric">234 Leads</span> zu CPL <span class="highlight-metric">24,02 €</span>.</p>
                         </div>
                         <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:route"></span> Ansatz:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:route" data-width="18" data-height="18"></span> Ansatz:</p>
                             <p class="metric-content">Meta Ads + Retargeting.</p>
                         </div>
                         <div class="metric-block">
-                             <p class="metric-label"><span class="iconify" data-icon="tabler:bulb"></span> Fazit:</p>
+                             <p class="metric-label"><span class="iconify" data-icon="tabler:bulb" data-width="18" data-height="18"></span> Fazit:</p>
                             <p class="metric-content">Hocheffiziente Kampagne durch präzise Zielgruppenansprache.</p>
                         </div>
                     </div>
@@ -1140,19 +1036,19 @@
                          <img src="https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Orange Katze schaut neugierig" width="600" height="400">
                          <h3>Versicherungsagentur</h3>
                          <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:target"></span> Ziel:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:target" data-width="18" data-height="18"></span> Ziel:</p>
                             <p class="metric-content">Leads für Katzenkrankenversicherung.</p>
                         </div>
                         <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:chart-infographic"></span> Ergebnis:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:chart-infographic" data-width="18" data-height="18"></span> Ergebnis:</p>
                             <p class="metric-content"><span class="highlight-metric">>150 Leads</span> (CPL <span class="highlight-metric">< 20 €</span>) in wenigen Wochen.</p>
                         </div>
                          <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:route"></span> Ansatz:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:route" data-width="18" data-height="18"></span> Ansatz:</p>
                             <p class="metric-content">Emotionale Social Ads + Mobile Funnel.</p>
                         </div>
                         <div class="metric-block">
-                             <p class="metric-label"><span class="iconify" data-icon="tabler:bulb"></span> Fazit:</p>
+                             <p class="metric-label"><span class="iconify" data-icon="tabler:bulb" data-width="18" data-height="18"></span> Fazit:</p>
                             <p class="metric-content">Erfolgreiche Ansprache von Tierbesitzern, kostengünstige & hochwertige Leads.</p>
                         </div>
                     </div>
@@ -1160,19 +1056,19 @@
                          <img src="https://images.pexels.com/photos/175039/pexels-photo-175039.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Hand hält Smartphone mit App-Ansicht" width="600" height="400">
                          <h3>IT-Dienstleister</h3>
                          <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:target"></span> Ziel:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:target" data-width="18" data-height="18"></span> Ziel:</p>
                             <p class="metric-content">Leads für Software-Produkt.</p>
                         </div>
                         <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:chart-infographic"></span> Ergebnis:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:chart-infographic" data-width="18" data-height="18"></span> Ergebnis:</p>
                             <p class="metric-content">Leadkosten um <span class="highlight-metric">32% gesenkt</span> bei gleichbleibender Qualität.</p>
                         </div>
                          <div class="metric-block">
-                            <p class="metric-label"><span class="iconify" data-icon="tabler:route"></span> Ansatz:</p>
+                            <p class="metric-label"><span class="iconify" data-icon="tabler:route" data-width="18" data-height="18"></span> Ansatz:</p>
                             <p class="metric-content">LinkedIn Ads + optimierter Funnel mit klarem Value Proposition.</p>
                         </div>
                         <div class="metric-block">
-                             <p class="metric-label"><span class="iconify" data-icon="tabler:bulb"></span> Fazit:</p>
+                             <p class="metric-label"><span class="iconify" data-icon="tabler:bulb" data-width="18" data-height="18"></span> Fazit:</p>
                             <p class="metric-content">Gezielte B2B-Ansprache und verbesserte Conversion im Funnel steigern Effizienz.</p>
                         </div>
                     </div>
@@ -1180,6 +1076,7 @@
                  <p style="margin-top: calc(var(--spacing-unit) * 2.5); font-size: 0.9rem; color: #6c757d;">Dies sind nur einige Beispiele. Gerne zeigen wir Ihnen weitere Cases im persönlichen Gespräch.</p>
             </div>
         </section>
+
         <section id="cta" class="cta-section alt-section">
             <div class="container">
                 <h2>Sind Sie bereit für qualifizierte Leads auf Knopfdruck?</h2>
@@ -1201,7 +1098,7 @@
                  <a href="https://kikeriki.net/impressum" target="_blank">Impressum</a> |
                  <a href="https://kikeriki.net/datenschutz" target="_blank">Datenschutz</a>
              </div>
-             <p class="footer-copy">&copy; 2024 kikeriki GmbH</p>
+             <p class="footer-copy">© 2024 kikeriki GmbH</p>
         </div>
     </footer>
 
@@ -1214,106 +1111,109 @@
             const fadeInElements = document.querySelectorAll('.fade-in');
             const ctaSection = document.querySelector('.cta-section');
             const header = document.querySelector('.main-header');
-            
+            const problemListItems = document.querySelectorAll('.problem ul li'); // Select list items directly
+            const benefitsListItems = document.querySelectorAll('.benefit-item'); // Select benefit items directly
+
             // Scroll-Position merken für Header-Verstecken
             let lastScrollTop = 0;
-            
-            // Intersection Observer für Scroll-Animationen
-            const observer = new IntersectionObserver((entries) => {
+
+            // --- Intersection Observer Setup ---
+            const observerOptions = {
+                threshold: 0.15, // Adjust threshold for when animation triggers
+                rootMargin: '0px 0px -50px 0px' // Trigger slightly before fully in view
+            };
+
+            const observerCallback = (entries, observerInstance) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        if (entry.target === processSectionContainer) {
-                            processSectionContainer.classList.add('animate-in');
+                        // Add 'animate-in' or 'show' class based on target
+                        if (entry.target.classList.contains('process-step') ||
+                            entry.target.classList.contains('example-item') ||
+                            entry.target.classList.contains('benefit-item') ||
+                            entry.target.classList.contains('problem-list-item')) { // Use a common class if possible, or check individual classes
+                             entry.target.classList.add('animate-in');
                         } else if (entry.target.classList.contains('fade-in')) {
                             entry.target.classList.add('show');
-                        } else if (entry.target.classList.contains('example-item')) {
-                            entry.target.classList.add('animate-in');
-                        } else if (entry.target === ctaSection) {
-                            ctaSection.classList.add('animate-in');
+                        } else if (entry.target.classList.contains('process-steps-container') || // Observe container for staggered effect trigger
+                                   entry.target.classList.contains('cta-section')) {
+                            entry.target.classList.add('animate-in'); // Trigger container animation class
                         }
+
+                        // Optional: Unobserve after animation to save resources
+                        // observerInstance.unobserve(entry.target);
                     }
-                });
-            }, {
-                threshold: 0.2,
-                rootMargin: '0px 0px -100px 0px'
-            });
-            
-            // Alle animierbaren Elemente beobachten
-            if (processSectionContainer) observer.observe(processSectionContainer);
-            if (ctaSection) observer.observe(ctaSection);
-            
-            fadeInElements.forEach(element => {
-                observer.observe(element);
-            });
-            
-            exampleItems.forEach((item, index) => {
-                observer.observe(item);
-                // Verzögerte Animation für die Cards
-                item.style.transitionDelay = `${0.1 * index}s`;
-            });
-            
-            // Icon-Listen Elemente animieren mit Verzögerung
-            const problemList = document.querySelectorAll('.problem ul li');
-            const benefitsList = document.querySelectorAll('.benefit-item');
-            
-            const animateListItems = (items) => {
-                items.forEach((item, index) => {
-                    // Verzögerte Animation
-                    setTimeout(() => {
-                        item.classList.add('animate-in');
-                    }, 100 * index);
                 });
             };
-            
-            // Listen-Animation auslösen wenn im Viewport
-            const listObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (entry.target.classList.contains('problem')) {
-                            animateListItems(problemList);
-                        } else if (entry.target.classList.contains('benefits')) {
-                            animateListItems(benefitsList);
-                        }
-                        listObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            
-            listObserver.observe(document.querySelector('.problem'));
-            listObserver.observe(document.querySelector('.benefits'));
-            
-            // Header-Animation beim Scrollen
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            // --- Observe Elements ---
+            if (processSectionContainer) observer.observe(processSectionContainer); // Observe container for overall section animation trigger
+            document.querySelectorAll('.process-step').forEach((el, index) => {
+                 el.style.transitionDelay = `${0.1 * index}s`; // Keep staggered delay for steps
+                 observer.observe(el);
+            });
+
+
+            if (ctaSection) observer.observe(ctaSection); // Observe CTA section container
+
+            fadeInElements.forEach(element => { // Observe general fade-in elements
+                observer.observe(element);
+            });
+
+            exampleItems.forEach((item, index) => { // Observe example cards
+                item.style.transitionDelay = `${0.1 * index}s`; // Staggered delay for cards
+                observer.observe(item);
+            });
+
+             problemListItems.forEach((item, index) => { // Observe problem list items
+                item.classList.add('problem-list-item'); // Add class for observer callback if needed
+                item.style.transitionDelay = `${0.08 * index}s`; // Staggered delay
+                observer.observe(item);
+            });
+
+            benefitsListItems.forEach((item, index) => { // Observe benefit items
+                item.style.transitionDelay = `${0.08 * index}s`; // Staggered delay
+                observer.observe(item);
+            });
+
+
+            // --- Header Animation ---
             window.addEventListener('scroll', () => {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
+
                 // Header Schatten
                 if (scrollTop > 10) {
                     header.classList.add('shadow');
                 } else {
                     header.classList.remove('shadow');
                 }
-                
-                // Header verstecken beim Runterscrollen / zeigen beim Hochscrollen
-                if (scrollTop > lastScrollTop && scrollTop > 300) {
+
+                // Header verstecken/zeigen
+                if (scrollTop > lastScrollTop && scrollTop > 200) { // Adjust scroll threshold if needed
                     header.classList.add('hidden');
                 } else {
                     header.classList.remove('hidden');
                 }
-                
+
                 lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
             });
-            
-            // Smooth Scroll für Anker-Links
+
+            // --- Smooth Scroll ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        targetElement.scrollIntoView({
+                         // Calculate offset considering the sticky header height
+                         const headerOffset = header.offsetHeight + 20; // Add some extra space
+                         const elementPosition = targetElement.getBoundingClientRect().top;
+                         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
                             behavior: 'smooth'
                         });
                     }
@@ -1321,5 +1221,7 @@
             });
         });
     </script>
+
+
 </body>
 </html>
