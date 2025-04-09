@@ -12,7 +12,7 @@
         /* Reset & Globale Stile - Kikeriki Style (Enhanced Interactivity) */
         :root {
             --bg-color: #FFFFFF; --alt-bg-color: #F8F9FA; --dark-bg-color: #040D21;
-            --accent-color: #FF5722; --accent-light: #FF8A65; --accent-dark: #E64A19;
+            --accent-color: #212529; --accent-light: #495057; --accent-dark: #000000;
             --text-color: #343A40; --text-color-dark-bg: #E9ECEF; --heading-color: #212529;
             --heading-color-dark-bg: #FFFFFF; --button-bg: #212529; --button-text: #FFFFFF;
             --card-bg: #FFFFFF; --border-color: #DEE2E6; --border-radius: 8px;
@@ -45,9 +45,7 @@
         h2 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); margin-bottom: calc(var(--spacing-unit) * 2.5); }
         h3 { font-size: clamp(1.4rem, 3.5vw, 1.9rem); margin-bottom: calc(var(--spacing-unit) * 1.5); }
         h4 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); margin-bottom: var(--spacing-unit); }
-        h5 { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: calc(var(--spacing-unit)*0.5); }
-
-        p { margin-bottom: calc(var(--spacing-unit) * 1.5); max-width: 720px; margin-left: auto; margin-right: auto; font-size: 1.05rem; }
+        h5 { font-size: clamp(1rem, 2vw, 1.2rem); margin-bottom: calc(var(--spacing-unit)*0.5); }p { margin-bottom: calc(var(--spacing-unit) * 1.5); max-width: 720px; margin-left: auto; margin-right: auto; font-size: 1.05rem; }
         p.lead { font-size: 1.15em; margin-bottom: calc(var(--spacing-unit) * 2.5); color: #495057; max-width: 750px;}
         strong, b { font-weight: 600; }
 
@@ -119,9 +117,7 @@
                 transform: scale(1.1);
                 opacity: 0;
             }
-        }
-
-        /* Header mit erweiterten Effekten */
+        }/* Header mit erweiterten Effekten */
         .main-header { 
             padding: calc(var(--spacing-unit) * 1) 0; 
             border-bottom: 1px solid var(--border-color); 
@@ -137,6 +133,7 @@
         .main-header.shadow {
             box-shadow: 0 4px 20px rgba(0,0,0, 0.1);
         }
+        
         .main-header.hidden {
             transform: translateY(-100%);
         }
@@ -199,7 +196,7 @@
             position: absolute;
             width: 30%;
             height: 200%;
-            background: linear-gradient(120deg, #FF5722 10%, transparent 80%);
+            background: linear-gradient(120deg, #212529 10%, transparent 80%);
             opacity: 0.03;
             top: -50%;
             right: -10%;
@@ -215,9 +212,7 @@
             100% {
                 transform: rotate(-5deg) translateY(-2%);
             }
-        }
-        
-        .hero .container { 
+        }.hero .container { 
             display: flex; 
             flex-direction: column; 
             gap: calc(var(--spacing-unit) * 3);
@@ -313,9 +308,7 @@
         .hero-image:hover img {
             transform: translateY(-7px) scale(1.01);
             box-shadow: 0 25px 50px rgba(0,0,0, 0.2);
-        }
-        
-        /* Floating dots decorations */
+        }/* Floating dots decorations */
         .hero-dots {
             position: absolute;
             width: 150px;
@@ -357,8 +350,8 @@
         .dot:nth-child(4) { width: 12px; height: 12px; top: 40%; left: 70%; }
         .dot:nth-child(5) { width: 18px; height: 18px; top: 70%; left: 10%; }
 
-        /* Enhanced Icon Listen (Probleme, Vorteile) */
-        .icon-list ul { 
+        /* Problem-Sektion mit Icon-Liste */
+        .problem ul { 
             list-style: none; 
             padding: 0; 
             max-width: 850px; 
@@ -369,13 +362,13 @@
         }
         
         @media (min-width: 768px) { 
-            .icon-list ul { 
+            .problem ul { 
                 grid-template-columns: repeat(2, 1fr); 
                 column-gap: calc(var(--spacing-unit) * 3); 
             } 
         }
         
-        .icon-list li { 
+        .problem li { 
             display: flex; 
             align-items: flex-start; 
             font-size: 1.0rem; 
@@ -391,18 +384,18 @@
                         box-shadow 0.3s var(--animation-timing);
         }
         
-        .icon-list li:hover {
+        .problem li:hover {
             background-color: #f8f9fa;
             transform: translateY(-3px) !important;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .icon-list .animate-in {
+        .problem li.animate-in {
             opacity: 1;
             transform: translateY(0);
         }
         
-        .icon-list .iconify { 
+        .problem .iconify { 
             margin-right: var(--spacing-unit); 
             flex-shrink: 0; 
             color: var(--accent-color); 
@@ -412,10 +405,9 @@
             transition: transform 0.3s var(--animation-timing);
         }
         
-        .icon-list li:hover .iconify {
+        .problem li:hover .iconify {
             transform: scale(1.2);
         }
-
         /* Improved Process-Schritte Sektion */
         .process-section { 
             padding: calc(var(--spacing-unit) * 6) 0; 
@@ -434,8 +426,8 @@
             top: 0;
             left: 0;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 87, 34, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(255, 87, 34, 0.05) 0%, transparent 40%);
+                radial-gradient(circle at 20% 30%, rgba(33, 37, 41, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(33, 37, 41, 0.05) 0%, transparent 40%);
             z-index: 0;
         }
         
@@ -536,6 +528,7 @@
         .process-step:hover::before {
             opacity: 1;
         }
+
         .process-step .iconify {
              font-size: 3rem; 
              color: var(--accent-light);
@@ -619,6 +612,80 @@
         .process-steps-container.animate-in .process-step:nth-child(3) { transition-delay: 0.6s; }
         .process-steps-container.animate-in .process-step:nth-child(4) { transition-delay: 0.8s; }
 
+        /* Verbesserte Benefits Sektion mit Icon + Titel oben */
+        .benefits-grid { 
+            display: grid; 
+            gap: calc(var(--spacing-unit) * 2.5); 
+            max-width: 1000px;
+            margin: calc(var(--spacing-unit) * 3) auto 0;
+            text-align: center;
+        }
+        
+        @media (min-width: 576px) { 
+            .benefits-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+            } 
+        }
+        
+        @media (min-width: 992px) { 
+            .benefits-grid { 
+                grid-template-columns: repeat(3, 1fr); 
+            } 
+        }
+        
+        .benefit-item { 
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.0rem; 
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s var(--animation-timing), 
+                        transform 0.5s var(--animation-timing);
+            padding: calc(var(--spacing-unit) * 1.3);
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s var(--animation-timing),
+                        transform 0.3s var(--animation-timing),
+                        box-shadow 0.3s var(--animation-timing);
+        }
+        
+        .benefit-item:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .benefit-item.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .benefit-item .iconify { 
+            margin-bottom: calc(var(--spacing-unit) * 0.8);
+            color: var(--accent-color); 
+            font-size: 2.4em; 
+            opacity: 0.9;
+            transition: transform 0.3s var(--animation-timing);
+        }
+        
+        .benefit-item:hover .iconify {
+            transform: scale(1.2);
+        }
+        
+        .benefit-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: calc(var(--spacing-unit) * 0.5);
+            color: var(--heading-color);
+        }
+        
+        .benefit-item p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
         /* Verbesserte Erfolgsbeispiele Cards */
         .examples { 
             background-color: var(--bg-color); 
@@ -635,8 +702,8 @@
             top: 0;
             left: 0;
             background: 
-                radial-gradient(circle at 10% 90%, rgba(255, 87, 34, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 90% 10%, rgba(255, 87, 34, 0.03) 0%, transparent 40%);
+                radial-gradient(circle at 10% 90%, rgba(33, 37, 41, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(33, 37, 41, 0.03) 0%, transparent 40%);
             z-index: 0;
         }
         
@@ -793,7 +860,7 @@
             right: 0;
             width: 50%;
             height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 87, 34, 0.03));
+            background: linear-gradient(120deg, transparent, rgba(33, 37, 41, 0.03));
             z-index: 0;
         }
         
@@ -843,7 +910,6 @@
                         color 0.3s var(--animation-timing),
                         box-shadow 0.3s var(--animation-timing);
         }
-
         /* Enhanced Footer */
         .main-footer { 
             text-align: center; 
@@ -955,7 +1021,6 @@
                 </div>
             </div>
         </section>
-
         <section class="problem icon-list alt-section">
             <div class="container">
                 <h2 class="fade-in">Stolpersteine in der digitalen Kundengewinnung?</h2>
@@ -970,7 +1035,7 @@
                 </ul>
             </div>
         </section>
-        
+
         <!-- Verbesserte Prozess-Schritte Sektion mit Animation -->
         <section id="process" class="process-section dark-section">
             <div class="container">
@@ -1008,22 +1073,44 @@
                  </div>
             </div>
         </section>
-
-        <section class="benefits icon-list alt-section">
+        <section class="benefits alt-section">
             <div class="container">
                 <h2 class="fade-in">Ihr Mehrwert: Planbares Wachstum & Effizienz</h2>
                 <p class="lead fade-in">Steigern Sie nicht nur die Anzahl, sondern vor allem die Qualität Ihrer Leads.</p>
-                 <ul>
-                     <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span><strong>Hochwertige Kontakte:</strong> Leads mit echtem Interesse und Bedarf.</li>
-                    <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span><strong>Messbarer Erfolg:</strong> Klare KPIs und transparente Kosten pro Lead.</li>
-                    <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span><strong>Effizienter Vertrieb:</strong> Ihr Team konzentriert sich auf vielversprechende Gespräche.</li>
-                     <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span><strong>Markenpräsenz stärken:</strong> Professionelle Ansprache auf digitalen Kanälen.</li>
-                     <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span><strong>Passive Interessenten erreichen:</strong> Wir wecken Bedarf auch bei (noch) nicht aktiv Suchenden.</li>
-                      <li><span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span><strong>Nachhaltiger Leadflow:</strong> Kontinuierliche Generierung neuer Geschäftschancen.</li>
-                </ul>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <h4 class="benefit-title">Hochwertige Kontakte</h4>
+                        <p>Leads mit echtem Interesse und Bedarf.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <h4 class="benefit-title">Messbarer Erfolg</h4>
+                        <p>Klare KPIs und transparente Kosten pro Lead.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <h4 class="benefit-title">Effizienter Vertrieb</h4>
+                        <p>Ihr Team konzentriert sich auf vielversprechende Gespräche.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <h4 class="benefit-title">Markenpräsenz stärken</h4>
+                        <p>Professionelle Ansprache auf digitalen Kanälen.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <h4 class="benefit-title">Passive Interessenten erreichen</h4>
+                        <p>Wir wecken Bedarf auch bei (noch) nicht aktiv Suchenden.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded"></span>
+                        <h4 class="benefit-title">Nachhaltiger Leadflow</h4>
+                        <p>Kontinuierliche Generierung neuer Geschäftschancen.</p>
+                    </div>
+                </div>
             </div>
         </section>
-        
         <section id="examples" class="examples light-section">
             <div class="container">
                 <h2 class="fade-in">Erfolgsbeispiele unserer Kunden</h2>
@@ -1093,7 +1180,6 @@
                  <p style="margin-top: calc(var(--spacing-unit) * 2.5); font-size: 0.9rem; color: #6c757d;">Dies sind nur einige Beispiele. Gerne zeigen wir Ihnen weitere Cases im persönlichen Gespräch.</p>
             </div>
         </section>
-        
         <section id="cta" class="cta-section alt-section">
             <div class="container">
                 <h2>Sind Sie bereit für qualifizierte Leads auf Knopfdruck?</h2>
@@ -1168,7 +1254,7 @@
             
             // Icon-Listen Elemente animieren mit Verzögerung
             const problemList = document.querySelectorAll('.problem ul li');
-            const benefitsList = document.querySelectorAll('.benefits ul li');
+            const benefitsList = document.querySelectorAll('.benefit-item');
             
             const animateListItems = (items) => {
                 items.forEach((item, index) => {
