@@ -348,6 +348,7 @@ p {
     z-index: 2;
 }
 
+
 .hero h2 {
     font-size: clamp(3rem, 10vw, 5rem);
     letter-spacing: 0.2em;
