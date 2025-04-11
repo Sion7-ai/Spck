@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Sonne - Herzlich Willkommen im Schwarzwald</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts (Beispiel: Inter & Playfair Display) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+</head>
+<body>
+    <!-- Farbige Seitenleisten -->
+    <div class="sidebar left-accent"></div>
+    <div class="sidebar left-main"></div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="logo-area">
+             <!-- Optional: <img src="assets/logo.svg" alt="Hotel Sonne Logo"> -->
+             <span class="header-brand">Hotel Sonne</span>
+        </div>
+        <button id="menu-toggle" class="menu-button" aria-label="Menü öffnen/schließen" aria-expanded="false" aria-controls="mobile-menu">
+            <span class="dot"></span>
+        </button>
+    </header>
+
+    <!-- Slide-In Menu -->
+    <nav id="mobile-menu" class="mobile-nav" aria-hidden="true">
+        <div class="nav-content">
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#philosophy">Philosophie</a></li>
+                <li><a href="#offerings">Angebot</a></li>
+                <li><a href="#why-region">Region</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <div class="menu-footer">
+                <p>Interesse an einem Aufenthalt?</p>
+                <a href="mailto:booking@hotel-sonne-schwarzwald.de" class="email-link">booking@hotel-sonne-schwarzwald.de</a>
+                <p class="copyright">&copy; <span id="current-year"></span> Hotel Sonne GmbH. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hauptinhalt -->
+    <main id="main-content">
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section content-section primary-bg">
+            <div class="hero-background-shape">
+                <!-- SVG oder Hintergrundbild für die Berg-/Waldsilhouette -->
+            </div>
+            <h1>Hotel Sonne<br>Schwarzwald</h1>
+            <p class="subtitle">HS &copy; <span id="current-year-hero"></span></p>
+
+            <div class="intro-box">
+                <h2>Wer wir sind:</h2>
+                <p class="large-text">Ein familiengeführtes Hotel im Herzen des Schwarzwaldes – Ihr Refugium für Erholung und Naturerlebnisse.</p>
+                <a href="#contact" class="cta-link">
+                    <span class="iconify" data-icon="material-symbols:arrow-right-alt" data-width="24" data-height="24"></span>
+                    Jetzt Buchen
+                </a>
+            </div>
+        </section>
+
+        <!-- Philosophy Section -->
+        <section id="philosophy" class="content-section secondary-bg">
+             <div class="section-header">
+                 <span class="eyebrow">
+                     <span class="dot"></span> Unsere Werte
+                 </span>
+                 <a href="#contact" class="cta-link-alt">
+                     <span class="iconify" data-icon="material-symbols:arrow-right-alt" data-width="20" data-height="20"></span>
+                     Anfragen
+                 </a>
+             </div>
+             <h2>Unsere Philosophie</h2>
+             <p class="large-text">Wir glauben an die Kraft der Natur und herzliche Gastfreundschaft. Nachhaltigkeit, Regionalität und Ihr Wohlbefinden stehen bei uns an erster Stelle.</p>
+             <div class="philosophy-background-image">
+                 <!-- Hintergrundbild (z.B. Wald, Berge) -->
+             </div>
+        </section>
+
+        <!-- Why Region Section -->
+        <section id="why-region" class="content-section light-bg">
+            <h2>Warum Schwarzwald?</h2>
+            <p class="subtitle-text">Eine Region voller Magie</p>
+            <p>Der Schwarzwald ist mehr als nur ein Gebirge. Er ist ein Ort der Ruhe, der Inspiration und unzähliger Freizeitmöglichkeiten – von Wanderwegen bis zu kulinarischen Entdeckungen. Erleben Sie die einzigartige Verbindung von Natur und Kultur.</p>
+            <div class="region-graphic">
+                 <!-- Grafik oder Bild, z.B. überlappende Kreise oder Karte -->
+                 <div class="circle circle1"></div>
+                 <div class="circle circle2"></div>
+            </div>
+            <p>Genießen Sie die klare Luft, die dichten Wälder und die traditionelle Gastfreundschaft. Der Schwarzwald bietet zu jeder Jahreszeit unvergessliche Momente.</p>
+            <a href="#offerings" class="cta-button dark">Entdecken Sie unsere Angebote
+                <span class="iconify" data-icon="material-symbols:arrow-forward" data-width="20" data-height="20"></span>
+            </a>
+        </section>
+
+        <!-- Experiences Section -->
+        <section id="experiences" class="content-section light-bg no-padding-top">
+            <h2 class="centered-title">Einzigartige Erlebnisse</h2>
+
+            <div class="experience-card accent-gradient-bg">
+                <span class="number">(1)</span>
+                <p><strong>Wandern & Natur:</strong> Erkunden Sie hunderte Kilometer markierter Wanderwege direkt vor unserer Haustür. Atmen Sie die frische Waldluft und genießen Sie atemberaubende Ausblicke.</p>
+                 <div class="experience-bg-image" style="background-image: url('https://via.placeholder.com/600x400/cccccc/888888?text=Wanderweg+Bild');"></div>
+            </div>
+
+            <div class="experience-card primary-gradient-bg">
+                <span class="number">(2)</span>
+                <p><strong>Kulinarik & Genuss:</strong> Lassen Sie sich von unserer regionalen Küche verwöhnen. Wir verwenden frische Zutaten von lokalen Erzeugern für authentischen Schwarzwälder Geschmack.</p>
+                <div class="experience-bg-image" style="background-image: url('https://via.placeholder.com/600x400/eeeeee/aaaaaa?text=Essen+Bild');"></div>
+            </div>
+
+             <div class="experience-card secondary-gradient-bg">
+                <span class="number">(3)</span>
+                <p><strong>Wellness & Entspannung:</strong> Finden Sie Ruhe in unserem kleinen, feinen Wellnessbereich. Sauna, Ruhezonen und wohltuende Anwendungen warten auf Sie.</p>
+                 <div class="experience-bg-image" style="background-image: url('https://via.placeholder.com/600x400/dddddd/999999?text=Wellness+Bild');"></div>
+            </div>
+        </section>
+
+        <!-- Offerings Section -->
+        <section id="offerings" class="content-section light-bg">
+            <h2>Was wir bieten</h2>
+            <p class="subtitle-text">Unsere Zimmer & Arrangements</p>
+
+             <div class="offering-intro">
+                 <p>Wir bieten verschiedene Zimmerkategorien und Pauschalangebote, die auf Ihre Bedürfnisse zugeschnitten sind.</p>
+                 <div class="offering-graphic">
+                     <!-- Einfache schematische Grafik wie im Video -->
+                     <div class="layer-ring layer-0"><span>Komfort</span></div>
+                     <div class="layer-ring layer-1"><span>Superior</span></div>
+                     <div class="layer-ring layer-2"><span>Suite</span></div>
+                     <div class="layer-ring layer-3"><span>Arrangements</span></div>
+                 </div>
+                 <h3>Individueller Komfort</h3>
+                 <p>Von gemütlichen Einzelzimmern bis zu großzügigen Suiten – bei uns finden Sie den perfekten Rückzugsort.</p>
+             </div>
+
+            <!-- Accordion -->
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>Komfort Zimmer</span>
+                        <span class="iconify plus-icon" data-icon="material-symbols:add" data-width="24" data-height="24"></span>
+                        <span class="iconify minus-icon" data-icon="material-symbols:remove" data-width="24" data-height="24"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Unsere gemütlichen Komfort-Zimmer bieten alles, was Sie für einen erholsamen Aufenthalt benötigen. Ausgestattet mit Dusche/WC, Föhn, TV und kostenfreiem WLAN.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>Superior Zimmer</span>
+                         <span class="iconify plus-icon" data-icon="material-symbols:add" data-width="24" data-height="24"></span>
+                         <span class="iconify minus-icon" data-icon="material-symbols:remove" data-width="24" data-height="24"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Mehr Platz und zusätzlicher Komfort erwartet Sie in unseren Superior-Zimmern. Teilweise mit Balkon oder Terrasse und herrlichem Blick in die Natur.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>Suiten</span>
+                         <span class="iconify plus-icon" data-icon="material-symbols:add" data-width="24" data-height="24"></span>
+                         <span class="iconify minus-icon" data-icon="material-symbols:remove" data-width="24" data-height="24"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Unsere geräumigen Suiten bieten einen separaten Wohn- und Schlafbereich und sind ideal für längere Aufenthalte oder Familien. Genießen Sie höchsten Komfort und Privatsphäre.</p>
+                    </div>
+                </div>
+                 <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>Pauschalangebote</span>
+                         <span class="iconify plus-icon" data-icon="material-symbols:add" data-width="24" data-height="24"></span>
+                         <span class="iconify minus-icon" data-icon="material-symbols:remove" data-width="24" data-height="24"></span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Entdecken Sie unsere attraktiven Arrangements – vom Wanderwochenende bis zum Wellness-Kurzurlaub. Inklusive Halbpension und vielen Extras.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="site-footer-section dark-bg">
+            <div class="footer-content">
+                 <div class="contact-info">
+                    <h3>Interesse geweckt?</h3>
+                    <a href="mailto:booking@hotel-sonne-schwarzwald.de" class="email-link large">booking@hotel-sonne-schwarzwald.de</a>
+                </div>
+
+                <div class="footer-columns">
+                    <div class="footer-column">
+                        <h4>Hotel</h4>
+                        <ul>
+                            <li><a href="#hero">Home</a></li>
+                            <li><a href="#philosophy">Philosophie</a></li>
+                            <li><a href="#offerings">Angebot</a></li>
+                            <li><a href="#why-region">Region</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Social Media</h4>
+                        <ul>
+                            <li><a href="#" target="_blank">Instagram</a></li>
+                            <li><a href="#" target="_blank">Facebook</a></li>
+                            <!-- Add other relevant social links -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                     <div class="footer-section">
+                        <h5>Anreise</h5>
+                        <p>Musterstraße 1, 79822 Titisee-Neustadt</p>
+                        <a href="tel:+49765112345" class="phone-link">+49 7651 12345</a>
+                    </div>
+                     <div class="footer-section">
+                        <h5>Information</h5>
+                        <p>Impressum</p>
+                        <p>Datenschutz</p>
+                    </div>
+                    <div class="footer-legal">
+                         <p class="copyright">&copy; <span id="current-year-footer"></span> Hotel Sonne GmbH. Alle Rechte vorbehalten.</p>
+                         <p class="design-credit">Design inspiriert von Obys</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
