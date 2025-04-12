@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapse Design | Mit KI durchdacht, mit Herz umgesetzt</title>
+    <meta name="description" content="Synapse Design verbindet KI-Innovation mit menschlicher Kreativität für effiziente und emotionale Designlösungen.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Iconify für Icons -->
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="logo-icon">
+                        <span class="iconify" data-icon="material-symbols:psychology-rounded" data-width="32" data-height="32"></span>
+                    </span>
+                    <span class="logo-text">Synapse Design</span>
+                </a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Prozess</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#ai-lab">KI-Labor</a></li>
+                    <li><a href="#about">Über uns</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                </ul>
+            </nav>
+            
+            <div class="nav-cta">
+                <a href="#contact" class="btn btn-primary">Kontakt</a>
+            </div>
+            
+            <button class="mobile-menu-toggle" aria-label="Menü öffnen">
+                <span class="iconify" data-icon="material-symbols:menu" data-width="24" data-height="24"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-split">
+            <div class="hero-visual">
+                <div class="network-animation">
+                    <!-- Animation Container - wird per JS befüllt -->
+                    <div id="network-container"></div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1>Mit KI durchdacht, mit Herz umgesetzt</h1>
+                <p class="lead">Wir verbinden innovative KI-Technologie mit menschlicher Kreativität für Designs, die begeistern und funktionieren.</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-cta">Projekt starten</a>
+                    <a href="#process" class="btn btn-secondary">Mehr erfahren</a>
+                </div>
+                <div class="scroll-indicator">
+                    <span>Entdecken</span>
+                    <span class="iconify" data-icon="material-symbols:keyboard-arrow-down-rounded" data-width="24" data-height="24"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro" id="intro">
+        <div class="container">
+            <div class="section-header">
+                <h2>Das Beste aus beiden Welten</h2>
+                <p class="subtitle">Technologische Präzision trifft auf menschliche Intuition</p>
+            </div>
+            
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <p>Bei Synapse Design haben wir eine einzigartige Arbeitsweise entwickelt: Wir nutzen die Effizienz und analytische Kraft künstlicher Intelligenz und veredeln die Ergebnisse mit menschlicher Kreativität und emotionalem Verständnis.</p>
+                    <p>Diese Synergie ermöglicht es uns, schneller zu arbeiten, datenbasierte Entscheidungen zu treffen und dennoch Designs zu schaffen, die emotional berühren und Ihre Zielgruppe begeistern.</p>
+                </div>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="60">0</span><span>%</span>
+                        <p>Schnellere Entwicklung</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="3">0</span><span>x</span>
+                        <p>Mehr Design-Iterationen</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="100">0</span><span>%</span>
+                        <p>Menschliche Qualitätssicherung</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workflow-visualization">
+                <div class="workflow-step">
+                    <div class="step-icon">
+                        <span class="iconify" data-icon="material-symbols:data-exploration" data-width="48" data-height="48" style="color: var(--color-indigo);"></span>
+                    </div>
+                    <h3>Datenanalyse</h3>
+                    <p>KI analysiert Daten und identifiziert Muster und Trends</p>
+                </div>
+                
+                <div class="workflow-connector">
+                    <span class="iconify" data-icon="material-symbols:arrow-right-alt-rounded" data-width="32" data-height="32"></span>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-icon">
+                        <span class="iconify" data-icon="material-symbols:generating-tokens" data-width="48" data-height="48" style="color: var(--color-cyan);"></span>
+                    </div>
+                    <h3>KI-Generierung</h3>
+                    <p>Datengestützte Konzepte und Design-Varianten</p>
+                </div>
+                
+                <div class="workflow-connector">
+                    <span class="iconify" data-icon="material-symbols:arrow-right-alt-rounded" data-width="32" data-height="32"></span>
+                </div>
+                
+                <div class="workflow-step">
+                    <div class="step-icon">
+                        <span class="iconify" data-icon="material-symbols:favorite-rounded" data-width="48" data-height="48" style="color: var(--color-coral);"></span>
+                    </div>
+                    <h3>Menschliches Feintuning</h3>
+                    <p>Emotionale Intelligenz und kreative Veredelung</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Preview -->
+    <section class="services-preview" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unsere Services</h2>
+                <p class="subtitle">Maßgeschneiderte Lösungen für Ihr Unternehmen</p>
+            </div>
+            
+            <div class="services-carousel">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <span class="iconify" data-icon="material-symbols:web" data-width="48" data-height="48" style="color: var(--color-indigo);"></span>
+                    </div>
+                    <h3>KI-Webdesign</h3>
+                    <p>Datengestützte, nutzerorientierte Websites mit emotionaler Wirkung</p>
+                    <a href="#" class="card-link">Mehr erfahren <span class="iconify" data-icon="material-symbols:arrow-forward" data-width="16" data-height="16"></span></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <span class="iconify" data-icon="material-symbols:palette" data-width="48" data-height="48" style="color: var(--color-indigo);"></span>
+                    </div>
+                    <h3>Branding</h3>
+                    <p>Einprägsame Identitäten, die Ihre Marke einzigartig machen</p>
+                    <a href="#" class="card-link">Mehr erfahren <span class="iconify" data-icon="material-symbols:arrow-forward" data-width="16" data-height="16"></span></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <span class="iconify" data-icon="material-symbols:ads-click" data-width="48" data-height="48" style="color: var(--color-indigo);"></span>
+                    </div>
+                    <h3>Digital Marketing</h3>
+                    <p>Datengestützte Kampagnen mit menschlichem Touch</p>
+                    <a href="#" class="card-link">Mehr erfahren <span class="iconify" data-icon="material-symbols:arrow-forward" data-width="16" data-height="16"></span></a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <span class="iconify" data-icon="material-symbols:phone-iphone" data-width="48" data-height="48" style="color: var(--color-indigo);"></span>
+                    </div>
+                    <h3>App-Design</h3>
+                    <p>Benutzerfreundliche, intuitive App-Oberflächen</p>
+                    <a href="#" class="card-link">Mehr erfahren <span class="iconify" data-icon="material-symbols:arrow-forward" data-width="16" data-height="16"></span></a>
+                </div>
+            </div>
+            
+            <div class="carousel-controls">
+                <button class="carousel-prev" aria-label="Vorherige Services">
+                    <span class="iconify" data-icon="material-symbols:arrow-back-ios-rounded" data-width="24" data-height="24"></span>
+                </button>
+                <div class="carousel-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="carousel-next" aria-label="Weitere Services">
+                    <span class="iconify" data-icon="material-symbols:arrow-forward-ios-rounded" data-width="24" data-height="24"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Preview -->
+    <section class="portfolio-preview" id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unsere Arbeiten</h2>
+                <p class="subtitle">KI-unterstützte Designlösungen, die begeistern</p>
+            </div>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="comparison-slider">
+                        <div class="comparison-before">
+                            <img src="https://via.placeholder.com/600x400/f8f7f3/2d2d2a?text=KI-Version" alt="KI-Version eines Webdesigns" width="600" height="400">
+                            <span class="comparison-label">KI-Version</span>
+                        </div>
+                        <div class="comparison-after">
+                            <img src="https://via.placeholder.com/600x400/f8f7f3/2d2d2a?text=Menschlich+verfeinert" alt="Menschlich verfeinertes Webdesign" width="600" height="400">
+                            <span class="comparison-label">Menschlich verfeinert</span>
+                        </div>
+                        <div class="slider-handle">
+                            <span class="iconify" data-icon="material-symbols:unfold-more" data-width="24" data-height="24"></span>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>EcoSmart Rebranding</h3>
+                        <p>Modernisierung einer nachhaltigen Marke mit KI-Unterstützung</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">Branding</span>
+                            <span class="tag">UI/UX</span>
+                        </div>
+                        <a href="#" class="btn btn-secondary">Case Study</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="comparison-slider">
+                        <div class="comparison-before">
+                            <img src="https://via.placeholder.com/600x400/f8f7f3/2d2d2a?text=KI-Version" alt="KI-Version eines App-Designs" width="600" height="400">
+                            <span class="comparison-label">KI-Version</span>
+                        </div>
+                        <div class="comparison-after">
+                            <img src="https://via.placeholder.com/600x400/f8f7f3/2d2d2a?text=Menschlich+verfeinert" alt="Menschlich verfeinertes App-Design" width="600" height="400">
+                            <span class="comparison-label">Menschlich verfeinert</span>
+                        </div>
+                        <div class="slider-handle">
+                            <span class="iconify" data-icon="material-symbols:unfold-more" data-width="24" data-height="24"></span>
+                        </div>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>FinTech App-Redesign</h3>
+                        <p>Nutzerzentrierte Neugestaltung einer Finance-App</p>
+                        <div class="portfolio-tags">
+                            <span class="tag">App Design</span>
+                            <span class="tag">UX/UI</span>
+                        </div>
+                        <a href="#" class="btn btn-secondary">Case Study</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-cta">
+                <a href="#" class="btn btn-primary">Alle Projekte ansehen</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Lab Preview -->
+    <section class="ai-lab-preview" id="ai-lab">
+        <div class="container">
+            <div class="section-header">
+                <h2>KI-Labor</h2>
+                <p class="subtitle">Erleben Sie die Zukunft des Designs</p>
+            </div>
+            
+            <div class="ai-demo">
+                <div class="ai-demo-intro">
+                    <h3>Testen Sie unsere KI</h3>
+                    <p>Geben Sie ein paar Stichwörter ein und erleben Sie, wie KI Ihr Designkonzept visualisiert – bevor es von unseren Designern verfeinert wird.</p>
+                </div>
+                
+                <div class="ai-demo-tool">
+                    <form class="ai-form">
+                        <div class="form-group">
+                            <label for="design-concept">Ihr Designkonzept</label>
+                            <input type="text" id="design-concept" placeholder="z.B. Minimalistisches Logo für Bio-Café">
+                        </div>
+                        <button type="button" class="btn btn-primary">KI generieren lassen</button>
+                    </form>
+                    
+                    <div class="ai-results">
+                        <div class="ai-result-placeholder">
+                            <span class="iconify" data-icon="material-symbols:image" data-width="64" data-height="64"></span>
+                            <p>Ihr KI-generiertes Design erscheint hier</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Kundenstimmen</h2>
+                <p class="subtitle">Was unsere Kunden über unsere Arbeit sagen</p>
+            </div>
+            
+            <div class="testimonials-carousel">
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <span class="iconify quote-icon" data-icon="material-symbols:format-quote" data-width="48" data-height="48"></span>
+                        <p>Synapse Design hat unsere Erwartungen übertroffen. Die Kombination aus KI-Effizienz und menschlichem Gespür hat zu einem Webauftritt geführt, der nicht nur gut aussieht, sondern auch messbar besser performt.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://via.placeholder.com/60x60/f8f7f3/2d2d2a?text=M" alt="Maria Schmidt" width="60" height="60">
+                        </div>
+                        <div class="author-info">
+                            <h4>Maria Schmidt</h4>
+                            <p>CMO, EcoSmart GmbH</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <span class="iconify quote-icon" data-icon="material-symbols:format-quote" data-width="48" data-height="48"></span>
+                        <p>Was uns beeindruckt hat, ist die Geschwindigkeit und dennoch hohe Qualität. Das Team hat unsere App in Rekordzeit redesignt und dabei Nutzerprobleme gelöst, die wir seit Jahren hatten.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://via.placeholder.com/60x60/f8f7f3/2d2d2a?text=T" alt="Thomas Weber" width="60" height="60">
+                        </div>
+                        <div class="author-info">
+                            <h4>Thomas Weber</h4>
+                            <p>CEO, FinTech Solutions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-controls">
+                <button class="carousel-prev" aria-label="Vorheriges Testimonial">
+                    <span class="iconify" data-icon="material-symbols:arrow-back-ios-rounded" data-width="24" data-height="24"></span>
+                </button>
+                <div class="carousel-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="carousel-next" aria-label="Nächstes Testimonial">
+                    <span class="iconify" data-icon="material-symbols:arrow-forward-ios-rounded" data-width="24" data-height="24"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Bereit für innovative Designlösungen?</h2>
+                <p>Lassen Sie uns gemeinsam Ihr nächstes Projekt gestalten – mit der Effizienz von KI und dem Gespür unserer Designer.</p>
+                <a href="#contact" class="btn btn-cta">Gespräch vereinbaren</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <span class="iconify" data-icon="material-symbols:psychology-rounded" data-width="32" data-height="32"></span>
+                        <span>Synapse Design</span>
+                    </div>
+                    <p>Wir verbinden KI-Innovation mit menschlicher Kreativität für Designs, die begeistern und funktionieren.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn">
+                            <span class="iconify" data-icon="logos:linkedin-icon" data-width="24" data-height="24"></span>
+                        </a>
+                        <a href="#" aria-label="Instagram">
+                            <span class="iconify" data-icon="skill-icons:instagram" data-width="24" data-height="24"></span>
+                        </a>
+                        <a href="#" aria-label="Twitter/X">
+                            <span class="iconify" data-icon="logos:twitter" data-width="24" data-height="24"></span>
+                        </a>
+                        <a href="#" aria-label="Behance">
+                            <span class="iconify" data-icon="logos:behance" data-width="24" data-height="24"></span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-nav">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#process">Unser Prozess</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#ai-lab">KI-Labor</a></li>
+                        <li><a href="#about">Über uns</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-services">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">KI-Webdesign</a></li>
+                        <li><a href="#">Branding</a></li>
+                        <li><a href="#">Digital Marketing</a></li>
+                        <li><a href="#">App-Design</a></li>
+                        <li><a href="#">UX/UI Optimierung</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact" id="contact">
+                    <h3>Kontakt</h3>
+                    <p><span class="iconify" data-icon="material-symbols:location-on" data-width="16" data-height="16"></span> Designstraße 42, 10115 Berlin</p>
+                    <p><span class="iconify" data-icon="material-symbols:call" data-width="16" data-height="16"></span> +49 30 1234567</p>
+                    <p><span class="iconify" data-icon="material-symbols:mail" data-width="16" data-height="16"></span> info@synapse-design.de</p>
+                    
+                    <form class="footer-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Ihre E-Mail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Newsletter abonnieren</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Synapse Design. Alle Rechte vorbehalten.</p>
+                <div class="footer-links">
+                    <a href="#">Datenschutz</a>
+                    <a href="#">Impressum</a>
+                    <a href="#">AGB</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS einbinden -->
+    <script src="script.js"></script>
+</body>
+</html>
