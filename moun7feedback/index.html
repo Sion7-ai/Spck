@@ -16,21 +16,20 @@
 <body>
     <!-- Rating Section - directly on body background -->
     <section id="rating-section" class="rating-section">
-        <!-- Optional: Logo/Brand Name - mimicking reference image -->
-        <div class="brand-name">MOUNT7</div>
-
-        <h1>Wie zufrieden bist du mit Mount7?</h1>
-        <!-- Optional: Subtext? -->
-        <!-- <p class="subtitle">Deine Meinung ist uns wichtig!</p> -->
-
+        <h1>Wie zufrieden bist du mit Mount7</h1>
+        
         <div class="smiley-container">
-            <span id="smiley-icon" class="iconify" data-icon="material-symbols:sentiment-neutral-outline" data-width="48" data-height="48"></span>
+            <img id="smiley-emoji" src="assets/smiley-neutral.png" alt="Bewertungs-Emoji" class="smiley-image">
         </div>
-        <input type="range" id="rating-slider" min="1" max="10" value="5" class="slider">
-        <div class="slider-numbers">
-            <span>1</span> <span>2</span> <span>3</span> <span>4</span> <span>5</span>
-            <span>6</span> <span>7</span> <span>8</span> <span>9</span> <span>10</span>
+        
+        <div class="slider-wrapper">
+            <input type="range" id="rating-slider" min="1" max="10" value="5" class="slider">
+            <div class="slider-numbers">
+                <span>1</span> <span>2</span> <span>3</span> <span>4</span> <span>5</span>
+                <span>6</span> <span>7</span> <span>8</span> <span>9</span> <span>10</span>
+            </div>
         </div>
+        
         <span id="rating-value-display" class="sr-only">Aktuelle Bewertung: 5</span>
 
         <button id="submit-rating-btn" class="submit-rating-button">Bewertung bestätigen</button>
