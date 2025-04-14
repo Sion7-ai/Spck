@@ -14,63 +14,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Custom SVG Smileys -->
-    <div id="custom-smileys" style="display: none;">
-        <!-- Very Unhappy: 1-2 -->
-        <div class="custom-smiley" data-rating="1">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                <path d="M9,10 C9.55228475,10 10,9.55228475 10,9 C10,8.44771525 9.55228475,8 9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 Z" />
-                <path d="M15,10 C15.5522847,10 16,9.55228475 16,9 C16,8.44771525 15.5522847,8 15,8 C14.4477153,8 14,8.44771525 14,9 C14,9.55228475 14.4477153,10 15,10 Z" />
-                <path d="M8.2,18 C13,15 16,17 15.8,18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M6.5,6 L9,7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M17.5,6 L15,7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-        </div>
-        
-        <!-- Unhappy: 3-4 -->
-        <div class="custom-smiley" data-rating="3">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                <path d="M9,10 C9.55228475,10 10,9.55228475 10,9 C10,8.44771525 9.55228475,8 9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 Z" />
-                <path d="M15,10 C15.5522847,10 16,9.55228475 16,9 C16,8.44771525 15.5522847,8 15,8 C14.4477153,8 14,8.44771525 14,9 C14,9.55228475 14.4477153,10 15,10 Z" />
-                <path d="M8,16 C10,13.5 14,13.5 16,16" stroke="currentColor" stroke-width="2" stroke-linecap="round" transform="rotate(180, 12, 16)"/>
-            </svg>
-        </div>
-        
-        <!-- Neutral: 5-6 -->
-        <div class="custom-smiley" data-rating="5">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                <path d="M9,10 C9.55228475,10 10,9.55228475 10,9 C10,8.44771525 9.55228475,8 9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 Z" />
-                <path d="M15,10 C15.5522847,10 16,9.55228475 16,9 C16,8.44771525 15.5522847,8 15,8 C14.4477153,8 14,8.44771525 14,9 C14,9.55228475 14.4477153,10 15,10 Z" />
-                <line x1="8" y1="16" x2="16" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-        </div>
-        
-        <!-- Happy: 7-8 -->
-        <div class="custom-smiley" data-rating="7">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                <path d="M9,10 C9.55228475,10 10,9.55228475 10,9 C10,8.44771525 9.55228475,8 9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 Z" />
-                <path d="M15,10 C15.5522847,10 16,9.55228475 16,9 C16,8.44771525 15.5522847,8 15,8 C14.4477153,8 14,8.44771525 14,9 C14,9.55228475 14.4477153,10 15,10 Z" />
-                <path d="M8,14 C10,16.5 14,16.5 16,14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-        </div>
-        
-        <!-- Very Happy: 9-10 -->
-        <div class="custom-smiley" data-rating="9">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                <path d="M9,10 C9.55228475,10 10,9.55228475 10,9 C10,8.44771525 9.55228475,8 9,8 C8.44771525,8 8,8.44771525 8,9 C8,9.55228475 8.44771525,10 9,10 Z" />
-                <path d="M15,10 C15.5522847,10 16,9.55228475 16,9 C16,8.44771525 15.5522847,8 15,8 C14.4477153,8 14,8.44771525 14,9 C14,9.55228475 14.4477153,10 15,10 Z" />
-                <path d="M8,13 C10,17 14,17 16,13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M18.5,11.5 C18.5,11.5 17,13 16.5,15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M5.5,11.5 C5.5,11.5 7,13 7.5,15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-        </div>
-    </div>
-
     <!-- Rating Section - directly on body background -->
     <section id="rating-section" class="rating-section">
         <h1>Wie zufrieden bist du mit Mount7</h1>
