@@ -125,40 +125,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Updates smiley emoji and slider thumb color based on rating
     function updateSmileyAndSlider(rating) {
-        // Set emoji content based on rating
-        smileyEmoji.textContent = '';
-
         // Add appropriate CSS classes to style the emoji based on rating
         smileyEmoji.className = 'smiley-image';
         
-        // Set emoji content based on rating
+        // Set emoji content and style based on rating
         if (rating <= 2) {
-            smileyEmoji.textContent = emojis[1];
+            smileyEmoji.innerHTML = emojis[1];
             smileyEmoji.style.background = 'linear-gradient(to bottom, #ffadad, #ff6666)';
             slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-red-orange)');
         } else if (rating <= 4) {
-            smileyEmoji.textContent = emojis[3];
+            smileyEmoji.innerHTML = emojis[3];
             smileyEmoji.style.background = 'linear-gradient(to bottom, #ffbf87, #ff9248)';
             slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-red-orange)');
         } else if (rating <= 6) {
-            smileyEmoji.textContent = emojis[5];
+            smileyEmoji.innerHTML = emojis[5];
             smileyEmoji.style.background = 'linear-gradient(to bottom, #ffda6a, #ff9a3c)';
             slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-yellow-orange)');
         } else if (rating <= 8) {
-            smileyEmoji.textContent = emojis[7];
+            smileyEmoji.innerHTML = emojis[7];
             smileyEmoji.style.background = 'linear-gradient(to bottom, #a8deb5, #65c984)';
             slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-turquoise)');
         } else { // 9 or 10
-            smileyEmoji.textContent = emojis[9];
+            smileyEmoji.innerHTML = emojis[9];
             smileyEmoji.style.background = 'linear-gradient(to bottom, #86c5da, #4a9cc1)';
             slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-blue)');
         }
-        
-        // Style the text emoji to be properly centered and sized
-        smileyEmoji.style.display = 'flex';
-        smileyEmoji.style.alignItems = 'center';
-        smileyEmoji.style.justifyContent = 'center';
-        smileyEmoji.style.fontSize = '70px';
     }
 
     // Function to show a specific section (improvement form or positive feedback)
@@ -203,93 +194,4 @@ document.addEventListener('DOMContentLoaded', () => {
              }, 550); // Match transition duration + buffer
         }
     }
-
-}); // End DOMContentLoadedoji.style.alignItems = 'center';
-            smileyEmoji.style.justifyContent = 'center';
-            smileyEmoji.innerHTML = getEmojiByRating(rating);
-        }
-
-        if (rating <= 2) {
-            emojiSrc = emojiImages.veryLow;
-            thumbColor = 'var(--mount7-red-orange)';
-        } else if (rating <= 4) {
-            emojiSrc = emojiImages.low;
-            thumbColor = 'var(--mount7-red-orange)';
-        } else if (rating <= 6) {
-            emojiSrc = emojiImages.neutral;
-            thumbColor = 'var(--mount7-yellow-orange)';
-        } else if (rating <= 8) {
-            emojiSrc = emojiImages.happy;
-            thumbColor = 'var(--mount7-turquoise)';
-        } else { // 9 or 10
-            emojiSrc = emojiImages.veryHappy;
-            thumbColor = 'var(--mount7-blue)';
-        }
-        
-        // Update emoji based on availability
-        if (emojiSrc) {
-            // Use image if available
-            smileyEmoji.src = emojiSrc;
-            smileyEmoji.style.backgroundImage = 'none';
-        } else {
-            // Fallback to Unicode emoji with color if image not available
-            smileyEmoji.innerHTML = getEmojiByRating(rating);
-        }
-        
-        // Update slider thumb color
-        slider.style.setProperty('--slider-thumb-bg', thumbColor);
-    }
-    
-    // Returns appropriate Unicode emoji based on rating
-    function getEmojiByRating(rating) {
-        if (rating <= 2) return '😠';
-        if (rating <= 4) return '🙁';
-        if (rating <= 6) return '😐';
-        if (rating <= 8) return '🙂';
-        return '😄';
-    }
-
-    // Function to show a specific section (improvement form or positive feedback)
-    function showSection(element) {
-        if (!element || element.classList.contains('visible')) return;
-        element.classList.remove('hidden');
-        element.style.display = 'block'; // Ensure display:block for transition
-        setTimeout(() => { // Allow display change to register
-             element.classList.add('visible');
-        }, 10);
-    }
-
-    // Function to hide a specific section
-    function hideSection(element, immediate = false) {
-        if (!element || (!element.classList.contains('visible') && !immediate)) {
-             // If not visible and not immediate hide, ensure it's correctly hidden
-             if (!element.classList.contains('hidden')) {
-                  element.classList.add('hidden');
-                  element.style.display = 'none';
-             }
-             return;
-        }
-
-        if (immediate) {
-            element.classList.remove('visible');
-            element.classList.add('hidden');
-            element.style.display = 'none';
-        } else {
-            element.classList.remove('visible');
-            element.addEventListener('transitionend', () => {
-                if (!element.classList.contains('visible')) {
-                    element.classList.add('hidden');
-                    element.style.display = 'none';
-                }
-            }, { once: true });
-             // Fallback timeout
-             setTimeout(() => {
-                 if (!element.classList.contains('visible')) {
-                     element.classList.add('hidden');
-                     element.style.display = 'none';
-                 }
-             }, 550); // Match transition duration + buffer
-        }
-    }
-
 }); // End DOMContentLoaded
