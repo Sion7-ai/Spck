@@ -14,87 +14,75 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="feedback-container">
-        <h1>Wie zufrieden bist du mit Mount7?</h1>
+    <!-- Rating Section - directly on body background -->
+    <section id="rating-section" class="rating-section">
+        <!-- Optional: Logo/Brand Name - mimicking reference image -->
+        <div class="brand-name">MOUNT7</div>
 
-        <div class="rating-section">
-            <div class="smiley-container">
-                <!-- Dynamisches Iconify icon wird hier von JS geladen -->
-                <span id="smiley-icon" class="iconify" data-icon="material-symbols:sentiment-neutral-outline" data-width="48" data-height="48"></span>
+        <h1>Wie zufrieden bist du mit Mount7?</h1>
+        <!-- Optional: Subtext? -->
+        <!-- <p class="subtitle">Deine Meinung ist uns wichtig!</p> -->
+
+        <div class="smiley-container">
+            <span id="smiley-icon" class="iconify" data-icon="material-symbols:sentiment-neutral-outline" data-width="48" data-height="48"></span>
+        </div>
+        <input type="range" id="rating-slider" min="1" max="10" value="5" class="slider">
+        <div class="slider-numbers">
+            <span>1</span> <span>2</span> <span>3</span> <span>4</span> <span>5</span>
+            <span>6</span> <span>7</span> <span>8</span> <span>9</span> <span>10</span>
+        </div>
+        <span id="rating-value-display" class="sr-only">Aktuelle Bewertung: 5</span>
+
+        <button id="submit-rating-btn" class="submit-rating-button">Bewertung bestätigen</button>
+    </section>
+
+    <!-- Conditional Content Area - This will become the card -->
+    <section id="conditional-content" class="content-area hidden">
+        <!-- Content (Form or Thank You) is loaded here by JS -->
+
+        <!-- Improvement Feedback Form (Ratings 1-7) -->
+        <div id="improvement-form" class="feedback-form hidden">
+            <h2>Was können wir besser machen?</h2>
+            <textarea id="feedback-text" rows="4" placeholder="Dein Feedback hilft uns..." aria-label="Was können wir besser machen?"></textarea>
+            <fieldset class="contact-option">
+                <legend>Sollen wir dich nochmals kontaktieren?</legend>
+                <div>
+                    <input type="radio" id="contact-yes" name="contact-option" value="yes">
+                    <label for="contact-yes">Ja</label>
+                </div>
+                <div>
+                    <input type="radio" id="contact-no" name="contact-option" value="no" checked>
+                    <label for="contact-no">Nein</label>
+                </div>
+            </fieldset>
+            <div id="contact-details" class="hidden">
+                <label for="customer-name">Dein Name (Optional)</label>
+                <input type="text" id="customer-name" placeholder="Max Mustermann">
+                <label for="customer-email">Deine E-Mail-Adresse (Optional)</label>
+                <input type="email" id="customer-email" placeholder="max@beispiel.de">
             </div>
-            <input type="range" id="rating-slider" min="1" max="10" value="5" class="slider">
-            <!-- NEU: Detaillierte Slider-Nummern -->
-            <div class="slider-numbers">
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>5</span>
-                <span>6</span>
-                <span>7</span>
-                <span>8</span>
-                <span>9</span>
-                <span>10</span>
-            </div>
-            <span id="rating-value-display" class="sr-only">Aktuelle Bewertung: 5</span>
+            <button id="submit-feedback" type="submit">Feedback senden</button>
         </div>
 
-        <!-- Conditional Content Area -->
-        <div id="conditional-content" class="content-area">
-
-            <!-- Improvement Feedback Form (Ratings 1-7) -->
-            <div id="improvement-form" class="feedback-form hidden">
-                <h2>Was können wir besser machen?</h2>
-                <textarea id="feedback-text" rows="4" placeholder="Dein Feedback hilft uns..." aria-label="Was können wir besser machen?"></textarea>
-
-                <fieldset class="contact-option">
-                    <legend>Sollen wir dich nochmals kontaktieren?</legend>
-                    <div>
-                        <input type="radio" id="contact-yes" name="contact-option" value="yes">
-                        <label for="contact-yes">Ja</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="contact-no" name="contact-option" value="no" checked>
-                        <label for="contact-no">Nein</label>
-                    </div>
-                </fieldset>
-
-                <div id="contact-details" class="hidden">
-                    <label for="customer-name">Dein Name (Optional)</label>
-                    <input type="text" id="customer-name" placeholder="Max Mustermann">
-
-                    <label for="customer-email">Deine E-Mail-Adresse (Optional)</label>
-                    <input type="email" id="customer-email" placeholder="max@beispiel.de">
-                </div>
-
-                <button id="submit-feedback" type="submit">Feedback senden</button>
+        <!-- Positive Feedback / Review Links (Ratings 8-10) -->
+        <div id="positive-feedback" class="positive-section hidden">
+            <h2 class="thank-you-title">
+                <span class="accent-font">Vielen Dank</span> für dein Feedback!
+            </h2>
+            <p>Wir würden uns freuen, wenn du deine positive Erfahrung auch mit anderen teilst:</p>
+            <div class="review-links">
+                <a href="https://g.page/r/CV2M5SoVhcTkEBM/review" target="_blank" rel="noopener noreferrer" class="review-button google">
+                    <span class="iconify" data-icon="logos:google-icon" data-width="20" data-height="20"></span> Bei Google bewerten
+                </a>
+                <a href="https://de.trustpilot.com/evaluate/mount7.com" target="_blank" rel="noopener noreferrer" class="review-button trustpilot">
+                    <span class="iconify" data-icon="simple-icons:trustpilot" data-width="20" data-height="20" style="color: white;"></span> Bei Trustpilot bewerten
+                </a>
+                <a href="https://www.golocal.de/freiburg/fahrraeder/mount7-gmbh-9PpHX/" target="_blank" rel="noopener noreferrer" class="review-button golocal">
+                    <span class="iconify" data-icon="material-symbols:location-pin" data-width="20" data-height="20"></span> Bei Golocal bewerten
+                </a>
             </div>
-
-            <!-- Positive Feedback / Review Links (Ratings 8-10) -->
-            <div id="positive-feedback" class="positive-section hidden">
-                <h2 class="thank-you-title">
-                    <span class="accent-font">Vielen Dank</span> für dein Feedback!
-                </h2>
-                <p>Wir würden uns freuen, wenn du deine positive Erfahrung auch mit anderen teilst:</p>
-                <div class="review-links">
-                    <a href="https://g.page/r/CV2M5SoVhcTkEBM/review" target="_blank" rel="noopener noreferrer" class="review-button google">
-                        <span class="iconify" data-icon="logos:google-icon" data-width="20" data-height="20"></span>
-                        Bei Google bewerten
-                    </a>
-                    <a href="https://de.trustpilot.com/evaluate/mount7.com" target="_blank" rel="noopener noreferrer" class="review-button trustpilot">
-                        <span class="iconify" data-icon="simple-icons:trustpilot" data-width="20" data-height="20" style="color: white;"></span>
-                        Bei Trustpilot bewerten
-                    </a>
-                    <a href="https://www.golocal.de/freiburg/fahrraeder/mount7-gmbh-9PpHX/" target="_blank" rel="noopener noreferrer" class="review-button golocal">
-                        <span class="iconify" data-icon="material-symbols:location-pin" data-width="20" data-height="20"></span>
-                        Bei Golocal bewerten
-                    </a>
-                </div>
-            </div>
-
-        </div> <!-- /conditional-content -->
-
-    </div> <!-- /feedback-container -->
+        </div>
+    </section> <!-- /conditional-content -->
 
     <!-- Custom Script -->
     <script src="script.js"></script>
