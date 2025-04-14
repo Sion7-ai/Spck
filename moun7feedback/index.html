@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Just+Me+Again+Down+Here&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <!-- Iconify -->
     <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -18,11 +20,10 @@
     <section id="rating-section" class="rating-section">
         <h1>Wie zufrieden bist du mit Mount7</h1>
         
-        <div class="smiley-container">
-            <div id="smiley-emoji" class="smiley-image"></div>
-        </div>
-        
         <div class="slider-wrapper">
+            <div id="smiley-emoji" class="smiley-image">
+                <span class="iconify" data-icon="material-symbols:sentiment-neutral-outline" data-width="36" data-height="36"></span>
+            </div>
             <input type="range" id="rating-slider" min="1" max="10" value="5" class="slider">
             <div class="slider-numbers">
                 <span>1</span> <span>2</span> <span>3</span> <span>4</span> <span>5</span>
@@ -65,6 +66,7 @@
 
         <!-- Positive Feedback / Review Links (Ratings 8-10) -->
         <div id="positive-feedback" class="positive-section hidden">
+            <div id="lottie-container" class="lottie-animation"></div>
             <h2 class="thank-you-title">
                 <span class="accent-font">Vielen Dank</span> für dein Feedback!
             </h2>

@@ -14,13 +14,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactNoRadio = document.getElementById('contact-no');
     const contactDetails = document.getElementById('contact-details');
 
-    // Fallback emoji for different ratings
-    const emojis = {
-        1: '😠', 2: '😠', 
-        3: '🙁', 4: '🙁', 
-        5: '😐', 6: '😐', 
-        7: '🙂', 8: '🙂', 
-        9: '😄', 10: '😄'
+    // Fallback icon names for different ratings
+    const iconNames = {
+        1: 'material-symbols:sentiment-very-dissatisfied-outline',
+        2: 'material-symbols:sentiment-very-dissatisfied-outline',
+        3: 'material-symbols:sentiment-dissatisfied-outline',
+        4: 'material-symbols:sentiment-dissatisfied-outline',
+        5: 'material-symbols:sentiment-neutral-outline',
+        6: 'material-symbols:sentiment-neutral-outline',
+        7: 'material-symbols:sentiment-satisfied-outline',
+        8: 'material-symbols:sentiment-satisfied-outline',
+        9: 'material-symbols:sentiment-very-satisfied-outline',
+        10: 'material-symbols:sentiment-very-satisfied-outline'
     };
 
     // --- Initial State ---
@@ -47,6 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update UI based on initial slider value
     updateSmileyAndSlider(parseInt(slider.value));
+    
+    // Update initial smiley position
+    updateSmileyPosition();
 
     // --- Event Listeners ---
 
@@ -55,6 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const rating = parseInt(event.target.value);
         ratingValueDisplay.textContent = `Aktuelle Bewertung: ${rating}`; // Update accessibility text
         updateSmileyAndSlider(rating);
+        
+        // Update smiley position to match slider thumb
+        updateSmileyPosition();
+    });
+
+    // Window resize event to ensure smiley position is correct after window resizes
+    window.addEventListener('resize', () => {
+        updateSmileyPosition();
     });
 
     // Listener for the 'Submit Rating' Button
@@ -78,6 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (rating >= 8 && rating <= 10) {
                         showSection(positiveFeedback);
                         hideSection(improvementForm, true); // Hide immediately if needed
+                        
+                        // Initialize Lottie animation
+                        const lottieContainer = document.getElementById('lottie-container');
+                        if (lottieContainer) {
+                            lottieContainer.innerHTML = '';
+                            
+                            // Create and load lottie player with cycling animation
+                            const lottiePlayer = document.createElement('lottie-player');
+                            lottiePlayer.src = "https://assets2.lottiefiles.com/private_files/lf30_ulp9xekw.json"; // Bicycle riding animation
+                            lottiePlayer.background = "transparent";
+                            lottiePlayer.speed = "1";
+                            lottiePlayer.loop = true;
+                            lottiePlayer.autoplay = true;
+                            lottiePlayer.style.width = "100%";
+                            lottiePlayer.style.height = "100%";
+                            
+                            lottieContainer.appendChild(lottiePlayer);
+                        }
                     }
                 }, 50); // Short delay for child appearance after parent starts transition
 
@@ -128,28 +162,49 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add appropriate CSS classes to style the emoji based on rating
         smileyEmoji.className = 'smiley-image';
         
-        // Set emoji content and style based on rating
+        let iconName = iconNames[rating];
+        let backgroundColor = 'var(--mount7-yellow-orange)';
+        
+        // Set icon and color based on rating
         if (rating <= 2) {
-            smileyEmoji.innerHTML = emojis[1];
-            smileyEmoji.style.background = 'linear-gradient(to bottom, #ffadad, #ff6666)';
-            slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-red-orange)');
+            backgroundColor = 'var(--mount7-red-orange)';
         } else if (rating <= 4) {
-            smileyEmoji.innerHTML = emojis[3];
-            smileyEmoji.style.background = 'linear-gradient(to bottom, #ffbf87, #ff9248)';
-            slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-red-orange)');
+            backgroundColor = 'var(--mount7-red-orange)';
         } else if (rating <= 6) {
-            smileyEmoji.innerHTML = emojis[5];
-            smileyEmoji.style.background = 'linear-gradient(to bottom, #ffda6a, #ff9a3c)';
-            slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-yellow-orange)');
+            backgroundColor = 'var(--mount7-yellow-orange)';
         } else if (rating <= 8) {
-            smileyEmoji.innerHTML = emojis[7];
-            smileyEmoji.style.background = 'linear-gradient(to bottom, #a8deb5, #65c984)';
-            slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-turquoise)');
+            backgroundColor = 'var(--mount7-turquoise)';
         } else { // 9 or 10
-            smileyEmoji.innerHTML = emojis[9];
-            smileyEmoji.style.background = 'linear-gradient(to bottom, #86c5da, #4a9cc1)';
-            slider.style.setProperty('--slider-thumb-bg', 'var(--mount7-blue)');
+            backgroundColor = 'var(--mount7-blue)';
         }
+        
+        // Update icon
+        const iconElement = smileyEmoji.querySelector('.iconify');
+        if (iconElement) {
+            iconElement.setAttribute('data-icon', iconName);
+        }
+        
+        // Update background colors
+        smileyEmoji.style.backgroundColor = backgroundColor;
+        slider.style.setProperty('--slider-thumb-bg', backgroundColor);
+    }
+
+    // Function to update smiley position based on slider value
+    function updateSmileyPosition() {
+        if (!slider || !smileyEmoji) return;
+        
+        const sliderValue = parseInt(slider.value);
+        const min = parseInt(slider.min);
+        const max = parseInt(slider.max);
+        const percentage = (sliderValue - min) / (max - min);
+        
+        const sliderWidth = slider.offsetWidth;
+        const thumbWidth = 30; // This should match the CSS width for the thumb
+        
+        // Calculate left position: percentage of slider width
+        // Adjust for thumb width to center the emoji above the thumb
+        const thumbPosition = percentage * (sliderWidth - thumbWidth) + thumbWidth / 2;
+        smileyEmoji.style.left = thumbPosition + 'px';
     }
 
     // Function to show a specific section (improvement form or positive feedback)
