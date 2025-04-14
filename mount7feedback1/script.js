@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const smileyEmoji = document.getElementById('smiley-emoji');
     const ratingValueDisplay = document.getElementById('rating-value-display'); // For screen readers
     const submitRatingBtn = document.getElementById('submit-rating-btn'); // The confirmation button
+    const sliderNumbers = document.querySelector('.slider-numbers').children;
 
     const conditionalContent = document.getElementById('conditional-content'); // Container for next steps (the card)
     const improvementForm = document.getElementById('improvement-form');
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactYesRadio = document.getElementById('contact-yes');
     const contactNoRadio = document.getElementById('contact-no');
     const contactDetails = document.getElementById('contact-details');
-
+    
     // Fallback icon names for different ratings
     const iconNames = {
         1: 'material-symbols:sentiment-very-dissatisfied-outline',
@@ -27,6 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
         9: 'material-symbols:sentiment-very-satisfied-outline',
         10: 'material-symbols:sentiment-very-satisfied-outline'
     };
+
+    // Custom SVG emoji control
+    const customSmileys = document.getElementById('custom-smileys');
+    let useCustomSmileys = false;
+    
+    if (customSmileys && customSmileys.children.length > 0) {
+        useCustomSmileys = true;
+    }
 
     // --- Initial State ---
     // Ensure conditional content card and its children are hidden initially
@@ -55,6 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Update initial smiley position
     updateSmileyPosition();
+    
+    // Highlight active number in slider
+    updateActiveNumber();
+    
+    // Add ripple effect to all buttons
+    addRippleEffectToButtons();
 
     // --- Event Listeners ---
 
@@ -66,6 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Update smiley position to match slider thumb
         updateSmileyPosition();
+        
+        // Update active number
+        updateActiveNumber();
     });
 
     // Window resize event to ensure smiley position is correct after window resizes
@@ -91,51 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (rating >= 1 && rating <= 7) {
                         showSection(improvementForm);
                         hideSection(positiveFeedback, true); // Hide immediately if needed
-                    } else                     if (rating >= 8 && rating <= 10) {
+                    } else if (rating >= 8 && rating <= 10) {
                         showSection(positiveFeedback);
                         hideSection(improvementForm, true); // Hide immediately if needed
                         
-                        // Create simple CSS confetti effect
-                        setTimeout(() => {
-                            const confettiContainer = document.getElementById('confetti-container');
-                            if (confettiContainer) {
-                                confettiContainer.innerHTML = ''; // Clear previous confetti
-                                
-                                const colors = [
-                                    '#002E40', // mount7-blue
-                                    '#E5230C', // mount7-red-orange
-                                    '#F2F0D0', // mount7-cream
-                                    '#1F7373', // mount7-turquoise
-                                    '#F3B05C'  // mount7-yellow-orange
-                                ];
-                                
-                                // Create 50 confetti pieces
-                                for (let i = 0; i < 50; i++) {
-                                    const confetti = document.createElement('div');
-                                    confetti.className = 'confetti';
-                                    
-                                    // Random position, color, delay and shape
-                                    const color = colors[Math.floor(Math.random() * colors.length)];
-                                    const left = Math.random() * 100;
-                                    const delay = Math.random() * 2;
-                                    const size = Math.floor(Math.random() * 8) + 5; // 5-12px
-                                    const shape = Math.random() > 0.5 ? '50%' : '0';
-                                    
-                                    // Apply styles
-                                    confetti.style.backgroundColor = color;
-                                    confetti.style.left = `${left}%`;
-                                    confetti.style.width = `${size}px`;
-                                    confetti.style.height = `${size}px`;
-                                    confetti.style.borderRadius = shape;
-                                    confetti.style.animationDelay = `${delay}s`;
-                                    
-                                    confettiContainer.appendChild(confetti);
-                                }
-                            }
-                        }, 300);
+                        // Create upgraded confetti effect
+                        setTimeout(createConfetti, 300);
                     }
                 }, 50); // Short delay for child appearance after parent starts transition
-
             }, 10); // Small delay for parent visibility
         }
     });
@@ -177,16 +158,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Functions ---
+    
+    // Funktion zum Aktualisieren der aktiven Zahl im Slider
+    function updateActiveNumber() {
+        const rating = parseInt(slider.value);
+        
+        // Entferne 'active' von allen Zahlen
+        for (let span of sliderNumbers) {
+            span.classList.remove('active');
+        }
+        
+        // Füge 'active' zur aktuellen Zahl hinzu (Index ist rating-1, da rating von 1-10 geht)
+        if (sliderNumbers[rating-1]) {
+            sliderNumbers[rating-1].classList.add('active');
+        }
+    }
+
+    // Button-Ripple-Effekt hinzufügen
+    function addRippleEffectToButtons() {
+        const buttons = document.querySelectorAll('button, .review-button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                createRippleEffect(e, this);
+            });
+        });
+    }
+    
+    // Erstellt den Ripple-Effekt auf Buttons
+    function createRippleEffect(e, element) {
+        const button = element || e.currentTarget;
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        button.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    }
 
     // Updates smiley emoji and slider thumb color based on rating
     function updateSmileyAndSlider(rating) {
-        // Add appropriate CSS classes to style the emoji based on rating
-        smileyEmoji.className = 'smiley-image';
+        // Clear existing content
+        smileyEmoji.innerHTML = '';
         
-        let iconName = iconNames[rating];
         let backgroundColor = 'var(--mount7-yellow-orange)';
         
-        // Set icon and color based on rating
+        // Set background color based on rating
         if (rating <= 2) {
             backgroundColor = 'var(--mount7-red-orange)';
         } else if (rating <= 4) {
@@ -199,10 +224,37 @@ document.addEventListener('DOMContentLoaded', () => {
             backgroundColor = 'var(--mount7-blue)';
         }
         
-        // Update icon
-        const iconElement = smileyEmoji.querySelector('.iconify');
-        if (iconElement) {
-            iconElement.setAttribute('data-icon', iconName);
+        // Update smiley with either custom SVG or iconify
+        if (useCustomSmileys) {
+            // Find appropriate custom SVG
+            let targetRating;
+            if (rating <= 2) targetRating = 1;
+            else if (rating <= 4) targetRating = 3;
+            else if (rating <= 6) targetRating = 5;
+            else if (rating <= 8) targetRating = 7;
+            else targetRating = 9;
+            
+            const targetSmiley = customSmileys.querySelector(`.custom-smiley[data-rating="${targetRating}"]`);
+            
+            if (targetSmiley) {
+                smileyEmoji.appendChild(targetSmiley.cloneNode(true));
+            } else {
+                // Fallback to iconify
+                const iconElement = document.createElement('span');
+                iconElement.className = 'iconify';
+                iconElement.setAttribute('data-icon', iconNames[rating]);
+                iconElement.setAttribute('data-width', '42');
+                iconElement.setAttribute('data-height', '42');
+                smileyEmoji.appendChild(iconElement);
+            }
+        } else {
+            // Use iconify (original behavior)
+            const iconElement = document.createElement('span');
+            iconElement.className = 'iconify';
+            iconElement.setAttribute('data-icon', iconNames[rating]);
+            iconElement.setAttribute('data-width', '42');
+            iconElement.setAttribute('data-height', '42');
+            smileyEmoji.appendChild(iconElement);
         }
         
         // Update background colors
@@ -220,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const percentage = (sliderValue - min) / (max - min);
         
         const sliderWidth = slider.offsetWidth;
-        const thumbWidth = 30; // This should match the CSS width for the thumb
+        const thumbWidth = 34; // Matches the CSS for the thumb
         
         // Calculate left position: percentage of slider width
         // Adjust for thumb width to center the emoji above the thumb
@@ -268,6 +320,60 @@ document.addEventListener('DOMContentLoaded', () => {
                      element.style.display = 'none';
                  }
              }, 550); // Match transition duration + buffer
+        }
+    }
+    
+    // Verbesserte Konfetti-Erzeugung
+    function createConfetti() {
+        const confettiContainer = document.getElementById('confetti-container');
+        if (!confettiContainer) return;
+        
+        confettiContainer.innerHTML = ''; // Bestehende Konfetti löschen
+        
+        const colors = [
+            '#002E40', // mount7-blue
+            '#E5230C', // mount7-red-orange
+            '#F2F0D0', // mount7-cream
+            '#1F7373', // mount7-turquoise
+            '#F3B05C'  // mount7-yellow-orange
+        ];
+        
+        const shapes = ['square', 'rectangle', 'circle', 'triangle'];
+        const speeds = ['slow', 'medium', 'fast'];
+        const layers = ['front', 'middle', 'back'];
+        
+        // Erzeugt 80 Konfetti-Stücke
+        for (let i = 0; i < 80; i++) {
+            const confetti = document.createElement('div');
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const shape = shapes[Math.floor(Math.random() * shapes.length)];
+            const speed = speeds[Math.floor(Math.random() * speeds.length)];
+            const layer = layers[Math.floor(Math.random() * layers.length)];
+            
+            confetti.className = `confetti ${shape} ${speed} ${layer}`;
+            
+            // Position
+            const left = Math.random() * 100; // Prozent
+            const delay = Math.random() * 1.5; // Sekunden
+            
+            // Größe für nicht-dreieckige Formen anpassen
+            if (shape !== 'triangle') {
+                const size = Math.floor(Math.random() * 5) + 5; // 5-10px
+                confetti.style.width = `${size}px`;
+                confetti.style.height = shape === 'rectangle' ? `${size/2}px` : `${size}px`;
+            }
+            
+            confetti.style.left = `${left}%`;
+            confetti.style.animationDelay = `${delay}s`;
+            
+            // Farbe setzen (entweder direkt oder als Variable für Dreiecke)
+            if (shape === 'triangle') {
+                confetti.style.setProperty('--confetti-color', color);
+            } else {
+                confetti.style.backgroundColor = color;
+            }
+            
+            confettiContainer.appendChild(confetti);
         }
     }
 }); // End DOMContentLoaded

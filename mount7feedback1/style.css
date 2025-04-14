@@ -46,6 +46,23 @@ body {
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
 }
 
+/* Custom SVG Smileys */
+.custom-smiley {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-smiley svg {
+  width: 42px;
+  height: 42px;
+  fill: white;
+  stroke: white;
+  stroke-width: 0.5;
+}
+
 /* Rating Section - No Card, direct on body */
 #rating-section {
     max-width: 600px;
@@ -87,25 +104,30 @@ body {
 }
 
 .smiley-image {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background-color: var(--slider-thumb-bg);
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(0);
     left: 50%;
-    bottom: 110px; /* Erhöhte Position entsprechend dem roten Kreis */
-    transition: left 0.1s ease, background-color 0.3s ease;
+    bottom: 130px;
+    transition: left 0.1s ease, background-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     z-index: 3;
 }
 
+.smiley-image:hover,
+.slider:active ~ .smiley-image {
+    transform: translateX(-50%) translateY(-10px) scale(1.1);
+}
+
 .smiley-image .iconify {
-    color: white;
-    font-size: 36px;
+    font-size: 42px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
 }
 
 /* Slider styling */
@@ -113,7 +135,7 @@ body {
     width: 100%;
     position: relative;
     margin-bottom: 2.5rem;
-    padding-top: 120px; /* Increased space for the higher emoji */
+    padding-top: 140px; /* Increased space for the higher emoji */
     margin-top: 2rem;
 }
 
@@ -121,14 +143,24 @@ body {
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
-    height: 8px;
-    background: #e0e0e0;
+    height: 12px;
+    background: linear-gradient(to right, 
+        var(--mount7-red-orange) 0%, 
+        var(--mount7-red-orange) 20%, 
+        var(--mount7-yellow-orange) 20%, 
+        var(--mount7-yellow-orange) 60%, 
+        var(--mount7-turquoise) 60%, 
+        var(--mount7-turquoise) 80%, 
+        var(--mount7-blue) 80%, 
+        var(--mount7-blue) 100%
+    );
     border-radius: 5px;
     outline: none;
     opacity: 0.9;
     transition: opacity .2s;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
 }
 
 .slider:hover {
@@ -138,62 +170,95 @@ body {
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     background: var(--slider-thumb-bg);
     border-radius: 50%;
     cursor: pointer;
     border: 3px solid #FFFFFF;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transform: scale(1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
     z-index: 2;
 }
 
 .slider::-moz-range-thumb {
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     background: var(--slider-thumb-bg);
     border-radius: 50%;
     cursor: pointer;
     border: 3px solid #FFFFFF;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    transform: scale(1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
     z-index: 2;
+}
+
+.slider:active::-webkit-slider-thumb {
+    transform: scale(1.1);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+}
+
+.slider:active::-moz-range-thumb {
+    transform: scale(1.1);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.3);
 }
 
 .slider-numbers {
     display: flex;
     justify-content: space-between;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    opacity: 0.7;
+    padding: 0 15px;
 }
 
 .slider-numbers span {
     width: 2em;
     text-align: center;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.slider-numbers span.active {
+    font-weight: bold;
+    color: var(--slider-thumb-bg);
+    transform: translateY(-5px) scale(1.2);
+    opacity: 1;
 }
 
 .submit-rating-button {
     background-color: var(--mount7-turquoise);
     color: var(--text-light);
     border: none;
-    padding: 0.8rem 1.6rem;
-    border-radius: 6px;
+    padding: 1rem 2rem;
+    border-radius: 8px;
     font-family: var(--font-primary);
     font-size: 1rem;
     font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-block;
     width: 100%;
     max-width: 400px;
     margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .submit-rating-button:hover {
     background-color: #165656;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+}
+
+.submit-rating-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Conditional Content Area - This becomes the card */
@@ -210,19 +275,24 @@ body {
     opacity: 0;
     max-height: 0;
     visibility: hidden;
-    transition: opacity 0.5s ease, max-height 0.5s ease, padding 0.5s ease, background-color 0.3s ease, box-shadow 0.3s ease, visibility 0s linear 0.5s;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* Styles when the card becomes visible */
 #conditional-content.visible {
-    background-color: var(--background-card);
+    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 10px 30px rgba(0, 46, 64, 0.12),
+        0 1px 5px rgba(0, 46, 64, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    border-radius: 16px;
     padding: clamp(1.5rem, 5vw, 3rem);
-    box-shadow: 0 4px 15px rgba(0, 46, 64, 0.1);
     opacity: 1;
     max-height: 1500px;
     visibility: visible;
-    margin-top: 2rem;
-    transition: opacity 0.5s ease, max-height 0.5s ease, padding 0.5s ease, background-color 0.3s ease, box-shadow 0.3s ease, margin-top 0.5s ease;
+    margin-top: 2.5rem;
+    transform: translateY(0);
 }
 
 /* Inner Form/Thank You sections */
@@ -258,14 +328,18 @@ body {
     margin-top: 1rem;
 }
 
-.feedback-form textarea, .feedback-form input[type="text"], .feedback-form input[type="email"] {
+.feedback-form textarea, 
+.feedback-form input[type="text"], 
+.feedback-form input[type="email"] {
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ccc;
+    padding: 1rem;
+    border: 2px solid #EDEDED;
     border-radius: 6px;
     font-family: var(--font-primary);
     font-size: 1rem;
     margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    background-color: #FAFAFA;
 }
 
 .feedback-form textarea {
@@ -273,10 +347,14 @@ body {
     min-height: 80px;
 }
 
-.feedback-form input:focus, .feedback-form textarea:focus {
-    outline: none;
+.feedback-form textarea:focus, 
+.feedback-form input[type="text"]:focus, 
+.feedback-form input[type="email"]:focus {
     border-color: var(--mount7-turquoise);
-    box-shadow: 0 0 0 2px rgba(31, 115, 115, 0.3);
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(31, 115, 115, 0.15);
+    transform: translateY(-2px);
+    outline: none;
 }
 
 .feedback-form fieldset.contact-option {
@@ -286,7 +364,21 @@ body {
 }
 
 .feedback-form fieldset.contact-option legend {
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+    position: relative;
     margin-bottom: 0.8rem;
+}
+
+.feedback-form fieldset.contact-option legend:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--mount7-turquoise);
+    border-radius: 2px;
 }
 
 .feedback-form fieldset.contact-option div {
@@ -296,10 +388,31 @@ body {
 }
 
 .feedback-form fieldset.contact-option input[type="radio"] {
-    margin-right: 0.5rem;
-    accent-color: var(--mount7-turquoise);
-    width: auto;
-    margin-bottom: 0;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 0.7rem;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.feedback-form fieldset.contact-option input[type="radio"]:checked {
+    border-color: var(--mount7-turquoise);
+    background-color: #FFFFFF;
+}
+
+.feedback-form fieldset.contact-option input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: var(--mount7-turquoise);
+    border-radius: 50%;
 }
 
 .feedback-form fieldset.contact-option label {
@@ -328,13 +441,18 @@ body {
     background-color: var(--accent-primary);
     color: var(--text-light);
     border: none;
-    padding: 0.9rem 1.8rem;
-    border-radius: 6px;
+    padding: 1rem 2rem;
+    border-radius: 8px;
     font-family: var(--font-primary);
     font-size: 1rem;
     font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
     display: block;
     width: 100%;
     margin-top: 1.5rem;
@@ -342,46 +460,123 @@ body {
 
 .feedback-form button:hover {
     background-color: #c41a07;
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feedback-form button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Positive Feedback Section Styling (inside the card) */
 .positive-section {
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Erweiterte Konfetti-Animation */
 .confetti-container {
     position: absolute;
-    top: 0;
+    top: -20px; /* Beginnt etwas höher */
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% + 40px); /* Etwas größerer Bereich */
     pointer-events: none;
     z-index: 10;
+    overflow: hidden;
 }
 
 .confetti {
     position: absolute;
-    width: 10px;
-    height: 10px;
     opacity: 0;
-    animation: fall 3s ease-out forwards;
-    transform-origin: center;
+    animation-name: confettiFall, confettiRotate;
+    animation-duration: 3s, 2s;
+    animation-timing-function: ease-out, linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1, infinite;
 }
 
-@keyframes fall {
+/* Verschiedene Konfettiformdefinitionen */
+.confetti.square {
+    width: 8px;
+    height: 8px;
+    border-radius: 0;
+}
+
+.confetti.rectangle {
+    width: 12px;
+    height: 6px;
+    border-radius: 0;
+}
+
+.confetti.circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.confetti.triangle {
+    width: 0;
+    height: 0;
+    background-color: transparent !important;
+    border-style: solid;
+    border-width: 0 6px 10px 6px;
+    border-color: transparent transparent var(--confetti-color) transparent;
+}
+
+/* Verschiedene Fallgeschwindigkeiten */
+.confetti.slow {
+    animation-duration: 4.5s, 3s;
+}
+
+.confetti.medium {
+    animation-duration: 3.5s, 2.5s;
+}
+
+.confetti.fast {
+    animation-duration: 2.5s, 2s;
+}
+
+@keyframes confettiFall {
     0% {
-        transform: translateY(-5vh) rotate(0deg);
+        transform: translateY(-50px);
+        opacity: 1;
+    }
+    80% {
         opacity: 1;
     }
     100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0.3;
+        transform: translateY(calc(100vh - 100px));
+        opacity: 0;
     }
 }
 
-.positive-section {
-    position: relative;
-    overflow: hidden;
+@keyframes confettiRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Parallaxeffekt mit unterschiedlichen Z-Ebenen */
+.confetti.front {
+    z-index: 12;
+    transform: scale(1.2);
+}
+
+.confetti.middle {
+    z-index: 11;
+    transform: scale(1);
+}
+
+.confetti.back {
+    z-index: 10;
+    transform: scale(0.8);
+    opacity: 0.7;
 }
 
 .thank-you-title .accent-font {
@@ -410,10 +605,20 @@ body {
     color: #333;
 }
 
+/* Modern Review Buttons */
 .review-links {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 0.5rem;
+}
+
+@media (min-width: 600px) {
+    .review-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
 
 .review-button {
@@ -421,18 +626,32 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    padding: 0.9rem 1.5rem;
-    border-radius: 6px;
+    padding: 1rem 1.6rem;
+    border-radius: 10px;
     text-decoration: none;
     font-weight: 700;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.review-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
 .review-button .iconify {
-    vertical-align: middle;
+    font-size: 24px;
+    transition: transform 0.3s ease;
 }
 
+.review-button:hover .iconify {
+    transform: scale(1.2);
+}
+
+/* Google Button */
 .review-button.google {
     background-color: #FFFFFF;
     color: #4285F4;
@@ -441,9 +660,11 @@ body {
 
 .review-button.google:hover {
     background-color: #f8f9fa;
-    border-color: #d1d3d4;
+    border-color: #4285F4;
+    color: #4285F4;
 }
 
+/* TrustPilot Button */
 .review-button.trustpilot {
     background-color: #00B67A;
     color: white;
@@ -451,15 +672,55 @@ body {
 
 .review-button.trustpilot:hover {
     background-color: #00a36b;
+    border-color: #ffffff;
 }
 
+/* Golocal Button */
 .review-button.golocal {
     background-color: var(--mount7-blue);
     color: var(--text-light);
 }
 
 .review-button.golocal:hover {
-    background-color: #001f2b;
+    background-color: #004460;
+    border-color: var(--mount7-cream);
+}
+
+/* Button Hover Effect */
+.review-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, 
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.2) 50%,
+                rgba(255,255,255,0) 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.review-button:hover::after {
+    transform: translateX(100%);
+}
+
+/* Button-Ripple-Effekt */
+.ripple {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
 }
 
 /* Responsive adjustments */
