@@ -91,27 +91,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (rating >= 1 && rating <= 7) {
                         showSection(improvementForm);
                         hideSection(positiveFeedback, true); // Hide immediately if needed
-                    } else if (rating >= 8 && rating <= 10) {
+                    } else                     if (rating >= 8 && rating <= 10) {
                         showSection(positiveFeedback);
                         hideSection(improvementForm, true); // Hide immediately if needed
                         
-                        // Initialize Lottie animation
-                        const lottieContainer = document.getElementById('lottie-container');
-                        if (lottieContainer) {
-                            lottieContainer.innerHTML = '';
-                            
-                            // Create and load lottie player with cycling animation
-                            const lottiePlayer = document.createElement('lottie-player');
-                            lottiePlayer.src = "https://assets2.lottiefiles.com/private_files/lf30_ulp9xekw.json"; // Bicycle riding animation
-                            lottiePlayer.background = "transparent";
-                            lottiePlayer.speed = "1";
-                            lottiePlayer.loop = true;
-                            lottiePlayer.autoplay = true;
-                            lottiePlayer.style.width = "100%";
-                            lottiePlayer.style.height = "100%";
-                            
-                            lottieContainer.appendChild(lottiePlayer);
-                        }
+                        // Create simple CSS confetti effect
+                        setTimeout(() => {
+                            const confettiContainer = document.getElementById('confetti-container');
+                            if (confettiContainer) {
+                                confettiContainer.innerHTML = ''; // Clear previous confetti
+                                
+                                const colors = [
+                                    '#002E40', // mount7-blue
+                                    '#E5230C', // mount7-red-orange
+                                    '#F2F0D0', // mount7-cream
+                                    '#1F7373', // mount7-turquoise
+                                    '#F3B05C'  // mount7-yellow-orange
+                                ];
+                                
+                                // Create 50 confetti pieces
+                                for (let i = 0; i < 50; i++) {
+                                    const confetti = document.createElement('div');
+                                    confetti.className = 'confetti';
+                                    
+                                    // Random position, color, delay and shape
+                                    const color = colors[Math.floor(Math.random() * colors.length)];
+                                    const left = Math.random() * 100;
+                                    const delay = Math.random() * 2;
+                                    const size = Math.floor(Math.random() * 8) + 5; // 5-12px
+                                    const shape = Math.random() > 0.5 ? '50%' : '0';
+                                    
+                                    // Apply styles
+                                    confetti.style.backgroundColor = color;
+                                    confetti.style.left = `${left}%`;
+                                    confetti.style.width = `${size}px`;
+                                    confetti.style.height = `${size}px`;
+                                    confetti.style.borderRadius = shape;
+                                    confetti.style.animationDelay = `${delay}s`;
+                                    
+                                    confettiContainer.appendChild(confetti);
+                                }
+                            }
+                        }, 300);
                     }
                 }, 50); // Short delay for child appearance after parent starts transition
 
