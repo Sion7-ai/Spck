@@ -2,7 +2,7 @@
 /* Reset & Base Styles  */
 /* -------------------- */
 :root {
-    --pink: #E6007A;
+    --pink: #E6007A; /* Bleibt für andere Elemente erhalten */
     --orange: #F37021;
     --lavender: #D8BFD8;
     --white: #FFFFFF;
@@ -12,6 +12,8 @@
     --gray-dark: #808080;
     --font-primary: 'Poppins', sans-serif;
     --sidebar-width: 15px; /* Breite der festen Seitenleisten */
+    --bg-image-header-hero: url('https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); /* Pexels Schwarzwald Bild */
+    --bg-overlay-color: rgba(0, 0, 0, 0.4); /* Overlay-Dunkelheit für Lesbarkeit */
 }
 
 * {
@@ -30,7 +32,7 @@ body {
     color: var(--black);
     background-color: var(--white);
     overflow-x: hidden; /* Verhindert horizontales Scrollen */
-    cursor: none; /* Versteckt Standard-Cursor */
+    /* cursor: none; --- ENTFERNT --- */
 }
 
 main {
@@ -44,19 +46,21 @@ a, button {
     font-family: inherit;
     color: inherit;
     text-decoration: none;
-    cursor: none; /* Wichtig für Custom Cursor Interaktion */
+    /* cursor: none; --- ENTFERNT --- */
+    cursor: pointer; /* Standard-Cursor für interaktive Elemente */
     background: none;
     border: none;
 }
-a.interactive, button.interactive {
-     position: relative; /* Für Cursor-Erkennung */
+/* a.interactive, button.interactive { --- Nicht mehr primär für Cursor nötig, kann bleiben für JS-Selektion ---
+     position: relative;
      z-index: 2;
-}
+} */
 
 
 /* -------------------- */
 /* Custom Cursor        */
 /* -------------------- */
+/*
 .custom-cursor {
     position: fixed;
     width: 30px;
@@ -65,12 +69,12 @@ a.interactive, button.interactive {
     border-radius: 50%;
     left: 0;
     top: 0;
-    pointer-events: none; /* Klicks gehen durch */
+    pointer-events: none;
     transform: translate(-50%, -50%);
     z-index: 9999;
-    mix-blend-mode: difference; /* Cooler Effekt auf farbigem Hintergrund */
+    mix-blend-mode: difference;
     transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
-    will-change: top, left, width, height; /* Performance hint */
+    will-change: top, left, width, height;
 }
 
 .custom-cursor.hovered {
@@ -79,10 +83,11 @@ a.interactive, button.interactive {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-/* Standard-Cursor verstecken wenn JS aktiv ist */
 body.js-cursor * {
     cursor: none;
 }
+*/
+/* --- ENDE Custom Cursor --- */
 
 
 /* -------------------- */
@@ -160,14 +165,14 @@ body.js-cursor * {
 .text-black { color: var(--black); }
 .text-lavender { color: var(--lavender); }
 
-.bg-pink { background-color: var(--pink); }
+/* .bg-pink { background-color: var(--pink); } --- Wird jetzt durch Bild ersetzt --- */
 .bg-orange { background-color: var(--orange); }
 .bg-lavender { background-color: var(--lavender); }
 .bg-white { background-color: var(--white); }
 .bg-black { background-color: var(--black); }
 .bg-gray-light { background-color: var(--gray-light); }
 
-.bg-lavender-light { background-color: #E6D9E6; } /* Angepasste Highlight-Farben */
+.bg-lavender-light { background-color: #E6D9E6; }
 .bg-orange-light { background-color: #FAD9C5; }
 .bg-pink-light { background-color: #F8C0D9; }
 
@@ -192,10 +197,24 @@ body.js-cursor * {
     font-weight: 600;
     margin-top: 20px;
     font-size: clamp(0.9rem, 3vw, 1.1rem);
+    /* NEU: Transition für Animation */
+    transition: transform 0.2s ease-out;
+    will-change: transform; /* Performance hint */
 }
 .cta-link.large {
     font-size: clamp(1.1rem, 4vw, 1.8rem);
 }
+
+/* NEU: Hover & Active Zustand für .cta-link */
+.cta-link:hover {
+    transform: translateY(-3px); /* Leichte Anhebung */
+    /* Optional: Andere Hover-Effekte, z.B. hellere Farbe */
+    /* color: lightblue; */
+}
+.cta-link:active {
+    transform: translateY(0px); /* Zurück zur Basis beim Klick */
+}
+
 
 .btn {
     display: inline-flex;
@@ -215,8 +234,8 @@ body.js-cursor * {
     background-color: var(--black);
     color: var(--white);
 }
-.btn-black:hover { /* Basic hover - wird vom Custom Cursor überschrieben */
-    background-color: var(--pink);
+.btn-black:hover {
+    background-color: var(--pink); /* Bestehender Hover behalten */
 }
 
 .text-with-line {
@@ -247,10 +266,16 @@ body.js-cursor * {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    background-color: var(--pink); /* Wie Hero Section */
+    /* background-color: var(--pink); --- ERSETZT DURCH BILD --- */
     color: var(--white);
     padding-bottom: 0; /* Weniger Padding unten */
     min-height: auto;
+
+    /* NEU: Hintergrundbild + Overlay */
+    background: linear-gradient(var(--bg-overlay-color), var(--bg-overlay-color)), var(--bg-image-header-hero);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 .header-content {
     width: 100%;
@@ -258,7 +283,8 @@ body.js-cursor * {
 .header-line {
     border: none;
     height: 1px;
-    background-color: rgba(255, 255, 255, 0.5);
+    /* background-color: rgba(255, 255, 255, 0.5); */ /* Etwas heller für besseren Kontrast auf Bild */
+    background-color: rgba(255, 255, 255, 0.7);
     width: 100%;
     margin: 15px 0;
 }
@@ -267,22 +293,36 @@ body.js-cursor * {
     top: clamp(20px, 5vw, 40px);
     right: clamp(20px, 5vw, 40px);
     color: var(--white);
+    z-index: 5; /* Sicherstellen, dass es über dem BG liegt */
 }
 
 /* -------------------- */
 /* Hero Section         */
 /* -------------------- */
+/* Die Klasse .bg-pink wird nicht mehr benötigt, da das Bild im Selektor .hero-section angewendet wird */
+.hero-section {
+     /* NEU: Hintergrundbild + Overlay */
+    background: linear-gradient(var(--bg-overlay-color), var(--bg-overlay-color)), var(--bg-image-header-hero);
+    background-size: cover;
+    background-position: center center; /* Ggf. anpassen (z.B. center bottom) */
+    background-repeat: no-repeat;
+}
+
 .hero-section .content-block {
     margin-top: auto; /* Push content to bottom */
     padding-top: 5vh;
+    position: relative; /* Sicherstellen, dass Inhalt über potentiellem ::before liegt */
+    z-index: 2;
 }
 .graphic-placeholder.pink-waves {
     /* Style placeholder or add background image */
     height: 30vh;
-    background: linear-gradient(to bottom, rgba(230, 0, 122, 0), var(--pink)), repeating-linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05) 10px, transparent 10px, transparent 20px);
-    opacity: 0.7;
+    /* background: linear-gradient(to bottom, rgba(230, 0, 122, 0), var(--pink)), repeating-linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05) 10px, transparent 10px, transparent 20px); */
+    /* Optional: Entfernen oder durch transparenteres Element ersetzen, da jetzt Bild da ist */
+    background: none; /* Entfernt die pinken Wellen */
     margin-bottom: 20px;
 }
+
 
 /* -------------------- */
 /* Philosophy Section   */
@@ -512,16 +552,18 @@ body.js-cursor * {
 .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-in-out;
+    transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out; /* Padding mit animieren */
     padding: 0 15px;
     color: var(--gray-dark);
 }
-.accordion-content p {
-     padding-bottom: 15px; /* Padding within the content */
-}
+/* .accordion-content p { --- Padding wird jetzt im .accordion-content gesteuert ---
+     padding-bottom: 15px;
+} */
 .accordion-item.open .accordion-content {
-    /* max-height wird per JS gesetzt oder hoher Wert: */
-    max-height: 500px; /* Adjust if needed */
+    /* max-height wird per JS gesetzt ODER hoher fixer Wert */
+    max-height: 500px; /* Muss groß genug sein für längsten Inhalt */
+    padding-top: 10px; /* Abstand oben wenn offen */
+    padding-bottom: 15px; /* Abstand unten wenn offen */
 }
 .accordion-item.open .accordion-icon {
      /* Icon wird per JS geändert (data-icon) */
@@ -539,8 +581,13 @@ body.js-cursor * {
 .footer-nav {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap; /* Besser auf kleineren Screens */
     margin-bottom: 30px;
     gap: 20px;
+}
+.footer-column {
+    flex-basis: calc(50% - 10px); /* Ca. 2 Spalten, wenn Platz da ist */
+    min-width: 150px; /* Mindestbreite */
 }
 .footer-column h4 {
     margin-bottom: 15px;
@@ -557,6 +604,10 @@ body.js-cursor * {
 .footer-column a {
     font-weight: 600;
     text-decoration: underline;
+    transition: color 0.2s ease; /* Hover Effekt für Footer Links */
+}
+.footer-column a:hover {
+    color: var(--orange); /* Beispiel Hover Farbe */
 }
 
 .footer-blocks {
@@ -588,7 +639,12 @@ body.js-cursor * {
      font-weight: 600;
      display: inline-block;
      margin-top: 10px;
+     transition: color 0.2s ease; /* Hover Effekt */
 }
+.footer-legal a:hover {
+    color: var(--orange); /* Beispiel Hover Farbe */
+}
+
 .final-letters {
     font-size: clamp(6rem, 30vw, 15rem);
     font-weight: 900;
@@ -627,9 +683,13 @@ body.js-cursor * {
 }
 .close-menu {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 30px; /* Positionierung Top */
+    right: 30px; /* Positionierung Rechts */
     color: var(--white);
+    z-index: 1001; /* Über anderen Overlay-Inhalten */
+    /* Grösse und Klickfläche ggf. anpassen für bessere Bedienbarkeit */
+    padding: 10px; /* Klickfläche vergrössern */
+    transform: scale(1.2); /* Icon etwas größer machen */
 }
 .overlay-menu nav ul {
     list-style: none;
@@ -687,7 +747,12 @@ body.js-cursor * {
     font-weight: 600;
     text-decoration: underline;
     font-size: 1.1rem;
+    transition: color 0.2s ease; /* Hover Effekt */
 }
+.overlay-contact a:hover {
+    color: var(--lavender); /* Beispiel Hover */
+}
+
 .overlay-legal {
     position: absolute;
     bottom: 30px;
