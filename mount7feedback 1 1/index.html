@@ -14,90 +14,96 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="feedback-container">
-        <!-- Initial Feedback Screen (Split Layout) -->
-        <section id="rating-section" class="rating-section">
-            <!-- Left Content Column -->
-            <div class="content-column">
-                <div class="brand-content">
-                    <h1>Wie zufrieden bist du mit <span class="accent-font">Mount7</span>?</h1>
-                    <p class="subtitle">Deine Meinung ist uns wichtig. Hilf uns, unseren Service für dich zu verbessern.</p>
-                    
-                    <!-- Feature Image -->
-                    <div class="feature-image">
-                        <span class="iconify" data-icon="material-symbols:directions-bike" data-width="180" data-height="180"></span>
+    <div class="main-container">
+        <section class="feedback-section">
+            <h1>WIE ZUFRIEDEN BIST DU <br>MIT MOUNT7?</h1>
+            <p class="subtitle"><span class="accent-font">Deine Meinung ist uns wichtig.</span></p>
+            
+            <!-- Bewertungskarte - Initial -->
+            <div id="rating-card" class="rating-card">
+                <p class="intro-text">Hilf uns, unseren Service für dich zu verbessern.</p>
+                
+                <div class="value-items">
+                    <div class="value-item">
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="24" data-height="24"></span>
+                        <span>Dein Feedback hilft uns besser zu werden</span>
                     </div>
-                    
-                    <!-- Company Values -->
-                    <div class="value-proposition">
-                        <div class="value-item">
-                            <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="24" data-height="24"></span>
-                            <span>Dein Feedback hilft uns besser zu werden</span>
-                        </div>
-                        <div class="value-item">
-                            <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="24" data-height="24"></span>
-                            <span>100% anonyme Bewertung möglich</span>
-                        </div>
+                    <div class="value-item">
+                        <span class="iconify" data-icon="material-symbols:check-circle-outline-rounded" data-width="24" data-height="24"></span>
+                        <span>100% anonyme Bewertung möglich</span>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Right Interaction Column -->
-            <div class="interaction-column">
-                <div class="rating-container">
-                    <h2>Deine Bewertung</h2>
-                    
-                    <!-- Rating Slider with Emoji -->
-                    <div class="slider-wrapper">
+                
+                <h2>Deine Bewertung</h2>
+                
+                <!-- Rating Slider mit Emoji -->
+                <div class="slider-wrapper">
+                    <div class="smiley-container">
                         <div id="smiley-emoji" class="smiley-image">
                             <span class="iconify" data-icon="material-symbols:sentiment-neutral-outline" data-width="36" data-height="36"></span>
                         </div>
-                        <input type="range" id="rating-slider" min="1" max="10" value="5" class="slider">
-                        <div class="slider-numbers">
-                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-                        </div>
                     </div>
-                    
-                    <span id="rating-value-display" class="sr-only">Aktuelle Bewertung: 5</span>
-                    
-                    <button id="submit-rating-btn" class="submit-rating-button">
-                        <span>Bewertung bestätigen</span>
-                        <span class="iconify" data-icon="material-symbols:arrow-forward-rounded" data-width="20" data-height="20"></span>
-                    </button>
+                    <input type="range" id="rating-slider" min="1" max="10" value="5" class="slider">
+                    <div class="slider-numbers">
+                        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                    </div>
                 </div>
+                
+                <span id="rating-value-display" class="sr-only">Aktuelle Bewertung: 5</span>
+                
+                <button id="submit-rating-btn" class="submit-button">
+                    <span>Bewertung bestätigen</span>
+                    <span class="iconify" data-icon="material-symbols:arrow-forward-rounded" data-width="20" data-height="20"></span>
+                </button>
             </div>
-        </section>
-
-        <!-- Conditional Content Area (Shown after rating) -->
-        <section id="conditional-content" class="content-area hidden">
-            <!-- Improvement Feedback Form (Ratings 1-7) -->
-            <div id="improvement-form" class="feedback-form hidden">
+            
+            <!-- Verbesserungsvorschläge Form (für Bewertungen 1-7) -->
+            <div id="improvement-form" class="rating-card feedback-form">
                 <h2>Was können wir besser machen?</h2>
-                <textarea id="feedback-text" rows="4" placeholder="Dein Feedback hilft uns..." aria-label="Was können wir besser machen?"></textarea>
+                <textarea id="feedback-text" placeholder="Dein Feedback hilft uns..." aria-label="Was können wir besser machen?"></textarea>
+                
                 <fieldset class="contact-option">
                     <legend>Sollen wir dich nochmals kontaktieren?</legend>
-                    <div>
-                        <input type="radio" id="contact-yes" name="contact-option" value="yes">
-                        <label for="contact-yes">Ja</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="contact-no" name="contact-option" value="no" checked>
-                        <label for="contact-no">Nein</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="contact-yes" name="contact-option" value="yes">
+                            <label for="contact-yes">Ja</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="contact-no" name="contact-option" value="no" checked>
+                            <label for="contact-no">Nein</label>
+                        </div>
                     </div>
                 </fieldset>
-                <div id="contact-details" class="hidden">
+                
+                <div id="contact-details" class="contact-details">
                     <label for="customer-name">Dein Name (Optional)</label>
                     <input type="text" id="customer-name" placeholder="Max Mustermann">
                     <label for="customer-email">Deine E-Mail-Adresse (Optional)</label>
                     <input type="email" id="customer-email" placeholder="max@beispiel.de">
                 </div>
-                <button id="submit-feedback" type="submit">Feedback senden</button>
+                
+                <button id="submit-feedback" class="submit-button">
+                    <span>Feedback senden</span>
+                </button>
             </div>
-
-            <!-- Positive Feedback / Review Links (Ratings 8-10) -->
-            <div id="positive-feedback" class="positive-section hidden">
-                <div id="confetti-container" class="confetti-container"></div>
+            
+            <!-- Positive Feedback (für Bewertungen 8-10) -->
+            <div id="positive-feedback" class="rating-card positive-feedback">
+                <!-- LordIcon Animation zentriert -->
+                <div class="icon-container">
+                    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+                    <lord-icon
+                        src="https://cdn.lordicon.com/ohcuigqh.json"
+                        trigger="in"
+                        stroke="light"
+                        state="in-reveal"
+                        colors="primary:#ffffff,secondary:#f3b05c"
+                        style="width:200px;height:200px">
+                    </lord-icon>
+                    <a href="https://lordicon.com/" class="icon-attribution">Icons by Lordicon.com</a>
+                </div>
                 <h2 class="thank-you-title">
                     <span class="accent-font">Vielen Dank</span> für dein Feedback!
                 </h2>
@@ -115,33 +121,11 @@
                 </div>
             </div>
         </section>
-    </main>
+    </div>
 
-    <!-- Footer with Logo and Copyright -->
-    <footer class="footer">
-        <div class="company-info">
-            <!-- Office Information -->
-            <div class="office-info">
-                <div class="office">
-                    <h3>Head Office:</h3>
-                    <p>Kaiser-Joseph-Str. 264</p>
-                    <p>79098 Freiburg (Henri)</p>
-                    <a href="mailto:support@mount7.com">support@mount7.com</a>
-                </div>
-                <div class="office">
-                    <h3>Branch Office:</h3>
-                    <p>Friedrichring 22</p>
-                    <p>79098 Freiburg (Henri)</p>
-                    <a href="mailto:sales@mount7.com">sales@mount7.com</a>
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2025 Mount7 GmbH. Alle Rechte vorbehalten.</p>
-        </div>
-    </footer>
+    <!-- Footer komplett entfernt gemäß Anweisung -->
 
-    <!-- Custom Script -->
+    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
