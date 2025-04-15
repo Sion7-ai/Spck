@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeGo - UI/UX Design Studio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="iconify" data-icon="tabler:hexagon" data-width="24" data-height="24"></span>
+            <span>DeGo</span>
+        </div>
+        <nav class="side-nav">
+            <div class="nav-item active">
+                <span class="iconify" data-icon="tabler:layout-dashboard" data-width="20" data-height="20"></span>
+                <span>Dashboard</span>
+            </div>
+            <div class="nav-item">
+                <span class="iconify" data-icon="tabler:briefcase" data-width="20" data-height="20"></span>
+                <span>Projekte</span>
+            </div>
+            <div class="nav-item">
+                <span class="iconify" data-icon="tabler:file-analytics" data-width="20" data-height="20"></span>
+                <span>Analysen</span>
+            </div>
+            <div class="nav-item">
+                <span class="iconify" data-icon="tabler:users" data-width="20" data-height="20"></span>
+                <span>Kunden</span>
+            </div>
+        </nav>
+        <div class="account">
+            <div class="avatar">
+                <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&dpr=1" width="32" height="32" alt="Profilbild">
+            </div>
+            <div class="account-info">
+                <p class="name">Emma</p>
+                <p class="role">Designer</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Produkte</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Preise</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="search-btn">
+                    <span class="iconify" data-icon="tabler:search" data-width="20" data-height="20"></span>
+                </button>
+                <button class="contact-btn">Kontakt</button>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="badge">UI/UX Design</span>
+                <h1>Modernes Design<br>für digitale Produkte</h1>
+                <p>Wir kreieren nutzerorientierte Interfaces, die Conversion steigern und die Benutzererfahrung verbessern.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Demo starten</button>
+                    <button class="btn-secondary">Mehr erfahren</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-cards">
+                    <div class="card card-light">
+                        <h3>UI Design</h3>
+                        <p>Visuelle Interfaces mit klarer Hierarchie</p>
+                        <button class="card-btn">Entdecken</button>
+                    </div>
+                    <div class="card card-accent">
+                        <h3>UX Strategie</h3>
+                        <p>Nutzerzentrierte Workflows & Konzepte</p>
+                        <button class="card-btn card-btn-light">Mehr dazu</button>
+                    </div>
+                    <div class="card card-light">
+                        <h3>Entwicklung</h3>
+                        <p>Technische Umsetzung moderner Designs</p>
+                        <button class="card-btn">Details</button>
+                    </div>
+                </div>
+                <div class="circle-element"></div>
+                <div class="product-visual">
+                    <img src="https://images.pexels.com/photos/4792729/pexels-photo-4792729.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Produktvisualisierung" width="280" height="180">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services">
+            <div class="section-header">
+                <h2>Unsere Leistungen</h2>
+                <p>Maßgeschneiderte Lösungen für Ihr digitales Produkt</p>
+            </div>
+            <div class="services-tabs">
+                <div class="tab active">Design</div>
+                <div class="tab">Entwicklung</div>
+                <div class="tab">Analyse</div>
+                <div class="tab">Marketing</div>
+                <div class="tab">Support</div>
+                <div class="tab">CMS</div>
+            </div>
+            <div class="services-content">
+                <div class="service-card">
+                    <div class="service-image">
+                        <img src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=400" alt="UI/UX Design Service" width="400" height="240">
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>Von der Konzeption bis zur finalen Gestaltung – wir entwickeln benutzerfreundliche Interfaces, die Ihre Marke perfekt repräsentieren.</p>
+                    <a href="#" class="service-link">Service Details <span class="iconify" data-icon="tabler:arrow-right" data-width="16" data-height="16"></span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile Preview Section -->
+        <section class="mobile-preview">
+            <div class="mobile-content">
+                <span class="badge">Responsive Design</span>
+                <h2>Optimiert für alle Geräte</h2>
+                <p>Unsere Designs funktionieren nahtlos auf Desktop, Tablet und Smartphone – für ein konsistentes Nutzererlebnis auf allen Plattformen.</p>
+                <button class="btn-primary">Beispiele ansehen</button>
+            </div>
+            <div class="mobile-device">
+                <div class="phone-mockup">
+                    <img src="https://images.pexels.com/photos/193004/pexels-photo-193004.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Mobile App Interface" width="200" height="400">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
