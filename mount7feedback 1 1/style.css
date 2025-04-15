@@ -160,14 +160,17 @@ body {
 
 .value-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Ändert die Ausrichtung von center zu flex-start */
     gap: 0.8rem;
-    color: white; /* Weiße Schrift gemäß Anweisung */
+    color: white;
     font-size: 1rem;
+    text-align: left; /* Stellt sicher, dass der Text linksbündig ist */
 }
 
 .value-item .iconify {
     color: var(--mount7-yellow-orange);
+    flex-shrink: 0; /* Verhindert, dass das Icon schrumpft */
+    margin-top: 0.2rem; /* Leicht nach unten versetzt für bessere visuelle Ausrichtung mit der ersten Textzeile */
 }
 
 /* ===== SLIDER STYLES ===== */
