@@ -3,22 +3,22 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const body = document.body;
-    const customCursor = document.querySelector('.custom-cursor');
-    const interactiveElements = document.querySelectorAll('.interactive, a, button'); // Select all interactive elements
+    // const customCursor = document.querySelector('.custom-cursor'); // --- AUSKOMMENTIERT ---
+    // const interactiveElements = document.querySelectorAll('.interactive, a, button'); // Kann bleiben für andere Selektionen, aber nicht mehr für Cursor
     const menuToggle = document.getElementById('menuToggle');
     const overlayMenu = document.getElementById('overlayMenu');
     const closeMenu = document.getElementById('closeMenu');
     const accordionToggles = document.querySelectorAll('.accordion-toggle');
     const scrollAnimatedElements = document.querySelectorAll('.scroll-animate');
 
-    let cursorTimeout;
+    // let cursorTimeout; // --- AUSKOMMENTIERT ---
 
-    // --- Custom Cursor Logic ---
+    // --- Custom Cursor Logic --- AUSKOMMENTIERT ---
+    /*
     if (customCursor) {
-        body.classList.add('js-cursor'); // Add class to hide default cursor via CSS
+        // body.classList.add('js-cursor'); // Add class to hide default cursor via CSS
 
         window.addEventListener('mousemove', (e) => {
-            // Use requestAnimationFrame for smoother updates
              cancelAnimationFrame(cursorTimeout);
              cursorTimeout = requestAnimationFrame(() => {
                  customCursor.style.left = `${e.clientX}px`;
@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.warn('Custom cursor element not found.');
     }
+    */
+    // --- ENDE Custom Cursor Logic ---
 
     // --- Overlay Menu Logic ---
     if (menuToggle && overlayMenu && closeMenu) {
@@ -66,7 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
          // Optional: Close menu when clicking outside the nav (on the overlay background)
          overlayMenu.addEventListener('click', (e) => {
-             if (e.target === overlayMenu) { // Check if the click is directly on the overlay
+             // Nur schließen, wenn direkt auf das Overlay geklickt wird, nicht auf dessen Kinder (wie Text oder Links)
+             if (e.target === overlayMenu) {
                  overlayMenu.classList.remove('active');
                  body.classList.remove('overlay-active');
              }
@@ -85,36 +88,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 const icon = toggle.querySelector('.accordion-icon');
                 const isOpen = item.classList.contains('open');
 
-                // Optional: Close other open items
-                // accordionToggles.forEach(otherToggle => {
-                //    if (otherToggle !== toggle) {
-                //        const otherItem = otherToggle.closest('.accordion-item');
-                //        const otherContent = document.getElementById(otherToggle.getAttribute('aria-controls'));
-                //        const otherIcon = otherToggle.querySelector('.accordion-icon');
-                //        if (otherItem.classList.contains('open')) {
-                //            otherItem.classList.remove('open');
-                //            otherContent.style.maxHeight = null; // Use null to reset to CSS value
-                //            otherToggle.setAttribute('aria-expanded', 'false');
-                //            otherIcon.setAttribute('data-icon', 'mdi:plus');
-                //        }
-                //    }
-                // });
+                // --- VERBESSERUNG: Andere schließen ---
+                // Schließe alle anderen offenen Akkordeon-Elemente in DIESEM Akkordeon-Block
+                const parentAccordion = toggle.closest('.accordion');
+                if (parentAccordion) {
+                    parentAccordion.querySelectorAll('.accordion-item.open').forEach(openItem => {
+                        if (openItem !== item) { // Nur andere Elemente schließen
+                            openItem.classList.remove('open');
+                            const openContent = document.getElementById(openItem.querySelector('.accordion-toggle').getAttribute('aria-controls'));
+                            const openIcon = openItem.querySelector('.accordion-icon');
+                            // openContent.style.maxHeight = null; // CSS handhabt das Schließen
+                            openItem.querySelector('.accordion-toggle').setAttribute('aria-expanded', 'false');
+                            if (openIcon) openIcon.setAttribute('data-icon', 'mdi:plus');
+                        }
+                    });
+                }
+                // --- ENDE VERBESSERUNG ---
 
 
+                // Öffne/Schließe das aktuelle Element
                 item.classList.toggle('open');
                 toggle.setAttribute('aria-expanded', !isOpen);
 
                 if (!isOpen) {
-                    // Set max-height for opening transition
-                    // content.style.maxHeight = content.scrollHeight + 'px'; // Precise height
-                    icon.setAttribute('data-icon', 'mdi:close');
+                    // Setze max-height nicht mehr explizit, CSS mit hohem Wert regelt das
+                    // content.style.maxHeight = content.scrollHeight + 'px';
+                    if (icon) icon.setAttribute('data-icon', 'mdi:minus'); // Geändertes Icon zu Minus
                 } else {
-                    // Remove max-height for closing transition (CSS handles the 0)
-                    // content.style.maxHeight = null;
-                    icon.setAttribute('data-icon', 'mdi:plus');
+                    // content.style.maxHeight = null; // CSS handhabt das Schließen
+                    if (icon) icon.setAttribute('data-icon', 'mdi:plus');
                 }
-                  // Let Iconify re-render the icon if needed (might not be necessary)
-                 Iconify.render();
+                  // Let Iconify re-render the icon if needed (sollte automatisch passieren, aber sicher ist sicher)
+                 if (typeof Iconify !== 'undefined') {
+                     Iconify.render();
+                 }
             });
         });
     } else {
@@ -128,17 +135,17 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    // Optional: Stop observing once visible
+                    // Optional: Stop observing once visible (Performance)
                     // observer.unobserve(entry.target);
                 }
-                 // Optional: Remove class if element scrolls out of view
+                 // Optional: Remove class if element scrolls out of view (Animation bei jedem Scrollen)
                  // else {
                  //     entry.target.classList.remove('visible');
                  // }
             });
         }, {
-            rootMargin: '0px', // How close to viewport edge triggers?
-            threshold: 0.1  // How much of the element needs to be visible (0 to 1)
+            rootMargin: '0px 0px -50px 0px', // Trigger etwas früher (50px bevor es ganz im Viewport ist)
+            threshold: 0.1  // Mind. 10% sichtbar
         });
 
         scrollAnimatedElements.forEach(el => {
