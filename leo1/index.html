@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leo Löwe beim Zahnarzt - Ein Kinderbuch von Simon Design</title>
+    <meta name="description" content="Lesen Sie 'Leo Löwe beim Zahnarzt' - ein kindgerechtes Bilderbuch, das spielerisch Zahnarztangst nimmt. Ein kreatives Projekt von Simon Design.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Leo Löwe beim Zahnarzt</h1>
+        <p class="subtitle">Ein mutiges Abenteuer für kleine Zahnarzthelden</p>
+    </header>
+
+    <main>
+        <div class="book-container">
+            <div class="book-navigation">
+                <button id="prev-btn" class="nav-button" aria-label="Vorherige Seite">
+                    <span class="iconify" data-icon="material-symbols:arrow-back-rounded" data-width="32" data-height="32"></span>
+                </button>
+                <div class="book-wrapper">
+                    <div id="book-viewer" class="book-viewer">
+                        <!-- Book pages will be loaded here via JavaScript -->
+                    </div>
+                    <div class="page-indicator">
+                        <span id="current-page">1</span>/<span id="total-pages">14</span>
+                    </div>
+                </div>
+                <button id="next-btn" class="nav-button" aria-label="Nächste Seite">
+                    <span class="iconify" data-icon="material-symbols:arrow-forward-rounded" data-width="32" data-height="32"></span>
+                </button>
+            </div>
+
+            <div class="instructions">
+                <p>
+                    <span class="iconify" data-icon="material-symbols:swipe" data-width="20" data-height="20"></span> 
+                    Wischen oder Pfeiltasten zum Blättern 
+                    <span class="iconify" data-icon="material-symbols:touch-app" data-width="20" data-height="20"></span> 
+                    Tippen für Zoom
+                </p>
+            </div>
+        </div>
+
+        <button id="feedback-btn" class="feedback-button" aria-label="Feedback geben">
+            <span class="iconify" data-icon="material-symbols:rate-review" data-width="24" data-height="24"></span>
+            Feedback
+        </button>
+    </main>
+
+    <footer>
+        <div class="designer-info">
+            <div class="logo">
+                <span class="iconify" data-icon="fluent-emoji:lion" data-width="36"></span>
+                <h3>Simon Design</h3>
+            </div>
+            <p>Simon Design entwickelt innovative visuelle Konzepte mit dem perfekten Mix aus menschlicher Kreativität und KI-Unterstützung. Dieses Kinderbuch demonstriert, wie moderne Technologie und kreatives Storytelling zusammenwirken können.</p>
+            <a href="#" class="website-link">Zur Designer-Website</a>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Simon Design. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal">
+                <span class="iconify" data-icon="material-symbols:close" data-width="24" data-height="24"></span>
+            </button>
+            <h2>Ihre Meinung ist uns wichtig!</h2>
+            
+            <div id="feedback-form" class="feedback-form">
+                <div class="question">
+                    <p>Würden Sie dieses Buch als gedruckte Version kaufen?</p>
+                    <div class="button-group">
+                        <button class="purchase-option" data-value="yes">Ja</button>
+                        <button class="purchase-option" data-value="maybe">Vielleicht</button>
+                        <button class="purchase-option" data-value="no">Nein</button>
+                    </div>
+                </div>
+                
+                <div id="price-question" class="question hidden">
+                    <p>Zu welchem Preis würden Sie das Buch kaufen?</p>
+                    <select id="price-select">
+                        <option value="5-10">5-10€</option>
+                        <option value="11-15">11-15€</option>
+                        <option value="16-20">16-20€</option>
+                        <option value=">20">Über 20€</option>
+                    </select>
+                </div>
+                
+                <div id="email-question" class="question hidden">
+                    <p>Möchten Sie informiert werden, wenn das Buch erhältlich ist? (optional)</p>
+                    <input type="email" id="email-input" placeholder="Ihre E-Mail-Adresse">
+                    <small class="privacy-note">
+                        <span class="iconify" data-icon="material-symbols:security" data-width="16" data-height="16"></span>
+                        Ihre Daten werden gemäß unserer <a href="#">Datenschutzerklärung</a> behandelt.
+                    </small>
+                </div>
+                
+                <div class="button-group feedback-submit">
+                    <button id="skip-feedback" class="secondary-button">Überspringen</button>
+                    <button id="submit-feedback" class="primary-button">Absenden</button>
+                </div>
+            </div>
+            
+            <div id="feedback-thanks" class="hidden">
+                <p>Vielen Dank für Ihr Feedback!</p>
+                <span class="iconify thank-icon" data-icon="noto:star" data-width="48" data-height="48"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- End-Survey Modal -->
+    <div id="end-survey-modal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="close-modal">
+                <span class="iconify" data-icon="material-symbols:close" data-width="24" data-height="24"></span>
+            </button>
+            <h2>Das war die Geschichte von Leo!</h2>
+            
+            <div id="survey-form" class="feedback-form">
+                <div class="question">
+                    <p>Hat Ihnen "Leo Löwe beim Zahnarzt" gefallen?</p>
+                    <div class="button-group">
+                        <button class="enjoyed-option" data-value="yes">Ja</button>
+                        <button class="enjoyed-option" data-value="no">Nein</button>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <p>Würden Sie eine gedruckte Version kaufen?</p>
+                    <div class="button-group">
+                        <button class="purchase-survey-option" data-value="yes">Ja</button>
+                        <button class="purchase-survey-option" data-value="maybe">Vielleicht</button>
+                        <button class="purchase-survey-option" data-value="no">Nein</button>
+                    </div>
+                </div>
+                
+                <div id="survey-price-question" class="question hidden">
+                    <p>Zu welchem Preis würden Sie das Buch kaufen?</p>
+                    <select id="survey-price-select">
+                        <option value="5-10">5-10€</option>
+                        <option value="11-15">11-15€</option>
+                        <option value="16-20">16-20€</option>
+                        <option value=">20">Über 20€</option>
+                    </select>
+                </div>
+                
+                <div class="question">
+                    <p>Möchten Sie informiert werden, wenn das Buch erhältlich ist? (optional)</p>
+                    <input type="email" id="survey-email-input" placeholder="Ihre E-Mail-Adresse">
+                    <small class="privacy-note">
+                        <span class="iconify" data-icon="material-symbols:security" data-width="16" data-height="16"></span>
+                        Ihre Daten werden gemäß unserer <a href="#">Datenschutzerklärung</a> behandelt.
+                    </small>
+                </div>
+                
+                <div class="button-group feedback-submit">
+                    <button id="skip-survey" class="secondary-button">Überspringen</button>
+                    <button id="submit-survey" class="primary-button">Absenden</button>
+                </div>
+            </div>
+            
+            <div id="survey-thanks" class="hidden">
+                <p>Vielen Dank für Ihr Feedback!</p>
+                <p>Wir hoffen, die Geschichte hat Ihnen gefallen.</p>
+                <span class="iconify thank-icon" data-icon="noto:lion" data-width="64" data-height="64"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
