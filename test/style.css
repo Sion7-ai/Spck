@@ -1,0 +1,378 @@
+/* Globale Variablen */
+:root {
+    --primary-bg-color: #1fb0a2; /* Angepasstes Türkis */
+    --primary-bg-light: #a8e0d9; /* Hellere Variante */
+    --text-color: #ffffff;
+    --accent-color: #e74c3c; /* Rot für den "Glitch" */
+    --headline-font: 'Playfair Display', serif;
+    --body-font: 'Roboto', sans-serif;
+}
+
+/* Basis-Reset und Body-Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--body-font);
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    overflow-x: hidden; /* Verhindert horizontales Scrollen */
+    transition: background-color 0.5s ease; /* Übergang für Farbwechsel */
+}
+
+/* Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-bg-color);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease-out 0.5s, visibility 0s linear 1s; /* Verzögerter Fade-Out */
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-line {
+    width: 80px;
+    height: 4px;
+    background-color: var(--text-color);
+    animation: loading 1s infinite ease-in-out;
+}
+
+@keyframes loading {
+    0% { transform: scaleX(0); transform-origin: left; }
+    50% { transform: scaleX(1); transform-origin: left; }
+    51% { transform-origin: right; }
+    100% { transform: scaleX(0); transform-origin: right; }
+}
+
+
+/* Header */
+header {
+    position: fixed; /* Oder absolute, je nach gewünschtem Scrollverhalten */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.logo {
+    font-size: 24px; /* Größe anpassen */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+.logo .iconify {
+    font-size: 30px; /* Icon Größe */
+    margin-right: 5px;
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+nav a:hover {
+    opacity: 0.7;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.language {
+    margin-right: 20px;
+    cursor: pointer;
+}
+.language span:hover {
+    opacity: 0.7;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px 50px; /* Padding oben für Header, unten für Reel */
+}
+
+.animated-headline {
+    font-family: var(--headline-font);
+    font-size: clamp(2.5rem, 8vw, 6rem); /* Responsive Schriftgröße */
+    line-height: 1.2;
+    margin-bottom: 40px;
+    position: relative; /* Für den Glitch-Effekt */
+    color: var(--text-color);
+}
+
+/* Vereinfachter Glitch-Effekt */
+.animated-headline::before {
+    content: attr(data-text); /* Wird später vielleicht via JS gesetzt, hier erstmal statisch */
+    position: absolute;
+    left: -2px; /* Leichter Versatz */
+    top: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--accent-color);
+    opacity: 0.8;
+    z-index: -1;
+    /* mix-blend-mode: screen; /* Experimentieren */
+    /* filter: blur(0.5px); /* Experimentieren */
+}
+
+/* Für Text-Reveal Animation */
+.animated-headline span {
+    display: block; /* Jede Zeile einzeln */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animated-headline span.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Preview Reel */
+.preview-reel-container {
+    position: relative; /* Für absolute Positionierung des Buttons */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preview-reel {
+    width: 250px; /* Größe anpassen */
+    height: 150px; /* Größe anpassen */
+    overflow: hidden;
+    margin-bottom: 20px; /* Abstand zum Button */
+    background-color: rgba(0, 0, 0, 0.1); /* Hintergrund, falls Bild nicht lädt */
+}
+
+.preview-reel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Bild füllt den Container */
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out; /* Fade-Effekt beim Wechsel */
+}
+
+.preview-reel img.fade-out {
+    opacity: 0;
+}
+
+
+.play-reel-button {
+    background: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.play-reel-button:hover {
+    background-color: var(--text-color);
+    color: var(--primary-bg-color);
+}
+
+
+/* Projects Section */
+.projects {
+    padding: 100px 40px;
+    background-color: var(--primary-bg-light); /* Hellere Hintergrundfarbe */
+    color: var(--accent-color); /* Textfarbe ändern für Kontrast */
+}
+
+.projects .section-headline {
+    font-family: var(--headline-font);
+    font-size: clamp(2rem, 6vw, 4rem);
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.2;
+}
+
+.projects .section-headline span {
+     display: block;
+}
+
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Grid */
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.project-item {
+    text-align: left;
+}
+
+.project-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+    background-color: #eee; /* Platzhalterfarbe */
+}
+
+.project-item p {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Scroll Reveal Animation */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* About Section innerhalb Projects */
+.about-section {
+    max-width: 600px;
+    margin: 0 auto 80px; /* Zentriert und Abstand unten */
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.about-section p {
+     margin-bottom: 20px;
+}
+
+
+.learn-more {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.learn-more:hover {
+     background-color: var(--accent-color);
+     color: var(--primary-bg-light);
+}
+
+
+/* Clients Section */
+.clients {
+    padding: 60px 40px;
+    text-align: center;
+     background-color: var(--primary-bg-color); /* Wieder dunkler Hintergrund */
+     color: var(--text-color); /* Text wieder weiß */
+}
+
+.clients h3 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.client-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.client-logos span {
+    /* Hier würden normalerweise Logos stehen */
+    font-size: 18px;
+    opacity: 0.8;
+    font-family: var(--headline-font); /* Beispielhaft */
+}
+
+
+/* Responsive Anpassungen (Beispiel) */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav {
+        margin-top: 10px;
+    }
+    .header-right {
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+
+    .hero {
+        padding-top: 150px; /* Mehr Platz für den Header */
+    }
+
+    .preview-reel {
+        width: 200px;
+        height: 120px;
+    }
+    .play-reel-button {
+        width: 80px;
+        height: 80px;
+    }
+
+    .projects {
+        padding: 80px 20px;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr; /* Einspaltig auf kleinen Bildschirmen */
+        gap: 30px;
+    }
+}
