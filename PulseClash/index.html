@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- PWA Manifest (Pfad anpassen, falls verwendet) -->
+    <!-- <link rel="manifest" href="manifest.json"> -->
+    <meta name="theme-color" content="#1a1a2e"> <!-- Für PWA UI -->
+    <!-- Favicon (Pfade anpassen, falls verwendet) -->
+    <!-- <link rel="icon" type="image/png" href="assets/icons/favicon-32x32.png" sizes="32x32"> -->
+    <!-- <link rel="icon" type="image/png" href="assets/icons/favicon-16x16.png" sizes="16x16"> -->
+    <!-- <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png"> -->
+
+    <title>Pulse Clash – Cyber-Glitch Edition</title>
+
+    <!-- Verlinkung zur CSS-Datei -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Optional: Google Fonts (Beispiel: Orbitron) -->
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet"> -->
+
+    <!-- Iconify Core Script (für das Settings-Icon) -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+</head>
+<body class="loading"> <!-- Startet mit der Lade-Klasse -->
+
+    <!-- Hauptcontainer für das Spiel und UI -->
+    <div id="game-container" role="application">
+
+        <!-- Canvas, auf das Phaser 3 rendert -->
+        <canvas id="game-canvas">
+            Ihr Browser unterstützt das Canvas-Element nicht. Bitte aktualisieren Sie Ihren Browser.
+        </canvas>
+
+        <!-- Container für UI-Elemente (HUD, Menüs, Modals) -->
+        <div id="ui-overlay">
+            <!-- HUD (Heads-Up Display) -->
+            <div id="hud">
+                <div id="score">Score: 0</div>
+                <!-- Iconify Icon für Settings/Pause -->
+                <div id="settings-icon-container" title="Pause / Settings">
+                     <iconify-icon icon="mdi:cog-outline" class="settings-icon"></iconify-icon>
+                </div>
+                <div id="combo">Combo: x1</div>
+            </div>
+
+            <!-- Container für Menü-Panels (Start, Game Over, Pause) -->
+            <div id="menu-panels">
+                 <!-- Inhalt wird dynamisch von JavaScript eingefügt -->
+            </div>
+
+             <!-- Optional: Bereich für untere HUD-Elemente -->
+             <div id="bottom-hud">
+                 <!-- z.B. <div id="lives">Lives: 3</div> -->
+             </div>
+        </div>
+
+        <!-- Ladeanzeige -->
+        <div id="loader">Loading Pulse Clash...</div>
+
+    </div> <!-- Ende #game-container -->
+
+    <!-- Phaser 3 Bibliothek (via CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+
+    <!-- Optional: Dexie.js für IndexedDB (via CDN, falls benötigt) -->
+    <!-- <script src="https://unpkg.com/dexie@3/dist/dexie.js"></script> -->
+
+    <!-- Verlinkung zur JavaScript-Datei -->
+    <script src="script.js"></script>
+
+</body>
+</html>

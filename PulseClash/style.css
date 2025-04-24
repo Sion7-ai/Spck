@@ -1,0 +1,201 @@
+/* style.css - Styles für Pulse Clash */
+
+/* Basis-Styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0f0f1a; /* Dunkler Tech-Noir Hintergrund */
+    color: #e0e0e0;
+    /* font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */ /* Beispiel mit Orbitron zuerst */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fallback-Schrift */
+    overflow: hidden; /* Verhindert Scrollbars */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Container-Styling */
+#game-container {
+    position: relative; /* Wichtig für absolute Positionierung von UI-Overlays */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: none; /* Versteckt den Mauszeiger über dem Spiel */
+}
+
+/* Canvas-Styling */
+#game-canvas {
+    display: block; /* Verhindert kleinen Leerraum unter dem Canvas */
+    max-width: 100%;
+    max-height: 100%;
+    background-color: #050510; /* Hintergrund für das Canvas selbst, falls Ränder sichtbar */
+    /* Scaling wird von Phaser gehandhabt */
+}
+
+/* UI Overlay über dem Canvas */
+#ui-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Lässt Klicks zum Canvas durch, außer auf Kindelementen */
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Verteilt HUD oben/unten */
+    padding: 15px 25px; /* Mehr Padding */
+    box-sizing: border-box;
+}
+
+/* Heads-Up Display (HUD) */
+#hud {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 1.5em; /* Größere Schrift */
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ffff, 0 0 8px rgba(0, 255, 255, 0.7); /* Stärkerer Neon-Glow */
+    pointer-events: none; /* HUD selbst ist nicht klickbar */
+}
+#hud > * {
+    pointer-events: auto; /* Einzelne Elemente (wie das Icon) klickbar machen */
+}
+#score {
+    /* Spezifische Styles für Score, falls nötig */
+}
+#combo {
+   /* Spezifische Styles für Combo, falls nötig */
+}
+
+/* Iconify Settings Icon */
+#settings-icon-container {
+    pointer-events: auto; /* Container klickbar machen */
+    cursor: pointer; /* Zeiger anzeigen */
+    line-height: 0; /* Verhindert extra Platz um das Icon */
+}
+.settings-icon {
+    font-size: 2em; /* Größe des Icons */
+    color: #00ffff; /* Neon-Cyan */
+    transition: transform 0.3s ease-in-out, color 0.2s ease;
+    display: inline-block; /* Wichtig für korrekte Transformation */
+}
+.settings-icon:hover {
+    transform: rotate(90deg) scale(1.1); /* Rotations- und Skalierungsanimation bei Hover */
+    color: #ffffff; /* Heller bei Hover */
+}
+
+/* Menü-Panel Container (Start, Game Over, Pause) */
+#menu-panels {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(15, 15, 26, 0.92); /* Etwas dunklerer Panel-Hintergrund, leicht opak */
+    padding: 35px 45px;
+    border-radius: 12px;
+    border: 2px solid #ff00ff; /* Neon-Magenta Rand */
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.55); /* Stärkerer Neon-Glow Effekt Magenta */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: auto; /* Menüs sind klickbar */
+    z-index: 20;
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Federnde Transition */
+    opacity: 0; /* Standardmäßig ausgeblendet */
+    visibility: hidden;
+    transform: translate(-50%, -50%) scale(0.8); /* Startet kleiner für Pop-In Effekt */
+    text-align: center;
+    min-width: 280px; /* Mindestbreite für bessere Lesbarkeit */
+    box-sizing: border-box;
+}
+
+#menu-panels h2 {
+    color: #00ffff; /* Neon-Cyan Titel */
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 2em;
+    text-shadow: 0 0 8px #00ffff;
+    /* font-family: 'Orbitron', sans-serif; */ /* Optional spezielle Schrift */
+}
+
+#menu-panels p {
+    font-size: 1.3em;
+    margin-bottom: 25px;
+    line-height: 1.4;
+}
+
+/* Styling für Buttons im Menü (wiederverwendbar) */
+.menu-button {
+    background: linear-gradient(45deg, #00ffff, #ff00ff); /* Farbverlauf */
+    color: #0f0f1a; /* Dunkler Text */
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 10px rgba(255, 0, 255, 0.6);
+    margin-top: 15px; /* Etwas Abstand zwischen Buttons/Text */
+    min-width: 180px;
+    display: inline-block;
+}
+.menu-button:hover {
+    transform: scale(1.05); /* Leichte Vergrößerung bei Hover */
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 15px rgba(255, 0, 255, 0.8);
+    filter: brightness(1.1); /* Etwas heller */
+}
+.menu-button:active {
+    transform: scale(1.02); /* Leichte Verkleinerung beim Klicken */
+}
+
+
+/* Ladeanzeige */
+#loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #00ffff; /* Neon-Cyan */
+    font-size: 1.8em;
+    /* font-family: 'Orbitron', sans-serif; */ /* Optional spezielle Schrift */
+    font-weight: bold;
+    z-index: 100;
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff;
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* Sanftes Ausblenden */
+    opacity: 1;
+    visibility: visible;
+    text-align: center;
+}
+
+/* Zustand: Laden abgeschlossen */
+body:not(.loading) #loader {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Zustand: Menü Sichtbar */
+body.menu-visible #menu-panels {
+     opacity: 1;
+     visibility: visible;
+     transform: translate(-50%, -50%) scale(1); /* Normale Größe für Pop-In Effekt */
+}
+
+/* Optional: Abdunkeln des Spiels, wenn Menü offen ist */
+body.menu-visible #game-canvas {
+     filter: brightness(0.4) blur(2px); /* Abdunkeln und leicht unscharf */
+     transition: filter 0.4s ease;
+}
+body:not(.menu-visible) #game-canvas {
+     filter: brightness(1) blur(0px);
+     transition: filter 0.4s ease;
+}
