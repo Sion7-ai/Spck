@@ -19,8 +19,7 @@
         }
 
         .color-picker {
-            /* Neue Breite: 257px + 40px = 297px */
-            width: 297px;
+            width: 297px; /* Breite beibehalten */
             border-top: 1px solid #e0e0e0;
             border-bottom: 1px solid #e0e0e0;
             padding: 12px 0;
@@ -33,18 +32,17 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-            padding: 0 8px; /* Beibehaltung des Paddings */
+            padding: 0 8px;
         }
 
         .color-picker-header h3 {
             margin: 0;
-            /* Schrift-Styles für Kategorie */
             color: #212529;
-            font-family: 'Lato', sans-serif; /* Lato Font anwenden */
+            font-family: 'Lato', sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 700;
-            line-height: 24px; /* 150% */
+            line-height: 24px;
             letter-spacing: 1.4px;
         }
 
@@ -55,30 +53,46 @@
         .color-swatches {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px; /* Abstand zwischen den Kreisen */
-            padding: 0 8px; /* Beibehaltung des Paddings */
+            gap: 10px;
+            padding: 0 8px;
             justify-content: flex-start;
         }
 
         .color-swatch {
-            /* Abmessungen */
             width: 23px;
             height: 23px;
-            /* Radius und Rahmen */
             border-radius: 14px;
+            /* Standard-Rahmen */
             border: 0.5px solid #B5B5B5;
             padding: 0;
             cursor: pointer;
             display: inline-block;
             vertical-align: middle;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease; /* Border zur Transition hinzufügen */
             box-sizing: border-box;
+            background-clip: padding-box; /* Verhindert, dass Hintergrund unter dem Rand durchscheint */
         }
 
         .color-swatch:hover {
             transform: scale(1.1);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+
+        /* NEU: Style für den ausgewählten Swatch */
+        .color-swatch.selected {
+            border-radius: 14px; /* Bleibt gleich, aber explizit für Spezifität */
+            border: 1.5px solid #002E40; /* Dickerer, dunklerer Rahmen */
+            /* Optional: Kleinerer Innenbereich durch dickeren Border,
+               kann man durch Anpassung von width/height oder box-sizing ausgleichen,
+               aber bei 1.5px ist der Effekt gering */
+        }
+
+        /* Überschreibe Hover-Schatten für ausgewählte Elemente, falls gewünscht */
+        .color-swatch.selected:hover {
+             box-shadow: 0 2px 6px rgba(0, 46, 64, 0.3); /* Evtl. leicht angepasster Schatten */
+             /* transform: scale(1.05); Optional: Etwas weniger starker Hover-Zoom */
+        }
+
 
     </style>
 </head>
@@ -109,6 +123,26 @@
             <button class="color-swatch" style="background-color: #CD7F32;" aria-label="Farbe Bronze wählen"></button>
         </div>
     </div>
+
+    <script>
+        // Wähle alle Farb-Swatch-Buttons aus
+        const swatches = document.querySelectorAll('.color-swatch');
+
+        // Füge einen Event Listener zu jedem Swatch hinzu
+        swatches.forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                // 1. Entferne die 'selected'-Klasse von ALLEN Swatches
+                swatches.forEach(s => s.classList.remove('selected'));
+
+                // 2. Füge die 'selected'-Klasse zum angeklickten Swatch hinzu
+                this.classList.add('selected');
+
+                // Optional: Hier könntest du den Wert der ausgewählten Farbe speichern oder weiterverarbeiten
+                // const selectedColor = this.style.backgroundColor;
+                // console.log('Ausgewählte Farbe:', selectedColor);
+            });
+        });
+    </script>
 
 </body>
 </html>
