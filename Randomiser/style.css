@@ -1,0 +1,293 @@
+/* Globale Einstellungen & Variablen */
+:root {
+    --font-sans: 'Roboto', sans-serif;
+    --text-color: #333;
+    --bg-color: #eef1f5; /* Grundfarbe für Neumorphism */
+    --shadow-light: rgba(255, 255, 255, 0.9);
+    --shadow-dark: rgba(163, 177, 198, 0.6);
+    --transition-fast: 0.2s ease-out;
+    --transition-bg: 0.8s ease-in-out;
+
+    /* Dynamische Hintergrund Variable */
+    --current-bg-gradient: linear-gradient(135deg, #a0dfe5, #c1f1e1); /* Standard: Section 1 */
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--text-color);
+    background: var(--current-bg-gradient); /* Startet mit Gradient von Section 1 */
+    background-attachment: fixed; /* Verhindert ruckeln beim Gradient-Wechsel */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    transition: background var(--transition-bg); /* Sanfter Übergang für Hintergrund */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Stellt sicher, dass Sektionen scrollbar sind */
+}
+
+/* Sektionen Styling */
+.generator-section {
+    min-height: 90vh; /* Mindesthöhe für Sichtbarkeit & Scroll-Trigger */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.content-wrapper {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1); /* Leichter transparenter Hintergrund */
+    backdrop-filter: blur(5px); /* Optional: Glassmorphism-Effekt */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--text-color); /* Gute Lesbarkeit auf hellem BG */
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Neumorphism Button Style */
+.neumorphic-button {
+    display: inline-flex; /* Für Icon + Text */
+    align-items: center;
+    justify-content: center;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow:
+        5px 5px 10px var(--shadow-dark), /* Dunkler Schatten unten/rechts */
+        -5px -5px 10px var(--shadow-light); /* Heller Schatten oben/links */
+    transition: all var(--transition-fast);
+    min-width: 44px; /* Accessibility Touch Target */
+    min-height: 44px;
+}
+
+.neumorphic-button iconify-icon {
+    vertical-align: middle; /* Zentriert Icon vertikal */
+}
+
+/* Button Microinteractions */
+.neumorphic-button:hover {
+    transform: scale(1.03);
+    box-shadow:
+        7px 7px 14px var(--shadow-dark),
+        -7px -7px 14px var(--shadow-light);
+}
+
+.neumorphic-button:active {
+    transform: scale(0.98);
+    /* Inset Shadow für "gedrückten" Effekt */
+    box-shadow:
+        inset 3px 3px 6px var(--shadow-dark),
+        inset -3px -3px 6px var(--shadow-light);
+    color: #555; /* Text leicht abdunkeln */
+}
+
+.neumorphic-button:focus {
+    outline: none; /* Standard Outline entfernen */
+    /* Fokus-Indikator als leichter äußerer Ring */
+    box-shadow:
+        5px 5px 10px var(--shadow-dark),
+        -5px -5px 10px var(--shadow-light),
+        0 0 0 3px rgba(0, 123, 255, 0.3); /* Blauer Fokus-Ring */
+}
+
+/* Ergebnis-Bereich */
+.result-area {
+    margin-top: 30px;
+    padding: 25px;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+     box-shadow:
+        inset 4px 4px 8px var(--shadow-dark),
+        inset -4px -4px 8px var(--shadow-light); /* Inset für "Vertiefung" */
+    min-height: 60px; /* Platzhalter Höhe */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0; /* Startet unsichtbar */
+    transform: translateY(15px); /* Startet leicht nach unten verschoben */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    position: relative; /* Für absolute Positionierung des Save-Buttons */
+}
+
+.result-area.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.result-text {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin: 0;
+    flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+    text-align: left;
+    padding-right: 50px; /* Platz für Save Button */
+}
+
+/* Speicher-Button (Icon) */
+.save-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    opacity: 0; /* Startet unsichtbar */
+    transition: opacity 0.3s ease-out, transform 0.2s ease-out;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.8); /* Startet kleiner und zentriert */
+    padding: 5px;
+    border-radius: 50%; /* Rund für Icon-Button */
+}
+
+.result-area.visible .save-button {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+.save-button:hover {
+    color: #007bff; /* Blauer Hover-Effekt */
+    transform: translateY(-50%) scale(1.1); /* Leichte Vergrößerung */
+}
+
+.save-button:active {
+    transform: translateY(-50%) scale(0.9); /* Klick-Effekt */
+}
+
+/* Gespeicherte Liste */
+.saved-list-container {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.saved-list {
+    list-style: none;
+    padding-left: 0;
+    max-height: 150px; /* Begrenzte Höhe mit Scrollbar */
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.saved-list li {
+    background: rgba(255, 255, 255, 0.5);
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+    display: flex;          /* Für Löschen-Button */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.saved-list li .delete-item {
+    background: none;
+    border: none;
+    color: #ff4d4d; /* Rote Farbe für Löschen */
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease-out;
+    margin-left: 10px;
+    padding: 0;
+}
+.saved-list li .delete-item:hover {
+    opacity: 1;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: rgba(0, 0, 0, 0.05); /* Leicht abgedunkelt */
+    color: #555;
+    font-size: 0.9rem;
+    margin-top: 50px; /* Abstand zur letzten Sektion */
+}
+
+footer .social-icons a {
+    color: #555;
+    margin: 0 10px;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+footer .social-icons a:hover {
+    color: #007bff; /* Blauer Hover */
+}
+footer .social-icons a:hover iconify-icon { /* Icon-Rotation bei Hover */
+    animation: spin 0.5s ease-out;
+}
+
+footer nav a {
+    color: #555;
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color var(--transition-fast);
+}
+footer nav a:hover {
+    color: #000;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+/* Responsivität (Mobile-First Ansatz) */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 2rem;
+    }
+    .content-wrapper {
+        padding: 25px;
+    }
+    .neumorphic-button {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+    .result-area {
+        padding: 20px;
+    }
+     .result-text {
+        font-size: 1rem;
+        padding-right: 45px; /* Etwas weniger Platz für Button */
+    }
+    .save-button {
+        right: 10px;
+    }
+}

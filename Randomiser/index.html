@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kreativ-Generatoren</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Iconify CDN -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+
+    <main>
+        <!-- Section 1: Draw -->
+        <section id="draw" class="generator-section" data-gradient="linear-gradient(135deg, #a0dfe5, #c1f1e1)"> <!-- Teal -> Mint -->
+            <div class="content-wrapper">
+                <h2>Zeichen-/Malmotiv-Generator</h2>
+                <button id="generate-draw" class="neumorphic-button">
+                    <iconify-icon icon="ph:sparkle-fill" width="20" style="margin-right: 8px;"></iconify-icon>
+                    Neues Motiv generieren
+                </button>
+                <div class="result-area" id="result-draw" aria-live="polite">
+                    <p class="result-text"></p>
+                    <button class="save-button" id="save-draw" title="Motiv speichern" aria-label="Motiv speichern">
+                        <iconify-icon icon="ph:floppy-disk-back" width="24"></iconify-icon>
+                    </button>
+                </div>
+                <div class="saved-list-container">
+                    <h3>Gespeicherte Motive:</h3>
+                    <ul id="saved-list-draw" class="saved-list">
+                        <!-- Gespeicherte Items werden hier per JS eingefügt -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Music -->
+        <section id="music" class="generator-section" data-gradient="linear-gradient(135deg, #f7a399, #a0dfe5)"> <!-- Coral -> Teal -->
+             <div class="content-wrapper">
+                <h2>Musiktitel-Generator</h2>
+                <button id="generate-music" class="neumorphic-button">
+                     <iconify-icon icon="ph:music-notes-fill" width="20" style="margin-right: 8px;"></iconify-icon>
+                    Neuen Titel generieren
+                </button>
+                <div class="result-area" id="result-music" aria-live="polite">
+                    <p class="result-text"></p>
+                    <button class="save-button" id="save-music" title="Titel speichern" aria-label="Titel speichern">
+                        <iconify-icon icon="ph:floppy-disk-back" width="24"></iconify-icon>
+                    </button>
+                </div>
+                 <div class="saved-list-container">
+                    <h3>Gespeicherte Titel:</h3>
+                    <ul id="saved-list-music" class="saved-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Story -->
+        <section id="story" class="generator-section" data-gradient="linear-gradient(135deg, #c1f1e1, #f7a399)"> <!-- Mint -> Coral -->
+             <div class="content-wrapper">
+                <h2>Kurzgeschichte-Thema-Generator</h2>
+                <button id="generate-story" class="neumorphic-button">
+                     <iconify-icon icon="ph:book-open-text-fill" width="20" style="margin-right: 8px;"></iconify-icon>
+                    Neues Thema generieren
+                </button>
+                <div class="result-area" id="result-story" aria-live="polite">
+                    <p class="result-text"></p>
+                    <button class="save-button" id="save-story" title="Thema speichern" aria-label="Thema speichern">
+                         <iconify-icon icon="ph:floppy-disk-back" width="24"></iconify-icon>
+                    </button>
+                </div>
+                 <div class="saved-list-container">
+                    <h3>Gespeicherte Themen:</h3>
+                    <ul id="saved-list-story" class="saved-list"></ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Finde mich auf:</p>
+        <div class="social-icons">
+             <a href="#" title="Beispiel Social Link 1"><iconify-icon icon="mdi:github" width="24"></iconify-icon></a>
+             <a href="#" title="Beispiel Social Link 2"><iconify-icon icon="mdi:linkedin" width="24"></iconify-icon></a>
+             <!-- Weitere Icons hier -->
+        </div>
+        <nav>
+            <a href="#">Impressum</a> | <a href="#">Datenschutz</a>
+        </nav>
+        <p><small>Hinweis: Gespeicherte Elemente werden nur lokal im Browser gespeichert und gehen beim Löschen des Browser-Caches verloren.</small></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
