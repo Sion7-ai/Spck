@@ -1,109 +1,118 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Prompt-Daten (Beispiele, erweiterbar) ---
-    const promptsData = {
+    // --- Generator Vorlagen mit Satzbausteinen ---
+    const generatorTemplates = {
         draw: {
-            common: [
-                "Ein Fuchs liest ein Buch im Wald", "Eine Katze fliegt auf einem Besen", "Ein Leuchtturm im Sturm",
-                "Ein magischer Baum", "Pinguine tanzen Tango", "Ein Oktopus als Bibliothekar"
-            ],
-            rare: [ // Seltenere, vielleicht spezifischere oder absurdere Ideen
-                "Ein Astronaut reitet ein Seepferdchen im All",
-                "Ein Kaktus strickt einen Pullover",
-                "Ein Roboter-Einhorn auf einer Blumenwiese"
+            adjectives: ["Ein neugieriger", "Ein schläfriger", "Ein winziger", "Ein riesiger", "Ein leuchtender", "Ein mechanischer", "Ein magischer", "Ein flauschiger", "Ein geometrischer"],
+            subjects: ["Fuchs", "Roboter", "Kaktus", "Pilz", "Berg", "Wal", "Astronaut", "Ritter", "Geist", "Baum", "Kristall", "Panda", "Drache"],
+            actions: ["liest ein Buch", "malt ein Bild", "tanzt im Regen", "repariert ein Raumschiff", "meditiert", "schwebt", "singt Opern", "kocht Tee", "spielt Schach", "baut eine Sandburg"],
+            contexts: ["auf dem Mond", "in einer Unterwasserstadt", "in einem schwebenden Schloss", "in einem Wald aus Glas", "während eines Meteoritenschauers", "unter einem Sternenhimmel", "in einer Cyberpunk-Gasse", "auf einem riesigen Blatt", "in einer verlassenen Bibliothek", "auf einem Jahrmarkt"],
+            styles: [" im Stil von Van Gogh", " als minimalistische Vektorgrafik", " in düsterer Atmosphäre", " mit Pastellfarben", " als Kohlezeichnung", " im Pixel-Art-Stil", " als Comic", ""], // Leerzeichen am Anfang für bessere Verbindung
+            templates: [
+                "{adjective} {subject} {action} {context}{style}.",
+                "{adjective} {subject} {action}{style}.",
+                "{adjective} {subject} {context}{style}.",
+                "Stell dir vor: {adjective} {subject} {context}{style}.",
+                "Fokus auf: {subject} {action}{style}.",
+                "{subject} {action} unter einem {adjective} Himmel{style}."
             ]
         },
         music: {
-            common: [
-                "Neonlichter im Regen", "Sonnenaufgang über den Bergen", "Verlorene Erinnerungen",
-                "Tanz der Glühwürmchen", "Staubige Schallplatten", "Mitternachtszug ins Nirgendwo"
-            ],
-            rare: [
-                "Das Flüstern eines vergessenen Sterns",
-                "Sinfonie einer rostenden Maschine",
-                "Der Geschmack von elektrischem Ozon"
+            moods: ["Melancholische", "Euphorische", "Mysteriöse", "Treibende", "Verträumte", "Bedrohliche", "Epische", "Sanfte", "Verspielte"],
+            elements: ["Sonate", "Fuge", "Nocturne", "Elegie", "Symphonie", "Rhapsodie", "Kadenz", "Melodie", "Harmonie", "Suite", "Präludium"],
+            concepts: ["vergessener Sterne", "tanzender Schatten", "elektrischer Stille", "rostender Zeit", "kristallklarer Seen", "fallender Blätter", "urbaner Dschungel", "kosmischer Nebel", "innerer Stimmen", "des letzten Leuchtturms"],
+            instruments: [" für Klavier", " für Streichquartett", " für Synthesizer", " für eine einsame Trompete", " für Orchester", " für eine Spieluhr", " mit Chor", " für Gitarre und Flöte", ""],
+            templates: [
+                "{mood} {elements} {concepts}{instruments}.", // Punkt am Ende für Konsistenz
+                "{mood} {elements}.",
+                "Die {elements} {concepts}{instruments}.",
+                "{concepts}: Eine {mood} {elements}{instruments}.",
+                "Titel: {mood} {elements}.",
+                "{elements} {instruments}."
             ]
         },
         story: {
-            common: [
-                "Zeitreise ins eigene Kinderzimmer.", "Haustier ist Hauptverdächtiger.", "Letzte Bibliothek der Welt.",
-                "Koch entdeckt Emotions-Gewürz.", "Erwachen auf Raumschiff ohne Erinnerung.",
-                "Arrangierte Heirat zwischen Königreichen.", "Karte zu verborgenem Garten."
-            ],
-            rare: [
-                "Die Schatten beginnen, eigene Geschichten zu erzählen.",
-                "Eine Stadt, in der Erinnerungen Währung sind.",
-                "Ein Leuchtturm, der Schiffe in andere Dimensionen lenkt."
+            protagonists: ["Ein Bibliothekar", "Eine Hexe", "Ein Roboter-Detektiv", "Ein Raumschiff-Kapitän", "Ein Bäcker", "Ein alter Fischer", "Eine junge Erfinderin", "Ein zeitreisender Historiker", "Ein sprechendes Tier", "Ein abtrünniger Spion"],
+            actions: ["entdeckt ein Portal", "findet eine antike Karte", "erhält eine kryptische Nachricht", "muss ein Rätsel lösen", "verliert sein Gedächtnis", "tauscht den Körper", "schließt einen Pakt", "jagt einen Dieb", "sucht nach einem Heilmittel"],
+            objectsOrTwists: ["eines verlorenen Tagebuchs", "einer singenden Pflanze", "eines magischen Amuletts", "einer Verschwörung", "eines Kometeneinschlags", "eines doppelten Spiels", "einer unerwarteten Freundschaft", "einer Prophezeiung", "eines Familiengeheimnisses"],
+            settings: ["in einer Stadt unter der Erde", "auf einem fliegenden Schiff", "in einer Welt ohne Farben", "während einer endlosen Nacht", "in einer virtuellen Realität", "in der letzten Oase", "an Bord eines Geisterzugs", "in einer verbotenen Zone", "auf einem fremden Planeten"],
+            templates: [
+                "{protagonist}, der {actions}, stolpert über {objectsOrTwists} {settings}.",
+                "{protagonist} {actions} {settings}.",
+                "{settings}: {protagonist} {actions} wegen {objectsOrTwists}.",
+                "Was wäre, wenn {protagonist} {actions} würde, aber {objectsOrTwists} eintritt?",
+                "Die Geschichte von {protagonist}, der {actions}.",
+                "In {settings}, muss {protagonist} {actions}."
             ]
         }
     };
 
-    // --- Gamification State (aus localStorage laden oder initialisieren) ---
+
+    // --- Gamification State ---
     let counts = JSON.parse(localStorage.getItem('generatorCounts')) || {
-        drawGenerated: 0, drawSaved: 0, musicGenerated: 0, musicSaved: 0, storyGenerated: 0, storySaved: 0, totalGenerated: 0, rareFound: 0
+        drawGenerated: 0, drawSaved: 0, musicGenerated: 0, musicSaved: 0, storyGenerated: 0, storySaved: 0, totalGenerated: 0
+        // rareFound nicht mehr relevant
     };
     let achievements = JSON.parse(localStorage.getItem('userAchievements')) || {
         firstSpark: false, collectorHeartDraw: false, collectorHeartMusic: false, collectorHeartStory: false,
-        kreativTrio: false, ideenMarathon: false, rareFind: false
+        kreativTrio: false, ideenMarathon: false // rareFind entfernt
     };
 
-    const achievementMeta = { // Für Toast-Nachrichten und UI-Updates
+    const achievementMeta = { // Meta-Informationen für Erfolge (Titel, Icon)
         firstSpark: { title: "Erster Funke!", icon: "ph:sparkle-duotone" },
         collectorHeartDraw: { title: "Sammlerherz (Zeichnen)!", icon: "ph:paint-brush-duotone" },
         collectorHeartMusic: { title: "Sammlerherz (Musik)!", icon: "ph:music-notes-duotone" },
         collectorHeartStory: { title: "Sammlerherz (Story)!", icon: "ph:book-open-text-duotone" },
         kreativTrio: { title: "Kreativ-Trio!", icon: "ph:medal-duotone" },
-        ideenMarathon: { title: "Ideen-Marathon!", icon: "ph:confetti-duotone" },
-        rareFind: { title: "Seltener Fund!", icon: "ph:star-four-duotone" }
+        ideenMarathon: { title: "Ideen-Marathon!", icon: "ph:confetti-duotone" }
+        // rareFind Meta entfernt
     };
 
     const toastContainer = document.getElementById('toast-container');
 
     // --- Hilfsfunktionen ---
     function saveProgress() {
-        localStorage.setItem('generatorCounts', JSON.stringify(counts));
-        localStorage.setItem('userAchievements', JSON.stringify(achievements));
+        try {
+            localStorage.setItem('generatorCounts', JSON.stringify(counts));
+            localStorage.setItem('userAchievements', JSON.stringify(achievements));
+        } catch (e) {
+            console.error("Fehler beim Speichern des Fortschritts in localStorage:", e);
+            // Evtl. Nutzer informieren, dass Fortschritt nicht gespeichert werden kann
+        }
     }
 
     function showToast(achievementKey) {
         const meta = achievementMeta[achievementKey];
-        if (!meta || !toastContainer) return; // Sicherstellen, dass Container existiert
+        if (!meta || !toastContainer) return;
 
         const toast = document.createElement('div');
         toast.className = 'toast';
-        toast.innerHTML = `
-            <iconify-icon icon="${meta.icon}"></iconify-icon>
-            <span>${meta.title}</span>
-        `;
+        toast.innerHTML = `<iconify-icon icon="${meta.icon}"></iconify-icon><span>${meta.title}</span>`;
         toastContainer.appendChild(toast);
 
-        // Force reflow to enable transition
-        void toast.offsetWidth;
+        requestAnimationFrame(() => { // Stellt sicher, dass das Element im DOM ist, bevor die Klasse hinzugefügt wird
+            toast.classList.add('show');
+        });
 
-        toast.classList.add('show');
-
-        // Nach einiger Zeit wieder entfernen
         setTimeout(() => {
             toast.classList.remove('show');
-            // Warten bis CSS-Transition vorbei ist, bevor Element entfernt wird
             toast.addEventListener('transitionend', () => toast.remove(), { once: true });
-        }, 3500); // 3.5 Sekunden sichtbar
+        }, 3500);
     }
 
     function updateAchievementUI(newlyUnlockedKey = null) {
         const achievementList = document.getElementById('achievement-list');
         if (!achievementList) return;
 
-        Object.keys(achievements).forEach(key => {
+        Object.keys(achievementMeta).forEach(key => {
             const li = achievementList.querySelector(`li[data-achievement="${key}"]`);
             if (li) {
-                li.classList.remove('newly-unlocked'); // Reset pulse effect
+                li.classList.remove('newly-unlocked');
                 if (achievements[key]) {
                     li.classList.add('unlocked');
                     li.classList.remove('locked');
-                     if (key === newlyUnlockedKey) {
-                         // Kurze Verzögerung für den Übergang von locked zu unlocked
-                         setTimeout(() => li.classList.add('newly-unlocked'), 50);
+                    if (key === newlyUnlockedKey) {
+                        setTimeout(() => li.classList.add('newly-unlocked'), 50);
                     }
                 } else {
                     li.classList.add('locked');
@@ -111,16 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+        // Stelle sicher, dass das (jetzt entfernte) rareFind li nicht angezeigt wird
+         const rareLi = achievementList.querySelector('li[data-achievement="rareFind"]');
+         if(rareLi) rareLi.style.display = 'none';
     }
 
      function updateCounterUI() {
-         // Sicherstellen, dass die Elemente existieren, bevor man darauf zugreift
-         const drawGenCount = document.getElementById('draw-generated-count');
-         const drawSaveCount = document.getElementById('draw-saved-count');
-         const musicGenCount = document.getElementById('music-generated-count');
-         const musicSaveCount = document.getElementById('music-saved-count');
-         const storyGenCount = document.getElementById('story-generated-count');
-         const storySaveCount = document.getElementById('story-saved-count');
+         const getEl = (id) => document.getElementById(id); // Kurzfunktion
+         const drawGenCount = getEl('draw-generated-count');
+         const drawSaveCount = getEl('draw-saved-count');
+         const musicGenCount = getEl('music-generated-count');
+         const musicSaveCount = getEl('music-saved-count');
+         const storyGenCount = getEl('story-generated-count');
+         const storySaveCount = getEl('story-saved-count');
 
          if (drawGenCount) drawGenCount.textContent = counts.drawGenerated;
          if (drawSaveCount) drawSaveCount.textContent = counts.drawSaved;
@@ -132,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function checkAchievements(type, action) {
-        let achievementUnlocked = null; // Trackt, ob *dieser* Aufruf einen Erfolg freischaltete
+        let achievementUnlocked = null;
 
         if (action === 'generated') {
             counts[`${type}Generated`]++;
@@ -142,11 +154,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (action === 'saved') {
             counts[`${type}Saved`]++;
             const key = `collectorHeart${type.charAt(0).toUpperCase() + type.slice(1)}`;
-             if (counts[`${type}Saved`] >= 10 && !achievements[key]) { achievements[key] = true; achievementUnlocked = key; }
-        } else if (action === 'rare_found') {
-             counts.rareFound++;
-             if (!achievements.rareFind) { achievements.rareFind = true; achievementUnlocked = 'rareFind'; }
+            // Prüfe, ob der Schlüssel im achievements Objekt existiert (wichtig, da rareFind entfernt wurde)
+             if (achievements.hasOwnProperty(key) && counts[`${type}Saved`] >= 10 && !achievements[key]) {
+                 achievements[key] = true; achievementUnlocked = key;
+             }
         }
+        // Kein rare_found Check mehr
 
         // Kombinations-Erfolge prüfen
         if (counts.drawSaved > 0 && counts.musicSaved > 0 && counts.storySaved > 0 && !achievements.kreativTrio) {
@@ -155,69 +168,105 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (achievementUnlocked) {
             saveProgress();
-            updateAchievementUI(achievementUnlocked); // Badge hervorheben
-            showToast(achievementUnlocked); // Benachrichtigung anzeigen
+            updateAchievementUI(achievementUnlocked);
+            showToast(achievementUnlocked);
         } else {
-            saveProgress(); // Auch speichern, wenn kein Erfolg erzielt wurde (für Zähler)
+            saveProgress(); // Fortschritt (Zähler) trotzdem speichern
         }
         updateCounterUI(); // Zähler immer aktualisieren
     }
 
-     // Funktion für Confetti-Effekt
     function triggerConfetti(container) {
         const confettiContainer = container.querySelector('.confetti-container');
         if (!confettiContainer) return;
+        confettiContainer.innerHTML = ''; // Alte entfernen
 
-        confettiContainer.innerHTML = ''; // Alte Confetti entfernen
-
-        for (let i = 0; i < 15; i++) { // 15 Partikel
+        for (let i = 0; i < 15; i++) {
             const confetti = document.createElement('div');
             confetti.classList.add('confetti');
-            // Zufällige Startposition und Klasse für Farbe/Delay
             confetti.style.left = `${Math.random() * 100}%`;
-            const colorClassIndex = Math.floor(Math.random() * 5) + 1; // Index 1-5
+            const colorClassIndex = Math.floor(Math.random() * 5) + 1;
             confetti.classList.add(`c${colorClassIndex}`);
-            confetti.style.animationDuration = `${2 + Math.random() * 2}s`; // Variation in Fallzeit
-
+            confetti.style.animationDuration = `${2 + Math.random() * 2}s`;
             confettiContainer.appendChild(confetti);
-
-            // Partikel nach Animation entfernen (wird jetzt durch innerHTML = '' oben erledigt)
-            // confetti.addEventListener('animationend', () => confetti.remove(), { once: true });
         }
     }
 
-    // --- Generator Setup Funktion ---
+    // --- Generator Funktion (Kombinatorisch) ---
+    function getRandomElement(arr) {
+        if (!arr || arr.length === 0) return "";
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        return arr[randomIndex];
+    }
+
+    function generateInfinitePrompt(type) {
+        const templateSet = generatorTemplates[type];
+        if (!templateSet || !templateSet.templates || templateSet.templates.length === 0) {
+            console.error(`Keine Templates für Typ ${type} gefunden!`);
+            return "Fehler: Generator-Vorlage nicht gefunden.";
+        }
+
+        let promptTemplate = getRandomElement(templateSet.templates);
+        let generatedPrompt = promptTemplate;
+        const placeholders = promptTemplate.match(/{\w+}/g); // Findet alle {wort}
+
+        if (placeholders) {
+            placeholders.forEach(placeholder => {
+                const componentName = placeholder.slice(1, -1);
+                // Korrekte Pluralbildung für den Zugriff auf die Liste
+                const listName = componentName.endsWith('s') ? componentName : componentName + 's';
+                const componentList = templateSet[listName];
+
+                if (componentList) {
+                    const randomComponent = getRandomElement(componentList);
+                    generatedPrompt = generatedPrompt.replaceAll(placeholder, randomComponent);
+                } else {
+                    console.warn(`Keine Komponentenliste für "${listName}" im Typ "${type}" gefunden (Platzhalter: ${placeholder}).`);
+                    generatedPrompt = generatedPrompt.replaceAll(placeholder, ""); // Platzhalter entfernen, falls Liste fehlt
+                }
+            });
+        }
+
+        // Bereinigung und Formatierung
+        generatedPrompt = generatedPrompt.replace(/\s+/g, ' ').trim(); // Doppelte Leerzeichen -> einzelnes; trimmen
+        if (generatedPrompt.length > 0) {
+            generatedPrompt = generatedPrompt.charAt(0).toUpperCase() + generatedPrompt.slice(1); // Erster Buchstabe groß
+            if (!/[.!?]$/.test(generatedPrompt)) { // Füge Punkt hinzu, wenn nötig
+                generatedPrompt += '.';
+            }
+        }
+        generatedPrompt = generatedPrompt.replace(/\s*,\s*/g, ', '); // Komma-Formatierung
+        generatedPrompt = generatedPrompt.replace(/\s*(\.)/g, '$1'); // Leerzeichen vor Punkt entfernen
+        generatedPrompt = generatedPrompt.replace(/\.{2,}/g, '.'); // Mehrfache Punkte -> einzelner Punkt
+
+        return generatedPrompt;
+    }
+
+
+    // --- Generator Setup Funktion (nutzt generateInfinitePrompt) ---
     function setupGenerator(config) {
         const generateBtn = document.getElementById(config.generateBtnId);
         const resultArea = document.getElementById(config.resultAreaId);
-        // Sicherstellen, dass Elemente existieren
         if (!generateBtn || !resultArea) {
-            console.error(`Fehler beim Setup für ${config.type}: Button oder Ergebnisbereich nicht gefunden.`);
-            return;
+            console.error(`Setup-Fehler ${config.type}: Button oder Ergebnisbereich fehlt.`); return;
         }
         const resultTextElement = resultArea.querySelector('.result-text');
         const saveBtn = document.getElementById(config.saveBtnId);
         const savedListElement = document.getElementById(config.savedListId);
-        // Auch hier prüfen
          if (!resultTextElement || !saveBtn || !savedListElement) {
-             console.error(`Fehler beim Setup für ${config.type}: Interne Elemente (Text, Speichern, Liste) nicht gefunden.`);
-             return;
+             console.error(`Setup-Fehler ${config.type}: Interne Elemente fehlen.`); return;
          }
 
         let currentResult = null;
-        let isRare = false;
 
-        function displayResult(text, rare = false) {
+        function displayResult(text) {
             currentResult = text;
-            isRare = rare; // Merken ob selten für Speichern etc.
             resultTextElement.textContent = text;
-            resultTextElement.classList.toggle('rare-result', rare); // Klasse für seltenes Styling
+            resultTextElement.classList.remove('rare-result'); // Sicherstellen, dass kein Rare-Styling aktiv ist
             resultArea.classList.add('visible');
             saveBtn.style.opacity = '1';
             saveBtn.style.transform = 'translateY(-50%) scale(1)';
-            saveBtn.style.color = ''; // Reset Farbe von potentiellem "schon gespeichert" Feedback
-
-             // Confetti bei Generierung!
+            saveBtn.style.color = ''; // Farbe zurücksetzen (falls vorher orange war)
             triggerConfetti(resultArea);
         }
 
@@ -225,27 +274,22 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
                 updateSavedList(items);
-            } catch (e) {
-                console.error(`Fehler beim Laden von ${config.storageKey} aus localStorage:`, e);
-                updateSavedList([]); // Leere Liste anzeigen bei Fehler
-            }
+            } catch (e) { console.error(`Ladefehler ${config.storageKey}:`, e); updateSavedList([]); }
         }
 
         function updateSavedList(items, newlySavedItem = null) {
             savedListElement.innerHTML = '';
             items.forEach((item, index) => {
                 const li = document.createElement('li');
-                li.textContent = item; // Setzt den Text sicher (verhindert XSS falls item HTML enthält)
-
+                li.textContent = item;
                 if (item === newlySavedItem) {
-                    li.classList.add('newly-saved'); // Highlight für neues Item
-                    setTimeout(() => li.classList.remove('newly-saved'), 1500); // Highlight entfernen
+                    li.classList.add('newly-saved');
+                    setTimeout(() => li.classList.remove('newly-saved'), 1500);
                 }
-
                 const deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('delete-item');
-                deleteBtn.setAttribute('aria-label', `"${item}" löschen`); // Korrektes Label für Screenreader
-                deleteBtn.innerHTML = '<iconify-icon icon="ph:trash-simple" width="18"></iconify-icon>'; // Sicher, da fester String
+                deleteBtn.setAttribute('aria-label', `"${item}" löschen`);
+                deleteBtn.innerHTML = '<iconify-icon icon="ph:trash-simple" width="18"></iconify-icon>';
                 deleteBtn.onclick = () => deleteItem(index);
                 li.appendChild(deleteBtn);
                 savedListElement.appendChild(li);
@@ -259,49 +303,36 @@ document.addEventListener('DOMContentLoaded', () => {
                  if (!items.includes(currentResult)) {
                      items.push(currentResult);
                      localStorage.setItem(config.storageKey, JSON.stringify(items));
-                     updateSavedList(items, currentResult); // Übergebe das neue Item für Highlight
-                     animateSaveButton(true); // Erfolg=true
-                     checkAchievements(config.type, 'saved'); // Erfolg prüfen
+                     updateSavedList(items, currentResult);
+                     animateSaveButton(true); // Erfolg
+                     checkAchievements(config.type, 'saved');
                  } else {
-                    // Feedback, dass schon gespeichert
-                    animateSaveButton(false); // Erfolg=false
+                    animateSaveButton(false); // Duplikat
                  }
-             } catch (e) {
-                 console.error(`Fehler beim Speichern in ${config.storageKey}:`, e);
-                 alert("Speichern fehlgeschlagen. Ist vielleicht der Speicher voll?");
-             }
+             } catch (e) { console.error(`Speicherfehler ${config.storageKey}:`, e); alert("Speichern fehlgeschlagen."); }
         }
 
          function deleteItem(indexToDelete) {
             try {
                 let items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
-                items.splice(indexToDelete, 1); // Item am Index entfernen
+                items.splice(indexToDelete, 1);
                 localStorage.setItem(config.storageKey, JSON.stringify(items));
                 updateSavedList(items);
-                // Zähler anpassen
                 counts[`${config.type}Saved`] = items.length;
-                saveProgress();
+                // Kreativ-Trio ggf. neu prüfen (sowohl Sperren als auch Freischalten)
+                checkAchievements(config.type, 'saved'); // Ruft implizit auch Trio-Check auf
+                saveProgress(); // Speichere den aktualisierten Zählerstand
                 updateCounterUI();
-                // Überprüfe Kreativ-Trio erneut, falls es vorher erfüllt war
-                if (!achievements.kreativTrio && counts.drawSaved > 0 && counts.musicSaved > 0 && counts.storySaved > 0) {
-                     checkAchievements(config.type, 'saved'); // Ruft checkAchievements erneut auf
-                } else if (achievements.kreativTrio && (counts.drawSaved === 0 || counts.musicSaved === 0 || counts.storySaved === 0)) {
-                    // Optional: Erfolg wieder "sperren", falls Bedingung nicht mehr gilt
-                    // achievements.kreativTrio = false; saveProgress(); updateAchievementUI();
-                }
-
-            } catch (e) {
-                console.error(`Fehler beim Löschen aus ${config.storageKey}:`, e);
-            }
+            } catch (e) { console.error(`Löschfehler ${config.storageKey}:`, e); }
         }
 
         function animateSaveButton(success) {
              saveBtn.style.transition = 'transform 0.1s ease-out, color 0.1s ease-out';
              saveBtn.style.transform = 'translateY(-50%) scale(1.2)';
-             saveBtn.style.color = success ? 'var(--success-color)' : 'orange'; // Grün bei Erfolg, Orange bei Duplikat
+             saveBtn.style.color = success ? 'var(--success-color)' : 'orange';
              setTimeout(() => {
                  saveBtn.style.transform = 'translateY(-50%) scale(1)';
-                 saveBtn.style.color = ''; // Farbe zurücksetzen
+                 saveBtn.style.color = '';
                  setTimeout(() => {
                      saveBtn.style.transition = 'opacity 0.3s ease-out, transform 0.2s ease-out, color 0.2s ease-out';
                  }, 100);
@@ -311,42 +342,25 @@ document.addEventListener('DOMContentLoaded', () => {
         generateBtn.addEventListener('click', () => {
             generateBtn.disabled = true;
             generateBtn.innerHTML = '<iconify-icon icon="eos-icons:loading" width="20" style="margin-right: 8px;"></iconify-icon> Generiere...';
-            resultTextElement.classList.remove('rare-result'); // Styling zurücksetzen
 
             setTimeout(() => {
-                let randomPrompt = "Fehler beim Generieren"; // Fallback
-                let rare = false;
-                const promptSet = promptsData[config.type];
-                const rareChance = 0.15; // 15% Chance
+                // --- Generiere Prompt mit der neuen Funktion ---
+                const generatedPrompt = generateInfinitePrompt(config.type);
+                // ---
 
-                // Sicherheitschecks für Prompt-Daten
-                if (promptSet && promptSet.common && promptSet.common.length > 0) {
-                    if (promptSet.rare && promptSet.rare.length > 0 && Math.random() < rareChance) {
-                        const randomIndex = Math.floor(Math.random() * promptSet.rare.length);
-                        randomPrompt = promptSet.rare[randomIndex];
-                        rare = true;
-                        checkAchievements(config.type, 'rare_found');
-                    } else {
-                        const randomIndex = Math.floor(Math.random() * promptSet.common.length);
-                        randomPrompt = promptSet.common[randomIndex];
-                    }
-                } else {
-                    console.error(`Keine gültigen Prompts für Typ ${config.type} gefunden!`);
-                }
-
-                displayResult(randomPrompt, rare);
-                checkAchievements(config.type, 'generated');
+                displayResult(generatedPrompt); // Zeige Ergebnis an
+                checkAchievements(config.type, 'generated'); // Melde Generierung für Gamification
 
                 generateBtn.disabled = false;
                 generateBtn.innerHTML = `<iconify-icon icon="${config.buttonIcon}" width="20" style="margin-right: 8px;"></iconify-icon> ${config.buttonText}`;
-            }, 600);
+            }, 600); // Behalte Verzögerung für Ladeeffekt
         });
 
         saveBtn.addEventListener('click', saveItem);
         loadSavedItems(); // Initiale Liste laden
     }
 
-    // --- Initialisierung ---
+    // --- Initialisierung der Generatoren ---
     setupGenerator({
         type: 'draw', generateBtnId: 'generate-draw', resultAreaId: 'result-draw', saveBtnId: 'save-draw',
         savedListId: 'saved-list-draw', storageKey: 'draw-saved-items', buttonIcon: 'ph:sparkle-fill', buttonText: 'Neues Motiv generieren'
@@ -362,12 +376,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Intersection Observer für Hintergrund ---
     const sections = document.querySelectorAll('.generator-section');
-    if (typeof IntersectionObserver === 'function') { // Prüfen ob IntersectionObserver unterstützt wird
+    if (typeof IntersectionObserver === 'function') {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const gradient = entry.target.dataset.gradient;
-                    if (gradient) { // Sicherstellen, dass ein Gradient definiert ist
+                    if (gradient) {
                        document.documentElement.style.setProperty('--current-bg-gradient', gradient);
                     }
                 }
@@ -375,13 +389,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.6 });
         sections.forEach(section => observer.observe(section));
     } else {
-        // Fallback, falls IntersectionObserver nicht unterstützt wird (z.B. sehr alte Browser)
-         console.warn("IntersectionObserver wird nicht unterstützt, dynamischer Hintergrundwechsel deaktiviert.");
+        console.warn("IntersectionObserver nicht unterstützt.");
     }
 
 
     // --- Initiale UI Updates beim Laden ---
      updateCounterUI();
-     updateAchievementUI(); // Zeigt den aktuellen Stand der Erfolge an
+     updateAchievementUI();
 
 }); // Ende DOMContentLoaded

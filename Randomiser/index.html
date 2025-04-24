@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kreativ-Generatoren mit Gamification</title>
+    <title>Kreativ-Generatoren V2 (Unendlich)</title> <!-- Titel angepasst -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
@@ -27,14 +27,12 @@
                     <button class="save-button" id="save-draw" title="Motiv speichern" aria-label="Motiv speichern">
                         <iconify-icon icon="ph:floppy-disk-back" width="24"></iconify-icon>
                     </button>
-                    <!-- Confetti Container (optional, für JS-gesteuerte Effekte) -->
                     <div class="confetti-container"></div>
                 </div>
                 <div class="saved-list-container">
                     <h3>Gespeicherte Motive:</h3>
                     <ul id="saved-list-draw" class="saved-list"></ul>
                 </div>
-                <!-- Stats Area -->
                 <div class="stats-area">
                     <p>Generiert: <span id="draw-generated-count">0</span> | Gespeichert: <span id="draw-saved-count">0</span></p>
                 </div>
@@ -60,7 +58,6 @@
                     <h3>Gespeicherte Titel:</h3>
                     <ul id="saved-list-music" class="saved-list"></ul>
                 </div>
-                 <!-- Stats Area -->
                 <div class="stats-area">
                     <p>Generiert: <span id="music-generated-count">0</span> | Gespeichert: <span id="music-saved-count">0</span></p>
                 </div>
@@ -86,7 +83,6 @@
                     <h3>Gespeicherte Themen:</h3>
                     <ul id="saved-list-story" class="saved-list"></ul>
                 </div>
-                 <!-- Stats Area -->
                 <div class="stats-area">
                     <p>Generiert: <span id="story-generated-count">0</span> | Gespeichert: <span id="story-saved-count">0</span></p>
                 </div>
@@ -95,11 +91,10 @@
     </main>
 
     <footer>
-         <!-- Achievement Section -->
+         <!-- Achievement Section (ohne RareFind) -->
         <div class="achievements-section">
             <h3>Deine Erfolge</h3>
             <ul id="achievement-list">
-                <!-- Badges werden hier per JS aktualisiert -->
                 <li data-achievement="firstSpark">
                     <iconify-icon icon="ph:sparkle-duotone" width="24"></iconify-icon> <span>Erster Funke</span>
                     <small>Generiere deine erste Idee.</small>
@@ -124,10 +119,7 @@
                     <iconify-icon icon="ph:confetti-duotone" width="24"></iconify-icon> <span>Ideen-Marathon</span>
                      <small>Generiere 50 Ideen insgesamt.</small>
                  </li>
-                 <li data-achievement="rareFind">
-                    <iconify-icon icon="ph:star-four-duotone" width="24"></iconify-icon> <span>Seltener Fund</span>
-                     <small>Generiere eine seltene Idee.</small>
-                 </li>
+                 <!-- RareFind Badge wurde entfernt -->
             </ul>
         </div>
 
