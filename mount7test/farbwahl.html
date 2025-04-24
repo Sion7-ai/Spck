@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farbauswahl</title>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <!-- Import Lato font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: sans-serif; /* Fallback font */
+            background-color: #f8f9fa; /* Heller Hintergrund zum Testen */
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+        }
+
+        .color-picker {
+            /* Neue Breite: 257px + 40px = 297px */
+            width: 297px;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 0;
+            background-color: #E8E8E8; /* Hintergrundfarbe */
+            box-sizing: border-box;
+        }
+
+        .color-picker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 8px; /* Beibehaltung des Paddings */
+        }
+
+        .color-picker-header h3 {
+            margin: 0;
+            /* Schrift-Styles für Kategorie */
+            color: #212529;
+            font-family: 'Lato', sans-serif; /* Lato Font anwenden */
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 24px; /* 150% */
+            letter-spacing: 1.4px;
+        }
+
+        .color-picker-header .iconify {
+            color: #555;
+        }
+
+        .color-swatches {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px; /* Abstand zwischen den Kreisen */
+            padding: 0 8px; /* Beibehaltung des Paddings */
+            justify-content: flex-start;
+        }
+
+        .color-swatch {
+            /* Abmessungen */
+            width: 23px;
+            height: 23px;
+            /* Radius und Rahmen */
+            border-radius: 14px;
+            border: 0.5px solid #B5B5B5;
+            padding: 0;
+            cursor: pointer;
+            display: inline-block;
+            vertical-align: middle;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-sizing: border-box;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="color-picker">
+        <div class="color-picker-header">
+            <h3>FARBE</h3>
+            <span class="iconify" data-icon="material-symbols:keyboard-arrow-up" data-width="24" data-height="24"></span>
+        </div>
+        <div class="color-swatches">
+            <!-- Farben: Schwarz, Weiß, Blau, Grau, Braun, Beige, Rot, Rosa, Orange, Gelb, Grün, Türkis, Lila, Gold, Silber, Bronze -->
+            <button class="color-swatch" style="background-color: #000000;" aria-label="Farbe Schwarz wählen"></button>
+            <button class="color-swatch" style="background-color: #FFFFFF;" aria-label="Farbe Weiß wählen"></button>
+            <button class="color-swatch" style="background-color: #007bff;" aria-label="Farbe Blau wählen"></button>
+            <button class="color-swatch" style="background-color: #808080;" aria-label="Farbe Grau wählen"></button>
+            <button class="color-swatch" style="background-color: #A0522D;" aria-label="Farbe Braun wählen"></button>
+            <button class="color-swatch" style="background-color: #F5F5DC;" aria-label="Farbe Beige wählen"></button>
+            <button class="color-swatch" style="background-color: #DC3545;" aria-label="Farbe Rot wählen"></button>
+            <button class="color-swatch" style="background-color: #FFC0CB;" aria-label="Farbe Rosa wählen"></button>
+            <button class="color-swatch" style="background-color: #FD7E14;" aria-label="Farbe Orange wählen"></button>
+            <button class="color-swatch" style="background-color: #FFC107;" aria-label="Farbe Gelb wählen"></button>
+            <button class="color-swatch" style="background-color: #28A745;" aria-label="Farbe Grün wählen"></button>
+            <button class="color-swatch" style="background-color: #40E0D0;" aria-label="Farbe Türkis wählen"></button>
+            <button class="color-swatch" style="background-color: #800080;" aria-label="Farbe Lila wählen"></button>
+            <button class="color-swatch" style="background-color: #FFD700;" aria-label="Farbe Gold wählen"></button>
+            <button class="color-swatch" style="background-color: #C0C0C0;" aria-label="Farbe Silber wählen"></button>
+            <button class="color-swatch" style="background-color: #CD7F32;" aria-label="Farbe Bronze wählen"></button>
+        </div>
+    </div>
+
+</body>
+</html>
