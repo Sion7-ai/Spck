@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showToast(achievementKey) {
         const meta = achievementMeta[achievementKey];
-        if (!meta) return;
+        if (!meta || !toastContainer) return; // Sicherstellen, dass Container existiert
 
         const toast = document.createElement('div');
         toast.className = 'toast';
@@ -85,9 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Nach einiger Zeit wieder entfernen
         setTimeout(() => {
             toast.classList.remove('show');
-            setTimeout(() => {
-                toast.remove();
-            }, 500); // Warten bis Transition vorbei ist
+            // Warten bis CSS-Transition vorbei ist, bevor Element entfernt wird
+            toast.addEventListener('transitionend', () => toast.remove(), { once: true });
         }, 3500); // 3.5 Sekunden sichtbar
     }
 
@@ -101,9 +100,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.classList.remove('newly-unlocked'); // Reset pulse effect
                 if (achievements[key]) {
                     li.classList.add('unlocked');
-                    li.classList.remove('locked'); // Explizit entfernen, falls CSS es braucht
+                    li.classList.remove('locked');
                      if (key === newlyUnlockedKey) {
-                         // Kurze Verzögerung, damit der Übergang von locked zu unlocked abgeschlossen ist
+                         // Kurze Verzögerung für den Übergang von locked zu unlocked
                          setTimeout(() => li.classList.add('newly-unlocked'), 50);
                     }
                 } else {
@@ -115,12 +114,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
      function updateCounterUI() {
-         document.getElementById('draw-generated-count').textContent = counts.drawGenerated;
-         document.getElementById('draw-saved-count').textContent = counts.drawSaved;
-         document.getElementById('music-generated-count').textContent = counts.musicGenerated;
-         document.getElementById('music-saved-count').textContent = counts.musicSaved;
-         document.getElementById('story-generated-count').textContent = counts.storyGenerated;
-         document.getElementById('story-saved-count').textContent = counts.storySaved;
+         // Sicherstellen, dass die Elemente existieren, bevor man darauf zugreift
+         const drawGenCount = document.getElementById('draw-generated-count');
+         const drawSaveCount = document.getElementById('draw-saved-count');
+         const musicGenCount = document.getElementById('music-generated-count');
+         const musicSaveCount = document.getElementById('music-saved-count');
+         const storyGenCount = document.getElementById('story-generated-count');
+         const storySaveCount = document.getElementById('story-saved-count');
+
+         if (drawGenCount) drawGenCount.textContent = counts.drawGenerated;
+         if (drawSaveCount) drawSaveCount.textContent = counts.drawSaved;
+         if (musicGenCount) musicGenCount.textContent = counts.musicGenerated;
+         if (musicSaveCount) musicSaveCount.textContent = counts.musicSaved;
+         if (storyGenCount) storyGenCount.textContent = counts.storyGenerated;
+         if (storySaveCount) storySaveCount.textContent = counts.storySaved;
      }
 
 
@@ -161,20 +168,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const confettiContainer = container.querySelector('.confetti-container');
         if (!confettiContainer) return;
 
+        confettiContainer.innerHTML = ''; // Alte Confetti entfernen
+
         for (let i = 0; i < 15; i++) { // 15 Partikel
             const confetti = document.createElement('div');
             confetti.classList.add('confetti');
             // Zufällige Startposition und Klasse für Farbe/Delay
             confetti.style.left = `${Math.random() * 100}%`;
-            confetti.classList.add(`c${Math.floor(Math.random() * 6)}`); // Klassen c0-c5
+            const colorClassIndex = Math.floor(Math.random() * 5) + 1; // Index 1-5
+            confetti.classList.add(`c${colorClassIndex}`);
             confetti.style.animationDuration = `${2 + Math.random() * 2}s`; // Variation in Fallzeit
 
             confettiContainer.appendChild(confetti);
 
-            // Partikel nach Animation entfernen
-            confetti.addEventListener('animationend', () => {
-                confetti.remove();
-            });
+            // Partikel nach Animation entfernen (wird jetzt durch innerHTML = '' oben erledigt)
+            // confetti.addEventListener('animationend', () => confetti.remove(), { once: true });
         }
     }
 
@@ -182,9 +190,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupGenerator(config) {
         const generateBtn = document.getElementById(config.generateBtnId);
         const resultArea = document.getElementById(config.resultAreaId);
+        // Sicherstellen, dass Elemente existieren
+        if (!generateBtn || !resultArea) {
+            console.error(`Fehler beim Setup für ${config.type}: Button oder Ergebnisbereich nicht gefunden.`);
+            return;
+        }
         const resultTextElement = resultArea.querySelector('.result-text');
         const saveBtn = document.getElementById(config.saveBtnId);
         const savedListElement = document.getElementById(config.savedListId);
+        // Auch hier prüfen
+         if (!resultTextElement || !saveBtn || !savedListElement) {
+             console.error(`Fehler beim Setup für ${config.type}: Interne Elemente (Text, Speichern, Liste) nicht gefunden.`);
+             return;
+         }
+
         let currentResult = null;
         let isRare = false;
 
@@ -196,21 +215,28 @@ document.addEventListener('DOMContentLoaded', () => {
             resultArea.classList.add('visible');
             saveBtn.style.opacity = '1';
             saveBtn.style.transform = 'translateY(-50%) scale(1)';
+            saveBtn.style.color = ''; // Reset Farbe von potentiellem "schon gespeichert" Feedback
 
              // Confetti bei Generierung!
             triggerConfetti(resultArea);
         }
 
         function loadSavedItems() {
-            const items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
-            updateSavedList(items);
+            try {
+                const items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
+                updateSavedList(items);
+            } catch (e) {
+                console.error(`Fehler beim Laden von ${config.storageKey} aus localStorage:`, e);
+                updateSavedList([]); // Leere Liste anzeigen bei Fehler
+            }
         }
 
         function updateSavedList(items, newlySavedItem = null) {
             savedListElement.innerHTML = '';
             items.forEach((item, index) => {
                 const li = document.createElement('li');
-                li.textContent = item;
+                li.textContent = item; // Setzt den Text sicher (verhindert XSS falls item HTML enthält)
+
                 if (item === newlySavedItem) {
                     li.classList.add('newly-saved'); // Highlight für neues Item
                     setTimeout(() => li.classList.remove('newly-saved'), 1500); // Highlight entfernen
@@ -218,8 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('delete-item');
-                deleteBtn.setAttribute('aria-label', `"${item}" löschen`);
-                deleteBtn.innerHTML = '<iconify-icon icon="ph:trash-simple" width="18"></iconify-icon>';
+                deleteBtn.setAttribute('aria-label', `"${item}" löschen`); // Korrektes Label für Screenreader
+                deleteBtn.innerHTML = '<iconify-icon icon="ph:trash-simple" width="18"></iconify-icon>'; // Sicher, da fester String
                 deleteBtn.onclick = () => deleteItem(index);
                 li.appendChild(deleteBtn);
                 savedListElement.appendChild(li);
@@ -228,74 +254,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function saveItem() {
             if (!currentResult) return;
-            const items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
-            if (!items.includes(currentResult)) {
-                 items.push(currentResult);
-                 localStorage.setItem(config.storageKey, JSON.stringify(items));
-                 updateSavedList(items, currentResult); // Übergebe das neue Item für Highlight
-                 animateSaveButton();
-                 checkAchievements(config.type, 'saved'); // Erfolg prüfen
-            } else {
-                 // Feedback, dass schon gespeichert
-                 saveBtn.style.color = 'orange';
-                 setTimeout(() => saveBtn.style.color = '', 1000);
-            }
+             try {
+                 const items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
+                 if (!items.includes(currentResult)) {
+                     items.push(currentResult);
+                     localStorage.setItem(config.storageKey, JSON.stringify(items));
+                     updateSavedList(items, currentResult); // Übergebe das neue Item für Highlight
+                     animateSaveButton(true); // Erfolg=true
+                     checkAchievements(config.type, 'saved'); // Erfolg prüfen
+                 } else {
+                    // Feedback, dass schon gespeichert
+                    animateSaveButton(false); // Erfolg=false
+                 }
+             } catch (e) {
+                 console.error(`Fehler beim Speichern in ${config.storageKey}:`, e);
+                 alert("Speichern fehlgeschlagen. Ist vielleicht der Speicher voll?");
+             }
         }
 
          function deleteItem(indexToDelete) {
-            let items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
-            items.splice(indexToDelete, 1); // Item am Index entfernen
-            localStorage.setItem(config.storageKey, JSON.stringify(items));
-            updateSavedList(items);
-            // Zähler anpassen (wird nicht automatisch durch checkAchievements gemacht)
-            counts[`${config.type}Saved`] = items.length;
-            saveProgress();
-            updateCounterUI();
+            try {
+                let items = JSON.parse(localStorage.getItem(config.storageKey)) || [];
+                items.splice(indexToDelete, 1); // Item am Index entfernen
+                localStorage.setItem(config.storageKey, JSON.stringify(items));
+                updateSavedList(items);
+                // Zähler anpassen
+                counts[`${config.type}Saved`] = items.length;
+                saveProgress();
+                updateCounterUI();
+                // Überprüfe Kreativ-Trio erneut, falls es vorher erfüllt war
+                if (!achievements.kreativTrio && counts.drawSaved > 0 && counts.musicSaved > 0 && counts.storySaved > 0) {
+                     checkAchievements(config.type, 'saved'); // Ruft checkAchievements erneut auf
+                } else if (achievements.kreativTrio && (counts.drawSaved === 0 || counts.musicSaved === 0 || counts.storySaved === 0)) {
+                    // Optional: Erfolg wieder "sperren", falls Bedingung nicht mehr gilt
+                    // achievements.kreativTrio = false; saveProgress(); updateAchievementUI();
+                }
+
+            } catch (e) {
+                console.error(`Fehler beim Löschen aus ${config.storageKey}:`, e);
+            }
         }
 
-        function animateSaveButton() {
-            saveBtn.style.transition = 'transform 0.1s ease-out, color 0.1s ease-out';
-            saveBtn.style.transform = 'translateY(-50%) scale(1.2)';
-            saveBtn.style.color = var(--success-color); // Grün färben
-            setTimeout(() => {
-                saveBtn.style.transform = 'translateY(-50%) scale(1)';
-                saveBtn.style.color = ''; // Farbe zurücksetzen
-                setTimeout(() => {
-                    saveBtn.style.transition = 'opacity 0.3s ease-out, transform 0.2s ease-out, color 0.2s ease-out';
-                }, 100);
-            }, 150);
+        function animateSaveButton(success) {
+             saveBtn.style.transition = 'transform 0.1s ease-out, color 0.1s ease-out';
+             saveBtn.style.transform = 'translateY(-50%) scale(1.2)';
+             saveBtn.style.color = success ? 'var(--success-color)' : 'orange'; // Grün bei Erfolg, Orange bei Duplikat
+             setTimeout(() => {
+                 saveBtn.style.transform = 'translateY(-50%) scale(1)';
+                 saveBtn.style.color = ''; // Farbe zurücksetzen
+                 setTimeout(() => {
+                     saveBtn.style.transition = 'opacity 0.3s ease-out, transform 0.2s ease-out, color 0.2s ease-out';
+                 }, 100);
+             }, 150);
         }
 
         generateBtn.addEventListener('click', () => {
             generateBtn.disabled = true;
             generateBtn.innerHTML = '<iconify-icon icon="eos-icons:loading" width="20" style="margin-right: 8px;"></iconify-icon> Generiere...';
+            resultTextElement.classList.remove('rare-result'); // Styling zurücksetzen
 
             setTimeout(() => {
-                let randomPrompt;
+                let randomPrompt = "Fehler beim Generieren"; // Fallback
                 let rare = false;
                 const promptSet = promptsData[config.type];
-                const rareChance = 0.15; // 15% Chance auf seltenen Prompt
+                const rareChance = 0.15; // 15% Chance
 
-                if (promptSet.rare.length > 0 && Math.random() < rareChance) {
-                    const randomIndex = Math.floor(Math.random() * promptSet.rare.length);
-                    randomPrompt = promptSet.rare[randomIndex];
-                    rare = true;
-                    checkAchievements(config.type, 'rare_found'); // Seltenen Fund melden
+                // Sicherheitschecks für Prompt-Daten
+                if (promptSet && promptSet.common && promptSet.common.length > 0) {
+                    if (promptSet.rare && promptSet.rare.length > 0 && Math.random() < rareChance) {
+                        const randomIndex = Math.floor(Math.random() * promptSet.rare.length);
+                        randomPrompt = promptSet.rare[randomIndex];
+                        rare = true;
+                        checkAchievements(config.type, 'rare_found');
+                    } else {
+                        const randomIndex = Math.floor(Math.random() * promptSet.common.length);
+                        randomPrompt = promptSet.common[randomIndex];
+                    }
                 } else {
-                    const randomIndex = Math.floor(Math.random() * promptSet.common.length);
-                    randomPrompt = promptSet.common[randomIndex];
+                    console.error(`Keine gültigen Prompts für Typ ${config.type} gefunden!`);
                 }
 
                 displayResult(randomPrompt, rare);
-                checkAchievements(config.type, 'generated'); // Generierung melden
+                checkAchievements(config.type, 'generated');
 
                 generateBtn.disabled = false;
                 generateBtn.innerHTML = `<iconify-icon icon="${config.buttonIcon}" width="20" style="margin-right: 8px;"></iconify-icon> ${config.buttonText}`;
-            }, 600); // Etwas längere Ladezeit für besseren Effekt
+            }, 600);
         });
 
         saveBtn.addEventListener('click', saveItem);
-        loadSavedItems();
+        loadSavedItems(); // Initiale Liste laden
     }
 
     // --- Initialisierung ---
@@ -314,15 +362,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Intersection Observer für Hintergrund ---
     const sections = document.querySelectorAll('.generator-section');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const gradient = entry.target.dataset.gradient;
-                document.documentElement.style.setProperty('--current-bg-gradient', gradient);
-            }
-        });
-    }, { threshold: 0.6 });
-    sections.forEach(section => observer.observe(section));
+    if (typeof IntersectionObserver === 'function') { // Prüfen ob IntersectionObserver unterstützt wird
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const gradient = entry.target.dataset.gradient;
+                    if (gradient) { // Sicherstellen, dass ein Gradient definiert ist
+                       document.documentElement.style.setProperty('--current-bg-gradient', gradient);
+                    }
+                }
+            });
+        }, { threshold: 0.6 });
+        sections.forEach(section => observer.observe(section));
+    } else {
+        // Fallback, falls IntersectionObserver nicht unterstützt wird (z.B. sehr alte Browser)
+         console.warn("IntersectionObserver wird nicht unterstützt, dynamischer Hintergrundwechsel deaktiviert.");
+    }
+
 
     // --- Initiale UI Updates beim Laden ---
      updateCounterUI();
