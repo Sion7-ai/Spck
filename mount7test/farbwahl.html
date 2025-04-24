@@ -19,11 +19,11 @@
         }
 
         .color-picker {
-            width: 297px; /* Breite beibehalten */
+            width: 297px;
             border-top: 1px solid #e0e0e0;
             border-bottom: 1px solid #e0e0e0;
             padding: 12px 0;
-            background-color: #E8E8E8; /* Hintergrundfarbe */
+            background-color: #E8E8E8;
             box-sizing: border-box;
         }
 
@@ -62,35 +62,48 @@
             width: 23px;
             height: 23px;
             border-radius: 14px;
-            /* Standard-Rahmen */
             border: 0.5px solid #B5B5B5;
             padding: 0;
             cursor: pointer;
             display: inline-block;
             vertical-align: middle;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease; /* Border zur Transition hinzufügen */
+            /* Füge opacity zur Transition hinzu */
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease, opacity 0.2s ease;
             box-sizing: border-box;
-            background-clip: padding-box; /* Verhindert, dass Hintergrund unter dem Rand durchscheint */
+            background-clip: padding-box;
+            opacity: 1; /* Standard-Deckkraft */
         }
 
         .color-swatch:hover {
+            /* Nur Hover-Effekt, wenn nicht faded */
+            /* Wird durch spezifischere Regeln unten ggf. überschrieben */
             transform: scale(1.1);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        /* NEU: Style für den ausgewählten Swatch */
+        /* Style für den ausgewählten Swatch */
         .color-swatch.selected {
-            border-radius: 14px; /* Bleibt gleich, aber explizit für Spezifität */
-            border: 1.5px solid #002E40; /* Dickerer, dunklerer Rahmen */
-            /* Optional: Kleinerer Innenbereich durch dickeren Border,
-               kann man durch Anpassung von width/height oder box-sizing ausgleichen,
-               aber bei 1.5px ist der Effekt gering */
+            border: 1.5px solid #002E40;
+            opacity: 1; /* Sicherstellen, dass der ausgewählte immer volle Deckkraft hat */
         }
 
-        /* Überschreibe Hover-Schatten für ausgewählte Elemente, falls gewünscht */
+        /* Überschreibe Hover-Schatten für ausgewählte Elemente */
         .color-swatch.selected:hover {
-             box-shadow: 0 2px 6px rgba(0, 46, 64, 0.3); /* Evtl. leicht angepasster Schatten */
-             /* transform: scale(1.05); Optional: Etwas weniger starker Hover-Zoom */
+             box-shadow: 0 2px 6px rgba(0, 46, 64, 0.3);
+             transform: scale(1.05); /* Optional: Etwas weniger starker Hover-Zoom */
+        }
+
+        /* NEU: Style für die nicht ausgewählten Swatches, wenn einer ausgewählt ist */
+        .color-swatch.faded {
+            opacity: 0.5; /* Reduzierte Deckkraft */
+            /* Optional: Hover-Effekte für faded Swatches reduzieren oder entfernen */
+            /* z.B.: */
+            /* cursor: default; */
+        }
+        .color-swatch.faded:hover {
+            /* Kein oder reduzierter Hover-Effekt für ausgeblendete */
+             transform: none;
+             box-shadow: none;
         }
 
 
@@ -131,15 +144,39 @@
         // Füge einen Event Listener zu jedem Swatch hinzu
         swatches.forEach(swatch => {
             swatch.addEventListener('click', function() {
-                // 1. Entferne die 'selected'-Klasse von ALLEN Swatches
-                swatches.forEach(s => s.classList.remove('selected'));
+                const clickedSwatch = this; // Den geklickten Swatch merken
 
-                // 2. Füge die 'selected'-Klasse zum angeklickten Swatch hinzu
-                this.classList.add('selected');
+                // Prüfen, ob der geklickte Swatch bereits ausgewählt war
+                const wasSelected = clickedSwatch.classList.contains('selected');
+
+                // 1. Zuerst IMMER alle speziellen Klassen entfernen (Reset)
+                swatches.forEach(s => {
+                    s.classList.remove('selected');
+                    s.classList.remove('faded'); // Wichtig: Auch faded entfernen
+                });
+
+                // 2. Nur wenn der Swatch NICHT bereits ausgewählt war, Aktionen ausführen
+                if (!wasSelected) {
+                    // a) Füge 'selected' zum geklickten Swatch hinzu
+                    clickedSwatch.classList.add('selected');
+
+                    // b) Füge 'faded' zu ALLEN ANDEREN Swatches hinzu
+                    swatches.forEach(s => {
+                        if (s !== clickedSwatch) { // Nur die, die NICHT der geklickte sind
+                            s.classList.add('faded');
+                        }
+                    });
+                }
+                // Wenn der Swatch bereits ausgewählt war und erneut geklickt wird,
+                // passiert nach dem Reset nichts weiter - alle sind wieder normal (keine Auswahl).
 
                 // Optional: Hier könntest du den Wert der ausgewählten Farbe speichern oder weiterverarbeiten
-                // const selectedColor = this.style.backgroundColor;
-                // console.log('Ausgewählte Farbe:', selectedColor);
+                if (!wasSelected) {
+                    const selectedColor = clickedSwatch.style.backgroundColor;
+                    console.log('Ausgewählte Farbe:', selectedColor);
+                } else {
+                    console.log('Auswahl aufgehoben.');
+                }
             });
         });
     </script>
