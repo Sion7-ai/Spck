@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dummy Website - Neon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Schwarzer Hintergrund */
+            color: #fff; /* Standardtextfarbe */
+        }
+        /* Neon Yellow Akzentfarbe */
+        .text-neon-yellow { color: #CCFF00; }
+        .bg-neon-yellow { background-color: #CCFF00; }
+        .border-neon-yellow { border-color: #CCFF00; }
+
+        /* Flat Button Stil (Neon Rand, Transparenter Hintergrund) */
+        .btn-flat-neon {
+            background-color: transparent;
+            color: #CCFF00;
+            padding: 0.75rem 2rem;
+            border: 2px solid #CCFF00; /* Neon Rand */
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-flat-neon:hover {
+            background-color: #CCFF00; /* Neon Füllung bei Hover */
+            color: #000; /* Schwarzer Text bei Hover */
+        }
+
+        /* Flat Button Stil (Schwarzer Hintergrund, Neon Text/Rand) */
+        .btn-flat-black-neon {
+            background-color: #000; /* Schwarzer Hintergrund */
+            color: #CCFF00; /* Neon Text */
+            padding: 0.75rem 2rem;
+            border: 2px solid #CCFF00; /* Neon Rand */
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+         .btn-flat-black-neon:hover {
+            background-color: #CCFF00; /* Neon Füllung bei Hover */
+            color: #000; /* Schwarzer Text bei Hover */
+        }
+
+
+        /* Große Großbuchstaben-Typografie als Trenner/Element */
+        .large-neon-text {
+            font-size: 3rem; /* Standardgröße */
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #CCFF00;
+            word-break: break-word; /* Verhindert Überlauf */
+            line-height: 1;
+            /* Standardtextausrichtung entfernt, wird durch übergeordnetes Element oder spezifische Klasse gesetzt */
+        }
+        /* Spezifischer Stil für großen Text auf Neon Hintergrund */
+        .large-neon-text.on-neon-bg {
+            color: #000; /* Schwarzer Text auf Neon Hintergrund */
+        }
+
+        @media (min-width: 768px) {
+            .large-neon-text {
+                font-size: 6rem; /* Größer auf mittleren Bildschirmen */
+            }
+        }
+        @media (min-width: 1024px) {
+            .large-neon-text {
+                font-size: 9rem; /* Noch größer auf großen Bildschirmen */
+            }
+        }
+
+        /* Sicherstellen, dass Bilder responsiv sind */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Entfernt zusätzlichen Platz unter dem Bild */
+        }
+
+        /* Spezifische Anpassungen für Asymmetrie */
+        .hero-text-block {
+            /* Textblock außerhalb der Mitte positionieren */
+            margin-right: auto; /* Nach links schieben */
+             /* Oder absolute Positionierung für mehr Kontrolle */
+             /* position: absolute; left: 10%; top: 50%; transform: translateY(-50%); */
+        }
+
+        .about-section-layout > div:first-child {
+             /* Abstand/Ausrichtung für Asymmetrie steuern */
+             padding-right: 2rem; /* Platz rechts vom Bild auf dem Desktop hinzufügen */
+        }
+         .about-section-layout > div:last-child {
+             /* Abstand/Ausrichtung für Asymmetrie steuern */
+             padding-left: 2rem; /* Platz links vom Text auf dem Desktop hinzufügen */
+        }
+        @media (max-width: 767px) {
+             .about-section-layout > div:first-child,
+             .about-section-layout > div:last-child {
+                 padding: 0; /* Abstand auf kleinen Bildschirmen entfernen */
+             }
+        }
+
+         /* Flex Container für Überschrift und Icon */
+        .headline-with-icon {
+            display: flex;
+            align-items: center;
+            /* justify-content und gap basierend auf gewünschter Ausrichtung anpassen */
+        }
+
+        /* Mobiles Menü Overlay */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95); /* Halbtransparentes Schwarz */
+            z-index: 1000; /* Über anderem Inhalt */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Inhalt am unteren Rand ausrichten */
+            padding: 2rem;
+            opacity: 0; /* Anfangs versteckt */
+            visibility: hidden; /* Komplett verstecken */
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Fade Übergang */
+        }
+
+        .mobile-menu-overlay.is-open {
+            opacity: 1; /* Einblenden */
+            visibility: visible; /* Anzeigen */
+        }
+
+        .mobile-menu-overlay nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left; /* Links linksbündig ausrichten */
+        }
+
+        .mobile-menu-overlay nav ul li {
+            margin-bottom: 1.5rem; /* Abstand zwischen den Links */
+        }
+
+        .mobile-menu-overlay nav ul li a {
+            color: #CCFF00; /* Neongelbe Links */
+            font-size: 2.5rem; /* Große Schriftgröße */
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-overlay nav ul li a:hover {
+            color: #fff; /* Weiß bei Hover */
+        }
+
+        /* Hamburger Icon */
+        .hamburger-icon {
+            display: none; /* Standardmäßig versteckt */
+            cursor: pointer;
+            z-index: 1001; /* Über Overlay */
+        }
+
+        @media (max-width: 767px) {
+            .hamburger-icon {
+                display: block; /* Auf kleinen Bildschirmen anzeigen */
+            }
+            .main-nav {
+                display: none; /* Hauptnavigation auf kleinen Bildschirmen verstecken */
+            }
+             /* Header Layout für Mobile anpassen */
+            header .container {
+                justify-content: space-between;
+            }
+        }
+
+        /* Styling für das Hintergrundvideo */
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Teile des Videos, die überlaufen, verstecken */
+        }
+
+        .hero-video-container video {
+            position: absolute;
+            top: 50%; /* Vertikal zentrieren */
+            left: 50%; /* Horizontal zentrieren */
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%); /* Für Zentrierung anpassen */
+            z-index: 0; /* Unter Overlay und Inhalt */
+            object-fit: cover; /* Sicherstellen, dass das Video den Container abdeckt */
+            /* Filter entfernt */
+            /* filter: contrast(1.8) saturate(2.5) blur(1px) hue-rotate(0deg); */
+            /* Animation entfernt */
+            /* animation: subtle-glitch 5s infinite linear; */
+        }
+
+        /* Keyframes für einen subtilen Glitch/Flicker Effekt (entfernt) */
+        /*
+        @keyframes subtle-glitch {
+            0% { opacity: 1; filter: contrast(1.8) saturate(2.5) blur(1px) hue-rotate(0deg); }
+            5% { opacity: 0.9; filter: contrast(1.9) saturate(2.6) blur(0.8px) hue-rotate(5deg); }
+            10% { opacity: 1; filter: contrast(1.8) saturate(2.5) blur(1px) hue-rotate(0deg); }
+            15% { filter: contrast(1.8) saturate(2.5) blur(1px) hue-rotate(0deg); }
+            16% { filter: contrast(2.0) saturate(2.8) blur(0.5px) hue-rotate(-5deg); }
+            17% { filter: contrast(1.8) saturate(2.5) blur(1px) hue-rotate(0deg); }
+            25% { opacity: 1; }
+            26% { opacity: 0.85; }
+            27% { opacity: 1; }
+            100% { opacity: 1; filter: contrast(1.8) saturate(2.5) blur(1px) hue-rotate(0deg); }
+        }
+        */
+
+
+    </style>
+</head>
+<body class="bg-black text-white">
+
+    <header class="bg-black py-4 border-b border-neon-yellow">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                 <span class="iconify text-neon-yellow text-3xl" data-icon="mdi:cube-outline"></span>
+                <div class="text-2xl font-bold text-white">
+                    DUMMY<span class="text-neon-yellow">SITE</span>
+                </div>
+            </div>
+            <nav class="main-nav flex items-center space-x-6">
+                <ul class="flex space-x-4 text-white uppercase">
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">HOME <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">ABOUT <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">SERVICES <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">CONTACT <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                </ul>
+                 <button class="btn-flat-neon">GET STARTED</button>
+            </nav>
+            <div class="hamburger-icon" id="hamburgerBtn">
+                 <span class="iconify text-neon-yellow text-4xl" data-icon="mdi:menu"></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <nav>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">SERVICES</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+         <div class="absolute top-4 right-4">
+              <span class="iconify text-neon-yellow text-4xl cursor-pointer" data-icon="mdi:close" id="closeMenuBtn"></span>
+         </div>
+    </div>
+
+
+    <section class="relative h-[500px] md:h-[600px] flex items-center justify-start overflow-hidden">
+        <div class="hero-video-container">
+             <video autoplay loop muted playsinline>
+                <source src="https://sion7-ai.github.io/Spck/test/wave.mp4" type="video/mp4">
+                </video>
+        </div>
+
+        <div class="absolute inset-0 bg-black opacity-70 z-10"></div>
+
+        <div class="container mx-auto px-4 relative z-20 text-white max-w-2xl hero-text-block">
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4 text-neon-yellow uppercase">
+                Interpilalves reardecl : arlivag anadict
+            </h1>
+            <p class="text-lg md:text-xl mb-8 uppercase">
+                Sherrblogs in frgor the modells
+            </p>
+            <a href="#" class="btn-flat-neon">
+                MEHR ERFAHREN
+            </a>
+        </div>
+    </section>
+
+    <section class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="headline-with-icon justify-start gap-4">
+                 <h2 class="large-neon-text text-left">FEATURES</h2>
+                 <span class="iconify text-neon-yellow text-4xl" data-icon="mdi:arrow-right"></span>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-black p-8 border border-neon-yellow text-left">
+                    <span class="iconify text-neon-yellow text-5xl mb-4" data-icon="mdi:home-outline"></span>
+                    <h3 class="text-xl font-semibold mb-4 text-white uppercase">Home Sittoring</h3>
+                    <p class="text-gray-400 text-sm uppercase">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </div>
+                <div class="bg-black p-8 border border-neon-yellow text-left">
+                    <span class="iconify text-neon-yellow text-5xl mb-4" data-icon="mdi:account-group-outline"></span>
+                    <h3 class="text-xl font-semibold mb-4 text-white uppercase">Obem Homeans</h3>
+                    <p class="text-gray-400 text-sm uppercase">
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                </div>
+                <div class="bg-black p-8 border border-neon-yellow text-left">
+                    <span class="iconify text-neon-yellow text-5xl mb-4" data-icon="mdi:shield-check-outline"></span>
+                    <h3 class="text-xl font-semibold mb-4 text-white uppercase">Numanthy Eleamnce</h3>
+                    <p class="text-gray-400 text-sm uppercase">
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-black">
+        <div class="container mx-auto px-4">
+            <div class="headline-with-icon justify-end gap-4">
+                 <span class="iconify text-neon-yellow text-4xl" data-icon="mdi:arrow-left"></span>
+                 <h2 class="large-neon-text text-right">ABOUT US</h2>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-16 bg-black">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center about-section-layout">
+            <div class="md:order-1 border border-neon-yellow">
+                <img src="https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=" alt="Team Meeting" class="w-full h-auto">
+            </div>
+            <div class="md:order-2 text-white uppercase">
+                <h2 class="text-3xl font-bold mb-6 text-neon-yellow">CLER FUOT</h2>
+                <p class="mb-4">
+                    LES A CORDEMAND LEVATIOS
+                </p>
+                 <p class="mb-6 text-gray-400 text-sm">
+                    SED UT PERSPECIATIS UNDE OMNIS ISTE NATUS ERROR SIT VOLUPTATEM ACCUSANTIUM DOLOREMQUE LAUDANTIUM, TOTAM REM APERIAM, EAQUE IPSA QUAE AB ILLO INVENTORE VERITATIS ET QUASI ARCHITECTO BEATAE VITAE DICTA SUNT EXPLICABO. NEMO ENIM IPSAM VOLUPTATEM QUIA VOLUPTAS SIT ASPERNATUR AUT ODIT AUT FUGIT, SED QUIA CONSEQUUNTUR MAGNI DOLORES EOS QUI RATIONE VOLUTPATEM SEQUI NESCIUNT. NEQUE PORRO QUISQUAM EST, QUI DOLOREM IPSUM QUIA DOLOR SIT AMET, CONSECTETUR, ADIPISCI VELIT.
+                </p>
+                 <a href="#" class="btn-flat-neon">
+                    LEARN MORE
+                </a>
+            </div>
+        </div>
+    </section>
+
+     <section class="py-20 bg-neon-yellow text-black">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center mb-6">
+                 <span class="iconify text-black text-6xl" data-icon="mdi:email-newsletter"></span>
+            </div>
+
+            <h2 class="large-neon-text on-neon-bg mb-8">
+                STAY UPDATED
+            </h2>
+
+            <p class="text-lg mb-8 uppercase">
+                Subscribe to our newsletter for the latest news and updates.
+            </p>
+
+            <form class="max-w-md mx-auto">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input type="email" placeholder="ENTER YOUR EMAIL" class="flex-grow px-4 py-3 bg-white text-black border border-black focus:outline-none focus:ring-2 focus:ring-black placeholder-gray-600 uppercase text-sm" style="border-radius: 0;">
+                    <button type="submit" class="btn-flat-black-neon">SUBSCRIBE</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <footer class="bg-black text-white py-12 border-t border-neon-yellow">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 uppercase">
+            <div>
+                 <div class="flex items-center space-x-2 mb-4">
+                    <span class="iconify text-neon-yellow text-3xl" data-icon="mdi:cube-outline"></span>
+                    <div class="text-2xl font-bold text-white">
+                        DUMMY<span class="text-neon-yellow">SITE</span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-sm">© 2023 DUMMYSITE. ALLE RECHTE VORBEHALTEN.</p>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-neon-yellow">ANCUTE</h3>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">HOME <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">ABOUT <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">SERVICES <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">CONTACT <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                </ul>
+            </div>
+
+            <div>
+                 <h3 class="text-xl font-semibold mb-4 text-neon-yellow">GERIENCIAS</h3>
+                 <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">SERVICE ONE <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">SERVICE TWO <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">SERVICE THREE <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                    <li><a href="#" class="hover:text-neon-yellow transition duration-300 flex items-center">SERVICE FOUR <span class="iconify ml-1 text-neon-yellow" data-icon="mdi:arrow-right"></span></a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-neon-yellow">ABOUT</h3>
+                 <p class="text-gray-400 mb-4 text-sm">GET IN TOUCH WITH US.</p>
+                 <form>
+                    <input type="email" placeholder="YOUR EMAIL" class="w-full px-4 py-2 bg-gray-700 text-white border border-neon-yellow mb-2 focus:outline-none focus:ring-2 focus:ring-neon-yellow placeholder-gray-500 uppercase text-sm" style="border-radius: 0;">
+                    <textarea placeholder="YOUR MESSAGE" rows="3" class="w-full px-4 py-2 bg-gray-700 text-white border border-neon-yellow mb-2 focus:outline-none focus:ring-2 focus:ring-neon-yellow placeholder-gray-500 uppercase text-sm" style="border-radius: 0;"></textarea>
+                    <button type="submit" class="btn-flat-neon w-full">SEND</button>
+                 </form>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+        // Menü öffnen
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenuOverlay.classList.add('is-open');
+        });
+
+        // Menü schließen
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenuOverlay.classList.remove('is-open');
+        });
+
+        // Menü schließen, wenn ein Link geklickt wird (optional)
+        mobileMenuOverlay.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('is-open');
+            });
+        });
+
+    </script>
+
+</body>
+</html>
