@@ -3,99 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kreativstudio - Inspiriert von 5S</title>
+    <title>Caleb Raney - Freelance Designer & Webflow Developer</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
 </head>
 <body>
 
-    <div class="preloader">
-        <div class="loader-line"></div>
-    </div>
-
-    <header>
-        <div class="logo">
-            <!-- Platzhalter-Logo mit Iconify -->
-            <span class="iconify" data-icon="mdi:alpha-s-box-outline" data-inline="false"></span>S
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Work</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="header-right">
-             <div class="language">
-                <span>EN</span> | <span>FR</span>
-             </div>
-             <div class="studio-tag">SS IS A CREATIVE STUDIO.</div>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                Caleb<br>
+                <span class="logo-last-name">Raney</span>
+            </div>
+            <button class="menu-toggle" aria-label="Menü öffnen/schließen" aria-expanded="false">
+                <span class="iconify hamburger-icon" data-icon="material-symbols:menu-rounded" data-width="28" data-height="28"></span>
+                <span class="iconify close-icon" data-icon="material-symbols:close-rounded" data-width="28" data-height="28"></span>
+            </button>
         </div>
     </header>
 
+    <!-- Full Screen Menu Overlay -->
+    <nav class="menu-overlay" id="menuOverlay">
+        <div class="menu-content">
+            <ul>
+                <li><a href="#home">Home</a><span class="menu-number">1.</span></li>
+                <li><a href="#work">Work</a><span class="menu-number">2.</span></li>
+                <li><a href="#about">About</a><span class="menu-number">3.</span></li>
+                <li><a href="#contact">Contact</a><span class="menu-number">4.</span></li>
+            </ul>
+        </div>
+    </nav>
+
     <main>
-        <section class="hero">
-            <h1 class="animated-headline">
-                <span>IT TAKES 7 SECONDS</span>
-                <span>TO MAKE AN IMPRESSION</span>
-                <span>WE DO IT IN 5</span>
-            </h1>
-            <div class="preview-reel-container">
-                <div class="preview-reel">
-                    <!-- Bilder von Pexels als Platzhalter für Video-Clips -->
-                    <img id="reel-image" src="https://images.pexels.com/photos/7130560/pexels-photo-7130560.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Preview Reel Image">
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section scroll-reveal">
+             <div class="hero-background-circles">
+                 <div class="circle circle-1"></div>
+                 <div class="circle circle-2"></div>
+                 <div class="circle circle-3"></div>
+            </div>
+            <div class="hero-content">
+                <h1>
+                    Caleb Raney is a<br>
+                    <span class="serif-italic">freelance designer &</span><br>
+                    webflow developer
+                </h1>
+                <div class="hero-buttons">
+                    <a href="#work" class="btn btn-primary">See My Work</a>
+                    <span class="button-connector"></span>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
                 </div>
-                <button class="play-reel-button">PLAY REEL</button>
             </div>
         </section>
 
-        <section class="projects">
-             <h2 class="section-headline scroll-reveal">
-                <span>PROJECTS THAT</span>
-                <span>MAKE US BLUSH</span>
-            </h2>
-            <div class="project-grid">
-                <div class="project-item scroll-reveal">
-                    <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Projekt 1">
-                    <p>Projekt Alpha</p>
+        <!-- Specializing In Section -->
+        <section id="specializing-in" class="specializing-section scroll-reveal">
+            <div class="content-wrapper">
+                <p class="specializing-intro">
+                    Specializing<br>
+                    In — Creating
+                </p>
+                <div class="rotating-text-container">
+                    <span id="rotatingText" class="rotating-text">BOLD</span>
                 </div>
-                 <div class="project-item scroll-reveal">
-                    <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Projekt 2">
-                    <p>Projekt Beta</p>
-                </div>
-                 <div class="project-item scroll-reveal">
-                    <img src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Projekt 3">
-                    <p>Projekt Gamma</p>
-                </div>
-                 <div class="project-item scroll-reveal">
-                    <img src="https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Projekt 4">
-                    <p>Projekt Delta</p>
-                </div>
+                <p class="specializing-main">Brand Identities</p>
+                <p class="specializing-amp">&</p>
+                <p class="specializing-main serif-large">Websites</p>
+                <span class="iconify arrow-down" data-icon="material-symbols:arrow-downward" data-width="32" data-height="32"></span>
             </div>
-             <div class="about-section scroll-reveal">
-                <p>5S IS A CREATIVE STUDIO BORN AND BRED IN MONTREAL. OUR APPROACH INFUSES STRATEGIC INSIGHT INTO STORYTELLING FOR BRANDS AND AGENCIES SEEKING TO STAND OUT.</p>
-                <a href="#" class="learn-more">LEARN MORE</a>
+             <!-- Placeholder for Diagonal Wipe Transition Element -->
+             <div class="diagonal-wipe"></div>
+        </section>
+
+        <!-- You bring the vision Section -->
+        <section id="vision" class="vision-section scroll-reveal">
+            <div class="content-wrapper">
+                <h2>
+                    You bring the<br>
+                    <span class="serif-italic">vision,</span><br>
+                    I help you<br>
+                    <span class="serif-italic stand-out">stand out.</span>
+                    <span class="animated-lines">
+                        <span></span><span></span><span></span>
+                    </span>
+                </h2>
+                <p>
+                    I uncover what was already a part of your company. I take your goals, your passions, and all the tiny details that make you stand above the rest — and I give them a voice and a presence that people can’t ignore. You already know that what you do is game changing, but I can help others to understand that. So let’s get started, I’d love to hear what you’re creating and become a part of it.
+                </p>
             </div>
         </section>
 
-        <section class="clients scroll-reveal">
-             <h3>CLIENTS</h3>
-             <div class="client-logos">
-                <!-- Beispiel-Logos (Text statt Bilder hier) -->
-                <span>Lancôme</span>
-                <span>Ford</span>
-                <span>Little Burgundy</span>
-                <span>Adidas</span>
-             </div>
+        <!-- Selected Work Section -->
+        <section id="work" class="selected-work-section scroll-reveal">
+            <div class="content-wrapper">
+                <div class="work-header">
+                    <h3>Selected Work</h3>
+                    <div class="work-filters">
+                        <a href="#">ALL WORK →</a> | <a href="#" class="active">SELECTED WORK →</a>
+                    </div>
+                </div>
+                <ul class="work-list">
+                    <li><a href="#"><span>01</span> Ivella <span class="iconify arrow-right" data-icon="material-symbols:arrow-right-alt-rounded" data-width="24" data-height="24"></span></a></li>
+                    <li><a href="#"><span>02</span> Linea 7 <span class="iconify arrow-right" data-icon="material-symbols:arrow-right-alt-rounded" data-width="24" data-height="24"></span></a></li>
+                    <li><a href="#"><span>03</span> IdolRoc <span class="iconify arrow-right" data-icon="material-symbols:arrow-right-alt-rounded" data-width="24" data-height="24"></span></a></li>
+                    <li><a href="#"><span>04</span> My Story <span class="iconify arrow-right" data-icon="material-symbols:arrow-right-alt-rounded" data-width="24" data-height="24"></span></a></li>
+                </ul>
+            </div>
         </section>
 
     </main>
 
-    <!-- Iconify Skript -->
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-    <!-- Eigenes Skript -->
+    <!-- Pexels Image Placeholder - Example for Project Page Concept -->
+    <!-- <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width="1260" height="750" alt="Modern interior design example from Pexels"> -->
+
     <script src="script.js"></script>
 </body>
 </html>

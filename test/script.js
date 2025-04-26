@@ -1,129 +1,83 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const preloader = document.querySelector('.preloader');
+    // --- Menu Toggle ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menuOverlay = document.getElementById('menuOverlay');
     const body = document.body;
-    const heroHeadlineSpans = document.querySelectorAll('.animated-headline span');
-    const reelImage = document.getElementById('reel-image');
-    const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
 
-    // --- Preloader ---
-    window.addEventListener('load', () => {
-        setTimeout(() => { // Kurze Verzögerung nach dem Laden
-             preloader.classList.add('hidden');
-             // Start animations after preloader is gone
-             startHeroAnimation();
-        }, 200); // Minimalzeit für den Ladebalken
-    });
-
-
-    // --- Hero Headline Animation ---
-    function startHeroAnimation() {
-        heroHeadlineSpans.forEach((span, index) => {
-            // Add data-text for potential CSS glitch effect use
-            span.parentElement.dataset.text = span.parentElement.textContent.trim().replace(/\s+/g, ' ');
-
-            // Staggered reveal
-            setTimeout(() => {
-                span.classList.add('visible');
-            }, index * 400); // Verzögerung zwischen den Zeilen
+    if (menuToggle && menuOverlay) {
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            body.classList.toggle('menu-open');
+            // Optional: Focus management for accessibility can be added here
         });
     }
-    // Initialer Start (falls kein Preloader verwendet wird oder als Fallback)
-    // startHeroAnimation(); // Wird jetzt nach dem Preloader gestartet
 
+    // --- Rotating Text in "Specializing In" Section ---
+    const rotatingTextElement = document.getElementById('rotatingText');
+    const words = ["BOLD", "Unexpected", "ETHICAL", "Growing"];
+    let currentWordIndex = 0;
 
-    // --- Preview Reel Image Cycling ---
-    const reelImages = [
-        // Füge hier mehrere Pexels Bild-URLs ein
-        'https://images.pexels.com/photos/7130560/pexels-photo-7130560.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&w=600',
-        'https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&w=600'
-    ];
-    let currentImageIndex = 0;
+    function updateRotatingText() {
+        if (!rotatingTextElement) return;
 
-    function changeReelImage() {
-        if (!reelImage) return;
+        const currentWord = words[currentWordIndex];
+        const nextWordIndex = (currentWordIndex + 1) % words.length;
+        const nextWord = words[nextWordIndex];
 
-        reelImage.classList.add('fade-out'); // Start fade out
+        // Add exit animation class
+        rotatingTextElement.classList.add('exit');
 
+        // After exit animation duration, change text and start enter animation
         setTimeout(() => {
-            currentImageIndex = (currentImageIndex + 1) % reelImages.length;
-            reelImage.src = reelImages[currentImageIndex];
+            rotatingTextElement.textContent = nextWord;
+            rotatingTextElement.classList.remove('exit');
+            rotatingTextElement.classList.add('enter');
 
-            // Warten bis das neue Bild potenziell geladen ist, dann einblenden
-             // (Eine robustere Lösung würde das 'onload' Event nutzen)
-            reelImage.onload = () => {
-                 reelImage.classList.remove('fade-out'); // Fade in
-            }
-            // Fallback, falls onload nicht feuert (z.B. bei gecachten Bildern)
-            setTimeout(() => reelImage.classList.remove('fade-out'), 50);
+             // Remove enter class after animation to reset state
+             setTimeout(() => {
+                 rotatingTextElement.classList.remove('enter');
+             }, 300); // Match CSS transition duration
 
-        }, 500); // Muss zur CSS transition passen
+            currentWordIndex = nextWordIndex;
+        }, 300); // Match CSS transition duration
     }
 
-    if (reelImage) {
-      setInterval(changeReelImage, 2000); // Bild alle 2 Sekunden wechseln
+    if (rotatingTextElement) {
+        // Initial setup if needed
+         rotatingTextElement.textContent = words[0];
+         // Start the rotation interval
+        setInterval(updateRotatingText, 2000); // Change word every 2 seconds (1.5s visible + 0.5s transition)
     }
 
 
-    // --- Scroll Reveal Animation ---
+    // --- Simple Scroll Reveal Animation ---
+    const revealElements = document.querySelectorAll('.scroll-reveal');
+
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Optional: Animation nur einmal auslösen
+                entry.target.classList.add('is-visible');
+                // Optional: Unobserve after reveal to save resources
                 // observer.unobserve(entry.target);
-            } else {
-                 // Optional: Animation zurücksetzen, wenn Element wieder aus dem Viewport verschwindet
-                 entry.target.classList.remove('visible');
             }
+            // Optional: Add logic to remove 'is-visible' when scrolling back up
+            // else {
+            //     entry.target.classList.remove('is-visible');
+            // }
         });
     }, {
-        root: null, // Beobachtet im Verhältnis zum Viewport
-        threshold: 0.1, // Element muss zu 10% sichtbar sein
-        rootMargin: '0px 0px -50px 0px' // Trigger etwas früher/später auslösen
+        root: null, // Use the viewport as the root
+        threshold: 0.1 // Trigger when 10% of the element is visible
     });
 
-    scrollRevealElements.forEach(el => {
+    revealElements.forEach(el => {
         revealObserver.observe(el);
     });
 
-
-    // --- Hintergrundfarbe beim Scrollen ändern (Beispiel) ---
-    const projectsSection = document.querySelector('.projects');
-    const clientsSection = document.querySelector('.clients');
-
-    const colorObserver = new IntersectionObserver((entries) => {
-         entries.forEach(entry => {
-            if(entry.target === projectsSection) {
-                if (entry.isIntersecting) {
-                     body.style.backgroundColor = 'var(--primary-bg-light)';
-                 } else {
-                      // Wenn wir wieder nach oben scrollen und .projects verlässt den Viewport
-                     const heroSection = document.querySelector('.hero');
-                     // Prüfen ob Hero Section sichtbar ist, um Flackern zu vermeiden
-                     const heroRect = heroSection.getBoundingClientRect();
-                     if (heroRect.top >= 0 && heroRect.bottom <= window.innerHeight) {
-                         body.style.backgroundColor = 'var(--primary-bg-color)';
-                     }
-                 }
-            } else if (entry.target === clientsSection) {
-                 if (entry.isIntersecting) {
-                     body.style.backgroundColor = 'var(--primary-bg-color)';
-                 } else {
-                     // Prüfen ob Projects Section noch sichtbar ist, wenn Clients nach oben verschwindet
-                     const projectsRect = projectsSection.getBoundingClientRect();
-                     if (projectsRect.bottom > 0 && projectsRect.top < window.innerHeight / 2) { // Wenn die Projektsection noch halb sichtbar ist
-                        body.style.backgroundColor = 'var(--primary-bg-light)';
-                     }
-                 }
-            }
-         });
-    }, { threshold: 0.3 }); // 30% Sichtbarkeit für Farbwechsel
-
-    if(projectsSection) colorObserver.observe(projectsSection);
-    if(clientsSection) colorObserver.observe(clientsSection);
+    // --- Work List Item Hover Effect (Arrow Move) ---
+    // This is handled purely by CSS :hover pseudo-class in this implementation.
+    // If more complex JS interaction was needed on hover, it would go here.
 
 });

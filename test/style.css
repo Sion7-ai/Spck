@@ -1,378 +1,550 @@
-/* Globale Variablen */
-:root {
-    --primary-bg-color: #1fb0a2; /* Angepasstes Türkis */
-    --primary-bg-light: #a8e0d9; /* Hellere Variante */
-    --text-color: #ffffff;
-    --accent-color: #e74c3c; /* Rot für den "Glitch" */
-    --headline-font: 'Playfair Display', serif;
-    --body-font: 'Roboto', sans-serif;
-}
-
-/* Basis-Reset und Body-Styling */
-* {
+/* ------------------------- */
+/* Reset & Globals           */
+/* ------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+:root {
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --color-light-gray: #F8F8F8; /* Used for Menu Overlay & Selected Work BG */
+    --color-medium-gray: #CCCCCC; /* Borders, decorative elements */
+    --color-dark-gray: #333333; /* Paragraph text on dark BG */
+    --color-text-gray: #555555; /* Paragraph text on light BG */
+    --color-accent-gold: #A07D5A; /* Example from project page analysis */
+
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+
+    --header-height: 70px;
+    --padding-standard: clamp(1rem, 5vw, 2rem); /* Responsive padding */
+    --padding-section: clamp(3rem, 10vw, 6rem);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size */
 }
 
 body {
-    font-family: var(--body-font);
-    background-color: var(--primary-bg-color);
-    color: var(--text-color);
-    overflow-x: hidden; /* Verhindert horizontales Scrollen */
-    transition: background-color 0.5s ease; /* Übergang für Farbwechsel */
+    font-family: var(--font-sans);
+    color: var(--color-black);
+    background-color: var(--color-white);
+    line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    transition: background-color 0.3s ease; /* For menu overlay effect */
 }
 
-/* Preloader */
-.preloader {
+body.menu-open {
+    overflow: hidden; /* Prevent scrolling when menu is open */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+h1, h2, h3, p {
+    margin-bottom: 1em; /* Basic spacing */
+}
+
+/* ------------------------- */
+/* Header                    */
+/* ------------------------- */
+.site-header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: var(--primary-bg-color);
+    height: var(--header-height);
+    background-color: transparent; /* Or var(--color-white) if needed */
     z-index: 1000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease-out 0.5s, visibility 0s linear 1s; /* Verzögerter Fade-Out */
+    padding: 0 var(--padding-standard);
+    transition: background-color 0.3s ease;
 }
 
-.preloader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.loader-line {
-    width: 80px;
-    height: 4px;
-    background-color: var(--text-color);
-    animation: loading 1s infinite ease-in-out;
-}
-
-@keyframes loading {
-    0% { transform: scaleX(0); transform-origin: left; }
-    50% { transform: scaleX(1); transform-origin: left; }
-    51% { transform-origin: right; }
-    100% { transform: scaleX(0); transform-origin: right; }
-}
-
-
-/* Header */
-header {
-    position: fixed; /* Oder absolute, je nach gewünschtem Scrollverhalten */
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px 40px;
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    height: 100%;
+    max-width: 1600px; /* Optional max width */
+    margin: 0 auto;
 }
 
 .logo {
-    font-size: 24px; /* Größe anpassen */
-    font-weight: bold;
-    display: flex;
-    align-items: center;
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    line-height: 1.1;
+    font-weight: 600;
+    color: var(--color-black);
 }
-.logo .iconify {
-    font-size: 30px; /* Icon Größe */
-    margin-right: 5px;
-}
-
-
-nav ul {
-    list-style: none;
-    display: flex;
+.logo-last-name {
+    font-weight: 400;
+    font-size: 0.9em;
+    margin-left: 0.3em; /* Slight indent */
 }
 
-nav li {
-    margin: 0 15px;
-}
-
-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-}
-
-nav a:hover {
-    opacity: 0.7;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-}
-
-.language {
-    margin-right: 20px;
+.menu-toggle {
+    background-color: rgba(230, 230, 230, 0.8); /* Light gray container */
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
     cursor: pointer;
-}
-.language span:hover {
-    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001; /* Above header content */
 }
 
-/* Hero Section */
-.hero {
-    min-height: 100vh;
+.menu-toggle .iconify {
+    color: var(--color-black);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.menu-toggle .close-icon {
+    display: none;
+    transform: rotate(-45deg);
+}
+.menu-toggle .hamburger-icon {
+    display: block;
+    transform: rotate(0deg);
+}
+
+/* Menu Open State for Toggle Button */
+.menu-open .menu-toggle .hamburger-icon {
+    transform: rotate(45deg);
+    opacity: 0; /* Fade out middle line simulation */
+    display: none;
+}
+.menu-open .menu-toggle .close-icon {
+     display: block;
+     transform: rotate(0deg); /* Counter-rotate to appear straight */
+}
+
+
+/* ------------------------- */
+/* Menu Overlay              */
+/* ------------------------- */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-light-gray);
+    z-index: 999; /* Below header toggle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-out, visibility 0s linear 0.4s;
+    padding: var(--padding-standard);
+}
+
+.menu-open .menu-overlay {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease-out, visibility 0s linear 0s;
+}
+
+.menu-content ul {
+    text-align: center;
+}
+
+.menu-content li {
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+    border-bottom: 1px solid var(--color-medium-gray);
+    padding-bottom: 1rem;
+}
+.menu-content li:last-child {
+    border-bottom: none;
+}
+
+.menu-content a {
+    font-family: var(--font-sans);
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    font-weight: 300; /* Light font */
+    color: var(--color-black);
+    display: block;
+    position: relative;
+    padding-right: 3rem; /* Space for number */
+}
+.menu-content a:hover {
+    color: var(--color-dark-gray);
+}
+
+.menu-number {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    color: var(--color-text-gray);
+    font-weight: 400;
+}
+
+/* Staggered Animation for Menu Items */
+.menu-open .menu-content li:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+.menu-open .menu-content li:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.menu-open .menu-content li:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+.menu-open .menu-content li:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+
+
+/* ------------------------- */
+/* Hero Section              */
+/* ------------------------- */
+.hero-section {
+    min-height: 90vh; /* Slightly less than full viewport */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 100px 20px 50px; /* Padding oben für Header, unten für Reel */
+    padding: var(--header-height) var(--padding-standard) var(--padding-section);
+    background-color: var(--color-white);
+    position: relative; /* For background circles */
+    overflow: hidden; /* Contain circles */
 }
 
-.animated-headline {
-    font-family: var(--headline-font);
-    font-size: clamp(2.5rem, 8vw, 6rem); /* Responsive Schriftgröße */
+.hero-content {
+    z-index: 2; /* Above circles */
+    position: relative;
+}
+
+.hero-section h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Responsive base size */
     line-height: 1.2;
-    margin-bottom: 40px;
-    position: relative; /* Für den Glitch-Effekt */
-    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-weight: 400; /* Normal sans-serif */
 }
 
-/* Vereinfachter Glitch-Effekt */
-.animated-headline::before {
-    content: attr(data-text); /* Wird später vielleicht via JS gesetzt, hier erstmal statisch */
+.hero-section .serif-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 600; /* Bolder serif */
+    font-size: clamp(2.5rem, 9vw, 4rem); /* Much larger */
+    display: block; /* Force line break */
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px; /* Pill shape */
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    transition: transform 0.2s ease-out, background-color 0.2s ease, color 0.2s ease;
+}
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: 1px solid var(--color-black);
+}
+
+.btn-secondary {
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid var(--color-black);
+}
+
+.button-connector {
+    width: 20px; /* Length of the line */
+    height: 1px;
+    background-color: var(--color-black);
+    margin: 0 5px; /* Space around the line */
+}
+
+/* Hero Background Circles */
+.hero-background-circles {
     position: absolute;
-    left: -2px; /* Leichter Versatz */
-    top: 0;
-    width: 100%;
-    height: 100%;
-    color: var(--accent-color);
-    opacity: 0.8;
-    z-index: -1;
-    /* mix-blend-mode: screen; /* Experimentieren */
-    /* filter: blur(0.5px); /* Experimentieren */
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden; /* Ensure circles don't go outside */
+    z-index: 1;
+}
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Faint white lines */
+    /* Basic positioning - adjust as needed for parallax */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Center them */
+    /* Sizes */
+}
+.circle-1 { width: 150%; padding-bottom: 150%; /* Aspect ratio hack */ }
+.circle-2 { width: 200%; padding-bottom: 200%; }
+.circle-3 { width: 250%; padding-bottom: 250%; }
+/* Add animation/parallax effect via JS if desired */
+
+
+/* ------------------------- */
+/* Specializing In Section   */
+/* ------------------------- */
+.specializing-section {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: var(--padding-section) var(--padding-standard);
+    text-align: center;
+    position: relative; /* For diagonal wipe if implemented */
+}
+/* Basic diagonal wipe placeholder - needs JS for animation */
+.diagonal-wipe {
+     position: absolute;
+     top: 0; left: 0; width: 100%; height: 100%;
+     background: var(--color-black); /* Same as section bg */
+     clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%); /* Initially hidden */
+     z-index: 5; /* Above content, below header */
+     /* transition: clip-path 0.8s cubic-bezier(0.25, 1, 0.5, 1); Needs JS trigger */
+}
+/* .is-wiping .diagonal-wipe {
+     clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 100%); /* Example wipe up-left */
+/* } */
+
+
+.specializing-intro {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    line-height: 1.3;
+    margin-bottom: 2rem;
+    /* Add lines with pseudo-elements if needed */
+}
+.specializing-intro br { display: block; margin-bottom: 0.2em;} /* Ensure break */
+
+.rotating-text-container {
+    display: inline-block;
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-radius: 50px; /* Pill shape */
+    padding: 0.5rem 1.5rem;
+    margin: 1rem auto 2rem;
+    min-width: 150px; /* Ensure space */
+    overflow: hidden; /* For animation */
+    height: 2.5rem; /* Fixed height for smooth rotation */
+    line-height: 1.5rem; /* Vertically center text */
 }
 
-/* Für Text-Reveal Animation */
-.animated-headline span {
-    display: block; /* Jede Zeile einzeln */
+.rotating-text {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: inline-block; /* Needed for JS height calc maybe */
+    /* Add animation styles */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 1;
+    transform: translateY(0);
+}
+.rotating-text.exit {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(-100%); /* Slide up */
+}
+.rotating-text.enter {
+    opacity: 0;
+    transform: translateY(100%); /* Slide in from bottom */
+}
+
+
+.specializing-main {
+    font-family: var(--font-sans);
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+.specializing-main.serif-large {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: clamp(2.2rem, 9vw, 4rem);
+}
+.specializing-amp {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    margin: 0.5rem 0;
+}
+
+.arrow-down {
+    color: var(--color-white);
+    margin-top: 2rem;
+}
+
+/* ------------------------- */
+/* Vision Section            */
+/* ------------------------- */
+.vision-section {
+    background-color: var(--color-black); /* Matches analysis */
+    color: var(--color-white);
+    padding: var(--padding-section) var(--padding-standard);
+}
+
+.vision-section h2 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 400; /* Normal sans-serif */
+    position: relative; /* For animated lines */
+}
+
+.vision-section .serif-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(2.5rem, 9vw, 4rem);
+    display: block;
+}
+.vision-section .stand-out {
+     position: relative;
+     display: inline-block; /* Contain lines */
+     margin-bottom: 1.5rem; /* Space below for lines */
+}
+
+/* Animated Lines under "stand out." */
+.animated-lines {
+    position: absolute;
+    bottom: -10px; /* Position below text */
+    left: 0;
+    width: 80%; /* Adjust width as needed */
+    height: 5px; /* Container height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.animated-lines span {
+    display: block;
+    height: 1px;
+    background-color: var(--color-white);
+    width: 0; /* Initially hidden */
+    transition: width 0.5s ease-out;
+}
+/* Trigger animation via JS adding class */
+.vision-section.is-visible .animated-lines span:nth-child(1) { width: 100%; transition-delay: 0.1s; }
+.vision-section.is-visible .animated-lines span:nth-child(2) { width: 80%; transition-delay: 0.2s; }
+.vision-section.is-visible .animated-lines span:nth-child(3) { width: 90%; transition-delay: 0.3s; }
+
+
+.vision-section p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8); /* Slightly dimmer white */
+    max-width: 600px; /* Improve readability */
+}
+
+/* ------------------------- */
+/* Selected Work Section     */
+/* ------------------------- */
+.selected-work-section {
+    background-color: var(--color-light-gray); /* Very light gray */
+    color: var(--color-black);
+    padding: var(--padding-section) var(--padding-standard);
+}
+
+.work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.work-header h3 {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Reduce margin */
+}
+
+.work-filters {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--color-text-gray);
+}
+.work-filters a {
+    color: var(--color-text-gray);
+    margin-left: 0.5rem;
+    transition: color 0.2s ease;
+}
+.work-filters a:hover,
+.work-filters a.active {
+    color: var(--color-black);
+}
+
+.work-list li {
+    border-bottom: 1px solid var(--color-medium-gray);
+}
+.work-list li:last-child {
+    border-bottom: none;
+}
+
+.work-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+.work-list a:hover {
+    color: var(--color-accent-gold); /* Example hover */
+}
+
+.work-list span:first-child { /* The number */
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 300;
+    color: #B0B0B0; /* Light gray number */
+    margin-right: 1rem;
+}
+
+.work-list .arrow-right {
+    color: var(--color-black);
+    transition: transform 0.2s ease-out;
+}
+.work-list a:hover .arrow-right {
+    transform: translateX(5px); /* Move arrow on hover */
+}
+
+/* ------------------------- */
+/* Scroll Reveal Animation   */
+/* ------------------------- */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.animated-headline span.visible {
+.scroll-reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Preview Reel */
-.preview-reel-container {
-    position: relative; /* Für absolute Positionierung des Buttons */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.preview-reel {
-    width: 250px; /* Größe anpassen */
-    height: 150px; /* Größe anpassen */
-    overflow: hidden;
-    margin-bottom: 20px; /* Abstand zum Button */
-    background-color: rgba(0, 0, 0, 0.1); /* Hintergrund, falls Bild nicht lädt */
-}
-
-.preview-reel img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Bild füllt den Container */
-    opacity: 1;
-    transition: opacity 0.5s ease-in-out; /* Fade-Effekt beim Wechsel */
-}
-
-.preview-reel img.fade-out {
-    opacity: 0;
-}
-
-
-.play-reel-button {
-    background: none;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.play-reel-button:hover {
-    background-color: var(--text-color);
-    color: var(--primary-bg-color);
-}
-
-
-/* Projects Section */
-.projects {
-    padding: 100px 40px;
-    background-color: var(--primary-bg-light); /* Hellere Hintergrundfarbe */
-    color: var(--accent-color); /* Textfarbe ändern für Kontrast */
-}
-
-.projects .section-headline {
-    font-family: var(--headline-font);
-    font-size: clamp(2rem, 6vw, 4rem);
-    text-align: center;
-    margin-bottom: 60px;
-    line-height: 1.2;
-}
-
-.projects .section-headline span {
-     display: block;
-}
-
-
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive Grid */
-    gap: 40px;
-    margin-bottom: 80px;
-}
-
-.project-item {
-    text-align: left;
-}
-
-.project-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin-bottom: 10px;
-    background-color: #eee; /* Platzhalterfarbe */
-}
-
-.project-item p {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Scroll Reveal Animation */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-.scroll-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* About Section innerhalb Projects */
-.about-section {
-    max-width: 600px;
-    margin: 0 auto 80px; /* Zentriert und Abstand unten */
-    text-align: center;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-.about-section p {
-     margin-bottom: 20px;
-}
-
-
-.learn-more {
-    display: inline-block;
-    padding: 10px 20px;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.learn-more:hover {
-     background-color: var(--accent-color);
-     color: var(--primary-bg-light);
-}
-
-
-/* Clients Section */
-.clients {
-    padding: 60px 40px;
-    text-align: center;
-     background-color: var(--primary-bg-color); /* Wieder dunkler Hintergrund */
-     color: var(--text-color); /* Text wieder weiß */
-}
-
-.clients h3 {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
-    font-weight: 400;
-    opacity: 0.7;
-}
-
-.client-logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-}
-
-.client-logos span {
-    /* Hier würden normalerweise Logos stehen */
-    font-size: 18px;
-    opacity: 0.8;
-    font-family: var(--headline-font); /* Beispielhaft */
-}
-
-
-/* Responsive Anpassungen (Beispiel) */
-@media (max-width: 768px) {
-    header {
-        padding: 15px 20px;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    nav {
-        margin-top: 10px;
-    }
-    .header-right {
-        margin-top: 10px;
-        align-self: flex-end;
-    }
-
-    .hero {
-        padding-top: 150px; /* Mehr Platz für den Header */
-    }
-
-    .preview-reel {
-        width: 200px;
-        height: 120px;
-    }
-    .play-reel-button {
-        width: 80px;
-        height: 80px;
-    }
-
-    .projects {
-        padding: 80px 20px;
-    }
-
-    .project-grid {
-        grid-template-columns: 1fr; /* Einspaltig auf kleinen Bildschirmen */
-        gap: 30px;
-    }
+/* ------------------------- */
+/* Content Wrapper Utility   */
+/* ------------------------- */
+.content-wrapper {
+    max-width: 1200px; /* Max width for content within sections */
+    margin: 0 auto;
 }
