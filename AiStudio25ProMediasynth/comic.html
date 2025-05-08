@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 EVERESTING - Das Comic-Abenteuer!</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Bangers&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <!-- Bangers/Luckiest Guy für Comic-Headlines -->
+    <style>
+        :root {
+            --comic-bg: #E0F7FA; /* Helles Himmelblau */
+            --comic-panel-bg: #FFFFFF;
+            --comic-outline: #000000;
+            --comic-red: #FF3B30; /* Kräftigeres Rot */
+            --comic-yellow: #FFCC00; /* Kräftigeres Gelb */
+            --comic-green: #34C759; /* Kräftigeres Grün */
+            --comic-blue: #007AFF; /* Kräftigeres Blau */
+            --comic-text: #222222;
+            --comic-outline-thickness: 3px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Basislesbarkeit */
+            background-color: var(--comic-bg);
+            color: var(--comic-text);
+            line-height: 1.5;
+            padding: 15px;
+            overflow-x: hidden;
+        }
+        /* Sternchen-Hintergrundmuster (optional) */
+        body::before {
+             content: ''; position: fixed; top:0; left:0; width:100%; height:100%;
+             background-image: radial-gradient(var(--comic-yellow) 1px, transparent 1px);
+             background-size: 20px 20px;
+             opacity: 0.2; z-index: -1;
+        }
+
+
+        .comic-container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .comic-header {
+            background-color: var(--comic-yellow);
+            padding: 10px 20px;
+            margin-bottom: 30px;
+            border: var(--comic-outline-thickness) solid var(--comic-outline);
+            border-radius: 10px 10px 0 0; /* Oben abgerundet */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        /* "Glanz"-Streifen auf Header */
+        .comic-header::after {
+            content: ''; position: absolute; top: 5px; left: 10px; right: 10px; height: 5px;
+            background: rgba(255,255,255,0.5); border-radius: 5px; transform: skewX(-20deg);
+        }
+
+        .comic-logo {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            color: var(--comic-red);
+            -webkit-text-stroke: 1.5px var(--comic-outline);
+            text-shadow: 3px 3px 0px var(--comic-blue);
+        }
+        .comic-nav a {
+            font-family: 'Luckiest Guy', cursive;
+            color: var(--comic-outline);
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 1.1rem;
+            padding: 5px 10px;
+            background-color: var(--comic-bg);
+            border: 2px solid var(--comic-outline);
+            border-radius: 5px;
+            transition: transform 0.1s ease-out;
+        }
+        .comic-nav a:hover {
+            transform: scale(1.1) rotate(-3deg);
+            background-color: var(--comic-green);
+        }
+
+        /* Comic Panels */
+        .comic-panel {
+            background-color: var(--comic-panel-bg);
+            border: var(--comic-outline-thickness) solid var(--comic-outline);
+            padding: 20px;
+            margin-bottom: 25px;
+            position: relative; /* Für innere Elemente */
+            overflow: hidden; /* Für Speedlines etc. */
+            border-radius: 5px; /* Leichte Rundung */
+        }
+         /* Panel-Ecken (optional) */
+        .comic-panel::before {
+            content: ''; position: absolute; top:-5px; left:-5px; width:15px; height:15px;
+            border-top: var(--comic-outline-thickness) solid var(--comic-outline);
+            border-left: var(--comic-outline-thickness) solid var(--comic-outline);
+        }
+         .comic-panel::after { /* etc. für andere Ecken */ }
+
+
+        .comic-panel h1, .comic-panel h2, .comic-panel h3 {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 1px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--comic-blue);
+            -webkit-text-stroke: 1px var(--comic-outline);
+        }
+        .comic-panel h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); line-height: 1.1; }
+        .comic-panel h2 { font-size: 2rem; color: var(--comic-red); }
+        .comic-panel h3 { font-size: 1.5rem; color: var(--comic-green); }
+
+        .comic-hero .hero-number-comic {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(7rem, 25vw, 13rem);
+            color: var(--comic-yellow);
+            -webkit-text-stroke: 3px var(--comic-outline);
+            text-shadow: 6px 6px 0px var(--comic-red);
+            text-align: center;
+            display: block;
+            line-height: 0.8;
+            margin: -10px 0 15px 0;
+        }
+        .comic-hero p {
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        /* Sound Wort */
+        .sound-word {
+             font-family: 'Bangers', cursive; font-size: 3rem; color: var(--comic-red);
+             position: absolute; top: 10px; right: 10px; transform: rotate(15deg);
+             text-shadow: 2px 2px 0 var(--comic-outline);
+        }
+
+        .btn-comic {
+            display: inline-block;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 1.5rem;
+            color: var(--comic-outline);
+            background-color: var(--comic-green);
+            padding: 10px 25px;
+            border: var(--comic-outline-thickness) solid var(--comic-outline);
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 4px 4px 0px var(--comic-outline);
+            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background-color 0.1s;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-comic:hover {
+            transform: translate(2px, 2px) rotate(-2deg);
+            box-shadow: 2px 2px 0px var(--comic-outline);
+            background-color: var(--comic-yellow);
+        }
+        .btn-comic:active {
+            transform: translate(4px, 4px) rotate(0deg);
+            box-shadow: 0px 0px 0px var(--comic-outline);
+        }
+
+        /* Info Boxen */
+        .comic-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .comic-info-box {
+            background-color: var(--comic-mint); /* Beispiel */
+            border: 2px solid var(--comic-outline);
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+        }
+        .comic-info-box iconify-icon {
+            font-size: 3rem; display: block; margin-bottom: 10px;
+            color: var(--comic-red);
+        }
+        .comic-info-box p { font-weight: 700; font-size: 0.95rem; }
+
+        /* Sprechblase */
+        .speech-bubble {
+            position: relative;
+            background: var(--comic-panel-bg);
+            border-radius: .4em;
+            padding: 15px;
+            border: var(--comic-outline-thickness) solid var(--comic-outline);
+            font-style: italic;
+            font-weight: bold;
+        }
+        .speech-bubble:after { /* Der Pfeil der Sprechblase */
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            width: 0; height: 0;
+            border: 20px solid transparent;
+            border-top-color: var(--comic-outline);
+            border-bottom: 0; border-left: 0;
+            margin-left: -10px; margin-bottom: -20px;
+        }
+        .speech-bubble p { margin-bottom: 0; }
+
+        /* Footer */
+        .comic-footer {
+            padding: 20px;
+            margin-top: 30px;
+            background-color: var(--comic-blue);
+            border: var(--comic-outline-thickness) solid var(--comic-outline);
+            border-radius: 0 0 10px 10px; /* Unten abgerundet */
+            text-align: center;
+            color: var(--comic-panel-bg);
+        }
+        .comic-footer p { margin: 5px 0; font-size: 0.9rem; font-weight: bold; }
+        .comic-footer a { color: var(--comic-yellow); text-decoration: none; }
+        .comic-footer a:hover { text-decoration: underline; color: var(--comic-green); }
+
+        /* Animationen */
+        .animate-comic-in { opacity: 0; } /* Startzustand, Anime.js übernimmt */
+    </style>
+</head>
+<body>
+    <div class="comic-container">
+        <header class="comic-header animate-comic-in">
+            <div class="comic-logo">ALPIN8!</div>
+            <nav class="comic-nav">
+                <a href="#story">Story!</a>
+                <a href="#facts">Facts!</a>
+                <a href="#join">Join!</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="comic-hero comic-panel animate-comic-in" style="animation-delay: 0.1s;">
+                <div class="sound-word">ZOOOM!</div>
+                <h1>DAS ULTIMATIVE BERG-ABENTEUER!</h1>
+                <div class="hero-number-comic">8848</div>
+                <!-- Hier eine Cartoon-Illustration eines Helden am Berg -->
+                <div style="text-align:center; margin: 20px 0;">
+                    <iconify-icon icon="mdi:run-fast" style="font-size: 80px; color: var(--comic-blue);"></iconify-icon>
+                    <iconify-icon icon="twemoji:mountain" style="font-size: 100px; margin-left:-20px;"></iconify-icon>
+                    <p style="font-family:'Bangers', cursive; font-size:1.5rem;">(Zeichnung hier vorstellen!)</p>
+                </div>
+                <p>Kannst DU den Gipfel der Herausforderung erklimmen?!</p>
+                <div style="text-align:center;">
+                    <a href="#join" class="btn-comic">START!</a>
+                </div>
+            </section>
+
+            <section id="story" class="comic-panel animate-comic-in" style="animation-delay: 0.2s;">
+                <h2>DIE STORY: HELD VS. HÖHENMETER!</h2>
+                <p>Unser Held (das bist DU!) steht vor einer epischen Aufgabe: <strong>8848 Meter</strong> bergauf! <span style="font-family:'Bangers',cursive; color:var(--comic-red);">POW!</span> Die treue Gondel hilft beim Abstieg, aber den Aufstieg musst du schaffen! 34 Stunden tickt die Uhr... Wirst du es schaffen, bevor dein Kopf <span style="font-family:'Bangers',cursive; color:var(--comic-blue);">"GAME OVER!"</span> schreit?</p>
+            </section>
+
+            <section id="facts" class="comic-panel animate-comic-in" style="animation-delay: 0.3s;">
+                <h2>SUPER-FAKTEN FÜR SUPER-HELDEN!</h2>
+                <div class="comic-info-grid">
+                    <div class="comic-info-box animate-comic-in" style="background-color:#FFECB3; animation-delay:0.32s;"> <!-- Pastellgelb -->
+                        <iconify-icon icon="twemoji:calendar"></iconify-icon>
+                        <p>04.-06. Juli 2025</p>
+                    </div>
+                    <div class="comic-info-box animate-comic-in" style="background-color:#C8E6C9; animation-delay:0.34s;"> <!-- Pastellgrün -->
+                        <iconify-icon icon="twemoji:national-park"></iconify-icon>
+                        <p>Brandnertal, Austria</p>
+                    </div>
+                     <div class="comic-info-box animate-comic-in" style="background-color:#BBDEFB; animation-delay:0.36s;"> <!-- Pastellblau -->
+                        <iconify-icon icon="twemoji:rocket"></iconify-icon>
+                        <p>Ziel: 8848m</p>
+                    </div>
+                     <div class="comic-info-box animate-comic-in" style="background-color:#FFCDD2; animation-delay:0.38s;"> <!-- Pastellrot -->
+                        <iconify-icon icon="twemoji:admission-tickets"></iconify-icon>
+                        <p>Ticket: €599</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="animate-comic-in" style="animation-delay: 0.4s; margin-bottom:25px;">
+                 <div class="speech-bubble">
+                     <p>"WOW! Einfach nur WOW! Das war der härteste Comic meines Lebens!"</p>
+                 </div>
+                 <p style="text-align:right; font-weight:bold; font-size:0.9rem;">- André S. (bekannt aus Funk & Fernsehen)</p>
+            </section>
+
+            <section id="join" class="comic-panel animate-comic-in" style="text-align:center; background-color: var(--comic-yellow); animation-delay: 0.5s;">
+                <h2>ZEIT FÜR ACTION! LEVEL UP!</h2>
+                <p style="font-family:'Luckiest Guy', cursive; font-size: 1.3rem; color: var(--comic-red); margin-bottom:25px;">Werde Teil des ALPIN8 Comic-Universums! Schnapp dir dein Cape... äh... deine Laufschuhe!</p>
+                 <div style="margin-bottom: -30px; margin-top:-10px;"> <!-- Überlappender Charakter -->
+                    <iconify-icon icon="twemoji:superhero" style="font-size: 80px; transform: translateY(20px);"></iconify-icon>
+                 </div>
+                <a href="#" class="btn-comic" style="background-color: var(--comic-red); color:white; font-size:1.8rem;">ICH BIN DABEI!</a>
+            </section>
+        </main>
+    </div>
+
+    <footer class="comic-footer animate-comic-in">
+        <p>Ein verrücktes Projekt von ALPIN8 COMICS!</p>
+        <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a> | <a href="#">AGB</a></p>
+        <p>&copy; 2024 - TO BE CONTINUED...?!</p>
+    </footer>
+
+    <script>
+        // Animation für Elemente mit Anime.js (Bounce In)
+        const animatedElements = document.querySelectorAll('.animate-comic-in');
+        animatedElements.forEach((el, index) => {
+            const delay = el.style.animationDelay ? parseFloat(el.style.animationDelay) * 1000 : 0;
+            anime({
+                targets: el,
+                opacity: [0, 1],
+                translateY: [-50, 0], // Kommt von oben rein
+                scale: [0.5, 1],
+                duration: 800,
+                delay: 100 + delay + index * 50, // Grundverzögerung + CSS-Delay + Staffelung
+                easing: 'easeOutElastic(1, .6)' // Stark federnd
+            });
+        });
+    </script>
+</body>
+</html>

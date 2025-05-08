@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 :: PROTOCOL 8848 :: FUTURE ASCENT</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&family=Roboto+Condensed:wght@300;400;700&family=Oswald:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Roboto Condensed, Oswald für schmale, technische Anmutung -->
+    <style>
+        :root {
+            --futuristic-bg: #0A0B1A; /* Sehr dunkles Tech-Blau */
+            --futuristic-text: #E0F0FF; /* Helles, kühles Weiß/Blau */
+            --futuristic-text-secondary: #88A0B8;
+            --futuristic-neon-cyan: #00FFFF; /* #06D6A0 als Variation */
+            --futuristic-neon-magenta: #FF00FF; /* #FF5050 als Variation */
+            --futuristic-neon-yellow: #FFD166;
+            --futuristic-border: rgba(var(--futuristic-neon-cyan-rgb, 0,255,255), 0.3);
+            --futuristic-surface: rgba(15, 25, 50, 0.5); /* Dunkelblau, transparent */
+            --futuristic-spacing: 28px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto Condensed', 'Roboto', sans-serif; /* Schmale Sans-Serif */
+            font-weight: 300; /* Light */
+            background-color: var(--futuristic-bg);
+            color: var(--futuristic-text);
+            line-height: 1.6;
+            padding: var(--futuristic-spacing);
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* Hintergrund Gitter (subtil) */
+        body::before {
+             content: ''; position: fixed; top:0; left:0; width:100%; height:100%;
+             background-image: linear-gradient(rgba(var(--futuristic-neon-cyan-rgb, 0,255,255), 0.05) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(var(--futuristic-neon-cyan-rgb, 0,255,255), 0.05) 1px, transparent 1px);
+             background-size: 50px 50px;
+             z-index: -1; pointer-events: none;
+        }
+
+
+        .futuristic-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header (minimalistisch) */
+        .futuristic-header {
+            padding: calc(var(--futuristic-spacing)/2) 0;
+            margin-bottom: calc(var(--futuristic-spacing) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .futuristic-logo { /* Abstraktes Logo oder Monogramm */
+             font-family: 'Oswald', sans-serif; font-weight: 700;
+             font-size: 1.8rem; color: var(--futuristic-neon-cyan);
+             letter-spacing: 1px;
+             text-shadow: 0 0 10px var(--futuristic-neon-cyan);
+             /* Oder ein SVG-Logo */
+        }
+        .futuristic-menu-btn {
+            color: var(--futuristic-text); font-size: 1.8rem;
+            cursor: pointer; border: none; background: none; padding: 5px;
+             transition: color 0.2s, text-shadow 0.2s;
+        }
+        .futuristic-menu-btn:hover {
+             color: var(--futuristic-neon-cyan);
+             text-shadow: 0 0 8px var(--futuristic-neon-cyan);
+        }
+
+
+        /* Sektionen */
+        .futuristic-section { margin-bottom: calc(var(--futuristic-spacing) * 2.5); }
+        .futuristic-section h1, .futuristic-section h2 {
+            font-family: 'Oswald', sans-serif; /* Markante Headline-Schrift */
+            font-weight: 500; /* Medium */
+            margin-top: 0; margin-bottom: var(--futuristic-spacing);
+            line-height: 1.2; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .futuristic-section h1 {
+            font-size: clamp(2.8rem, 6vw, 4rem); color: var(--futuristic-text);
+            text-shadow: 0 0 15px rgba(var(--futuristic-neon-cyan-rgb, 0,255,255), 0.4);
+        }
+        .futuristic-section h2 {
+            font-size: 1.8rem; color: var(--futuristic-neon-cyan);
+            border-bottom: 1px solid var(--futuristic-border);
+            padding-bottom: calc(var(--futuristic-spacing)/3);
+        }
+        .futuristic-section p {
+            font-size: 1rem; font-weight: 300; /* Roboto Light */
+            margin-bottom: var(--futuristic-spacing);
+            color: var(--futuristic-text-secondary);
+            max-width: 750px; /* Gute Lesbarkeit */
+        }
+
+        /* Hero */
+        .futuristic-hero .hero-number-futuristic {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700; /* Bold */
+            font-size: clamp(7rem, 25vw, 15rem);
+            color: var(--futuristic-text);
+            text-align: center; line-height: 0.8;
+            margin: 0 0 15px 0; display: block;
+            position: relative;
+            /* Optional: Glitch-Effekt auf Zahl */
+             animation: num-glitch 7s infinite alternate steps(2);
+        }
+         @keyframes num-glitch {
+             0%, 100% { text-shadow: 0 0 5px var(--futuristic-neon-magenta), 1px 1px 0 var(--futuristic-neon-cyan); opacity: 1;}
+             49.8% { opacity: 1; }
+             50% { text-shadow: 2px 2px 0 var(--futuristic-neon-cyan), -2px -2px 0 var(--futuristic-neon-magenta); opacity: 0.7; }
+             50.2% { opacity: 1; }
+         }
+
+        .futuristic-hero p { text-align: center; font-size: 1.2rem; }
+
+        .btn-futuristic {
+            display: inline-block;
+            padding: 10px 25px; text-decoration: none;
+            font-family: 'Roboto Condensed', sans-serif; font-weight: 700;
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--futuristic-neon-cyan);
+            background-color: transparent;
+            border: 1px solid var(--futuristic-border);
+            position: relative; overflow: hidden; /* Für Scanline */
+            transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-futuristic::before { /* Scanline-Effekt */
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(var(--futuristic-neon-cyan-rgb,0,255,255), 0.2), transparent);
+            transition: left 0.5s cubic-bezier(0.23, 1, 0.32, 1); /* Schneller raus */
+        }
+        .btn-futuristic:hover {
+            color: var(--futuristic-bg);
+            background-color: var(--futuristic-neon-cyan);
+            box-shadow: 0 0 15px var(--futuristic-neon-cyan);
+        }
+        .btn-futuristic:hover::before { left: 100%; }
+
+
+        /* Datenmodule / Cards */
+        .futuristic-module {
+            background-color: var(--futuristic-surface);
+            border: 1px solid var(--futuristic-border);
+            padding: var(--futuristic-spacing);
+            margin-bottom: var(--futuristic-spacing);
+            backdrop-filter: blur(4px);
+            border-radius: 4px; /* Subtile Rundung */
+        }
+        .futuristic-module h3 {
+             font-family: 'Oswald', sans-serif; font-weight: 500;
+             font-size: 1.3rem; color: var(--futuristic-neon-yellow);
+             margin: 0 0 10px 0; text-transform: uppercase;
+        }
+        .futuristic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--futuristic-spacing); }
+
+        /* Quick Facts */
+        .futuristic-data-list { list-style: none; padding: 0; }
+        .futuristic-data-list li {
+            margin-bottom: 10px; font-size: 0.9rem;
+            display: flex; align-items: center;
+            color: var(--futuristic-text-secondary);
+        }
+        .futuristic-data-list li iconify-icon {
+             font-size: 1.3rem; color: var(--futuristic-neon-cyan); margin-right: 10px;
+        }
+         .futuristic-data-list li strong { color: var(--futuristic-text); font-weight: 400; }
+
+
+        /* Footer */
+        .futuristic-footer {
+            padding: var(--futuristic-spacing) 0;
+            margin-top: calc(var(--futuristic-spacing) * 2);
+            border-top: 1px solid var(--futuristic-border);
+            text-align: center; font-size: 0.8rem;
+            color: var(--futuristic-text-secondary);
+        }
+        .futuristic-footer a { color: var(--futuristic-text-secondary); text-decoration: none; }
+        .futuristic-footer a:hover { color: var(--futuristic-neon-cyan); }
+
+        /* Animation */
+        .animate-futuristic-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-futuristic-in.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+     <!-- RGB für CSS Variablen -->
+     <script>
+        function getRgbFromHexFut(hex) { hex = hex.replace(/^#/, ''); if (hex.length === 3) hex = hex.split('').map(char => char + char).join(''); const bigint = parseInt(hex, 16); return `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`; }
+        document.documentElement.style.setProperty('--futuristic-neon-cyan-rgb', getRgbFromHexFut(getComputedStyle(document.documentElement).getPropertyValue('--futuristic-neon-cyan').trim()));
+         document.documentElement.style.setProperty('--futuristic-neon-magenta-rgb', getRgbFromHexFut(getComputedStyle(document.documentElement).getPropertyValue('--futuristic-neon-magenta').trim()));
+     </script>
+
+    <div class="futuristic-container">
+        <header class="futuristic-header animate-futuristic-in is-visible">
+            <div class="futuristic-logo">A8_SYS</div>
+            <button class="futuristic-menu-btn" aria-label="Menü öffnen">
+                <iconify-icon icon="carbon:menu"></iconify-icon>
+            </button>
+        </header>
+
+        <main>
+            <section class="futuristic-section futuristic-hero animate-futuristic-in is-visible" style="transition-delay: 0.1s;">
+                <h1>PROTOCOL: EVERESTING</h1>
+                <div class="hero-number-futuristic">8848</div>
+                <p>Initiate the ascent protocol. Human endurance meets alpine challenge. Data stream online.</p>
+                <div style="text-align:center;">
+                    <a href="#register" class="btn-futuristic">Engage Program</a>
+                </div>
+            </section>
+
+            <section id="objective" class="futuristic-section animate-futuristic-in is-visible" style="transition-delay: 0.2s;">
+                <h2>OBJECTIVE_ANALYSIS</h2>
+                 <div class="futuristic-grid">
+                     <div class="futuristic-module">
+                         <h3>Primary Directive</h3>
+                         <p>Accumulate 8848 meters vertical ascent within a 34-hour operational window. Utilize provided gondola system for descent phase. Optimize resource management (physical/mental energy).</p>
+                     </div>
+                      <div class="futuristic-module">
+                         <h3>Secondary Parameters</h3>
+                         <p>Navigate challenging alpine terrain. Interface with support systems (nutrition, recovery). Operate within a limited participant network (max 300 units). Overcome cognitive limiters.</p>
+                     </div>
+                 </div>
+            </section>
+
+            <section id="specs" class="futuristic-section animate-futuristic-in is-visible" style="transition-delay: 0.3s;">
+                 <h2>SYSTEM_SPECIFICATIONS_v20.25</h2>
+                 <div class="futuristic-module">
+                    <ul class="futuristic-data-list">
+                        <li><iconify-icon icon="carbon:calendar"></iconify-icon> <strong>Timestamp:</strong> 2025-07-04 // 06:00 UTC+2</li>
+                        <li><iconify-icon icon="carbon:location-current"></iconify-icon> <strong>Coordinates:</strong> Brandnertal / Sector AUT / Alpine Grid</li>
+                        <li><iconify-icon icon="carbon:chart-line-data"></iconify-icon> <strong>Target Elevation Gain:</strong> 8848m (Primary) / 4424m (Secondary)</li>
+                        <li><iconify-icon icon="carbon:network-4"></iconify-icon> <strong>Network Capacity:</strong> 300 Nodes</li>
+                        <li><iconify-icon icon="carbon:purchase"></iconify-icon> <strong>Access Credential:</strong> 599 EUR (P) / 499 EUR (S)</li>
+                    </ul>
+                 </div>
+            </section>
+
+             <section class="futuristic-section animate-futuristic-in is-visible" style="transition-delay: 0.4s;">
+                 <h2>DATA_LOG :: UNIT_SCHUERRLE_A</h2>
+                 <div class="futuristic-module" style="border-left: 3px solid var(--futuristic-neon-magenta);">
+                     <p style="font-family: 'Roboto Condensed', sans-serif; font-style:italic; color:var(--futuristic-text);">"SYSTEM_DIAGNOSTIC: Challenge = Insane. Specification match = 100%. Difficulty = Maximum. Performance = Nominal. Unit status = fatigued but operational."</p>
+                     <p style="text-align:right; font-size:0.8rem; color:var(--futuristic-text-secondary); margin-bottom:0;">// END TRANSMISSION //</p>
+                 </div>
+             </section>
+
+
+            <section id="register" class="futuristic-section animate-futuristic-in is-visible" style="text-align:center; transition-delay: 0.5s;">
+                <h2>INITIATE_REGISTRATION_SEQUENCE</h2>
+                <p>System resources limited. Secure network access for ALPIN8 Protocol 2025.</p>
+                <a href="#" class="btn-futuristic" style="color: var(--futuristic-neon-magenta); border-color:rgba(var(--futuristic-neon-magenta-rgb,255,0,255),0.3); font-size:1.1rem;">[ Authorize Access ]</a>
+            </section>
+        </main>
+
+        <footer class="futuristic-footer animate-futuristic-in is-visible">
+            <p>ALPIN8_SYSTEMS // v3.0 // SECURE_NODE</p>
+            <p><a href="#">[Legal_Data_Packet_01]</a> // <a href="#">[Privacy_Algorithm_v4.2]</a> // &copy; 2024</p>
+        </footer>
+    </div>
+
+    <script>
+         // RGB für CSS Variablen
+        function getRgbFromHexFut2(hex) { hex = hex.replace(/^#/, ''); if (hex.length === 3) hex = hex.split('').map(char => char + char).join(''); const bigint = parseInt(hex, 16); return `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`; }
+        document.documentElement.style.setProperty('--futuristic-neon-cyan-rgb', getRgbFromHexFut2(getComputedStyle(document.documentElement).getPropertyValue('--futuristic-neon-cyan').trim()));
+        document.documentElement.style.setProperty('--futuristic-neon-magenta-rgb', getRgbFromHexFut2(getComputedStyle(document.documentElement).getPropertyValue('--futuristic-neon-magenta').trim()));
+
+
+        const animatedElementsFuturistic = document.querySelectorAll('.animate-futuristic-in');
+        const observerFuturistic = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerFuturistic.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsFuturistic.forEach(el => observerFuturistic.observe(el));
+
+        // Optional: JS für komplexere HUD-Animationen oder Partikel
+    </script>
+</body>
+</html>

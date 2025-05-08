@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>((( ALPIN8 EVERESTING ))) ~ Experience the Ascent ~</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Lobster&family=Lemon&display=swap" rel="stylesheet">
+    <!-- Lobster/Lemon als Beispiele für verschnörkelte/organische Fonts (echte Psychedelic Fonts wären besser), Roboto Light als Fallback -->
+    <style>
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes subtlePulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.03); opacity: 1; }
+        }
+        @keyframes slowSpin {
+            from { transform: rotate(0deg); } to { transform: rotate(360deg); }
+        }
+
+        :root {
+            --psych-color1: #FF5050; /* Pink/Rot */
+            --psych-color2: #FFD166; /* Orange/Gelb */
+            --psych-color3: #06D6A0; /* Türkis/Grün */
+            --psych-color4: #0E545F; /* Dunkelblau/Violett */
+            --psych-color5: #F0F0FF; /* Sehr helles Lavendel/Weiß */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif; /* Fallback */
+            background: linear-gradient(-45deg, var(--psych-color1), var(--psych-color2), var(--psych-color3), var(--psych-color4));
+            background-size: 400% 400%;
+            animation: gradientBG 25s ease infinite;
+            color: var(--psych-color5);
+            line-height: 1.7;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .psych-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Header (fließend) */
+        .psych-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .psych-logo {
+            font-family: 'Lemon', cursive; /* Beispiel für organische Schrift */
+            font-size: clamp(3rem, 8vw, 5rem);
+            color: var(--psych-color5);
+            text-shadow: 2px 2px 0px var(--psych-color4), 4px 4px 0px var(--psych-color1);
+            display: inline-block;
+            animation: subtlePulse 5s infinite ease-in-out;
+        }
+        .psych-nav { margin-top: 15px; }
+        .psych-nav a {
+            font-family: 'Lobster', cursive; /* Beispiel für geschwungene Schrift */
+            color: var(--psych-color5);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.4rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            transition: color 0.4s ease, transform 0.4s ease;
+        }
+        .psych-nav a:hover {
+            color: var(--psych-color2);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Content Sektionen (organisch) */
+        .psych-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(0,0,0,0.2); /* Dunkler, transparenter Hintergrund */
+            border-radius: 30px 80px 40px 90px / 90px 40px 80px 30px; /* Organische Blob-Form */
+            border: 2px solid rgba(var(--psych-color5-rgb, 240,240,255), 0.3);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 25px rgba(0,0,0,0.3);
+        }
+        .psych-section h1, .psych-section h2 {
+            font-family: 'Lemon', cursive;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: var(--psych-color3); /* Türkis */
+            text-shadow: 1px 1px 0 var(--psych-color4), 2px 2px 0 var(--psych-color1);
+        }
+        .psych-section h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); }
+        .psych-section h2 { font-size: 1.8rem; }
+
+        .psych-hero .hero-number-psych {
+            font-family: 'Lobster', cursive;
+            font-size: clamp(7rem, 25vw, 14rem);
+            color: var(--psych-color2); /* Gelb */
+            text-align: center;
+            line-height: 0.9;
+            margin: 0 0 20px 0;
+            display: block;
+            font-weight: normal;
+            text-shadow: 3px 3px 0 var(--psych-color1), 5px 5px 0 var(--psych-color4);
+            animation: subtlePulse 4s infinite ease-in-out alternate;
+            transform: skewY(-5deg);
+        }
+        .psych-hero p {
+            font-family: 'Roboto', sans-serif; /* Lesbarer für Intro */
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: rgba(var(--psych-color5-rgb, 240,240,255), 0.9);
+        }
+
+        .btn-psych {
+            display: inline-block;
+            font-family: 'Lemon', cursive;
+            font-size: 1.4rem;
+            color: var(--psych-color5);
+            background: linear-gradient(45deg, var(--psych-color1), var(--psych-color4));
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px 20px 50px 20px; /* Organische Buttonform */
+            text-decoration: none;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55), box-shadow 0.3s ease; /* Spring-Effekt */
+            cursor: pointer;
+        }
+        .btn-psych:hover {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+        }
+
+
+        /* Muster und Verzierungen */
+        .psych-pattern {
+            text-align: center; margin: 25px 0;
+        }
+        .psych-pattern iconify-icon { /* Mandala-artig */
+             font-size: 8rem; color: var(--psych-color3); opacity: 0.4;
+             animation: slowSpin 30s linear infinite;
+        }
+
+
+        /* Footer */
+        .psych-footer {
+            padding: 20px 0;
+            margin-top: 40px;
+            text-align: center;
+            font-family: 'Lobster', cursive;
+            font-size: 1rem;
+            color: rgba(var(--psych-color5-rgb, 240,240,255), 0.7);
+        }
+        .psych-footer p { margin: 5px 0; }
+        .psych-footer a { color: rgba(var(--psych-color5-rgb, 240,240,255), 0.7); text-decoration: none; }
+        .psych-footer a:hover { color: var(--psych-color2); }
+
+        /* Animation für Sektionen */
+        .animate-psych-in { opacity: 0; filter: blur(8px); transform: scale(0.9); transition: opacity 1s ease-out, filter 1s ease-out, transform 1s ease-out; }
+        .animate-psych-in.is-visible { opacity: 1; filter: blur(0px); transform: scale(1); }
+    </style>
+</head>
+<body>
+    <!-- RGB für CSS Variablen extrahieren (im Script-Teil) -->
+    <div class="psych-container">
+        <header class="psych-header animate-psych-in is-visible">
+            <div class="psych-logo">Alpin8</div>
+            <nav class="psych-nav">
+                <a href="#journey">Journey</a>
+                <a href="#visions">Visions</a>
+                <a href="#connect">Connect</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="psych-section psych-hero animate-psych-in is-visible" style="transition-delay: 0.2s;">
+                <h1>Transcend the Mountain</h1>
+                <div class="hero-number-psych">8848</div>
+                <p>Unlock the doors of perception. Experience the Everesting challenge as a journey inward and upward.</p>
+                 <div class="psych-pattern">
+                    <iconify-icon icon="mdi:atom-variant"></iconify-icon> <!-- Beispiel-Icon -->
+                 </div>
+                <div style="text-align:center;">
+                    <a href="#connect" class="btn-psych">Begin Transmission</a>
+                </div>
+            </section>
+
+            <section id="journey" class="psych-section animate-psych-in is-visible" style="transition-delay: 0.4s;">
+                <h2>The Cosmic Climb</h2>
+                <p style="font-family: 'Roboto'; text-align:left;">This is more than meters and minutes. It's about the rhythm of your breath merging with the pulse of the earth. 34 hours to explore the landscapes of your mind as you ascend. The gondola? A brief return to the mundane before you re-enter the flow state.</p>
+            </section>
+
+            <section id="visions" class="psych-section animate-psych-in is-visible" style="transition-delay: 0.6s;">
+                <h2>Visions & Frequencies</h2>
+                 <ul style="list-style: none; padding:0; text-align:center; font-family:'Lobster', cursive; font-size:1.2rem;">
+                    <li><iconify-icon icon="mdi:eye-circle-outline" style="color:var(--psych-color1);"></iconify-icon> Date: July 4-6, 2025</li>
+                    <li><iconify-icon icon="mdi:map-marker-radius" style="color:var(--psych-color2);"></iconify-icon> Location: Brandnertal Vortex</li>
+                    <li><iconify-icon icon="mdi:triangle-wave" style="color:var(--psych-color3);"></iconify-icon> Altitude Target: 8848m Vibration</li>
+                    <li><iconify-icon icon="mdi:currency-eur" style="color:var(--psych-color4);"></iconify-icon> Energy Exchange: 599 EUR</li>
+                </ul>
+            </section>
+
+             <section class="psych-section animate-psych-in is-visible" style="transition-delay: 0.8s;">
+                <h2 style="color:var(--psych-color1);">Mind Expansion Log: A. Schürrle</h2>
+                <blockquote style="font-family: 'Lobster', cursive; font-size: 1.4rem; text-align:center; color: var(--psych-color5); border: none; padding: 15px; background:rgba(var(--psych-color4-rgb, 14,84,95), 0.5); border-radius: 50%;">
+                    "Mind... blown! Insane frequency. Hard path. Found... the signal."
+                 </blockquote>
+             </section>
+
+            <section id="connect" class="psych-section animate-psych-in is-visible" style="text-align:center; transition-delay: 1s;">
+                <h2>Enter the Portal // Registration 2025</h2>
+                <p>Are you ready to dissolve boundaries? Secure your frequency.</p>
+                 <div class="psych-pattern">
+                    <iconify-icon icon="mdi:creation" style="animation-duration: 15s;"></iconify-icon> <!-- Beispiel-Icon -->
+                 </div>
+                <a href="#" class="btn-psych" style="background: linear-gradient(45deg, var(--psych-color3), var(--psych-color2)); color:#333; font-size:1.5rem;">Join the Collective</a>
+            </section>
+        </main>
+
+        <footer class="psych-footer animate-psych-in is-visible">
+            <p>~ ALPIN8 Consciousness ~</p>
+            <p><a href="#">Legal Mandalas</a> | <a href="#">Privacy Aura</a> | ∞ 2024</p>
+        </footer>
+    </div>
+
+    <script>
+         // RGB für CSS Variablen
+        function getRgbFromHexPsych(hex) {
+            hex = hex.replace(/^#/, '');
+            if (hex.length === 3) hex = hex.split('').map(char => char + char).join('');
+            const bigint = parseInt(hex, 16);
+            return `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`;
+        }
+        document.documentElement.style.setProperty('--psych-color4-rgb', getRgbFromHexPsych(getComputedStyle(document.documentElement).getPropertyValue('--psych-color4').trim()));
+        document.documentElement.style.setProperty('--psych-color5-rgb', getRgbFromHexPsych(getComputedStyle(document.documentElement).getPropertyValue('--psych-color5').trim()));
+
+        // Scroll Animation
+        const animatedElementsPsych = document.querySelectorAll('.animate-psych-in');
+        const observerPsych = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerPsych.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsPsych.forEach(el => observerPsych.observe(el));
+    </script>
+</body>
+</html>

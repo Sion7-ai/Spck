@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting - Glassmorphismus</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg-color: rgba(255, 255, 255, 0.15); /* Haupt-Glasfarbe */
+            --glass-border-color: rgba(255, 255, 255, 0.25);
+            --glass-blur-value: 10px;
+            --text-color-on-glass: #FFFFFF;
+            --text-color-secondary-on-glass: rgba(255, 255, 255, 0.8);
+            --accent-green: #06D6A0;
+            --accent-yellow: #FFD166;
+            --accent-red: #FF5050;
+            --primary-dark: #0E545F;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-green) 50%, var(--accent-yellow) 100%);
+            /* Alternativ ein Pexels-Bild als Hintergrund:
+            background-image: url('https://images.pexels.com/photos/1766838/pexels-photo-1766838.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=1');
+            background-size: cover;
+            background-attachment: fixed; */
+            background-attachment: fixed; /* Wichtig für den Glass-Effekt bei Scrollen */
+            color: var(--text-color-on-glass);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .glass-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 15px;
+        }
+
+        /* Basis-Stil für Glaselemente */
+        .glass-effect {
+            background: var(--glass-bg-color);
+            backdrop-filter: blur(var(--glass-blur-value));
+            -webkit-backdrop-filter: blur(var(--glass-blur-value)); /* Für Safari */
+            border-radius: 12px; /* Abgerundete Ecken */
+            border: 1px solid var(--glass-border-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-effect:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Header */
+        .glass-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding-top: 15px; /* Platz für body padding oben */
+            margin-bottom: 0; /* Header klebt direkt oben */
+        }
+        .glass-header .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Glass-Effekt direkt auf Content, nicht auf .glass-header, um Padding zu ermöglichen */
+            background: var(--glass-bg-color);
+            backdrop-filter: blur(var(--glass-blur-value));
+            -webkit-backdrop-filter: blur(var(--glass-blur-value));
+            border-radius: 12px;
+            border: 1px solid var(--glass-border-color);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 15px 25px;
+        }
+        .glass-logo img {
+            height: 40px;
+            filter: brightness(0) invert(1); /* Stellt sicher, dass das Logo weiß ist */
+        }
+        .glass-nav a {
+            color: var(--text-color-on-glass);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .glass-nav a:hover {
+            color: var(--accent-yellow);
+        }
+
+        /* Hero Section */
+        .glass-hero {
+            text-align: center;
+            padding: 60px 30px; /* Mehr Padding im Hero */
+        }
+        .glass-hero h1 {
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            font-weight: 700; /* Bold für Hero-Titel */
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+        .glass-hero .hero-number {
+            font-size: clamp(4rem, 10vw, 7rem);
+            font-weight: 300; /* Light für die Zahl */
+            color: var(--accent-yellow);
+            display: block;
+            margin-bottom: 20px;
+        }
+        .glass-hero p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--text-color-secondary-on-glass);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-glass {
+            display: inline-block;
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        .btn-glass.primary-accent { /* Solider Button für Kontrast */
+            background-color: var(--accent-green);
+            color: var(--primary-dark);
+            border: 1px solid var(--accent-green);
+        }
+        .btn-glass.primary-accent:hover {
+            background-color: var(--accent-yellow);
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(var(--accent-yellow-rgb, 255, 209, 102), 0.4);
+        }
+        .btn-glass.secondary-glass { /* Button im Glass-Stil */
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-color-on-glass);
+            backdrop-filter: blur(5px);
+        }
+        .btn-glass.secondary-glass:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+
+        /* Content Sections & Cards */
+        .glass-section h2 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text-color-on-glass);
+        }
+        .glass-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .glass-card .card-icon {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            display: block; /* Für Margin */
+        }
+         .glass-card .card-icon.yellow { color: var(--accent-yellow); }
+         .glass-card .card-icon.red { color: var(--accent-red); }
+
+        .glass-card h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .glass-card p {
+            color: var(--text-color-secondary-on-glass);
+            font-size: 0.95rem;
+        }
+
+        /* Quick Facts als Liste in einer Card */
+        .glass-quick-facts ul {
+            list-style: none;
+            padding: 0;
+        }
+        .glass-quick-facts li {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--glass-border-color);
+        }
+        .glass-quick-facts li:last-child { border-bottom: none; }
+        .glass-quick-facts iconify-icon {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            margin-right: 15px;
+        }
+        .glass-quick-facts li strong { font-weight: 500; margin-right: 5px;}
+
+        /* Footer */
+        .glass-footer {
+            text-align: center;
+            padding: 30px 15px;
+            margin-top: 30px;
+            /* Kann auch .glass-effect haben oder solider sein */
+            background: rgba(0,0,0,0.2); /* Etwas dunkler für Footer */
+            border-top: 1px solid var(--glass-border-color);
+            border-radius: 12px 12px 0 0; /* Oben abgerundet */
+        }
+        .glass-footer p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: var(--text-color-secondary-on-glass);
+        }
+        .glass-footer a {
+            color: var(--text-color-on-glass);
+            text-decoration: none;
+        }
+        .glass-footer a:hover { color: var(--accent-yellow); }
+        .glass-footer .social-icons-glass a {
+            font-size: 1.8rem;
+            margin: 0 10px;
+        }
+
+        /* Animation für das Erscheinen von Elementen */
+        .animate-glass-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .animate-glass-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-container">
+        <header class="glass-header">
+            <div class="header-content">
+                <div class="glass-logo">
+                    <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo">
+                </div>
+                <nav class="glass-nav">
+                    <a href="#challenge">Challenge</a>
+                    <a href="#why">Warum Alpin8</a>
+                    <a href="#anmeldung">Anmeldung</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="glass-hero glass-effect animate-glass-in is-visible" style="margin-top: 25px;">
+            <h1>ALPIN8 EVERESTING</h1>
+            <span class="hero-number">8848</span>
+            <p>Dein ultimatives Abenteuer. Die mentale und physische Herausforderung deines Lebens im Herzen der Alpen.</p>
+            <a href="#anmeldung" class="btn-glass primary-accent">Jetzt deinen Platz sichern!</a>
+        </section>
+
+        <section id="challenge" class="glass-section">
+            <h2 class="animate-glass-in">Was dich bei ALPIN8 erwartet</h2>
+            <div class="glass-card-grid">
+                <div class="glass-card glass-effect animate-glass-in" style="transition-delay: 0.1s;">
+                    <iconify-icon class="card-icon" icon="tabler:mountain"></iconify-icon>
+                    <h3>Die ultimative Challenge</h3>
+                    <p>8848 Höhenmeter bergauf, 34 Stunden Zeit. Die Gondel bringt dich sicher wieder ins Tal. Konzentriere dich auf den Aufstieg.</p>
+                </div>
+                <div class="glass-card glass-effect animate-glass-in" style="transition-delay: 0.2s;">
+                    <iconify-icon class="card-icon yellow" icon="tabler:brain"></iconify-icon>
+                    <h3>Mentale Stärke</h3>
+                    <p>Es ist dein Kopf, der entscheidet, nicht nur deine Beine. Überwinde innere Barrieren und wachse über dich hinaus.</p>
+                </div>
+                <div class="glass-card glass-effect animate-glass-in" style="transition-delay: 0.3s;">
+                    <iconify-icon class="card-icon red" icon="tabler:flag-3-filled"></iconify-icon>
+                    <h3>Dein Ziel</h3>
+                    <p>Erreiche mehr, als du je für möglich gehalten hast. Finde heraus, wozu du wirklich fähig bist und definiere deine Grenzen neu.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="why" class="glass-section">
+            <h2 class="animate-glass-in">Warum ALPIN8? Einzigartig & Sicher.</h2>
+            <div class="glass-card-grid">
+                 <div class="glass-card glass-effect animate-glass-in" style="transition-delay: 0.1s;">
+                    <iconify-icon class="card-icon" icon="tabler:shield-check-filled"></iconify-icon>
+                    <h3>Sichere Umgebung</h3>
+                    <p>Die Palüdbahn läuft 34h exklusiv für uns. Unser Team und medizinische Versorgung sind stets präsent.</p>
+                </div>
+                <div class="glass-card glass-effect animate-glass-in" style="transition-delay: 0.2s;">
+                    <iconify-icon class="card-icon yellow" icon="tabler:users-group"></iconify-icon>
+                    <h3>Exklusive Community</h3>
+                    <p>Limitiert auf 300 Teilnehmer. Erlebe eine einzigartige, unterstützende Atmosphäre unter Gleichgesinnten.</p>
+                </div>
+                <div class="glass-card glass-effect animate-glass-in" style="transition-delay: 0.3s;">
+                    <iconify-icon class="card-icon red" icon="tabler:apple"></iconify-icon>
+                    <h3>Summit Camp & Versorgung</h3>
+                    <p>Beste Snacks, Getränke, warme Mahlzeiten und Regenerationsmöglichkeiten im Summit-Camp.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass-quick-facts glass-effect animate-glass-in">
+            <h3 style="font-size: 1.8rem; font-weight:500; margin-bottom: 15px; text-align:center;">ALPIN8 2025 - Quick Facts</h3>
+            <ul>
+                <li><iconify-icon icon="tabler:calendar-event"></iconify-icon> <strong>Datum:</strong> 04. bis 06. Juli 2025</li>
+                <li><iconify-icon icon="tabler:map-pin"></iconify-icon> <strong>Ort:</strong> Brandnertal, Vorarlberg, Österreich</li>
+                <li><iconify-icon icon="tabler:flag-checkered"></iconify-icon> <strong>Ziel:</strong> 8848m (Everesting) / 4424m (Everesty)</li>
+                <li><iconify-icon icon="tabler:currency-euro"></iconify-icon> <strong>Ticket:</strong> Ab €499 (inkl. umfangreicher Leistungen)</li>
+            </ul>
+        </section>
+
+        <section id="anmeldung" class="glass-hero glass-effect animate-glass-in" style="padding: 40px 30px;">
+            <h2 style="font-size: 2rem;">Bist du bereit, Geschichte zu schreiben?</h2>
+            <p style="font-size: 1.1rem;">Erlebe das Abenteuer deines Lebens. Die Plätze sind streng limitiert.</p>
+            <a href="#" class="btn-glass primary-accent" style="font-size: 1.1rem; padding: 15px 40px;">Melde dich für 2025 an!</a>
+        </section>
+    </div>
+
+    <footer class="glass-footer">
+        <div class="glass-logo" style="margin-bottom:15px;">
+            <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo" style="height:35px;">
+        </div>
+        <div class="social-icons-glass" style="margin-bottom:15px;">
+            <a href="#" aria-label="Instagram"><iconify-icon icon="tabler:brand-instagram"></iconify-icon></a>
+            <a href="#" aria-label="Facebook"><iconify-icon icon="tabler:brand-facebook"></iconify-icon></a>
+            <a href="#" aria-label="LinkedIn"><iconify-icon icon="tabler:brand-linkedin"></iconify-icon></a>
+        </div>
+        <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a> | <a href="#">AGB</a></p>
+        <p>&copy; 2024 ALPIN8 GmbH. Embrace the Challenge.</p>
+    </footer>
+
+    <script>
+        // Scroll Animation für Elemente
+        const animatedElementsGlass = document.querySelectorAll('.animate-glass-in');
+
+        const observerGlass = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Optional: Animation nur einmal ausführen
+                    // observerGlass.unobserve(entry.target);
+                } else {
+                    // Optional: Animation zurücksetzen, wenn Element aus Viewport verschwindet
+                    // entry.target.classList.remove('is-visible');
+                }
+            });
+        }, {
+            threshold: 0.1 // Element ist zu 10% sichtbar
+        });
+
+        animatedElementsGlass.forEach(el => {
+            observerGlass.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting :: The Art Deco Ascent</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Montserrat:wght@400;600;700&family=Poppins:wght@600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <!-- Montserrat/Poppins für geometrische Sans, Cinzel für Deco-Headlines, Roboto für Fließtext -->
+    <style>
+        :root {
+            --deco-bg: #1A1A1A; /* Schwarz oder sehr dunkles Grau/Blau */
+            --deco-text: #EAE0D5; /* Cremefarben für Text */
+            --deco-gold: #FFD166; /* Dein Gelb als Goldbasis */
+            --deco-gold-dark: #B8860B; /* Dunkleres Gold für Schatten/Linien */
+            --deco-silver: #C0C0C0;
+            --deco-border: var(--deco-gold-dark);
+            --deco-accent-red: #8B0000; /* Bordeauxrot */
+            --deco-accent-blue: #0E545F; /* Dein Petrol */
+            --deco-spacing: 25px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', 'Montserrat', sans-serif;
+            background-color: var(--deco-bg);
+            color: var(--deco-text);
+            line-height: 1.7;
+            padding: 0;
+        }
+
+        .deco-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: calc(var(--deco-spacing) * 2) var(--deco-spacing);
+            position: relative; /* Für Muster */
+        }
+        /* Dezentes Hintergrundmuster (optional) */
+        .deco-container::before {
+             content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+             background-image: linear-gradient(45deg, rgba(255,209,102,0.03) 25%, transparent 25%, transparent 75%, rgba(255,209,102,0.03) 75%, rgba(255,209,102,0.03)),
+                               linear-gradient(-45deg, rgba(255,209,102,0.03) 25%, transparent 25%, transparent 75%, rgba(255,209,102,0.03) 75%, rgba(255,209,102,0.03));
+             background-size: 30px 30px;
+             z-index: -1; pointer-events: none;
+        }
+
+        /* Header */
+        .deco-header {
+            text-align: center;
+            padding-bottom: var(--deco-spacing);
+            margin-bottom: calc(var(--deco-spacing) * 2);
+            border-bottom: 1px solid var(--deco-border);
+            position: relative;
+        }
+         /* Art Deco Rahmen oben (Beispiel) */
+        .deco-header::before, .deco-header::after {
+            content: ''; position: absolute; bottom: -1px; width: 30%; height: 5px;
+            background: linear-gradient(to right, var(--deco-gold), var(--deco-gold-dark));
+        }
+        .deco-header::before { left: 0; border-radius: 0 5px 0 0;}
+        .deco-header::after { right: 0; border-radius: 5px 0 0 0;}
+
+        .deco-logo {
+            font-family: 'Cinzel', serif; /* Elegante Deco-Schrift */
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--deco-gold);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            display: block;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .deco-nav a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600; /* SemiBold */
+            color: var(--deco-text);
+            text-decoration: none;
+            margin: 0 calc(var(--deco-spacing) / 1.5);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+        .deco-nav a:hover {
+            color: var(--deco-gold);
+            text-shadow: 0 0 5px var(--deco-gold);
+        }
+
+        /* Sektionen */
+        .deco-section { margin-bottom: calc(var(--deco-spacing) * 2); }
+        .deco-section h1, .deco-section h2 {
+            font-family: 'Poppins', sans-serif; /* Geometrische Sans */
+            font-weight: 700; /* Bold */
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: var(--deco-spacing);
+            color: var(--deco-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .deco-section h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+        .deco-section h2 { font-size: 1.8rem; }
+        .deco-section h3 { /* Für Sub-Headlines */
+            font-family: 'Montserrat', sans-serif; font-weight: 600;
+            font-size: 1.2rem; color: var(--deco-silver);
+            text-align: center; margin-bottom: calc(var(--deco-spacing) / 2);
+            border-top: 1px solid var(--deco-border);
+            border-bottom: 1px solid var(--deco-border);
+            padding: 5px 0;
+        }
+
+        .deco-section p {
+            font-size: 1rem;
+            font-weight: 300; /* Roboto Light */
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: var(--deco-spacing);
+            color: rgba(var(--deco-text-rgb, 234, 224, 213), 0.9); /* Leicht transparent */
+        }
+
+        /* Hero */
+        .deco-hero .hero-number-deco {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(7rem, 20vw, 12rem);
+            font-weight: 700;
+            color: transparent; /* Text unsichtbar */
+            -webkit-text-stroke: 1px var(--deco-gold); /* Goldene Outline */
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+            text-align: center;
+            line-height: 0.9;
+            margin: 10px 0 25px 0;
+            display: block;
+        }
+         /* Sonnenstrahl-Effekt (simuliert) */
+        .sunburst-bg {
+             position: relative; padding: var(--deco-spacing) 0;
+             overflow: hidden;
+        }
+         .sunburst-bg::before {
+             content: ''; position: absolute; top: 50%; left: 50%;
+             width: 200%; height: 200%; /* Groß genug */
+             transform: translate(-50%, -50%);
+             background: conic-gradient(
+                rgba(var(--deco-gold-rgb, 255,209,102), 0.15) 0deg 10deg,
+                transparent 10deg 20deg
+             );
+             background-size: 20deg; /* Breite der Strahlen */
+             border-radius: 50%;
+             animation: spin 60s linear infinite;
+             z-index: 0;
+         }
+         .sunburst-bg > * { position: relative; z-index: 1; }
+         @keyframes spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+
+        .btn-deco {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--deco-bg);
+            background: var(--deco-gold);
+            padding: 10px 25px;
+            border: 1px solid var(--deco-gold-dark);
+            text-decoration: none;
+            box-shadow: inset 0 0 5px rgba(255,255,255,0.3), 0 2px 5px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-deco:hover {
+            background: var(--deco-gold-dark);
+            color: var(--deco-text);
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+            transform: scale(1.03);
+        }
+
+        /* Quick Facts mit geometrischen Linien */
+        .deco-facts-list { list-style: none; padding: 0; max-width: 500px; margin: var(--deco-spacing) auto; }
+        .deco-facts-list li {
+            padding: 10px 0 10px 25px; /* Platz für Deko-Linie */
+            border-bottom: 1px solid rgba(var(--deco-border-rgb, 184,134,11), 0.3);
+            position: relative;
+            text-align: left;
+        }
+        .deco-facts-list li::before { /* Vertikale Deko-Linie */
+            content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px;
+            background: linear-gradient(to bottom, var(--deco-gold), var(--deco-gold-dark));
+        }
+        .deco-facts-list li strong { color: var(--deco-gold); }
+
+        /* Footer */
+        .deco-footer {
+            padding: var(--deco-spacing) 0;
+            margin-top: calc(var(--deco-spacing) * 2);
+            border-top: 1px solid var(--deco-border);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(var(--deco-text-rgb, 234, 224, 213), 0.7);
+        }
+        .deco-footer a { color: rgba(var(--deco-text-rgb, 234, 224, 213), 0.7); text-decoration: none; }
+        .deco-footer a:hover { color: var(--deco-gold); }
+
+        /* Animation */
+        .animate-deco-in { opacity: 0; transform: translateY(15px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+        .animate-deco-in.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="deco-container">
+        <header class="deco-header animate-deco-in is-visible">
+            <div class="deco-logo">ALPIN8</div>
+            <nav class="deco-nav">
+                <a href="#challenge">Die Herausforderung</a>
+                <a href="#details">Details & Eleganz</a>
+                <a href="#register">Registrierung</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="deco-section deco-hero sunburst-bg animate-deco-in is-visible" style="transition-delay: 0.1s;">
+                <h1>EVERESTING</h1>
+                <div class="hero-number-deco">8848</div>
+                <p>Erleben Sie die Gipfel der Ausdauer in einem Rahmen von zeitloser Eleganz und unvergleichlicher Herausforderung.</p>
+                <div style="text-align:center;">
+                    <a href="#register" class="btn-deco">Beginnen Sie Ihre Reise</a>
+                </div>
+            </section>
+
+            <section id="challenge" class="deco-section animate-deco-in is-visible" style="transition-delay: 0.2s;">
+                <h2>Die Quintessenz der Herausforderung</h2>
+                <p>Alpin8 Everesting repräsentiert die ultimative Prüfung menschlicher Willenskraft und Ausdauer. Über 34 Stunden erstreckt sich das Zeitfenster, um die monumentale Marke von 8848 Höhenmetern zu erreichen. Der Aufstieg erfolgt ausschließlich durch eigene Kraft, während der Abstieg komfortabel per Gondelunterstützung erfolgt. Es ist eine Hommage an die großen Bergsteiger vergangener Zeiten, kombiniert mit moderner Organisation und Exklusivität.</p>
+            </section>
+
+            <section id="details" class="deco-section animate-deco-in is-visible" style="transition-delay: 0.3s;">
+                <h2>Details in Gold gefasst</h2>
+                 <div style="max-width: 700px; margin:auto; text-align:center;">
+                    <img src="https://images.pexels.com/photos/1670770/pexels-photo-1670770.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Goldene Berge abstrakt" style="width:80%; border: 1px solid var(--deco-border); padding:5px; margin-bottom:var(--deco-spacing);">
+                 </div>
+                 <ul class="deco-facts-list">
+                    <li><strong>Termin:</strong> 04. bis 06. Juli 2025</li>
+                    <li><strong>Ort:</strong> Brandnertal, Vorarlberg, Österreich – Eine Kulisse von erhabener Schönheit.</li>
+                    <li><strong>Format:</strong> 8848m Aufstieg (Everesting) / 4424m (Everesty).</li>
+                    <li><strong>Teilnehmer:</strong> Streng limitiert auf 300 Personen für ein exklusives Erlebnis.</li>
+                    <li><strong>Leistungen:</strong> Umfassendes Paket inkl. Gondel, Verpflegung, Zeitnahme, exklusive Präsente.</li>
+                    <li><strong>Ticket:</strong> Ab €499.</li>
+                </ul>
+            </section>
+
+             <section class="deco-section animate-deco-in is-visible" style="transition-delay: 0.4s;">
+                <h2>Ein Echo der Größe</h2>
+                 <blockquote style="font-family: 'Cinzel', serif; font-size: 1.3rem; text-align:center; border-top:1px solid var(--deco-border); border-bottom:1px solid var(--deco-border); padding: 15px 0; margin: 20px auto; max-width:70%;">
+                    "Eine Herausforderung von monumentalen Ausmaßen. Wahnsinnig. Präzise das, was ich suchte. Extrem fordernd!"
+                 </blockquote>
+                 <p style="font-size:0.9rem;">- André Schürrle</p>
+            </section>
+
+            <section id="register" class="deco-section sunburst-bg animate-deco-in is-visible" style="text-align:center; transition-delay: 0.5s;">
+                <h2>Reservieren Sie Ihren Platz in der Legende</h2>
+                <p>Die Teilnahme am Alpin8 Everesting ist mehr als ein Event – es ist ein Statement. Sichern Sie sich Ihre exklusive Teilnahme.</p>
+                <a href="#" class="btn-deco" style="font-size: 1.1rem; padding: 12px 35px;">Zur exklusiven Registrierung</a>
+            </section>
+        </main>
+
+        <footer class="deco-footer animate-deco-in is-visible">
+            <p>ALPIN8 GmbH &copy; 2024</p>
+            <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // RGB für CSS-Variablen
+        function getRgbFromHexDeco(hex) {
+            hex = hex.replace(/^#/, '');
+            if (hex.length === 3) hex = hex.split('').map(char => char + char).join('');
+            const bigint = parseInt(hex, 16);
+            return `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`;
+        }
+        document.documentElement.style.setProperty('--deco-text-rgb', getRgbFromHexDeco(getComputedStyle(document.documentElement).getPropertyValue('--deco-text').trim()));
+        document.documentElement.style.setProperty('--deco-gold-rgb', getRgbFromHexDeco(getComputedStyle(document.documentElement).getPropertyValue('--deco-gold').trim()));
+         document.documentElement.style.setProperty('--deco-border-rgb', getRgbFromHexDeco(getComputedStyle(document.documentElement).getPropertyValue('--deco-border').trim()));
+
+
+        const animatedElementsDeco = document.querySelectorAll('.animate-deco-in');
+        const observerDeco = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerDeco.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsDeco.forEach(el => observerDeco.observe(el));
+    </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting :: Dark Edition</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #121212; /* Sehr dunkles Grau */
+            /* --dark-bg: #0E545F; /* Dein Petrol, falls dunkel genug oder abgedunkelt */
+            --dark-surface: #1E1E1E; /* Etwas hellere Oberfläche für Cards etc. */
+            --dark-text-primary: #E0E0E0; /* Helles Grau für Haupttext */
+            --dark-text-secondary: #A0A0A0; /* Gedämpfteres Grau für Sekundärtext */
+            --dark-border: #333333; /* Feine Ränder */
+
+            --dark-accent-green: #06D6A0;
+            --dark-accent-yellow: #FFD166;
+            --dark-accent-red: #FF5050;
+            --dark-accent-blue-text: #87CEFA; /* Helles Blau für Links */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--dark-text-primary);
+            line-height: 1.7;
+            padding: 20px;
+        }
+
+        .dark-container {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .dark-header {
+            padding: 15px 0;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--dark-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .dark-logo img {
+            height: 40px;
+            /* Weißes Logo ist perfekt */
+        }
+        .dark-nav a {
+            color: var(--dark-text-secondary);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 500;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+        .dark-nav a:hover {
+            color: var(--dark-accent-green);
+            text-shadow: 0 0 5px var(--dark-accent-green);
+        }
+
+        /* Sektionen */
+        .dark-section {
+            margin-bottom: 50px;
+        }
+        .dark-section h1, .dark-section h2, .dark-section h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .dark-section h1 {
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            font-weight: 900; /* Roboto Black */
+            color: var(--dark-text-primary);
+            line-height: 1.1;
+            text-shadow: 0 0 15px rgba(var(--dark-accent-yellow-rgb, 255,209,102), 0.3); /* Subtiler Glow */
+        }
+        .dark-section h2 {
+            font-size: 2rem;
+            color: var(--dark-accent-yellow); /* Akzent für H2 */
+            border-bottom: 1px solid var(--dark-border);
+            padding-bottom: 10px;
+        }
+        .dark-section h3 {
+            font-size: 1.4rem;
+            color: var(--dark-accent-green); /* Akzent für H3 */
+        }
+        .dark-section p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: var(--dark-text-secondary);
+        }
+        .dark-section strong { color: var(--dark-text-primary); font-weight: 500; }
+
+
+        /* Hero Section */
+        .dark-hero { text-align: center; }
+        .dark-hero .hero-number-dark {
+            font-size: clamp(6rem, 18vw, 10rem);
+            font-weight: 900;
+            color: var(--dark-accent-red);
+            display: block;
+            margin: 0px 0 10px 0;
+            line-height: 0.9;
+            text-shadow: 0 0 20px var(--dark-accent-red), 0 0 30px rgba(var(--dark-accent-red-rgb,255,80,80),0.5);
+        }
+        .dark-hero .hero-subline {
+            font-size: 1.3rem;
+            color: var(--dark-text-primary);
+            margin-bottom: 30px;
+        }
+
+        .btn-darkmode {
+            display: inline-block;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        .btn-darkmode.primary {
+            background-color: var(--dark-accent-green);
+            color: var(--dark-bg); /* Dunkler Text auf hellem Button */
+            border-color: var(--dark-accent-green);
+        }
+        .btn-darkmode.primary:hover {
+            background-color: var(--dark-accent-yellow);
+            border-color: var(--dark-accent-yellow);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(var(--dark-accent-yellow-rgb,255,209,102),0.3);
+        }
+        .btn-darkmode.outline {
+            background-color: transparent;
+            color: var(--dark-accent-blue-text);
+            border: 1px solid var(--dark-accent-blue-text);
+        }
+        .btn-darkmode.outline:hover {
+            background-color: var(--dark-accent-blue-text);
+            color: var(--dark-bg);
+            text-shadow: none;
+        }
+
+        /* Cards / Abgegrenzte Bereiche */
+        .dark-card {
+            background-color: var(--dark-surface);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid var(--dark-border);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        .dark-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .dark-card .card-icon {
+            font-size: 2.5rem;
+            color: var(--dark-accent-green);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+
+        /* Quick Facts */
+        .dark-quick-facts ul { list-style: none; padding: 0; }
+        .dark-quick-facts li {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            font-size: 1rem;
+        }
+        .dark-quick-facts iconify-icon {
+            font-size: 1.5rem;
+            color: var(--dark-accent-yellow);
+            margin-right: 12px;
+        }
+
+        /* Bild */
+        .dark-image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            border: 1px solid var(--dark-border);
+            display: block;
+        }
+
+
+        /* Footer */
+        .dark-footer {
+            padding: 25px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--dark-border);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--dark-text-secondary);
+        }
+        .dark-footer a { color: var(--dark-accent-blue-text); text-decoration: none; }
+        .dark-footer a:hover { color: var(--dark-accent-green); text-decoration: underline; }
+        .dark-footer .social-icons-dark a {
+            font-size: 1.6rem; margin: 0 10px; color: var(--dark-text-secondary);
+        }
+         .dark-footer .social-icons-dark a:hover { color: var(--dark-accent-yellow); }
+
+        /* Animation */
+        .animate-dark-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-dark-in.is-visible { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body>
+    <div class="dark-container">
+        <header class="dark-header animate-dark-in is-visible">
+            <div class="dark-logo">
+                <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo">
+            </div>
+            <nav class="dark-nav">
+                <a href="#challenge">Challenge</a>
+                <a href="#details">Details</a>
+                <a href="#anmeldung">Anmeldung</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="dark-hero dark-section animate-dark-in is-visible" style="transition-delay: 0.1s;">
+                <h1>ALPIN8 EVERESTING</h1>
+                <div class="hero-number-dark">8848</div>
+                <p class="hero-subline">Die ultimative Herausforderung im Herzen der Nacht. Erlebe deine Grenzen neu.</p>
+                <a href="#anmeldung" class="btn-darkmode primary">Starte dein Abenteuer</a>
+            </section>
+
+            <section id="challenge" class="dark-section animate-dark-in is-visible" style="transition-delay: 0.2s;">
+                <h2>Die Essenz der Nacht: Deine Challenge</h2>
+                <p>8848 Höhenmeter, getragen von der Stille der Dunkelheit und der Kraft deines Willens. Über 34 Stunden verschmelzen Tag und Nacht zu einer einzigen, intensiven Erfahrung. Die Gondel bringt dich sicher ins Tal, dein Fokus gilt dem Aufstieg.</p>
+                <div class="dark-card-grid" style="margin-top:30px;">
+                    <div class="dark-card animate-dark-in" style="transition-delay: 0.25s;">
+                        <iconify-icon class="card-icon" icon="mdi:moon-waning-crescent"></iconify-icon>
+                        <h3>Mentale Tiefe</h3>
+                        <p>Im Schutz der Dunkelheit begegnest du deinen innersten Grenzen. Es ist der Kopf, der den Weg weist.</p>
+                    </div>
+                     <div class="dark-card animate-dark-in" style="transition-delay: 0.3s;">
+                        <iconify-icon class="card-icon" style="color:var(--dark-accent-yellow);" icon="mdi:star-shooting-outline"></iconify-icon>
+                        <h3>Einzigartige Atmosphäre</h3>
+                        <p>Die Stille der Berge bei Nacht, die Lichter im Tal, die exklusive Gemeinschaft – ein unvergessliches Setting.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="details" class="dark-section animate-dark-in is-visible" style="transition-delay: 0.3s;">
+                <h2>Fakten im Zwielicht: ALPIN8 2025</h2>
+                <div class="dark-quick-facts dark-card">
+                    <ul>
+                        <li class="animate-dark-in" style="transition-delay: 0.32s;"><iconify-icon icon="mdi:calendar-star"></iconify-icon> <div><strong>Datum:</strong> 04. - 06. Juli 2025</div></li>
+                        <li class="animate-dark-in" style="transition-delay: 0.34s;"><iconify-icon icon="mdi:map-marker-path"></iconify-icon> <div><strong>Ort:</strong> Brandnertal, Österreich (Nacht & Tag)</div></li>
+                        <li class="animate-dark-in" style="transition-delay: 0.36s;"><iconify-icon icon="mdi:summit"></iconify-icon> <div><strong>Ziel:</strong> 8848m (Everesting) / 4424m (Everesty)</div></li>
+                        <li class="animate-dark-in" style="transition-delay: 0.38s;"><iconify-icon icon="mdi:ticket-confirmation-outline"></iconify-icon> <div><strong>Ticket:</strong> Ab €499 inkl. aller Supportleistungen</div></li>
+                        <li class="animate-dark-in" style="transition-delay: 0.4s;"><iconify-icon icon="mdi:food-outline"></iconify-icon> <div><strong>Versorgung:</strong> Summit Camp, Energie-Stationen (24/7)</div></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="dark-section animate-dark-in is-visible" style="transition-delay: 0.4s;">
+                 <h2>Ein Echo aus der Dunkelheit</h2>
+                 <div class="dark-card" style="border-left: 3px solid var(--dark-accent-red);">
+                    <p style="font-size:1.2rem; font-style:italic; color:var(--dark-text-primary);">"What a challenge! That was insane. Exactly what I was looking for. That was hard!"</p>
+                    <p style="text-align:right; color:var(--dark-text-secondary); font-weight:500;">– André Schürrle, Fußball Weltmeister 2014</p>
+                 </div>
+            </section>
+
+             <section id="anmeldung" class="dark-section dark-hero animate-dark-in is-visible" style="transition-delay: 0.5s;">
+                <h2>Bist du bereit, die Nacht zu erobern?</h2>
+                <p class="hero-subline" style="color: var(--dark-text-secondary);">Deine Reise ins Ungewisse beginnt hier. Die Plätze sind limitiert.</p>
+                <a href="#" class="btn-darkmode outline" style="margin-right:15px;">Mehr Informationen</a>
+                <a href="#" class="btn-darkmode primary">Jetzt für 2025 registrieren</a>
+            </section>
+
+        </main>
+
+        <footer class="dark-footer animate-dark-in is-visible">
+            <div class="social-icons-dark" style="margin-bottom:15px;">
+                <a href="#" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+                <a href="#" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+                <a href="#" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+            </div>
+            <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a> | <a href="#">Teilnahmebedingungen</a></p>
+            <p>&copy; 2024 ALPIN8 GmbH. Conquer the Night.</p>
+        </footer>
+    </div>
+
+    <script>
+        // RGB für CSS-Variablen (falls für JS-Glows benötigt)
+        function getRgbFromHexDark(hex) {
+            hex = hex.replace(/^#/, '');
+            if (hex.length === 3) hex = hex.split('').map(char => char + char).join('');
+            const bigint = parseInt(hex, 16);
+            return `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`;
+        }
+        document.documentElement.style.setProperty('--dark-accent-yellow-rgb', getRgbFromHexDark(getComputedStyle(document.documentElement).getPropertyValue('--dark-accent-yellow').trim()));
+         document.documentElement.style.setProperty('--dark-accent-red-rgb', getRgbFromHexDark(getComputedStyle(document.documentElement).getPropertyValue('--dark-accent-red').trim()));
+
+
+        const animatedElementsDark = document.querySelectorAll('.animate-dark-in');
+        const observerDark = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerDark.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsDark.forEach(el => observerDark.observe(el));
+    </script>
+</body>
+</html>

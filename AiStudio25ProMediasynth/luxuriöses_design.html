@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting :: Exklusive Herausforderung</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <!-- Cormorant Garamond (elegant Serif), Montserrat/Roboto Light/Thin (fein Sans) -->
+    <style>
+        :root {
+            --lux-bg: #141414; /* Sehr dunkles Grau */
+            /* --lux-bg: #0A2E36; /* Dunklere Variante von #0E545F */
+            --lux-text: #EAEAEA; /* Helles Grau/Creme */
+            --lux-text-secondary: #A0A0A0;
+            --lux-gold: #CAA86B; /* Gedämpftes Gold */
+            --lux-gold-light: #E8D8B5;
+            --lux-border: rgba(var(--lux-gold-rgb, 202,168,107), 0.3); /* Goldene Linien */
+            --lux-spacing: 30px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', 'Montserrat', sans-serif; /* Basis Sans-Serif */
+            font-weight: 300; /* Light */
+            background-color: var(--lux-bg);
+            color: var(--lux-text);
+            line-height: 1.8; /* Großzügig */
+            padding: 0;
+        }
+
+        .lux-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: calc(var(--lux-spacing) * 2) var(--lux-spacing);
+        }
+
+        /* Header (minimalistisch) */
+        .lux-header {
+            padding: var(--lux-spacing) 0;
+            margin-bottom: calc(var(--lux-spacing) * 2.5);
+            display: flex;
+            justify-content: center; /* Logo zentriert, Navi optional */
+            align-items: center;
+        }
+        .lux-logo {
+            font-family: 'Cormorant Garamond', serif; /* Elegante Serif */
+            font-weight: 600; /* SemiBold */
+            font-size: 1.6rem;
+            color: var(--lux-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        /* Navigation oft versteckt oder sehr dezent */
+        .lux-nav { position: absolute; right: var(--lux-spacing); }
+        .lux-nav a {
+            color: var(--lux-text-secondary); text-decoration: none;
+            margin-left: var(--lux-spacing); font-size: 0.8rem;
+            font-weight: 400; text-transform: uppercase; letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        .lux-nav a:hover { color: var(--lux-gold); }
+
+
+        /* Sektionen */
+        .lux-section { margin-bottom: calc(var(--lux-spacing) * 3); }
+        .lux-section h1, .lux-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700; /* Bold */
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: var(--lux-spacing);
+            line-height: 1.2;
+        }
+        .lux-section h1 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            color: var(--lux-text);
+            font-weight: 600; /* SemiBold für H1 */
+        }
+        .lux-section h2 {
+            font-size: 2rem;
+            color: var(--lux-gold);
+            font-weight: 500; /* Medium */
+            margin-bottom: calc(var(--lux-spacing)*1.5);
+            position: relative;
+            padding-bottom: calc(var(--lux-spacing)/2);
+        }
+         /* Feine Linie unter H2 */
+         .lux-section h2::after {
+             content: ''; position: absolute; bottom: 0; left: 50%;
+             transform: translateX(-50%); width: 50px; height: 1px;
+             background: linear-gradient(to right, transparent, var(--lux-border), transparent);
+         }
+
+        .lux-section p {
+            font-size: 1rem; /* Leicht kleiner für mehr Eleganz */
+            color: var(--lux-text-secondary);
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto calc(var(--lux-spacing)*1.5) auto;
+        }
+        .lux-section strong { color: var(--lux-text); font-weight: 500; }
+
+        /* Hero */
+        .lux-hero {
+            min-height: 70vh; /* Viel Höhe */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .lux-hero .hero-number-lux {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(8rem, 25vw, 15rem);
+            font-weight: 300; /* Light */
+            color: transparent;
+            -webkit-text-stroke: 1px var(--lux-gold);
+            line-height: 0.8;
+            margin-bottom: var(--lux-spacing);
+            opacity: 0.6;
+        }
+
+        .btn-lux {
+            display: inline-block;
+            padding: 10px 28px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400; /* Regular */
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid var(--lux-border);
+            color: var(--lux-gold);
+            background-color: transparent;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-lux:hover {
+            background-color: var(--lux-gold);
+            color: var(--lux-bg);
+            border-color: var(--lux-gold);
+        }
+
+        /* Edle Feature Liste */
+        .lux-feature-list { list-style: none; padding: 0; max-width: 600px; margin: var(--lux-spacing) auto; }
+        .lux-feature-list li {
+            padding: calc(var(--lux-spacing)/1.5) 0;
+            border-bottom: 1px solid rgba(var(--lux-border-rgb, 184,134,11), 0.2);
+            display: flex; align-items: center;
+            font-size: 0.95rem;
+        }
+        .lux-feature-list li:last-child { border-bottom: none; }
+        .lux-feature-list iconify-icon {
+            font-size: 1.4rem; color: var(--lux-gold); margin-right: 15px; flex-shrink: 0;
+        }
+
+        /* Bild */
+        .lux-image-wrapper {
+             border: 1px solid var(--lux-border);
+             padding: 6px;
+             margin-bottom: var(--lux-spacing);
+             display: inline-block; /* Passt sich Bildgröße an */
+        }
+        .lux-image-wrapper img { width: 100%; height: auto; display: block; }
+
+
+        /* Footer */
+        .lux-footer {
+            padding: var(--lux-spacing) 0;
+            margin-top: calc(var(--lux-spacing) * 2);
+            border-top: 1px solid var(--lux-border);
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--lux-text-secondary);
+        }
+        .lux-footer a { color: var(--lux-text-secondary); text-decoration: none; }
+        .lux-footer a:hover { color: var(--lux-gold); }
+
+        /* Animation */
+        .animate-lux-in { opacity: 0; transform: translateY(25px); transition: opacity 1s ease-out, transform 1s ease-out; }
+        .animate-lux-in.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+     <!-- RGB für CSS Variablen -->
+     <script>
+        function getRgbFromHexLux(hex) { hex = hex.replace(/^#/, ''); if (hex.length === 3) hex = hex.split('').map(char => char + char).join(''); const bigint = parseInt(hex, 16); return `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`; }
+        document.documentElement.style.setProperty('--lux-gold-rgb', getRgbFromHexLux(getComputedStyle(document.documentElement).getPropertyValue('--lux-gold').trim()));
+         document.documentElement.style.setProperty('--lux-border-rgb', getRgbFromHexLux(getComputedStyle(document.documentElement).getPropertyValue('--lux-gold-dark').trim())); /* Border nutzt dunkleres Gold */
+     </script>
+
+    <div class="lux-container">
+        <header class="lux-header animate-lux-in is-visible">
+            <div class="lux-logo">ALPIN8</div>
+            <!-- <nav class="lux-nav">
+                <a href="#">Die Herausforderung</a>
+                <a href="#">Das Erlebnis</a>
+                <a href="#">Registrierung</a>
+            </nav> -->
+        </header>
+
+        <main>
+            <section class="lux-section lux-hero animate-lux-in is-visible" style="transition-delay: 0.1s;">
+                 <h1 style="margin-bottom:5px;">Die Krönung der Ausdauer</h1>
+                 <div class="hero-number-lux">8848</div>
+                 <p style="font-size:1.1rem; margin-bottom:var(--lux-spacing);">Alpin8 Everesting – wo sich anspruchsvolle Herausforderung und exklusives Erlebnis vereinen.</p>
+                 <a href="#register" class="btn-lux">Reservieren Sie Ihren Platz</a>
+            </section>
+
+            <section id="challenge" class="lux-section animate-lux-in is-visible" style="transition-delay: 0.3s;">
+                <h2>Eine Herausforderung von Format</h2>
+                <p>Die Zahl 8848 steht für mehr als nur Höhenmeter. Sie symbolisiert das Streben nach dem Außergewöhnlichen, die Überwindung von Grenzen und die Hingabe an ein Ziel. Alpin8 bietet den exklusiven Rahmen für diese persönliche Expedition, unterstützt durch erstklassige Organisation und eine unvergleichliche alpine Kulisse.</p>
+                 <div style="text-align:center; margin-top: calc(var(--lux-spacing)*1.5);">
+                     <div class="lux-image-wrapper">
+                        <img src="https://images.pexels.com/photos/373481/pexels-photo-373481.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Elegante Berglandschaft in Schwarz-Weiß">
+                     </div>
+                 </div>
+            </section>
+
+            <section id="experience" class="lux-section animate-lux-in is-visible" style="transition-delay: 0.5s;">
+                <h2>Das Erlebnis Alpin8</h2>
+                 <div style="display: flex; gap: var(--lux-spacing); flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3>Exklusivität & Gemeinschaft</h3>
+                        <p>Mit einer streng limitierten Teilnehmerzahl von 300 Personen gewährleistet Alpin8 eine intime und fokussierte Atmosphäre. Erleben Sie den Austausch mit Gleichgesinnten in einem Rahmen, der Individualität und gemeinschaftlichen Geist vereint.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3>Erstklassiger Support</h3>
+                         <p>Von der 34-stündigen Gondelverfügbarkeit bis hin zur hochwertigen Verpflegung im Summit Camp – jedes Detail ist darauf ausgerichtet, Ihnen die Konzentration auf Ihre Leistung zu ermöglichen.</p>
+                    </div>
+                 </div>
+            </section>
+
+             <section id="details" class="lux-section animate-lux-in is-visible" style="transition-delay: 0.7s;">
+                 <h2>Auf einen Blick: Die Eckdaten</h2>
+                 <ul class="lux-feature-list">
+                     <li><iconify-icon icon="tabler:calendar-event"></iconify-icon> <span>04. – 06. Juli 2025</span></li>
+                     <li><iconify-icon icon="tabler:map-pin"></iconify-icon> <span>Brandnertal, Vorarlberg, Österreich</span></li>
+                     <li><iconify-icon icon="tabler:trending-up"></iconify-icon> <span>8848m (Everesting) / 4424m (Everesty)</span></li>
+                     <li><iconify-icon icon="tabler:users"></iconify-icon> <span>Limitiert auf 300 Teilnehmer</span></li>
+                     <li><iconify-icon icon="tabler:medal"></iconify-icon> <span>Umfassendes Leistungspaket ab €499</span></li>
+                 </ul>
+             </section>
+
+             <section id="register" class="lux-section animate-lux-in is-visible" style="text-align:center; border-top: 1px solid var(--lux-border); border-bottom: 1px solid var(--lux-border); padding: calc(var(--lux-spacing)*1.5) 0; transition-delay: 0.9s;">
+                <h2 style="border:none; padding:0; margin-bottom:var(--lux-spacing);">Ihre Exklusive Einladung</h2>
+                <p>Werden Sie Teil eines außergewöhnlichen Kapitels alpiner Herausforderungen. Die Registrierung für Alpin8 2025 ist nun geöffnet.</p>
+                <a href="#" class="btn-lux" style="font-size:1rem; padding: 12px 35px;">Zur Registrierung</a>
+            </section>
+        </main>
+
+        <footer class="lux-footer animate-lux-in is-visible">
+            <p>ALPIN8 GmbH &copy; 2024</p>
+            <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a> | <a href="#">Kontakt</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const animatedElementsLux = document.querySelectorAll('.animate-lux-in');
+        const observerLux = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerLux.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsLux.forEach(el => observerLux.observe(el));
+    </script>
+</body>
+</html>

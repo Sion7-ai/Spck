@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 / 8848 / EVERESTING</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script> <!-- Icons hier unwahrscheinlich -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Playfair+Display:wght@900&family=Source+Code+Pro:wght@400&display=swap" rel="stylesheet">
+    <!-- Playfair Display Black für plakative Serif-Headlines, Roboto als Sans-Serif-Basis, Source Code Pro für Akzente -->
+    <style>
+        :root {
+            --typo-bg: #FFFFFF;
+            --typo-text: #111111;
+            --typo-accent: #FF5050; /* Rot als Akzent */
+            /* Alternative Akzente: */
+            /* --typo-accent: #06D6A0; */
+            /* --typo-accent: #0E545F; */
+            --typo-line-color: #DDDDDD;
+            --typo-spacing: 30px; /* Großzügiger Abstand */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--typo-bg);
+            color: var(--typo-text);
+            line-height: 1.6;
+            padding: calc(var(--typo-spacing) * 1.5) var(--typo-spacing);
+            overflow-x: hidden;
+        }
+
+        .typo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .typo-header {
+            padding-bottom: var(--typo-spacing);
+            margin-bottom: calc(var(--typo-spacing) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline; /* An Grundlinie ausrichten */
+            border-bottom: 1px solid var(--typo-line-color);
+        }
+        .typo-logo {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900; /* Black */
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .typo-logo .accent { color: var(--typo-accent); }
+
+        .typo-nav a {
+            font-family: 'Source Code Pro', monospace; /* Monospace für Kontrast */
+            color: var(--typo-text);
+            text-decoration: none;
+            margin-left: calc(var(--typo-spacing) * 0.8);
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        .typo-nav a:hover { color: var(--typo-accent); }
+
+        /* Sektionen */
+        .typo-section { margin-bottom: calc(var(--typo-spacing) * 3); }
+
+        /* Riesige Headline */
+        .typo-headline-massive {
+            font-family: 'Playfair Display', serif; /* Plakative Serif */
+            font-weight: 900; /* Black */
+            font-size: clamp(5rem, 20vw, 14rem); /* Extrem groß */
+            line-height: 0.85;
+            margin: calc(var(--typo-spacing)* -0.5) 0 var(--typo-spacing) 0; /* Negativer Margin oben für Überlappung */
+            word-break: break-word; /* Umbruch bei Bedarf */
+            color: var(--typo-text);
+            /* Optional: leichter Textschatten für Tiefe */
+            /* text-shadow: 3px 3px 0px var(--typo-line-color); */
+            /* Oder Outline */
+            /* color: transparent; -webkit-text-stroke: 1px var(--typo-text); */
+        }
+        .typo-headline-massive.accent { color: var(--typo-accent); }
+
+        .typo-subheadline {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300; /* Light */
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin-bottom: var(--typo-spacing);
+            color: #555; /* Etwas gedämpfter */
+        }
+
+        .typo-section h2 {
+            font-family: 'Roboto', sans-serif; font-weight: 900; /* Black */
+            font-size: 2.5rem;
+            margin-bottom: var(--typo-spacing);
+            line-height: 1.1;
+            border-bottom: 1px solid var(--typo-line-color);
+            padding-bottom: calc(var(--typo-spacing)/3);
+        }
+         .typo-section h3 {
+            font-family: 'Roboto', sans-serif; font-weight: 700; /* Bold */
+            font-size: 1.4rem; color: var(--typo-accent);
+            margin-bottom: calc(var(--typo-spacing)/2);
+         }
+
+        .typo-section p, .typo-section li {
+            font-size: 1rem;
+            margin-bottom: var(--typo-spacing);
+            max-width: 650px; /* Lesbarkeit */
+        }
+        .typo-section ul { list-style: none; padding-left: 0; }
+        .typo-section li { padding-left: 1.5em; position: relative; }
+        .typo-section li::before { /* Einfacher Punkt oder Zahl */
+            content: '•'; /* oder counter(list-item) für Zahlen */
+            position: absolute; left: 0; top: 0;
+            color: var(--typo-accent); font-weight: bold;
+        }
+
+        .btn-typo {
+            display: inline-block;
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 400;
+            font-size: 1rem;
+            color: var(--typo-accent);
+            text-decoration: none;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--typo-accent);
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+        .btn-typo:hover {
+            color: var(--typo-text);
+            border-color: var(--typo-text);
+        }
+        .btn-typo::after { content: ' →'; /* Pfeil nach rechts */ }
+
+        /* Typografische Hervorhebung */
+        .typo-highlight {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 3rem;
+            line-height: 1.2;
+            color: var(--typo-accent);
+            display: block;
+            margin: var(--typo-spacing) 0;
+            text-align: center;
+        }
+
+        /* Footer */
+        .typo-footer {
+            padding-top: var(--typo-spacing);
+            margin-top: calc(var(--typo-spacing) * 2);
+            border-top: 1px solid var(--typo-line-color);
+            font-size: 0.85rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+        .typo-footer a { color: #666; text-decoration: none; }
+        .typo-footer a:hover { color: var(--typo-accent); }
+
+        /* Text Animation (Beispiel) */
+        .animate-text-reveal span {
+            opacity: 0;
+            display: inline-block; /* Wichtig für Transformationen */
+            transform: translateY(15px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-text-reveal.is-visible span {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grid (optional, für Textanordnung) */
+        .typo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: calc(var(--typo-spacing) * 1.5); }
+
+    </style>
+</head>
+<body>
+    <div class="typo-container">
+        <header class="typo-header">
+            <div class="typo-logo">Alpin<span class="accent">8</span></div>
+            <nav class="typo-nav">
+                <a href="#challenge">Challenge</a>
+                <a href="#details">Details</a>
+                <a href="#anmeldung">Anmeldung</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="typo-section typo-hero">
+                <h1 class="typo-headline-massive animate-text-reveal">
+                    <span>8</span><span>8</span><span>4</span><span>8</span>
+                </h1>
+                <p class="typo-subheadline animate-text-reveal is-visible" style="transition-delay: 0.3s;">
+                    <span>Die</span> <span>ultimative</span> <span>Höhenmeter-Herausforderung.</span> <span>ALPIN8</span> <span>Everesting.</span> <span>Stelle</span> <span>dich</span> <span>dem</span> <span>Berg,</span> <span>stelle</span> <span>dich</span> <span>dir</span> <span>selbst.</span>
+                </p>
+                <a href="#challenge" class="btn-typo animate-text-reveal is-visible" style="transition-delay: 0.6s;">Erfahre mehr</a>
+            </section>
+
+            <section id="challenge" class="typo-section">
+                <h2 class="animate-text-reveal">Die Herausforderung</h2>
+                <div class="typo-grid">
+                    <p class="animate-text-reveal is-visible" style="transition-delay: 0.1s;">Es geht um eine Zahl: <strong>8848</strong>. Die Höhenmeter des Mount Everest, bezwungen an einem einzigen Berg. 34 Stunden Zeit. Der Aufstieg gehört dir, der Abstieg der Gondel. Eine Prüfung der Ausdauer, mental und physisch.</p>
+                    <p class="animate-text-reveal is-visible" style="transition-delay: 0.2s;">Kein Rennen gegen andere, nur gegen die eigenen Grenzen. ALPIN8 schafft den Rahmen, du schreibst die Geschichte.</p>
+                </div>
+            </section>
+
+            <section class="typo-section">
+                <span class="typo-highlight animate-text-reveal is-visible" style="transition-delay: 0.3s;">Mehr als du denkst.</span>
+            </section>
+
+            <section id="details" class="typo-section">
+                 <h2 class="animate-text-reveal">Fakten / 2025</h2>
+                 <div class="typo-grid">
+                     <div class="animate-text-reveal is-visible" style="transition-delay: 0.1s;">
+                         <h3>Datum & Ort</h3>
+                         <p>04. – 06. Juli 2025<br>Brandnertal, Österreich</p>
+                         <h3>Teilnehmer</h3>
+                         <p>Maximal 300</p>
+                     </div>
+                     <div class="animate-text-reveal is-visible" style="transition-delay: 0.2s;">
+                         <h3>Formate & Kosten</h3>
+                         <p><strong>Everesting</strong> / 8848m / 34h / €599<br>
+                            <strong>Everesty</strong> / 4424m / 20h / €499</p>
+                         <h3>Leistungen</h3>
+                         <p>Gondel, Verpflegung, Zeitnahme, Camp, Support, Überraschung.</p>
+                     </div>
+                </div>
+            </section>
+
+             <section class="typo-section">
+                 <h2 class="animate-text-reveal">Zitat</h2>
+                 <blockquote style="font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; text-align: center; border-left: 3px solid var(--typo-accent); padding-left: var(--typo-spacing); margin: var(--typo-spacing) 0;" class="animate-text-reveal is-visible" style="transition-delay: 0.1s;">
+                     "What a challenge! That was insane. Exactly what I was looking for. That was hard!"
+                 </blockquote>
+                 <p style="text-align: center; font-family: 'Source Code Pro', monospace; font-size: 0.9rem;" class="animate-text-reveal is-visible" style="transition-delay: 0.2s;">– André Schürrle</p>
+             </section>
+
+            <section id="anmeldung" class="typo-section" style="text-align: center;">
+                 <h2 class="animate-text-reveal">Bereit?</h2>
+                 <h1 class="typo-headline-massive accent animate-text-reveal is-visible" style="font-size: clamp(4rem, 15vw, 10rem); transition-delay: 0.1s;">JETZT<br>ANMELDEN</h1>
+                 <p class="typo-subheadline animate-text-reveal is-visible" style="transition-delay: 0.3s;">Sichere dir deinen Platz für ALPIN8 2025.</p>
+                 <a href="#" class="btn-typo animate-text-reveal is-visible" style="transition-delay: 0.5s; font-size: 1.2rem;">Registrierung starten</a>
+            </section>
+        </main>
+
+        <footer class="typo-footer">
+            <p>ALPIN8 GmbH</p>
+            <p>&copy; 2024 / <a href="#">Impressum</a> / <a href="#">Datenschutz</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Funktion zum Aufteilen von Text in Spans (für Animation)
+        function splitTextIntoSpans(selector) {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                const text = el.textContent.trim();
+                const words = text.split(/\s+/); // Trennt nach Leerzeichen
+                el.innerHTML = ''; // Leert das Element
+                words.forEach(word => {
+                    // Fügt ein Leerzeichen nach jedem Wort hinzu, außer dem letzten
+                    const wordSpan = document.createElement('span');
+                    wordSpan.textContent = word + '\u00A0'; // Fügt geschütztes Leerzeichen hinzu
+                    el.appendChild(wordSpan);
+
+                    // Oder Buchstaben einzeln:
+                    /*
+                    word.split('').forEach(char => {
+                        const charSpan = document.createElement('span');
+                        charSpan.textContent = char;
+                        el.appendChild(charSpan);
+                    });
+                    const spaceSpan = document.createElement('span'); // Leerzeichen zwischen Wörtern
+                    spaceSpan.innerHTML = '&nbsp;';
+                    el.appendChild(spaceSpan);
+                    */
+                });
+                 // Entfernt das letzte Leerzeichen
+                if (el.lastChild) {
+                    el.lastChild.textContent = el.lastChild.textContent.trim();
+                }
+            });
+        }
+
+        // Texte aufteilen, die animiert werden sollen
+        splitTextIntoSpans('.animate-text-reveal > span'); // Wählt die Kind-Spans
+        //splitTextIntoSpans('.typo-subheadline'); // Direkt das p-Tag
+        //splitTextIntoSpans('.typo-headline-massive');
+
+
+        // Scroll-Animation für Text-Reveal
+        const animatedTextElements = document.querySelectorAll('.animate-text-reveal');
+        const observerTypo = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    const spans = entry.target.querySelectorAll('span');
+                    spans.forEach((span, index) => {
+                        // Staffelt die Transition für jeden Span
+                        span.style.transitionDelay = `${index * 0.03 + parseFloat(entry.target.style.transitionDelay || 0)}s`;
+                    });
+                    observerTypo.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedTextElements.forEach(el => {
+            observerTypo.observe(el);
+        });
+
+    </script>
+</body>
+</html>

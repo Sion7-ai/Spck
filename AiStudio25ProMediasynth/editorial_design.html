@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting | Die ultimative Herausforderung</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Playfair+Display:wght@700;900&family=Merriweather:wght@400;400i;700&display=swap" rel="stylesheet">
+    <!-- Playfair Display für Headlines, Merriweather für Body Text, Roboto als Sans-Serif Alternative/Ergänzung -->
+    <style>
+        :root {
+            --editorial-bg: #FFFFFF;
+            --editorial-text: #333333;
+            --editorial-headline: #111111;
+            --editorial-accent: #0E545F; /* Petrolblau als Hauptakzent */
+            /* Alternative Akzente: */
+             /* --editorial-accent: #B8860B; /* Dunkelgold von #FFD166 */
+             /* --editorial-accent: #A03C3C; /* Dunkelrot von #FF5050 */
+            --editorial-meta-text: #777777;
+            --editorial-line: #E0E0E0;
+            --editorial-spacing: 24px; /* Grid-Gap / Basisabstand */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Merriweather', serif; /* Serif für Body */
+            background-color: var(--editorial-bg);
+            color: var(--editorial-text);
+            line-height: 1.7;
+            padding: 0;
+        }
+
+        .editorial-container {
+            max-width: 1200px; /* Breiter für Magazin-Layout */
+            margin: 0 auto;
+            padding: calc(var(--editorial-spacing) * 1.5) var(--editorial-spacing);
+        }
+
+        /* Grid-System (simuliert, für Magazin oft komplexer) */
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr); /* 12 Spalten */
+            gap: var(--editorial-spacing);
+            margin-bottom: calc(var(--editorial-spacing) * 2);
+        }
+        /* Basis-Spalten */
+        .col-e-1 { grid-column: span 1; }
+        .col-e-2 { grid-column: span 2; }
+        .col-e-3 { grid-column: span 3; }
+        .col-e-4 { grid-column: span 4; }
+        .col-e-5 { grid-column: span 5; }
+        .col-e-6 { grid-column: span 6; }
+        .col-e-7 { grid-column: span 7; }
+        .col-e-8 { grid-column: span 8; }
+        .col-e-9 { grid-column: span 9; }
+        .col-e-10 { grid-column: span 10; }
+        .col-e-11 { grid-column: span 11; }
+        .col-e-12 { grid-column: span 12; }
+
+        /* Header */
+        .editorial-header {
+            padding: var(--editorial-spacing) 0;
+            margin-bottom: calc(var(--editorial-spacing) * 1.5);
+            border-bottom: 1px solid var(--editorial-line);
+        }
+        .editorial-header .editorial-grid { margin-bottom: 0; align-items: center; }
+        .editorial-logo {
+            font-family: 'Roboto', sans-serif; font-weight: 900; /* Klare Sans-Serif */
+            font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--editorial-headline);
+        }
+        .editorial-nav { text-align: right; }
+        .editorial-nav a {
+            font-family: 'Roboto', sans-serif; font-weight: 500;
+            color: var(--editorial-text); text-decoration: none;
+            margin-left: var(--editorial-spacing); font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+        }
+        .editorial-nav a:hover { color: var(--editorial-accent); }
+
+        /* Typografie */
+        h1, h2, h3, h4, p, ul, li, blockquote, figcaption { margin: 0; padding: 0; }
+
+        h1.editorial-title { /* Große Headline */
+            font-family: 'Playfair Display', serif;
+            font-weight: 900; /* Black */
+            font-size: clamp(3rem, 7vw, 5rem);
+            line-height: 1.1;
+            color: var(--editorial-headline);
+            margin-bottom: calc(var(--editorial-spacing) / 2);
+        }
+        .editorial-subtitle {
+            font-family: 'Roboto', sans-serif; font-weight: 300; /* Light */
+            font-size: 1.3rem; color: var(--editorial-meta-text);
+            margin-bottom: var(--editorial-spacing);
+        }
+        h2.editorial-section-title {
+            font-family: 'Playfair Display', serif; font-weight: 700; /* Bold */
+            font-size: 2.2rem; line-height: 1.2; color: var(--editorial-headline);
+            margin-bottom: var(--editorial-spacing);
+            border-bottom: 1px solid var(--editorial-line); padding-bottom: calc(var(--editorial-spacing) / 3);
+        }
+        h3.editorial-sub-section-title {
+            font-family: 'Roboto', sans-serif; font-weight: 700; /* Bold */
+            font-size: 1.2rem; color: var(--editorial-accent);
+            margin-bottom: calc(var(--editorial-spacing) / 2);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        p { margin-bottom: var(--editorial-spacing); }
+        p.lead { /* Größerer Einleitungstext */
+             font-size: 1.2rem; font-weight: 400; color: var(--editorial-headline);
+             margin-bottom: calc(var(--editorial-spacing) * 1.5);
+        }
+        ul { list-style: none; }
+        li { margin-bottom: calc(var(--editorial-spacing) / 2); padding-left: 1.5em; position: relative; }
+        li::before { /* Einfacher Punkt */
+            content: '•'; position: absolute; left: 0; top: 0.05em;
+            color: var(--editorial-accent); font-size: 1.2em;
+        }
+        blockquote.pull-quote {
+            font-family: 'Playfair Display', serif; font-weight: 700;
+            font-size: 1.8rem; line-height: 1.4; color: var(--editorial-accent);
+            border-left: 3px solid var(--editorial-accent);
+            padding-left: var(--editorial-spacing);
+            margin: calc(var(--editorial-spacing) * 1.5) 0;
+            font-style: italic;
+        }
+        figcaption {
+            font-size: 0.85rem; color: var(--editorial-meta-text); font-style: italic;
+            margin-top: calc(var(--editorial-spacing) / 3);
+        }
+
+        /* Bilder */
+        figure { margin: 0; margin-bottom: var(--editorial-spacing); }
+        figure img { width: 100%; height: auto; display: block; }
+        .full-bleed { /* Bild über volle Breite */
+             grid-column: 1 / -1 !important;
+             margin-left: calc(-1 * var(--editorial-spacing)); /* Ausgleich für Container-Padding */
+             margin-right: calc(-1 * var(--editorial-spacing));
+             max-width: calc(100% + 2 * var(--editorial-spacing)); /* Korrekte Breite */
+        }
+        /* Spaltensatz (simuliert für einfache Beispiele) */
+        .two-columns { column-count: 2; column-gap: calc(var(--editorial-spacing) * 1.5); }
+        .three-columns { column-count: 3; column-gap: var(--editorial-spacing); }
+
+
+        /* Button */
+        .btn-editorial {
+            display: inline-block;
+            font-family: 'Roboto', sans-serif; font-weight: 700;
+            font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--editorial-bg); background-color: var(--editorial-accent);
+            padding: calc(var(--editorial-spacing)/2) calc(var(--editorial-spacing)*1.2);
+            text-decoration: none; border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-editorial:hover { background-color: var(--editorial-headline); }
+
+        /* Footer */
+        .editorial-footer {
+            padding: var(--editorial-spacing) 0;
+            margin-top: calc(var(--editorial-spacing) * 2);
+            border-top: 1px solid var(--editorial-line);
+            font-size: 0.8rem; color: var(--editorial-meta-text);
+            display: flex; justify-content: space-between;
+        }
+        .editorial-footer a { color: var(--editorial-meta-text); text-decoration: none; }
+        .editorial-footer a:hover { color: var(--editorial-accent); text-decoration: underline;}
+
+
+        /* Animationen */
+        .animate-editorial-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+        .animate-editorial-in.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Responsive Anpassungen */
+        @media (max-width: 992px) {
+             .two-columns, .three-columns { column-count: 1; }
+             .editorial-grid { grid-template-columns: repeat(6, 1fr); }
+             .col-e-1, .col-e-2, .col-e-3, .col-e-4, .col-e-5, .col-e-6,
+             .col-e-7, .col-e-8, .col-e-9, .col-e-10, .col-e-11, .col-e-12 {
+                 grid-column: span 6;
+             }
+             .full-bleed { margin-left: 0; margin-right: 0; max-width: 100%; }
+        }
+        @media (max-width: 768px) {
+             h1.editorial-title { font-size: 2.5rem; }
+             h2.editorial-section-title { font-size: 1.8rem; }
+             blockquote.pull-quote { font-size: 1.5rem; }
+             .editorial-nav { display: none; /* Beispiel: Mobile Navi wäre nötig */ }
+        }
+    </style>
+</head>
+<body>
+    <div class="editorial-container">
+        <header class="editorial-header">
+            <div class="editorial-grid">
+                <div class="col-e-4 editorial-logo">ALPIN8</div>
+                <nav class="col-e-8 editorial-nav">
+                    <a href="#challenge">Die Challenge</a>
+                    <a href="#experience">Das Erlebnis</a>
+                    <a href="#details">Fakten</a>
+                    <a href="#register">Anmeldung</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="editorial-grid hero-section animate-editorial-in is-visible">
+                <div class="col-e-12">
+                    <figure>
+                        <img src="https://images.pexels.com/photos/238622/pexels-photo-238622.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Epische Berglandschaft bei Sonnenaufgang">
+                        <figcaption>Das Brandnertal bietet die Bühne für eine außergewöhnliche Herausforderung.</figcaption>
+                    </figure>
+                </div>
+                <div class="col-e-8" style="grid-column-start: 3;"> <!-- Zentriert, über 8 Spalten -->
+                    <h1 class="editorial-title" style="text-align: center;">8848: Der Gipfel der Ausdauer</h1>
+                    <p class="editorial-subtitle" style="text-align: center;">Alpin8 Everesting definiert persönliche Grenzen neu. Eine Hommage an den Berg, eine Prüfung des Willens.</p>
+                </div>
+            </section>
+
+            <section id="challenge" class="editorial-grid animate-editorial-in is-visible" style="transition-delay: 0.1s;">
+                <div class="col-e-8">
+                    <h2 class="editorial-section-title">Die Herausforderung im Detail</h2>
+                    <p class="lead">Alpin8 Everesting ist mehr als nur ein Lauf; es ist eine strategische und mentale Meisterleistung. Das Ziel: 8848 Höhenmeter, die Äquivalenz des Mount Everest, kumuliert durch wiederholte Aufstiege an einem einzigen Berg.</p>
+                    <div class="two-columns">
+                        <p>Innerhalb eines Zeitfensters von 34 Stunden bestimmen die Teilnehmer selbst ihr Tempo, ihre Pausen und ihre Herangehensweise. Während der physische Aspekt unbestreitbar fordernd ist, liegt die wahre Essenz der Herausforderung in der mentalen Stärke – der Fähigkeit, auch dann weiterzumachen, wenn der Körper nach Ruhe verlangt.</p>
+                        <p>Die Nutzung der Gondel für den Abstieg ist ein entscheidendes Element, das den Fokus vollständig auf die Aufstiegsleistung legt und eine einzigartige Dynamik schafft. Es ermöglicht eine intensive Auseinandersetzung mit der Steigung und der eigenen Psyche, frei von der Belastung des Abstiegs.</p>
+                    </div>
+                </div>
+                <aside class="col-e-4">
+                     <h3 class="editorial-sub-section-title">Kernfakten</h3>
+                     <ul style="font-size:0.9rem;">
+                         <li><strong>Ziel:</strong> 8848m Höhengewinn</li>
+                         <li><strong>Zeitlimit:</strong> 34 Stunden</li>
+                         <li><strong>Ort:</strong> Brandnertal, Österreich</li>
+                         <li><strong>Format:</strong> Aufstieg zu Fuß, Abstieg per Gondel</li>
+                         <li><strong>Fokus:</strong> Mentale & physische Ausdauer</li>
+                     </ul>
+                     <figure style="margin-top:var(--editorial-spacing);">
+                        <img src="https://images.pexels.com/photos/1666021/pexels-photo-1666021.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fokus auf einen Bergpfad">
+                        <figcaption>Der Weg nach oben erfordert Konzentration.</figcaption>
+                    </figure>
+                </aside>
+            </section>
+
+             <section class="editorial-grid animate-editorial-in is-visible" style="transition-delay: 0.2s;">
+                 <div class="col-e-12">
+                    <blockquote class="pull-quote">
+                        "What a challenge! That was insane. Exactly what I was looking for. That was hard!"
+                        <cite style="display:block; font-size:1rem; font-style:normal; margin-top:10px; color:var(--editorial-meta-text);">– André Schürrle, Weltmeister 2014</cite>
+                    </blockquote>
+                 </div>
+            </section>
+
+             <section id="experience" class="editorial-grid animate-editorial-in is-visible" style="transition-delay: 0.3s;">
+                 <div class="col-e-12"> <h2 class="editorial-section-title">Das Erlebnis Alpin8</h2> </div>
+                 <div class="col-e-6">
+                     <figure>
+                        <img src="https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Gruppe von Wanderern in den Bergen">
+                        <figcaption>Gemeinschaft und Support prägen das Event.</figcaption>
+                    </figure>
+                 </div>
+                 <div class="col-e-6">
+                      <h3 class="editorial-sub-section-title">Gemeinschaft & Atmosphäre</h3>
+                      <p>Trotz der individuellen Herausforderung steht die Gemeinschaft im Mittelpunkt. Mit maximal 300 Teilnehmern entsteht eine einzigartige, persönliche Atmosphäre des gegenseitigen Supports und der gemeinsamen Leidenschaft. Es ist kein Rennen gegeneinander, sondern ein gemeinsames Erleben von Grenzerfahrungen.</p>
+                      <h3 class="editorial-sub-section-title">Organisation & Versorgung</h3>
+                      <p>Ein erfahrenes Team sorgt für einen reibungslosen Ablauf. Das Summit Camp bietet Raum für Erholung, Regeneration und hochwertige Verpflegung rund um die Uhr, sodass Sie sich voll auf Ihre Leistung konzentrieren können.</p>
+                 </div>
+             </section>
+
+             <section id="register" class="editorial-grid animate-editorial-in is-visible" style="align-items: center; background-color:#f8f8f8; padding:var(--editorial-spacing); transition-delay: 0.4s;">
+                  <div class="col-e-8">
+                     <h2 class="editorial-section-title" style="border:none; margin-bottom:10px;">Beginnen Sie Ihre Legende: Alpin8 2025</h2>
+                     <p style="margin-bottom:0;">Sichern Sie sich Ihren Platz für die ultimative Herausforderung vom 04. bis 06. Juli 2025 im Brandnertal.</p>
+                 </div>
+                  <div class="col-e-4" style="text-align:right;">
+                     <a href="#" class="btn-editorial">Zur Anmeldung</a>
+                 </div>
+             </section>
+
+        </main>
+
+        <footer class="editorial-footer">
+            <div>ALPIN8 GmbH</div>
+            <div>&copy; 2024 <a href="#">Impressum</a> | <a href="#">Datenschutz</a></div>
+        </footer>
+    </div>
+
+    <script>
+        const animatedElementsEditorial = document.querySelectorAll('.animate-editorial-in');
+        const observerEditorial = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerEditorial.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsEditorial.forEach(el => observerEditorial.observe(el));
+    </script>
+</body>
+</html>

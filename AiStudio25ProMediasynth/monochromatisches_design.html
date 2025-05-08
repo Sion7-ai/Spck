@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting :: Monochrome Edition</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Blau/Petrol Basis: #0E545F */
+            --mono-base: #0E545F;
+            --mono-darkest: #072A30; /* Shade */
+            --mono-darker: #0A434D;  /* Shade */
+            --mono-medium: #3C7A85;  /* Tone/Tint */
+            --mono-light: #8FBAC2;   /* Tint */
+            --mono-lightest: #D9E6E8; /* Sehr heller Tint (fast weiß) */
+            --mono-white: #FFFFFF;
+            --mono-black: #000000; /* Nur für feine Linien etc. */
+
+            --mono-bg: var(--mono-lightest); /* Heller Hintergrund */
+            --mono-text-main: var(--mono-darkest);
+            --mono-text-secondary: var(--mono-darker);
+            --mono-headline: var(--mono-darkest);
+            --mono-accent: var(--mono-base); /* Originalfarbe als Akzent */
+            --mono-border: var(--mono-light);
+
+            --mono-spacing: 24px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--mono-bg);
+            color: var(--mono-text-main);
+            line-height: 1.7;
+            padding: var(--mono-spacing);
+        }
+
+        .mono-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .mono-header {
+            padding-bottom: var(--mono-spacing);
+            margin-bottom: calc(var(--mono-spacing) * 2);
+            border-bottom: 1px solid var(--mono-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mono-logo {
+            font-weight: 900; /* Black */
+            font-size: 1.6rem;
+            color: var(--mono-darkest);
+        }
+        .mono-logo .accent { color: var(--mono-accent); } /* Akzent im Logo */
+        .mono-nav a {
+            font-weight: 500; /* Medium */
+            color: var(--mono-text-secondary);
+            text-decoration: none;
+            margin-left: calc(var(--mono-spacing) * 0.8);
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+        .mono-nav a:hover { color: var(--mono-accent); }
+
+        /* Sektionen */
+        .mono-section { margin-bottom: calc(var(--mono-spacing) * 2.5); }
+        .mono-section h1, .mono-section h2 {
+            font-weight: 900; /* Black */
+            margin-top: 0;
+            margin-bottom: var(--mono-spacing);
+            line-height: 1.1;
+            color: var(--mono-headline);
+        }
+        .mono-section h1 { font-size: clamp(3rem, 7vw, 4.5rem); }
+        .mono-section h2 { font-size: 2rem; color: var(--mono-accent); } /* Akzentfarbe für H2 */
+        .mono-section h3 {
+             font-weight: 700; font-size: 1.3rem; color: var(--mono-darker);
+             margin-bottom: calc(var(--mono-spacing)/2);
+        }
+        .mono-section p {
+            font-size: 1rem; font-weight: 400; /* Regular */
+            margin-bottom: var(--mono-spacing);
+            max-width: 700px; /* Lesbarkeit */
+        }
+        .mono-section strong { font-weight: 700; color: var(--mono-text-main); }
+
+        /* Hero */
+        .mono-hero .hero-number-mono {
+            font-size: clamp(7rem, 22vw, 13rem);
+            font-weight: 100; /* Thin */
+            color: var(--mono-medium); /* Mittlerer Ton für die Zahl */
+            text-align: center;
+            line-height: 0.8;
+            margin: 10px 0 20px 0;
+            display: block;
+        }
+        .mono-hero .hero-subline {
+            font-size: 1.2rem; font-weight: 300; /* Light */
+            text-align: center; color: var(--mono-text-secondary);
+            margin-bottom: calc(var(--mono-spacing) * 1.5);
+        }
+
+        .btn-mono {
+            display: inline-block;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .btn-mono.primary {
+            background-color: var(--mono-accent); /* Akzentfarbe als Button */
+            color: var(--mono-white);
+            border-color: var(--mono-accent);
+        }
+        .btn-mono.primary:hover {
+            background-color: var(--mono-darker); /* Dunklere Variante bei Hover */
+            border-color: var(--mono-darker);
+        }
+        .btn-mono.secondary { /* Hellerer Button */
+             background-color: var(--mono-light);
+             color: var(--mono-darkest);
+             border-color: var(--mono-light);
+        }
+        .btn-mono.secondary:hover {
+            background-color: var(--mono-medium);
+            border-color: var(--mono-medium);
+        }
+
+        /* Card / Box */
+        .mono-card {
+            background-color: var(--mono-white); /* Weiße Card für Kontrast */
+            padding: var(--mono-spacing);
+            margin-bottom: var(--mono-spacing);
+            border: 1px solid var(--mono-border);
+            border-radius: 4px;
+        }
+        .mono-card.darker-bg { /* Alternative Card mit dunklerem BG */
+            background-color: var(--mono-medium);
+            color: var(--mono-lightest);
+        }
+        .mono-card.darker-bg h3, .mono-card.darker-bg p, .mono-card.darker-bg li { color: var(--mono-lightest); }
+        .mono-card.darker-bg strong { color: var(--mono-white); }
+        .mono-card.darker-bg li::before { color: var(--mono-light); }
+
+        /* Quick Facts */
+        .mono-facts-list { list-style: none; padding: 0; }
+        .mono-facts-list li {
+            display: flex; align-items: center;
+            margin-bottom: calc(var(--mono-spacing)/2);
+            font-size: 0.95rem;
+        }
+        .mono-facts-list iconify-icon {
+            font-size: 1.4rem; color: var(--mono-accent);
+            margin-right: 10px;
+        }
+
+        /* Bild (S/W oder Monochrom) */
+        .mono-image-container img {
+            width: 100%; height: auto; display: block;
+            border-radius: 4px;
+            filter: grayscale(100%) contrast(1.1); /* Schwarz-Weiß */
+            /* Oder: filter: sepia(100%) saturate(300%) hue-rotate(180deg); /* Für Blauton-Filter */
+        }
+
+
+        /* Footer */
+        .mono-footer {
+            padding: var(--mono-spacing) 0;
+            margin-top: calc(var(--mono-spacing) * 2);
+            border-top: 1px solid var(--mono-border);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--mono-text-secondary);
+        }
+        .mono-footer a { color: var(--mono-text-secondary); text-decoration: none; }
+        .mono-footer a:hover { color: var(--mono-accent); }
+
+        /* Animation */
+        .animate-mono-in { opacity: 0; transform: translateY(15px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+        .animate-mono-in.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="mono-container">
+        <header class="mono-header animate-mono-in is-visible">
+            <div class="mono-logo">ALPIN<span class="accent">8</span></div>
+            <nav class="mono-nav">
+                <a href="#challenge">Herausforderung</a>
+                <a href="#details">Details</a>
+                <a href="#anmeldung">Anmeldung</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="mono-section mono-hero animate-mono-in is-visible" style="transition-delay: 0.1s;">
+                <h1>EVERESTING</h1>
+                <div class="hero-number-mono">8848</div>
+                <p class="hero-subline">Eine monochrome Reise zur Spitze deiner Leistungsfähigkeit.</p>
+                <div style="text-align:center;">
+                    <a href="#anmeldung" class="btn-mono primary">Herausforderung annehmen</a>
+                </div>
+            </section>
+
+            <section id="challenge" class="mono-section animate-mono-in is-visible" style="transition-delay: 0.2s;">
+                <h2>Ein Ziel, viele Facetten</h2>
+                 <div style="display: flex; flex-wrap: wrap; gap: var(--mono-spacing);">
+                     <div style="flex: 2;">
+                         <p>Die Alpin8 Everesting Challenge reduziert sich auf das Wesentliche: 8848 Höhenmeter, bezwungen durch die Einheit von Körper und Geist. In der Konzentration auf diesen einen Berg, unterstützt durch die Gondel im Abstieg, entfaltet sich die volle Tiefe der Herausforderung.</p>
+                         <p>Über 34 Stunden hinweg navigieren Sie durch Ihre eigenen mentalen Landschaften, finden Stärke in der Monotonie und entdecken die Kraft, die in der Fokussierung liegt.</p>
+                     </div>
+                     <div style="flex: 1; min-width: 250px;">
+                         <div class="mono-image-container">
+                             <img src="https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Schwarz-Weiß Berglandschaft">
+                         </div>
+                     </div>
+                 </div>
+            </section>
+
+            <section id="details" class="mono-section animate-mono-in is-visible" style="transition-delay: 0.3s;">
+                 <h2>Fakten in Klarheit</h2>
+                 <div class="mono-card darker-bg"> <!-- Dunklere Card für Kontrast -->
+                     <div style="display: flex; flex-wrap: wrap; gap: var(--mono-spacing);">
+                         <div style="flex: 1; min-width: 250px;">
+                             <h3>Event-Parameter</h3>
+                             <ul class="mono-facts-list">
+                                 <li><iconify-icon icon="mdi:calendar-outline"></iconify-icon> <span>Datum: 04. - 06. Juli 2025</span></li>
+                                 <li><iconify-icon icon="mdi:map-marker-outline"></iconify-icon> <span>Ort: Brandnertal, Österreich</span></li>
+                                 <li><iconify-icon icon="mdi:run"></iconify-icon> <span>Distanz: 8848m / 4424m</span></li>
+                                 <li><iconify-icon icon="mdi:clock-time-four-outline"></iconify-icon> <span>Zeit: 34h / 20h</span></li>
+                             </ul>
+                         </div>
+                         <div style="flex: 1; min-width: 250px;">
+                              <h3>Teilnahme & Support</h3>
+                             <ul class="mono-facts-list">
+                                <li><iconify-icon icon="mdi:account-group-outline"></iconify-icon> <span>Limit: 300 Teilnehmer</span></li>
+                                <li><iconify-icon icon="mdi:ticket-outline"></iconify-icon> <span>Ticket: Ab €499</span></li>
+                                <li><iconify-icon icon="mdi:gondola"></iconify-icon> <span>Inklusive: Gondel, Verpflegung, Support</span></li>
+                             </ul>
+                         </div>
+                    </div>
+                 </div>
+            </section>
+
+            <section class="mono-section animate-mono-in is-visible" style="transition-delay: 0.4s;">
+                 <h2>Ein Zitat in Tönen</h2>
+                  <blockquote style="text-align: center; font-size: 1.4rem; font-style: italic; color: var(--mono-darker); border-left: 3px solid var(--mono-border); padding-left: var(--mono-spacing); margin: var(--mono-spacing) auto; max-width: 70%;">
+                     "Die Reduktion auf das Wesentliche war... intensiv. Eine Herausforderung in ihrer reinsten Form."
+                 </blockquote>
+                  <p style="text-align: center; font-size: 0.9rem; color: var(--mono-text-secondary);">- Adaptiert von André Schürrle</p>
+            </section>
+
+
+            <section id="anmeldung" class="mono-section mono-card animate-mono-in is-visible" style="text-align:center; transition-delay: 0.5s;">
+                <h2>Fokus auf 2025</h2>
+                <p>Konzentrieren Sie sich auf Ihr Ziel. Die Anmeldung für Alpin8 Everesting 2025 ist geöffnet.</p>
+                <a href="#" class="btn-mono secondary" style="margin-right:10px;">Details anzeigen</a>
+                <a href="#" class="btn-mono primary">Jetzt Registrieren</a>
+            </section>
+        </main>
+
+        <footer class="mono-footer animate-mono-in is-visible">
+            <p>ALPIN8 GmbH &copy; 2024</p>
+            <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const animatedElementsMono = document.querySelectorAll('.animate-mono-in');
+        const observerMono = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerMono.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsMono.forEach(el => observerMono.observe(el));
+    </script>
+</body>
+</html>

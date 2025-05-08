@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8_EVERESTING [RAW_CUT]</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Special+Elite&family=Creepster&display=swap" rel="stylesheet">
+    <!-- Special Elite für Schreibmaschinen-Look, Creepster für extremen Grunge (sparsam!), Roboto als Basis -->
+    <style>
+        :root {
+            --grunge-bg-texture: url('https://images.pexels.com/photos/161294/background-texture-color-wall-161294.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&dpr=1'); /* Beton */
+            /* Alternativ: url('...'); für Papier etc. */
+            --grunge-bg-color: #4a4a4a; /* Dunkelgrau als Fallback */
+            --grunge-text-color: #E0E0E0; /* Helles Grau */
+            --grunge-text-alt: #B0B0B0; /* Noch dunkleres Hellgrau */
+            --grunge-accent-dirt-green: #5a7d6a; /* Schmutziges Grün von #06D6A0 */
+            --grunge-accent-dirt-yellow: #b09344; /* Schmutziges Gelb von #FFD166 */
+            --grunge-accent-dirt-red: #a54040; /* Schmutziges Rot von #FF5050 */
+            --grunge-border-color: #222;
+            --grunge-overlay-color: rgba(0,0,0,0.4); /* Dunkles Overlay */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', 'Special Elite', sans-serif;
+            background-color: var(--grunge-bg-color);
+            background-image: var(--grunge-bg-texture);
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--grunge-text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        /* Globales Overlay für mehr "Schmutz" */
+        body::after {
+            content: ''; position: fixed; top:0; left:0; width:100%; height:100%;
+            background: var(--grunge-overlay-color);
+            background-image: url('https://www.transparenttextures.com/patterns/worn-dots.png'); /* Zusätzliche Textur */
+            mix-blend-mode: overlay; /* Experimentieren! multiply, screen... */
+            pointer-events: none; z-index: -1; opacity: 0.6;
+        }
+
+        .grunge-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header (kaum vorhanden) */
+        .grunge-header {
+            padding: 10px 0;
+            margin-bottom: 30px;
+            text-align: right; /* Unkonventionell */
+        }
+        .grunge-logo { /* Wie gesprüht */
+            font-family: 'Creepster', cursive; /* Oder Stencil Font */
+            font-size: 3rem;
+            color: var(--grunge-accent-dirt-yellow);
+            text-shadow: 1px 1px 0px var(--grunge-border-color), -1px -1px 0px var(--grunge-border-color);
+            display: inline-block;
+            border: 1px dashed var(--grunge-accent-dirt-yellow);
+            padding: 0 10px;
+            transform: rotate(1deg);
+        }
+        .grunge-nav { margin-top: 10px; }
+        .grunge-nav a {
+            font-family: 'Special Elite', cursive;
+            color: var(--grunge-text-alt);
+            text-decoration: none; /* Oder line-through */
+            margin-left: 15px;
+            font-size: 1rem;
+            border-bottom: 1px dotted var(--grunge-text-alt);
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .grunge-nav a:hover {
+            color: var(--grunge-accent-dirt-red);
+            border-bottom-color: var(--grunge-accent-dirt-red);
+        }
+
+        /* Content Blöcke / Layer */
+        .grunge-layer {
+            background-color: rgba(10,10,10,0.5); /* Dunkel, leicht transparent */
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--grunge-border-color);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            /* Optional: "abgerissene" Kante mit clip-path oder Maske */
+            clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%); /* Beispiel */
+        }
+        .grunge-layer.paper-texture {
+             background-color: rgba(240, 230, 210, 0.8); /* Vergilbtes Papier */
+             color: #333;
+             border-color: #8B4513; /* Braun */
+             clip-path: polygon(0 3%, 98% 0, 100% 97%, 2% 100%);
+             box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
+        }
+
+        .grunge-layer h1, .grunge-layer h2 {
+            font-family: 'Roboto', sans-serif; /* Klarere Schrift für Titel */
+            font-weight: 900; /* Black */
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--grunge-text-color); /* Oder Kontrastfarbe */
+            text-transform: uppercase;
+        }
+         .grunge-layer.paper-texture h1, .grunge-layer.paper-texture h2 { color: #444; }
+         .grunge-layer h1 { font-size: clamp(2.5rem, 6vw, 4rem); letter-spacing: 1px;}
+         .grunge-layer h2 { font-size: 1.8rem; color: var(--grunge-accent-dirt-green);}
+
+
+        .grunge-hero .hero-number-grunge {
+            font-family: 'Creepster', cursive; /* Oder abgenutzte Stencil */
+            font-size: clamp(6rem, 22vw, 12rem);
+            color: var(--grunge-accent-dirt-red);
+            text-align: center;
+            line-height: 0.8;
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px 0px #000;
+            font-weight: normal;
+        }
+        .grunge-hero p {
+            font-size: 1.1rem;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        .grunge-hero .subtitle {
+            font-family: 'Special Elite', cursive;
+            color: var(--grunge-text-alt);
+        }
+
+        .btn-grunge {
+            display: inline-block;
+            font-family: 'Special Elite', cursive;
+            font-size: 1.2rem;
+            color: var(--grunge-text-color);
+            background-color: var(--grunge-accent-dirt-red);
+            padding: 10px 20px;
+            border: 1px solid var(--grunge-text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+            transition: background-color 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .btn-grunge:hover {
+            background-color: var(--grunge-text-color);
+            color: var(--grunge-accent-dirt-red);
+            border-color: var(--grunge-accent-dirt-red);
+        }
+
+
+        /* Quick Facts auf "Notizzettel" */
+        .grunge-notes ul { list-style: none; padding: 0; }
+        .grunge-notes li {
+            font-family: 'Special Elite', cursive;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .grunge-notes li::before { /* "Reißzwecke" */
+             content: 'X'; font-family: sans-serif;
+             position: absolute; left: 0; top: 0.1em;
+             color: var(--grunge-accent-dirt-red); font-weight: bold;
+        }
+        .grunge-notes strong { color: #000; } /* Auf Papier lesbar */
+
+        /* Bild-Container */
+        .grunge-image-container {
+            border: 5px solid #333; /* Dicker, dunkler Rahmen */
+            padding: 5px;
+            background-color: #555; /* Hintergrund für Bild */
+            transform: rotate(-2deg);
+            margin: 20px 0;
+            box-shadow: 0 0 15px rgba(0,0,0,0.6);
+        }
+         .grunge-image-container img {
+             display: block; width: 100%; height: auto;
+             filter: sepia(0.4) contrast(1.2) brightness(0.8) saturate(0.8); /* Alter Look */
+        }
+
+
+        /* Footer */
+        .grunge-footer {
+            padding: 15px 0;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--grunge-text-alt);
+            border-top: 1px dotted var(--grunge-text-alt);
+        }
+        .grunge-footer a { color: var(--grunge-text-alt); text-decoration: underline; }
+        .grunge-footer a:hover { color: var(--grunge-accent-dirt-yellow); }
+
+        /* Animation */
+        .animate-grunge-in { opacity: 0; filter: blur(3px); transform: translateY(10px); transition: opacity 0.5s ease-out, filter 0.5s ease-out, transform 0.5s ease-out; }
+        .animate-grunge-in.is-visible { opacity: 1; filter: blur(0px); transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="grunge-container">
+        <header class="grunge-header animate-grunge-in is-visible">
+            <!-- Logo oft nicht prominent oder fehlt -->
+            <!-- <div class="grunge-logo">ALPIN8</div> -->
+            <nav class="grunge-nav">
+                <a href="#challenge" style="text-decoration: line-through;">[THE PAIN]</a>
+                <a href="#details">[FACTS?]</a>
+                <a href="#join">[SIGN UP_IF_YOU_DARE]</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="grunge-hero grunge-layer animate-grunge-in is-visible" style="transition-delay: 0.1s;">
+                <h1 style="text-align:center;">ALPIN8</h1>
+                <div class="hero-number-grunge">8848</div>
+                <p class="subtitle" style="text-align:center;">// RAW MOUNTAIN CHALLENGE //</p>
+                <div class="grunge-image-container">
+                    <img src="https://images.pexels.com/photos/1586153/pexels-photo-1586153.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Düstere Berglandschaft">
+                </div>
+                <p>Face the climb. Face yourself.</p>
+                <div style="text-align:center;">
+                    <a href="#join" class="btn-grunge">JOIN.</a>
+                </div>
+            </section>
+
+            <section id="challenge" class="grunge-layer animate-grunge-in is-visible" style="transition-delay: 0.2s;">
+                <h2>CHALLENGE_?</h2>
+                <p>8848 vertical meters. Up by foot. Down by gondola. 34 hours. Sounds... doable? Think again. Your mind is the real mountain.</p>
+            </section>
+
+            <section id="details" class="grunge-layer paper-texture grunge-notes animate-grunge-in is-visible" style="transition-delay: 0.3s;">
+                <h2 style="font-family:'Special Elite', cursive; color: #553311; transform: rotate(-1deg);">FIELD_NOTES:</h2>
+                <ul>
+                    <li>Date: July 4-6, 2025</li>
+                    <li>Location: Brandnertal / Austria</li>
+                    <li>Objective: 8848m (or 4424m)</li>
+                    <li>Cost: From 499 EUR</li>
+                    <li>Support: Gondola / Food / Medics</li>
+                    <li>Limit: <strong>300 participants ONLY</strong></li>
+                </ul>
+            </section>
+
+             <section class="grunge-layer animate-grunge-in is-visible" style="transition-delay: 0.4s;">
+                 <h2 style="font-size:1.5rem; text-align:center;">>> ANDRE S. REPORTED:</h2>
+                <p style="font-family: 'Special Elite', cursive; text-align:center; font-size:1.2rem; color: var(--grunge-accent-dirt-yellow); border: 1px dotted; padding: 10px;">
+                    "INSANE. HARD. EXACTLY WHAT I NEEDED."
+                </p>
+             </section>
+
+            <section id="join" class="grunge-layer animate-grunge-in is-visible" style="text-align:center; background-color: rgba(80,20,20,0.4); border-color: var(--grunge-accent-dirt-red); transition-delay: 0.5s;">
+                <h2>ENOUGH_TALK.</h2>
+                <p>Ready to face the dirt, the pain, the glory? Limited slots.</p>
+                <a href="#" class="btn-grunge" style="background-color: var(--grunge-accent-dirt-yellow); color: #111; border-color:#111; font-size:1.4rem;">SIGN_ME_UP.</a>
+            </section>
+        </main>
+
+        <footer class="grunge-footer animate-grunge-in is-visible">
+            <p>ALPIN8 // NO FRILLS. JUST CLIMBING.</p>
+            <p><a href="#">[imprint]</a> // <a href="#">[privacy_bullshit]</a> // (c) 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        const animatedElementsGrunge = document.querySelectorAll('.animate-grunge-in');
+        const observerGrunge = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerGrunge.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsGrunge.forEach(el => observerGrunge.observe(el));
+    </script>
+</body>
+</html>

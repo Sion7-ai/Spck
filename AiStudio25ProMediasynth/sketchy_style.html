@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting ~ Handgezeichnet!</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Cabin+Sketch:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <!-- Cabin Sketch für Headlines, Patrick Hand für Fließtext/Notizen, Roboto als Fallback -->
+    <style>
+        :root {
+            --sketch-bg: #FDFCF5; /* Leicht beiges Papier */
+            --sketch-line-color: #333333; /* Dunkelgrau statt Schwarz */
+            --sketch-red: #FF5050;
+            --sketch-yellow: #FFD166;
+            --sketch-green: #06D6A0;
+            --sketch-blue: #0E545F;
+            --sketch-mint: #BBCDCD;
+            --sketch-font-main: 'Patrick Hand', cursive;
+            --sketch-font-headline: 'Cabin Sketch', cursive;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--sketch-font-main), 'Roboto', sans-serif;
+            background-color: var(--sketch-bg);
+            background-image: url('https://www.transparenttextures.com/patterns/notebook-dark.png'); /* Dezente Papiertextur */
+            color: var(--sketch-line-color);
+            line-height: 1.7;
+            padding: 25px;
+            overflow-x: hidden;
+        }
+
+        .sketch-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .sketch-header {
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            border-bottom: 2px dashed var(--sketch-line-color); /* Gestrichelte Linie */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .sketch-logo {
+            font-family: var(--sketch-font-headline);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--sketch-blue);
+            transform: rotate(-2deg); /* Leicht schräg */
+        }
+        .sketch-logo .accent { color: var(--sketch-red); }
+
+        .sketch-nav a {
+            font-family: var(--sketch-font-main);
+            color: var(--sketch-line-color);
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 1.2rem;
+            border-bottom: 3px solid transparent; /* Platz für Hover-Linie */
+            transition: border-color 0.2s ease;
+            position: relative;
+        }
+        .sketch-nav a:hover {
+            border-bottom-color: var(--sketch-yellow); /* Wie mit Textmarker unterstrichen */
+        }
+        /* Kritzel-Hover (optional) */
+        .sketch-nav a::after {
+            content: ''; position: absolute; bottom: -5px; left: 10%; width: 80%; height: 2px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M0 5 Q 25 10, 50 5 T 100 5' fill='none' stroke='%23333' stroke-width='1'/%3E%3C/svg%3E") repeat-x;
+            background-size: 15px 3px;
+            opacity: 0; transition: opacity 0.2s; pointer-events: none;
+        }
+         .sketch-nav a:hover::after { opacity: 0.6; }
+
+
+        /* Sektionen */
+        .sketch-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.5); /* Leicht durchscheinend auf Textur */
+            border: 1px solid rgba(0,0,0,0.1); /* Kaum sichtbarer Rand */
+            border-radius: 3px; /* Minimale Rundung */
+        }
+        .sketch-section h1, .sketch-section h2 {
+            font-family: var(--sketch-font-headline);
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            color: var(--sketch-blue);
+            position: relative;
+        }
+         /* Kritzel-Unterstreichung für Headlines */
+         .sketch-section h1::after, .sketch-section h2::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 80%; height: 3px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10'%3E%3Cpath d='M0 5 Q 25 0, 50 5 T 100 5' fill='none' stroke='%23FF5050' stroke-width='2'/%3E%3C/svg%3E") repeat-x;
+            background-size: 20px 4px; opacity: 0.8;
+        }
+
+        .sketch-section h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+        .sketch-section h2 { font-size: 1.8rem; }
+
+        .sketch-section p, .sketch-section li {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+         .sketch-section ul { list-style: none; padding-left: 0; }
+         .sketch-section li { padding-left: 25px; position: relative; }
+         .sketch-section li::before { /* Handgezeichnetes Aufzählungszeichen */
+             content: '*'; /* Oder SVG-Icon */
+             position: absolute; left: 0; top: 0;
+             font-size: 1.5rem;
+             color: var(--sketch-red);
+             font-family: sans-serif; /* Einfaches Sternchen */
+         }
+
+        /* Hero */
+        .sketch-hero { text-align: center; }
+        .sketch-hero .hero-number-sketch {
+            font-family: var(--sketch-font-headline);
+            font-size: clamp(6rem, 20vw, 11rem);
+            font-weight: 700;
+            color: var(--sketch-yellow);
+            display: block;
+            line-height: 0.9;
+            margin: 0px 0 10px 0;
+            text-shadow: 3px 3px 0 var(--sketch-line-color), -1px -1px 0 var(--sketch-line-color); /* Outline-Effekt */
+        }
+        .sketch-hero p { font-size: 1.3rem; font-weight: bold; /* Patrick Hand hat kein bold */ }
+
+        .btn-sketch {
+            display: inline-block;
+            font-family: var(--sketch-font-headline);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--sketch-line-color);
+            background-color: var(--sketch-green);
+            padding: 12px 28px;
+            border: 2px solid var(--sketch-line-color);
+            text-decoration: none;
+            border-radius: 5px 15px 5px 15px; /* Unregelmäßige Rundung */
+            box-shadow: 3px 3px 0px var(--sketch-line-color);
+            transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+            cursor: pointer;
+            transform: rotate(-1deg); /* Leicht schräg */
+        }
+        .btn-sketch:hover {
+            transform: rotate(-1deg) translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--sketch-line-color);
+        }
+         .btn-sketch:active {
+             transform: rotate(-1deg) translate(3px, 3px);
+             box-shadow: 0px 0px 0px var(--sketch-line-color);
+        }
+
+
+        /* Sketchy Icons */
+        .sketchy-icon {
+            display: inline-block;
+            font-size: 1.5rem; /* Iconify Icon Größe */
+            color: var(--sketch-red);
+            position: relative;
+            margin-right: 8px;
+            vertical-align: middle;
+            /* Optional: leichte Rotation für unperfekten Look */
+             transform: rotate(calc(var(--icon-rotate, 0) * 1deg));
+             /* --icon-rotate wird per JS gesetzt oder fest
+                style="--icon-rotate: -3;" */
+        }
+        /* Füll-Effekt für Icons (vereinfacht) */
+        .sketchy-icon::after {
+            content: ''; position: absolute; top: 10%; left: 10%; width: 80%; height: 80%;
+            background: radial-gradient(circle, currentColor 30%, transparent 70%);
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        /* Handgezeichnete Illustration */
+        .sketch-illustration { text-align: center; margin: 20px 0; }
+        .sketch-illustration img {
+             max-width: 80%; height: auto;
+             border: 1px dashed var(--sketch-mint); /* Gestrichelter Rahmen */
+             padding: 5px;
+             background-color: #fff; /* Damit es wie aufgeklebt wirkt */
+             box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        .sketch-footer {
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid var(--sketch-line-color);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .sketch-footer p { margin: 5px 0; }
+        .sketch-footer a { color: var(--sketch-blue); text-decoration: none; font-weight:bold; }
+        .sketch-footer a:hover { text-decoration: underline; color: var(--sketch-red); }
+
+
+        /* Animationen */
+        .animate-sketch-in { opacity: 0; transform: translateY(20px) rotate(-1deg); transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .animate-sketch-in.is-visible { opacity: 1; transform: translateY(0) rotate(0deg); }
+
+        /* Wackel-Animation */
+        .wiggle:hover { animation: wiggle 0.5s ease-in-out infinite; }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sketch-container">
+        <header class="sketch-header animate-sketch-in is-visible">
+            <div class="sketch-logo">ALPIN<span class="accent">8</span>!</div>
+            <nav class="sketch-nav">
+                <a href="#challenge">Die Idee</a>
+                <a href="#details">Infos & Skizzen</a>
+                <a href="#anmeldung">Mitmachen!</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="sketch-hero sketch-section animate-sketch-in is-visible" style="transition-delay: 0.1s;">
+                <h1>Everesting? <br>Klar doch!</h1>
+                <div class="hero-number-sketch">8848</div>
+                <p>Eine verrückte Idee auf Papier... und bald Realität! Bist du dabei?</p>
+                <div class="sketch-illustration">
+                    <!-- Hier könnte eine handgezeichnete Berg-Illustration hin -->
+                     <iconify-icon icon="mdi:mountain" style="font-size: 100px; color: var(--sketch-blue); opacity: 0.8;"></iconify-icon>
+                     <p style="font-size:0.8rem; margin-top:-10px;">(Stell dir hier 'ne coole Zeichnung vor!)</p>
+                </div>
+                <a href="#anmeldung" class="btn-sketch wiggle">Klingt gut, los geht's!</a>
+            </section>
+
+            <section id="challenge" class="sketch-section animate-sketch-in is-visible" style="transition-delay: 0.2s;">
+                <h2>Die grobe Skizze: Worum geht's?</h2>
+                <p>Ganz einfach (naja, fast!): <strong>8848 Meter rauf!</strong> Immer den gleichen Berg, aber hey, die Aussicht ändert sich bestimmt... oder dein Gemütszustand! <span style="font-family: var(--sketch-font-headline); color: var(--sketch-red);">(Wird hart!)</span> Runterfahren darfst du mit der Gondel (puh!). 34 Stunden hast du Zeit.</p>
+                <p>Die eigentliche Kunst: Den inneren Kritzelkopf überlisten! <span style="font-family: sans-serif; font-size:1.5rem;">🧠</span><span style="font-family: sans-serif; font-size:1.5rem;">💥</span></p>
+            </section>
+
+            <section id="details" class="sketch-section animate-sketch-in is-visible" style="transition-delay: 0.3s;">
+                <h2>Kritzel-Details & wichtige Notizen:</h2>
+                 <ul>
+                    <li><span class="sketchy-icon" style="--icon-rotate: 2;"><iconify-icon icon="mdi:calendar-blank-outline"></iconify-icon></span> Wann? <strong>04.-06. Juli 2025</strong> (im Kalender anmalen!)</li>
+                    <li><span class="sketchy-icon" style="--icon-rotate: -3; color:var(--sketch-green);"><iconify-icon icon="mdi:map-marker-outline"></iconify-icon></span> Wo? <strong>Brandnertal, Österreich</strong> (schöne Berge!)</li>
+                    <li><span class="sketchy-icon" style="--icon-rotate: 1; color:var(--sketch-yellow);"><iconify-icon icon="mdi:ticket-outline"></iconify-icon></span> Kosten? Ab <strong>€499</strong> (inkl. Gondel, Futter, Ruhm!)</li>
+                    <li><span class="sketchy-icon" style="--icon-rotate: -1;"><iconify-icon icon="mdi:account-group-outline"></iconify-icon></span> Wer? Max. <strong>300 Abenteurer</strong> (wird kuschelig!)</li>
+                </ul>
+                <div class="sketch-illustration" style="margin-top:15px;">
+                     <iconify-icon icon="mdi:food-apple-outline" style="font-size: 60px; color: var(--sketch-red); opacity: 0.8;"></iconify-icon>
+                     <iconify-icon icon="mdi:gondola" style="font-size: 60px; color: var(--sketch-blue); opacity: 0.8; margin-left:20px;"></iconify-icon>
+                     <p style="font-size:0.8rem;">(Verpflegung & Gondel sind safe!)</p>
+                </div>
+            </section>
+
+             <section class="sketch-section animate-sketch-in is-visible" style="background-color: var(--sketch-mint); transition-delay: 0.4s;">
+                <h2>André Schürrle hat's auch probiert:</h2>
+                <p style="font-family:var(--sketch-font-headline); font-size:1.3rem; text-align:center; color: var(--sketch-blue); transform: rotate(1deg);">"Wahnsinn! Hart! Aber geil!" <span style="font-family:sans-serif; font-size:1.5rem;">👍</span></p>
+             </section>
+
+            <section id="anmeldung" class="sketch-section sketch-hero animate-sketch-in is-visible" style="transition-delay: 0.5s;">
+                <h2>Lust bekommen, mitzukritzeln?</h2>
+                <p>Dann schnapp dir deinen Stift (oder eher deine Maus) und melde dich an!</p>
+                <a href="#" class="btn-sketch wiggle" style="background-color: var(--sketch-yellow); font-size:1.5rem;">Ja, ich will malen... äh, laufen!</a>
+            </section>
+        </main>
+
+        <footer class="sketch-footer animate-sketch-in is-visible">
+            <p>Eine wilde Idee der ALPIN8 GmbH ~ Gezeichnet mit Liebe (und Kaffee!)</p>
+            <p><a href="#">Impressum Kritzelei</a> | <a href="#">Datenschutz Gekritzel</a> | &copy; 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        const animatedElementsSketchy = document.querySelectorAll('.animate-sketch-in');
+        const observerSketchy = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerSketchy.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsSketchy.forEach(el => observerSketchy.observe(el));
+
+        // Zufällige Rotation für Icons (optional)
+        const sketchyIcons = document.querySelectorAll('.sketchy-icon');
+        sketchyIcons.forEach(icon => {
+            const randomAngle = Math.random() * 8 - 4; // -4 bis +4 Grad
+            icon.style.setProperty('--icon-rotate', randomAngle);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting :: Natürlich Herausfordernd</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@300;400;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Nunito (rund, weich Sans), Merriweather (organisch Serif), Roboto als Basis -->
+    <style>
+        :root {
+            --organic-bg: #F5F5F0; /* Warmes Off-White / Beige */
+            --organic-text: #4F4A45; /* Dunkles Braun-Grau */
+            --organic-green-dark: #5F7464; /* Moosgrün */
+            --organic-green-light: #A1C3A9; /* Helleres Salbei von #06D6A0 */
+            --organic-blue: #87A9BC; /* Gedämpftes Blau von #0E545F */
+            --organic-beige: #E4D8C4;
+            --organic-accent-yellow: #F2C886; /* Sanfteres Gelb von #FFD166 */
+            --organic-accent-red: #C87E7E; /* Gedämpftes Rot von #FF5050 */
+            --organic-border-radius: 15px; /* Weiche Rundung */
+            --organic-spacing: 22px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Nunito', 'Roboto', sans-serif;
+            background-color: var(--organic-bg);
+            color: var(--organic-text);
+            line-height: 1.7;
+            padding: var(--organic-spacing);
+        }
+         /* Optionale Textur */
+        body::before {
+            content: ''; position: fixed; top:0; left:0; width:100%; height:100%;
+            background-image: url('https://www.transparenttextures.com/patterns/light-paper-fibers.png');
+            opacity: 0.3; z-index: -1; pointer-events: none;
+        }
+
+        .organic-container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .organic-header {
+            padding-bottom: var(--organic-spacing);
+            margin-bottom: calc(var(--organic-spacing) * 2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--organic-beige); /* Sanfte Trennlinie */
+        }
+        .organic-logo { /* Logo mit organischem Touch */
+            display: flex; align-items: center;
+            font-family: 'Merriweather', serif;
+            font-weight: 700; font-size: 1.8rem;
+            color: var(--organic-green-dark);
+        }
+        .organic-logo iconify-icon { /* Blatt-Symbol */
+             font-size: 1.5rem; margin-right: 8px; color: var(--organic-green-light);
+        }
+        .organic-logo img { height: 40px; } /* Fallback für Bildlogo */
+
+        .organic-nav a {
+            font-family: 'Nunito', sans-serif; font-weight: 600;
+            color: var(--organic-text);
+            text-decoration: none;
+            margin-left: calc(var(--organic-spacing) * 1.2);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        .organic-nav a:hover { color: var(--organic-green-dark); }
+
+        /* Sektionen */
+        .organic-section { margin-bottom: calc(var(--organic-spacing) * 2.5); }
+        .organic-section h1, .organic-section h2 {
+            font-family: 'Merriweather', serif; /* Serif für Titel */
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: var(--organic-spacing);
+            line-height: 1.3;
+            color: var(--organic-green-dark);
+            text-align: center;
+        }
+        .organic-section h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+        .organic-section h2 { font-size: 1.8rem; }
+        .organic-section h3 { /* Sub-Headlines */
+             font-family: 'Nunito', sans-serif; font-weight: 700;
+             font-size: 1.3rem; color: var(--organic-blue);
+             margin-bottom: calc(var(--organic-spacing) / 2);
+        }
+        .organic-section p {
+            font-size: 1.05rem; /* Leicht größer für Lesbarkeit */
+            margin-bottom: var(--organic-spacing);
+        }
+
+        /* Hero */
+        .organic-hero .hero-number-organic {
+            font-family: 'Merriweather', serif;
+            font-size: clamp(6rem, 18vw, 10rem);
+            font-weight: 300; /* Light */
+            color: var(--organic-green-light);
+            text-align: center;
+            line-height: 0.9;
+            margin: 10px 0 25px 0;
+            display: block;
+        }
+        .organic-hero p { text-align: center; max-width: 600px; margin: 0 auto var(--organic-spacing) auto; }
+
+        .btn-organic {
+            display: inline-block;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 50px; /* Stark abgerundet / Kieselform */
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+        .btn-organic.primary {
+            background-color: var(--organic-green-dark);
+            color: var(--organic-bg);
+            border-color: var(--organic-green-dark);
+        }
+        .btn-organic.primary:hover {
+            background-color: var(--organic-green-light);
+            border-color: var(--organic-green-light);
+            color: var(--organic-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(var(--organic-green-dark-rgb, 95,116,100), 0.2);
+        }
+        .btn-organic.secondary { /* Wie Kieselstein */
+             background-color: var(--organic-beige);
+             color: var(--organic-text);
+             border: 1px solid #C8BBAE;
+        }
+         .btn-organic.secondary:hover {
+             background-color: #D8CABC;
+             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+         }
+
+
+        /* Organic Shape Container (Beispiel) */
+        .organic-shape-box {
+            background-color: #ffffff; /* Weiße Fläche für Kontrast */
+            padding: calc(var(--organic-spacing) * 1.5);
+            border-radius: 60% 40% 70% 30% / 50% 70% 30% 50%; /* Organische Form */
+            margin-bottom: var(--organic-spacing);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+            border: 1px solid var(--organic-beige);
+        }
+
+        /* Quick Facts */
+        .organic-facts-list { list-style: none; padding-left: 0; }
+        .organic-facts-list li {
+            display: flex; align-items: flex-start;
+            margin-bottom: calc(var(--organic-spacing)/1.5);
+            font-size: 1rem;
+        }
+        .organic-facts-list iconify-icon { /* Natürliche Icons */
+            font-size: 1.5rem; color: var(--organic-green-light);
+            margin-right: 10px; margin-top: 0.1em; flex-shrink: 0;
+        }
+        .organic-facts-list strong { font-weight: 600; color: var(--organic-green-dark); }
+
+        /* Image */
+        .organic-image-container img {
+            width: 100%; height: auto; display: block;
+            border-radius: var(--organic-border-radius);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        .organic-footer {
+            padding: var(--organic-spacing) 0;
+            margin-top: calc(var(--organic-spacing) * 2);
+            border-top: 1px solid var(--organic-beige);
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+        .organic-footer a { color: #777; text-decoration: none; }
+        .organic-footer a:hover { color: var(--organic-green-dark); }
+
+
+        /* Animationen */
+        .animate-organic-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-organic-in.is-visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <!-- RGB für CSS Variablen -->
+    <script>
+        function getRgbFromHexOrg(hex) { hex = hex.replace(/^#/, ''); if (hex.length === 3) hex = hex.split('').map(char => char + char).join(''); const bigint = parseInt(hex, 16); return `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`; }
+        document.documentElement.style.setProperty('--organic-green-dark-rgb', getRgbFromHexOrg(getComputedStyle(document.documentElement).getPropertyValue('--organic-green-dark').trim()));
+    </script>
+
+    <div class="organic-container">
+        <header class="organic-header animate-organic-in is-visible">
+            <div class="organic-logo">
+                <iconify-icon icon="tabler:leaf"></iconify-icon>
+                <span>ALPIN8</span>
+            </div>
+            <nav class="organic-nav">
+                <a href="#nature">Natur erleben</a>
+                <a href="#challenge">Herausforderung</a>
+                <a href="#register">Anmeldung</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="organic-section organic-hero animate-organic-in is-visible" style="transition-delay: 0.1s;">
+                <h1>Im Einklang mit dem Berg</h1>
+                <div class="hero-number-organic">8848</div>
+                <p>Entdecke deine natürliche Stärke beim ALPIN8 Everesting. Eine Reise zu dir selbst, getragen von der Kraft der Alpen.</p>
+                <div style="text-align:center;">
+                    <a href="#register" class="btn-organic primary">Finde deinen Weg</a>
+                </div>
+            </section>
+
+            <section id="nature" class="organic-section animate-organic-in is-visible" style="transition-delay: 0.2s;">
+                <h2>Die Kraft der Natur spüren</h2>
+                 <div style="display: flex; gap: var(--organic-spacing); flex-wrap: wrap; align-items: center;">
+                     <div style="flex: 1; min-width: 250px;">
+                         <p>ALPIN8 ist mehr als nur ein Rennen. Es ist eine tiefe Verbindung mit der majestätischen Natur des Brandnertals. Spüre den Boden unter deinen Füßen, atme die klare Bergluft, lausche der Stille und finde deinen Rhythmus im Einklang mit der Umgebung.</p>
+                         <p>Die 34 Stunden werden zu einer Meditation in Bewegung, einer Chance, dich von der Ursprünglichkeit der Landschaft inspirieren und tragen zu lassen.</p>
+                     </div>
+                     <div style="flex: 1; min-width: 250px;">
+                         <div class="organic-image-container">
+                             <img src="https://images.pexels.com/photos/371589/pexels-photo-371589.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ruhige Berglandschaft mit See">
+                         </div>
+                     </div>
+                 </div>
+            </section>
+
+            <section id="challenge" class="organic-section animate-organic-in is-visible" style="transition-delay: 0.3s;">
+                <div class="organic-shape-box">
+                    <h3>Die Herausforderung: Natürlich Wachsen</h3>
+                    <p>Die 8848 Höhenmeter sind ein Symbol für persönliches Wachstum. Wie ein Baum streckst du dich nach oben, überwindest Hindernisse und entdeckst neue Stärke in dir. Der Weg ist das Ziel, jeder Schritt eine Erfahrung.</p>
+                    <ul class="organic-facts-list" style="margin-top:var(--organic-spacing);">
+                        <li><iconify-icon icon="tabler:mountain"></iconify-icon> <strong>Ziel:</strong> 8848m - Wachse über dich hinaus.</li>
+                        <li><iconify-icon icon="tabler:clock-hour-3"></iconify-icon> <strong>Zeit:</strong> 34 Stunden - Finde deinen natürlichen Rhythmus.</li>
+                        <li><iconify-icon icon="tabler:plant-2"></iconify-icon> <strong>Fokus:</strong> Mentale Stärke & Verbindung zur Natur.</li>
+                         <li><iconify-icon icon="tabler:gondola"></iconify-icon> <strong>Support:</strong> Die Gondel als sanfter Begleiter bergab.</li>
+                    </ul>
+                </div>
+            </section>
+
+             <section class="organic-section animate-organic-in is-visible" style="transition-delay: 0.4s;">
+                 <h2>Stimmen aus dem Wald</h2>
+                 <div style="background-color: var(--organic-beige); padding: var(--organic-spacing); border-radius: var(--organic-border-radius); text-align:center;">
+                     <p style="font-family: 'Merriweather', serif; font-size: 1.2rem; font-style: italic; color: var(--organic-green-dark);">"Eine unglaubliche Erfahrung! So intensiv, so echt. Man fühlt sich eins mit dem Berg."</p>
+                     <p style="font-weight:600;">- André Schürrle (adaptiert)</p>
+                 </div>
+             </section>
+
+            <section id="register" class="organic-section animate-organic-in is-visible" style="text-align:center; transition-delay: 0.5s;">
+                <h2>Bereit, Wurzeln zu schlagen?</h2>
+                <p>Finde deinen Platz in der ALPIN8 Community und erlebe die natürliche Herausforderung.</p>
+                <a href="#" class="btn-organic secondary" style="margin-right: 10px;">Mehr erfahren</a>
+                <a href="#" class="btn-organic primary">Jetzt anmelden (2025)</a>
+            </section>
+        </main>
+
+        <footer class="organic-footer animate-organic-in is-visible">
+            <p>ALPIN8 GmbH &copy; 2024 - Verbunden mit der Natur</p>
+            <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const animatedElementsOrganic = document.querySelectorAll('.animate-organic-in');
+        const observerOrganic = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerOrganic.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsOrganic.forEach(el => observerOrganic.observe(el));
+    </script>
+</body>
+</html>

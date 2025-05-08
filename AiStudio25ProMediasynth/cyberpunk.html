@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 :: EVERESTING_SYS_CORE</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Share+Tech+Mono&family=Aldrich&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Share Tech Mono für Fließtext/Code, Aldrich/Orbitron für Headlines -->
+    <style>
+        :root {
+            --cp-bg-dark: #08021A; /* Sehr dunkles Blau-Violett */
+            --cp-neon-pink: #FF00FF;
+            --cp-neon-cyan: #00FFFF;
+            --cp-neon-green: #06D6A0;
+            --cp-neon-yellow: #FFD166;
+            --cp-text-color: #C0C0FF; /* Helles Lavendel für Text */
+            --cp-glitch-overlay: rgba(255, 0, 255, 0.05); /* Für Glitch-Effekte */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Share Tech Mono', 'Roboto', monospace;
+            background-color: var(--cp-bg-dark);
+            color: var(--cp-text-color);
+            line-height: 1.7;
+            padding: 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Glitch-Layer (subtil) */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                var(--cp-glitch-overlay),
+                var(--cp-glitch-overlay) 1px,
+                transparent 1px,
+                transparent 4px /* Streifenhöhe */
+            );
+            animation: glitch-lines 0.3s steps(2) infinite;
+            z-index: 1001; /* Über fast allem */
+            opacity: 0.3;
+        }
+        @keyframes glitch-lines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(8px); }
+        }
+
+        .cp-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1; /* Über Body-After-Element */
+        }
+
+        /* Header */
+        .cp-header {
+            padding: 10px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(var(--cp-neon-cyan-rgb, 0, 255, 255), 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cp-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--cp-neon-pink);
+            text-shadow: 0 0 10px var(--cp-neon-pink), 0 0 20px var(--cp-neon-pink), 0 0 2px #fff;
+            animation: logo-glitch 5s infinite alternate;
+        }
+        @keyframes logo-glitch {
+            0%, 100% { text-shadow: 0 0 10px var(--cp-neon-pink), 0 0 20px var(--cp-neon-pink), 0 0 2px #fff; opacity: 1;}
+            49% { opacity: 1; }
+            50% { text-shadow: 0 0 10px var(--cp-neon-cyan), 2px 2px 1px var(--cp-neon-pink); opacity: 0.8; transform: skewX(-3deg);}
+            51% { opacity: 1; }
+        }
+
+        .cp-nav a {
+            font-family: 'Aldrich', sans-serif;
+            color: var(--cp-text-color);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            padding: 5px;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+        .cp-nav a:hover {
+            color: var(--cp-neon-cyan);
+            text-shadow: 0 0 8px var(--cp-neon-cyan);
+            animation: link-flicker 0.3s infinite;
+        }
+        @keyframes link-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Module */
+        .cp-module {
+            background-color: rgba(10, 2, 26, 0.5); /* Dunkel, leicht transparent */
+            border: 1px solid rgba(var(--cp-neon-pink-rgb, 255,0,255), 0.4);
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px rgba(var(--cp-neon-pink-rgb, 255,0,255), 0.2),
+                        inset 0 0 10px rgba(var(--cp-neon-cyan-rgb, 0,255,255), 0.1);
+            position: relative; /* Für Pseudo-Elemente (Ecken) */
+        }
+        /* Eck-Design für Module */
+        .cp-module::before, .cp-module::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-style: solid;
+            border-color: var(--cp-neon-cyan);
+        }
+        .cp-module::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+        .cp-module::after { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+
+        .cp-module h1, .cp-module h2, .cp-module h3 {
+            font-family: 'Aldrich', 'Orbitron', sans-serif;
+            color: var(--cp-neon-cyan);
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px var(--cp-neon-cyan);
+        }
+        .cp-module h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        .cp-module h2 { font-size: 1.5rem; }
+        .cp-module h3 { font-size: 1.2rem; color: var(--cp-neon-green); text-shadow: 0 0 6px var(--cp-neon-green);}
+
+        .cp-hero .hero-number-cp {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(5rem, 18vw, 10rem);
+            font-weight: 900;
+            color: var(--cp-neon-pink);
+            display: block;
+            text-align: center;
+            line-height: 0.9;
+            margin: 10px 0 20px 0;
+            text-shadow: 0 0 10px var(--cp-neon-pink), 0 0 25px var(--cp-neon-pink), 0 0 40px var(--cp-neon-pink), 0 0 4px #fff;
+            animation: number-pulse 2s infinite ease-in-out;
+        }
+        @keyframes number-pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        .cp-hero p {
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--cp-text-color);
+        }
+
+        .btn-cp {
+            display: inline-block;
+            font-family: 'Aldrich', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            color: var(--cp-bg-dark);
+            background: var(--cp-neon-pink);
+            padding: 10px 25px;
+            border: 1px solid var(--cp-neon-pink);
+            text-decoration: none;
+            box-shadow: 0 0 12px var(--cp-neon-pink), inset 0 0 5px rgba(255,255,255,0.4);
+            transition: all 0.2s ease-out;
+            position: relative;
+            overflow: hidden; /* Für Glitch-Line */
+        }
+        .btn-cp::after { /* Glitch-Linie bei Hover */
+            content: '';
+            position: absolute;
+            left: -100%; top: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(var(--cp-neon-cyan-rgb,0,255,255),0.5), transparent);
+            transition: left 0.4s ease-out;
+        }
+        .btn-cp:hover {
+            background: var(--cp-bg-dark);
+            color: var(--cp-neon-pink);
+            box-shadow: 0 0 20px var(--cp-neon-pink), 0 0 8px var(--cp-neon-cyan);
+            transform: translateY(-2px);
+        }
+        .btn-cp:hover::after { left: 100%; }
+
+        /* HUD-artige Elemente */
+        .cp-data-list ul { list-style: none; padding: 0; }
+        .cp-data-list li {
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(var(--cp-text-color-rgb, 192,192,255), 0.15);
+            font-size: 0.9rem;
+        }
+        .cp-data-list li::before { /* Data-Prefix */
+            content: "[SYS]>";
+            color: var(--cp-neon-green);
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        .cp-data-list strong { color: var(--cp-neon-yellow); }
+
+        .cp-image-container {
+            border: 1px solid var(--cp-neon-cyan);
+            padding: 3px;
+            box-shadow: 0 0 8px var(--cp-neon-cyan);
+            margin-bottom: 15px;
+            overflow: hidden; /* Für Glitch auf Bild */
+        }
+        .cp-image-container img {
+            display: block; width: 100%; height: auto;
+            filter: saturate(1.5) contrast(1.2);
+            animation: image-glitch 8s infinite steps(1);
+        }
+        @keyframes image-glitch {
+            0%, 100% { transform: translateX(0); opacity: 1; }
+            50.0% { transform: translateX(3px) skewX(-2deg); opacity: 0.8; filter: hue-rotate(10deg) saturate(2) contrast(1.5); }
+            50.2% { transform: translateX(-3px) skewX(2deg); opacity: 0.9; filter: hue-rotate(-10deg) saturate(1.5) contrast(1.3); }
+        }
+
+        /* Footer */
+        .cp-footer {
+            border-top: 1px solid rgba(var(--cp-neon-pink-rgb, 255,0,255), 0.3);
+            padding: 20px 0 5px 0;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .cp-footer p { margin: 3px 0; color: rgba(var(--cp-text-color-rgb, 192,192,255), 0.7); }
+        .cp-footer a { color: var(--cp-neon-cyan); text-decoration: none; }
+        .cp-footer a:hover { text-decoration: underline; color: var(--cp-neon-pink); }
+        .cp-footer .social-icons-cp a {
+            font-size: 1.5rem; margin: 0 8px; color: var(--cp-text-color);
+        }
+        .cp-footer .social-icons-cp a:hover { color: var(--cp-neon-green); }
+
+
+        /* Animation für Module */
+        .animate-cp-in { opacity: 0; animation: cp-module-appear 0.7s 0.1s forwards cubic-bezier(0.1, 0.7, 0.3, 1); }
+        @keyframes cp-module-appear {
+            0% { opacity: 0; transform: translateY(25px) scale(0.98) skewY(2deg); }
+            60% { opacity: 0.7; transform: translateY(-5px) scale(1.01) skewY(-1deg); }
+            100% { opacity: 1; transform: translateY(0) scale(1) skewY(0deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cp-container">
+        <header class="cp-header animate-cp-in">
+            <div class="cp-logo">ALPIN8</div>
+            <nav class="cp-nav">
+                <a href="#protocol">PROTOCOL</a>
+                <a href="#interface">INTERFACE</a>
+                <a href="#transmit">TRANSMIT</a>
+            </nav>
+        </header>
+
+        <section class="cp-hero cp-module animate-cp-in" style="animation-delay: 0.2s;">
+            <h1>//ALPIN8_CORE::ONLINE</h1>
+            <span class="hero-number-cp">8848</span>
+            <p>Die Grenze ist nicht der Berg. Sie ist in deinem Code. Überschreibe sie.</p>
+            <div style="text-align:center;">
+                <a href="#transmit" class="btn-cp">INITIATE_ASCENSION_V2.5</a>
+            </div>
+        </section>
+
+        <section id="protocol" class="cp-module animate-cp-in" style="animation-delay: 0.4s;">
+            <h2>// PROTOKOLL: EVERESTING //</h2>
+            <p>Einheitenparameter: 34 Stunden Zeitfenster. Vertikale Distanz: 8848 Meter. Fortbewegung: Biomechanisch (Aufstieg), Gravitations-unterstützt via Seilbahn-Interface (Abstieg). Primärziel: Überwindung der mentalen Firewall.</p>
+            <div class="cp-image-container" style="margin-top:20px;">
+                <img src="https://images.pexels.com/photos/4065906/pexels-photo-4065906.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cyberpunk Berglandschaft">
+            </div>
+        </section>
+
+        <section id="interface" class="cp-module cp-data-list animate-cp-in" style="animation-delay: 0.6s;">
+            <h2>// INTERFACE_SPECS // ALPIN8_UNIT_2025</h2>
+            <ul>
+                <li><strong>OPERATION_ID:</strong> ALPIN8_EVERESTING_2025</li>
+                <li><strong>LOCATION_GRID:</strong> Brandnertal_Sector_AT</li>
+                <li><strong>TIMEFRAME:</strong> 04.JUL.2025_06.JUL.2025</li>
+                <li><strong>MAX_PARTICIPANTS:</strong> 300_UNITS</li>
+                <li><strong>ACCESS_FEE:</strong> 599_CREDITS (STANDARD_UNIT)</li>
+                <li><strong>SUPPORT_SYSTEMS:</strong> Gondola_Transport_V4, Nutrition_Dispenser_Mk3, Recovery_Zone_Omega</li>
+            </ul>
+        </section>
+
+         <section class="cp-module animate-cp-in" style="animation-delay: 0.8s;">
+            <h2>// TRANSMISSION_LOG: SCHUERRLE_A. //</h2>
+            <blockquote style="font-size: 1.2rem; color: var(--cp-neon-yellow); border-left: 2px solid var(--cp-neon-yellow); padding-left: 10px; margin: 15px 0; font-style: italic;">
+                "CHALLENGE_STATUS: INSANE. EXACTLY_AS_ADVERTISED. DIFFICULTY_LEVEL: MAXIMUM. HARDWARE_STRESSED_BUT_FUNCTIONAL."
+            </blockquote>
+            <p style="text-align: right; font-size:0.9rem;">- Unit S.A., CallSign: Weltmeister_14</p>
+        </section>
+
+
+        <section id="transmit" class="cp-module animate-cp-in" style="text-align:center; animation-delay: 1s;">
+            <h2>// DATENÜBERTRAGUNG_STARTEN // ANMELDUNG_ALPIN8_PROGRAMM</h2>
+            <p>System bereit für deine Registrierung. Limitierte Slots verfügbar. Warte nicht auf den nächsten Zyklus.</p>
+            <a href="#" class="btn-cp" style="background-color: var(--cp-neon-cyan); border-color:var(--cp-neon-cyan); box-shadow: 0 0 12px var(--cp-neon-cyan), inset 0 0 5px rgba(255,255,255,0.4); font-size:1.2rem; padding: 12px 35px;">AUTHORIZE_&_TRANSMIT_NOW</a>
+        </section>
+    </div>
+
+    <footer class="cp-footer">
+         <div class="social-icons-cp" style="margin-bottom:10px;">
+            <a href="#" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+            <a href="#" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+            <a href="#" aria-label="Discord"><iconify-icon icon="mdi:discord"></iconify-icon></a>
+             <a href="#" aria-label="Twitch"><iconify-icon icon="mdi:twitch"></iconify-icon></a>
+        </div>
+        <p>ALPIN8_SYSTEMS_INC. // COPYRIGHT_2025 // ALL_RIGHTS_RESERVED_IN_THIS_SECTOR</p>
+        <p><a href="#">[LEGAL_DOC_001]</a> :: <a href="#">[PRIVACY_PROTOCOL_7.3]</a> :: <a href="#">[TERMS_OF_SERVICE_V9]</a></p>
+    </footer>
+
+    <script>
+        // RGB-Werte für CSS-Variablen extrahieren, falls für JS benötigt (z.B. für Canvas-Glitch)
+        function getRgbFromHex(hex) {
+            // Entferne #, falls vorhanden
+            hex = hex.replace(/^#/, '');
+            // Konvertiere 3-stelligen Hex zu 6-stelligem
+            if (hex.length === 3) {
+                hex = hex.split('').map(char => char + char).join('');
+            }
+            const bigint = parseInt(hex, 16);
+            const r = (bigint >> 16) & 255;
+            const g = (bigint >> 8) & 255;
+            const b = bigint & 255;
+            return `${r},${g},${b}`;
+        }
+
+        // Beim Laden die RGB-Werte in CSS-Variablen setzen (für Effekte, die rgba benötigen)
+        document.documentElement.style.setProperty('--cp-neon-pink-rgb', getRgbFromHex(getComputedStyle(document.documentElement).getPropertyValue('--cp-neon-pink').trim()));
+        document.documentElement.style.setProperty('--cp-neon-cyan-rgb', getRgbFromHex(getComputedStyle(document.documentElement).getPropertyValue('--cp-neon-cyan').trim()));
+        document.documentElement.style.setProperty('--cp-text-color-rgb', getRgbFromHex(getComputedStyle(document.documentElement).getPropertyValue('--cp-text-color').trim()));
+
+
+        const animatedElementsCP = document.querySelectorAll('.animate-cp-in');
+        const observerCP = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Die Animation wird durch CSS gestartet, wenn die Klasse hinzugefügt wird.
+                    // Hier nur sicherstellen, dass die Grund-Opacity für den Start der Animation gesetzt ist.
+                    entry.target.style.opacity = '0'; // Start der CSS-Animation
+                    entry.target.classList.add('is-visible'); // Dummy-Klasse, falls Animation anders getriggert wird
+                                                           // oder um sie nur einmal auszuführen.
+                                                           // Die aktuelle CSS-Animation startet direkt.
+                    observerCP.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.05 }); // Schon bei 5% Sichtbarkeit starten
+
+        animatedElementsCP.forEach(el => {
+            observerCP.observe(el);
+        });
+    </script>
+</body>
+</html>

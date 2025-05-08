@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting / Bauhaus Edition</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Montserrat hat eine geometrische Anmutung, Roboto als Allrounder -->
+    <style>
+        :root {
+            --bauhaus-bg: #FDFDFD; /* Fast Weiß */
+            --bauhaus-text: #1A1A1A; /* Fast Schwarz */
+            --bauhaus-red: #FF5050;
+            --bauhaus-yellow: #FFD166;
+            --bauhaus-blue: #0E545F; /* Dein Dunkelblau als Primärblau */
+            --bauhaus-black: #000000;
+            --bauhaus-white: #FFFFFF;
+            --bauhaus-line: #D0D0D0; /* Helle Linie */
+            --bauhaus-spacing: 24px; /* Basisabstand */
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', 'Montserrat', sans-serif;
+            background-color: var(--bauhaus-bg);
+            color: var(--bauhaus-text);
+            line-height: 1.6;
+            padding: 0;
+        }
+
+        .bauhaus-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: calc(var(--bauhaus-spacing) * 1.5);
+        }
+
+        /* Grundlegende geometrische Elemente */
+        .shape { position: absolute; z-index: 0; }
+        .shape.rect { background-color: var(--bauhaus-yellow); }
+        .shape.circle { background-color: var(--bauhaus-red); border-radius: 50%; }
+        .shape.line { background-color: var(--bauhaus-black); height: 2px; }
+
+
+        /* Header */
+        .bauhaus-header {
+            padding-bottom: var(--bauhaus-spacing);
+            margin-bottom: calc(var(--bauhaus-spacing) * 2);
+            border-bottom: 2px solid var(--bauhaus-black);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bauhaus-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800; /* ExtraBold */
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .bauhaus-logo .accent { color: var(--bauhaus-red); } /* Roter Akzent im Logo */
+
+        .bauhaus-nav a {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500; /* Medium */
+            color: var(--bauhaus-text);
+            text-decoration: none;
+            margin-left: var(--bauhaus-spacing);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            padding-bottom: 4px; /* Platz für Hover-Linie */
+            position: relative;
+        }
+        .bauhaus-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--bauhaus-red);
+            transition: width 0.3s ease;
+        }
+        .bauhaus-nav a:hover::after { width: 100%; }
+
+        /* Sektionen */
+        .bauhaus-section {
+            margin-bottom: calc(var(--bauhaus-spacing) * 2.5);
+            position: relative; /* Für absolute Shapes */
+        }
+        .bauhaus-section h1, .bauhaus-section h2, .bauhaus-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700; /* Bold */
+            margin-top: 0;
+            margin-bottom: var(--bauhaus-spacing);
+            line-height: 1.2;
+        }
+        .bauhaus-section h1 { /* Große, asymmetrische Headline */
+            font-size: clamp(3.5rem, 9vw, 6rem);
+            font-weight: 900; /* Black */
+            color: var(--bauhaus-black);
+            text-transform: uppercase;
+            margin-bottom: calc(var(--bauhaus-spacing) * 1.5);
+            position: relative;
+            z-index: 2;
+        }
+        .bauhaus-section h2 { font-size: 2rem; }
+        .bauhaus-section h3 { font-size: 1.3rem; color: var(--bauhaus-blue); margin-bottom: calc(var(--bauhaus-spacing)/2) ; }
+
+        .bauhaus-section p, .bauhaus-section li {
+            font-size: 1rem;
+            margin-bottom: var(--bauhaus-spacing);
+            position: relative; z-index: 1;
+        }
+        .bauhaus-section ul { list-style: none; padding-left: 0; }
+        .bauhaus-section li { display: flex; align-items: flex-start; }
+        .bauhaus-section li::before { /* Geometrische Aufzählungszeichen */
+            content: '';
+            display: inline-block;
+            width: 10px; height: 10px;
+            margin-right: 10px;
+            margin-top: 0.3em; /* Vertikale Ausrichtung */
+            flex-shrink: 0;
+        }
+        .bauhaus-section li.dot::before { background-color: var(--bauhaus-red); border-radius: 50%; }
+        .bauhaus-section li.square::before { background-color: var(--bauhaus-yellow); }
+        .bauhaus-section li.triangle::before {
+            width: 0; height: 0; background-color: transparent;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 10px solid var(--bauhaus-blue);
+        }
+
+
+        .btn-bauhaus {
+            display: inline-block;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: var(--bauhaus-white);
+            background-color: var(--bauhaus-red);
+            padding: calc(var(--bauhaus-spacing)/1.5) calc(var(--bauhaus-spacing)*1.5);
+            text-decoration: none;
+            border: none;
+            transition: background-color 0.2s ease;
+            position: relative; z-index: 1;
+        }
+        .btn-bauhaus:hover { background-color: var(--bauhaus-black); }
+        .btn-bauhaus.blue { background-color: var(--bauhaus-blue); }
+        .btn-bauhaus.yellow { background-color: var(--bauhaus-yellow); color: var(--bauhaus-black); }
+
+
+        .bauhaus-image-container {
+            margin-bottom: var(--bauhaus-spacing);
+            border: 2px solid var(--bauhaus-black);
+            padding: 8px; /* "Rahmen" um das Bild */
+            background-color: var(--bauhaus-white);
+            position: relative; z-index: 1;
+        }
+        .bauhaus-image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Farbblock für Hervorhebungen */
+        .bauhaus-color-block {
+            padding: var(--bauhaus-spacing);
+            margin: var(--bauhaus-spacing) 0;
+        }
+        .bauhaus-color-block.red { background-color: var(--bauhaus-red); color: var(--bauhaus-white); }
+        .bauhaus-color-block.yellow { background-color: var(--bauhaus-yellow); color: var(--bauhaus-black); }
+        .bauhaus-color-block.blue { background-color: var(--bauhaus-blue); color: var(--bauhaus-white); }
+        .bauhaus-color-block p, .bauhaus-color-block h3 { color: inherit !important; }
+
+
+        /* Footer */
+        .bauhaus-footer {
+            padding-top: var(--bauhaus-spacing);
+            margin-top: calc(var(--bauhaus-spacing) * 2);
+            border-top: 2px solid var(--bauhaus-black);
+            text-align: left;
+            font-size: 0.85rem;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+        }
+        .bauhaus-footer a { color: #555; text-decoration: none; }
+        .bauhaus-footer a:hover { color: var(--bauhaus-red); }
+
+        /* Grid-Struktur (einfach gehalten) */
+        .grid-bauhaus { display: flex; flex-wrap: wrap; gap: var(--bauhaus-spacing); }
+        .grid-bauhaus > .col { flex: 1; min-width: 280px; /* Für Responsive Verhalten */ }
+        .grid-bauhaus > .col-2-3 { flex: 2; }
+        .grid-bauhaus > .col-1-3 { flex: 1; }
+
+        /* Animationen */
+        .animate-bauhaus-in { opacity:0; transform: translateY(15px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-bauhaus-in.is-visible { opacity:1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <!-- Dekorative geometrische Formen im Hintergrund (Beispiele) -->
+    <div class="shape rect" style="width: 200px; height: 300px; top: 50px; left: -50px; opacity: 0.8; transform: rotate(-15deg);"></div>
+    <div class="shape circle" style="width: 150px; height: 150px; top: 400px; right: -70px; opacity: 0.9;"></div>
+    <div class="shape line" style="width: 80%; height: 3px; top: 250px; left: 10%; opacity: 0.7;"></div>
+
+
+    <div class="bauhaus-container">
+        <header class="bauhaus-header animate-bauhaus-in is-visible">
+            <div class="bauhaus-logo">ALPIN<span class="accent">8</span></div>
+            <nav class="bauhaus-nav">
+                <a href="#challenge">Herausforderung</a>
+                <a href="#details">Details</a>
+                <a href="#anmeldung">Anmeldung</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="bauhaus-section animate-bauhaus-in is-visible" style="transition-delay: 0.1s;">
+                <div class="grid-bauhaus">
+                    <div class="col col-2-3">
+                        <h1>FORM FOLGT FUNKTION<br>AM BERG</h1>
+                        <p style="font-size: 1.2rem; font-weight:300;">ALPIN8 Everesting: Eine Reduktion auf das Wesentliche. Die reine Form der Herausforderung – 8848 Höhenmeter.</p>
+                        <a href="#anmeldung" class="btn-bauhaus">Zur Anmeldung 2025</a>
+                    </div>
+                    <div class="col col-1-3">
+                         <div class="bauhaus-image-container" style="margin-top:10px;">
+                            <img src="https://images.pexels.com/photos/572897/pexels-photo-572897.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&dpr=1" alt="Geometrische Berglandschaft">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <hr style="border:none; border-top: 1px solid var(--bauhaus-line); margin: calc(var(--bauhaus-spacing)*2) 0;">
+
+            <section id="challenge" class="bauhaus-section animate-bauhaus-in is-visible" style="transition-delay: 0.2s;">
+                <div class="shape rect" style="width:80px; height:250px; background-color:var(--bauhaus-blue); top:10%; right:5%; transform:rotate(10deg); opacity:0.7;"></div>
+                <h2>Die Herausforderung: Klar. Definiert.</h2>
+                <div class="grid-bauhaus">
+                    <div class="col">
+                        <p>Das Konzept von ALPIN8 ist einfach und funktional: Erreiche 8848 Höhenmeter. Die Mittel sind deine Beine für den Aufstieg und die Gondel für den Abstieg. Über 34 Stunden hast du Zeit, deine Strategie zu verfolgen. Es geht um die reine Auseinandersetzung mit dem Berg und dir selbst.</p>
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <li class="dot">Ziel: 8848 Höhenmeter</li>
+                            <li class="square">Zeit: 34 Stunden</li>
+                            <li class="triangle">Ort: Brandnertal, Österreich</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bauhaus-color-block yellow animate-bauhaus-in is-visible" style="transition-delay: 0.3s;">
+                <h3>Das Prinzip ALPIN8</h3>
+                <p>Reduziert auf das Maximum: Maximale Höhe, maximale Erfahrung, maximaler Fokus. ALPIN8 ist kein Wettlauf gegen die Zeit anderer, sondern ein Dialog mit den eigenen Grenzen. Die Gemeinschaft unterstützt, die Natur inspiriert.</p>
+            </section>
+
+
+            <section id="details" class="bauhaus-section animate-bauhaus-in is-visible" style="transition-delay: 0.4s;">
+                 <div class="shape circle" style="width:120px; height:120px; background-color:var(--bauhaus-yellow); opacity:0.6; bottom:-40px; left:20%;"></div>
+                <h2>Fakten und Struktur: Event 2025</h2>
+                <div class="grid-bauhaus">
+                    <div class="col">
+                        <h3>Programmübersicht</h3>
+                        <ul style="font-size:0.9rem;">
+                            <li class="square"><strong>Freitag:</strong> Anreise, Briefing, Community-Abend</li>
+                            <li class="square"><strong>Samstag:</strong> Start Everesting (Morgen), Challenge Phase 1</li>
+                            <li class="square"><strong>Sonntag:</strong> Challenge Phase 2, Zieleinlauf, Abschlussfeier</li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <h3>Leistungspakete</h3>
+                        <p><strong>Everesting (8848m):</strong> €599<br>
+                           <strong>Everesty (4424m):</strong> €499</p>
+                        <p style="font-size:0.9rem;">Inkludiert: Gondel, Verpflegung, Zeitmessung, Summit Camp, exklusives Teilnehmergeschenk.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="anmeldung" class="bauhaus-color-block red animate-bauhaus-in is-visible" style="text-align:center; transition-delay: 0.5s;">
+                <h2>Anmeldung ALPIN8 2025</h2>
+                <p>Funktionale Gestaltung trifft auf maximale Herausforderung. Melden Sie sich jetzt an und werden Sie Teil einer einzigartigen Erfahrung.</p>
+                <a href="#" class="btn-bauhaus yellow" style="margin-top:10px;">Jetzt Platz sichern</a>
+            </section>
+        </main>
+
+        <footer class="bauhaus-footer animate-bauhaus-in is-visible">
+            <p>ALPIN8 GmbH</p>
+            <p><a href="#">Impressum</a> / <a href="#">Datenschutz</a> / &copy; 2024</p>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll-Animationen
+        const animatedElementsBauhaus = document.querySelectorAll('.animate-bauhaus-in');
+        const observerBauhaus = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerBauhaus.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsBauhaus.forEach(el => observerBauhaus.observe(el));
+
+        // Zusätzliche Deko-Elemente dynamischer platzieren (optional, für mehr Variation)
+        const mainShapes = document.querySelectorAll('.shape');
+        mainShapes.forEach(shape => {
+            // Kleine zufällige Anpassung der Position für mehr "organisches" Layout
+            // Dies ist nicht strikt Bauhaus, aber kann helfen, es weniger statisch zu machen
+            // const offsetX = (Math.random() - 0.5) * 30; // -15px bis +15px
+            // const offsetY = (Math.random() - 0.5) * 30;
+            // shape.style.transform += ` translate(${offsetX}px, ${offsetY}px)`;
+        });
+    </script>
+</body>
+</html>

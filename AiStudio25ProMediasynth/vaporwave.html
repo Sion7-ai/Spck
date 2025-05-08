@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ＡＬＰＩＮ８　ＥＶＥＲＥＳＴＩＮＧ　（アesthetic山）</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=VT323&family=Press+Start+2P&family=Times+New+Roman&display=swap" rel="stylesheet">
+    <!-- VT323/Press Start 2P für Pixel, Times New Roman für klassischen Vaporwave-Kontrast -->
+    <style>
+        :root {
+            --vw-bg: linear-gradient(160deg, #FF80AB 0%, #8C9EFF 50%, #4DD0E1 100%); /* Pink, Lila, Türkis */
+            --vw-grid-color: rgba(255, 255, 255, 0.08);
+            --vw-text-color: #FFFFFF;
+            --vw-text-shadow: 1px 1px 0px #AA0077, 2px 2px 0px #5500AA; /* Starker 3D-Schatten */
+            --vw-panel-bg: rgba(0, 0, 50, 0.3); /* Dunkelblau, transparent */
+            --vw-panel-border: #FF00FF; /* Magenta */
+            --vw-accent-cyan: #00FFFF;
+            --vw-accent-green: #06D6A0;
+            --vw-accent-yellow: #FFD166;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Times New Roman', 'Roboto', serif; /* Klassische Serifenschrift als Basis */
+            background: var(--vw-bg);
+            background-attachment: fixed;
+            color: var(--vw-text-color);
+            line-height: 1.6;
+            padding: 15px;
+            overflow-x: hidden;
+            position: relative; /* Für Grid-Overlay */
+        }
+
+        /* Grid-Overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                linear-gradient(to right, var(--vw-grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--vw-grid-color) 1px, transparent 1px);
+            background-size: 30px 30px; /* Kleineres Raster */
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .vw-container {
+            max-width: 850px; /* Schmaler für den Retro-Look */
+            margin: 0 auto;
+            border: 2px solid var(--vw-accent-cyan); /* Rahmen um den Hauptcontainer */
+            background-color: rgba(0,0,0,0.2); /* Etwas dunklerer Innenbereich */
+            padding: 15px;
+            box-shadow: 0 0 20px var(--vw-accent-cyan);
+        }
+
+        /* Header */
+        .vw-header {
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 1px dashed var(--vw-panel-border);
+        }
+        .vw-logo { /* Vollbreitzeichen für Vaporwave-Look */
+            font-family: 'VT323', monospace;
+            font-size: 2.5rem;
+            color: var(--vw-text-color);
+            text-shadow: var(--vw-text-shadow);
+            letter-spacing: 0.1em; /* Weiter Buchstabenabstand */
+            animation: logo-flicker 3s infinite alternate;
+        }
+        @keyframes logo-flicker {
+            0%, 100% { opacity: 1; text-shadow: var(--vw-text-shadow); }
+            50% { opacity: 0.8; text-shadow: 1px 1px 0px var(--vw-accent-cyan), 2px 2px 0px var(--vw-panel-border); }
+        }
+        .vw-nav { margin-top: 10px; }
+        .vw-nav a {
+            font-family: 'Press Start 2P', cursive; /* Pixel-Schrift */
+            color: var(--vw-text-color);
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.7rem;
+            padding: 5px;
+            background-color: var(--vw-panel-bg);
+            border: 1px solid var(--vw-accent-green);
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .vw-nav a:hover {
+            background-color: var(--vw-accent-green);
+            color: #000;
+        }
+
+        /* "Windows" / Panels */
+        .vw-panel {
+            background: var(--vw-panel-bg);
+            border: 2px solid var(--vw-panel-border);
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 5px 5px 0px rgba(var(--vw-panel-border-rgb, 255,0,255), 0.5); /* Harter Schatten */
+        }
+        .vw-panel-titlebar {
+            background: linear-gradient(to right, #000080, #5050D0); /* Windows-Blau */
+            color: white;
+            padding: 3px 8px;
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            margin: -15px -15px 10px -15px; /* Überlappt Padding */
+            border-bottom: 2px solid var(--vw-panel-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .vw-panel-titlebar .buttons span { /* Fake Buttons */
+            display: inline-block; width: 12px; height: 12px;
+            background-color: #C0C0C0; border: 1px solid #808080;
+            margin-left: 3px; box-shadow: 1px 1px #fff;
+        }
+
+        .vw-panel h1, .vw-panel h2 {
+            font-family: 'Times New Roman', serif;
+            color: var(--vw-text-color);
+            text-shadow: var(--vw-text-shadow);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .vw-panel h1 { font-size: 2rem; letter-spacing: 0.05em; }
+        .vw-panel h2 { font-size: 1.5rem; color: var(--vw-accent-cyan); }
+
+        .vw-hero .hero-number-vw {
+            font-family: 'Press Start 2P', cursive;
+            font-size: clamp(3rem, 12vw, 6rem);
+            color: var(--vw-accent-yellow);
+            text-align: center;
+            margin: 10px 0 15px 0;
+            display: block;
+            text-shadow: 2px 2px 0 var(--vw-panel-border), 4px 4px 0 #000;
+        }
+        .vw-hero p {
+            font-family: 'VT323', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .btn-vw { /* Windows 95 Style Button */
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: #000;
+            background-color: #C0C0C0; /* Hellgrau */
+            padding: 8px 20px;
+            border-style: solid;
+            border-width: 2px;
+            border-color: #FFFFFF #808080 #808080 #FFFFFF; /* 3D-Effekt */
+            box-shadow: 1px 1px 0px #000000;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.1s linear;
+        }
+        .btn-vw:active {
+            border-color: #808080 #FFFFFF #FFFFFF #808080;
+            transform: translate(1px, 1px);
+            box-shadow: none;
+        }
+        .btn-vw:hover { background-color: #D0D0D0; }
+
+        /* Dekorative Elemente */
+        .vw-decoration { text-align: center; margin: 15px 0; }
+        .vw-decoration img { /* z.B. eine Palme oder Büste */
+            max-width: 100px;
+            filter: grayscale(0.5) sepia(0.3) hue-rotate(180deg); /* Verfremdeter Look */
+            opacity: 0.7;
+        }
+        .vw-japanese-text {
+            font-family: 'MS Mincho', 'SimSun', sans-serif; /* Japanische Fallback-Schriften */
+            color: rgba(var(--vw-text-color-rgb, 255,255,255), 0.5);
+            font-size: 0.9rem;
+            margin: 5px 0;
+            text-align: center;
+            user-select: none;
+        }
+
+        /* Quick Facts Liste */
+        .vw-facts-list ul {
+            list-style: none; padding: 0;
+            font-family: 'VT323', monospace; font-size: 0.9rem;
+        }
+        .vw-facts-list li {
+            background-color: rgba(0,0,0,0.2);
+            padding: 5px 8px; margin-bottom: 5px;
+            border-left: 3px solid var(--vw-accent-green);
+        }
+        .vw-facts-list li::before { content: ">> "; color: var(--vw-accent-green); }
+
+        /* Footer */
+        .vw-footer {
+            border-top: 1px dashed var(--vw-panel-border);
+            padding: 15px 0 5px 0;
+            margin-top: 20px;
+            text-align: center;
+            font-family: 'VT323', monospace;
+            font-size: 0.8rem;
+        }
+        .vw-footer p { margin: 3px 0; color: rgba(var(--vw-text-color-rgb,255,255,255),0.8); }
+        .vw-footer a { color: var(--vw-accent-cyan); text-decoration: none; }
+        .vw-footer a:hover { text-decoration: underline; color: var(--vw-accent-yellow); }
+        .vw-footer .social-icons-vw iconify-icon {
+            font-size: 1.5rem; margin: 0 5px; color: var(--vw-text-color);
+            filter: drop-shadow(1px 1px 0px var(--vw-panel-border));
+        }
+
+        /* Animation */
+        .animate-vw-in { opacity: 0; animation: vw-fade-in 0.8s 0.1s forwards ease-out; }
+        @keyframes vw-fade-in {
+            0% { opacity: 0; transform: translateY(15px) scale(0.99); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="vw-container">
+        <header class="vw-header animate-vw-in">
+            <div class="vw-logo">ＡＬＰＩＮ８</div>
+            <nav class="vw-nav">
+                <a href="#info">ＩＮＦＯ</a>
+                <a href="#details">ＤＥＴＡＩＬＳ</a>
+                <a href="#join">ＪＯＩＮ</a>
+            </nav>
+        </header>
+
+        <section class="vw-hero vw-panel animate-vw-in" style="animation-delay: 0.2s;">
+            <div class="vw-panel-titlebar">
+                <span>ＡＬＰＩＮ８．ＥＸＥ</span>
+                <div class="buttons"><span></span><span></span><span></span></div>
+            </div>
+            <h1>ＥＶＥＲＥＳＴＩＮＧ　ＰＲＯＧＲＡＭ</h1>
+            <div class="hero-number-vw">８８４８</div>
+            <p>Ｅｘｐｅｒｉｅｎｃｅ　ｔｈｅ　ｕｌｔｉｍａｔｅ　ａｓｃｅｎｓｉｏｎ．<br>Ｙｏｕｒ　ｍｉｎｄ　ｉｓ　ｔｈｅ　ｋｅｙ．</p>
+            <div class="vw-decoration">
+                 <!-- Placeholder für eine Büste oder Palme -->
+                 <iconify-icon icon="mdi:palm-tree" style="font-size: 50px; color: var(--vw-accent-green); opacity: 0.6;"></iconify-icon>
+            </div>
+            <div style="text-align:center;">
+                <a href="#join" class="btn-vw">ＬＯＡＤ　ＣＨＡＬＬＥＮＧＥ．．．</a>
+            </div>
+        </section>
+
+        <section id="info" class="vw-panel animate-vw-in" style="animation-delay: 0.4s;">
+            <div class="vw-panel-titlebar"><span>ＩＮＦＯＲＭＡＴＩＯＮ</span><div class="buttons"><span></span><span></span></div></div>
+            <h2>Ｔｈｅ　Ｃｈａｌｌｅｎｇｅ　Ａｗａｉｔｓ</h2>
+            <p>This is not just a run. It's a journey. 8848 vertical meters. 34 hours. Gondola down. Your mental fortitude will be tested. But remember: ｙｏｕ　ｃａｎ　ｄｏ　ｉｔ．</p>
+            <p class="vw-japanese-text">山への挑戦 | あなたの可能性</p>
+        </section>
+
+        <section id="details" class="vw-panel vw-facts-list animate-vw-in" style="animation-delay: 0.6s;">
+            <div class="vw-panel-titlebar"><span>ＱＵＩＣＫ＿ＦＡＣＴＳ．ＴＸＴ</span><div class="buttons"><span></span></div></div>
+            <h2>ＤＡＴＡ＿ＳＴＲＥＡＭ：</h2>
+            <ul>
+                <li>Ｄａｔｅ： ０７／０４／２５　－　０７／０６／２５</li>
+                <li>Ｌｏｃａｔｉｏｎ：　Ｂｒａｎｄｎｅｒｔａｌ，　Ａｕｓｔｒｉａ　（美しい景色）</li>
+                <li>Ｔａｒｇｅｔ　Ａｌｔｉｔｕｄｅ：　８８４８ｍ</li>
+                <li>Ｐａｒｔｉｃｉｐａｎｔ　Ｌｉｍｉｔ：　３００　Ｓｏｕｌｓ</li>
+                <li>Ａｃｃｅｓｓ　Ｃｏｓｔ：　５９９　ＥＵＲ</li>
+            </ul>
+             <div class="vw-decoration" style="margin-top: 15px;">
+                <img src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&w=300&h=200&dpr=1" alt="Retro Computer" style="max-width:150px; border: 1px solid var(--vw-panel-border); padding:2px;">
+            </div>
+        </section>
+
+        <section id="join" class="vw-panel animate-vw-in" style="text-align:center; animation-delay: 0.8s;">
+             <div class="vw-panel-titlebar"><span>ＲＥＧＩＳＴＲＡＴＩＯＮ．ＨＴＭ</span><div class="buttons"><span></span><span></span></div></div>
+            <h2>ＪＯＩＮ　ＴＨＥ　ＡＥＳＴＨＥＴＩＣ</h2>
+            <p>Ｒｅａｄｙ　ｔｏ　ｒｅａｃｈ　ｎｅｗ　ｈｅｉｇｈｔｓ？<br>Ｄｏｎ’ｔ　ｄｒｅａｍ　ｉｔ，　ｂｅ　ｉｔ．</p>
+            <a href="#" class="btn-vw" style="font-size:1.2rem; padding: 10px 25px; background-color: var(--vw-accent-green); color:#000; border-color:#008000 #00FA9A #00FA9A #008000;">ＳＩＧＮ　ＵＰ　ＮＯＷ</a>
+        </section>
+    </div>
+
+    <footer class="vw-footer animate-vw-in">
+        <div class="social-icons-vw" style="margin-bottom:10px;">
+            <iconify-icon icon="mdi:instagram"></iconify-icon>
+            <iconify-icon icon="mdi:youtube"></iconify-icon>
+            <iconify-icon icon="mdi:soundcloud"></iconify-icon>
+        </div>
+        <p>ＡＬＰＩＮ８　©　１９９８－２０２５　//　Ａｌｌ　Ｖａｐｏｒｓ　Ｒｅｓｅｒｖｅｄ</p>
+        <p><a href="#">ＬＥＧＡＬ　ＳＴＵＦＦ</a>　//　<a href="#">ＰＲＩＶＡＣＹ　ＰＯＬＩＣＹ</a></p>
+        <p class="vw-japanese-text">永遠の夏　－　Ｅｔｅｒｎａｌ　Ｓｕｍｍｅｒ</p>
+    </footer>
+
+    <script>
+        // RGB für CSS-Variablen (falls für JS benötigt)
+        function getRgbFromHexVW(hex) {
+            hex = hex.replace(/^#/, '');
+            if (hex.length === 3) hex = hex.split('').map(char => char + char).join('');
+            const bigint = parseInt(hex, 16);
+            return `${(bigint >> 16) & 255},${(bigint >> 8) & 255},${bigint & 255}`;
+        }
+        document.documentElement.style.setProperty('--vw-panel-border-rgb', getRgbFromHexVW(getComputedStyle(document.documentElement).getPropertyValue('--vw-panel-border').trim()));
+        document.documentElement.style.setProperty('--vw-text-color-rgb', getRgbFromHexVW(getComputedStyle(document.documentElement).getPropertyValue('--vw-text-color').trim()));
+
+        const animatedElementsVW = document.querySelectorAll('.animate-vw-in');
+        const observerVW = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible'); // Animation durch CSS
+                    observerVW.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsVW.forEach(el => observerVW.observe(el));
+    </script>
+</body>
+</html>

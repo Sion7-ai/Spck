@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting ::: Y2K Xperience!</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Varela+Round&family=Fredoka+One&display=swap" rel="stylesheet">
+    <!-- Varela Round für Fließtext, Fredoka One für Headlines (verspielt, abgerundet) -->
+    <style>
+        :root {
+            --y2k-bg: linear-gradient(135deg, #B0E0E6 0%, #FFC0CB 50%, #FFFACD 100%); /* Puderblau, Pink, Hellgelb */
+            --y2k-silver: linear-gradient(to bottom, #E0E0E0, #B0B0B0, #E0E0E0);
+            --y2k-pink: #FF69B4;
+            --y2k-blue: #87CEEB;
+            --y2k-green: #98FB98; /* Helleres Grün, passend zu #06D6A0 */
+            --y2k-yellow: #FFD700; /* Passend zu #FFD166 */
+            --y2k-red: #FF6347;   /* Passend zu #FF5050 */
+            --y2k-text-dark: #2F4F4F; /* Dunkles Schiefergrau für Kontrast */
+            --y2k-panel-bg: rgba(255, 255, 255, 0.6); /* Transparente Panels */
+            --y2k-border-radius: 20px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Varela Round', 'Roboto', sans-serif;
+            background: var(--y2k-bg);
+            background-attachment: fixed;
+            color: var(--y2k-text-dark);
+            line-height: 1.6;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .y2k-container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .y2k-header {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: var(--y2k-border-radius);
+            padding: 10px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1), inset 0 0 0 2px rgba(255,255,255,0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .y2k-logo {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.2rem;
+            color: var(--y2k-pink);
+            text-shadow: 2px 2px 0 var(--y2k-blue), -1px -1px 0 rgba(255,255,255,0.8);
+            /* Oder Logo als Bild mit Chrome-Effekt */
+        }
+        .y2k-logo img { height: 45px; filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.2)); }
+
+        .y2k-nav a {
+            color: var(--y2k-text-dark);
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: 700;
+            padding: 8px 12px;
+            background: var(--y2k-silver);
+            border-radius: 12px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(255,255,255,0.8);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .y2k-nav a:hover {
+            transform: scale(1.05) translateY(-1px);
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.2), inset 1px 1px 1px rgba(255,255,255,0.9);
+        }
+
+        /* Panels / Module */
+        .y2k-panel {
+            background: var(--y2k-panel-bg);
+            backdrop-filter: blur(5px);
+            border-radius: var(--y2k-border-radius);
+            border: 1px solid rgba(255,255,255,0.7);
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .y2k-panel.accent-border {
+            border: 3px solid var(--y2k-pink);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1), 0 0 15px var(--y2k-pink);
+        }
+
+        .y2k-panel h1, .y2k-panel h2, .y2k-panel h3 {
+            font-family: 'Fredoka One', cursive;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--y2k-text-dark);
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.7);
+        }
+        .y2k-panel h1 { font-size: clamp(2.5rem, 6vw, 3.8rem); color: var(--y2k-red); }
+        .y2k-panel h2 { font-size: 1.8rem; color: var(--y2k-blue); }
+        .y2k-panel h3 { font-size: 1.4rem; color: var(--y2k-green); }
+
+
+        .y2k-hero .hero-number-y2k {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(5rem, 16vw, 9rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin: 5px 0 20px 0;
+            text-align: center;
+            /* Chrome-Effekt für Zahl */
+            background: linear-gradient(180deg, #FFFFFF 20%, #D8D8D8 50%, #A0A0A0 55%, #D0D0D0 85%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(3px 3px 0px var(--y2k-pink)) drop-shadow(-2px -2px 0px var(--y2k-blue));
+        }
+        .y2k-hero p {
+            font-size: 1.15rem;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .btn-y2k {
+            display: inline-block;
+            font-family: 'Fredoka One', cursive;
+            font-weight: 700; /* Fredoka One ist schon fett */
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            color: #fff;
+            background: linear-gradient(135deg, var(--y2k-pink), var(--y2k-red));
+            padding: 14px 30px;
+            border: none;
+            border-radius: 15px;
+            text-decoration: none;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.25), 
+                        inset 2px 2px 3px rgba(255,255,255,0.4),
+                        inset -2px -2px 3px rgba(0,0,0,0.1);
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Elastischer Übergang */
+            cursor: pointer;
+        }
+        .btn-y2k:hover {
+            transform: scale(1.05) rotate(-1deg);
+            box-shadow: 5px 5px 12px rgba(0,0,0,0.3),
+                        inset 2px 2px 4px rgba(255,255,255,0.5),
+                        inset -2px -2px 4px rgba(0,0,0,0.15);
+        }
+        .btn-y2k:active {
+             transform: scale(0.98) rotate(0deg);
+             box-shadow: inset 3px 3px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Quick Facts als "Sticker" */
+        .y2k-sticker-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .y2k-sticker {
+            background: linear-gradient(45deg, var(--y2k-green), var(--y2k-yellow));
+            padding: 10px 18px;
+            border-radius: 25px 10px 25px 10px; /* Asymmetrische Rundung */
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--y2k-text-dark);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(255,255,255,0.8);
+            display: flex;
+            align-items: center;
+        }
+        .y2k-sticker iconify-icon {
+            font-size: 1.4rem;
+            margin-right: 8px;
+            color: var(--y2k-red); /* Kontrastfarbe für Icons */
+        }
+
+        /* Bilder */
+        .y2k-image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--y2k-border-radius);
+            border: 4px solid #fff; /* Dicker weißer Rand wie bei alten Fotos */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Footer */
+        .y2k-footer {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(6px);
+            border-radius: var(--y2k-border-radius) var(--y2k-border-radius) 0 0;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.05);
+        }
+        .y2k-footer p { margin: 8px 0; font-size: 0.9rem; font-weight: 500; }
+        .y2k-footer a { color: var(--y2k-pink); text-decoration: none; font-weight: 700; }
+        .y2k-footer a:hover { text-decoration: underline; color: var(--y2k-blue); }
+        .y2k-footer .social-icons-y2k a {
+            display: inline-block;
+            font-size: 2rem; margin: 0 10px;
+            color: var(--y2k-text-dark);
+            transition: transform 0.2s ease-out;
+        }
+        .y2k-footer .social-icons-y2k a:hover {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--y2k-red);
+        }
+
+        /* Animationen */
+        .animate-y2k-in {
+            opacity: 0;
+            transform: translateY(25px) scale(0.95);
+            transition: opacity 0.5s cubic-bezier(0.215, 0.610, 0.355, 1), transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        .animate-y2k-in.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div class="y2k-container">
+        <header class="y2k-header animate-y2k-in is-visible">
+            <div class="y2k-logo">ALPIN8!</div>
+            <!-- <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo"> -->
+            <nav class="y2k-nav">
+                <a href="#challenge">Challenge!</a>
+                <a href="#infoz">Infoz!</a>
+                <a href="#join">Join Us!</a>
+            </nav>
+        </header>
+
+        <section class="y2k-hero y2k-panel animate-y2k-in is-visible" style="transition-delay: 0.1s;">
+            <h1>ALPIN8 EVERESTING</h1>
+            <div class="hero-number-y2k">8848</div>
+            <p>Die ultimative Höhenmeter-Party! Bist du bereit für den Retro-Kick am Berg? Zeig, was in dir steckt!</p>
+            <div style="text-align:center;">
+                <a href="#join" class="btn-y2k">LET'S CLIMB!</a>
+            </div>
+        </section>
+
+        <section id="challenge" class="y2k-panel animate-y2k-in" style="transition-delay: 0.2s;">
+            <h2>DA CHALLENGE! (Was geht ab?)</h2>
+            <p>Stell dir vor: <strong>8848 Höhenmeter</strong>, nur du und der Berg (und 'ne coole Gondel für den Weg runter!). 34 Stunden pure Action. Dein Kopf ist der DJ, deine Beine die Tanzfläche. Das Ziel? Mehr Fun, mehr Power, mehr DU!</p>
+            <div class="y2k-image-container" style="margin-top:20px; text-align:center;">
+                <img src="https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Coole Leute beim Sport">
+            </div>
+        </section>
+
+        <section id="infoz" class="y2k-panel accent-border animate-y2k-in" style="transition-delay: 0.3s;">
+            <h2>ALPIN8 HIGHLIGHTZ! (Warum du dabei sein musst!)</h2>
+            <div class="y2k-sticker-list">
+                <span class="y2k-sticker animate-y2k-in" style="transition-delay: 0.35s;"><iconify-icon icon="fluent-emoji-flat:gondola"></iconify-icon>Non-Stop Gondel-Action!</span>
+                <span class="y2k-sticker animate-y2k-in" style="transition-delay: 0.4s;"><iconify-icon icon="fluent-emoji-flat:sparkles"></iconify-icon>Mega exklusive Atmosphäre!</span>
+                <span class="y2k-sticker animate-y2k-in" style="transition-delay: 0.45s;"><iconify-icon icon="fluent-emoji-flat:party-popper"></iconify-icon>Summit-Camp mit coolen Snacks!</span>
+                <span class="y2k-sticker animate-y2k-in" style="transition-delay: 0.5s;"><iconify-icon icon="fluent-emoji-flat:mountain"></iconify-icon>Brandnertal - die Location!</span>
+                <span class="y2k-sticker animate-y2k-in" style="transition-delay: 0.55s;"><iconify-icon icon="fluent-emoji-flat:calendar"></iconify-icon>04.-06. Juli 2025!</span>
+                <span class="y2k-sticker animate-y2k-in" style="transition-delay: 0.6s;"><iconify-icon icon="fluent-emoji-flat:admission-tickets"></iconify-icon>Ticket ab 499€!</span>
+            </div>
+            <p style="text-align:center; margin-top:25px; font-weight:bold;">Garantie: Ein Erlebnis, das bunter ist als dein Lieblings-Tamagotchi!</p>
+        </section>
+
+         <section class="y2k-panel animate-y2k-in" style="transition-delay: 0.4s;">
+            <h2>Word on tha Street! (André Schürrle sagt...)</h2>
+            <blockquote style="font-size: 1.3rem; color: var(--y2k-pink); border-left: 4px solid var(--y2k-blue); padding-left: 15px; margin: 15px 0; font-style: italic; font-weight:bold;">
+                "Totally krass! That was, like, insane. Genau mein Ding. Super hard, aber fett!"
+            </blockquote>
+            <p style="text-align: right; font-weight:700;">- André S., World Champ '14</p>
+        </section>
+
+
+        <section id="join" class="y2k-hero y2k-panel animate-y2k-in" style="background: linear-gradient(to right, var(--y2k-blue), var(--y2k-green)); transition-delay: 0.5s;">
+            <h2 style="color: #fff; text-shadow: 2px 2px 0 var(--y2k-text-dark);">BIST DU READY 2 RUMBLE?</h2>
+            <p style="color: var(--y2k-text-dark); font-size: 1.1rem;">Dein Y2K-Abenteuer wartet! Hol dir deinen Slot für die krasseste Challenge des Jahres 2025!</p>
+            <div style="text-align:center;">
+                <a href="#" class="btn-y2k" style="background: linear-gradient(135deg, var(--y2k-yellow), var(--y2k-red)); font-size:1.4rem; padding: 16px 40px;">SIGN ME UP!</a>
+            </div>
+        </section>
+    </div>
+
+    <footer class="y2k-footer animate-y2k-in">
+        <div class="y2k-logo" style="font-size: 1.8rem; margin-bottom:5px;">ALPIN8 Online!</div>
+        <div class="social-icons-y2k" style="margin:10px 0;">
+            <a href="#" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+            <a href="#" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+            <a href="#" aria-label="TikTok"><iconify-icon icon="mdi:tiktok"></iconify-icon></a>
+        </div>
+        <p><a href="#">Impressum</a> ::: <a href="#">Datenschutz</a> ::: <a href="#">AGBs</a></p>
+        <p>&copy; 2000-2025 ALPIN8 Interactive Entertainment. All Rights Reserved, DUDE!</p>
+    </footer>
+
+    <script>
+        const animatedElementsY2K = document.querySelectorAll('.animate-y2k-in');
+        const observerY2K = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerY2K.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElementsY2K.forEach(el => {
+            observerY2K.observe(el);
+        });
+    </script>
+</body>
+</html>

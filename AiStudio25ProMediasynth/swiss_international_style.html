@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpin8 Everesting / Die Herausforderung</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Roboto als zugängliche serifenlose Schrift -->
+    <style>
+        :root {
+            --swiss-bg: #FFFFFF;
+            --swiss-text: #000000; /* Schwarz für Haupttext */
+            --swiss-accent-red: #FF5050;
+            --swiss-accent-blue: #0E545F;
+            --swiss-neutral-gray: #E0E0E0; /* Helles Grau für Linien/BG-Flächen */
+            --swiss-line-height: 1.5; /* Typischer Zeilenabstand */
+            --grid-gap: 20px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: var(--swiss-bg);
+            color: var(--swiss-text);
+            line-height: var(--swiss-line-height);
+            padding: 0; /* Container übernimmt Padding */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .swiss-container {
+            max-width: 1140px; /* Typische Containerbreite */
+            margin: 0 auto;
+            padding: calc(var(--grid-gap) * 2); /* Padding basierend auf Grid Gap */
+        }
+
+        /* Einfaches Grid-System (Beispiel für 12 Spalten) */
+        .grid-row {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--grid-gap);
+            margin-bottom: calc(var(--grid-gap) * 2);
+        }
+        /* Spaltenklassen (Beispiel) */
+        .col-1 { grid-column: span 1; }
+        .col-2 { grid-column: span 2; }
+        .col-3 { grid-column: span 3; }
+        .col-4 { grid-column: span 4; }
+        .col-5 { grid-column: span 5; }
+        .col-6 { grid-column: span 6; }
+        .col-7 { grid-column: span 7; }
+        .col-8 { grid-column: span 8; }
+        .col-9 { grid-column: span 9; }
+        .col-10 { grid-column: span 10; }
+        .col-11 { grid-column: span 11; }
+        .col-12 { grid-column: span 12; }
+
+        /* Typografie */
+        h1, h2, h3, h4, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+        h1 { /* Große, plakative Headline */
+            font-size: clamp(3rem, 8vw, 5.5rem); /* Responsive Größe */
+            font-weight: 900; /* Roboto Black */
+            line-height: 1.0;
+            margin-bottom: calc(var(--grid-gap) / 2);
+            letter-spacing: -0.02em; /* Leicht negativ für Kompaktheit */
+        }
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700; /* Roboto Bold */
+            line-height: 1.2;
+            margin-bottom: var(--grid-gap);
+        }
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 500; /* Roboto Medium */
+            line-height: 1.3;
+            margin-bottom: calc(var(--grid-gap) / 2);
+            color: var(--swiss-accent-blue); /* Akzentfarbe für Zwischenüberschriften */
+        }
+        p, li {
+            font-size: 1rem; /* Standardgröße für Fließtext (ca. 16px) */
+            font-weight: 400; /* Roboto Regular */
+            margin-bottom: var(--grid-gap);
+        }
+        ul { list-style: none; }
+
+        /* Header / Navigation */
+        .swiss-header {
+            padding: var(--grid-gap) 0;
+            margin-bottom: calc(var(--grid-gap) * 2);
+            border-bottom: 1px solid var(--swiss-neutral-gray);
+        }
+        .swiss-header .grid-row { margin-bottom: 0; } /* Kein unterer Margin für Header-Grid */
+        .swiss-logo img {
+            height: 30px; /* Klares, reduziertes Logo */
+            display: block;
+        }
+        .swiss-nav { text-align: right; }
+        .swiss-nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--swiss-text);
+            text-decoration: none;
+            margin-left: var(--grid-gap);
+            transition: color 0.2s ease;
+        }
+        .swiss-nav a:hover { color: var(--swiss-accent-red); }
+
+        /* Hero Section */
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover; /* Stellt sicher, dass das Bild den Container füllt */
+            max-height: 500px; /* Beispielhafte Höhenbegrenzung */
+        }
+
+        .btn-swiss {
+            display: inline-block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+            padding: calc(var(--grid-gap)/2) var(--grid-gap);
+            border: 1px solid var(--swiss-text);
+            color: var(--swiss-text);
+            background-color: transparent;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .btn-swiss:hover {
+            background-color: var(--swiss-text);
+            color: var(--swiss-bg);
+        }
+        .btn-swiss.accent {
+            border-color: var(--swiss-accent-red);
+            color: var(--swiss-accent-red);
+        }
+        .btn-swiss.accent:hover {
+            background-color: var(--swiss-accent-red);
+            color: var(--swiss-bg);
+        }
+
+
+        /* Farbflächen */
+        .color-block {
+            padding: calc(var(--grid-gap) * 2);
+            color: var(--swiss-bg); /* Heller Text auf Farbfläche */
+        }
+        .color-block.bg-blue { background-color: var(--swiss-accent-blue); }
+        .color-block.bg-red { background-color: var(--swiss-accent-red); }
+        .color-block h2, .color-block h3, .color-block p { color: var(--swiss-bg); }
+        .color-block h3 { color: rgba(255,255,255,0.8); } /* Etwas gedämpfter für Zwischenüberschriften auf Farbe */
+
+        /* Quick Facts */
+        .quick-facts-item {
+            margin-bottom: calc(var(--grid-gap)/2);
+            display: flex;
+            align-items: flex-start; /* Icons obenbündig mit erster Textzeile */
+        }
+        .quick-facts-item iconify-icon {
+            font-size: 1.3rem;
+            color: var(--swiss-accent-red);
+            margin-right: calc(var(--grid-gap)/2);
+            margin-top: 0.1em; /* Feinanpassung der vertikalen Ausrichtung */
+        }
+        .quick-facts-item p { margin-bottom: 0; }
+
+        /* Footer */
+        .swiss-footer {
+            padding: var(--grid-gap) 0;
+            margin-top: calc(var(--grid-gap) * 2);
+            border-top: 1px solid var(--swiss-neutral-gray);
+            font-size: 0.8rem;
+            color: #666; /* Dunkleres Grau für Footer-Text */
+        }
+        .swiss-footer a { color: #666; text-decoration: none; }
+        .swiss-footer a:hover { color: var(--swiss-accent-red); text-decoration: underline;}
+        .swiss-footer .grid-row { align-items: center; margin-bottom:0; }
+        .swiss-footer .copyright { text-align: right; }
+
+        /* Animationen */
+        .animate-swiss-in { opacity: 0; transition: opacity 0.8s 0.2s ease-out; }
+        .animate-swiss-in.is-visible { opacity: 1; }
+
+        /* Responsive Anpassungen (Beispiel) */
+        @media (max-width: 768px) {
+            .grid-row { grid-template-columns: repeat(6, 1fr); } /* Wechsel auf 6 Spalten für kleinere Screens */
+            /* Beispiel: Alle Elemente nehmen volle Breite oder 3 Spalten ein */
+            .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+            .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+                grid-column: span 6;
+            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.5rem; }
+            .swiss-nav { text-align: left; margin-top: var(--grid-gap); }
+            .swiss-nav a { margin-left:0; margin-right: var(--grid-gap); }
+            .swiss-footer .copyright { text-align: left; margin-top: calc(var(--grid-gap)/2); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="swiss-container">
+        <header class="swiss-header">
+            <div class="grid-row">
+                <div class="col-6 swiss-logo">
+                    <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="Alpin8 Logo" style="filter: invert(1);"> <!-- Invertiert für dunkles Logo auf weißem Grund -->
+                </div>
+                <nav class="col-6 swiss-nav">
+                    <a href="#herausforderung">Herausforderung</a>
+                    <a href="#details">Details</a>
+                    <a href="#anmeldung">Anmeldung</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="grid-row hero-section animate-swiss-in is-visible">
+                <div class="col-7">
+                    <h1>8848</h1>
+                    <p style="font-size:1.3rem; font-weight:300; line-height:1.4;">Alpin8 Everesting: Die ultimative Herausforderung an Körper und Geist. Erreichen Sie mehr, als Sie je für möglich gehalten haben.</p>
+                    <a href="#anmeldung" class="btn-swiss accent">Zur Anmeldung 2025 <iconify-icon icon="feather:arrow-right" style="vertical-align:middle;"></iconify-icon></a>
+                </div>
+                <div class="col-5 hero-image-container">
+                    <img src="https://images.pexels.com/photos/1261731/pexels-photo-1261731.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&dpr=1" alt="Minimalistische Bergspitze">
+                </div>
+            </section>
+
+            <section id="herausforderung" class="grid-row animate-swiss-in is-visible">
+                <div class="col-12">
+                    <h2>Die Herausforderung: 8848 Höhenmeter</h2>
+                </div>
+                <div class="col-8">
+                    <p>Das Ziel ist klar definiert: 8848 Höhenmeter, die symbolische Höhe des Mount Everest, zu Fuß bergauf bewältigen. Die Gondelunterstützung für den Abstieg ermöglicht volle Konzentration auf die Aufstiegsleistung. Über einen Zeitraum von 34 Stunden entscheiden Sie über Ihr Tempo, Ihre Pausen und Ihre Strategie.</p>
+                    <p>Die wahre Schwierigkeit liegt nicht allein in der physischen Anstrengung, sondern in der mentalen Ausdauer. Es gilt, den inneren Dialog zu meistern und auch dann weiterzugehen, wenn der Kopf zur Aufgabe rät.</p>
+                </div>
+                <div class="col-4">
+                    <h3>Kernpunkte</h3>
+                    <div class="quick-facts-item">
+                        <iconify-icon icon="feather:target"></iconify-icon>
+                        <p>8848m Aufstieg</p>
+                    </div>
+                     <div class="quick-facts-item">
+                        <iconify-icon icon="feather:clock"></iconify-icon>
+                        <p>34 Stunden Zeitlimit</p>
+                    </div>
+                    <div class="quick-facts-item">
+                        <iconify-icon icon="feather:shield"></iconify-icon>
+                        <p>Gondelunterstützung Abstieg</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid-row color-block bg-blue animate-swiss-in is-visible">
+                <div class="col-12">
+                    <h2>Mehr als ein Wettkampf</h2>
+                    <p>Alpin8 Everesting ist eine exklusive Veranstaltung, die auf eine persönliche Atmosphäre und gegenseitige Unterstützung setzt. Mit maximal 300 Teilnehmenden treten Sie nicht gegen andere an, sondern nur gegen sich selbst und Ihre eigenen Grenzen. Entdecken Sie, was wirklich in Ihnen steckt.</p>
+                </div>
+            </section>
+
+            <section id="details" class="grid-row animate-swiss-in is-visible">
+                 <div class="col-12">
+                    <h2>Veranstaltungsdetails Alpin8 2025</h2>
+                </div>
+                <div class="col-6">
+                    <h3>Datum und Ort</h3>
+                    <p><strong>04. bis 06. Juli 2025</strong><br>Brandnertal, Vorarlberg, Österreich.<br>Eine beeindruckende Alpenkulisse erwartet Sie.</p>
+                    <h3>Leistungen im Überblick</h3>
+                    <ul>
+                        <li><p>Professionelle Organisation und Streckensicherung</p></li>
+                        <li><p>Durchgehender Gondelbetrieb (34 Stunden)</p></li>
+                        <li><p>Verpflegungsstationen und Summit-Camp</p></li>
+                        <li><p>Exklusives Alpin8 Teilnehmerpaket</p></li>
+                        <li><p>Finisher-Überraschung</p></li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <h3>Ablauf (Auszug)</h3>
+                    <p><strong>Freitag:</strong> Briefing, Get-together<br>
+                       <strong>Samstag:</strong> Start Everesting (früh), durchgehende Challenge<br>
+                       <strong>Sonntag:</strong> Zieleinlauf, Fade-Out Feier</p>
+                    <h3>Ticketinformation</h3>
+                    <p>Everesting (8848m): <strong>599,00 Euro</strong><br>Everesty (4424m): <strong>499,00 Euro</strong></p>
+                </div>
+            </section>
+
+            <section id="anmeldung" class="grid-row color-block bg-red animate-swiss-in is-visible">
+                <div class="col-8">
+                    <h2>Sind Sie bereit?</h2>
+                    <p>Sichern Sie sich Ihren Platz für ein Erlebnis, das Ihr Leben bereichern wird. Die Teilnehmerzahl ist limitiert.</p>
+                </div>
+                 <div class="col-4" style="display:flex; align-items:center; justify-content:flex-end;">
+                    <a href="#" class="btn-swiss" style="border-color:var(--swiss-bg); color:var(--swiss-bg);">Jetzt Anmelden</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="swiss-footer">
+            <div class="grid-row">
+                <div class="col-6">
+                    <p>Alpin8 GmbH</p>
+                </div>
+                <div class="col-6 copyright">
+                    <p>&copy; 2024 <a href="#">Impressum</a> <a href="#">Datenschutz</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const animatedElementsSwiss = document.querySelectorAll('.animate-swiss-in');
+        const observerSwiss = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerSwiss.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElementsSwiss.forEach(el => observerSwiss.observe(el));
+    </script>
+</body>
+</html>
