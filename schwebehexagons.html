@@ -3,65 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interaktive SVG Hexagone</title>
+    <title>Interaktiver Hexagon Hintergrund</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
             margin: 0;
-            background-color: #eef1f5; /* Heller Hintergrund, passend zum SVG-Stil */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
-            padding: 20px;
-            box-sizing: border-box;
+            overflow: hidden; /* Verhindert Scrollbalken */
+            background-color: #eef1f5; /* Hintergrundfarbe, falls SVG nicht alles abdeckt oder transparent ist */
         }
 
-        .header-info {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #333;
-        }
-
-        .svg-container {
-            width: 90%;
-            max-width: 800px; /* Begrenzen Sie die Größe für die Demo */
-            margin: 0 auto;
+        .svg-background-container {
+            position: fixed; /* Oder absolute, je nach Bedarf */
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Legt es hinter potenziellen anderen Inhalt */
         }
 
         #interactive-hexagons-svg {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
+            object-fit: cover; /* Füllt den Container, kann Teile abschneiden, um Aspekt zu wahren */
+            /* object-fit: contain; */ /* Zeigt ganzes SVG, kann Leerraum lassen */
+            /* object-position: center center; */ /* Zentriert das SVG */
         }
 
-        /* Die Gruppen <g> mit filter Attribut sind unsere Hauptziele */
-        #interactive-hexagons-svg g[filter] {
-            cursor: pointer;
-            will-change: transform; /* Performance-Hinweis */
+        #interactive-hexagons-svg g[filter].hexagon-group {
+            /* Kein Cursor mehr, da es ein Hintergrundelement ist */
+            will-change: transform;
         }
-         /* Die Pfade selbst, falls man Hover-Effekte direkt darauf anwenden will (z.B. fill ändern) */
-        #interactive-hexagons-svg g[filter] > path {
-            /* transition: fill 0.3s ease; */ /* Für optionale Farbänderung bei Hover */
-        }
-        /* #interactive-hexagons-svg g[filter]:hover > path {
-            fill: #f0f8ff; 
-        } */
-
     </style>
 </head>
 <body>
 
-    <div class="header-info">
-        <h1>SVG Waben Interaktion</h1>
-        <p>Bewege die Maus über die Hexagone.</p>
-    </div>
-
-    <div class="svg-container">
+    <div class="svg-background-container">
         <!-- Ihr SVG Code hier eingefügt -->
         <svg id="interactive-hexagons-svg" width="3431" height="1425" viewBox="0 0 3431 1425" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_207_108)">
@@ -259,19 +236,18 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
         const svgElement = document.getElementById('interactive-hexagons-svg');
-        // Die Gruppen <g>, die das 'filter'-Attribut haben, sind unsere Hexagone
-        const hexagonGroups = Array.from(svgElement.querySelectorAll('g[filter].hexagon-group')); // Klasse hinzugefügt für Selektion
+        const hexagonGroups = Array.from(svgElement.querySelectorAll('g[filter].hexagon-group'));
 
         // Parameter für den Effekt
-        const maxDistance = 150;    // Maximale Distanz, auf die ein Item reagiert (relativ zur skalierten SVG-Größe)
-        const maxLift = -50;        // Maximale Anhebung (negativer Wert für nach oben in SVG-Koordinaten)
+        const maxDistance = 350;    // Erhöht für großflächigen Hintergrund
+        const maxLift = -15;        // Subtile Anhebung
         const minLift = 0;
 
-        // Schatten Parameter für den "gelifteten" Zustand
-        const liftedShadowProps = { 
-            dy: -10,                // Schatten nach oben verschieben
-            stdDeviation: 502,       // Weicherer, größerer Schatten
-            floodOpacity: 0.12      // Etwas intensiver, aber immer noch soft
+        // Ziel-Schatten Parameter für den "gelifteten" Zustand
+        const liftedShadowTarget = {
+            dy_offset_increase: 25, // Wieviel der Schatten ZUSÄTZLICH nach unten wandert
+            stdDeviation_factor: 1.2, // Faktor, um stdDeviation leicht zu erhöhen (optional)
+            opacity_factor: 0.3    // Schatten wird 30% seiner ursprünglichen Sichtbarkeit haben
         };
 
         const hexagonData = hexagonGroups.map(group => {
@@ -279,29 +255,25 @@
             const filterId = filterUrl.substring(filterUrl.indexOf('#') + 1, filterUrl.length - 1);
             const filterElement = svgElement.querySelector(`defs > filter#${filterId}`);
             const feDropShadow = filterElement ? filterElement.querySelector('feDropShadow') : null;
+            const feColorMatrixForOpacity = feDropShadow ? feDropShadow.parentElement.querySelector('feColorMatrix[type="matrix"][values*="0.06"]') : null;
 
-            // Initialwerte aus dem SVG für den jeweiligen Filter auslesen
             const initialShadow = {
                 dy: feDropShadow ? parseFloat(feDropShadow.getAttribute('dy') || 0) : 16,
                 stdDeviation: feDropShadow ? parseFloat(feDropShadow.getAttribute('stdDeviation') || 0) : 7,
-                floodOpacity: feDropShadow ? parseFloat(feDropShadow.parentElement.querySelector('feColorMatrix[type="matrix"][values*="0.06"]').getAttribute('values').split(' ').pop()) : 0.06
+                floodOpacity: feColorMatrixForOpacity ? parseFloat(feColorMatrixForOpacity.getAttribute('values').split(' ').pop()) : 0.06
             };
-            // Die Opazität ist in der feColorMatrix in diesem SVG, letzter Wert in 'values'
-            const feColorMatrixForOpacity = feDropShadow ? feDropShadow.parentElement.querySelector('feColorMatrix[type="matrix"][values*="0.06"]') : null;
-
-
+            
             return {
                 element: group,
                 feDropShadow: feDropShadow,
-                feColorMatrixForOpacity: feColorMatrixForOpacity, // Referenz auf die ColorMatrix für die Opazität
+                feColorMatrixForOpacity: feColorMatrixForOpacity,
                 initialShadow: initialShadow,
-                // BoundingBox wird erst nach dem Laden und Skalieren des SVGs korrekt sein
-                // Daher berechnen wir sie später oder im mousemove, wenn die SVG-Größe stabil ist.
+                // BoundingBox wird später berechnet
+                centerX: 0,
+                centerY: 0
             };
         });
 
-        // Neuberechnung der Bounding Boxes nach einer kurzen Verzögerung oder bei Window Resize,
-        // um sicherzustellen, dass das SVG skaliert wurde.
         function calculateBoundingBoxes() {
             hexagonData.forEach(data => {
                 const rect = data.element.getBoundingClientRect();
@@ -310,9 +282,12 @@
             });
         }
         
-        // Initial und bei Größenänderung des Fensters
-        calculateBoundingBoxes();
-        window.addEventListener('resize', calculateBoundingBoxes);
+        // Warten bis das SVG potenziell geladen und gerendert ist, um korrekte Maße zu erhalten
+        // requestAnimationFrame stellt sicher, dass es nach dem Browser-Paint passiert
+        requestAnimationFrame(() => {
+            calculateBoundingBoxes();
+            window.addEventListener('resize', calculateBoundingBoxes);
+        });
 
 
         function getDistance(x1, y1, x2, y2) {
@@ -326,7 +301,7 @@
             const mouseY = e.clientY;
 
             hexagonData.forEach(data => {
-                if (!data.centerX) calculateBoundingBoxes(); // Fallback, falls noch nicht berechnet
+                if (data.centerX === 0 && data.centerY === 0) return; // Bounding Box noch nicht bereit
 
                 const distance = getDistance(mouseX, mouseY, data.centerX, data.centerY);
 
@@ -334,37 +309,40 @@
                 const clampedLift = gsap.utils.clamp(maxLift, minLift, lift);
 
                 gsap.to(data.element, {
-                    attr: { transform: `translate(0, ${clampedLift})` }, // SVG-Transform Attribut
-                    duration: 0.35,
+                    attr: { transform: `translate(0, ${clampedLift})` },
+                    duration: 0.4,
                     ease: 'power2.out',
                     overwrite: 'auto'
                 });
 
                 if (data.feDropShadow) {
-                    const shadowDy = gsap.utils.mapRange(0, maxDistance, liftedShadowProps.dy, data.initialShadow.dy, distance);
-                    const shadowStdDeviation = gsap.utils.mapRange(0, maxDistance, liftedShadowProps.stdDeviation, data.initialShadow.stdDeviation, distance);
-                    const shadowOpacity = gsap.utils.mapRange(0, maxDistance, liftedShadowProps.floodOpacity, data.initialShadow.floodOpacity, distance);
+                    // Zielwerte für den Schatten im gelifteten Zustand
+                    const targetDy = data.initialShadow.dy + liftedShadowTarget.dy_offset_increase;
+                    const targetStdDeviation = data.initialShadow.stdDeviation * liftedShadowTarget.stdDeviation_factor;
+                    const targetOpacity = data.initialShadow.floodOpacity * liftedShadowTarget.opacity_factor;
 
-                    gsap.to(data.feDropShadow, { // Animiert SVG-Primitive-Attribute direkt
+                    const shadowDy = gsap.utils.mapRange(0, maxDistance, targetDy, data.initialShadow.dy, distance);
+                    const shadowStdDeviation = gsap.utils.mapRange(0, maxDistance, targetStdDeviation, data.initialShadow.stdDeviation, distance);
+                    const shadowOpacity = gsap.utils.mapRange(0, maxDistance, targetOpacity, data.initialShadow.floodOpacity, distance);
+
+                    gsap.to(data.feDropShadow, {
                         attr: {
-                            dy: gsap.utils.clamp(liftedShadowProps.dy, data.initialShadow.dy, shadowDy),
-                            stdDeviation: gsap.utils.clamp(data.initialShadow.stdDeviation, liftedShadowProps.stdDeviation, shadowStdDeviation)
+                            dy: gsap.utils.clamp(data.initialShadow.dy, targetDy, shadowDy), // Clamp-Reihenfolge angepasst
+                            stdDeviation: gsap.utils.clamp(data.initialShadow.stdDeviation, targetStdDeviation, shadowStdDeviation)
                         },
-                        duration: 0.35,
+                        duration: 0.4,
                         ease: 'power2.out',
                         overwrite: 'auto'
                     });
                     
-                    // Opazität der ColorMatrix animieren
                     if (data.feColorMatrixForOpacity) {
-                        // Die Werte der Matrix sind eine Zeichenkette. Wir müssen den letzten Wert (Alpha) ändern.
                         const currentValues = data.feColorMatrixForOpacity.getAttribute('values').split(' ');
-                        const targetOpacity = gsap.utils.clamp(data.initialShadow.floodOpacity, liftedShadowProps.floodOpacity, shadowOpacity);
-                        currentValues[18] = targetOpacity; // Der 19. Wert (Index 18) in einer 4x5 Matrix ist oft der Alpha-Multiplikator in dieser Art Filteraufbau
+                        const finalOpacity = gsap.utils.clamp(targetOpacity, data.initialShadow.floodOpacity, shadowOpacity); // Clamp-Reihenfolge angepasst
+                        currentValues[18] = finalOpacity; 
 
                         gsap.to(data.feColorMatrixForOpacity, {
                             attr: { values: currentValues.join(' ') },
-                            duration: 0.35,
+                            duration: 0.4,
                             ease: 'power2.out',
                             overwrite: 'auto'
                         });
@@ -373,11 +351,15 @@
             });
         });
 
-        document.body.addEventListener('mouseleave', () => { // Oder svgElement.addEventListener
+        // Kein mouseleave-Effekt für ein permanentes Hintergrundelement,
+        // es sei denn, Sie möchten, dass es sich beruhigt, wenn die Maus das Fenster verlässt.
+        // Falls doch gewünscht:
+        /*
+        document.body.addEventListener('mouseleave', () => {
             hexagonData.forEach(data => {
                 gsap.to(data.element, {
                     attr: { transform: 'translate(0, 0)' },
-                    duration: 0.6,
+                    duration: 0.7,
                     ease: 'elastic.out(1, 0.6)'
                 });
                 if (data.feDropShadow) {
@@ -386,7 +368,7 @@
                             dy: data.initialShadow.dy,
                             stdDeviation: data.initialShadow.stdDeviation
                         },
-                        duration: 0.6,
+                        duration: 0.7,
                         ease: 'elastic.out(1, 0.6)'
                     });
                      if (data.feColorMatrixForOpacity) {
@@ -394,13 +376,14 @@
                         currentValues[18] = data.initialShadow.floodOpacity;
                         gsap.to(data.feColorMatrixForOpacity, {
                             attr: { values: currentValues.join(' ') },
-                            duration: 0.6,
+                            duration: 0.7,
                             ease: 'elastic.out(1, 0.6)'
                         });
                     }
                 }
             });
         });
+        */
     });
     </script>
 
