@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaktive SVG Hexagone</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #eef1f5; /* Heller Hintergrund, passend zum SVG-Stil */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .header-info {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .svg-container {
+            width: 90%;
+            max-width: 800px; /* Begrenzen Sie die Größe für die Demo */
+            margin: 0 auto;
+        }
+
+        #interactive-hexagons-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Die Gruppen <g> mit filter Attribut sind unsere Hauptziele */
+        #interactive-hexagons-svg g[filter] {
+            cursor: pointer;
+            will-change: transform; /* Performance-Hinweis */
+        }
+         /* Die Pfade selbst, falls man Hover-Effekte direkt darauf anwenden will (z.B. fill ändern) */
+        #interactive-hexagons-svg g[filter] > path {
+            /* transition: fill 0.3s ease; */ /* Für optionale Farbänderung bei Hover */
+        }
+        /* #interactive-hexagons-svg g[filter]:hover > path {
+            fill: #f0f8ff; 
+        } */
+
+    </style>
+</head>
+<body>
+
+    <div class="header-info">
+        <h1>SVG Waben Interaktion</h1>
+        <p>Bewege die Maus über die Hexagone.</p>
+    </div>
+
+    <div class="svg-container">
+        <!-- Ihr SVG Code hier eingefügt -->
+        <svg id="interactive-hexagons-svg" width="3431" height="1425" viewBox="0 0 3431 1425" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_207_108)">
+            <g filter="url(#filter0_d_207_108)" class="hexagon-group">
+            <path d="M1816.5 899.856C1831.35 891.282 1849.65 891.282 1864.5 899.856L2033.44 997.394C2048.29 1005.97 2057.44 1021.81 2057.44 1038.96V1234.04C2057.44 1251.19 2048.29 1267.03 2033.44 1275.61L1864.5 1373.14C1849.65 1381.72 1831.35 1381.72 1816.5 1373.14L1647.56 1275.61C1632.71 1267.03 1623.56 1251.19 1623.56 1234.04V1038.96C1623.56 1021.81 1632.71 1005.97 1647.56 997.394L1816.5 899.856Z" fill="white"/>
+            </g>
+            <g filter="url(#filter1_d_207_108)" class="hexagon-group">
+            <path d="M85.5 475.856C100.351 467.282 118.649 467.282 133.5 475.856L302.439 573.394C317.291 581.968 326.439 597.814 326.439 614.963V810.037C326.439 827.186 317.291 843.032 302.439 851.606L133.5 949.144C118.649 957.718 100.351 957.718 85.5 949.144L-83.4394 851.606C-98.2906 843.032 -107.439 827.186 -107.439 810.037V614.963C-107.439 597.814 -98.2906 581.968 -83.4394 573.394L85.5 475.856Z" fill="white"/>
+            </g>
+            <g filter="url(#filter2_d_207_108)" class="hexagon-group">
+            <path d="M2059.5 475.856C2074.35 467.282 2092.65 467.282 2107.5 475.856L2276.44 573.394C2291.29 581.968 2300.44 597.814 2300.44 614.963V810.037C2300.44 827.186 2291.29 843.032 2276.44 851.606L2107.5 949.144C2092.65 957.718 2074.35 957.718 2059.5 949.144L1890.56 851.606C1875.71 843.032 1866.56 827.186 1866.56 810.037V614.963C1866.56 597.814 1875.71 581.968 1890.56 573.394L2059.5 475.856Z" fill="white"/>
+            </g>
+            <g filter="url(#filter3_d_207_108)" class="hexagon-group">
+            <path d="M328.5 51.8564C343.351 43.282 361.649 43.282 376.5 51.8564L545.439 149.394C560.291 157.968 569.439 173.814 569.439 190.963V386.037C569.439 403.186 560.291 419.032 545.439 427.606L376.5 525.144C361.649 533.718 343.351 533.718 328.5 525.144L159.561 427.606C144.709 419.032 135.561 403.186 135.561 386.037V190.963C135.561 173.814 144.709 157.968 159.561 149.394L328.5 51.8564Z" fill="white"/>
+            </g>
+            <g filter="url(#filter4_d_207_108)" class="hexagon-group">
+            <path d="M2310.5 899.856C2325.35 891.282 2343.65 891.282 2358.5 899.856L2527.44 997.394C2542.29 1005.97 2551.44 1021.81 2551.44 1038.96V1234.04C2551.44 1251.19 2542.29 1267.03 2527.44 1275.61L2358.5 1373.14C2343.65 1381.72 2325.35 1381.72 2310.5 1373.14L2141.56 1275.61C2126.71 1267.03 2117.56 1251.19 2117.56 1234.04V1038.96C2117.56 1021.81 2126.71 1005.97 2141.56 997.394L2310.5 899.856Z" fill="white"/>
+            </g>
+            <g filter="url(#filter5_d_207_108)" class="hexagon-group">
+            <path d="M579.5 475.856C594.351 467.282 612.649 467.282 627.5 475.856L796.439 573.394C811.291 581.968 820.439 597.814 820.439 614.963V810.037C820.439 827.186 811.291 843.032 796.439 851.606L627.5 949.144C612.649 957.718 594.351 957.718 579.5 949.144L410.561 851.606C395.709 843.032 386.561 827.186 386.561 810.037V614.963C386.561 597.814 395.709 581.968 410.561 573.394L579.5 475.856Z" fill="white"/>
+            </g>
+            <g filter="url(#filter6_d_207_108)" class="hexagon-group">
+            <path d="M2553.5 949.144C2568.35 957.718 2586.65 957.718 2601.5 949.144L2770.44 851.606C2785.29 843.032 2794.44 827.186 2794.44 810.037V614.963C2794.44 597.814 2785.29 581.968 2770.44 573.394L2601.5 475.856C2586.65 467.282 2568.35 467.282 2553.5 475.856L2384.56 573.394C2369.71 581.968 2360.56 597.814 2360.56 614.963V810.037C2360.56 827.186 2369.71 843.032 2384.56 851.606L2553.5 949.144Z" fill="white"/>
+            </g>
+            <g filter="url(#filter7_d_207_108)" class="hexagon-group">
+            <path d="M822.5 525.144C837.351 533.718 855.649 533.718 870.5 525.144L1039.44 427.606C1054.29 419.032 1063.44 403.186 1063.44 386.037V190.963C1063.44 173.814 1054.29 157.968 1039.44 149.394L870.5 51.8564C855.649 43.282 837.351 43.282 822.5 51.8564L653.561 149.394C638.709 157.968 629.561 173.814 629.561 190.963V386.037C629.561 403.186 638.709 419.032 653.561 427.606L822.5 525.144Z" fill="white"/>
+            </g>
+            <g filter="url(#filter8_d_207_108)" class="hexagon-group">
+            <path d="M2803.5 1373.14C2818.35 1381.72 2836.65 1381.72 2851.5 1373.14L3020.44 1275.61C3035.29 1267.03 3044.44 1251.19 3044.44 1234.04V1038.96C3044.44 1021.81 3035.29 1005.97 3020.44 997.394L2851.5 899.856C2836.65 891.282 2818.35 891.282 2803.5 899.856L2634.56 997.394C2619.71 1005.97 2610.56 1021.81 2610.56 1038.96V1234.04C2610.56 1251.19 2619.71 1267.03 2634.56 1275.61L2803.5 1373.14Z" fill="white"/>
+            </g>
+            <g filter="url(#filter9_d_207_108)" class="hexagon-group">
+            <path d="M1072.5 949.144C1087.35 957.718 1105.65 957.718 1120.5 949.144L1289.44 851.606C1304.29 843.032 1313.44 827.186 1313.44 810.037V614.963C1313.44 597.814 1304.29 581.968 1289.44 573.394L1120.5 475.856C1105.65 467.282 1087.35 467.282 1072.5 475.856L903.561 573.394C888.709 581.968 879.561 597.814 879.561 614.963V810.037C879.561 827.186 888.709 843.032 903.561 851.606L1072.5 949.144Z" fill="white"/>
+            </g>
+            <g filter="url(#filter10_d_207_108)" class="hexagon-group">
+            <path d="M3297.5 1373.14C3312.35 1381.72 3330.65 1381.72 3345.5 1373.14L3514.44 1275.61C3529.29 1267.03 3538.44 1251.19 3538.44 1234.04V1038.96C3538.44 1021.81 3529.29 1005.97 3514.44 997.394L3345.5 899.856C3330.65 891.282 3312.35 891.282 3297.5 899.856L3128.56 997.394C3113.71 1005.97 3104.56 1021.81 3104.56 1038.96V1234.04C3104.56 1251.19 3113.71 1267.03 3128.56 1275.61L3297.5 1373.14Z" fill="white"/>
+            </g>
+            <g filter="url(#filter11_d_207_108)" class="hexagon-group">
+            <path d="M1566.5 949.144C1581.35 957.718 1599.65 957.718 1614.5 949.144L1783.44 851.606C1798.29 843.032 1807.44 827.186 1807.44 810.037V614.963C1807.44 597.814 1798.29 581.968 1783.44 573.394L1614.5 475.856C1599.65 467.282 1581.35 467.282 1566.5 475.856L1397.56 573.394C1382.71 581.968 1373.56 597.814 1373.56 614.963V810.037C1373.56 827.186 1382.71 843.032 1397.56 851.606L1566.5 949.144Z" fill="white"/>
+            </g>
+            <g filter="url(#filter12_d_207_108)" class="hexagon-group">
+            <path d="M3046.5 949.144C3061.35 957.718 3079.65 957.718 3094.5 949.144L3263.44 851.606C3278.29 843.032 3287.44 827.186 3287.44 810.037V614.963C3287.44 597.814 3278.29 581.968 3263.44 573.394L3094.5 475.856C3079.65 467.282 3061.35 467.282 3046.5 475.856L2877.56 573.394C2862.71 581.968 2853.56 597.814 2853.56 614.963V810.037C2853.56 827.186 2862.71 843.032 2877.56 851.606L3046.5 949.144Z" fill="white"/>
+            </g>
+            <g filter="url(#filter13_d_207_108)" class="hexagon-group">
+            <path d="M1315.5 525.144C1330.35 533.718 1348.65 533.718 1363.5 525.144L1532.44 427.606C1547.29 419.032 1556.44 403.186 1556.44 386.037V190.963C1556.44 173.814 1547.29 157.968 1532.44 149.394L1363.5 51.8564C1348.65 43.282 1330.35 43.282 1315.5 51.8564L1146.56 149.394C1131.71 157.968 1122.56 173.814 1122.56 190.963V386.037C1122.56 403.186 1131.71 419.032 1146.56 427.606L1315.5 525.144Z" fill="white"/>
+            </g>
+            </g>
+            <defs>
+            <filter id="filter0_d_207_108" x="1609.56" y="893.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter1_d_207_108" x="-121.439" y="469.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter2_d_207_108" x="1852.56" y="469.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter3_d_207_108" x="121.561" y="45.4258" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter4_d_207_108" x="2103.56" y="893.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter5_d_207_108" x="372.561" y="469.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter6_d_207_108" x="2346.56" y="469.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter7_d_207_108" x="615.561" y="45.4258" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter8_d_207_108" x="2596.56" y="893.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter9_d_207_108" x="865.561" y="469.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter10_d_207_108" x="3090.56" y="893.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter11_d_207_108" x="1359.56" y="469.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter12_d_207_108" x="2839.56" y="469.426" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <filter id="filter13_d_207_108" x="1108.56" y="45.4258" width="461.879" height="516.148" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset dy="16"/>
+            <feGaussianBlur stdDeviation="7"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_207_108"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_207_108" result="shape"/>
+            </filter>
+            <clipPath id="clip0_207_108">
+            <rect width="3431" height="1425" fill="white"/>
+            </clipPath>
+            </defs>
+        </svg>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const svgElement = document.getElementById('interactive-hexagons-svg');
+        // Die Gruppen <g>, die das 'filter'-Attribut haben, sind unsere Hexagone
+        const hexagonGroups = Array.from(svgElement.querySelectorAll('g[filter].hexagon-group')); // Klasse hinzugefügt für Selektion
+
+        // Parameter für den Effekt
+        const maxDistance = 150;    // Maximale Distanz, auf die ein Item reagiert (relativ zur skalierten SVG-Größe)
+        const maxLift = -50;        // Maximale Anhebung (negativer Wert für nach oben in SVG-Koordinaten)
+        const minLift = 0;
+
+        // Schatten Parameter für den "gelifteten" Zustand
+        const liftedShadowProps = { 
+            dy: -10,                // Schatten nach oben verschieben
+            stdDeviation: 502,       // Weicherer, größerer Schatten
+            floodOpacity: 0.12      // Etwas intensiver, aber immer noch soft
+        };
+
+        const hexagonData = hexagonGroups.map(group => {
+            const filterUrl = group.getAttribute('filter');
+            const filterId = filterUrl.substring(filterUrl.indexOf('#') + 1, filterUrl.length - 1);
+            const filterElement = svgElement.querySelector(`defs > filter#${filterId}`);
+            const feDropShadow = filterElement ? filterElement.querySelector('feDropShadow') : null;
+
+            // Initialwerte aus dem SVG für den jeweiligen Filter auslesen
+            const initialShadow = {
+                dy: feDropShadow ? parseFloat(feDropShadow.getAttribute('dy') || 0) : 16,
+                stdDeviation: feDropShadow ? parseFloat(feDropShadow.getAttribute('stdDeviation') || 0) : 7,
+                floodOpacity: feDropShadow ? parseFloat(feDropShadow.parentElement.querySelector('feColorMatrix[type="matrix"][values*="0.06"]').getAttribute('values').split(' ').pop()) : 0.06
+            };
+            // Die Opazität ist in der feColorMatrix in diesem SVG, letzter Wert in 'values'
+            const feColorMatrixForOpacity = feDropShadow ? feDropShadow.parentElement.querySelector('feColorMatrix[type="matrix"][values*="0.06"]') : null;
+
+
+            return {
+                element: group,
+                feDropShadow: feDropShadow,
+                feColorMatrixForOpacity: feColorMatrixForOpacity, // Referenz auf die ColorMatrix für die Opazität
+                initialShadow: initialShadow,
+                // BoundingBox wird erst nach dem Laden und Skalieren des SVGs korrekt sein
+                // Daher berechnen wir sie später oder im mousemove, wenn die SVG-Größe stabil ist.
+            };
+        });
+
+        // Neuberechnung der Bounding Boxes nach einer kurzen Verzögerung oder bei Window Resize,
+        // um sicherzustellen, dass das SVG skaliert wurde.
+        function calculateBoundingBoxes() {
+            hexagonData.forEach(data => {
+                const rect = data.element.getBoundingClientRect();
+                data.centerX = rect.left + rect.width / 2;
+                data.centerY = rect.top + rect.height / 2;
+            });
+        }
+        
+        // Initial und bei Größenänderung des Fensters
+        calculateBoundingBoxes();
+        window.addEventListener('resize', calculateBoundingBoxes);
+
+
+        function getDistance(x1, y1, x2, y2) {
+            const dx = x1 - x2;
+            const dy = y1 - y2;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        document.body.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+
+            hexagonData.forEach(data => {
+                if (!data.centerX) calculateBoundingBoxes(); // Fallback, falls noch nicht berechnet
+
+                const distance = getDistance(mouseX, mouseY, data.centerX, data.centerY);
+
+                const lift = gsap.utils.mapRange(0, maxDistance, maxLift, minLift, distance);
+                const clampedLift = gsap.utils.clamp(maxLift, minLift, lift);
+
+                gsap.to(data.element, {
+                    attr: { transform: `translate(0, ${clampedLift})` }, // SVG-Transform Attribut
+                    duration: 0.35,
+                    ease: 'power2.out',
+                    overwrite: 'auto'
+                });
+
+                if (data.feDropShadow) {
+                    const shadowDy = gsap.utils.mapRange(0, maxDistance, liftedShadowProps.dy, data.initialShadow.dy, distance);
+                    const shadowStdDeviation = gsap.utils.mapRange(0, maxDistance, liftedShadowProps.stdDeviation, data.initialShadow.stdDeviation, distance);
+                    const shadowOpacity = gsap.utils.mapRange(0, maxDistance, liftedShadowProps.floodOpacity, data.initialShadow.floodOpacity, distance);
+
+                    gsap.to(data.feDropShadow, { // Animiert SVG-Primitive-Attribute direkt
+                        attr: {
+                            dy: gsap.utils.clamp(liftedShadowProps.dy, data.initialShadow.dy, shadowDy),
+                            stdDeviation: gsap.utils.clamp(data.initialShadow.stdDeviation, liftedShadowProps.stdDeviation, shadowStdDeviation)
+                        },
+                        duration: 0.35,
+                        ease: 'power2.out',
+                        overwrite: 'auto'
+                    });
+                    
+                    // Opazität der ColorMatrix animieren
+                    if (data.feColorMatrixForOpacity) {
+                        // Die Werte der Matrix sind eine Zeichenkette. Wir müssen den letzten Wert (Alpha) ändern.
+                        const currentValues = data.feColorMatrixForOpacity.getAttribute('values').split(' ');
+                        const targetOpacity = gsap.utils.clamp(data.initialShadow.floodOpacity, liftedShadowProps.floodOpacity, shadowOpacity);
+                        currentValues[18] = targetOpacity; // Der 19. Wert (Index 18) in einer 4x5 Matrix ist oft der Alpha-Multiplikator in dieser Art Filteraufbau
+
+                        gsap.to(data.feColorMatrixForOpacity, {
+                            attr: { values: currentValues.join(' ') },
+                            duration: 0.35,
+                            ease: 'power2.out',
+                            overwrite: 'auto'
+                        });
+                    }
+                }
+            });
+        });
+
+        document.body.addEventListener('mouseleave', () => { // Oder svgElement.addEventListener
+            hexagonData.forEach(data => {
+                gsap.to(data.element, {
+                    attr: { transform: 'translate(0, 0)' },
+                    duration: 0.6,
+                    ease: 'elastic.out(1, 0.6)'
+                });
+                if (data.feDropShadow) {
+                    gsap.to(data.feDropShadow, {
+                        attr: {
+                            dy: data.initialShadow.dy,
+                            stdDeviation: data.initialShadow.stdDeviation
+                        },
+                        duration: 0.6,
+                        ease: 'elastic.out(1, 0.6)'
+                    });
+                     if (data.feColorMatrixForOpacity) {
+                        const currentValues = data.feColorMatrixForOpacity.getAttribute('values').split(' ');
+                        currentValues[18] = data.initialShadow.floodOpacity;
+                        gsap.to(data.feColorMatrixForOpacity, {
+                            attr: { values: currentValues.join(' ') },
+                            duration: 0.6,
+                            ease: 'elastic.out(1, 0.6)'
+                        });
+                    }
+                }
+            });
+        });
+    });
+    </script>
+
+</body>
+</html>
