@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting - Skeuomorph</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Cabin+Sketch:wght@400;700&family=Special+Elite&family=Metal+Mania&display=swap" rel="stylesheet">
+    <!-- Special Elite für Schreibmaschinen-Look, Metal Mania für geprägten Look (sehr spezifisch) -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', 'Special Elite', serif; /* Fallback auf Roboto für Lesbarkeit */
+            background-image: url('https://images.pexels.com/photos/1341279/pexels-photo-1341279.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&dpr=1'); /* Holztisch */
+            background-size: cover;
+            background-attachment: fixed; /* Hält den Hintergrund fest */
+            color: #3A2411; /* Dunkelbraun, passend zu Holz/Leder */
+            line-height: 1.7;
+        }
+
+        .page-wrapper-skeu { /* Zentriert den "Papier"-Inhalt */
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #F5EFE0; /* Vergilbtes Papier */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 10px #E0D6C3; /* Schatten und innerer Rand für Papiereffekt */
+            border-radius: 3px; /* Leicht abgerundete Papierecken */
+            padding: 30px;
+            position: relative;
+        }
+        .page-wrapper-skeu::before { /* Simulation von mehreren Papierseiten darunter */
+            content: '';
+            position: absolute;
+            bottom: -6px; right: -6px;
+            width: 100%; height: 100%;
+            background-color: #EAE1D1;
+            border-radius: 3px;
+            z-index: -1;
+            box-shadow: 0 0 0 10px #D5CABE;
+        }
+
+
+        /* Header - Metallplakette */
+        .header-skeu {
+            background: linear-gradient(to bottom, #D0D0D0, #A0A0A0); /* Metall-Gradient */
+            border: 2px solid #707070;
+            border-radius: 5px;
+            padding: 15px 25px;
+            margin-bottom: 30px;
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.5), 0 2px 5px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-skeu img {
+            height: 50px;
+            filter: grayscale(0.3) contrast(1.2) brightness(0.9) /*sepia(0.2)*/; /* Simuliert "eingebrannt" oder älter */
+            opacity: 0.8;
+        }
+        .nav-skeu a {
+            font-family: 'Metal Mania', cursive; /* Für "gestanzten" Look */
+            color: #444;
+            text-decoration: none;
+            margin-left: 15px;
+            padding: 5px 10px;
+            background-color: #BDBDBD;
+            border: 1px solid #888;
+            border-radius: 3px;
+            box-shadow: inset 0 0 1px rgba(255,255,255,0.7), 0 1px 1px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.3);
+        }
+        .nav-skeu a:hover {
+            background-color: #AAA;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.2), 0 0 0 rgba(0,0,0,0); /* Eingedrückt */
+        }
+
+        /* Hero Section - Notizbuch */
+        .hero-notebook {
+            background-image: repeating-linear-gradient(#F5EFE0, #F5EFE0 29px, #D4C5A9 30px, #D4C5A9 31px); /* Linienpapier */
+            padding: 30px;
+            border: 1px dashed #B0A088;
+            margin-bottom: 30px;
+            position: relative; /* Für Polaroid */
+        }
+        .hero-notebook::before { /* Rote Randlinie wie im Notizbuch */
+            content: '';
+            position: absolute;
+            top: 10px; bottom: 10px; left: 30px;
+            width: 2px;
+            background-color: rgba(255, 80, 80, 0.5); /* #FF5050 */
+        }
+
+        .hero-notebook h1 {
+            font-family: 'Cabin Sketch', cursive;
+            font-size: 2.8rem;
+            color: #0E545F; /* Tintenfarbe */
+            margin-top: 0;
+            margin-left: 40px; /* Platz für Randlinie */
+        }
+        .hero-notebook .highlight-number {
+            font-family: 'Cabin Sketch', cursive;
+            font-weight: 700;
+            font-size: 4rem;
+            color: #FF5050; /* Roter Marker */
+            display: inline-block;
+            padding: 0 10px;
+            background-color: rgba(255, 209, 102, 0.3); /* #FFD166 als Textmarker */
+            border-radius: 3px;
+            transform: rotate(-2deg);
+        }
+        .polaroid-container {
+            background-color: #fff;
+            padding: 10px 10px 20px 10px; /* Polaroid Rahmen */
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+            transform: rotate(3deg);
+            width: 250px;
+            float: right;
+            margin: -20px 0 15px 15px;
+        }
+        .polaroid-container img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #eee;
+        }
+        .polaroid-caption {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 8px;
+            color: #555;
+        }
+
+        .btn-skeu-realistic { /* Realistischer Knopf */
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+            padding: 12px 25px;
+            background: linear-gradient(to bottom, #70A573, #06D6A0, #4CA78A); /* Grüntöne #06D6A0 */
+            border: 2px solid #058C68;
+            border-radius: 50px; /* Rund */
+            box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), 0 5px 5px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+            display: inline-block;
+            text-decoration: none;
+            margin-left: 40px; /* Platz für Randlinie */
+        }
+        .btn-skeu-realistic:hover {
+            background: linear-gradient(to bottom, #609563, #05C08A, #3C977A);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 2px 3px rgba(0,0,0,0.4);
+            transform: translateY(2px);
+        }
+        .btn-skeu-realistic:active {
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 1px 1px rgba(0,0,0,0.3);
+            transform: translateY(3px);
+        }
+
+        /* Pinnwand Section */
+        .pinnwand-section {
+            background-image: url('https://www.transparenttextures.com/patterns/cork-wallet.png'); /* Kork Textur */
+            padding: 30px;
+            border: 5px solid #7A5C3F; /* Dunkler Holzrahmen */
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+            overflow: auto; /* Falls Inhalt zu breit */
+        }
+        .pinnwand-section h2 {
+            font-family: 'Special Elite', cursive;
+            font-size: 1.8rem;
+            color: #4F3A29;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #4F3A29;
+            padding-bottom: 10px;
+        }
+        .note-item {
+            background-color: #FFFFA5; /* Gelber Notizzettel */
+            padding: 15px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            transform: rotate(calc( (var(--random-rotate, 0) * 1deg) )); /* JS setzt --random-rotate */
+            position: relative; /* Für Reißzwecke */
+            width: calc(50% - 30px); /* Zweispaltig */
+            float: left;
+            margin-right: 20px;
+            min-height: 120px;
+        }
+        .note-item:nth-child(odd) { margin-right: 20px;}
+        .note-item:nth-child(even) { margin-right: 0;}
+
+        .note-item::before { /* Reißzwecke */
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: calc(50% - 8px);
+            width: 16px;
+            height: 16px;
+            background-color: #FF5050; /* Roter Kopf */
+            border-radius: 50%;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+            border: 2px solid #D43E3E;
+        }
+        .note-item h3 {
+            font-family: 'Cabin Sketch', sans-serif;
+            font-size: 1.3rem;
+            color: #0E545F;
+            margin-top: 10px; /* Platz für Reißzwecke */
+        }
+        .note-item p {
+            font-family: 'Special Elite', cursive;
+            font-size: 1rem;
+            color: #555;
+        }
+        .note-item iconify-icon {
+            font-size: 1.5rem;
+            color: #0E545F;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        /* Footer - Leder */
+        .footer-skeu {
+            background-image: url('https://www.transparenttextures.com/patterns/leather.png'); /* Leder Textur */
+            background-color: #4A3B32; /* Dunkelbraun */
+            padding: 20px;
+            margin-top: 30px; /* Abstand zum Papier */
+            border-top: 4px solid #3A2B22; /* Dickere Kante */
+            box-shadow: 0 -5px 10px rgba(0,0,0,0.3);
+            text-align: center;
+            color: #D4C5A9; /* Helle Schrift auf Leder */
+        }
+        .footer-skeu .footer-logo-skeu img {
+            height: 40px;
+            opacity: 0.7;
+            filter: invert(90%) sepia(20%) saturate(50%) hue-rotate(310deg) brightness(100%) contrast(90%); /* Macht es heller, leicht vergilbt */
+            margin-bottom: 10px;
+        }
+        .footer-skeu p {
+            font-family: 'Special Elite', cursive;
+            font-size: 0.9rem;
+            margin: 5px 0;
+        }
+        .footer-skeu a {
+            color: #FFD166; /* Goldene Links */
+            text-decoration: none;
+        }
+        .footer-skeu a:hover {
+            text-decoration: underline;
+        }
+        .social-buttons-skeu button { /* Metallknöpfe */
+            background: linear-gradient(to bottom, #C0C0C0, #909090); /* Silber */
+            border: 1px solid #606060;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            margin: 0 5px;
+            color: #444;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.1s ease;
+        }
+        .social-buttons-skeu button:hover {transform: translateY(1px); box-shadow: inset 0 1px 1px rgba(0,0,0,0.2);}
+        .social-buttons-skeu iconify-icon { font-size: 1.2rem; vertical-align: middle; }
+
+
+        .clearfix::after { content: ""; clear: both; display: table; }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper-skeu">
+        <header class="header-skeu">
+            <div class="logo-skeu">
+                <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo">
+            </div>
+            <nav class="nav-skeu">
+                <a href="#challenge">Die Tour</a>
+                <a href="#facts">Fakten</a>
+                <a href="#signup">Anheuern</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero-notebook clearfix">
+                <div class="polaroid-container">
+                    <img src="https://images.pexels.com/photos/238622/pexels-photo-238622.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Bergpanorama ALPIN8">
+                    <p class="polaroid-caption">Brandnertal - Deine Arena</p>
+                </div>
+                <h1>ALPIN8 Everesting</h1>
+                <p style="margin-left: 40px; font-family: 'Special Elite', cursive;">Notizen zur Expedition:</p>
+                <p style="margin-left: 40px; font-size: 1.1rem;">Die ultimative Prüfung: <span class="highlight-number">8848</span> Höhenmeter. Nicht für Zartbesaitete. Nur dein Wille zählt. </p>
+                <p style="margin-left: 40px;"><em>"Der Berg ruft nicht, er wartet."</em></p>
+                <a href="#signup" class="btn-skeu-realistic">Expedition starten!</a>
+            </section>
+
+            <section id="challenge" class="pinnwand-section clearfix">
+                <h2>Logbuch der Herausforderung</h2>
+                <div class="note-item">
+                    <h3><iconify-icon icon="tabler:route"></iconify-icon>Die Route</h3>
+                    <p>Ein Berg. 34 Stunden. 8848m rauf (zu Fuß!), runter mit der Seilbahn. Wiederhole, bis der Gipfel (deiner Leistung) erreicht ist.</p>
+                </div>
+                <div class="note-item">
+                    <h3><iconify-icon icon="ph:brain-light"></iconify-icon>Mentale Karte</h3>
+                    <p>Die Beine machen den Anfang, der Kopf das Ende. Aufgeben ist keine Option auf dieser Karte.</p>
+                </div>
+                <div class="note-item">
+                    <h3><iconify-icon icon="mdi:flag-checkered"></iconify-icon>Das Basislager</h3>
+                    <p>Sichere Umgebung, exklusiv für max. 300 Bergsteiger. Top Verpflegung im Summit-Camp.</p>
+                </div>
+                 <div class="note-item">
+                    <h3><iconify-icon icon="mdi:calendar-clock"></iconify-icon>Zeitfenster</h3>
+                    <p><strong>04. - 06. Juli 2025</strong>. Trage es dir in deinen Expeditionskalender ein!</p>
+                </div>
+            </section>
+
+            <section id="facts" style="padding:20px; background-color: #E8DBC7; border:1px solid #C8B89F; margin-bottom:30px;">
+                 <h2 style="font-family: 'Special Elite', cursive; text-align:center; color: #5C4B3A; border-bottom: 1px solid; padding-bottom: 5px;">Faktenblatt - Operation ALPIN8</h2>
+                 <ul style="list-style: none; padding-left: 10px; font-family: 'Special Elite', cursive; font-size: 1.1rem;">
+                     <li style="margin-bottom: 8px; border-bottom: 1px dotted #B0A088; padding-bottom: 5px;"><strong style="color: #0E545F;">Ziel:</strong> 8848 Höhenmeter (oder 4424 für "Everesty")</li>
+                     <li style="margin-bottom: 8px; border-bottom: 1px dotted #B0A088; padding-bottom: 5px;"><strong style="color: #0E545F;">Ort:</strong> Brandnertal, Österreich – Alpines Gelände.</li>
+                     <li style="margin-bottom: 8px; border-bottom: 1px dotted #B0A088; padding-bottom: 5px;"><strong style="color: #0E545F;">Dauer:</strong> 34 Stunden (Everesting) / 20 Stunden (Everesty)</li>
+                     <li style="margin-bottom: 8px;"><strong style="color: #0E545F;">Ticket:</strong> €599 / €499 – Inkl. Gondel, Verpflegung, Ruhm.</li>
+                 </ul>
+            </section>
+
+
+            <section id="signup" class="hero-notebook" style="text-align:center; background-image: repeating-linear-gradient(#FDF5E3, #FDF5E3 29px, #E0D6C3 30px, #E0D6C3 31px);">
+                 <h2 style="font-family: 'Cabin Sketch', cursive; font-size: 2rem; color: #FF5050;">Bereit, dich einzuschreiben?</h2>
+                 <p style="font-family: 'Special Elite', cursive; font-size: 1.2rem;">Der Berg wartet nicht ewig. Dein Name auf der Teilnehmerliste schon!</p>
+                 <a href="#" class="btn-skeu-realistic" style="background: linear-gradient(to bottom, #FF8080, #FF5050, #E04040); border-color:#B03030; margin-left:0;">Ja, ich bin dabei!</a>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer-skeu">
+        <div class="footer-logo-skeu">
+             <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo">
+        </div>
+        <p>ALPIN8 GmbH - Expeditionen & Grenzerfahrungen</p>
+        <div class="social-buttons-skeu" style="margin: 10px 0;">
+            <button aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></button>
+            <button aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></button>
+            <button aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></button>
+        </div>
+        <p><a href="#">Impressum</a> | <a href="#">Teilnahmebedingungen</a> | <a href="#">Datenschutz</a></p>
+        <p>&copy; 2024 - Alle Karten und Routen urheberrechtlich geschützt.</p>
+    </footer>
+
+    <script>
+        // Random rotation für Notizzettel
+        const noteItems = document.querySelectorAll('.note-item');
+        noteItems.forEach(item => {
+            const randomAngle = Math.random() * 6 - 3; // -3 to +3 degrees
+            item.style.setProperty('--random-rotate', randomAngle);
+
+            // Leichte Animation beim Hover
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = `rotate(${randomAngle + (Math.random() > 0.5 ? 1 : -1)}deg) scale(1.03)`;
+                item.style.zIndex = '10'; // Nach vorne bringen
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = `rotate(${randomAngle}deg) scale(1)`;
+                item.style.zIndex = '1';
+            });
+        });
+    </script>
+
+</body>
+</html>
