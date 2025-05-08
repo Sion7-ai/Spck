@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting - Neubrutalismus</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Inter ist eine gute Alternative zu System-Fonts, sehr klar -->
+    <style>
+        :root {
+            --nb-black: #000000;
+            --nb-white: #FFFFFF;
+            --nb-primary-accent: #06D6A0; /* Grün */
+            --nb-secondary-accent: #FFD166; /* Gelb */
+            --nb-tertiary-accent: #FF5050; /* Rot */
+            --nb-neutral-bg: #BBCDCD; /* Mintgrau */
+            --nb-dark-bg: #0E545F; /* Petrol */
+            --nb-border-thickness: 4px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', 'Roboto', sans-serif;
+            background-color: var(--nb-white);
+            color: var(--nb-black);
+            line-height: 1.5; /* Etwas enger für blockigen Look */
+            -webkit-font-smoothing: antialiased; /* Schärfere Schrift */
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .nb-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Allgemeine Box-Styles */
+        .nb-box {
+            border: var(--nb-border-thickness) solid var(--nb-black);
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: var(--nb-white); /* Standard-Hintergrund für Boxen */
+        }
+        .nb-box.bg-accent-1 { background-color: var(--nb-primary-accent); }
+        .nb-box.bg-accent-2 { background-color: var(--nb-secondary-accent); }
+        .nb-box.bg-accent-3 { background-color: var(--nb-tertiary-accent); color: var(--nb-white); }
+        .nb-box.bg-neutral { background-color: var(--nb-neutral-bg); }
+        .nb-box.bg-dark { background-color: var(--nb-dark-bg); color: var(--nb-white); }
+
+
+        /* Header */
+        .nb-header {
+            border-bottom: var(--nb-border-thickness) solid var(--nb-black);
+            padding: 15px 20px;
+            background-color: var(--nb-secondary-accent); /* Gelber Header */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nb-logo img {
+            height: 40px;
+            /* Ggf. das Logo vereinfachen oder in S/W nutzen */
+        }
+        .nb-nav a {
+            color: var(--nb-black);
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 15px;
+            padding: 5px 10px;
+            border: calc(var(--nb-border-thickness) / 2) solid var(--nb-black);
+            transition: background-color 0.1s linear, color 0.1s linear;
+        }
+        .nb-nav a:hover {
+            background-color: var(--nb-black);
+            color: var(--nb-secondary-accent);
+        }
+
+        /* Hero Section */
+        .nb-hero {
+            padding: 40px 20px;
+            text-align: left; /* Typisch für Brutalismus, nicht immer zentriert */
+        }
+        .nb-hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900; /* Inter Black oder Roboto Black */
+            margin: 0 0 10px 0;
+            line-height: 1;
+            text-transform: uppercase;
+            /* Harter Schatten */
+            text-shadow: 5px 5px 0 var(--nb-primary-accent);
+        }
+        .nb-hero .sub-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        .nb-button {
+            display: inline-block;
+            background-color: var(--nb-primary-accent);
+            color: var(--nb-black);
+            font-weight: 700;
+            text-decoration: none;
+            padding: 12px 25px;
+            border: var(--nb-border-thickness) solid var(--nb-black);
+            box-shadow: var(--nb-border-thickness) var(--nb-border-thickness) 0 var(--nb-black); /* Harter Kasten-Schatten */
+            transition: transform 0.1s linear, box-shadow 0.1s linear, background-color 0.1s linear;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .nb-button:hover {
+            background-color: var(--nb-black);
+            color: var(--nb-primary-accent);
+            transform: translate(-2px, -2px);
+            box-shadow: calc(var(--nb-border-thickness) + 2px) calc(var(--nb-border-thickness) + 2px) 0 var(--nb-primary-accent);
+        }
+        .nb-button.secondary {
+            background-color: var(--nb-secondary-accent);
+        }
+        .nb-button.secondary:hover {
+             color: var(--nb-secondary-accent);
+             box-shadow: calc(var(--nb-border-thickness) + 2px) calc(var(--nb-border-thickness) + 2px) 0 var(--nb-secondary-accent);
+        }
+
+
+        /* Content Sections */
+        .nb-section h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: var(--nb-border-thickness) solid var(--nb-black);
+        }
+        .nb-box.bg-dark .nb-section h2, .nb-box.bg-accent-3 .nb-section h2 {
+            border-bottom-color: var(--nb-white);
+        }
+
+        .nb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .nb-grid .nb-box { margin-bottom: 0; } /* Kein doppelter Margin in Grid */
+
+        .nb-image-container {
+            border: var(--nb-border-thickness) solid var(--nb-black);
+            margin-bottom: 15px;
+        }
+        .nb-image-container img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Quick Facts */
+        .nb-quick-facts ul {
+            list-style: none;
+            padding: 0;
+        }
+        .nb-quick-facts li {
+            padding: 10px;
+            border: calc(var(--nb-border-thickness)/2) solid var(--nb-black);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .nb-quick-facts iconify-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: var(--nb-primary-accent); /* Akzent für Icons */
+        }
+        .nb-box.bg-dark .nb-quick-facts iconify-icon { color: var(--nb-secondary-accent); }
+
+
+        /* Footer */
+        .nb-footer {
+            background-color: var(--nb-black);
+            color: var(--nb-white);
+            padding: 30px 20px;
+            text-align: center;
+            border-top: var(--nb-border-thickness) solid var(--nb-primary-accent); /* Farbiger oberer Rand */
+        }
+        .nb-footer p { margin: 5px 0; }
+        .nb-footer a {
+            color: var(--nb-primary-accent);
+            text-decoration: underline;
+            font-weight: 700;
+        }
+        .nb-footer a:hover {
+            color: var(--nb-secondary-accent);
+        }
+        .nb-footer .social-icons-nb a {
+            display: inline-block;
+            border: calc(var(--nb-border-thickness)/2) solid var(--nb-white);
+            padding: 8px;
+            margin: 0 5px;
+            color: var(--nb-white);
+        }
+        .nb-footer .social-icons-nb a:hover {
+            background-color: var(--nb-white);
+            color: var(--nb-black);
+        }
+        .nb-footer .social-icons-nb iconify-icon { font-size: 1.5rem; display: block; }
+
+        /* Animationen für Erscheinen */
+        .nb-animate-in {
+            opacity: 0;
+            /* transform: translateX(-20px); */ /* Weniger Bewegung, mehr abruptes Erscheinen */
+            transition: opacity 0.2s linear; /* Kurze, harte Transition */
+        }
+        .nb-animate-in.is-visible {
+            opacity: 1;
+            /* transform: translateX(0); */
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nb-header">
+        <div class="nb-logo">
+            <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo" style="filter: grayscale(1) brightness(1.5) contrast(2); /* S/W Logo für Brutalismus */">
+        </div>
+        <nav class="nb-nav">
+            <a href="#challenge">CHALLENGE</a>
+            <a href="#details">DETAILS</a>
+            <a href="#anmeldung">ANMELDUNG</a>
+        </nav>
+    </header>
+
+    <div class="nb-container">
+        <section class="nb-hero nb-box bg-accent-2 nb-animate-in is-visible"> <!-- Gelber Hero-Block -->
+            <h1>ALPIN8<br>EVERESTING<br>8848HM</h1>
+            <p class="sub-text">Ein Berg. 34 Stunden. Dein Kopf gegen die Höhe. Mehr als nur ein Lauf – eine Grenzerfahrung.</p>
+            <a href="#anmeldung" class="nb-button">Fordere dich heraus!</a>
+        </section>
+
+        <section id="challenge" class="nb-section nb-box nb-animate-in">
+            <h2>DIE CHALLENGE. ROH. EHRLICH.</h2>
+            <p>8848 Höhenmeter. Zu Fuß bergauf, mit der Gondel runter. Klingt einfach? Dein Verstand wird dein größter Gegner sein. ALPIN8 ist kein Spaziergang, es ist eine Prüfung deiner Willenskraft.</p>
+            <div class="nb-image-container">
+                <img src="https://images.pexels.com/photos/1562/italian-alps-mountains-nature.jpg?auto=compress&cs=tinysrgb&w=800" alt="Harte Berglandschaft">
+            </div>
+            <p>Das Ziel: Mehr erreichen, als du für möglich hältst. <strong style="background-color: var(--nb-primary-accent); padding: 2px 4px;">Du kannst es schaffen!</strong></p>
+        </section>
+
+        <div class="nb-grid">
+            <div class="nb-box bg-neutral nb-animate-in">
+                <h3 style="font-weight:900; margin-top:0;">INSPIRATION</h3>
+                <p>Was steckt wirklich in dir? Finde es heraus. Überwinde dich selbst und werde zu einer neuen Version von dir.</p>
+                <iconify-icon icon="mdi:lightbulb-on-outline" style="font-size: 3rem; color: var(--nb-black); display:block; text-align:right;"></iconify-icon>
+            </div>
+            <div class="nb-box bg-dark nb-animate-in">
+                <h3 style="font-weight:900; margin-top:0;">COMMUNITY</h3>
+                <p>Kein Wettkampf. Nur Support. Triff Gleichgesinnte, die ticken wie du. Eine Community, die dich trägt.</p>
+                <iconify-icon icon="mdi:account-group-outline" style="font-size: 3rem; color: var(--nb-white); display:block; text-align:right;"></iconify-icon>
+            </div>
+        </div>
+
+        <section id="details" class="nb-section nb-box nb-quick-facts bg-accent-1 nb-animate-in"> <!-- Grüner Block für Fakten -->
+            <h2>FAKTEN. KLAR UND DEUTLICH.</h2>
+            <ul>
+                <li><iconify-icon icon="mdi:target"></iconify-icon> ZIEL: 8848 HM (EVERESTING) / 4424 HM (EVERESTY)</li>
+                <li><iconify-icon icon="mdi:calendar-month-outline"></iconify-icon> DATUM: 04.-06. JULI 2025</li>
+                <li><iconify-icon icon="mdi:map-marker-outline"></iconify-icon> ORT: BRANDNERTAL, ÖSTERREICH</li>
+                <li><iconify-icon icon="mdi:ticket-outline"></iconify-icon> PREIS: 599,00 EUR (EVERESTING)</li>
+                <li><iconify-icon icon="mdi:gondola"></iconify-icon> SUPPORT: GONDEL ABWÄRTS, VERPFLEGUNGSCAMPS</li>
+            </ul>
+        </section>
+
+        <section class="nb-box bg-accent-3 nb-animate-in"> <!-- Roter Block für Zitat -->
+             <h3 style="font-weight:900; margin-top:0;">STIMMEN VOM BERG:</h3>
+            <blockquote style="font-size: 1.5rem; font-weight: 700; margin: 10px 0; padding-left:15px; border-left: var(--nb-border-thickness) solid var(--nb-white);">
+                "What a challenge! That was insane. Exactly what I was looking for. That was hard!"
+            </blockquote>
+            <p style="text-align: right; font-weight:500;">– ANDRÉ SCHÜRRLE, WELTMEISTER 2014</p>
+        </section>
+
+        <section id="anmeldung" class="nb-section nb-box nb-animate-in" style="text-align:center;">
+            <h2>ANMELDUNG 2025.</h2>
+            <p>Genug geredet. Bist du bereit, an deine Grenzen zu gehen und darüber hinaus? Die Plätze sind limitiert.</p>
+            <a href="#" class="nb-button secondary" style="font-size:1.3rem; padding: 15px 30px;">JETZT DEINEN PLATZ SICHERN!</a>
+        </section>
+    </div>
+
+    <footer class="nb-footer">
+        <p>ALPIN8 GMBH</p>
+        <div class="social-icons-nb" style="margin:15px 0;">
+            <a href="#" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+            <a href="#" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+            <a href="#" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+        </div>
+        <p>
+            <a href="#">IMPRESSUM</a> | <a href="#">DATENSCHUTZ</a> | <a href="#">AGB</a>
+        </p>
+        <p>&copy; 2024. KEINE SCHÖNHEITSPREISE, NUR ERGEBNISSE.</p>
+    </footer>
+
+    <script>
+        // Abrupte Scroll Animation
+        const animatedElementsNB = document.querySelectorAll('.nb-animate-in');
+
+        const observerNB = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Kurze Verzögerung für den "Pop-in" Effekt
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, parseFloat(window.getComputedStyle(entry.target).transitionDelay || 0) * 1000);
+                    observerNB.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 }); // Sichtbar bei 10%
+
+        animatedElementsNB.forEach((el, index) => {
+            el.style.transitionDelay = `${index * 0.05}s`; // Leichte Staffelung für den Effekt
+            observerNB.observe(el);
+        });
+    </script>
+
+</body>
+</html>
