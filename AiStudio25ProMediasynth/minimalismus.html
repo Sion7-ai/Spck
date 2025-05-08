@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting - Minimalismus</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        /* Globale Reset- und Basis-Stile */
+        body, h1, h2, h3, p, ul, li, a, button {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #0E545F; /* Haupttextfarbe */
+            line-height: 1.6;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #FFFFFF; /* Reiner Weißraum */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px; /* Minimaler Abstand zum Rand */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px; /* Lesefreundliche Breite für Text */
+            margin: 0 auto;
+        }
+
+        /* Header/Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 60px;
+            width: 100%;
+            max-width: 1000px; /* Etwas breiter für Logo und Nav */
+        }
+
+        .logo img {
+            height: 40px;
+            filter: none; /* Für das weiße Logo wäre ein dunkler Header-BG nötig, oder das dunkle Logo nutzen */
+        }
+        /* Minimalistische Nav: könnte auch nur aus dem CTA bestehen oder ganz entfallen für One-Pager */
+        nav a {
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #06D6A0;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 60px;
+        }
+
+        .hero .height {
+            font-size: 10rem; /* Riesige Zahl */
+            font-weight: 700; /* Roboto Bold */
+            line-height: 1;
+            color: #0E545F;
+            /* Animation: Buchstaben einzeln einfliegen lassen */
+        }
+        .hero .height-text {
+            font-size: 1.8rem;
+            font-weight: 300; /* Roboto Light */
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .hero .subline {
+            font-size: 1.5rem;
+            font-weight: 400; /* Roboto Regular */
+            margin-bottom: 40px;
+            color: #333; /* Etwas gedämpfter */
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #0E545F;
+            color: #FFFFFF;
+            padding: 15px 30px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border: 2px solid #0E545F;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #FFFFFF;
+            color: #0E545F;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            text-align: left; /* Für bessere Lesbarkeit von Textblöcken */
+        }
+        .content-section.centered {
+            text-align: center;
+        }
+
+        .content-section h2 {
+            font-size: 2.5rem;
+            font-weight: 500; /* Roboto Medium */
+            margin-bottom: 30px;
+            text-align: center;
+        }
+         .content-section h2::after { /* Subtile Trennlinie */
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #06D6A0; /* Akzentfarbe */
+            margin: 15px auto 0;
+        }
+
+
+        .content-section p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            max-width: 650px; /* Lesbarkeit */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Quick Facts */
+        .quick-facts ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .quick-facts li {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            min-width: 200px; /* Für bessere Anordnung */
+        }
+
+        .quick-facts iconify-icon {
+            font-size: 1.8rem; /* Angepasste Icon-Größe */
+            margin-right: 10px;
+            color: #06D6A0; /* Akzentfarbe für Icons */
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid #BBCDCD; /* Sehr dezente Trennlinie */
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        footer .social-links a {
+            margin: 0 8px;
+            color: #0E545F;
+            font-size: 1.5rem; /* Icongröße */
+            transition: color 0.3s ease;
+        }
+        footer .social-links a:hover {
+            color: #06D6A0;
+        }
+        footer .footer-logo img {
+            height: 30px;
+            margin-bottom: 10px;
+            /* Ggf. Filter für dunklere Version, wenn weißes Logo verwendet wird */
+        }
+
+    </style>
+</head>
+<body>
+    <header class="container">
+        <div class="logo">
+            <!-- Das weiße Logo benötigt einen dunklen Hintergrund oder hier das dunkle Logo verwenden -->
+            <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo" style="filter: invert(1) brightness(0.2) sepia(1) hue-rotate(180deg) saturate(5); /* Simuliert dunkles Logo für weißen BG */">
+        </div>
+        <nav>
+            <!-- Minimalistische Navigation könnte hier sein, oder nur der CTA im Hero -->
+             <a href="#challenge">Die Challenge</a>
+             <a href="#anmeldung">Anmeldung</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="height-animation-wrapper">
+                <span class="height">8848</span>
+            </div>
+            <p class="height-text">Höhenmeter</p>
+            <h1 class="subline">Dein persönlicher Mount Everest.</h1>
+            <a href="#anmeldung" class="cta-button">Zur Anmeldung</a>
+        </section>
+
+        <section id="challenge" class="content-section">
+            <h2>Die Challenge</h2>
+            <p>8848 Höhenmeter – bergauf zu Fuß, bergab mit der Gondel. Die eigentliche Schwierigkeit: Nicht aufzugeben, wenn es dein Kopf dir sagt. Erreiche mehr, als du je für möglich gehalten hast. Zu was bist du wirklich fähig?</p>
+            <p>Das Besondere: <strong>Du kannst es schaffen!</strong></p>
+        </section>
+
+        <section class="content-section centered">
+             <h2>ALPIN8 2025</h2>
+             <p>ALPIN8 Everesting findet vom <strong>04. bis 06. Juli 2025</strong> im wunderschönen Brandnertal statt.</p>
+        </section>
+
+        <section id="quick-facts" class="content-section">
+            <h2>Quick Facts</h2>
+            <ul class="quick-facts">
+                <li><iconify-icon icon="mdi:target"></iconify-icon> Ziel: 8848 Höhenmeter</li>
+                <li><iconify-icon icon="mdi:calendar-clock"></iconify-icon> Datum: 04.-06. Juli 2025</li>
+                <li><iconify-icon icon="mdi:map-marker-outline"></iconify-icon> Ort: Brandnertal, Österreich</li>
+                <li><iconify-icon icon="mdi:account-group-outline"></iconify-icon> Max. 300 Teilnehmende</li>
+                <li><iconify-icon icon="mdi:arrow-up-down-bold-outline"></iconify-icon> 17 Aufstiege (Gondel abwärts)</li>
+                <li><iconify-icon icon="mdi:ticket-confirmation-outline"></iconify-icon> Ticket: 599,00 Euro</li>
+            </ul>
+        </section>
+
+        <section id="warum-alpin8" class="content-section">
+            <h2>Warum ALPIN8?</h2>
+            <div>
+                <h3><iconify-icon icon="mdi:shield-check-outline" style="color: #0E545F;"></iconify-icon> Sichere Umgebung</h3>
+                <p>Die Gondel bringt dich 34 Stunden sicher wieder nach unten. Ein exklusives Event mit einzigartiger Atmosphäre.</p>
+            </div>
+            <div>
+                <h3><iconify-icon icon="mdi:food-apple-outline" style="color: #0E545F;"></iconify-icon> Beste Versorgung</h3>
+                <p>Im Summit-Camp und bei den Verpflegungsstationen warten Snacks, Getränke und Erholung auf dich.</p>
+            </div>
+        </section>
+
+        <section id="anmeldung" class="content-section centered">
+            <h2>Bereit für die Herausforderung?</h2>
+            <p>Ein Erlebnis, das dein Leben bereichert!</p>
+            <a href="#" class="cta-button">Jetzt für ALPIN8 2025 anmelden</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo">
+             <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo" style="filter: invert(1) brightness(0.2) sepia(1) hue-rotate(180deg) saturate(5);">
+        </div>
+        <div class="social-links">
+            <a href="#" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+            <a href="#" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+            <a href="#" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+        </div>
+        <p>© 2024 ALPIN8 GmbH. Alle Rechte vorbehalten.</p>
+        <p><a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
+        <!-- Cookie Consent Management würde hier auch hingehören -->
+    </footer>
+
+    <script>
+        // Beispiel für eine sehr subtile Animation (optional)
+        // Buchstaben der Zahl "8848" einzeln einblenden
+        const heightElement = document.querySelector('.hero .height');
+        if (heightElement) {
+            const text = heightElement.textContent;
+            heightElement.innerHTML = ''; // Clear original text
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.opacity = '0';
+                span.style.display = 'inline-block';
+                span.style.transform = 'translateY(20px)';
+                span.style.transition = `opacity 0.5s ${index * 0.15}s ease-out, transform 0.5s ${index * 0.15}s ease-out`;
+                heightElement.appendChild(span);
+
+                // Trigger animation
+                setTimeout(() => {
+                    span.style.opacity = '1';
+                    span.style.transform = 'translateY(0)';
+                }, 50 + index * 100); // Kleine Verzögerung für den Start
+            });
+        }
+
+        // Fade-in für Sektionen beim Scrollen (sehr einfach gehalten)
+        const sections = document.querySelectorAll('.content-section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1 // Starte Animation, wenn 10% der Sektion sichtbar ist
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target); // Animation nur einmal ausführen
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
+            observer.observe(section);
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting - MAXIMALISMUS</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Roboto:wght@300;400;500;700;900&family=Wire+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #0E545F;
+            background-color: #BBCDCD; /* Basis-Hintergrund, wird oft überdeckt */
+            overflow-x: hidden; /* Wichtig, um seitliches Scrollen durch überstehende Elemente zu verhindern */
+        }
+
+        .overflow-container { /* Verhindert, dass animierte Elemente den Scrollbalken beeinflussen */
+            width: 100%;
+            overflow: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 0.5em;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 1em;
+        }
+
+        .section {
+            padding: 50px 20px;
+            position: relative; /* Für überlappende Elemente */
+            overflow: hidden; /* Verhindert, dass innere Elemente ungewollt überlaufen */
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            background-image: linear-gradient(to bottom right, #FF5050, #FFD166, #06D6A0), url('https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-blend-mode: overlay; /* Experimentiere mit Blend-Modes */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-logo-claim {
+            font-family: 'Cabin Sketch', cursive;
+            font-size: clamp(3rem, 10vw, 8rem); /* Responsive Schriftgröße */
+            font-weight: 700;
+            text-shadow: 3px 3px 0px #0E545F, 6px 6px 0px #FF5050;
+            margin-bottom: -0.2em; /* Näher an Subclaim */
+            animation: heroTextPopIn 1s easeOutBack;
+        }
+        .hero-subclaim {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900; /* Black */
+            font-size: clamp(1.5rem, 5vw, 4rem);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #FFD166;
+            text-shadow: 2px 2px 0px #0E545F;
+            margin-bottom: 30px;
+            animation: heroSubTextSlideUp 1s 0.3s easeOutExpo backwards;
+        }
+        .hero-date {
+            font-family: 'Wire One', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            letter-spacing: 5px;
+            color: #FFFFFF;
+            background-color: #0E545F;
+            padding: 5px 15px;
+            border: 2px dashed #06D6A0;
+            margin-bottom: 40px;
+            transform: rotate(-2deg);
+            animation: fadeInRotate 1.2s 0.6s easeOutExpo backwards;
+        }
+        .hero .number-graphic {
+            position: absolute;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900;
+            font-size: clamp(10rem, 30vw, 25rem);
+            color: rgba(255, 255, 255, 0.1);
+            bottom: -5%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            user-select: none;
+        }
+
+
+        .cta-button-maximalist {
+            font-family: 'Cabin Sketch', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #FF5050, #FFD166);
+            color: white;
+            border: 3px solid #0E545F;
+            text-decoration: none;
+            text-shadow: 1px 1px 0 #0E545F;
+            border-radius: 5px;
+            transition: transform 0.3s easeOutBack, box-shadow 0.3s ease;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+            animation: buttonPulse 2s infinite ease-in-out, fadeInScaleUp 1s 0.9s easeOutBack backwards;
+        }
+        .cta-button-maximalist:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.5);
+        }
+
+        /* Animations für Hero */
+        @keyframes heroTextPopIn {
+            from { opacity: 0; transform: scale(0.5) translateY(50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes heroSubTextSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInRotate {
+            from { opacity: 0; transform: rotate(-10deg) scale(0.8); }
+            to { opacity: 1; transform: rotate(-2deg) scale(1); }
+        }
+         @keyframes fadeInScaleUp {
+            from { opacity: 0; transform: scale(0.7); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes buttonPulse { /* Subtiler Puls für CTA */
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+
+        /* CHALLENGE SECTION */
+        .challenge-section {
+            background-color: #0E545F;
+            color: #BBCDCD;
+            padding: 80px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+        .challenge-section h2 {
+            font-family: 'Cabin Sketch', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: #06D6A0;
+            text-shadow: 2px 2px #FF5050;
+            grid-column: 1 / -1; /* Überspannt alle Spalten */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .challenge-text-block {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-left: 5px solid #FFD166;
+            position: relative; /* für pseudo-elemente */
+        }
+        .challenge-text-block::before { /* Grafisches Element */
+            content: '';
+            position: absolute;
+            top: -10px; right: -10px;
+            width: 50px; height: 50px;
+            background-color: #FF5050;
+            clip-path: polygon(0 0, 100% 0, 0 100%); /* Dreieck */
+            z-index: 0;
+        }
+        .challenge-text-block p {
+            position: relative; /* Über dem Pseudo-Element */
+            z-index: 1;
+        }
+        .challenge-text-block strong {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 900;
+            color: #06D6A0;
+            font-size: 1.2em;
+        }
+        .challenge-image-container img {
+            width: 100%;
+            height: auto;
+            border: 5px solid #FFD166;
+            transform: rotate(3deg);
+            box-shadow: 10px 10px 0px #FF5050;
+        }
+
+        /* THREE PILLARS SECTION */
+        .pillars-section {
+            background-color: #FFD166;
+            padding: 60px 5%;
+            text-align: center;
+        }
+        .pillars-section > h2 {
+            font-family: 'Cabin Sketch', cursive;
+            font-size: clamp(3rem, 7vw, 5rem);
+            color: #0E545F;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px #FF5050;
+        }
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .pillar-card {
+            padding: 30px;
+            border: 3px dashed #0E545F;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pillar-card:nth-child(1) { background-color: #06D6A0; color: #0E545F; }
+        .pillar-card:nth-child(2) { background-color: #FF5050; color: white; }
+        .pillar-card:nth-child(3) { background-color: #0E545F; color: #BBCDCD; }
+
+        .pillar-card:hover {
+            transform: translateY(-10px) rotate(-1deg);
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
+        }
+        .pillar-card iconify-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block; /* Damit margin-bottom greift */
+        }
+        .pillar-card h3 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .pillar-card p {
+            font-size: 1rem;
+        }
+
+
+        /* QUOTE SECTION */
+        .quote-section {
+            background-color: #0E545F;
+            color: white;
+            padding: 100px 5%;
+            text-align: center;
+            background-image: url('https://www.transparenttextures.com/patterns/concrete-wall.png'); /* Subtile Textur */
+            position: relative;
+        }
+        .quote-section::before { /* Überlagerndes Farbelement */
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255, 80, 80, 0.7), rgba(6, 214, 160, 0.7));
+            mix-blend-mode: multiply; /* Experimentiere mit Blend Modes */
+        }
+        .quote-content {
+            position: relative; /* Über dem ::before */
+            z-index: 1;
+        }
+        .quote-text {
+            font-family: 'Cabin Sketch', cursive; /* oder eine elegante Serifenschrift */
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: #FFD166;
+        }
+        .quote-author {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            font-size: 1.5rem;
+            color: #BBCDCD;
+        }
+        .quote-author::before {
+            content: "— ";
+        }
+
+
+        /* QUICK FACTS SECTION */
+        .quick-facts-section {
+            padding: 60px 5%;
+            background-color: #BBCDCD;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .fact-item {
+            background-color: #FFD166;
+            color: #0E545F;
+            padding: 20px;
+            min-width: 180px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border: 3px solid #0E545F;
+            box-shadow: 5px 5px 0px #06D6A0;
+            transform: rotate(calc(var(--random-rotate) * 1deg)); /* Random rotation */
+            transition: transform 0.3s ease;
+        }
+        .fact-item:hover {
+            transform: scale(1.1) rotate(calc(var(--random-rotate) * 1.2deg));
+        }
+        .fact-item .value {
+            display: block;
+            font-family: 'Cabin Sketch', cursive;
+            font-size: 2.5rem;
+            color: #FF5050;
+            margin-bottom: 5px;
+        }
+
+        /* CALL TO ACTION SECTION */
+        .cta-section-maximalist {
+            background: linear-gradient(135deg, #06D6A0, #0E545F);
+            padding: 80px 5%;
+            text-align: center;
+            color: white;
+        }
+        .cta-section-maximalist h2 {
+            font-family: 'Cabin Sketch', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: #FFD166;
+            text-shadow: 3px 3px 0 #FF5050;
+            margin-bottom: 30px;
+        }
+        .cta-section-maximalist p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* FOOTER */
+        .footer-maximalist {
+            background-color: #0E545F;
+            color: #BBCDCD;
+            padding: 40px 5% 20px;
+            text-align: center;
+            border-top: 10px solid #FF5050; /* Dicke, farbige Border */
+        }
+        .footer-maximalist .logo-footer img {
+            height: 60px; /* Größeres Logo */
+            margin-bottom: 20px;
+            filter: drop-shadow(3px 3px 0px #06D6A0); /* Farbiger Schlagschatten */
+        }
+        .footer-maximalist .social-links-maximalist a {
+            color: #FFD166;
+            font-size: 2.5rem; /* Große Icons */
+            margin: 0 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .footer-maximalist .social-links-maximalist a:hover {
+            color: #06D6A0;
+            transform: scale(1.2) rotate(10deg);
+        }
+        .footer-maximalist .footer-nav a {
+            color: #BBCDCD;
+            text-decoration: none;
+            margin: 0 10px;
+            font-family: 'Wire One', sans-serif;
+            font-size: 1.5rem;
+            border-bottom: 1px dashed #06D6A0;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        .footer-maximalist .footer-nav a:hover {
+            color: #FFD166;
+            border-color: #FFD166;
+        }
+        .footer-maximalist .copyright {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="overflow-container">
+        <header class="hero">
+            <div class="number-graphic">8848</div>
+            <div class="hero-logo-claim animated-text-elastic">ALPIN8</div>
+            <h1 class="hero-subclaim">EVERESTING</h1>
+            <div class="hero-date">04. BIS 06. JULI 2025</div>
+            <a href="#anmeldung" class="cta-button-maximalist">DEINE CHALLENGE WARTET!</a>
+        </header>
+
+        <main>
+            <section class="section challenge-section">
+                <h2><iconify-icon icon="mdi:summit" style="color: #FFD166;"></iconify-icon> Dein persönlicher Mount Everest</h2>
+                <div class="challenge-text-block">
+                    <p>Die Challenge: <strong>8848 Höhenmeter</strong> - Bergauf zu Fuß, bergab mit der Gondel. Klingt machbar? Die wahre Schwierigkeit liegt woanders: Nicht aufzugeben, wenn dein Kopf dir sagt, es sei genug. Hier testest du, was WIRKLICH in dir steckt!</p>
+                </div>
+                <div class="challenge-image-container">
+                    <img src="https://images.pexels.com/photos/7130555/pexels-photo-7130555.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="Abstrakter bunter Hintergrund als Platzhalter für ein dynamisches Bild">
+                    <!-- Pexels: "trail runner intense" oder "mountain challenge" -->
+                </div>
+                <div class="challenge-text-block" style="border-left-color: #06D6A0;">
+                     <p>Das Ziel: Mehr erreichen, als du je für möglich gehalten hast. Entdecke eine Stärke in dir, von der du nicht wusstest, dass sie existiert. Das Besondere: <strong>Du kannst es schaffen!</strong> Wir glauben an dich!</p>
+                </div>
+            </section>
+
+            <section class="section pillars-section">
+                <h2>Was ALPIN8 EINZIGARTIG macht!</h2>
+                <div class="pillars-grid">
+                    <div class="pillar-card">
+                        <iconify-icon icon="mdi:shield-star-outline"></iconify-icon>
+                        <h3>EPISCHE CHALLENGE</h3>
+                        <p>Ja, es ist hart. Aber die Entscheidung fällt im Kopf, nicht in den Beinen. Mit der richtigen Einstellung packst du das!</p>
+                    </div>
+                    <div class="pillar-card">
+                        <iconify-icon icon="mdi:rocket-launch-outline"></iconify-icon>
+                        <h3>GRENZENLOSE INSPIRATION</h3>
+                        <p>Du kannst so viel mehr! Geh ans Limit und lerne dich neu kennen. Wer wirst du sein, wenn du es geschafft hast?</p>
+                    </div>
+                    <div class="pillar-card">
+                        <iconify-icon icon="mdi:account-heart-outline"></iconify-icon>
+                        <h3>MEGA COMMUNITY</h3>
+                        <p>Kein Wettkampf, nur du gegen dich. Erlebe Support und werde Teil einer unglaublichen Gemeinschaft!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section quote-section">
+                <div class="quote-content">
+                    <p class="quote-text">"What a challenge! That was insane. Exactly what I was looking for. That was hard!"</p>
+                    <p class="quote-author">André Schürrle, Fußball Weltmeister 2014</p>
+                </div>
+            </section>
+
+             <section class="section quick-facts-section">
+                <div class="fact-item" style="--random-rotate: -2;">
+                    <span class="value">8848</span> Höhenmeter
+                </div>
+                <div class="fact-item" style="--random-rotate: 3;">
+                    <span class="value">34</span> Stunden Zeit
+                </div>
+                <div class="fact-item" style="--random-rotate: -1;">
+                    <iconify-icon icon="mdi:map-marker-radius-outline" style="font-size: 2rem; color: #FF5050;"></iconify-icon> Brandnertal, AT
+                </div>
+                <div class="fact-item" style="--random-rotate: 2.5;">
+                    <span class="value">300</span> Max. Teilnehmer
+                </div>
+                <div class="fact-item" style="--random-rotate: -1.5; background-color: #06D6A0; color: #0E545F; box-shadow: 5px 5px 0px #FF5050;">
+                     <iconify-icon icon="mdi:gondola" style="font-size: 2rem;"></iconify-icon> Gondel abwärts!
+                </div>
+                 <div class="fact-item" style="--random-rotate: 1; background-color: #FF5050; color: white; box-shadow: 5px 5px 0px #FFD166;">
+                    <span class="value">€599</span> Ticket
+                </div>
+            </section>
+
+            <section id="anmeldung" class="section cta-section-maximalist">
+                <h2>WILLST DU ERFAHREN, WAS IN DIR STECKT?</h2>
+                <p>Mach eine Erfahrung, die dein Leben bereichert! Sichere dir jetzt deinen Platz für ALPIN8 2025 – bevor es zu spät ist! Die Plätze sind heiß begehrt!</p>
+                <a href="#" class="cta-button-maximalist" style="background: linear-gradient(45deg, #06D6A0, #FFD166); color: #0E545F; border-color: white; text-shadow: 1px 1px 0 #0E545F;">JETZT FÜR 2025 ANMELDEN!</a>
+            </section>
+        </main>
+
+        <footer class="footer-maximalist">
+            <div class="logo-footer">
+                <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo">
+            </div>
+            <div class="social-links-maximalist">
+                <a href="#" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+                <a href="#" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+                <a href="#" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+            </div>
+            <nav class="footer-nav" style="margin-top: 20px; margin-bottom: 20px;">
+                <a href="#">Impressum</a> | <a href="#">AGB</a> | <a href="#">Datenschutz</a> | <a href="#">FAQ</a>
+            </nav>
+            <p class="copyright">© COPYRIGHT 2024 ALPIN8 GmbH - ALL RIGHTS RESERVED AND PAINTED WITH LOVE!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Beispiel: Textanimation mit Anime.js - Buchstaben "elastisch" einblenden
+        /*
+        Vorschau-Beschreibung: Die Buchstaben des Claims "ALPIN8" im Hero-Bereich erscheinen nacheinander mit einem federnden, elastischen Effekt.
+        Verwendete Bibliothek: Anime.js (wegen einfacher Handhabung von Staggering und komplexen Easings)
+        Easing: easeOutElastic(1, .8) (stark federnd)
+        */
+        const animatedText = document.querySelector('.animated-text-elastic');
+        if (animatedText) {
+            animatedText.innerHTML = animatedText.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+            anime.timeline({ loop: false })
+                .add({
+                    targets: '.animated-text-elastic .letter',
+                    translateX: [40,0],
+                    translateZ: 0,
+                    opacity: [0,1],
+                    easing: "easeOutExpo",
+                    duration: 1200,
+                    delay: (el, i) => 500 + 50 * i // Startverzögerung + gestaffelte Verzögerung
+                }).add({
+                    targets: '.animated-text-elastic .letter',
+                    translateX: [0,-30],
+                    opacity: [1,0],
+                    easing: "easeInExpo",
+                    duration: 1100,
+                    delay: (el, i) => 100 + 30 * i,
+                    // Diese zweite .add() würde sie wieder ausblenden. Für einen einmaligen Effekt beim Laden ggf. entfernen oder anpassen.
+                    // Für den Maximalismus soll es aber beim Laden reinpoppen, also die erste .add() ist relevanter.
+                    // Ich lasse die erste Animation (PopIn) bestehen und kommentiere die zweite (Ausblenden) aus.
+                });
+
+            // Nur die "PopIn" Animation:
+            anime.timeline({ loop: false })
+            .add({
+                targets: '.animated-text-elastic .letter',
+                opacity: [0,1],
+                scale: [0.2, 1],
+                translateY: ["1.1em", 0],
+                translateZ: 0,
+                rotateZ: [10, 0],
+                duration: 1000, // Dauer der Animation für jeden Buchstaben
+                easing: "easeOutElastic(1, .6)", // Stark federnder Effekt
+                delay: anime.stagger(100, {start: 500}) // Start nach 0.5s, 100ms Verzögerung zwischen Buchstaben
+            });
+        }
+
+        // Random rotation für Fact Items
+        const factItems = document.querySelectorAll('.fact-item');
+        factItems.forEach(item => {
+            const randomAngle = Math.random() * 10 - 5; // -5 to +5 degrees
+            item.style.setProperty('--random-rotate', randomAngle);
+        });
+
+        // Simple Scroll Animations (Beispiel für Pillar Cards)
+        const pillarCards = document.querySelectorAll('.pillar-card');
+        const observerOptionsMax = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2 // Starte Animation, wenn 20% der Karte sichtbar ist
+        };
+
+        const observerMax = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) rotate(0deg)';
+                    // entry.target.style.transitionDelay = `${Math.random() * 0.3}s`; // Random delay für chaotischeren Effekt
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptionsMax);
+
+        pillarCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = `translateY(50px) rotate(${Math.random() * 10 - 5}deg)`; // Start leicht gedreht
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s easeOutBack';
+            observerMax.observe(card);
+        });
+
+    </script>
+</body>
+</html>
