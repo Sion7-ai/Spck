@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting - Material Design</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --md-primary-color: #0E545F;
+            --md-accent-color: #06D6A0;
+            --md-accent-color-alt: #FF5050;
+            --md-background-color: #F5F5F5; /* Typischer Material BG */
+            --md-surface-color: #FFFFFF; /* Card Hintergrund */
+            --md-text-primary-on-light: rgba(0, 0, 0, 0.87);
+            --md-text-secondary-on-light: rgba(0, 0, 0, 0.6);
+            --md-text-primary-on-dark: #FFFFFF;
+            --md-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
+            --md-divider-color: rgba(0, 0, 0, 0.12);
+
+            /* Schatten (Elevation) - Beispiele */
+            --shadow-dp2: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+            --shadow-dp4: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.2);
+            --shadow-dp6: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.2);
+            --shadow-dp8: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--md-background-color);
+            color: var(--md-text-primary-on-light);
+            line-height: 1.6;
+        }
+
+        .container-md {
+            width: 90%;
+            max-width: 1000px; /* Etwas schmaler für typisches Material Layout */
+            margin: 0 auto;
+            padding: 24px 16px; /* Typische Material Paddings */
+        }
+
+        /* App Bar */
+        .app-bar {
+            background-color: var(--md-primary-color);
+            color: var(--md-text-primary-on-dark);
+            padding: 16px;
+            box-shadow: var(--shadow-dp4);
+            display: flex;
+            align-items: center;
+            position: sticky; /* Bleibt oben */
+            top: 0;
+            z-index: 1000;
+        }
+        .app-bar .logo-md img {
+            height: 32px; /* Etwas kleiner im App Bar */
+            margin-right: 16px;
+        }
+        .app-bar .title-md {
+            font-size: 1.25rem; /* 20sp */
+            font-weight: 500; /* Medium */
+            flex-grow: 1;
+        }
+        .app-bar .nav-icon {
+            color: var(--md-text-primary-on-dark);
+            font-size: 1.5rem; /* 24dp */
+            cursor: pointer;
+        }
+        /* Für Desktop-Nav in App-Bar (optional) */
+        .app-bar-nav a {
+            color: var(--md-text-secondary-on-dark);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .app-bar-nav a:hover {
+            color: var(--md-text-primary-on-dark);
+        }
+
+
+        /* Hero Section mit Bild */
+        .hero-material {
+            height: 60vh; /* Weniger als Fullscreen, mehr Platz für Content */
+            min-height: 400px;
+            background-image: url('https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--md-text-primary-on-dark);
+            padding: 24px;
+            position: relative; /* Für FAB */
+        }
+        .hero-material::before { /* Overlay für bessere Textlesbarkeit */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .hero-material h1, .hero-material p {
+            position: relative; z-index: 1;
+        }
+        .hero-material h1 {
+            font-size: 2.8rem; /* 45sp */
+            font-weight: 400; /* Regular */
+            margin-bottom: 8px;
+        }
+        .hero-material p {
+            font-size: 1.25rem; /* 20sp */
+            font-weight: 300; /* Light */
+            max-width: 600px;
+            margin-bottom: 32px;
+        }
+
+        /* Floating Action Button (FAB) */
+        .fab {
+            position: fixed; /* Oder absolute im Hero, wenn er nur dort sein soll */
+            bottom: 24px;
+            right: 24px;
+            background-color: var(--md-accent-color-alt);
+            color: var(--md-text-primary-on-dark);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow-dp6);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), box-shadow 0.2s ease;
+            z-index: 999;
+        }
+        .fab iconify-icon { font-size: 1.75rem; /* 28dp */ }
+        .fab:hover {
+            background-color: #E54848; /* Dunkleres Rot */
+            box-shadow: var(--shadow-dp8);
+            transform: scale(1.05);
+        }
+
+        /* Cards */
+        .card-md {
+            background-color: var(--md-surface-color);
+            border-radius: 4px; /* Typische Material-Abrundung */
+            box-shadow: var(--shadow-dp2);
+            margin-bottom: 24px;
+            overflow: hidden; /* Für Ripple-Effekt und Bildintegration */
+            transition: box-shadow 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        .card-md:hover {
+            box-shadow: var(--shadow-dp6); /* Erhöhte Elevation bei Hover */
+        }
+        .card-md-image img { /* Bild füllt Card-Breite */
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .card-md-content {
+            padding: 16px;
+        }
+        .card-md-title {
+            font-size: 1.5rem; /* 24sp */
+            font-weight: 500; /* Medium */
+            margin-bottom: 8px;
+            color: var(--md-primary-color);
+        }
+        .card-md p {
+            font-size: 0.875rem; /* 14sp */
+            line-height: 1.5;
+            color: var(--md-text-secondary-on-light);
+            margin-bottom: 16px;
+        }
+        .card-md-actions {
+            padding: 8px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* Buttons (Material Style) */
+        .btn-md {
+            padding: 8px 16px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem; /* 14sp */
+            font-weight: 500; /* Medium */
+            text-transform: uppercase;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            position: relative; /* Für Ripple */
+            overflow: hidden; /* Für Ripple */
+        }
+        .btn-md.text { /* Text Button */
+            color: var(--md-accent-color);
+            background-color: transparent;
+        }
+        .btn-md.text:hover { background-color: rgba(var(--md-accent-color-rgb, 6, 214, 160), 0.08); }
+
+        .btn-md.raised { /* Raised Button */
+            background-color: var(--md-accent-color);
+            color: var(--md-text-primary-on-dark);
+            box-shadow: var(--shadow-dp2);
+        }
+        .btn-md.raised:hover {
+            background-color: #05B086; /* Etwas dunkleres Grün */
+            box-shadow: var(--shadow-dp4);
+        }
+        .btn-md.raised.primary {
+            background-color: var(--md-primary-color);
+        }
+         .btn-md.raised.primary:hover {
+            background-color: #0B434D;
+        }
+
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4); /* Helles Ripple für dunkle Buttons */
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+        }
+        .btn-md.text .ripple { background-color: rgba(var(--md-accent-color-rgb, 6, 214, 160), 0.2); }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Grid für Cards */
+        .card-grid-md {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* List mit Dividers */
+        .list-md {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background-color: var(--md-surface-color);
+            border-radius: 4px;
+            box-shadow: var(--shadow-dp2);
+        }
+        .list-item-md {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--md-divider-color);
+        }
+        .list-item-md:last-child {
+            border-bottom: none;
+        }
+        .list-item-md iconify-icon {
+            font-size: 1.5rem; /* 24dp */
+            color: var(--md-accent-color);
+            margin-right: 16px;
+        }
+        .list-item-md .text-primary {
+            font-size: 1rem; /* 16sp */
+            color: var(--md-text-primary-on-light);
+        }
+        .list-item-md .text-secondary {
+            font-size: 0.875rem; /* 14sp */
+            color: var(--md-text-secondary-on-light);
+        }
+
+        /* Footer */
+        .footer-md {
+            background-color: #333; /* Dunkler Footer, nicht strikt Material, aber oft verwendet */
+            color: var(--md-text-secondary-on-dark);
+            padding: 32px 16px;
+            text-align: center;
+            font-size: 0.875rem;
+        }
+        .footer-md a {
+            color: var(--md-text-primary-on-dark);
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        .footer-md a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animationen für das Erscheinen von Cards */
+        .animate-card-in {
+            opacity: 0;
+            transform: translateY(20px) scale(0.98);
+            transition: opacity 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        .animate-card-in.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+    </style>
+</head>
+<body>
+    <header class="app-bar">
+        <div class="logo-md">
+            <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo">
+        </div>
+        <span class="title-md">ALPIN8 Everesting</span>
+        <!-- Für Mobile ein Hamburger Icon hier -->
+        <!-- <iconify-icon class="nav-icon" icon="mdi:menu"></iconify-icon> -->
+        <nav class="app-bar-nav" style="margin-left: auto;"> <!-- Für Desktop -->
+             <a href="#challenge">Challenge</a>
+             <a href="#details">Details</a>
+             <a href="#anmeldung">Anmeldung</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-material">
+            <h1>Dein persönlicher Mount Everest</h1>
+            <p>Die ultimative Herausforderung: 8848 Höhenmeter im wunderschönen Brandnertal. Bist du bereit?</p>
+            <!-- FAB ist global platziert oder könnte hier ein Raised Button sein -->
+        </section>
+
+        <button class="fab" aria-label="Zur Anmeldung" onclick="document.getElementById('anmeldung').scrollIntoView({behavior: 'smooth'});">
+            <iconify-icon icon="mdi:arrow-right-bold-circle-outline"></iconify-icon>
+        </button>
+
+        <div class="container-md">
+            <section id="challenge">
+                <div class="card-grid-md">
+                    <div class="card-md animate-card-in">
+                        <div class="card-md-content">
+                            <h2 class="card-md-title"><iconify-icon icon="mdi:summit" style="color: var(--md-primary-color); margin-right: 8px; vertical-align: bottom;"></iconify-icon>Die Challenge</h2>
+                            <p>Stell dich 8848 Höhenmetern – bergauf zu Fuß, bergab bequem mit der Gondel. Das Event läuft 34 Stunden nonstop.</p>
+                             <div class="card-md-actions">
+                                <button class="btn-md text">Mehr erfahren</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-md animate-card-in" style="transition-delay: 0.1s;">
+                         <div class="card-md-content">
+                            <h2 class="card-md-title"><iconify-icon icon="mdi:brain" style="color: var(--md-primary-color); margin-right: 8px; vertical-align: bottom;"></iconify-icon>Der Kopf siegt</h2>
+                            <p>Die größte Hürde ist mental. Überwinde deine Grenzen, wenn der Kopf "Stopp" sagt. Zeige, was in dir steckt!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="why-alpin8" style="margin-top: 32px;">
+                 <h2 style="text-align: center; font-weight: 400; font-size: 1.75rem; margin-bottom: 24px;">Warum ALPIN8?</h2>
+                <div class="card-grid-md">
+                    <div class="card-md animate-card-in" style="transition-delay: 0.2s;">
+                        <img src="https://images.pexels.com/photos/147411/italy-mountains-dawn-daybreak-147411.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Sichere Umgebung Alpin8" class="card-md-image">
+                        <div class="card-md-content">
+                            <h3 class="card-md-title" style="font-size: 1.25rem;">Sicher & Exklusiv</h3>
+                            <p>Dank durchgehender Gondelfahrt und einer Begrenzung auf 300 Teilnehmer erlebst du eine einzigartige, sichere Atmosphäre.</p>
+                        </div>
+                    </div>
+                    <div class="card-md animate-card-in" style="transition-delay: 0.3s;">
+                         <img src="https://images.pexels.com/photos/3760611/pexels-photo-3760611.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Verpflegung Alpin8" class="card-md-image">
+                        <div class="card-md-content">
+                            <h3 class="card-md-title" style="font-size: 1.25rem;">Top Verpflegung</h3>
+                            <p>Im Summit-Camp und an den Stationen warten regionale Snacks, Getränke und Zonen zur Regeneration auf dich.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quick-facts-md" style="margin-top: 32px;">
+                <h2 style="text-align: center; font-weight: 400; font-size: 1.75rem; margin-bottom: 16px;">Quick Facts: ALPIN8 2025</h2>
+                <ul class="list-md">
+                    <li class="list-item-md animate-card-in"><iconify-icon icon="mdi:calendar-check"></iconify-icon> <div><span class="text-primary">Datum:</span> <span class="text-secondary">04. - 06. Juli 2025</span></div></li>
+                    <li class="list-item-md animate-card-in" style="transition-delay: 0.05s;"><iconify-icon icon="mdi:map-marker"></iconify-icon> <div><span class="text-primary">Ort:</span> <span class="text-secondary">Brandnertal, Österreich</span></div></li>
+                    <li class="list-item-md animate-card-in" style="transition-delay: 0.1s;"><iconify-icon icon="mdi:run"></iconify-icon> <div><span class="text-primary">Höhenmeter:</span> <span class="text-secondary">8848 (Everesting) / 4424 (Everesty)</span></div></li>
+                    <li class="list-item-md animate-card-in" style="transition-delay: 0.15s;"><iconify-icon icon="mdi:ticket-account"></iconify-icon> <div><span class="text-primary">Ticketpreis:</span> <span class="text-secondary">ab €499</span></div></li>
+                </ul>
+            </section>
+
+            <section id="anmeldung" style="margin-top: 48px; margin-bottom: 48px;">
+                 <div class="card-md animate-card-in" style="transition-delay: 0.4s;">
+                    <div class="card-md-content" style="text-align: center;">
+                        <h2 class="card-md-title" style="color: var(--md-accent-color-alt);">Bereit für dein Abenteuer?</h2>
+                        <p style="color: var(--md-text-primary-on-light); font-size: 1rem;">Ein Erlebnis, das dein Leben bereichert! Sichere dir deinen Platz für ALPIN8 2025.</p>
+                        <button class="btn-md raised primary" style="min-width: 200px; padding: 12px 24px; font-size: 1rem; margin-top: 16px;">
+                            Jetzt Anmelden
+                            <span class="ripple"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer-md">
+        <p>© 2024 ALPIN8 GmbH. Alle Rechte vorbehalten.</p>
+        <p>
+            <a href="#">Impressum</a> |
+            <a href="#">Datenschutz</a> |
+            <a href="#">AGB</a>
+        </p>
+    </footer>
+
+    <script>
+        // Ripple Effect für Buttons
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const existingRipple = button.querySelector(".ripple");
+            if (existingRipple) {
+                existingRipple.remove();
+            }
+
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            // Zentriert das Ripple relativ zur Klickposition auf dem Button
+            // Wenn der Klick außerhalb des Buttons erfolgt (z.B. durch Label-Klick),
+            // kann offsetX/Y 0 sein, daher Fallback zur Button-Mitte.
+            const rect = button.getBoundingClientRect();
+            const rippleX = (event.clientX || rect.left + radius) - rect.left - radius;
+            const rippleY = (event.clientY || rect.top + radius) - rect.top - radius;
+
+            circle.style.left = `${rippleX}px`;
+            circle.style.top = `${rippleY}px`;
+            circle.classList.add("ripple");
+
+            button.appendChild(circle);
+        }
+
+        const buttons = document.querySelectorAll(".btn-md, .fab, .card-md"); // Ripple auch auf Cards, wenn gewünscht
+        buttons.forEach(button => {
+            button.addEventListener("click", createRipple);
+        });
+
+        // Scroll Animation für Cards
+        const animatedCards = document.querySelectorAll('.animate-card-in');
+        const observerMaterial = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerMaterial.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedCards.forEach(card => {
+            observerMaterial.observe(card);
+        });
+    </script>
+</body>
+</html>

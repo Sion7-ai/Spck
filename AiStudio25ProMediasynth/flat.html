@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPIN8 Everesting - Flat Design</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #FFFFFF; /* Grundfarbe, kann aber oft von Sections überdeckt werden */
+            color: #333333; /* Standard-Textfarbe für guten Kontrast auf hellen Flächen */
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        .main-header {
+            background-color: #0E545F;
+            padding: 15px 0;
+            color: white;
+        }
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo img {
+            height: 40px;
+            /* Weißes Logo passt hier perfekt */
+        }
+        .main-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        .main-nav li {
+            margin-left: 25px;
+        }
+        .main-nav a {
+            text-decoration: none;
+            color: #BBCDCD;
+            font-weight: 500;
+            transition: color 0.2s linear;
+        }
+        .main-nav a:hover, .main-nav a.active {
+            color: #FFFFFF;
+        }
+
+        /* Hero Section */
+        .hero-flat {
+            background-color: #06D6A0; /* Leuchtendes Grün */
+            padding: 80px 0;
+            text-align: center;
+            color: #FFFFFF; /* Weißer Text auf Grün */
+            position: relative;
+            overflow: hidden; /* Für die abstrakten Berge */
+        }
+        .hero-flat .abstract-mountains { /* Stilisierte Berge im Hintergrund */
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px; /* Höhe der Berg-Silhouette */
+            opacity: 0.2;
+            pointer-events: none; /* Damit sie nicht klickbar sind */
+        }
+        .hero-flat .abstract-mountains svg {
+            width: 100%;
+            height: 100%;
+            fill: #0E545F; /* Dunklere Farbe für die Berge */
+        }
+        .hero-flat h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900; /* Roboto Black */
+            margin-bottom: 10px;
+            position: relative; z-index: 1;
+        }
+        .hero-flat .sub-headline {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 400; /* Roboto Regular */
+            color: #EFFFFB; /* Sehr helles Mint für Kontrast */
+            margin-bottom: 40px;
+            position: relative; z-index: 1;
+        }
+        .btn-flat {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: #FF5050; /* Roter Akzent-Button */
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700; /* Roboto Bold */
+            border: none;
+            border-radius: 4px; /* Subtile Abrundung ist im Flat Design ok */
+            transition: background-color 0.2s linear;
+        }
+        .btn-flat:hover {
+            background-color: #E04343; /* Etwas dunkleres Rot bei Hover */
+        }
+
+        /* Content Sections Allgemein */
+        .section-flat {
+            padding: 60px 0;
+        }
+        .section-flat.bg-light-mint { background-color: #BBCDCD; color: #0E545F; }
+        .section-flat.bg-dark-petrol { background-color: #0E545F; color: #FFFFFF; }
+        .section-flat.bg-yellow-accent { background-color: #FFD166; color: #0E545F; }
+
+        .section-flat h2 {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700; /* Roboto Bold */
+            margin-bottom: 40px;
+        }
+        .section-flat.bg-dark-petrol h2 { color: #06D6A0; } /* Akzentfarbe für Titel auf dunklem Grund */
+        .section-flat.bg-yellow-accent h2 { color: #0E545F;}
+
+
+        /* Info Kacheln */
+        .info-tiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .tile {
+            background-color: #FFFFFF; /* Weiße Kacheln auf farbigem Section-BG */
+            padding: 30px 25px;
+            text-align: center;
+            border-radius: 4px;
+            /* Kein Schatten! */
+        }
+        .section-flat.bg-dark-petrol .tile { background-color: #136C7A; /* Dunklere Kachel auf dunklem Grund */ color: #FFFFFF; }
+        .tile iconify-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            color: #06D6A0; /* Standard Icon Farbe */
+        }
+        .section-flat.bg-dark-petrol .tile iconify-icon { color: #FFD166; }
+        .tile h3 {
+            font-size: 1.5rem;
+            font-weight: 700; /* Roboto Bold */
+            margin-bottom: 10px;
+        }
+        .tile p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Quick Facts als Liste */
+        .quick-facts-list {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+        .quick-facts-list li {
+            background-color: rgba(0,0,0,0.05); /* Subtiler Hintergrund für Listenelemente */
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        .section-flat.bg-dark-petrol .quick-facts-list li { background-color: rgba(255,255,255,0.1); }
+
+        .quick-facts-list iconify-icon {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            color: #0E545F; /* Hauptfarbe für Icons in Listen */
+        }
+        .section-flat.bg-dark-petrol .quick-facts-list iconify-icon { color: #FFD166; }
+
+
+        /* Call to Action Section */
+        .cta-flat {
+            text-align: center;
+        }
+        .cta-flat p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        .main-footer-flat {
+            background-color: #333333; /* Dunkelgrauer Footer */
+            color: #BBCDCD;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+        .main-footer-flat .logo-footer img {
+            height: 35px;
+            margin-bottom: 15px;
+        }
+        .main-footer-flat .footer-links {
+            margin-bottom: 15px;
+        }
+        .main-footer-flat .footer-links a {
+            color: #BBCDCD;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.2s linear;
+        }
+        .main-footer-flat .footer-links a:hover {
+            color: #FFFFFF;
+        }
+        .main-footer-flat .social-icons-flat a {
+            color: #BBCDCD;
+            font-size: 1.8rem;
+            margin: 0 8px;
+            transition: color 0.2s linear;
+        }
+        .main-footer-flat .social-icons-flat a:hover {
+            color: #FFFFFF;
+        }
+        .main-footer-flat .copyright-flat {
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Scroll Animationen */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo">
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#challenge" class="active">Challenge</a></li>
+                    <li><a href="#details">Details</a></li>
+                    <li><a href="#anmeldung">Anmeldung</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-flat">
+        <div class="abstract-mountains">
+            <svg viewBox="0 0 100 10" preserveAspectRatio="none">
+                <polygon points="0,10 20,2 30,7 50,1 70,8 85,3 100,10"/>
+                <polygon points="0,10 15,4 35,9 60,3 75,7 90,2 100,10" style="opacity:0.5; transform: translateX(5px) translateY(1px);"/>
+            </svg>
+        </div>
+        <div class="container">
+            <h1>ALPIN8 EVERESTING</h1>
+            <p class="sub-headline">8848 Höhenmeter. Dein Ziel. Deine ultimative Herausforderung.</p>
+            <a href="#anmeldung" class="btn-flat">Zur Anmeldung 2025</a>
+        </div>
+    </section>
+
+    <main>
+        <section id="challenge" class="section-flat bg-light-mint">
+            <div class="container">
+                <h2 class="animate-on-scroll">Die Essenz von ALPIN8</h2>
+                <div class="info-tiles">
+                    <div class="tile animate-on-scroll">
+                        <iconify-icon icon="mdi:run-fast"></iconify-icon>
+                        <h3>Die Challenge</h3>
+                        <p>8848 Höhenmeter bergauf zu Fuß. Bergab bringt dich die Gondel. Non-Stop für 34 Stunden.</p>
+                    </div>
+                    <div class="tile animate-on-scroll" style="transition-delay: 0.1s;">
+                        <iconify-icon icon="mdi:head-cog-outline"></iconify-icon>
+                        <h3>Der Kopf entscheidet</h3>
+                        <p>Nicht aufgeben, wenn es dein Kopf dir sagt. Hier zeigst du mentale Stärke.</p>
+                    </div>
+                    <div class="tile animate-on-scroll" style="transition-delay: 0.2s;">
+                        <iconify-icon icon="mdi:summit"></iconify-icon>
+                        <h3>Das Ziel</h3>
+                        <p>Mehr erreichen, als du je für möglich gehalten hast. Entdecke dein wahres Potenzial.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="details" class="section-flat bg-dark-petrol">
+            <div class="container">
+                <h2 class="animate-on-scroll">Was dich erwartet</h2>
+                <div class="info-tiles">
+                    <div class="tile animate-on-scroll">
+                        <iconify-icon icon="mdi:shield-check-outline"></iconify-icon>
+                        <h3>Sichere Umgebung</h3>
+                        <p>Die Gondel fährt 34h. Exklusives Event mit max. 300 Teilnehmern für eine einzigartige Atmosphäre.</p>
+                    </div>
+                    <div class="tile animate-on-scroll" style="transition-delay: 0.1s;">
+                        <iconify-icon icon="mdi:food-apple-outline"></iconify-icon>
+                        <h3>Top Versorgung</h3>
+                        <p>Im Summit-Camp und an den Stationen warten beste Snacks, Getränke und Erholung auf dich.</p>
+                    </div>
+                    <div class="tile animate-on-scroll" style="transition-delay: 0.2s;">
+                        <iconify-icon icon="mdi:map-marker-radius-outline"></iconify-icon>
+                        <h3>Brandnertal, Österreich</h3>
+                        <p>Eine beeindruckende Alpenkulisse ist die Bühne für dein unvergessliches Abenteuer.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quick-facts-section" class="section-flat">
+            <div class="container">
+                <h2 class="animate-on-scroll">Quick Facts ALPIN8 2025</h2>
+                <ul class="quick-facts-list">
+                    <li class="animate-on-scroll"><iconify-icon icon="mdi:calendar-month"></iconify-icon> <strong>Datum:</strong> 04. bis 06. Juli 2025</li>
+                    <li class="animate-on-scroll" style="transition-delay: 0.05s;"><iconify-icon icon="mdi:target-arrow"></iconify-icon> <strong>Ziel:</strong> 8848 Höhenmeter (Everesting) / 4424 Höhenmeter (Everesty)</li>
+                    <li class="animate-on-scroll" style="transition-delay: 0.1s;"><iconify-icon icon="mdi:account-multiple-outline"></iconify-icon> <strong>Teilnehmende:</strong> Max. 300 für persönliche Atmosphäre</li>
+                    <li class="animate-on-scroll" style="transition-delay: 0.15s;"><iconify-icon icon="mdi:arrow-up-bold-hexagon-outline"></iconify-icon> <strong>Aufstiege:</strong> 17x Bergauf (Gondel abwärts für Everesting)</li>
+                    <li class="animate-on-scroll" style="transition-delay: 0.2s;"><iconify-icon icon="mdi:ticket-percent-outline"></iconify-icon> <strong>Ticket:</strong> €599 (Everesting) / €499 (Everesty)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="anmeldung" class="section-flat bg-yellow-accent cta-flat">
+            <div class="container">
+                <h2 class="animate-on-scroll">Bereit, deine Grenzen zu sprengen?</h2>
+                <p class="animate-on-scroll">ALPIN8 ist mehr als nur ein Event – es ist eine Erfahrung, die dein Leben bereichert. Sichere dir jetzt deinen Platz für 2025!</p>
+                <a href="#" class="btn-flat animate-on-scroll" style="background-color: #0E545F; color: white; transition-delay: 0.1s;">Jetzt zum Everesting anmelden!</a>
+                <a href="#" class="btn-flat animate-on-scroll" style="background-color: #0E545F; color: white; margin-left:15px; transition-delay: 0.15s;">Infos zum Everesty</a>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer-flat">
+        <div class="container">
+            <div class="logo-footer">
+                <img src="https://www.alpin8.eu/wp-content/uploads/2023/07/8triple8_logo_hori-weiss_web2x-1.png" alt="ALPIN8 Logo">
+            </div>
+            <div class="social-icons-flat">
+                <a href="#" aria-label="Instagram"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+                <a href="#" aria-label="Facebook"><iconify-icon icon="mdi:facebook"></iconify-icon></a>
+                <a href="#" aria-label="LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+            </div>
+            <div class="footer-links">
+                <a href="#">Impressum</a> |
+                <a href="#">Datenschutz</a> |
+                <a href="#">AGB</a> |
+                <a href="#">FAQ</a>
+            </div>
+            <p class="copyright-flat">© 2024 ALPIN8 GmbH. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Animation Trigger
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observerFlat = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observerFlat.unobserve(entry.target); // Optional: Animation nur einmal ausführen
+                }
+            });
+        }, {
+            threshold: 0.1 // Element ist zu 10% sichtbar
+        });
+
+        animatedElements.forEach(el => {
+            observerFlat.observe(el);
+        });
+    </script>
+
+</body>
+</html>
