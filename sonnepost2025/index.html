@@ -23,6 +23,7 @@
             --font-primary: 'Epilogue', sans-serif;
             --font-secondary: 'Cormorant Garamond', serif;
             --header-height: 80px;
+            --header-scroll-threshold: 50px; /* Schwelle, wann der Header den Stil ändert */
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -61,25 +62,68 @@
         .btn-outline:hover, .btn-outline:focus-visible { background-color: var(--color-bordeaux); color: var(--color-white); }
         .btn iconify-icon { vertical-align: middle; margin-right: 0.5em; font-size: 1.2em; }
 
+        /* Header Styling - Initial & Scrolled */
         .site-header {
-            background-color: var(--color-white);
-            border-bottom: 1px solid var(--color-border-subtle);
-            position: sticky;
+            position: fixed; /* Damit er über dem Hero liegt und der Effekt funktioniert */
             top: 0; left:0; right:0;
             z-index: 1000;
             height: var(--header-height);
             display: flex;
             align-items: center;
-        }
-        .site-header .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .logo img { max-height: 50px; }
+            padding: 0 20px; /* Globales Padding, .container nicht mehr nötig direkt im Header */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Sanfter Übergang für Hintergrund */
 
+            /* Initialer transparenter Zustand mit Verlauf */
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 100%);
+            background-color: transparent; /* Wichtig für den Verlauf */
+            border-bottom: none; /* Keine Linie initial */
+        }
+        .site-header.scrolled {
+            background-image: none; /* Verlauf entfernen */
+            background-color: var(--color-bordeaux);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
+            /* border-bottom: 1px solid darken(var(--color-bordeaux), 10%); -> Alternative zum Schatten */
+        }
+        .header-content-wrapper { /* Neuer Wrapper für Logo und Button, um max-width zu nutzen */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: var(--container-max-width, 1280px); /* Fallback falls --container-max-width nicht global gesetzt */
+            margin: 0 auto;
+        }
+
+        .logo .logo-default,
+        .logo .logo-scrolled {
+            max-height: 50px;
+            transition: opacity 0.3s ease;
+        }
+        .logo .logo-default { opacity: 1; } /* Weißes Logo initial sichtbar */
+        .logo .logo-scrolled { opacity: 0; position: absolute; top:0; left:0; /* Damit es keinen Platz beansprucht */}
+
+        .site-header.scrolled .logo .logo-default { opacity: 0; }
+        .site-header.scrolled .logo .logo-scrolled { opacity: 1; } /* Standard-Logo (rot/farbig) bei Scroll sichtbar */
+        /* WENN DAS LOGO IMMER WEISS IST (wie das verlinkte SVG), dann ist der Wechsel nicht nötig für das Logo selbst. */
+        /* In diesem Fall: `.logo-scrolled` kann entfernt werden, oder das gleiche SVG wird für beide verwendet. */
+        /* Für dieses Beispiel nehme ich an, das SVG ist immer weiß und funktioniert auf rotem Grund */
+
+        .nav-toggle-btn iconify-icon {
+            font-size: 2rem;
+            color: var(--color-white); /* Initial weiß für transparenten Header */
+            transition: color 0.3s ease;
+        }
+        .site-header.scrolled .nav-toggle-btn iconify-icon {
+            color: var(--color-white); /* Bleibt weiß auf rotem Grund */
+            /* Alternativ: color: var(--color-beige); für Kontrast falls Logo auch Beige wird */
+        }
+        /* Restlicher Code für .nav-toggle-btn wie zuvor */
         .nav-toggle-btn {
             background: none; border: none; padding: 10px; cursor: pointer;
             z-index: 1002; display: flex; align-items: center; justify-content: center;
         }
-        .nav-toggle-btn iconify-icon { font-size: 2rem; color: var(--color-text-primary); transition: transform 0.3s ease; }
 
+
+        /* Fullscreen Navigation */
         .fullscreen-nav {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background-color: var(--color-beige);
@@ -87,7 +131,6 @@
             opacity: 0; visibility: hidden; transform: translateY(-20px);
             transition: opacity 0.4s ease, visibility 0s linear 0.4s, transform 0.4s ease;
             display: flex; flex-direction: column;
-            padding-top: 0; /* Padding wird durch .fullscreen-nav-main geregelt */
             overflow-y: auto;
         }
         .fullscreen-nav.is-open {
@@ -96,26 +139,22 @@
         }
         .fullscreen-nav-header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 20px; /* Links/Rechts Padding für Inhalt */
+            padding: 0 20px;
             border-bottom: 1px solid var(--color-border-subtle);
             height: var(--header-height);
             width: 100%;
-            background-color: var(--color-beige); /* Muss Navi-Hintergrund haben */
-            flex-shrink: 0; /* Verhindert Schrumpfen */
+            background-color: var(--color-beige);
+            flex-shrink: 0;
         }
-        .fullscreen-nav-header .logo-fullscreen img { max-height: 40px; }
+        .fullscreen-nav-header .logo-fullscreen img {
+             max-height: 40px; /* Hier Standard-Logo (farbig) für hellen Navi-Hintergrund */
+        }
         .fullscreen-nav-close-btn { background: none; border: none; padding: 10px; cursor: pointer; }
         .fullscreen-nav-close-btn iconify-icon { font-size: 2.2rem; color: var(--color-text-primary); }
 
         .fullscreen-nav-main {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 30px 40px; /* Innenabstand für Menüpunkte */
-            width: 100%;
-            max-width: 700px; /* Maximale Breite für Lesbarkeit im Swiss Style */
-            margin: 0 auto; /* Zentrierung der Navigationsliste */
+            flex-grow: 1; display: flex; flex-direction: column; justify-content: center;
+            padding: 30px 40px; width: 100%; max-width: 700px; margin: 0 auto;
         }
         .fullscreen-nav ul { list-style: none; }
         .fullscreen-nav > ul > li { margin-bottom: 5px; border-bottom: 1px solid var(--color-border-subtle); }
@@ -152,14 +191,26 @@
         .fullscreen-nav .dropdown-menu a:focus-visible { color: var(--color-bordeaux); background-color: transparent; }
         .fullscreen-nav .dropdown-menu .dropdown-desc { display: none; }
 
-        .hero-section { min-height: calc(100vh - var(--header-height)); position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-white); padding: 40px 20px; overflow: hidden; }
-        .hero-video-bg { position: absolute; top: 50%; left: 50%; width: auto; height: auto; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); z-index: -2; object-fit: cover; }
+        /* Hero-Sektion: Benötigt Padding-Top, um Platz für den fixierten Header zu schaffen */
+        .hero-section {
+            /* min-height: calc(100vh - var(--header-height)); -> wird zu 100vh, da Header drüber liegt */
+            min-height: 100vh;
+            padding-top: var(--header-height); /* WICHTIG für fixed Header */
+            position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-white);
+            /* padding: 40px 20px; -> Padding-Top wird separat gehandhabt */
+            padding-left: 20px; padding-right: 20px; padding-bottom: 40px;
+            overflow: hidden;
+        }
+        .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; /* Geändert für Fullscreen */ z-index: -2; object-fit: cover; }
         .hero-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0, 0.45); z-index: -1; }
         .hero-content { position: relative; z-index: 1; animation: fadeInHeroText 1.2s ease-out 0.3s forwards; opacity:0; transform: translateY(20px); }
         .hero-content h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 0.3em; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
         .hero-content p { font-size: clamp(1rem, 2.5vw, 1.3rem); margin-bottom: 1.5em; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 
         .content-section { padding: 80px 0; background-color: var(--color-white); }
+        .content-section:first-of-type { padding-top: calc(80px + var(--header-height)); } /* Sicherstellen, dass erste Sektion nicht vom Header verdeckt wird, falls Hero nicht da ist */
+
+
         .content-section.bg-beige { background-color: var(--color-beige); }
         .content-section.bg-sand { background-color: var(--color-sand); }
 
@@ -223,6 +274,7 @@
         .popup-content .close-popup iconify-icon { font-size: 1.8rem; }
 
         @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
+
     </style>
 </head>
 <body>
@@ -242,10 +294,13 @@
         </div>
     </div>
 
-    <header class="site-header" role="banner">
-        <div class="container">
+    <header class="site-header" id="site-header" role="banner">
+        <div class="header-content-wrapper">
             <a href="/" class="logo" aria-label="Hotel Sonne Post - Zur Startseite">
-                <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post">
+                <!-- Das weiße Logo ist das Standard-Logo -->
+                <img src="https://sion7-ai.github.io/Spck/sonnepost2025/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post" class="logo-default">
+                <!-- Falls ein anderes Logo für den gescrollten Zustand benötigt wird (z.B. farbig), hier einfügen: -->
+                <!-- <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post" class="logo-scrolled"> -->
             </a>
             <button class="nav-toggle-btn" id="nav-toggle-btn" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Navigation öffnen">
                 <iconify-icon class="icon-menu" icon="feather:menu"></iconify-icon>
@@ -256,6 +311,7 @@
     <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true">
         <div class="fullscreen-nav-header">
             <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
+                <!-- In der Navi immer das Standard (farbige) Logo, da Hintergrund hell ist -->
                 <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post">
             </a>
             <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Navigation schließen">
@@ -487,22 +543,36 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const siteHeader = document.getElementById('site-header');
+            const headerScrollThreshold = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-scroll-threshold')) || 50;
+
+            function handleHeaderScroll() {
+                if (window.scrollY > headerScrollThreshold) {
+                    siteHeader.classList.add('scrolled');
+                } else {
+                    siteHeader.classList.remove('scrolled');
+                }
+            }
+            window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+            handleHeaderScroll(); // Initial check on load
+
+
             const navToggleBtn = document.getElementById('nav-toggle-btn');
             const fullscreenNav = document.getElementById('fullscreen-nav');
             const navCloseBtn = document.getElementById('fullscreen-nav-close-btn');
             const mainContent = document.getElementById('main-content');
-            const siteFooter = document.querySelector('.site-footer');
-            let previouslyFocusedElement = null; // Um den Fokus wiederherzustellen
+            const pageFooter = document.querySelector('.site-footer'); // Renamed to avoid conflict
+            let previouslyFocusedElement = null;
 
             function openFullscreenNav() {
-                previouslyFocusedElement = document.activeElement; // Aktuell fokussiertes Element speichern
+                previouslyFocusedElement = document.activeElement;
                 document.body.classList.add('fullscreen-nav-open');
                 fullscreenNav.classList.add('is-open');
                 fullscreenNav.setAttribute('aria-hidden', 'false');
                 navToggleBtn.setAttribute('aria-expanded', 'true');
                 navToggleBtn.setAttribute('aria-label', 'Navigation schließen');
                 if (mainContent) mainContent.setAttribute('aria-hidden', 'true');
-                if (siteFooter) siteFooter.setAttribute('aria-hidden', 'true');
+                if (pageFooter) pageFooter.setAttribute('aria-hidden', 'true'); // Use renamed variable
                 navCloseBtn.focus();
             }
 
@@ -513,37 +583,26 @@
                 navToggleBtn.setAttribute('aria-expanded', 'false');
                 navToggleBtn.setAttribute('aria-label', 'Navigation öffnen');
                 if (mainContent) mainContent.setAttribute('aria-hidden', 'false');
-                if (siteFooter) siteFooter.setAttribute('aria-hidden', 'false');
-                if (previouslyFocusedElement) {
-                    previouslyFocusedElement.focus(); // Fokus auf das vorherige Element setzen
-                } else {
-                    navToggleBtn.focus(); // Fallback: Fokus auf den Toggle-Button
-                }
+                if (pageFooter) pageFooter.setAttribute('aria-hidden', 'false'); // Use renamed variable
+                if (previouslyFocusedElement) previouslyFocusedElement.focus();
+                else navToggleBtn.focus();
             }
 
             if (navToggleBtn && fullscreenNav && navCloseBtn) {
                 navToggleBtn.addEventListener('click', () => {
-                    if (fullscreenNav.classList.contains('is-open')) {
-                        closeFullscreenNav();
-                    } else {
-                        openFullscreenNav();
-                    }
+                    if (fullscreenNav.classList.contains('is-open')) closeFullscreenNav();
+                    else openFullscreenNav();
                 });
                 navCloseBtn.addEventListener('click', closeFullscreenNav);
-
                 fullscreenNav.querySelectorAll('a:not(.has-dropdown-toggle)').forEach(link => {
                     link.addEventListener('click', () => {
-                        // Schließen nur, wenn es kein Ankerlink auf derselben Seite ist
                         if (!link.getAttribute('href').startsWith('#') || link.getAttribute('href') === '#') {
                              closeFullscreenNav();
                         }
                     });
                 });
-
                 document.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape' && fullscreenNav.classList.contains('is-open')) {
-                        closeFullscreenNav();
-                    }
+                    if (event.key === 'Escape' && fullscreenNav.classList.contains('is-open')) closeFullscreenNav();
                 });
             }
 
@@ -552,7 +611,7 @@
                 if (submenu) {
                     toggle.addEventListener('click', () => {
                         const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-                        toggle.setAttribute('aria-expanded', String(!isExpanded)); // Korrekter boolescher String
+                        toggle.setAttribute('aria-expanded', String(!isExpanded));
                         submenu.classList.toggle('is-open');
                     });
                 }
@@ -585,7 +644,6 @@
                 const popup = document.getElementById(popupId);
                 if (popup) popup.classList.remove('is-visible');
             };
-            // Beispiel: if (CMS_VARIABLE_BETRIEBSFERIEN_AKTIV) { showPopup('betriebsferien-popup'); }
 
             function initializeSlider(sliderId, prevBtnId, nextBtnId, pauseBtnId = null, autoPlay = false, autoPlayInterval = 5000) {
                 const sliderWrapper = document.getElementById(sliderId);
