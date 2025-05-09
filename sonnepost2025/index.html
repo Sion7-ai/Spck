@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Sonne Post | Urlaub zum Durchatmen im Schwarzwald</title>
+    <meta name="description" content="Erleben Sie traditionsbewusste Gastfreundschaft und modernen Komfort im Hotel Sonne Post. Ihr Refugium für Wellness und Natur im Schwarzwald.">
+
+    <!-- Favicon - Bitte absolute URL verwenden -->
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts: Cormorant Garamond (Headlines), Epilogue (Text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- GSAP (GreenSock Animation Platform) - Core -->
+    <!-- Das Iconify Skript wird jetzt am Ende des Bodys geladen -->
+
+    <style>
+        /* Basis Reset und grundlegende Einstellungen */
+        :root {
+            --color-white: #FFFFFF;
+            --color-beige: #F7F2EC;
+            --color-sand: #E6DCCF;
+            --color-bordeaux: #8C1E2D; /* Akzent für CTAs */
+            --color-text-primary: #4A4A4A; /* Leicht desaturiertes Dunkelgrau für Text */
+            --color-text-secondary: #757575;
+            --color-border-subtle: #E0D8CE; /* Für feine Linien, abgeleitet von Sand */
+
+            --font-primary: 'Epilogue', sans-serif;
+            --font-secondary: 'Cormorant Garamond', serif;
+
+            --header-height: 80px; /* Beispielwert, anpassen falls nötig */
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.7;
+            color: var(--color-text-primary);
+            background-color: var(--color-white); /* Primär Weiß */
+            font-size: 16px; /* WCAG: Relative Einheiten für Skalierbarkeit */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        img, video { max-width: 100%; height: auto; display: block; }
+        /* Lazy Loading als Standard für alle Bilder */
+        img { loading: lazy; }
+
+        a { color: var(--color-bordeaux); text-decoration: none; }
+        a:hover, a:focus-visible { text-decoration: underline; color: var(--color-bordeaux); } /* Fokus-Stil für Links */
+
+        /* WCAG: Visuelle Hervorhebung des Fokus für Tastaturnutzer */
+        *:focus-visible {
+            outline: 2px solid var(--color-bordeaux);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 4px rgba(140, 30, 45, 0.2); /* Bordeaux mit Transparenz */
+        }
+        /* Ausnahme für Elemente, die ihren eigenen besseren Fokusstil haben */
+        .btn:focus-visible, .main-navigation a:focus-visible {
+            outline: 2px solid var(--color-bordeaux);
+            outline-offset: 2px;
+        }
+
+
+        /* Hilfsklasse für Screenreader-Only Text (WCAG) */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        .sr-only-focusable:active, .sr-only-focusable:focus { /* Damit Skip-Links sichtbar werden beim Fokussieren */
+            position: static;
+            width: auto;
+            height: auto;
+            margin: 0;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+            padding: 1em;
+            background-color: var(--color-beige);
+            color: var(--color-bordeaux);
+            z-index: 9999; /* Über allem anderen */
+            border: 1px solid var(--color-bordeaux);
+        }
+
+
+        .container {
+            max-width: 1280px; /* Etwas breiter für großzügigen Weißraum */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-secondary);
+            font-weight: 600; /* Etwas kräftiger für Headlines */
+            line-height: 1.2;
+            margin-bottom: 0.75em;
+        }
+        h1 { font-size: 3rem; } /* Beispielgrößen, anpassbar */
+        h2 { font-size: 2.25rem; margin-bottom: 1.5em; text-align: center; }
+        h3 { font-size: 1.5rem; }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8em 1.8em;
+            background-color: var(--color-bordeaux);
+            color: var(--color-white);
+            font-family: var(--font-primary);
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid var(--color-bordeaux);
+            border-radius: 4px; /* Sanfte Rundung */
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+        }
+        .btn:hover, .btn:focus-visible {
+            background-color: #701623; /* Dunkleres Bordeaux */
+            color: var(--color-white);
+            text-decoration: none;
+            transform: translateY(-2px); /* Leichter Hover-Effekt */
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-bordeaux);
+            border: 1px solid var(--color-bordeaux);
+        }
+        .btn-outline:hover, .btn-outline:focus-visible {
+            background-color: var(--color-bordeaux);
+            color: var(--color-white);
+        }
+        .btn .iconify-icon { /* Icons in Buttons */
+            vertical-align: middle;
+            margin-right: 0.5em;
+            font-size: 1.2em;
+        }
+
+
+        /* Header-Styling */
+        .site-header {
+            background-color: var(--color-white);
+            padding: 0; /* Angepasst für Höhe der Nav-Items */
+            border-bottom: 1px solid var(--color-border-subtle); /* Feine Linie */
+            position: sticky;
+            top: 0;
+            left:0;
+            right:0;
+            z-index: 1000;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+        }
+        .site-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .logo img { max-height: 50px; } /* Etwas kleiner für edleren Look */
+
+        /* Hauptnavigation - Neu gedacht */
+        .main-navigation { position: relative; } /* Für Dropdowns */
+        .main-navigation ul { list-style: none; display: flex; }
+        .main-navigation li { position: relative; } /* Für Dropdown-Positionierung */
+        .main-navigation a {
+            display: flex; /* Für Icon + Text Alignment */
+            align-items: center;
+            padding: calc((var(--header-height) - 1.2em - 2px) / 2) 1.2em; /* Vertikal zentriert, 1.2em ist ca. font-size + line-height */
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--color-text-primary);
+            text-decoration: none;
+            transition: color 0.2s ease, background-color 0.2s ease;
+            height: var(--header-height);
+        }
+        .main-navigation a:hover,
+        .main-navigation a:focus-visible,
+        .main-navigation li.active > a { /* Aktiver Menüpunkt */
+            color: var(--color-bordeaux);
+            background-color: var(--color-beige);
+        }
+        .main-navigation a .iconify-icon {
+            margin-right: 0.5em;
+            font-size: 1.2rem; /* Passende Icon-Größe */
+            color: var(--color-text-secondary); /* Dezentere Icon-Farbe */
+            transition: color 0.2s ease;
+        }
+        .main-navigation a:hover .iconify-icon,
+        .main-navigation a:focus-visible .iconify-icon,
+        .main-navigation li.active > a .iconify-icon {
+            color: var(--color-bordeaux);
+        }
+
+        /* Dropdown Menü Styling */
+        .dropdown-menu {
+            display: none; /* Standardmäßig versteckt */
+            position: absolute;
+            top: 100%; /* Direkt unter dem Elternelement */
+            left: 0;
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border-subtle);
+            border-top: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Reduzierter Schatten */
+            min-width: 220px; /* Mindestbreite für Dropdowns */
+            z-index: 1001;
+            padding: 0.5em 0;
+            border-radius: 0 0 4px 4px;
+        }
+        .has-dropdown:hover .dropdown-menu,
+        .has-dropdown:focus-within .dropdown-menu { /* Zeigen bei Hover/Fokus auf Elternelement */
+            display: block;
+        }
+        .dropdown-menu li { display: block; }
+        .dropdown-menu a {
+            padding: 0.7em 1.2em;
+            display: block; /* Damit Links die volle Breite einnehmen */
+            white-space: nowrap;
+            font-size: 0.9rem;
+            height: auto; /* Höhe zurücksetzen für Dropdown-Items */
+        }
+        .dropdown-menu a .dropdown-desc {
+            display: block;
+            font-size: 0.8em;
+            color: var(--color-text-secondary);
+            margin-top: 0.2em;
+        }
+        .dropdown-menu a:hover, .dropdown-menu a:focus-visible {
+            background-color: var(--color-beige);
+            color: var(--color-bordeaux);
+        }
+
+        /* Hero-Sektion */
+        .hero-section {
+            min-height: calc(100vh - var(--header-height)); /* Fullscreen minus Header */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white);
+            position: relative;
+            padding: 40px 20px; /* Padding für Inhalt */
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0, 0.35); /* Etwas helleres Overlay für ruhige Bilder */
+        }
+        .hero-content { position: relative; z-index: 1; animation: fadeInHeroText 1.2s ease-out 0.3s forwards; opacity:0; transform: translateY(20px); }
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); /* Responsive Schriftgröße */
+            margin-bottom: 0.3em;
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        .hero-content p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            margin-bottom: 1.5em;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+
+        /* Allgemeine Content-Sektionen */
+        .content-section {
+            padding: 80px 0; /* Großzügiger Weißraum */
+            background-color: var(--color-white);
+        }
+        .content-section.bg-beige { background-color: var(--color-beige); }
+        .content-section.bg-sand { background-color: var(--color-sand); }
+
+
+        /* Teaser Grid (3 Kacheln) */
+        .teaser-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; /* Mehr Abstand */
+        }
+        .teaser-card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border-subtle); /* Feine Linie */
+            border-radius: 6px; /* Sanfte Rundung */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .teaser-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.07); /* Reduzierter Schatten bei Hover */
+        }
+        .teaser-card img {
+            width: 100%;
+            height: 220px; /* Angepasste Höhe */
+            object-fit: cover;
+        }
+        .teaser-card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .teaser-card h3 {
+            margin-bottom: 0.5em;
+            color: var(--color-text-primary);
+            font-size: 1.3rem;
+        }
+        .teaser-card p {
+            margin-bottom: 1.5em;
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        .teaser-card .btn { margin-top: auto; } /* Button am unteren Rand */
+
+        /* Testimonials Slider */
+        .testimonials-section { background-color: var(--color-beige); }
+        .testimonial-quote {
+            text-align: center;
+            padding: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .testimonial-quote p {
+            font-size: 1.2rem; /* Etwas größer */
+            font-style: italic;
+            color: var(--color-text-primary);
+            margin-bottom: 1em;
+        }
+        .testimonial-quote cite {
+            font-style: normal;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+        .slider-container { position: relative; overflow: hidden; }
+        .slider-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; box-sizing: border-box; padding: 0 10px; /* Kleiner Abstand zwischen Slides */ }
+        .slider-controls { text-align: center; margin-top: 25px; }
+        .slider-controls button {
+            background: none;
+            border: none;
+            color: var(--color-text-secondary);
+            padding: 8px;
+            margin: 0 8px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: color 0.2s ease, background-color 0.2s ease;
+        }
+        .slider-controls button:hover, .slider-controls button:focus-visible {
+             color: var(--color-bordeaux);
+             background-color: rgba(140, 30, 45, 0.1);
+        }
+        .slider-controls button .iconify-icon { font-size: 1.8rem; } /* Größere Icons für Steuerung */
+        .slider-controls button:disabled { color: var(--color-border-subtle); cursor: not-allowed; background-color: transparent; }
+        .slider-pause-button .iconify-icon { font-size: 1.5rem; }
+
+
+        /* Karriere Teaser Sektion */
+        .karriere-teaser-section {
+            background-color: var(--color-sand); /* Sand-Hintergrund */
+            text-align: center;
+        }
+        .karriere-teaser-section .btn { margin-top: 1em; }
+
+        /* Call to Action (Newsletter) */
+        .cta-section { /* Als Banner, nicht Footer-Modul für mehr Präsenz */
+            background-color: var(--color-beige);
+            padding: 60px 0;
+            text-align: center;
+        }
+        .cta-section h2 { color: var(--color-text-primary); }
+        .cta-section p { margin-bottom: 25px; font-size: 1.1rem; max-width: 550px; margin-left: auto; margin-right: auto;}
+        .form-newsletter { display: flex; justify-content: center; max-width: 450px; margin: 0 auto; }
+        .form-newsletter input[type="email"] {
+            padding: 0.8em 1em;
+            flex-grow: 1;
+            border: 1px solid var(--color-border-subtle);
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+        }
+        .form-newsletter input[type="email"]:focus-visible {
+            border-color: var(--color-bordeaux);
+            outline: none;
+            box-shadow: none; /* Überschreibt globalen Fokus-Stil hier */
+            z-index: 1; /* Um Border über Button zu legen */
+        }
+        .form-newsletter button {
+            border-radius: 0 4px 4px 0;
+            padding: 0.8em 1.5em; /* Gleiche Höhe wie Input */
+        }
+        .form-newsletter button .iconify-icon { margin-right: 0; } /* Nur Icon für den Button */
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--color-white);
+            color: var(--color-text-secondary);
+            padding: 60px 0 30px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--color-border-subtle);
+        }
+        .site-footer .container-footer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .site-footer h4 {
+            font-family: var(--font-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--color-text-primary);
+            font-weight: 600;
+        }
+        .site-footer ul { list-style: none; }
+        .site-footer ul li { margin-bottom: 10px; }
+        .site-footer a { color: var(--color-text-secondary); }
+        .site-footer a:hover, .site-footer a:focus-visible { color: var(--color-bordeaux); text-decoration: underline; }
+        .social-links a { margin-right: 12px; font-size: 1.3rem; color: var(--color-text-secondary); }
+        .social-links a:hover, .social-links a:focus-visible { color: var(--color-bordeaux); }
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--color-border-subtle);
+            margin-top: 40px;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Sticky Buchungs-Button (Fähnchen) */
+        .booking-widget-trigger {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: bottom right;
+            background-color: var(--color-bordeaux);
+            color: var(--color-white);
+            padding: 12px 22px; /* Etwas größer */
+            font-family: var(--font-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            z-index: 1001;
+            border-radius: 4px 4px 0 0;
+            box-shadow: -2px -2px 8px rgba(0,0,0,0.1); /* Reduzierter Schatten */
+            transition: background-color 0.3s ease;
+        }
+        .booking-widget-trigger:hover, .booking-widget-trigger:focus-visible {
+            background-color: #701623; /* Dunkleres Bordeaux */
+            text-decoration: none;
+            color: var(--color-white);
+        }
+        .booking-widget-trigger .iconify-icon {
+            vertical-align: middle;
+            margin-right: 8px;
+            font-size: 1.3em;
+            transform: rotate(90deg); /* Icon richtig ausrichten */
+        }
+        /* Hinweis: Für Mobile ggf. Sticky-Bottom-Booking-Button als Alternative */
+
+        /* Betriebsferien Pop-Up */
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(50, 50, 50, 0.7); /* Dunkleres Overlay */
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2000; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .popup-overlay.is-visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .popup-content {
+            background-color: var(--color-white); padding: 40px; border-radius: 6px;
+            max-width: 550px; text-align: center; position: relative;
+            transform: scale(0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .popup-overlay.is-visible .popup-content {
+            transform: scale(1);
+        }
+        .popup-content h3 { font-size: 1.8rem; color: var(--color-text-primary); margin-bottom: 0.5em; }
+        .popup-content p { margin-bottom: 1em; font-size: 1rem; }
+        .popup-content .close-popup {
+            position: absolute; top: 15px; right: 15px; background: none; border: none;
+            font-size: 1.5rem; cursor: pointer; color: var(--color-text-secondary);
+            padding: 5px; line-height: 1;
+        }
+        .popup-content .close-popup:hover, .popup-content .close-popup:focus-visible { color: var(--color-bordeaux); }
+        .popup-content .close-popup .iconify-icon { font-size: 1.8rem; }
+
+        /* GSAP Animationen */
+        @keyframes fadeInHeroText {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Weitere Animationen können hier oder direkt mit GSAP im JS definiert werden */
+
+        /* Mobile Anpassungen (Beispiel für Navigation, Accordion müsste per JS umgesetzt werden) */
+        @media (max-width: 991px) { /* Beispiel-Breakpoint für mobile Navigation */
+            .site-header .container { flex-wrap: wrap; }
+            .main-navigation {
+                order: 3; /* Nach Logo und Mobile-Toggle */
+                width: 100%;
+                max-height: 0; /* Versteckt für JS-Toggle */
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out;
+                background-color: var(--color-white); /* Hintergrund für mobile Navi */
+                border-top: 1px solid var(--color-border-subtle); /* Trennlinie oben */
+            }
+            .main-navigation.is-open {
+                max-height: 100vh; /* Genug Höhe für alle Items */
+            }
+            .main-navigation ul { flex-direction: column; }
+            .main-navigation a {
+                padding: 0.8em 1.2em;
+                border-bottom: 1px solid var(--color-border-subtle);
+                height: auto;
+            }
+            .main-navigation li:last-child a { border-bottom: none; }
+            .dropdown-menu {
+                position: static; /* Im Fluss für Mobile */
+                border: none;
+                box-shadow: none;
+                padding-left: 1.5em; /* Einrücken für Sub-Items */
+                background-color: var(--color-beige); /* Leichter Hintergrund für Submenü */
+            }
+            .has-dropdown > a::after { /* Optional: Pfeil für aufklappbare Menüs */
+                /* Wird durch Iconify ersetzt wenn man es per JS steuert oder nur CSS :after macht */
+                /* content: '▼'; */
+                /* margin-left: auto; */
+                /* font-size: 0.7em; */
+            }
+            .mobile-nav-toggle {
+                display: block; /* Wird per JS oder CSS bei Bedarf angezeigt */
+                order: 2;
+                background: none; border: none; padding: 10px;
+                cursor: pointer;
+            }
+            .mobile-nav-toggle .iconify-icon { font-size: 1.8rem; color: var(--color-text-primary); }
+        }
+        .mobile-nav-toggle { display: none; } /* Standardmäßig versteckt, im Media Query dann block */
+        @media (max-width: 991px) { .mobile-nav-toggle { display: block; } }
+
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+    <a href="#main-navigation" class="sr-only sr-only-focusable">Zur Hauptnavigation springen</a>
+
+    <div class="popup-overlay" id="betriebsferien-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-description">
+        <div class="popup-content">
+            <button class="close-popup" aria-label="Schließen" onclick="closePopup('betriebsferien-popup')">
+                <span class="iconify-icon" data-icon="feather:x"></span>
+            </button>
+            <h3 id="popup-title">Betriebsferien Ankündigung</h3>
+            <div id="popup-description">
+                <p>Liebe Gäste,</p>
+                <p>unser Hotel hat vom [Startdatum] bis einschließlich [Enddatum] Betriebsferien. Wir freuen uns, Sie danach wieder bei uns begrüßen zu dürfen!</p>
+            </div>
+        </div>
+    </div>
+
+    <header class="site-header" role="banner">
+        <div class="container">
+            <a href="/" class="logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post">
+            </a>
+
+            <!-- Mobile Navigation Toggle Button -->
+            <button class="mobile-nav-toggle" aria-controls="main-navigation" aria-expanded="false" aria-label="Navigation umschalten">
+                <span class="iconify-icon icon-menu" data-icon="feather:menu"></span>
+                <span class="iconify-icon icon-close sr-only" data-icon="feather:x"></span>
+            </button>
+
+            <nav class="main-navigation" id="main-navigation" aria-label="Hauptnavigation">
+                <ul>
+                    <li class="has-dropdown">
+                        <a href="/hotel" aria-haspopup="true" aria-expanded="false">
+                            <span class="iconify-icon" data-icon="feather:home"></span> Hotel
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="/hotel/ueber-uns">Über Uns <span class="dropdown-desc">Unsere Philosophie</span></a></li>
+                            <li role="menuitem"><a href="/hotel/geschichte">Geschichte <span class="dropdown-desc">Tradition seit 1870</span></a></li>
+                            <li role="menuitem"><a href="/hotel/nachhaltigkeit">Nachhaltigkeit <span class="dropdown-desc">Unser Beitrag</span></a></li>
+                            <li role="menuitem"><a href="/hotel/gastfreund-app">Gastfreund App <span class="dropdown-desc">Ihr digitaler Begleiter</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="/zimmer-preise" aria-haspopup="true" aria-expanded="false">
+                             <span class="iconify-icon" data-icon="feather:key"></span> Zimmer & Preise
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="/zimmer-preise/uebersicht">Zimmerübersicht <span class="dropdown-desc">Alle Kategorien</span></a></li>
+                            <li role="menuitem"><a href="/zimmer-preise/suite-bergblick">Suite Bergblick <span class="dropdown-desc">Exklusiver Komfort</span></a></li>
+                            <li role="menuitem"><a href="/zimmer-preise/anfragen">Unverbindlich Anfragen <span class="dropdown-desc">Wir beraten Sie</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/wellness-spa">
+                        <span class="iconify-icon" data-icon="feather:wind"></span> Wellness & SPA
+                    </a></li>
+                    <li class="has-dropdown">
+                        <a href="/arrangements" aria-haspopup="true" aria-expanded="false">
+                            <span class="iconify-icon" data-icon="feather:gift"></span> Arrangements
+                        </a>
+                         <ul class="dropdown-menu" role="menu">
+                            <li role="menuitem"><a href="/arrangements/fuer-paare">Für Paare <span class="dropdown-desc">Romantische Auszeit</span></a></li>
+                            <li role="menuitem"><a href="/arrangements/fuer-familien">Für Familien <span class="dropdown-desc">Urlaub mit Kindern</span></a></li>
+                            <li role="menuitem"><a href="/arrangements/wellness-specials">Wellness-Specials <span class="dropdown-desc">Pure Entspannung</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/karriere">
+                        <span class="iconify-icon" data-icon="feather:briefcase"></span> Karriere
+                    </a></li>
+                    <li><a href="/kontakt-anreise">
+                        <span class="iconify-icon" data-icon="feather:map-pin"></span> Kontakt & Anreise
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <a href="EXTERNES_BUCHUNGSTOOL_URL" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
+        <span class="iconify-icon" data-icon="feather:calendar"></span> Buchen
+    </a>
+
+    <main id="main-content" role="main">
+
+        <section class="hero-section" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg');" aria-labelledby="hero-heading">
+            <div class="hero-content">
+                <h1 id="hero-heading">Tradition. Wellness. Natur.</h1>
+                <p>Ihr Urlaub zum Durchatmen im Herzen des Schwarzwalds. Entdecken Sie die Sonne Post.</p>
+                <a href="/zimmer-preise" class="btn">
+                     <span class="iconify-icon" data-icon="feather:eye"></span> Zimmer entdecken
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section teaser-section" aria-labelledby="highlights-heading">
+            <div class="container">
+                <h2 id="highlights-heading" class="gsap-fade-in">Urlaubsmomente, die bleiben</h2>
+                <div class="teaser-grid">
+                    <article class="teaser-card gsap-fade-in-up" aria-labelledby="teaser-title-arrangements">
+                        <img src="https://www.example.com/assets/arrangements_teaser.jpg" alt="Paar genießt ein Picknick in der Natur">
+                        <div class="teaser-card-content">
+                            <h3 id="teaser-title-arrangements">Exklusive Arrangements</h3>
+                            <p>Maßgeschneiderte Erlebnisse für Ihre perfekte Auszeit – von Romantik bis Aktivurlaub.</p>
+                            <a href="/arrangements" class="btn btn-outline">
+                                <span class="iconify-icon" data-icon="feather:gift"></span> Zu den Angeboten
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="teaser-card gsap-fade-in-up" data-gsap-delay="0.1" aria-labelledby="teaser-title-wellness">
+                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Entspannte Atmosphäre im Wellnessbereich mit Schwimmbad">
+                        <div class="teaser-card-content">
+                            <h3 id="teaser-title-wellness">Wellness &amp; SPA Oase</h3>
+                            <p>Tauchen Sie ein in unsere Welt der Entspannung mit Saunen, Pools und wohltuenden Anwendungen.</p>
+                            <a href="/wellness-spa" class="btn btn-outline">
+                                <span class="iconify-icon" data-icon="feather:wind"></span> Mehr erfahren
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="teaser-card gsap-fade-in-up" data-gsap-delay="0.2" aria-labelledby="teaser-title-zimmer">
+                        <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Stilvoll eingerichtetes Hotelzimmer mit Bergblick">
+                        <div class="teaser-card-content">
+                            <h3 id="teaser-title-zimmer">Unsere Zimmerwelten</h3>
+                            <p>Finden Sie Ihr persönliches Refugium – von gemütlichen Einzelzimmern bis zu großzügigen Suiten.</p>
+                            <a href="/zimmer-preise" class="btn btn-outline">
+                                <span class="iconify-icon" data-icon="feather:key"></span> Zimmer ansehen
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section testimonials-section" aria-labelledby="testimonials-heading">
+            <div class="container">
+                <h2 id="testimonials-heading" class="gsap-fade-in">Stimmen unserer Gäste</h2>
+                <div class="slider-container" role="region" aria-roledescription="Karussell">
+                    <div class="slider-wrapper" id="testimonial-slider">
+                        <div class="slide">
+                            <blockquote class="testimonial-quote">
+                                <p>"Ein absoluter Traumurlaub! Die Ruhe, das Ambiente und die herzliche Gastfreundschaft sind unübertroffen. Wir haben uns so wohlgefühlt."</p>
+                                <cite>Familie Schneider (Urlaub mit Kindern)</cite>
+                            </blockquote>
+                        </div>
+                        <div class="slide">
+                            <blockquote class="testimonial-quote">
+                                <p>"Der Wellnessbereich ist eine Oase der Erholung. Perfekt für ein Mädelswochenende! Die Anwendungen waren erstklassig."</p>
+                                <cite>Julia K. & Freundinnen (Wellness-Auszeit)</cite>
+                            </blockquote>
+                        </div>
+                         <div class="slide">
+                            <blockquote class="testimonial-quote">
+                                <p>"Wir kommen seit Jahren und schätzen die gleichbleibend hohe Qualität und die persönliche Betreuung. Für uns als Rentner ideal."</p>
+                                <cite>Ehepaar Wagner (Stammgäste)</cite>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button id="prevSlideTestimonial" aria-label="Vorheriges Testimonial"><span class="iconify-icon" data-icon="feather:arrow-left-circle"></span></button>
+                        <button class="slider-pause-button" id="testimonial-pause" aria-label="Animation anhalten/fortsetzen">
+                            <span class="iconify-icon" data-icon="feather:pause-circle"></span>
+                        </button>
+                        <button id="nextSlideTestimonial" aria-label="Nächstes Testimonial"><span class="iconify-icon" data-icon="feather:arrow-right-circle"></span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section karriere-teaser-section" aria-labelledby="karriere-teaser-heading">
+            <div class="container">
+                <h2 id="karriere-teaser-heading" class="gsap-fade-in">Werden Sie Teil unseres Teams</h2>
+                <p class="gsap-fade-in" data-gsap-delay="0.1">
+                    Die Sonne Post lebt von herzlichen Gastgebern. Entdecken Sie Ihre Karrieremöglichkeiten in einem traditionsreichen Haus mit Zukunft.
+                </p>
+                <a href="/karriere" class="btn gsap-fade-in" data-gsap-delay="0.2">
+                    <span class="iconify-icon" data-icon="feather:briefcase"></span> Offene Stellen
+                </a>
+            </div>
+        </section>
+
+
+        <section class="cta-section" aria-labelledby="newsletter-heading-cta">
+            <div class="container">
+                <h2 id="newsletter-heading-cta">Nichts mehr verpassen</h2>
+                <p>Abonnieren Sie unseren Newsletter für exklusive Angebote, Neuigkeiten und Urlaubsinspiration direkt aus der Sonne Post.</p>
+                <form action="/newsletter-anmeldung" method="post" class="form-newsletter" aria-describedby="newsletter-privacy-info">
+                    <label for="newsletter-email" class="sr-only">E-Mail-Adresse für Newsletter</label>
+                    <input type="email" id="newsletter-email" name="email" placeholder="Ihre E-Mail-Adresse" required aria-required="true">
+                    <button type="submit" class="btn" aria-label="Newsletter abonnieren">
+                        <span class="iconify-icon" data-icon="feather:mail"></span>
+                    </button>
+                </form>
+                <p id="newsletter-privacy-info" style="font-size: 0.8em; margin-top: 15px; color: var(--color-text-secondary);">
+                    Ihre Daten sind bei uns sicher. Mehr Infos: <a href="/datenschutz" style="color: var(--color-text-secondary); text-decoration: underline;">Datenschutz</a>.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container-footer">
+            <div class="footer-column">
+                <h4>Hotel Sonne Post</h4>
+                <address>
+                    Musterstraße 1<br>
+                    79822 Titisee-Neustadt<br>
+                    Schwarzwald, Deutschland<br><br>
+                    Tel: <a href="tel:+49765112345">+49 7651 12345</a><br>
+                    E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a>
+                </address>
+            </div>
+
+            <div class="footer-column">
+                <h4>Entdecken</h4>
+                <ul>
+                    <li><a href="/hotel/ueber-uns">Über uns</a></li>
+                    <li><a href="/zimmer-preise">Zimmer & Preise</a></li>
+                    <li><a href="/wellness-spa">Wellness & SPA</a></li>
+                    <li><a href="/arrangements">Arrangements</a></li>
+                    <li><a href="/region-aktiv">Region & Aktiv</a></li>
+                    <li><a href="/kulinarik">Kulinarik</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Information</h4>
+                 <ul>
+                    <li><a href="/kontakt-anreise">Kontakt & Anreise</a></li>
+                    <li><a href="/karriere">Karriere</a></li>
+                    <li><a href="/hotel/nachhaltigkeit">Nachhaltigkeit</a></li>
+                    <li><a href="/hotel/gastfreund-app">Gastfreund App</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                 </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Rechtliches</h4>
+                 <ul>
+                    <li><a href="/impressum">Impressum</a></li>
+                    <li><a href="/datenschutz">Datenschutz</a></li>
+                    <li><a href="/agb">AGB</a></li>
+                    <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li>
+                </ul>
+                <h4 style="margin-top: 20px;">Folgen Sie uns</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/IHRE_SEITE" target="_blank" rel="noopener noreferrer" aria-label="Hotel Sonne Post auf Facebook">
+                        <span class="iconify-icon" data-icon="feather:facebook"></span>
+                    </a>
+                    <a href="https://www.instagram.com/IHRE_SEITE" target="_blank" rel="noopener noreferrer" aria-label="Hotel Sonne Post auf Instagram">
+                        <span class="iconify-icon" data-icon="feather:instagram"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten. Ein Design von Ihrer Webdesign-KI.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Dateien -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Iconify für Icons (Free-Set, z.B. Feather, Material Symbols) - jetzt am Ende des Bodys -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sicherstellen, dass DOM geladen ist, bevor Skripte ausgeführt werden
+
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // GSAP Animationen
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.utils.toArray('.gsap-fade-in').forEach(el => {
+                gsap.from(el, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none none",
+                        once: true
+                    }
+                });
+            });
+
+            gsap.utils.toArray('.gsap-fade-in-up').forEach(el => {
+                const delay = parseFloat(el.dataset.gsapDelay) || 0;
+                gsap.from(el, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.8,
+                    delay: delay,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 90%",
+                        toggleActions: "play none none none",
+                        once: true
+                    }
+                });
+            });
+
+            // Betriebsferien Pop-Up
+            const betriebsferienPopup = document.getElementById('betriebsferien-popup');
+            function showPopup(popupId) {
+                const popup = document.getElementById(popupId);
+                if (popup) {
+                    popup.classList.add('is-visible');
+                    popup.querySelector('.close-popup').focus(); // Fokus auf Schließen-Button setzen
+                }
+            }
+            function closePopup(popupId) {
+                const popup = document.getElementById(popupId);
+                if (popup) {
+                    popup.classList.remove('is-visible');
+                }
+            }
+            // Beispiel für TYPO3 Integration:
+            // const showBetriebsferien = CMS_VARIABLE_BETRIEBSFERIEN_AKTIV; // true/false aus CMS
+            // if (showBetriebsferien) {
+            //    showPopup('betriebsferien-popup');
+            // }
+            // Für Demozwecke direkt aufrufen:
+            // showPopup('betriebsferien-popup'); // Dies auskommentieren für normale Anzeige
+
+            // Mobile Navigation Toggle
+            const navToggle = document.querySelector('.mobile-nav-toggle');
+            const mainNav = document.getElementById('main-navigation');
+            const iconMenu = navToggle.querySelector('.icon-menu');
+            const iconClose = navToggle.querySelector('.icon-close');
+
+            if (navToggle && mainNav) {
+                navToggle.addEventListener('click', () => {
+                    const isOpened = mainNav.classList.toggle('is-open');
+                    navToggle.setAttribute('aria-expanded', isOpened);
+                    if (isOpened) {
+                        iconMenu.classList.add('sr-only');
+                        iconClose.classList.remove('sr-only');
+                        mainNav.querySelector('a').focus(); // Fokus auf erstes Element in Navi
+                    } else {
+                        iconMenu.classList.remove('sr-only');
+                        iconClose.classList.add('sr-only');
+                    }
+                });
+            }
+
+            // Dropdown-Logik für Barrierefreiheit und Touch (Verbesserung)
+            document.querySelectorAll('.has-dropdown > a').forEach(anchor => {
+                const dropdownMenu = anchor.nextElementSibling;
+                if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                    anchor.addEventListener('click', function(event) {
+                        // Für Mobile: Toggle bei Klick auf Hauptlink
+                        if (window.innerWidth < 992) {
+                            event.preventDefault(); // Verhindert Navigation, öffnet/schließt Dropdown
+                            const isExpanded = anchor.getAttribute('aria-expanded') === 'true';
+                            anchor.setAttribute('aria-expanded', !isExpanded);
+                            dropdownMenu.style.display = isExpanded ? 'none' : 'block'; // Simples Toggle
+                        }
+                    });
+                    // Sicherstellen, dass das Dropdown bei Fokusverlust (Tabben aus dem Menü) schließt,
+                    // falls es nicht per Hover offen gehalten wird.
+                    const allFocusableElements = Array.from(dropdownMenu.querySelectorAll('a, button'));
+                    if (allFocusableElements.length > 0) {
+                        const lastFocusableElement = allFocusableElements[allFocusableElements.length - 1];
+                        lastFocusableElement.addEventListener('blur', (event) => {
+                            // Wenn der Fokus das Dropdown verlässt
+                            if (!dropdownMenu.contains(event.relatedTarget) && !anchor.contains(event.relatedTarget)) {
+                                if (window.innerWidth >= 992) { // Nur für Desktop, Mobile wird anders gehandhabt
+                                   // CSS :focus-within sollte das eigentlich abdecken
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+
+            // Slider Logik
+            function initializeSlider(sliderId, prevBtnId, nextBtnId, pauseBtnId = null, autoPlay = false, autoPlayInterval = 5000) {
+                const sliderWrapper = document.getElementById(sliderId);
+                if (!sliderWrapper) return;
+
+                const slides = Array.from(sliderWrapper.children).filter(child => child.classList.contains('slide'));
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const pauseBtn = pauseBtnId ? document.getElementById(pauseBtnId) : null;
+
+                if (slides.length <= 1) { // Slider-Logik nicht initialisieren, wenn nur ein oder kein Slide da ist
+                    if (prevBtn) prevBtn.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'none';
+                    if (pauseBtn) pauseBtn.style.display = 'none';
+                    return;
+                }
+
+                let currentIndex = 0;
+                let slideInterval;
+                let isPaused = false;
+                let isAutoplayActive = autoPlay;
+
+                function updateSlider() {
+                    sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                    if (prevBtn) prevBtn.disabled = currentIndex === 0;
+                    if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
+
+                    slides.forEach((slide, index) => {
+                        slide.setAttribute('aria-hidden', index !== currentIndex);
+                        slide.querySelectorAll('a, button, input, textarea, select, [tabindex="0"]').forEach(focusable => {
+                            focusable.setAttribute('tabindex', index === currentIndex ? '0' : '-1');
+                        });
+                    });
+                }
+
+                function nextSlideAction() {
+                    if (currentIndex < slides.length - 1) {
+                        currentIndex++;
+                    } else if (isAutoplayActive) { // Nur bei Autoplay zum Anfang springen
+                        currentIndex = 0;
+                    } else {
+                        return; // Nicht weiter, wenn am Ende und kein Autoplay
+                    }
+                    updateSlider();
+                }
+
+                function prevSlideAction() {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                        updateSlider();
+                    }
+                }
+
+                function startAutoPlay() {
+                    if (isAutoplayActive && !isPaused && slides.length > 1) {
+                        clearInterval(slideInterval);
+                        slideInterval = setInterval(nextSlideAction, autoPlayInterval);
+                        if (pauseBtn) {
+                            pauseBtn.setAttribute('aria-label', 'Animation anhalten');
+                            pauseBtn.querySelector('.iconify-icon').setAttribute('data-icon', 'feather:pause-circle');
+                        }
+                    }
+                }
+
+                function stopAutoPlay() {
+                    clearInterval(slideInterval);
+                     if (pauseBtn) {
+                        pauseBtn.setAttribute('aria-label', 'Animation fortsetzen');
+                        pauseBtn.querySelector('.iconify-icon').setAttribute('data-icon', 'feather:play-circle');
+                    }
+                }
+
+                if (prevBtn) prevBtn.addEventListener('click', () => { isPaused = true; stopAutoPlay(); prevSlideAction(); });
+                if (nextBtn) nextBtn.addEventListener('click', () => { isPaused = true; stopAutoPlay(); nextSlideAction(); });
+
+                if (pauseBtn) {
+                    pauseBtn.addEventListener('click', () => {
+                        isPaused = !isPaused;
+                        if (isPaused) {
+                            stopAutoPlay();
+                        } else {
+                            startAutoPlay();
+                            // Optional: direkt weiterspielen nach dem Klick auf Play
+                            // nextSlideAction();
+                        }
+                    });
+                }
+
+
+                const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+                function handleReducedMotion(event) {
+                    if (event.matches) {
+                        isAutoplayActive = false; // Autoplay komplett deaktivieren
+                        stopAutoPlay();
+                        if (pauseBtn) pauseBtn.style.display = 'none'; // Pause-Button ausblenden
+                    } else {
+                        isAutoplayActive = autoPlay; // Ursprüngliches Autoplay Setting
+                        if (!isPaused && slides.length > 1) startAutoPlay();
+                        else if (pauseBtn && slides.length > 1) pauseBtn.style.display = 'inline-block';
+                    }
+                }
+                mediaQuery.addEventListener('change', handleReducedMotion);
+                handleReducedMotion(mediaQuery); // Initial check
+
+                if (slides.length > 0) updateSlider(); // Initialer Zustand
+            }
+
+            initializeSlider('testimonial-slider', 'prevSlideTestimonial', 'nextSlideTestimonial', 'testimonial-pause', true, 7000);
+
+            // Cookie-Einstellungen
+            const cookieSettingsTrigger = document.getElementById('cookie-settings-trigger');
+            if (cookieSettingsTrigger) {
+                cookieSettingsTrigger.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    // Hier würde die Logik zum Öffnen des Cookie-Banners/Management-Tools stehen
+                    alert('Hier würden die Cookie-Einstellungen geöffnet. (z.B. Usercentrics, Cookiebot etc.)');
+                    // Für TYPO3 könnte hier z.B. ein JavaScript-Event ausgelöst werden,
+                    // auf das ein Cookie-Management-Tool reagiert.
+                });
+            }
+        });
+    </script>
+</body>
+</html>
