@@ -6,32 +6,23 @@
     <title>Hotel Sonne Post | Urlaub zum Durchatmen im Schwarzwald</title>
     <meta name="description" content="Erleben Sie traditionsbewusste Gastfreundschaft und modernen Komfort im Hotel Sonne Post. Ihr Refugium für Wellness und Natur im Schwarzwald.">
 
-    <!-- Favicon - Bitte absolute URL verwenden -->
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
-
-    <!-- Google Fonts: Cormorant Garamond (Headlines), Epilogue (Text) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- GSAP (GreenSock Animation Platform) - Core -->
-    <!-- Das Iconify Skript (Web Component) wird jetzt am Ende des Bodys geladen -->
-
     <style>
-        /* Basis Reset und grundlegende Einstellungen */
         :root {
             --color-white: #FFFFFF;
             --color-beige: #F7F2EC;
             --color-sand: #E6DCCF;
-            --color-bordeaux: #8C1E2D; /* Akzent für CTAs */
-            --color-text-primary: #4A4A4A; /* Leicht desaturiertes Dunkelgrau für Text */
+            --color-bordeaux: #8C1E2D;
+            --color-text-primary: #4A4A4A;
             --color-text-secondary: #757575;
-            --color-border-subtle: #E0D8CE; /* Für feine Linien, abgeleitet von Sand */
-
+            --color-border-subtle: #E0D8CE;
             --font-primary: 'Epilogue', sans-serif;
             --font-secondary: 'Cormorant Garamond', serif;
-
-            --header-height: 80px; /* Beispielwert, anpassen falls nötig */
+            --header-height: 80px;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,535 +30,204 @@
             font-family: var(--font-primary);
             line-height: 1.7;
             color: var(--color-text-primary);
-            background-color: var(--color-white); /* Primär Weiß */
-            font-size: 16px; /* WCAG: Relative Einheiten für Skalierbarkeit */
+            background-color: var(--color-white);
+            font-size: 16px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        body.fullscreen-nav-open { overflow: hidden; }
+
         img, video { max-width: 100%; height: auto; display: block; }
-        /* Lazy Loading als Standard für alle Bilder */
         img { loading: lazy; }
-
         a { color: var(--color-bordeaux); text-decoration: none; }
-        a:hover, a:focus-visible { text-decoration: underline; color: var(--color-bordeaux); } /* Fokus-Stil für Links */
-
-        /* WCAG: Visuelle Hervorhebung des Fokus für Tastaturnutzer */
+        a:hover, a:focus-visible { text-decoration: underline; color: var(--color-bordeaux); }
         *:focus-visible {
             outline: 2px solid var(--color-bordeaux);
             outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(140, 30, 45, 0.2); /* Bordeaux mit Transparenz */
+            box-shadow: 0 0 0 4px rgba(140, 30, 45, 0.2);
         }
-        /* Ausnahme für Elemente, die ihren eigenen besseren Fokusstil haben */
-        .btn:focus-visible, .main-navigation a:focus-visible {
-            outline: 2px solid var(--color-bordeaux);
-            outline-offset: 2px;
-        }
+        .btn:focus-visible { outline: 2px solid var(--color-bordeaux); outline-offset: 2px; }
 
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+        .sr-only-focusable:active, .sr-only-focusable:focus { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; padding: 1em; background-color: var(--color-beige); color: var(--color-bordeaux); z-index: 9999; border: 1px solid var(--color-bordeaux); }
 
-        /* Hilfsklasse für Screenreader-Only Text (WCAG) */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
-        .sr-only-focusable:active, .sr-only-focusable:focus { /* Damit Skip-Links sichtbar werden beim Fokussieren */
-            position: static;
-            width: auto;
-            height: auto;
-            margin: 0;
-            overflow: visible;
-            clip: auto;
-            white-space: normal;
-            padding: 1em;
-            background-color: var(--color-beige);
-            color: var(--color-bordeaux);
-            z-index: 9999; /* Über allem anderen */
-            border: 1px solid var(--color-bordeaux);
-        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-secondary); font-weight: 600; line-height: 1.2; margin-bottom: 0.75em; }
+        h1 { font-size: 3rem; } h2 { font-size: 2.25rem; margin-bottom: 1.5em; text-align: center; } h3 { font-size: 1.5rem; }
 
+        .btn { display: inline-flex; align-items: center; padding: 0.8em 1.8em; background-color: var(--color-bordeaux); color: var(--color-white); font-family: var(--font-primary); font-weight: 500; text-decoration: none; border: 1px solid var(--color-bordeaux); border-radius: 4px; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; cursor: pointer; }
+        .btn:hover, .btn:focus-visible { background-color: #701623; color: var(--color-white); text-decoration: none; transform: translateY(-2px); }
+        .btn-outline { background-color: transparent; color: var(--color-bordeaux); border: 1px solid var(--color-bordeaux); }
+        .btn-outline:hover, .btn-outline:focus-visible { background-color: var(--color-bordeaux); color: var(--color-white); }
+        .btn iconify-icon { vertical-align: middle; margin-right: 0.5em; font-size: 1.2em; }
 
-        .container {
-            max-width: 1280px; /* Etwas breiter für großzügigen Weißraum */
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-secondary);
-            font-weight: 600; /* Etwas kräftiger für Headlines */
-            line-height: 1.2;
-            margin-bottom: 0.75em;
-        }
-        h1 { font-size: 3rem; } /* Beispielgrößen, anpassbar */
-        h2 { font-size: 2.25rem; margin-bottom: 1.5em; text-align: center; }
-        h3 { font-size: 1.5rem; }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8em 1.8em;
-            background-color: var(--color-bordeaux);
-            color: var(--color-white);
-            font-family: var(--font-primary);
-            font-weight: 500;
-            text-decoration: none;
-            border: 1px solid var(--color-bordeaux);
-            border-radius: 4px; /* Sanfte Rundung */
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-            cursor: pointer;
-        }
-        .btn:hover, .btn:focus-visible {
-            background-color: #701623; /* Dunkleres Bordeaux */
-            color: var(--color-white);
-            text-decoration: none;
-            transform: translateY(-2px); /* Leichter Hover-Effekt */
-        }
-        .btn-outline {
-            background-color: transparent;
-            color: var(--color-bordeaux);
-            border: 1px solid var(--color-bordeaux);
-        }
-        .btn-outline:hover, .btn-outline:focus-visible {
-            background-color: var(--color-bordeaux);
-            color: var(--color-white);
-        }
-        .btn iconify-icon { /* Icons in Buttons (Web Component) */
-            vertical-align: middle;
-            margin-right: 0.5em;
-            font-size: 1.2em;
-        }
-
-
-        /* Header-Styling */
         .site-header {
             background-color: var(--color-white);
-            padding: 0;
             border-bottom: 1px solid var(--color-border-subtle);
             position: sticky;
-            top: 0;
-            left:0;
-            right:0;
+            top: 0; left:0; right:0;
             z-index: 1000;
             height: var(--header-height);
             display: flex;
             align-items: center;
         }
-        .site-header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-        }
+        .site-header .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
         .logo img { max-height: 50px; }
 
-        /* Hauptnavigation - Neu gedacht */
-        .main-navigation { position: relative; }
-        .main-navigation ul { list-style: none; display: flex; }
-        .main-navigation li { position: relative; }
-        .main-navigation a {
-            display: flex;
-            align-items: center;
-            padding: calc((var(--header-height) - 1.2em - 2px) / 2) 1.2em;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--color-text-primary);
-            text-decoration: none;
-            transition: color 0.2s ease, background-color 0.2s ease;
-            height: var(--header-height);
+        .nav-toggle-btn {
+            background: none; border: none; padding: 10px; cursor: pointer;
+            z-index: 1002; display: flex; align-items: center; justify-content: center;
         }
-        .main-navigation a:hover,
-        .main-navigation a:focus-visible,
-        .main-navigation li.active > a {
-            color: var(--color-bordeaux);
-            background-color: var(--color-beige);
-        }
-        .main-navigation a iconify-icon { /* Web Component Styling */
-            margin-right: 0.5em;
-            font-size: 1.2rem;
-            color: var(--color-text-secondary);
-            transition: color 0.2s ease;
-        }
-        .main-navigation a:hover iconify-icon,
-        .main-navigation a:focus-visible iconify-icon,
-        .main-navigation li.active > a iconify-icon {
-            color: var(--color-bordeaux);
-        }
+        .nav-toggle-btn iconify-icon { font-size: 2rem; color: var(--color-text-primary); transition: transform 0.3s ease; }
 
-        /* Dropdown Menü Styling */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border-subtle);
-            border-top: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            min-width: 220px;
+        .fullscreen-nav {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background-color: var(--color-beige);
             z-index: 1001;
-            padding: 0.5em 0;
-            border-radius: 0 0 4px 4px;
+            opacity: 0; visibility: hidden; transform: translateY(-20px);
+            transition: opacity 0.4s ease, visibility 0s linear 0.4s, transform 0.4s ease;
+            display: flex; flex-direction: column;
+            padding-top: 0; /* Padding wird durch .fullscreen-nav-main geregelt */
+            overflow-y: auto;
         }
-        .has-dropdown:hover .dropdown-menu,
-        .has-dropdown:focus-within .dropdown-menu {
-            display: block;
+        .fullscreen-nav.is-open {
+            opacity: 1; visibility: visible; transform: translateY(0);
+            transition: opacity 0.4s ease, visibility 0s linear 0s, transform 0.4s ease;
         }
-        .dropdown-menu li { display: block; }
-        .dropdown-menu a {
-            padding: 0.7em 1.2em;
-            display: block;
-            white-space: nowrap;
-            font-size: 0.9rem;
-            height: auto;
+        .fullscreen-nav-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 20px; /* Links/Rechts Padding für Inhalt */
+            border-bottom: 1px solid var(--color-border-subtle);
+            height: var(--header-height);
+            width: 100%;
+            background-color: var(--color-beige); /* Muss Navi-Hintergrund haben */
+            flex-shrink: 0; /* Verhindert Schrumpfen */
         }
-        .dropdown-menu a .dropdown-desc {
-            display: block;
-            font-size: 0.8em;
-            color: var(--color-text-secondary);
-            margin-top: 0.2em;
-        }
-        .dropdown-menu a:hover, .dropdown-menu a:focus-visible {
-            background-color: var(--color-beige);
-            color: var(--color-bordeaux);
-        }
+        .fullscreen-nav-header .logo-fullscreen img { max-height: 40px; }
+        .fullscreen-nav-close-btn { background: none; border: none; padding: 10px; cursor: pointer; }
+        .fullscreen-nav-close-btn iconify-icon { font-size: 2.2rem; color: var(--color-text-primary); }
 
-        /* Hero-Sektion */
-        .hero-section {
-            min-height: calc(100vh - var(--header-height));
-            position: relative; /* Für Video-Overlay */
+        .fullscreen-nav-main {
+            flex-grow: 1;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            text-align: center;
-            color: var(--color-white);
-            padding: 40px 20px;
-            overflow: hidden; /* Verhindert, dass Video übersteht */
+            padding: 30px 40px; /* Innenabstand für Menüpunkte */
+            width: 100%;
+            max-width: 700px; /* Maximale Breite für Lesbarkeit im Swiss Style */
+            margin: 0 auto; /* Zentrierung der Navigationsliste */
         }
-        .hero-video-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: auto;
-            height: auto;
-            min-width: 100%;
-            min-height: 100%;
-            transform: translate(-50%, -50%);
-            z-index: -2; /* Hinter Overlay und Inhalt */
-            object-fit: cover; /* Stellt sicher, dass das Video den Bereich füllt */
+        .fullscreen-nav ul { list-style: none; }
+        .fullscreen-nav > ul > li { margin-bottom: 5px; border-bottom: 1px solid var(--color-border-subtle); }
+        .fullscreen-nav > ul > li:last-child { border-bottom: none; }
+
+        .fullscreen-nav a,
+        .fullscreen-nav .has-dropdown-toggle {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 10px;
+            font-size: 1.8rem; font-family: var(--font-secondary); font-weight: 600;
+            color: var(--color-text-primary); text-decoration: none;
+            width: 100%; background: none; border: none; text-align: left; cursor: pointer;
         }
-        .hero-section::before { /* Overlay für Textlesbarkeit über Video */
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0,0,0, 0.45); /* Etwas dunkler für besseren Kontrast zum Video */
-            z-index: -1; /* Zwischen Video und Inhalt */
+        .fullscreen-nav a:hover, .fullscreen-nav a:focus-visible,
+        .fullscreen-nav .has-dropdown-toggle:hover,
+        .fullscreen-nav .has-dropdown-toggle:focus-visible {
+            color: var(--color-bordeaux); background-color: rgba(230, 220, 207, 0.5);
         }
+        .fullscreen-nav .has-dropdown-toggle iconify-icon[icon*="chevron"] { font-size: 1.5rem; transition: transform 0.3s ease; }
+        .fullscreen-nav .has-dropdown-toggle[aria-expanded="true"] iconify-icon[icon*="chevron"] { transform: rotate(180deg); }
+
+        .fullscreen-nav .dropdown-menu {
+            background-color: transparent; padding-left: 30px;
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out;
+        }
+        .fullscreen-nav .dropdown-menu.is-open { max-height: 500px; padding-top: 10px; padding-bottom: 10px; }
+        .fullscreen-nav .dropdown-menu li { margin-bottom: 0; border-bottom: none;}
+        .fullscreen-nav .dropdown-menu a {
+            font-size: 1.2rem; font-family: var(--font-primary); font-weight: 400;
+            padding: 12px 10px; color: var(--color-text-secondary);
+        }
+        .fullscreen-nav .dropdown-menu a:hover,
+        .fullscreen-nav .dropdown-menu a:focus-visible { color: var(--color-bordeaux); background-color: transparent; }
+        .fullscreen-nav .dropdown-menu .dropdown-desc { display: none; }
+
+        .hero-section { min-height: calc(100vh - var(--header-height)); position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-white); padding: 40px 20px; overflow: hidden; }
+        .hero-video-bg { position: absolute; top: 50%; left: 50%; width: auto; height: auto; min-width: 100%; min-height: 100%; transform: translate(-50%, -50%); z-index: -2; object-fit: cover; }
+        .hero-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0, 0.45); z-index: -1; }
         .hero-content { position: relative; z-index: 1; animation: fadeInHeroText 1.2s ease-out 0.3s forwards; opacity:0; transform: translateY(20px); }
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            margin-bottom: 0.3em;
-            font-weight: 700;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-        .hero-content p {
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
-            margin-bottom: 1.5em;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-        }
+        .hero-content h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 0.3em; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .hero-content p { font-size: clamp(1rem, 2.5vw, 1.3rem); margin-bottom: 1.5em; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 
-
-        /* Allgemeine Content-Sektionen */
-        .content-section {
-            padding: 80px 0;
-            background-color: var(--color-white);
-        }
+        .content-section { padding: 80px 0; background-color: var(--color-white); }
         .content-section.bg-beige { background-color: var(--color-beige); }
         .content-section.bg-sand { background-color: var(--color-sand); }
 
-
-        /* Teaser Grid (3 Kacheln) */
-        .teaser-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .teaser-card {
-            background-color: var(--color-white);
-            border: 1px solid var(--color-border-subtle);
-            border-radius: 6px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .teaser-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.07);
-        }
-        .teaser-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-        .teaser-card-content {
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .teaser-card h3 {
-            margin-bottom: 0.5em;
-            color: var(--color-text-primary);
-            font-size: 1.3rem;
-        }
-        .teaser-card p {
-            margin-bottom: 1.5em;
-            color: var(--color-text-secondary);
-            font-size: 0.95rem;
-            flex-grow: 1;
-        }
+        .teaser-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .teaser-card { background-color: var(--color-white); border: 1px solid var(--color-border-subtle); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .teaser-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
+        .teaser-card img { width: 100%; height: 220px; object-fit: cover; }
+        .teaser-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .teaser-card h3 { margin-bottom: 0.5em; color: var(--color-text-primary); font-size: 1.3rem; }
+        .teaser-card p { margin-bottom: 1.5em; color: var(--color-text-secondary); font-size: 0.95rem; flex-grow: 1; }
         .teaser-card .btn { margin-top: auto; }
 
-        /* Testimonials Slider */
         .testimonials-section { background-color: var(--color-beige); }
-        .testimonial-quote {
-            text-align: center;
-            padding: 20px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .testimonial-quote p {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--color-text-primary);
-            margin-bottom: 1em;
-        }
-        .testimonial-quote cite {
-            font-style: normal;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-        }
+        .testimonial-quote { text-align: center; padding: 20px; max-width: 700px; margin: 0 auto; }
+        .testimonial-quote p { font-size: 1.2rem; font-style: italic; color: var(--color-text-primary); margin-bottom: 1em; }
+        .testimonial-quote cite { font-style: normal; font-weight: 500; color: var(--color-text-secondary); }
         .slider-container { position: relative; overflow: hidden; }
         .slider-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
         .slide { min-width: 100%; box-sizing: border-box; padding: 0 10px; }
         .slider-controls { text-align: center; margin-top: 25px; }
-        .slider-controls button {
-            background: none;
-            border: none;
-            color: var(--color-text-secondary);
-            padding: 8px;
-            margin: 0 8px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: color 0.2s ease, background-color 0.2s ease;
-        }
-        .slider-controls button:hover, .slider-controls button:focus-visible {
-             color: var(--color-bordeaux);
-             background-color: rgba(140, 30, 45, 0.1);
-        }
+        .slider-controls button { background: none; border: none; color: var(--color-text-secondary); padding: 8px; margin: 0 8px; cursor: pointer; border-radius: 50%; transition: color 0.2s ease, background-color 0.2s ease; }
+        .slider-controls button:hover, .slider-controls button:focus-visible { color: var(--color-bordeaux); background-color: rgba(140, 30, 45, 0.1); }
         .slider-controls button iconify-icon { font-size: 1.8rem; }
         .slider-controls button:disabled { color: var(--color-border-subtle); cursor: not-allowed; background-color: transparent; }
         .slider-pause-button iconify-icon { font-size: 1.5rem; }
 
-
-        /* Karriere Teaser Sektion */
-        .karriere-teaser-section {
-            background-color: var(--color-sand);
-            text-align: center;
-        }
+        .karriere-teaser-section { background-color: var(--color-sand); text-align: center; }
         .karriere-teaser-section .btn { margin-top: 1em; }
 
-        /* Call to Action (Newsletter) */
-        .cta-section {
-            background-color: var(--color-beige);
-            padding: 60px 0;
-            text-align: center;
-        }
+        .cta-section { background-color: var(--color-beige); padding: 60px 0; text-align: center; }
         .cta-section h2 { color: var(--color-text-primary); }
         .cta-section p { margin-bottom: 25px; font-size: 1.1rem; max-width: 550px; margin-left: auto; margin-right: auto;}
         .form-newsletter { display: flex; justify-content: center; max-width: 450px; margin: 0 auto; }
-        .form-newsletter input[type="email"] {
-            padding: 0.8em 1em;
-            flex-grow: 1;
-            border: 1px solid var(--color-border-subtle);
-            border-right: none;
-            border-radius: 4px 0 0 4px;
-            font-family: var(--font-primary);
-            font-size: 0.95rem;
-        }
-        .form-newsletter input[type="email"]:focus-visible {
-            border-color: var(--color-bordeaux);
-            outline: none;
-            box-shadow: none;
-            z-index: 1;
-        }
-        .form-newsletter button {
-            border-radius: 0 4px 4px 0;
-            padding: 0.8em 1.5em;
-        }
+        .form-newsletter input[type="email"] { padding: 0.8em 1em; flex-grow: 1; border: 1px solid var(--color-border-subtle); border-right: none; border-radius: 4px 0 0 4px; font-family: var(--font-primary); font-size: 0.95rem; }
+        .form-newsletter input[type="email"]:focus-visible { border-color: var(--color-bordeaux); outline: none; box-shadow: none; z-index: 1; }
+        .form-newsletter button { border-radius: 0 4px 4px 0; padding: 0.8em 1.5em; }
         .form-newsletter button iconify-icon { margin-right: 0; }
 
-        /* Footer */
-        .site-footer {
-            background-color: var(--color-white);
-            color: var(--color-text-secondary);
-            padding: 60px 0 30px 0;
-            font-size: 0.9rem;
-            border-top: 1px solid var(--color-border-subtle);
-        }
-        .site-footer .container-footer {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 40px;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .site-footer h4 {
-            font-family: var(--font-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: var(--color-text-primary);
-            font-weight: 600;
-        }
-        .site-footer ul { list-style: none; }
-        .site-footer ul li { margin-bottom: 10px; }
-        .site-footer a { color: var(--color-text-secondary); }
+        .site-footer { background-color: var(--color-white); color: var(--color-text-secondary); padding: 60px 0 30px 0; font-size: 0.9rem; border-top: 1px solid var(--color-border-subtle); }
+        .site-footer .container-footer { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        .site-footer h4 { font-family: var(--font-secondary); font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); font-weight: 600; }
+        .site-footer ul { list-style: none; } .site-footer ul li { margin-bottom: 10px; } .site-footer a { color: var(--color-text-secondary); }
         .site-footer a:hover, .site-footer a:focus-visible { color: var(--color-bordeaux); text-decoration: underline; }
-        .social-links a { margin-right: 12px; /* Iconify-icon ist inline-block, Größe über font-size */ }
+        .social-links a { margin-right: 12px; }
         .social-links iconify-icon { font-size: 1.3rem; color: var(--color-text-secondary); }
         .social-links a:hover iconify-icon, .social-links a:focus-visible iconify-icon { color: var(--color-bordeaux); }
-        .copyright {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid var(--color-border-subtle);
-            margin-top: 40px;
-            font-size: 0.85rem;
-            color: var(--color-text-secondary);
-        }
+        .copyright { text-align: center; padding-top: 40px; border-top: 1px solid var(--color-border-subtle); margin-top: 40px; font-size: 0.85rem; color: var(--color-text-secondary); }
 
-        /* Sticky Buchungs-Button (Fähnchen) */
-        .booking-widget-trigger {
-            position: fixed;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%) rotate(-90deg);
-            transform-origin: bottom right;
-            background-color: var(--color-bordeaux);
-            color: var(--color-white);
-            padding: 12px 22px;
-            font-family: var(--font-primary);
-            font-weight: 500;
-            font-size: 1rem;
-            z-index: 1001;
-            border-radius: 4px 4px 0 0;
-            box-shadow: -2px -2px 8px rgba(0,0,0,0.1);
-            transition: background-color 0.3s ease;
-            display: flex; /* Für Alignment von Text und Icon */
-            align-items: center;
-        }
-        .booking-widget-trigger:hover, .booking-widget-trigger:focus-visible {
-            background-color: #701623;
-            text-decoration: none;
-            color: var(--color-white);
-        }
-        .booking-widget-trigger iconify-icon {
-            /* vertical-align: middle; -- nicht nötig bei flex */
-            margin-right: 8px;
-            font-size: 1.3em;
-            transform: rotate(90deg);
-        }
+        .booking-widget-trigger { position: fixed; top: 50%; right: 0; transform: translateY(-50%) rotate(-90deg); transform-origin: bottom right; background-color: var(--color-bordeaux); color: var(--color-white); padding: 12px 22px; font-family: var(--font-primary); font-weight: 500; font-size: 1rem; z-index: 1001; border-radius: 4px 4px 0 0; box-shadow: -2px -2px 8px rgba(0,0,0,0.1); transition: background-color 0.3s ease; display: flex; align-items: center; }
+        .booking-widget-trigger:hover, .booking-widget-trigger:focus-visible { background-color: #701623; text-decoration: none; color: var(--color-white); }
+        .booking-widget-trigger iconify-icon { margin-right: 8px; font-size: 1.3em; transform: rotate(90deg); }
 
-        /* Betriebsferien Pop-Up */
-        .popup-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(50, 50, 50, 0.7);
-            display: flex; align-items: center; justify-content: center;
-            z-index: 2000; opacity: 0; visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .popup-overlay.is-visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        .popup-content {
-            background-color: var(--color-white); padding: 40px; border-radius: 6px;
-            max-width: 550px; text-align: center; position: relative;
-            transform: scale(0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-        }
-        .popup-overlay.is-visible .popup-content {
-            transform: scale(1);
-        }
+        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(50,50,50,0.7); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .popup-overlay.is-visible { opacity: 1; visibility: visible; }
+        .popup-content { background-color: var(--color-white); padding: 40px; border-radius: 6px; max-width: 550px; text-align: center; position: relative; transform: scale(0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease; }
+        .popup-overlay.is-visible .popup-content { transform: scale(1); }
         .popup-content h3 { font-size: 1.8rem; color: var(--color-text-primary); margin-bottom: 0.5em; }
         .popup-content p { margin-bottom: 1em; font-size: 1rem; }
-        .popup-content .close-popup {
-            position: absolute; top: 15px; right: 15px; background: none; border: none;
-            font-size: 1.5rem; cursor: pointer; color: var(--color-text-secondary);
-            padding: 5px; line-height: 1;
-        }
+        .popup-content .close-popup { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-secondary); padding: 5px; line-height: 1; }
         .popup-content .close-popup:hover, .popup-content .close-popup:focus-visible { color: var(--color-bordeaux); }
         .popup-content .close-popup iconify-icon { font-size: 1.8rem; }
 
-        /* GSAP Animationen */
-        @keyframes fadeInHeroText {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Anpassungen */
-        @media (max-width: 991px) {
-            .site-header .container { flex-wrap: wrap; }
-            .main-navigation {
-                order: 3;
-                width: 100%;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease-in-out;
-                background-color: var(--color-white);
-                border-top: 1px solid var(--color-border-subtle);
-            }
-            .main-navigation.is-open {
-                max-height: 100vh;
-            }
-            .main-navigation ul { flex-direction: column; }
-            .main-navigation a {
-                padding: 0.8em 1.2em;
-                border-bottom: 1px solid var(--color-border-subtle);
-                height: auto;
-            }
-            .main-navigation li:last-child a { border-bottom: none; }
-            .dropdown-menu {
-                position: static;
-                border: none;
-                box-shadow: none;
-                padding-left: 1.5em;
-                background-color: var(--color-beige);
-            }
-            .mobile-nav-toggle {
-                display: block;
-                order: 2;
-                background: none; border: none; padding: 10px;
-                cursor: pointer;
-            }
-            .mobile-nav-toggle iconify-icon { font-size: 1.8rem; color: var(--color-text-primary); }
-        }
-        .mobile-nav-toggle { display: none; }
-        @media (max-width: 991px) { .mobile-nav-toggle { display: block; } }
-
+        @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
-    <a href="#main-navigation" class="sr-only sr-only-focusable">Zur Hauptnavigation springen</a>
 
     <div class="popup-overlay" id="betriebsferien-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-description">
         <div class="popup-content">
@@ -587,65 +247,66 @@
             <a href="/" class="logo" aria-label="Hotel Sonne Post - Zur Startseite">
                 <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post">
             </a>
-
-            <button class="mobile-nav-toggle" aria-controls="main-navigation" aria-expanded="false" aria-label="Navigation umschalten">
+            <button class="nav-toggle-btn" id="nav-toggle-btn" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Navigation öffnen">
                 <iconify-icon class="icon-menu" icon="feather:menu"></iconify-icon>
-                <iconify-icon class="icon-close sr-only" icon="feather:x"></iconify-icon>
             </button>
-
-            <nav class="main-navigation" id="main-navigation" aria-label="Hauptnavigation">
-                <ul>
-                    <li class="has-dropdown">
-                        <a href="/hotel" aria-haspopup="true" aria-expanded="false">
-                            <iconify-icon icon="feather:home"></iconify-icon> Hotel
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/hotel/ueber-uns">Über Uns <span class="dropdown-desc">Unsere Philosophie</span></a></li>
-                            <li role="menuitem"><a href="/hotel/geschichte">Geschichte <span class="dropdown-desc">Tradition seit 1870</span></a></li>
-                            <li role="menuitem"><a href="/hotel/nachhaltigkeit">Nachhaltigkeit <span class="dropdown-desc">Unser Beitrag</span></a></li>
-                            <li role="menuitem"><a href="/hotel/gastfreund-app">Gastfreund App <span class="dropdown-desc">Ihr digitaler Begleiter</span></a></li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="/zimmer-preise" aria-haspopup="true" aria-expanded="false">
-                             <iconify-icon icon="feather:key"></iconify-icon> Zimmer & Preise
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/zimmer-preise/uebersicht">Zimmerübersicht <span class="dropdown-desc">Alle Kategorien</span></a></li>
-                            <li role="menuitem"><a href="/zimmer-preise/suite-bergblick">Suite Bergblick <span class="dropdown-desc">Exklusiver Komfort</span></a></li>
-                            <li role="menuitem"><a href="/zimmer-preise/anfragen">Unverbindlich Anfragen <span class="dropdown-desc">Wir beraten Sie</span></a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/wellness-spa">
-                        <iconify-icon icon="feather:wind"></iconify-icon> Wellness & SPA
-                    </a></li>
-                    <li class="has-dropdown">
-                        <a href="/arrangements" aria-haspopup="true" aria-expanded="false">
-                            <iconify-icon icon="feather:gift"></iconify-icon> Arrangements
-                        </a>
-                         <ul class="dropdown-menu" role="menu">
-                            <li role="menuitem"><a href="/arrangements/fuer-paare">Für Paare <span class="dropdown-desc">Romantische Auszeit</span></a></li>
-                            <li role="menuitem"><a href="/arrangements/fuer-familien">Für Familien <span class="dropdown-desc">Urlaub mit Kindern</span></a></li>
-                            <li role="menuitem"><a href="/arrangements/wellness-specials">Wellness-Specials <span class="dropdown-desc">Pure Entspannung</span></a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/karriere">
-                        <iconify-icon icon="feather:briefcase"></iconify-icon> Karriere
-                    </a></li>
-                    <li><a href="/kontakt-anreise">
-                        <iconify-icon icon="feather:map-pin"></iconify-icon> Kontakt & Anreise
-                    </a></li>
-                </ul>
-            </nav>
         </div>
     </header>
+
+    <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true">
+        <div class="fullscreen-nav-header">
+            <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
+                <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post">
+            </a>
+            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Navigation schließen">
+                <iconify-icon icon="feather:x"></iconify-icon>
+            </button>
+        </div>
+        <div class="fullscreen-nav-main">
+            <ul>
+                <li>
+                    <button class="has-dropdown-toggle" aria-expanded="false" aria-controls="submenu-hotel">
+                        Hotel <iconify-icon icon="feather:chevron-down"></iconify-icon>
+                    </button>
+                    <ul class="dropdown-menu" id="submenu-hotel" role="menu">
+                        <li role="menuitem"><a href="/hotel/ueber-uns">Über Uns</a></li>
+                        <li role="menuitem"><a href="/hotel/geschichte">Geschichte</a></li>
+                        <li role="menuitem"><a href="/hotel/nachhaltigkeit">Nachhaltigkeit</a></li>
+                        <li role="menuitem"><a href="/hotel/gastfreund-app">Gastfreund App</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button class="has-dropdown-toggle" aria-expanded="false" aria-controls="submenu-zimmer">
+                        Zimmer & Preise <iconify-icon icon="feather:chevron-down"></iconify-icon>
+                    </button>
+                    <ul class="dropdown-menu" id="submenu-zimmer" role="menu">
+                        <li role="menuitem"><a href="/zimmer-preise/uebersicht">Zimmerübersicht</a></li>
+                        <li role="menuitem"><a href="/zimmer-preise/suite-bergblick">Suite Bergblick</a></li>
+                        <li role="menuitem"><a href="/zimmer-preise/anfragen">Unverbindlich Anfragen</a></li>
+                    </ul>
+                </li>
+                <li><a href="/wellness-spa">Wellness & SPA</a></li>
+                <li>
+                     <button class="has-dropdown-toggle" aria-expanded="false" aria-controls="submenu-arrangements">
+                        Arrangements <iconify-icon icon="feather:chevron-down"></iconify-icon>
+                    </button>
+                    <ul class="dropdown-menu" id="submenu-arrangements" role="menu">
+                        <li role="menuitem"><a href="/arrangements/fuer-paare">Für Paare</a></li>
+                        <li role="menuitem"><a href="/arrangements/fuer-familien">Für Familien</a></li>
+                        <li role="menuitem"><a href="/arrangements/wellness-specials">Wellness-Specials</a></li>
+                    </ul>
+                </li>
+                <li><a href="/karriere">Karriere</a></li>
+                <li><a href="/kontakt-anreise">Kontakt & Anreise</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <a href="EXTERNES_BUCHUNGSTOOL_URL" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
         <iconify-icon icon="feather:calendar"></iconify-icon> Buchen
     </a>
 
     <main id="main-content" role="main">
-
         <section class="hero-section" aria-labelledby="hero-heading">
             <video class="hero-video-bg" autoplay muted loop playsinline poster="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" aria-hidden="true">
                 <source src="https://sion7-ai.github.io/Spck/sonnepost2/video1.mp4" type="video/mp4">
@@ -674,7 +335,6 @@
                             </a>
                         </div>
                     </article>
-
                     <article class="teaser-card gsap-fade-in-up" data-gsap-delay="0.1" aria-labelledby="teaser-title-wellness">
                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Entspannte Atmosphäre im Wellnessbereich mit Schwimmbad">
                         <div class="teaser-card-content">
@@ -685,7 +345,6 @@
                             </a>
                         </div>
                     </article>
-
                     <article class="teaser-card gsap-fade-in-up" data-gsap-delay="0.2" aria-labelledby="teaser-title-zimmer">
                         <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Stilvoll eingerichtetes Hotelzimmer mit Bergblick">
                         <div class="teaser-card-content">
@@ -700,7 +359,7 @@
             </div>
         </section>
 
-        <section class="content-section testimonials-section" aria-labelledby="testimonials-heading">
+         <section class="content-section testimonials-section" aria-labelledby="testimonials-heading">
             <div class="container">
                 <h2 id="testimonials-heading" class="gsap-fade-in">Stimmen unserer Gäste</h2>
                 <div class="slider-container" role="region" aria-roledescription="Karussell">
@@ -736,7 +395,7 @@
         </section>
 
         <section class="content-section karriere-teaser-section" aria-labelledby="karriere-teaser-heading">
-            <div class="container">
+             <div class="container">
                 <h2 id="karriere-teaser-heading" class="gsap-fade-in">Werden Sie Teil unseres Teams</h2>
                 <p class="gsap-fade-in" data-gsap-delay="0.1">
                     Die Sonne Post lebt von herzlichen Gastgebern. Entdecken Sie Ihre Karrieremöglichkeiten in einem traditionsreichen Haus mit Zukunft.
@@ -746,7 +405,6 @@
                 </a>
             </div>
         </section>
-
 
         <section class="cta-section" aria-labelledby="newsletter-heading-cta">
             <div class="container">
@@ -764,7 +422,6 @@
                 </p>
             </div>
         </section>
-
     </main>
 
     <footer class="site-footer" role="contentinfo">
@@ -779,7 +436,6 @@
                     E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a>
                 </address>
             </div>
-
             <div class="footer-column">
                 <h4>Entdecken</h4>
                 <ul>
@@ -791,7 +447,6 @@
                     <li><a href="/kulinarik">Kulinarik</a></li>
                 </ul>
             </div>
-
             <div class="footer-column">
                 <h4>Information</h4>
                  <ul>
@@ -802,7 +457,6 @@
                     <li><a href="/faq">FAQ</a></li>
                  </ul>
             </div>
-
             <div class="footer-column">
                 <h4>Rechtliches</h4>
                  <ul>
@@ -827,19 +481,85 @@
         </div>
     </footer>
 
-    <!-- JavaScript Dateien -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- Iconify Icon Web Component - KORRIGIERTES SKRIPT -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const navToggleBtn = document.getElementById('nav-toggle-btn');
+            const fullscreenNav = document.getElementById('fullscreen-nav');
+            const navCloseBtn = document.getElementById('fullscreen-nav-close-btn');
+            const mainContent = document.getElementById('main-content');
+            const siteFooter = document.querySelector('.site-footer');
+            let previouslyFocusedElement = null; // Um den Fokus wiederherzustellen
+
+            function openFullscreenNav() {
+                previouslyFocusedElement = document.activeElement; // Aktuell fokussiertes Element speichern
+                document.body.classList.add('fullscreen-nav-open');
+                fullscreenNav.classList.add('is-open');
+                fullscreenNav.setAttribute('aria-hidden', 'false');
+                navToggleBtn.setAttribute('aria-expanded', 'true');
+                navToggleBtn.setAttribute('aria-label', 'Navigation schließen');
+                if (mainContent) mainContent.setAttribute('aria-hidden', 'true');
+                if (siteFooter) siteFooter.setAttribute('aria-hidden', 'true');
+                navCloseBtn.focus();
+            }
+
+            function closeFullscreenNav() {
+                document.body.classList.remove('fullscreen-nav-open');
+                fullscreenNav.classList.remove('is-open');
+                fullscreenNav.setAttribute('aria-hidden', 'true');
+                navToggleBtn.setAttribute('aria-expanded', 'false');
+                navToggleBtn.setAttribute('aria-label', 'Navigation öffnen');
+                if (mainContent) mainContent.setAttribute('aria-hidden', 'false');
+                if (siteFooter) siteFooter.setAttribute('aria-hidden', 'false');
+                if (previouslyFocusedElement) {
+                    previouslyFocusedElement.focus(); // Fokus auf das vorherige Element setzen
+                } else {
+                    navToggleBtn.focus(); // Fallback: Fokus auf den Toggle-Button
+                }
+            }
+
+            if (navToggleBtn && fullscreenNav && navCloseBtn) {
+                navToggleBtn.addEventListener('click', () => {
+                    if (fullscreenNav.classList.contains('is-open')) {
+                        closeFullscreenNav();
+                    } else {
+                        openFullscreenNav();
+                    }
+                });
+                navCloseBtn.addEventListener('click', closeFullscreenNav);
+
+                fullscreenNav.querySelectorAll('a:not(.has-dropdown-toggle)').forEach(link => {
+                    link.addEventListener('click', () => {
+                        // Schließen nur, wenn es kein Ankerlink auf derselben Seite ist
+                        if (!link.getAttribute('href').startsWith('#') || link.getAttribute('href') === '#') {
+                             closeFullscreenNav();
+                        }
+                    });
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape' && fullscreenNav.classList.contains('is-open')) {
+                        closeFullscreenNav();
+                    }
+                });
+            }
+
+            document.querySelectorAll('.fullscreen-nav .has-dropdown-toggle').forEach(toggle => {
+                const submenu = document.getElementById(toggle.getAttribute('aria-controls'));
+                if (submenu) {
+                    toggle.addEventListener('click', () => {
+                        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+                        toggle.setAttribute('aria-expanded', String(!isExpanded)); // Korrekter boolescher String
+                        submenu.classList.toggle('is-open');
+                    });
+                }
+            });
+
             document.getElementById('current-year').textContent = new Date().getFullYear();
-
             gsap.registerPlugin(ScrollTrigger);
-
             gsap.utils.toArray('.gsap-fade-in').forEach(el => {
                 gsap.from(el, {
                     opacity: 0, y: 30, duration: 1, ease: "power2.out",
@@ -854,52 +574,18 @@
                 });
             });
 
-            const betriebsferienPopup = document.getElementById('betriebsferien-popup');
-            window.showPopup = function(popupId) { // Global verfügbar machen für onclick
+            window.showPopup = function(popupId) {
                 const popup = document.getElementById(popupId);
                 if (popup) {
                     popup.classList.add('is-visible');
                     popup.querySelector('.close-popup').focus();
                 }
-            }
-            window.closePopup = function(popupId) { // Global verfügbar machen für onclick
+            };
+            window.closePopup = function(popupId) {
                 const popup = document.getElementById(popupId);
                 if (popup) popup.classList.remove('is-visible');
-            }
-            // if (CMS_VARIABLE_BETRIEBSFERIEN_AKTIV) { showPopup('betriebsferien-popup'); }
-
-            const navToggle = document.querySelector('.mobile-nav-toggle');
-            const mainNav = document.getElementById('main-navigation');
-            if (navToggle && mainNav) {
-                const iconMenu = navToggle.querySelector('.icon-menu');
-                const iconClose = navToggle.querySelector('.icon-close');
-                navToggle.addEventListener('click', () => {
-                    const isOpened = mainNav.classList.toggle('is-open');
-                    navToggle.setAttribute('aria-expanded', isOpened);
-                    if (isOpened) {
-                        iconMenu.classList.add('sr-only');
-                        iconClose.classList.remove('sr-only');
-                        mainNav.querySelector('a').focus();
-                    } else {
-                        iconMenu.classList.remove('sr-only');
-                        iconClose.classList.add('sr-only');
-                    }
-                });
-            }
-
-            document.querySelectorAll('.has-dropdown > a').forEach(anchor => {
-                const dropdownMenu = anchor.nextElementSibling;
-                if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-                    anchor.addEventListener('click', function(event) {
-                        if (window.innerWidth < 992) {
-                            event.preventDefault();
-                            const isExpanded = anchor.getAttribute('aria-expanded') === 'true';
-                            anchor.setAttribute('aria-expanded', !isExpanded);
-                            dropdownMenu.style.display = isExpanded ? 'none' : 'block';
-                        }
-                    });
-                }
-            });
+            };
+            // Beispiel: if (CMS_VARIABLE_BETRIEBSFERIEN_AKTIV) { showPopup('betriebsferien-popup'); }
 
             function initializeSlider(sliderId, prevBtnId, nextBtnId, pauseBtnId = null, autoPlay = false, autoPlayInterval = 5000) {
                 const sliderWrapper = document.getElementById(sliderId);
@@ -915,21 +601,18 @@
                     if (pauseBtn) pauseBtn.style.display = 'none';
                     return;
                 }
-
                 let currentIndex = 0; let slideInterval; let isPaused = false; let isAutoplayActive = autoPlay;
-
                 function updateSlider() {
                     sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
                     if (prevBtn) prevBtn.disabled = currentIndex === 0;
                     if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
                     slides.forEach((slide, index) => {
-                        slide.setAttribute('aria-hidden', index !== currentIndex);
+                        slide.setAttribute('aria-hidden', String(index !== currentIndex));
                         slide.querySelectorAll('a, button, input, textarea, select, [tabindex="0"]').forEach(focusable => {
                             focusable.setAttribute('tabindex', index === currentIndex ? '0' : '-1');
                         });
                     });
                 }
-
                 function nextSlideAction() {
                     if (currentIndex < slides.length - 1) currentIndex++;
                     else if (isAutoplayActive) currentIndex = 0;
@@ -937,7 +620,6 @@
                     updateSlider();
                 }
                 function prevSlideAction() { if (currentIndex > 0) { currentIndex--; updateSlider(); } }
-
                 function startAutoPlay() {
                     if (isAutoplayActive && !isPaused && slides.length > 1) {
                         clearInterval(slideInterval);
@@ -955,7 +637,6 @@
                         pauseBtn.querySelector('iconify-icon').setAttribute('icon', 'feather:play-circle');
                     }
                 }
-
                 if (prevBtn) prevBtn.addEventListener('click', () => { isPaused = true; stopAutoPlay(); prevSlideAction(); });
                 if (nextBtn) nextBtn.addEventListener('click', () => { isPaused = true; stopAutoPlay(); nextSlideAction(); });
                 if (pauseBtn) {
@@ -964,7 +645,6 @@
                         if (isPaused) stopAutoPlay(); else startAutoPlay();
                     });
                 }
-
                 const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
                 function handleReducedMotion(event) {
                     if (event.matches) {
@@ -986,7 +666,7 @@
             if (cookieSettingsTrigger) {
                 cookieSettingsTrigger.addEventListener('click', function(event) {
                     event.preventDefault();
-                    alert('Hier würden die Cookie-Einstellungen geöffnet.');
+                    alert('Hier würden die Cookie-Einstellungen geöffnet. (z.B. Usercentrics, Cookiebot etc.)');
                 });
             }
         });
