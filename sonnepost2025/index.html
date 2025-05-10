@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Sonne Post | Urlaub zum Durchatmen im Schwarzwald</title>
-    <meta name="description" content="Erleben Sie traditionsbewusste Gastfreundschaft und modernen Komfort im Hotel Sonne Post. Ihr Refugium für Wellness und Natur im Schwarzwald.">
+    <title>Hotel Sonne Post | Moderne Navigation & Inhalte</title>
+    <meta name="description" content="Erleben Sie traditionsbewusste Gastfreundschaft und modernen Komfort im Hotel Sonne Post.">
 
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,19 +17,27 @@
             --color-beige: #F7F2EC;
             --color-sand: #E6DCCF;
             --color-bordeaux: #8C1E2D;
-            --color-text-primary: #4A4A4A;
+            --color-text-primary: #333333; /* Dunkler für besseren Kontrast auf hellem Grund */
+            --color-text-primary-on-dark: #FFFFFF; /* Weißer Text auf dunklem Grund */
             --color-text-secondary: #757575;
             --color-border-subtle: #E0D8CE;
+            --color-header-bg-initial: transparent;
+            --color-header-bg-scrolled: var(--color-white);
+            --color-header-icon-initial: var(--color-white);
+            --color-header-icon-scrolled: var(--color-text-primary);
+
             --font-primary: 'Epilogue', sans-serif;
             --font-secondary: 'Cormorant Garamond', serif;
-            --header-height: 80px;
-            --header-scroll-threshold: 50px; /* Schwelle, wann der Header den Stil ändert */
+
+            --header-height: 70px;
+            --menu-icon-size: 24px;
+            --header-scroll-threshold: 50px;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: var(--font-primary);
-            line-height: 1.7;
+            line-height: 1.6;
             color: var(--color-text-primary);
             background-color: var(--color-white);
             font-size: 16px;
@@ -37,180 +45,114 @@
             -moz-osx-font-smoothing: grayscale;
         }
         body.fullscreen-nav-open { overflow: hidden; }
-
         img, video { max-width: 100%; height: auto; display: block; }
         img { loading: lazy; }
         a { color: var(--color-bordeaux); text-decoration: none; }
-        a:hover, a:focus-visible { text-decoration: underline; color: var(--color-bordeaux); }
-        *:focus-visible {
-            outline: 2px solid var(--color-bordeaux);
-            outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(140, 30, 45, 0.2);
-        }
-        .btn:focus-visible { outline: 2px solid var(--color-bordeaux); outline-offset: 2px; }
-
+        a:hover, a:focus-visible { text-decoration: underline; }
+        *:focus-visible { outline: 2px solid var(--color-bordeaux); outline-offset: 2px; }
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
-        .sr-only-focusable:active, .sr-only-focusable:focus { position: static; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; white-space: normal; padding: 1em; background-color: var(--color-beige); color: var(--color-bordeaux); z-index: 9999; border: 1px solid var(--color-bordeaux); }
-
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-secondary); font-weight: 600; line-height: 1.2; margin-bottom: 0.75em; }
-        h1 { font-size: 3rem; } h2 { font-size: 2.25rem; margin-bottom: 1.5em; text-align: center; } h3 { font-size: 1.5rem; }
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); } 
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5em; text-align: center; } 
+        h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
 
-        .btn { display: inline-flex; align-items: center; padding: 0.8em 1.8em; background-color: var(--color-bordeaux); color: var(--color-white); font-family: var(--font-primary); font-weight: 500; text-decoration: none; border: 1px solid var(--color-bordeaux); border-radius: 4px; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; cursor: pointer; }
-        .btn:hover, .btn:focus-visible { background-color: #701623; color: var(--color-white); text-decoration: none; transform: translateY(-2px); }
+        .btn { display: inline-flex; align-items: center; padding: 0.8em 1.8em; background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); font-family: var(--font-primary); font-weight: 500; text-decoration: none; border: 1px solid var(--color-bordeaux); border-radius: 4px; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; cursor: pointer; }
+        .btn:hover, .btn:focus-visible { background-color: #701623; color: var(--color-text-primary-on-dark); text-decoration: none; transform: translateY(-2px); }
         .btn-outline { background-color: transparent; color: var(--color-bordeaux); border: 1px solid var(--color-bordeaux); }
-        .btn-outline:hover, .btn-outline:focus-visible { background-color: var(--color-bordeaux); color: var(--color-white); }
+        .btn-outline:hover, .btn-outline:focus-visible { background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); }
         .btn iconify-icon { vertical-align: middle; margin-right: 0.5em; font-size: 1.2em; }
 
-        /* Header Styling - Initial & Scrolled */
         .site-header {
-            position: fixed; /* Damit er über dem Hero liegt und der Effekt funktioniert */
-            top: 0; left:0; right:0;
-            z-index: 1000;
+            position: fixed; top: 0; left:0; right:0; z-index: 1000;
             height: var(--header-height);
-            display: flex;
-            align-items: center;
-            padding: 0 20px; /* Globales Padding, .container nicht mehr nötig direkt im Header */
-            transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Sanfter Übergang für Hintergrund */
-
-            /* Initialer transparenter Zustand mit Verlauf */
-            background-image: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0) 100%);
-            background-color: transparent; /* Wichtig für den Verlauf */
-            border-bottom: none; /* Keine Linie initial */
+            background-color: var(--color-header-bg-initial);
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.10) 60%, rgba(0,0,0,0) 100%);
+            display: flex; align-items: center; padding: 0 20px;
+            transition: background-color 0.3s ease, background-image 0.3s ease, box-shadow 0.3s ease;
         }
         .site-header.scrolled {
-            background-image: none; /* Verlauf entfernen */
-            background-color: var(--color-bordeaux);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Leichter Schatten für Tiefe */
-            /* border-bottom: 1px solid darken(var(--color-bordeaux), 10%); -> Alternative zum Schatten */
+            background-color: var(--color-header-bg-scrolled);
+            background-image: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        .header-content-wrapper { /* Neuer Wrapper für Logo und Button, um max-width zu nutzen */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: var(--container-max-width, 1280px); /* Fallback falls --container-max-width nicht global gesetzt */
-            margin: 0 auto;
-        }
+        .header-content-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .header-left .menu-trigger-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 10px; background: none; border: none; }
+        .header-left .menu-trigger-wrapper .menu-trigger-text { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-header-icon-initial); margin-top: 4px; transition: color 0.3s ease; }
+        .site-header.scrolled .header-left .menu-trigger-wrapper .menu-trigger-text { color: var(--color-header-icon-scrolled); }
 
-        .logo .logo-default,
-        .logo .logo-scrolled {
-            max-height: 50px;
-            transition: opacity 0.3s ease;
-        }
-        .logo .logo-default { opacity: 1; } /* Weißes Logo initial sichtbar */
-        .logo .logo-scrolled { opacity: 0; position: absolute; top:0; left:0; /* Damit es keinen Platz beansprucht */}
+        .hamburger-icon { width: var(--menu-icon-size); height: calc(var(--menu-icon-size) * 0.7); position: relative; transition: transform 0.3s ease-in-out; }
+        .hamburger-icon span { display: block; position: absolute; height: 2px; width: 100%; background: var(--color-header-icon-initial); border-radius: 2px; opacity: 1; left: 0; transform: rotate(0deg); transition: .25s ease-in-out, background-color 0.3s ease; }
+        .site-header.scrolled .hamburger-icon span { background: var(--color-header-icon-scrolled); }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2), .hamburger-icon span:nth-child(3) { top: calc(50% - 1px); }
+        .hamburger-icon span:nth-child(4) { top: calc(100% - 2px); }
+        .menu-trigger-wrapper[aria-expanded="true"] .hamburger-icon span:nth-child(1),
+        .menu-trigger-wrapper[aria-expanded="true"] .hamburger-icon span:nth-child(4) { top: calc(50% - 1px); width: 0%; left: 50%; opacity: 0; }
+        .menu-trigger-wrapper[aria-expanded="true"] .hamburger-icon span:nth-child(2) { transform: rotate(45deg); }
+        .menu-trigger-wrapper[aria-expanded="true"] .hamburger-icon span:nth-child(3) { transform: rotate(-45deg); }
 
-        .site-header.scrolled .logo .logo-default { opacity: 0; }
-        .site-header.scrolled .logo .logo-scrolled { opacity: 1; } /* Standard-Logo (rot/farbig) bei Scroll sichtbar */
-        /* WENN DAS LOGO IMMER WEISS IST (wie das verlinkte SVG), dann ist der Wechsel nicht nötig für das Logo selbst. */
-        /* In diesem Fall: `.logo-scrolled` kann entfernt werden, oder das gleiche SVG wird für beide verwendet. */
-        /* Für dieses Beispiel nehme ich an, das SVG ist immer weiß und funktioniert auf rotem Grund */
-
-        .nav-toggle-btn iconify-icon {
-            font-size: 2rem;
-            color: var(--color-white); /* Initial weiß für transparenten Header */
-            transition: color 0.3s ease;
+        .header-center .central-logo img {
+            height: calc(var(--header-height) * 0.6); /* Höhe relativ zum Header */
+            max-height: 40px;
+            /* Das weiße SVG Logo wird verwendet. CSS-Filter ist nicht nötig. */
+            /* Farbwechsel passiert durch Austauschen der SVG-Quelle oder durch CSS, wenn das SVG `currentColor` verwendet */
         }
-        .site-header.scrolled .nav-toggle-btn iconify-icon {
-            color: var(--color-white); /* Bleibt weiß auf rotem Grund */
-            /* Alternativ: color: var(--color-beige); für Kontrast falls Logo auch Beige wird */
-        }
-        /* Restlicher Code für .nav-toggle-btn wie zuvor */
-        .nav-toggle-btn {
-            background: none; border: none; padding: 10px; cursor: pointer;
-            z-index: 1002; display: flex; align-items: center; justify-content: center;
-        }
+        .header-center .central-logo .logo-scrolled { display: none; }
+        .site-header.scrolled .header-center .central-logo .logo-initial { display: none; }
+        .site-header.scrolled .header-center .central-logo .logo-scrolled { display: block; }
 
 
-        /* Fullscreen Navigation */
-        .fullscreen-nav {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background-color: var(--color-beige);
-            z-index: 1001;
-            opacity: 0; visibility: hidden; transform: translateY(-20px);
-            transition: opacity 0.4s ease, visibility 0s linear 0.4s, transform 0.4s ease;
-            display: flex; flex-direction: column;
-            overflow-y: auto;
-        }
-        .fullscreen-nav.is-open {
-            opacity: 1; visibility: visible; transform: translateY(0);
-            transition: opacity 0.4s ease, visibility 0s linear 0s, transform 0.4s ease;
-        }
-        .fullscreen-nav-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 0 20px;
-            border-bottom: 1px solid var(--color-border-subtle);
-            height: var(--header-height);
-            width: 100%;
-            background-color: var(--color-beige);
-            flex-shrink: 0;
-        }
-        .fullscreen-nav-header .logo-fullscreen img {
-             max-height: 40px; /* Hier Standard-Logo (farbig) für hellen Navi-Hintergrund */
-        }
-        .fullscreen-nav-close-btn { background: none; border: none; padding: 10px; cursor: pointer; }
-        .fullscreen-nav-close-btn iconify-icon { font-size: 2.2rem; color: var(--color-text-primary); }
+        .header-right .contact-icon-btn iconify-icon { font-size: 1.5rem; color: var(--color-header-icon-initial); transition: color 0.3s ease; }
+        .site-header.scrolled .header-right .contact-icon-btn iconify-icon { color: var(--color-bordeaux); } /* Rot auf hellem Grund */
+        .header-right .contact-icon-btn { background: none; border: none; padding: 10px; cursor: pointer; }
 
-        .fullscreen-nav-main {
-            flex-grow: 1; display: flex; flex-direction: column; justify-content: center;
-            padding: 30px 40px; width: 100%; max-width: 700px; margin: 0 auto;
-        }
-        .fullscreen-nav ul { list-style: none; }
-        .fullscreen-nav > ul > li { margin-bottom: 5px; border-bottom: 1px solid var(--color-border-subtle); }
-        .fullscreen-nav > ul > li:last-child { border-bottom: none; }
+        .fullscreen-nav { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: var(--color-beige); z-index: 1001; transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; overflow-y: auto; }
+        .fullscreen-nav.is-open { left: 0; }
+        .fullscreen-nav-header { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: var(--header-height); border-bottom: 1px solid var(--color-border-subtle); flex-shrink: 0; }
+        .fullscreen-nav-header .logo-fullscreen img { max-height: 40px; }
+        .fullscreen-nav-close-btn iconify-icon { font-size: 1.8rem; color: var(--color-text-primary); }
+        .fullscreen-nav-ctas { display: flex; gap: 10px; }
+        .fullscreen-nav-ctas .btn { font-size: 0.8rem; padding: 0.6em 1.2em; text-transform: uppercase; }
+        .fullscreen-nav-ctas .btn-light { background-color: var(--color-white); color: var(--color-text-primary); border: 1px solid var(--color-border-subtle); }
+        .fullscreen-nav-ctas .btn-dark { background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); }
+        .fullscreen-nav-quicklinks { display: flex; justify-content: space-around; padding: 20px 0; border-bottom: 1px solid var(--color-border-subtle); flex-shrink: 0; }
+        .fullscreen-nav-quicklinks .quicklink-item { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; color: var(--color-text-secondary); text-decoration: none; }
+        .fullscreen-nav-quicklinks .quicklink-item iconify-icon { font-size: 1.8rem; margin-bottom: 5px; color: var(--color-text-primary); }
+        .fullscreen-nav-main { padding: 20px; flex-grow: 1; }
+        .nav-section { margin-bottom: 30px; }
+        .nav-section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
+        .nav-section-title { font-family: var(--font-secondary); font-size: 2rem; color: var(--color-text-primary); font-weight: 600; }
+        .nav-section-viewall { font-size: 0.8rem; color: var(--color-text-secondary); text-decoration: none; }
+        .horizontal-scroll-container { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--color-border-subtle) transparent; }
+        .horizontal-scroll-container::-webkit-scrollbar { height: 6px; } .horizontal-scroll-container::-webkit-scrollbar-track { background: transparent; } .horizontal-scroll-container::-webkit-scrollbar-thumb { background-color: var(--color-border-subtle); border-radius: 3px; }
+        .nav-tile { flex: 0 0 auto; width: 220px; height: 280px; border-radius: 8px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; color: var(--color-text-primary-on-dark); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .nav-tile img.tile-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.3s ease; }
+        .nav-tile:hover img.tile-bg { transform: scale(1.05); }
+        .nav-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.0) 100%); z-index: 2; }
+        .nav-tile-content { position: relative; z-index: 3; padding: 15px; }
+        .nav-tile-title { font-size: 1.3rem; font-weight: 600; line-height: 1.2; }
+        .nav-tile-subtitle { font-size: 0.9rem; font-weight: 400; opacity: 0.9; margin-top: 5px; }
+        .fullscreen-nav-footer { padding: 20px; border-top: 1px solid var(--color-border-subtle); flex-shrink: 0; }
+        .footer-links ul { list-style: none; margin-bottom: 20px; } .footer-links li { margin-bottom: 10px; }
+        .footer-links a { font-size: 0.9rem; color: var(--color-text-secondary); text-decoration: none; }
+        .footer-cta-button { display: block; width: 100%; text-align: center; padding: 0.8em 1.5em; background-color: transparent; color: var(--color-text-primary); border: 1px solid var(--color-text-primary); border-radius: 4px; text-transform: uppercase; font-weight: 500; font-size: 0.9rem; margin-bottom: 20px; text-decoration: none; }
+        .social-media-nav { display: flex; justify-content: center; gap: 20px; }
+        .social-media-nav a iconify-icon { font-size: 1.5rem; color: var(--color-text-secondary); }
 
-        .fullscreen-nav a,
-        .fullscreen-nav .has-dropdown-toggle {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 20px 10px;
-            font-size: 1.8rem; font-family: var(--font-secondary); font-weight: 600;
-            color: var(--color-text-primary); text-decoration: none;
-            width: 100%; background: none; border: none; text-align: left; cursor: pointer;
-        }
-        .fullscreen-nav a:hover, .fullscreen-nav a:focus-visible,
-        .fullscreen-nav .has-dropdown-toggle:hover,
-        .fullscreen-nav .has-dropdown-toggle:focus-visible {
-            color: var(--color-bordeaux); background-color: rgba(230, 220, 207, 0.5);
-        }
-        .fullscreen-nav .has-dropdown-toggle iconify-icon[icon*="chevron"] { font-size: 1.5rem; transition: transform 0.3s ease; }
-        .fullscreen-nav .has-dropdown-toggle[aria-expanded="true"] iconify-icon[icon*="chevron"] { transform: rotate(180deg); }
-
-        .fullscreen-nav .dropdown-menu {
-            background-color: transparent; padding-left: 30px;
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out;
-        }
-        .fullscreen-nav .dropdown-menu.is-open { max-height: 500px; padding-top: 10px; padding-bottom: 10px; }
-        .fullscreen-nav .dropdown-menu li { margin-bottom: 0; border-bottom: none;}
-        .fullscreen-nav .dropdown-menu a {
-            font-size: 1.2rem; font-family: var(--font-primary); font-weight: 400;
-            padding: 12px 10px; color: var(--color-text-secondary);
-        }
-        .fullscreen-nav .dropdown-menu a:hover,
-        .fullscreen-nav .dropdown-menu a:focus-visible { color: var(--color-bordeaux); background-color: transparent; }
-        .fullscreen-nav .dropdown-menu .dropdown-desc { display: none; }
-
-        /* Hero-Sektion: Benötigt Padding-Top, um Platz für den fixierten Header zu schaffen */
-        .hero-section {
-            /* min-height: calc(100vh - var(--header-height)); -> wird zu 100vh, da Header drüber liegt */
-            min-height: 100vh;
-            padding-top: var(--header-height); /* WICHTIG für fixed Header */
-            position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-white);
-            /* padding: 40px 20px; -> Padding-Top wird separat gehandhabt */
-            padding-left: 20px; padding-right: 20px; padding-bottom: 40px;
-            overflow: hidden;
-        }
-        .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; /* Geändert für Fullscreen */ z-index: -2; object-fit: cover; }
-        .hero-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0, 0.45); z-index: -1; }
+        .hero-section { min-height: 100vh; padding-top: var(--header-height); position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-text-primary-on-dark); padding-left: 20px; padding-right: 20px; padding-bottom: 40px; overflow: hidden; }
+        .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+        .hero-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0, 0.35); z-index: -1; }
         .hero-content { position: relative; z-index: 1; animation: fadeInHeroText 1.2s ease-out 0.3s forwards; opacity:0; transform: translateY(20px); }
-        .hero-content h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 0.3em; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .hero-content h1 { margin-bottom: 0.3em; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
         .hero-content p { font-size: clamp(1rem, 2.5vw, 1.3rem); margin-bottom: 1.5em; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
 
-        .content-section { padding: 80px 0; background-color: var(--color-white); }
-        .content-section:first-of-type { padding-top: calc(80px + var(--header-height)); } /* Sicherstellen, dass erste Sektion nicht vom Header verdeckt wird, falls Hero nicht da ist */
-
-
+        .content-section { padding: 80px 0; }
+        .content-section:first-of-type { /* Falls Hero nicht da ist, Platz für Header */
+            /* Dies wird relevant, wenn die .hero-section nicht die erste Sektion nach dem Header ist. */
+            /* Aktuell ist Hero da, daher kein direkter Effekt. */
+        }
         .content-section.bg-beige { background-color: var(--color-beige); }
         .content-section.bg-sand { background-color: var(--color-sand); }
 
@@ -219,7 +161,7 @@
         .teaser-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
         .teaser-card img { width: 100%; height: 220px; object-fit: cover; }
         .teaser-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .teaser-card h3 { margin-bottom: 0.5em; color: var(--color-text-primary); font-size: 1.3rem; }
+        .teaser-card h3 { margin-bottom: 0.5em; color: var(--color-text-primary); }
         .teaser-card p { margin-bottom: 1.5em; color: var(--color-text-secondary); font-size: 0.95rem; flex-grow: 1; }
         .teaser-card .btn { margin-top: auto; }
 
@@ -239,7 +181,6 @@
 
         .karriere-teaser-section { background-color: var(--color-sand); text-align: center; }
         .karriere-teaser-section .btn { margin-top: 1em; }
-
         .cta-section { background-color: var(--color-beige); padding: 60px 0; text-align: center; }
         .cta-section h2 { color: var(--color-text-primary); }
         .cta-section p { margin-bottom: 25px; font-size: 1.1rem; max-width: 550px; margin-left: auto; margin-right: auto;}
@@ -249,7 +190,7 @@
         .form-newsletter button { border-radius: 0 4px 4px 0; padding: 0.8em 1.5em; }
         .form-newsletter button iconify-icon { margin-right: 0; }
 
-        .site-footer { background-color: var(--color-white); color: var(--color-text-secondary); padding: 60px 0 30px 0; font-size: 0.9rem; border-top: 1px solid var(--color-border-subtle); }
+        .site-footer { background-color: var(--color-white); color: var(--color-text-secondary); padding: 60px 0 30px 0; font-size: 0.9rem; border-top: 1px solid var(--color-border-subtle); margin-bottom: 80px; /* Platz für Sticky Footer Buttons */ }
         .site-footer .container-footer { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         .site-footer h4 { font-family: var(--font-secondary); font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); font-weight: 600; }
         .site-footer ul { list-style: none; } .site-footer ul li { margin-bottom: 10px; } .site-footer a { color: var(--color-text-secondary); }
@@ -259,9 +200,10 @@
         .social-links a:hover iconify-icon, .social-links a:focus-visible iconify-icon { color: var(--color-bordeaux); }
         .copyright { text-align: center; padding-top: 40px; border-top: 1px solid var(--color-border-subtle); margin-top: 40px; font-size: 0.85rem; color: var(--color-text-secondary); }
 
-        .booking-widget-trigger { position: fixed; top: 50%; right: 0; transform: translateY(-50%) rotate(-90deg); transform-origin: bottom right; background-color: var(--color-bordeaux); color: var(--color-white); padding: 12px 22px; font-family: var(--font-primary); font-weight: 500; font-size: 1rem; z-index: 1001; border-radius: 4px 4px 0 0; box-shadow: -2px -2px 8px rgba(0,0,0,0.1); transition: background-color 0.3s ease; display: flex; align-items: center; }
-        .booking-widget-trigger:hover, .booking-widget-trigger:focus-visible { background-color: #701623; text-decoration: none; color: var(--color-white); }
-        .booking-widget-trigger iconify-icon { margin-right: 8px; font-size: 1.3em; transform: rotate(90deg); }
+        .sticky-footer-buttons { position: fixed; bottom: 0; left: 0; right: 0; display: flex; z-index: 990; background-color: var(--color-white); padding: 15px; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
+        .sticky-footer-buttons .btn { flex: 1; margin: 0 5px; text-transform: uppercase; font-size: 0.9rem; }
+        .sticky-footer-buttons .btn-light { background-color: var(--color-white); color: var(--color-text-primary); border: 1px solid var(--color-border-subtle); }
+        .sticky-footer-buttons .btn-dark { background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); }
 
         .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(50,50,50,0.7); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .popup-overlay.is-visible { opacity: 1; visibility: visible; }
@@ -272,9 +214,6 @@
         .popup-content .close-popup { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-secondary); padding: 5px; line-height: 1; }
         .popup-content .close-popup:hover, .popup-content .close-popup:focus-visible { color: var(--color-bordeaux); }
         .popup-content .close-popup iconify-icon { font-size: 1.8rem; }
-
-        @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
-
     </style>
 </head>
 <body>
@@ -289,78 +228,155 @@
             <h3 id="popup-title">Betriebsferien Ankündigung</h3>
             <div id="popup-description">
                 <p>Liebe Gäste,</p>
-                <p>unser Hotel hat vom [Startdatum] bis einschließlich [Enddatum] Betriebsferien. Wir freuen uns, Sie danach wieder bei uns begrüßen zu dürfen!</p>
+                <p>Unser Hotel hat vom [Startdatum] bis einschließlich [Enddatum] Betriebsferien. Wir freuen uns, Sie danach wieder bei uns begrüßen zu dürfen!</p>
             </div>
         </div>
     </div>
 
     <header class="site-header" id="site-header" role="banner">
         <div class="header-content-wrapper">
-            <a href="/" class="logo" aria-label="Hotel Sonne Post - Zur Startseite">
-                <!-- Das weiße Logo ist das Standard-Logo -->
-                <img src="https://sion7-ai.github.io/Spck/sonnepost2025/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post" class="logo-default">
-                <!-- Falls ein anderes Logo für den gescrollten Zustand benötigt wird (z.B. farbig), hier einfügen: -->
-                <!-- <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post" class="logo-scrolled"> -->
-            </a>
-            <button class="nav-toggle-btn" id="nav-toggle-btn" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Navigation öffnen">
-                <iconify-icon class="icon-menu" icon="feather:menu"></iconify-icon>
-            </button>
+            <div class="header-left">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
+                    <div class="hamburger-icon">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="menu-trigger-text">MENÜ</span>
+                </button>
+            </div>
+            <div class="header-center">
+                <a href="/" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial">
+                    <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post Farbig" class="logo-scrolled">
+                </a>
+            </div>
+            <div class="header-right">
+                <a href="/kontakt-anreise" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <iconify-icon icon="feather:phone"></iconify-icon>
+                </a>
+            </div>
         </div>
     </header>
 
-    <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true">
+    <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="fullscreen-nav-header">
-            <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
-                <!-- In der Navi immer das Standard (farbige) Logo, da Hintergrund hell ist -->
+             <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
                 <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post">
             </a>
-            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Navigation schließen">
+            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
                 <iconify-icon icon="feather:x"></iconify-icon>
             </button>
+            <div class="fullscreen-nav-ctas">
+                <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener" class="btn btn-light">Jetzt Buchen</a>
+                <a href="/anfragen" class="btn btn-dark">Anfragen</a>
+            </div>
         </div>
+
+        <div class="fullscreen-nav-quicklinks">
+            <a href="/zimmer-preise" class="quicklink-item">
+                <iconify-icon icon="feather:key"></iconify-icon>
+                <span>Zimmer</span>
+            </a>
+            <a href="/wellness-spa" class="quicklink-item">
+                <iconify-icon icon="feather:wind"></iconify-icon>
+                <span>Wellness</span>
+            </a>
+            <a href="/kulinarik" class="quicklink-item">
+                <iconify-icon icon="material-symbols:restaurant-outline"></iconify-icon>
+                <span>Kulinarik</span>
+            </a>
+            <a href="/region" class="quicklink-item">
+                <iconify-icon icon="feather:map"></iconify-icon>
+                <span>Region</span>
+            </a>
+        </div>
+
         <div class="fullscreen-nav-main">
-            <ul>
-                <li>
-                    <button class="has-dropdown-toggle" aria-expanded="false" aria-controls="submenu-hotel">
-                        Hotel <iconify-icon icon="feather:chevron-down"></iconify-icon>
-                    </button>
-                    <ul class="dropdown-menu" id="submenu-hotel" role="menu">
-                        <li role="menuitem"><a href="/hotel/ueber-uns">Über Uns</a></li>
-                        <li role="menuitem"><a href="/hotel/geschichte">Geschichte</a></li>
-                        <li role="menuitem"><a href="/hotel/nachhaltigkeit">Nachhaltigkeit</a></li>
-                        <li role="menuitem"><a href="/hotel/gastfreund-app">Gastfreund App</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="has-dropdown-toggle" aria-expanded="false" aria-controls="submenu-zimmer">
-                        Zimmer & Preise <iconify-icon icon="feather:chevron-down"></iconify-icon>
-                    </button>
-                    <ul class="dropdown-menu" id="submenu-zimmer" role="menu">
-                        <li role="menuitem"><a href="/zimmer-preise/uebersicht">Zimmerübersicht</a></li>
-                        <li role="menuitem"><a href="/zimmer-preise/suite-bergblick">Suite Bergblick</a></li>
-                        <li role="menuitem"><a href="/zimmer-preise/anfragen">Unverbindlich Anfragen</a></li>
-                    </ul>
-                </li>
-                <li><a href="/wellness-spa">Wellness & SPA</a></li>
-                <li>
-                     <button class="has-dropdown-toggle" aria-expanded="false" aria-controls="submenu-arrangements">
-                        Arrangements <iconify-icon icon="feather:chevron-down"></iconify-icon>
-                    </button>
-                    <ul class="dropdown-menu" id="submenu-arrangements" role="menu">
-                        <li role="menuitem"><a href="/arrangements/fuer-paare">Für Paare</a></li>
-                        <li role="menuitem"><a href="/arrangements/fuer-familien">Für Familien</a></li>
-                        <li role="menuitem"><a href="/arrangements/wellness-specials">Wellness-Specials</a></li>
-                    </ul>
-                </li>
-                <li><a href="/karriere">Karriere</a></li>
-                <li><a href="/kontakt-anreise">Kontakt & Anreise</a></li>
-            </ul>
+            <section class="nav-section" aria-labelledby="nav-section-title-arrangements">
+                <div class="nav-section-header">
+                    <h2 id="nav-section-title-arrangements" class="nav-section-title">Unsere Arrangements</h2>
+                    <a href="/arrangements" class="nav-section-viewall">Alle anzeigen</a>
+                </div>
+                <div class="horizontal-scroll-container">
+                    <a href="/arrangements/romantik" class="nav-tile">
+                        <img src="https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop&crop=focalpoint" alt="Paar beim romantischen Dinner" class="tile-bg">
+                        <div class="nav-tile-content">
+                            <span class="nav-tile-title">Romantik Pur</span>
+                            <span class="nav-tile-subtitle">Für Zwei</span>
+                        </div>
+                    </a>
+                    <a href="/arrangements/wellness" class="nav-tile">
+                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Wellnessbereich mit Pool" class="tile-bg">
+                        <div class="nav-tile-content">
+                            <span class="nav-tile-title">Wellness Auszeit</span>
+                            <span class="nav-tile-subtitle">Entspannung</span>
+                        </div>
+                    </a>
+                    <a href="/arrangements/familie" class="nav-tile">
+                        <img src="https://images.pexels.com/photos/4260325/pexels-photo-4260325.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop&crop=focalpoint" alt="Familie spielt im Freien" class="tile-bg">
+                        <div class="nav-tile-content">
+                            <span class="nav-tile-title">Familien Spaß</span>
+                            <span class="nav-tile-subtitle">Mit Kindern</span>
+                        </div>
+                    </a>
+                     <a href="/arrangements/aktiv" class="nav-tile">
+                        <img src="https://images.pexels.com/photos/163400/hiking-mountain-mountaineering-alpine-163400.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop&crop=focalpoint" alt="Wanderer in Berglandschaft" class="tile-bg">
+                        <div class="nav-tile-content">
+                            <span class="nav-tile-title">Aktiv & Natur</span>
+                            <span class="nav-tile-subtitle">Im Schwarzwald</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="nav-section" aria-labelledby="nav-section-title-zimmer">
+                <div class="nav-section-header">
+                    <h2 id="nav-section-title-zimmer" class="nav-section-title">Zimmer & Suiten</h2>
+                    <a href="/zimmer-preise" class="nav-section-viewall">Alle Zimmer</a>
+                </div>
+                 <div class="horizontal-scroll-container">
+                    <a href="/zimmer/suite-bergblick" class="nav-tile">
+                        <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Suite Bergblick Hotel Sonne Post" class="tile-bg">
+                        <div class="nav-tile-content">
+                            <span class="nav-tile-title">Suite Bergblick</span>
+                            <span class="nav-tile-subtitle">Luxus & Aussicht</span>
+                        </div>
+                    </a>
+                    <a href="/zimmer/doppelzimmer-komfort" class="nav-tile">
+                        <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop&crop=focalpoint" alt="Modernes Hotelzimmer" class="tile-bg">
+                        <div class="nav-tile-content">
+                            <span class="nav-tile-title">Doppelzimmer Komfort</span>
+                            <span class="nav-tile-subtitle">Gemütlichkeit</span>
+                        </div>
+                    </a>
+                    <a href="/zimmer/einzelzimmer" class="nav-tile">
+                        <img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop&crop=focalpoint" alt="Helles Einzelzimmer" class="tile-bg">
+                        <div class="nav-tile-content">
+                            <span class="nav-tile-title">Einzelzimmer Classic</span>
+                            <span class="nav-tile-subtitle">Für Alleinreisende</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <div class="fullscreen-nav-footer">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="/hotel/ueber-uns">Über uns</a></li>
+                    <li><a href="/hotel/nachhaltigkeit">Nachhaltigkeit</a></li>
+                    <li><a href="/karriere">Karriere</a></li>
+                    <li><a href="/kontakt-anreise">Kontakt & Anreise</a></li>
+                    <li><a href="/impressum">Impressum</a></li>
+                    <li><a href="/datenschutz">Datenschutz</a></li>
+                </ul>
+            </div>
+            <a href="/newsletter" class="footer-cta-button">Newsletter abonnieren</a>
+            <div class="social-media-nav">
+                <a href="https://facebook.com/sonnepost" aria-label="Sonne Post auf Facebook"><iconify-icon icon="feather:facebook"></iconify-icon></a>
+                <a href="https://instagram.com/sonnepost" aria-label="Sonne Post auf Instagram"><iconify-icon icon="feather:instagram"></iconify-icon></a>
+            </div>
         </div>
     </nav>
-
-    <a href="EXTERNES_BUCHUNGSTOOL_URL" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
-        <iconify-icon icon="feather:calendar"></iconify-icon> Buchen
-    </a>
 
     <main id="main-content" role="main">
         <section class="hero-section" aria-labelledby="hero-heading">
@@ -379,10 +395,10 @@
 
         <section class="content-section teaser-section" aria-labelledby="highlights-heading">
             <div class="container">
-                <h2 id="highlights-heading" class="gsap-fade-in">Urlaubsmomente, die bleiben</h2>
+                <h2 id="highlights-heading">Urlaubsmomente, die bleiben</h2>
                 <div class="teaser-grid">
-                    <article class="teaser-card gsap-fade-in-up" aria-labelledby="teaser-title-arrangements">
-                        <img src="https://www.example.com/assets/arrangements_teaser.jpg" alt="Paar genießt ein Picknick in der Natur">
+                    <article class="teaser-card" aria-labelledby="teaser-title-arrangements">
+                        <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Top Angebote Teaserbild">
                         <div class="teaser-card-content">
                             <h3 id="teaser-title-arrangements">Exklusive Arrangements</h3>
                             <p>Maßgeschneiderte Erlebnisse für Ihre perfekte Auszeit – von Romantik bis Aktivurlaub.</p>
@@ -391,8 +407,8 @@
                             </a>
                         </div>
                     </article>
-                    <article class="teaser-card gsap-fade-in-up" data-gsap-delay="0.1" aria-labelledby="teaser-title-wellness">
-                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Entspannte Atmosphäre im Wellnessbereich mit Schwimmbad">
+                    <article class="teaser-card" aria-labelledby="teaser-title-wellness">
+                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Wellnessbereich mit Schwimmbad">
                         <div class="teaser-card-content">
                             <h3 id="teaser-title-wellness">Wellness &amp; SPA Oase</h3>
                             <p>Tauchen Sie ein in unsere Welt der Entspannung mit Saunen, Pools und wohltuenden Anwendungen.</p>
@@ -401,8 +417,8 @@
                             </a>
                         </div>
                     </article>
-                    <article class="teaser-card gsap-fade-in-up" data-gsap-delay="0.2" aria-labelledby="teaser-title-zimmer">
-                        <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Stilvoll eingerichtetes Hotelzimmer mit Bergblick">
+                    <article class="teaser-card" aria-labelledby="teaser-title-zimmer">
+                        <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Stilvoll eingerichtetes Hotelzimmer">
                         <div class="teaser-card-content">
                             <h3 id="teaser-title-zimmer">Unsere Zimmerwelten</h3>
                             <p>Finden Sie Ihr persönliches Refugium – von gemütlichen Einzelzimmern bis zu großzügigen Suiten.</p>
@@ -415,27 +431,27 @@
             </div>
         </section>
 
-         <section class="content-section testimonials-section" aria-labelledby="testimonials-heading">
+         <section class="content-section testimonials-section bg-beige" aria-labelledby="testimonials-heading">
             <div class="container">
-                <h2 id="testimonials-heading" class="gsap-fade-in">Stimmen unserer Gäste</h2>
+                <h2 id="testimonials-heading">Stimmen unserer Gäste</h2>
                 <div class="slider-container" role="region" aria-roledescription="Karussell">
                     <div class="slider-wrapper" id="testimonial-slider">
                         <div class="slide">
                             <blockquote class="testimonial-quote">
-                                <p>"Ein absoluter Traumurlaub! Die Ruhe, das Ambiente und die herzliche Gastfreundschaft sind unübertroffen. Wir haben uns so wohlgefühlt."</p>
-                                <cite>Familie Schneider (Urlaub mit Kindern)</cite>
+                                <p>"Ein absoluter Traumurlaub! Die Ruhe, das Ambiente und die herzliche Gastfreundschaft sind unübertroffen."</p>
+                                <cite>Familie Schneider</cite>
                             </blockquote>
                         </div>
                         <div class="slide">
                             <blockquote class="testimonial-quote">
-                                <p>"Der Wellnessbereich ist eine Oase der Erholung. Perfekt für ein Mädelswochenende! Die Anwendungen waren erstklassig."</p>
-                                <cite>Julia K. & Freundinnen (Wellness-Auszeit)</cite>
+                                <p>"Der Wellnessbereich ist eine Oase der Erholung. Perfekt für ein Mädelswochenende!"</p>
+                                <cite>Julia K. & Freundinnen</cite>
                             </blockquote>
                         </div>
                          <div class="slide">
                             <blockquote class="testimonial-quote">
-                                <p>"Wir kommen seit Jahren und schätzen die gleichbleibend hohe Qualität und die persönliche Betreuung. Für uns als Rentner ideal."</p>
-                                <cite>Ehepaar Wagner (Stammgäste)</cite>
+                                <p>"Wir kommen seit Jahren und schätzen die gleichbleibend hohe Qualität und die persönliche Betreuung."</p>
+                                <cite>Ehepaar Wagner</cite>
                             </blockquote>
                         </div>
                     </div>
@@ -450,19 +466,17 @@
             </div>
         </section>
 
-        <section class="content-section karriere-teaser-section" aria-labelledby="karriere-teaser-heading">
+        <section class="content-section karriere-teaser-section bg-sand" aria-labelledby="karriere-teaser-heading">
              <div class="container">
-                <h2 id="karriere-teaser-heading" class="gsap-fade-in">Werden Sie Teil unseres Teams</h2>
-                <p class="gsap-fade-in" data-gsap-delay="0.1">
-                    Die Sonne Post lebt von herzlichen Gastgebern. Entdecken Sie Ihre Karrieremöglichkeiten in einem traditionsreichen Haus mit Zukunft.
-                </p>
-                <a href="/karriere" class="btn gsap-fade-in" data-gsap-delay="0.2">
+                <h2 id="karriere-teaser-heading">Werden Sie Teil unseres Teams</h2>
+                <p>Die Sonne Post lebt von herzlichen Gastgebern. Entdecken Sie Ihre Karrieremöglichkeiten in einem traditionsreichen Haus mit Zukunft.</p>
+                <a href="/karriere" class="btn">
                     <iconify-icon icon="feather:briefcase"></iconify-icon> Offene Stellen
                 </a>
             </div>
         </section>
 
-        <section class="cta-section" aria-labelledby="newsletter-heading-cta">
+        <section class="cta-section bg-beige" aria-labelledby="newsletter-heading-cta">
             <div class="container">
                 <h2 id="newsletter-heading-cta">Nichts mehr verpassen</h2>
                 <p>Abonnieren Sie unseren Newsletter für exklusive Angebote, Neuigkeiten und Urlaubsinspiration direkt aus der Sonne Post.</p>
@@ -523,211 +537,244 @@
                 </ul>
                 <h4 style="margin-top: 20px;">Folgen Sie uns</h4>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/IHRE_SEITE" target="_blank" rel="noopener noreferrer" aria-label="Hotel Sonne Post auf Facebook">
+                    <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Hotel Sonne Post auf Facebook">
                         <iconify-icon icon="feather:facebook"></iconify-icon>
                     </a>
-                    <a href="https://www.instagram.com/IHRE_SEITE" target="_blank" rel="noopener noreferrer" aria-label="Hotel Sonne Post auf Instagram">
+                    <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Hotel Sonne Post auf Instagram">
                         <iconify-icon icon="feather:instagram"></iconify-icon>
                     </a>
                 </div>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten. Ein Design von Ihrer Webdesign-KI.</p>
+            <p>&copy; <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
+
+    <div class="sticky-footer-buttons">
+        <a href="/anfragen" class="btn btn-light">Unverbindlich Anfragen</a>
+        <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener" class="btn btn-dark">Direkt Buchen</a>
+    </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const siteHeader = document.getElementById('site-header');
-            const headerScrollThreshold = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-scroll-threshold')) || 50;
+    document.addEventListener('DOMContentLoaded', function() {
+        const siteHeader = document.getElementById('site-header');
+        // Sicherstellen, dass der Wert als Zahl gelesen wird, auch wenn Einheit dabei ist
+        const headerScrollThresholdRaw = getComputedStyle(document.documentElement).getPropertyValue('--header-scroll-threshold').trim();
+        const headerScrollThreshold = parseInt(headerScrollThresholdRaw, 10) || 50;
 
-            function handleHeaderScroll() {
-                if (window.scrollY > headerScrollThreshold) {
-                    siteHeader.classList.add('scrolled');
-                } else {
-                    siteHeader.classList.remove('scrolled');
+
+        function handleHeaderScroll() {
+            if (window.scrollY > headerScrollThreshold) {
+                siteHeader.classList.add('scrolled');
+            } else {
+                siteHeader.classList.remove('scrolled');
+            }
+        }
+        window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+        handleHeaderScroll();
+
+        const menuTrigger = document.getElementById('menu-trigger');
+        const fullscreenNav = document.getElementById('fullscreen-nav');
+        const navCloseBtn = document.getElementById('fullscreen-nav-close-btn');
+        const mainContent = document.getElementById('main-content');
+        const pageFooter = document.querySelector('.site-footer');
+        const stickyFooterButtons = document.querySelector('.sticky-footer-buttons');
+        let previouslyFocusedElement = null;
+        let focusableElementsInNav = [];
+        let firstFocusableElement = null;
+        let lastFocusableElement = null;
+
+        function updateFocusableElements() {
+            focusableElementsInNav = Array.from(
+                fullscreenNav.querySelectorAll(
+                    'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
+                )
+            ).filter(el => el.offsetWidth > 0 || el.offsetHeight > 0 || el.getClientRects().length > 0);
+            if (focusableElementsInNav.length > 0) {
+                firstFocusableElement = focusableElementsInNav[0];
+                lastFocusableElement = focusableElementsInNav[focusableElementsInNav.length - 1];
+            } else {
+                firstFocusableElement = navCloseBtn;
+                lastFocusableElement = navCloseBtn;
+            }
+        }
+
+        function trapFocus(e) {
+            if (!fullscreenNav.classList.contains('is-open')) return;
+            let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+            if (!isTabPressed) return;
+            if (e.shiftKey) {
+                if (document.activeElement === firstFocusableElement) {
+                    lastFocusableElement.focus();
+                    e.preventDefault();
+                }
+            } else {
+                if (document.activeElement === lastFocusableElement) {
+                    firstFocusableElement.focus();
+                    e.preventDefault();
                 }
             }
-            window.addEventListener('scroll', handleHeaderScroll, { passive: true });
-            handleHeaderScroll(); // Initial check on load
+        }
 
+        function openFullscreenNav() {
+            previouslyFocusedElement = document.activeElement;
+            document.body.classList.add('fullscreen-nav-open');
+            fullscreenNav.classList.add('is-open');
+            fullscreenNav.setAttribute('aria-hidden', 'false');
+            menuTrigger.setAttribute('aria-expanded', 'true');
+            menuTrigger.setAttribute('aria-label', 'Menü schließen');
+            updateFocusableElements();
+            if (firstFocusableElement) firstFocusableElement.focus(); else navCloseBtn.focus();
+            document.addEventListener('keydown', trapFocus);
+            if (mainContent) mainContent.setAttribute('inert', '');
+            if (pageFooter) pageFooter.setAttribute('inert', '');
+            if (stickyFooterButtons) stickyFooterButtons.setAttribute('inert', '');
+            const currentHeader = document.getElementById('site-header'); // Sicherstellen, dass wir den aktuellen Header referenzieren
+            if(currentHeader && currentHeader !== menuTrigger.closest('header')) currentHeader.setAttribute('inert', '');
+        }
 
-            const navToggleBtn = document.getElementById('nav-toggle-btn');
-            const fullscreenNav = document.getElementById('fullscreen-nav');
-            const navCloseBtn = document.getElementById('fullscreen-nav-close-btn');
-            const mainContent = document.getElementById('main-content');
-            const pageFooter = document.querySelector('.site-footer'); // Renamed to avoid conflict
-            let previouslyFocusedElement = null;
+        function closeFullscreenNav() {
+            document.body.classList.remove('fullscreen-nav-open');
+            fullscreenNav.classList.remove('is-open');
+            fullscreenNav.setAttribute('aria-hidden', 'true');
+            menuTrigger.setAttribute('aria-expanded', 'false');
+            menuTrigger.setAttribute('aria-label', 'Menü öffnen');
+            document.removeEventListener('keydown', trapFocus);
+            if (mainContent) mainContent.removeAttribute('inert');
+            if (pageFooter) pageFooter.removeAttribute('inert');
+            if (stickyFooterButtons) stickyFooterButtons.removeAttribute('inert');
+            const currentHeader = document.getElementById('site-header');
+            if(currentHeader) currentHeader.removeAttribute('inert');
+            if (previouslyFocusedElement) previouslyFocusedElement.focus();
+            else menuTrigger.focus();
+        }
 
-            function openFullscreenNav() {
-                previouslyFocusedElement = document.activeElement;
-                document.body.classList.add('fullscreen-nav-open');
-                fullscreenNav.classList.add('is-open');
-                fullscreenNav.setAttribute('aria-hidden', 'false');
-                navToggleBtn.setAttribute('aria-expanded', 'true');
-                navToggleBtn.setAttribute('aria-label', 'Navigation schließen');
-                if (mainContent) mainContent.setAttribute('aria-hidden', 'true');
-                if (pageFooter) pageFooter.setAttribute('aria-hidden', 'true'); // Use renamed variable
-                navCloseBtn.focus();
-            }
-
-            function closeFullscreenNav() {
-                document.body.classList.remove('fullscreen-nav-open');
-                fullscreenNav.classList.remove('is-open');
-                fullscreenNav.setAttribute('aria-hidden', 'true');
-                navToggleBtn.setAttribute('aria-expanded', 'false');
-                navToggleBtn.setAttribute('aria-label', 'Navigation öffnen');
-                if (mainContent) mainContent.setAttribute('aria-hidden', 'false');
-                if (pageFooter) pageFooter.setAttribute('aria-hidden', 'false'); // Use renamed variable
-                if (previouslyFocusedElement) previouslyFocusedElement.focus();
-                else navToggleBtn.focus();
-            }
-
-            if (navToggleBtn && fullscreenNav && navCloseBtn) {
-                navToggleBtn.addEventListener('click', () => {
-                    if (fullscreenNav.classList.contains('is-open')) closeFullscreenNav();
-                    else openFullscreenNav();
-                });
-                navCloseBtn.addEventListener('click', closeFullscreenNav);
-                fullscreenNav.querySelectorAll('a:not(.has-dropdown-toggle)').forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (!link.getAttribute('href').startsWith('#') || link.getAttribute('href') === '#') {
-                             closeFullscreenNav();
-                        }
-                    });
-                });
-                document.addEventListener('keydown', (event) => {
-                    if (event.key === 'Escape' && fullscreenNav.classList.contains('is-open')) closeFullscreenNav();
-                });
-            }
-
-            document.querySelectorAll('.fullscreen-nav .has-dropdown-toggle').forEach(toggle => {
-                const submenu = document.getElementById(toggle.getAttribute('aria-controls'));
-                if (submenu) {
-                    toggle.addEventListener('click', () => {
-                        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-                        toggle.setAttribute('aria-expanded', String(!isExpanded));
-                        submenu.classList.toggle('is-open');
-                    });
-                }
+        if (menuTrigger && fullscreenNav && navCloseBtn) {
+            menuTrigger.addEventListener('click', () => {
+                if (fullscreenNav.classList.contains('is-open')) closeFullscreenNav();
+                else openFullscreenNav();
             });
-
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            gsap.registerPlugin(ScrollTrigger);
-            gsap.utils.toArray('.gsap-fade-in').forEach(el => {
-                gsap.from(el, {
-                    opacity: 0, y: 30, duration: 1, ease: "power2.out",
-                    scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none", once: true }
+            navCloseBtn.addEventListener('click', closeFullscreenNav);
+            fullscreenNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href') && link.getAttribute('href') !== "#" && !link.closest('.has-dropdown-toggle')) {
+                        closeFullscreenNav();
+                    }
                 });
             });
-            gsap.utils.toArray('.gsap-fade-in-up').forEach(el => {
-                const delay = parseFloat(el.dataset.gsapDelay) || 0;
-                gsap.from(el, {
-                    opacity: 0, y: 50, duration: 0.8, delay: delay, ease: "power2.out",
-                    scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none", once: true }
-                });
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && fullscreenNav.classList.contains('is-open')) closeFullscreenNav();
             });
+        }
 
-            window.showPopup = function(popupId) {
-                const popup = document.getElementById(popupId);
-                if (popup) {
-                    popup.classList.add('is-visible');
-                    popup.querySelector('.close-popup').focus();
-                }
-            };
-            window.closePopup = function(popupId) {
-                const popup = document.getElementById(popupId);
-                if (popup) popup.classList.remove('is-visible');
-            };
-
-            function initializeSlider(sliderId, prevBtnId, nextBtnId, pauseBtnId = null, autoPlay = false, autoPlayInterval = 5000) {
-                const sliderWrapper = document.getElementById(sliderId);
-                if (!sliderWrapper) return;
-                const slides = Array.from(sliderWrapper.children).filter(child => child.classList.contains('slide'));
-                const prevBtn = document.getElementById(prevBtnId);
-                const nextBtn = document.getElementById(nextBtnId);
-                const pauseBtn = pauseBtnId ? document.getElementById(pauseBtnId) : null;
-
-                if (slides.length <= 1) {
-                    if (prevBtn) prevBtn.style.display = 'none';
-                    if (nextBtn) nextBtn.style.display = 'none';
-                    if (pauseBtn) pauseBtn.style.display = 'none';
-                    return;
-                }
-                let currentIndex = 0; let slideInterval; let isPaused = false; let isAutoplayActive = autoPlay;
-                function updateSlider() {
-                    sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-                    if (prevBtn) prevBtn.disabled = currentIndex === 0;
-                    if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
-                    slides.forEach((slide, index) => {
-                        slide.setAttribute('aria-hidden', String(index !== currentIndex));
-                        slide.querySelectorAll('a, button, input, textarea, select, [tabindex="0"]').forEach(focusable => {
-                            focusable.setAttribute('tabindex', index === currentIndex ? '0' : '-1');
-                        });
-                    });
-                }
-                function nextSlideAction() {
-                    if (currentIndex < slides.length - 1) currentIndex++;
-                    else if (isAutoplayActive) currentIndex = 0;
-                    else return;
-                    updateSlider();
-                }
-                function prevSlideAction() { if (currentIndex > 0) { currentIndex--; updateSlider(); } }
-                function startAutoPlay() {
-                    if (isAutoplayActive && !isPaused && slides.length > 1) {
-                        clearInterval(slideInterval);
-                        slideInterval = setInterval(nextSlideAction, autoPlayInterval);
-                        if (pauseBtn) {
-                            pauseBtn.setAttribute('aria-label', 'Animation anhalten');
-                            pauseBtn.querySelector('iconify-icon').setAttribute('icon', 'feather:pause-circle');
-                        }
-                    }
-                }
-                function stopAutoPlay() {
-                    clearInterval(slideInterval);
-                    if (pauseBtn) {
-                        pauseBtn.setAttribute('aria-label', 'Animation fortsetzen');
-                        pauseBtn.querySelector('iconify-icon').setAttribute('icon', 'feather:play-circle');
-                    }
-                }
-                if (prevBtn) prevBtn.addEventListener('click', () => { isPaused = true; stopAutoPlay(); prevSlideAction(); });
-                if (nextBtn) nextBtn.addEventListener('click', () => { isPaused = true; stopAutoPlay(); nextSlideAction(); });
-                if (pauseBtn) {
-                    pauseBtn.addEventListener('click', () => {
-                        isPaused = !isPaused;
-                        if (isPaused) stopAutoPlay(); else startAutoPlay();
-                    });
-                }
-                const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-                function handleReducedMotion(event) {
-                    if (event.matches) {
-                        isAutoplayActive = false; stopAutoPlay();
-                        if (pauseBtn) pauseBtn.style.display = 'none';
-                    } else {
-                        isAutoplayActive = autoPlay;
-                        if (!isPaused && slides.length > 1) startAutoPlay();
-                        else if (pauseBtn && slides.length > 1) pauseBtn.style.display = 'inline-block';
-                    }
-                }
-                mediaQuery.addEventListener('change', handleReducedMotion);
-                handleReducedMotion(mediaQuery);
-                if (slides.length > 0) updateSlider();
-            }
-            initializeSlider('testimonial-slider', 'prevSlideTestimonial', 'nextSlideTestimonial', 'testimonial-pause', true, 7000);
-
-            const cookieSettingsTrigger = document.getElementById('cookie-settings-trigger');
-            if (cookieSettingsTrigger) {
-                cookieSettingsTrigger.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    alert('Hier würden die Cookie-Einstellungen geöffnet. (z.B. Usercentrics, Cookiebot etc.)');
-                });
-            }
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.teaser-card').forEach(el => { // Geändert auf .teaser-card für GSAP
+            gsap.from(el, {
+                opacity: 0, y: 50, duration: 0.8,
+                scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none", once: true }
+            });
         });
+         gsap.utils.toArray('.gsap-fade-in').forEach(el => { // Für andere Elemente, die nur einblenden sollen
+            gsap.from(el, {
+                opacity: 0, y: 30, duration: 1, ease: "power2.out",
+                scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none", once: true }
+            });
+        });
+
+
+        window.showPopup = function(popupId) {
+            const popup = document.getElementById(popupId);
+            if (popup) {
+                popup.classList.add('is-visible');
+                if(popup.querySelector('.close-popup')) popup.querySelector('.close-popup').focus();
+            }
+        };
+        window.closePopup = function(popupId) {
+            const popup = document.getElementById(popupId);
+            if (popup) popup.classList.remove('is-visible');
+        };
+        // if (BEDINGUNG_AUS_CMS_FUER_POPUP) { showPopup('betriebsferien-popup'); }
+
+
+        function initializeSlider(sliderId, prevBtnId, nextBtnId, pauseBtnId = null, autoPlay = false, autoPlayInterval = 5000) {
+            const sliderWrapper = document.getElementById(sliderId);
+            if (!sliderWrapper) return;
+            const slides = Array.from(sliderWrapper.children).filter(child => child.classList.contains('slide'));
+            const prevBtn = document.getElementById(prevBtnId);
+            const nextBtn = document.getElementById(nextBtnId);
+            const pauseBtn = pauseBtnId ? document.getElementById(pauseBtnId) : null;
+
+            if (slides.length <= 1) {
+                if (prevBtn) prevBtn.style.display = 'none'; if (nextBtn) nextBtn.style.display = 'none'; if (pauseBtn) pauseBtn.style.display = 'none';
+                return;
+            }
+            let currentIndex = 0; let slideInterval; let isPaused = false; let isAutoplayActive = autoPlay;
+            function updateSlider() {
+                sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+                if (prevBtn) prevBtn.disabled = currentIndex === 0;
+                if (nextBtn) nextBtn.disabled = currentIndex === slides.length - 1;
+                slides.forEach((slide, index) => {
+                    slide.setAttribute('aria-hidden', String(index !== currentIndex));
+                    slide.querySelectorAll('a, button, input, textarea, select, [tabindex="0"]').forEach(focusable => {
+                        focusable.setAttribute('tabindex', index === currentIndex ? '0' : '-1');
+                    });
+                });
+            }
+            function nextSlideAction() {
+                if (currentIndex < slides.length - 1) currentIndex++;
+                else if (isAutoplayActive) currentIndex = 0;
+                else return;
+                updateSlider();
+            }
+            function prevSlideAction() { if (currentIndex > 0) { currentIndex--; updateSlider(); } }
+            function startAutoPlay() {
+                if (isAutoplayActive && !isPaused && slides.length > 1) {
+                    clearInterval(slideInterval); slideInterval = setInterval(nextSlideAction, autoPlayInterval);
+                    if (pauseBtn) {
+                        pauseBtn.setAttribute('aria-label', 'Animation anhalten');
+                        pauseBtn.querySelector('iconify-icon').setAttribute('icon', 'feather:pause-circle');
+                    }
+                }
+            }
+            function stopAutoPlay() {
+                clearInterval(slideInterval);
+                if (pauseBtn) {
+                    pauseBtn.setAttribute('aria-label', 'Animation fortsetzen');
+                    pauseBtn.querySelector('iconify-icon').setAttribute('icon', 'feather:play-circle');
+                }
+            }
+            if (prevBtn) prevBtn.addEventListener('click', () => { isPaused = true; stopAutoPlay(); prevSlideAction(); });
+            if (nextBtn) nextBtn.addEventListener('click', () => { isPaused = true; stopAutoPlay(); nextSlideAction(); });
+            if (pauseBtn) {
+                pauseBtn.addEventListener('click', () => {
+                    isPaused = !isPaused; if (isPaused) stopAutoPlay(); else startAutoPlay();
+                });
+            }
+            const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            function handleReducedMotion(event) {
+                if (event.matches) { isAutoplayActive = false; stopAutoPlay(); if (pauseBtn) pauseBtn.style.display = 'none'; }
+                else { isAutoplayActive = autoPlay; if (!isPaused && slides.length > 1) startAutoPlay(); else if (pauseBtn && slides.length > 1) pauseBtn.style.display = 'inline-block'; }
+            }
+            mediaQuery.addEventListener('change', handleReducedMotion); handleReducedMotion(mediaQuery);
+            if (slides.length > 0) updateSlider();
+        }
+        initializeSlider('testimonial-slider', 'prevSlideTestimonial', 'nextSlideTestimonial', 'testimonial-pause', true, 7000);
+
+        const cookieSettingsTrigger = document.getElementById('cookie-settings-trigger');
+        if (cookieSettingsTrigger) {
+            cookieSettingsTrigger.addEventListener('click', function(event) {
+                event.preventDefault();
+                alert('Hier würden die Cookie-Einstellungen geöffnet.');
+            });
+        }
+    });
     </script>
 </body>
 </html>
