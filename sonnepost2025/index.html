@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Sonne Post | Moderne Navigation & Inhalte</title>
-    <meta name="description" content="Erleben Sie traditionsbewusste Gastfreundschaft und modernen Komfort im Hotel Sonne Post.">
+    <title>Hotel Sonne Post | Urlaub zum Durchatmen im Schwarzwald</title>
+    <meta name="description" content="Erleben Sie traditionsbewusste Gastfreundschaft und modernen Komfort im Hotel Sonne Post. Ihr Refugium für Wellness und Natur im Schwarzwald.">
 
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +39,7 @@
             font-family: var(--font-primary);
             line-height: 1.6;
             color: var(--color-text-primary);
-            background-color: var(--color-white);
+            background-color: var(--color-white); /* Hauptseitenhintergrund auf Weiß */
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -53,8 +53,8 @@
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-secondary); font-weight: 600; line-height: 1.2; margin-bottom: 0.75em; }
-        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); } 
-        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5em; text-align: center; } 
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5em; text-align: center; }
         h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
 
         .btn { display: inline-flex; align-items: center; padding: 0.8em 1.8em; background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); font-family: var(--font-primary); font-weight: 500; text-decoration: none; border: 1px solid var(--color-bordeaux); border-radius: 4px; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; cursor: pointer; }
@@ -63,6 +63,7 @@
         .btn-outline:hover, .btn-outline:focus-visible { background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); }
         .btn iconify-icon { vertical-align: middle; margin-right: 0.5em; font-size: 1.2em; }
 
+        /* Header (Sticky) mit Farbwechsel */
         .site-header {
             position: fixed; top: 0; left:0; right:0; z-index: 1000;
             height: var(--header-height);
@@ -93,18 +94,18 @@
         .menu-trigger-wrapper[aria-expanded="true"] .hamburger-icon span:nth-child(3) { transform: rotate(-45deg); }
 
         .header-center .central-logo img {
-            height: calc(var(--header-height) * 0.6); /* Höhe relativ zum Header */
+            height: calc(var(--header-height) * 0.6);
             max-height: 40px;
-            /* Das weiße SVG Logo wird verwendet. CSS-Filter ist nicht nötig. */
-            /* Farbwechsel passiert durch Austauschen der SVG-Quelle oder durch CSS, wenn das SVG `currentColor` verwendet */
+            /* Das weiße Logo ist initial sichtbar, das rote bei scroll */
         }
+        .header-center .central-logo .logo-initial { display: block; }
         .header-center .central-logo .logo-scrolled { display: none; }
         .site-header.scrolled .header-center .central-logo .logo-initial { display: none; }
         .site-header.scrolled .header-center .central-logo .logo-scrolled { display: block; }
 
 
         .header-right .contact-icon-btn iconify-icon { font-size: 1.5rem; color: var(--color-header-icon-initial); transition: color 0.3s ease; }
-        .site-header.scrolled .header-right .contact-icon-btn iconify-icon { color: var(--color-bordeaux); } /* Rot auf hellem Grund */
+        .site-header.scrolled .header-right .contact-icon-btn iconify-icon { color: var(--color-bordeaux); }
         .header-right .contact-icon-btn { background: none; border: none; padding: 10px; cursor: pointer; }
 
         .fullscreen-nav { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: var(--color-beige); z-index: 1001; transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; overflow-y: auto; }
@@ -136,9 +137,13 @@
         .fullscreen-nav-footer { padding: 20px; border-top: 1px solid var(--color-border-subtle); flex-shrink: 0; }
         .footer-links ul { list-style: none; margin-bottom: 20px; } .footer-links li { margin-bottom: 10px; }
         .footer-links a { font-size: 0.9rem; color: var(--color-text-secondary); text-decoration: none; }
+        .footer-links a:hover { color: var(--color-bordeaux); }
         .footer-cta-button { display: block; width: 100%; text-align: center; padding: 0.8em 1.5em; background-color: transparent; color: var(--color-text-primary); border: 1px solid var(--color-text-primary); border-radius: 4px; text-transform: uppercase; font-weight: 500; font-size: 0.9rem; margin-bottom: 20px; text-decoration: none; }
+        .footer-cta-button:hover { background-color: var(--color-text-primary); color: var(--color-text-primary-on-dark); }
         .social-media-nav { display: flex; justify-content: center; gap: 20px; }
         .social-media-nav a iconify-icon { font-size: 1.5rem; color: var(--color-text-secondary); }
+        .social-media-nav a:hover iconify-icon { color: var(--color-bordeaux); }
+
 
         .hero-section { min-height: 100vh; padding-top: var(--header-height); position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-text-primary-on-dark); padding-left: 20px; padding-right: 20px; padding-bottom: 40px; overflow: hidden; }
         .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
@@ -149,10 +154,6 @@
         @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
 
         .content-section { padding: 80px 0; }
-        .content-section:first-of-type { /* Falls Hero nicht da ist, Platz für Header */
-            /* Dies wird relevant, wenn die .hero-section nicht die erste Sektion nach dem Header ist. */
-            /* Aktuell ist Hero da, daher kein direkter Effekt. */
-        }
         .content-section.bg-beige { background-color: var(--color-beige); }
         .content-section.bg-sand { background-color: var(--color-sand); }
 
@@ -196,7 +197,7 @@
         .site-footer ul { list-style: none; } .site-footer ul li { margin-bottom: 10px; } .site-footer a { color: var(--color-text-secondary); }
         .site-footer a:hover, .site-footer a:focus-visible { color: var(--color-bordeaux); text-decoration: underline; }
         .social-links a { margin-right: 12px; }
-        .social-links iconify-icon { font-size: 1.3rem; color: var(--color-text-secondary); }
+        .social-links iconify-icon { font-size: 1.5rem; color: var(--color-text-secondary); }
         .social-links a:hover iconify-icon, .social-links a:focus-visible iconify-icon { color: var(--color-bordeaux); }
         .copyright { text-align: center; padding-top: 40px; border-top: 1px solid var(--color-border-subtle); margin-top: 40px; font-size: 0.85rem; color: var(--color-text-secondary); }
 
@@ -245,8 +246,10 @@
             </div>
             <div class="header-center">
                 <a href="/" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
-                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial">
-                    <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post Farbig" class="logo-scrolled">
+                    <!-- Logo für initialen (transparenten) Zustand -->
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial">
+                    <!-- Logo für gescrollten (weißen) Zustand -->
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled">
                 </a>
             </div>
             <div class="header-right">
@@ -260,7 +263,8 @@
     <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="fullscreen-nav-header">
              <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
-                <img src="https://www.sonne-post.de/typo3conf/ext/thsonne/Resources/Public/Images/logo_sonne_post.svg" alt="Logo Hotel Sonne Post">
+                <!-- Logo für den Header der Fullscreen-Navi (auf hellem Grund rot) -->
+                <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post">
             </a>
             <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
                 <iconify-icon icon="feather:x"></iconify-icon>
@@ -372,8 +376,8 @@
             </div>
             <a href="/newsletter" class="footer-cta-button">Newsletter abonnieren</a>
             <div class="social-media-nav">
-                <a href="https://facebook.com/sonnepost" aria-label="Sonne Post auf Facebook"><iconify-icon icon="feather:facebook"></iconify-icon></a>
-                <a href="https://instagram.com/sonnepost" aria-label="Sonne Post auf Instagram"><iconify-icon icon="feather:instagram"></iconify-icon></a>
+                <a href="https://facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"><iconify-icon icon="feather:facebook"></iconify-icon></a>
+                <a href="https://instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"><iconify-icon icon="feather:instagram"></iconify-icon></a>
             </div>
         </div>
     </nav>
@@ -438,7 +442,7 @@
                     <div class="slider-wrapper" id="testimonial-slider">
                         <div class="slide">
                             <blockquote class="testimonial-quote">
-                                <p>"Ein absoluter Traumurlaub! Die Ruhe, das Ambiente und die herzliche Gastfreundschaft sind unübertroffen."</p>
+                                <p>"Ein absoluter Traumurlaub! Die Ruhe, das Ambiente und die herzliche Gastfreundschaft sind unübertroffen. Wir haben uns so wohlgefühlt."</p>
                                 <cite>Familie Schneider</cite>
                             </blockquote>
                         </div>
@@ -537,10 +541,10 @@
                 </ul>
                 <h4 style="margin-top: 20px;">Folgen Sie uns</h4>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Hotel Sonne Post auf Facebook">
+                    <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook">
                         <iconify-icon icon="feather:facebook"></iconify-icon>
                     </a>
-                    <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Hotel Sonne Post auf Instagram">
+                    <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram">
                         <iconify-icon icon="feather:instagram"></iconify-icon>
                     </a>
                 </div>
@@ -564,7 +568,6 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const siteHeader = document.getElementById('site-header');
-        // Sicherstellen, dass der Wert als Zahl gelesen wird, auch wenn Einheit dabei ist
         const headerScrollThresholdRaw = getComputedStyle(document.documentElement).getPropertyValue('--header-scroll-threshold').trim();
         const headerScrollThreshold = parseInt(headerScrollThresholdRaw, 10) || 50;
 
@@ -635,7 +638,7 @@
             if (mainContent) mainContent.setAttribute('inert', '');
             if (pageFooter) pageFooter.setAttribute('inert', '');
             if (stickyFooterButtons) stickyFooterButtons.setAttribute('inert', '');
-            const currentHeader = document.getElementById('site-header'); // Sicherstellen, dass wir den aktuellen Header referenzieren
+            const currentHeader = document.getElementById('site-header');
             if(currentHeader && currentHeader !== menuTrigger.closest('header')) currentHeader.setAttribute('inert', '');
         }
 
@@ -675,13 +678,13 @@
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
         gsap.registerPlugin(ScrollTrigger);
-        gsap.utils.toArray('.teaser-card').forEach(el => { // Geändert auf .teaser-card für GSAP
+        gsap.utils.toArray('.teaser-card').forEach(el => {
             gsap.from(el, {
                 opacity: 0, y: 50, duration: 0.8,
                 scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none", once: true }
             });
         });
-         gsap.utils.toArray('.gsap-fade-in').forEach(el => { // Für andere Elemente, die nur einblenden sollen
+         gsap.utils.toArray('.gsap-fade-in').forEach(el => {
             gsap.from(el, {
                 opacity: 0, y: 30, duration: 1, ease: "power2.out",
                 scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none", once: true }
