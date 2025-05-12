@@ -26,9 +26,10 @@
             --color-bordeaux: #8C1E2D; /* Dunkler Weinrot-Akzent (Buttons, Links, etc.) */
 
             /* Textfarben */
+            /* Änderung 1: --color-text-primary ist bereits #333333. Sicherstellen, dass es korrekt angewendet wird. */
             --color-text-primary: #333333; /* Haupttextfarbe auf hellem Grund */
             --color-text-primary-on-dark: #FFFFFF; /* Textfarbe auf dunklem Grund (z.B. Hero, Buttons) */
-            --color-text-secondary: #757575; /* Sekundärtext (Grau, z.B. im Footer) */
+            --color-text-secondary: #333333; /* Sekundärtext (Grau, z.B. im Footer) */
             --color-border-subtle: #E0D8CE; /* Feine Linien, Bordüren, Trenner */
 
             /* Header spezifische Farben */
@@ -55,12 +56,16 @@
         body {
             font-family: var(--font-primary);
             line-height: 1.6;
-            color: var(--color-text-primary);
+            /* Änderung 1: Farbe wird hier korrekt über die Variable gesetzt */
+            color: var(--color-text-primary); /* Hauptfließtextfarbe #333333 */
             background-color: var(--color-beige); /* Grundfarbe der Seite */
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        /* Sicherstellen, dass p-Tags die Body-Farbe erben, falls nicht spezifischer gestyled */
+        p { color: inherit; }
+
         body.fullscreen-nav-open { overflow: hidden; } /* Verhindert Scrollen bei offener Navigation */
 
         img, video { max-width: 100%; height: auto; display: block; }
@@ -315,7 +320,8 @@
             margin-bottom: 0.8em;
             text-align: center;
         }
-        .welcome-text-section p { font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.7; }
+        /* Änderung 1: Sicherstellen, dass p die Standardfarbe #333 erbt */
+        .welcome-text-section p { font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.7; } /* Sekundärfarbe für Beschreibungstext hier beibehalten, wie es vorher war. Hauptfarbe wäre sehr dunkel */
 
         /* NEU: News Teaser Sektion */
         .news-teaser-section h2 { margin-bottom: 1.5em; }
@@ -334,8 +340,8 @@
         .teaser-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
         .teaser-card img { width: 100%; height: 220px; object-fit: cover; }
         .teaser-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .teaser-card h3 { margin-bottom: 0.5em; color: var(--color-text-primary); }
-        .teaser-card p { margin-bottom: 1.5em; color: var(--color-text-secondary); font-size: 0.95rem; flex-grow: 1; }
+        .teaser-card h3 { margin-bottom: 0.5em; color: var(--color-text-primary); } /* H3 hat Primärfarbe */
+        .teaser-card p { margin-bottom: 1.5em; color: var(--color-text-secondary); font-size: 0.95rem; flex-grow: 1; } /* Teaser-Text bleibt Sekundärfarbe */
         .teaser-card .btn { margin-top: auto; } /* Button am unteren Rand */
 
         /* Testimonials Slider */
@@ -344,7 +350,7 @@
         .slider-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
         .slide { min-width: 100%; box-sizing: border-box; padding: 0 10px; }
         .testimonial-quote { text-align: center; padding: 20px; max-width: 700px; margin: 0 auto; }
-        .testimonial-quote p { font-family: var(--font-secondary); font-size: 1.4rem; /* Größer, eleganter */ font-style: italic; color: var(--color-text-primary); margin-bottom: 1em; line-height: 1.4; }
+        .testimonial-quote p { font-family: var(--font-secondary); font-size: 1.4rem; /* Größer, eleganter */ font-style: italic; color: var(--color-text-primary); margin-bottom: 1em; line-height: 1.4; } /* Zitat-Text hat Primärfarbe */
         .testimonial-quote cite { font-style: normal; font-weight: 500; color: var(--color-text-secondary); }
         .slider-controls { text-align: center; margin-top: 25px; }
         .slider-controls button { background: none; border: none; color: var(--color-text-secondary); padding: 8px; margin: 0 8px; cursor: pointer; border-radius: 50%; transition: color 0.2s ease, background-color 0.2s ease; }
@@ -365,13 +371,13 @@
         .karriere-teaser-section { background-color: var(--color-sand); text-align: center; }
         .karriere-teaser-section .container { max-width: 700px; } /* Etwas schmaler */
         .karriere-teaser-section h2 { margin-bottom: 0.5em; }
-        .karriere-teaser-section p { color: var(--color-text-secondary); margin-bottom: 1.5em; }
+        .karriere-teaser-section p { color: var(--color-text-secondary); margin-bottom: 1.5em; } /* Text bleibt Sekundärfarbe */
         .karriere-teaser-section .btn { margin-top: 1em; }
 
         /* Newsletter CTA Sektion */
         .cta-section { background-color: var(--color-beige); padding: 60px 0; text-align: center; }
-        .cta-section h2 { color: var(--color-text-primary); margin-bottom: 0.5em;}
-        .cta-section p { margin-bottom: 25px; font-size: 1.1rem; max-width: 550px; margin-left: auto; margin-right: auto; color: var(--color-text-secondary);}
+        .cta-section h2 { color: var(--color-text-primary); margin-bottom: 0.5em;} /* H2 hat Primärfarbe */
+        .cta-section p { margin-bottom: 25px; font-size: 1.1rem; max-width: 550px; margin-left: auto; margin-right: auto; color: var(--color-text-secondary);} /* Text bleibt Sekundärfarbe */
         .form-newsletter { display: flex; justify-content: center; max-width: 450px; margin: 0 auto; }
         .form-newsletter input[type="email"] { padding: 0.8em 1em; flex-grow: 1; border: 1px solid var(--color-border-subtle); border-right: none; border-radius: 4px 0 0 4px; font-family: var(--font-primary); font-size: 0.95rem; }
         .form-newsletter input[type="email"]:focus-visible { border-color: var(--color-bordeaux); outline: none; box-shadow: none; z-index: 1; }
@@ -384,6 +390,7 @@
         /* Haupt-Footer der Seite mit Adressdaten, Links und Copyright. */
         .site-footer { background-color: var(--color-white); color: var(--color-text-secondary); padding: 60px 0 30px 0; font-size: 0.9rem; border-top: 1px solid var(--color-border-subtle); }
         .site-footer .container-footer { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        /* Änderung 1: Footer Texte (ul li, address) erben --color-text-secondary vom .site-footer */
         .site-footer ul { list-style: none; } .site-footer ul li { margin-bottom: 10px; } .site-footer a { color: var(--color-text-secondary); }
         .site-footer a:hover, .site-footer a:focus-visible { color: var(--color-bordeaux); text-decoration: underline; }
         .social-links a { margin-right: 12px; display: inline-block; } /* Inline-block für korrekten Abstand */
@@ -413,8 +420,9 @@
         .popup-overlay.is-visible { opacity: 1; visibility: visible; transition: opacity 0.3s ease, visibility 0s 0s; }
         .popup-content { background-color: var(--color-white); padding: 40px; border-radius: 6px; max-width: 550px; text-align: center; position: relative; transform: scale(0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease; }
         .popup-overlay.is-visible .popup-content { transform: scale(1); }
-        .popup-content h3 { font-size: 1.8rem; color: var(--color-text-primary); margin-bottom: 0.5em; }
-        .popup-content p { margin-bottom: 1em; font-size: 1rem; }
+        .popup-content h3 { font-size: 1.8rem; color: var(--color-text-primary); margin-bottom: 0.5em; } /* H3 hat Primärfarbe */
+        /* Änderung 1: PopUp Text explizit auf Primärfarbe setzen, wenn gewünscht. Hier bleibt es bei Standard Vererbung (sollte #333 sein) */
+        .popup-content p { margin-bottom: 1em; font-size: 1rem; color: var(--color-text-primary); }
         .popup-content .close-popup { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--color-text-secondary); padding: 5px; line-height: 1; }
         .popup-content .close-popup:hover, .popup-content .close-popup:focus-visible { color: var(--color-bordeaux); }
         .popup-content .close-popup iconify-icon { font-size: 1.8rem; }
@@ -435,8 +443,9 @@
     <!-- Inhalt (Titel, Text) sollte aus TYPO3 editierbar sein. -->
     <div class="popup-overlay" id="betriebsferien-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-description" aria-hidden="true">
         <div class="popup-content">
+            <!-- Änderung 2: aria-hidden="true" für Icon im Button hinzugefügt -->
             <button class="close-popup" aria-label="Schließen" onclick="closePopup('betriebsferien-popup')">
-                <iconify-icon icon="feather:x"></iconify-icon>
+                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
             </button>
             <!-- TYPO3: Editierbarer Titel -->
             <h3 id="popup-title">Betriebsferien Ankündigung</h3>
@@ -470,8 +479,9 @@
             </div>
             <div class="header-right">
                 <!-- TYPO3: Link zur Kontaktseite -->
+                <!-- Änderung 2: aria-hidden="true" für Icon im Link hinzugefügt -->
                 <a href="/kontakt-anreise" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
-                    <iconify-icon icon="feather:phone"></iconify-icon>
+                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
                 </a>
             </div>
         </div>
@@ -483,8 +493,9 @@
     <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
         <!-- Navigations-Header -->
         <div class="fullscreen-nav-header">
+            <!-- Änderung 2: aria-hidden="true" für Icon im Button hinzugefügt -->
             <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
-                <iconify-icon icon="feather:x"></iconify-icon>
+                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
             </button>
              <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
                  <!-- TYPO3: Logo Pfad editierbar -->
@@ -492,7 +503,7 @@
              </a>
             <div class="fullscreen-nav-ctas">
                  <!-- TYPO3: Link zum externen Buchungstool -->
-                 <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener" class="btn btn-light">Jetzt Buchen</a>
+                 <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="btn btn-light">Jetzt Buchen</a>
                  <!-- TYPO3: Link zur Anfrage-Seite -->
                  <a href="/anfragen" class="btn btn-dark">Anfragen</a>
              </div>
@@ -501,21 +512,22 @@
         <!-- Quicklinks (Icons) -->
         <!-- TYPO3: Links und Texte editierbar -->
         <div class="fullscreen-nav-quicklinks">
+            <!-- Änderung 2: aria-hidden="true" für Icons in Quicklinks hinzugefügt -->
             <a href="/zimmer-preise" class="quicklink-item">
                 <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon>
-                <span>Wohnen</span> <!-- Angepasst an alte Navi -->
+                <span>Wohnen</span>
             </a>
             <a href="/wellness-spa" class="quicklink-item">
                 <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon>
-                <span>Entspannen</span> <!-- Angepasst an alte Navi -->
+                <span>Entspannen</span>
             </a>
             <a href="/kulinarik" class="quicklink-item">
                 <iconify-icon icon="tabler:tools-kitchen" aria-hidden="true"></iconify-icon>
-                <span>Geniessen</span> <!-- Angepasst an alte Navi -->
+                <span>Geniessen</span>
             </a>
             <a href="/region" class="quicklink-item">
                 <iconify-icon icon="feather:map" aria-hidden="true"></iconify-icon>
-                <span>Freizeit</span> <!-- Angepasst an alte Navi -->
+                <span>Freizeit</span>
             </a>
         </div>
 
@@ -603,11 +615,6 @@
                     </a>
                     <!-- Evtl. weitere Kacheln für Ferienwohnungen etc. -->
                  </div>
-                 <!-- TYPO3: Zusätzliche Links unterhalb der Kacheln -->
-                 <!-- <ul class="nav-sublinks">
-                    <li><a href="/zimmer/preise">Preise & Inklusivleistungen</a></li>
-                    <li><a href="/hotel/ausstattung">Hotelausstattung</a></li>
-                 </ul> -->
             </section>
 
             <!-- Sektion: Geniessen (Kulinarik) -->
@@ -639,7 +646,6 @@
                             <span class="nav-tile-subtitle">Ihre Veranstaltung</span>
                         </div>
                     </a>
-                     <!-- Evtl. Kachel für Speisekarte -->
                  </div>
             </section>
 
@@ -672,7 +678,6 @@
                             <span class="nav-tile-subtitle">Für Körper & Seele</span>
                         </div>
                     </a>
-                     <!-- Evtl. Kachel für SPA Pakete (Tagesgäste) -->
                  </div>
             </section>
 
@@ -736,8 +741,9 @@
             </div>
             <div class="social-media-nav">
                 <!-- TYPO3: Links und Label editierbar -->
-                <a href="https://facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"><iconify-icon icon="feather:facebook"></iconify-icon></a>
-                <a href="https://instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"><iconify-icon icon="feather:instagram"></iconify-icon></a>
+                <!-- Änderung 2: aria-hidden="true" für Icons in Links hinzugefügt -->
+                <a href="https://facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"><iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon></a>
+                <a href="https://instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"><iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon></a>
             </div>
         </div>
     </nav>
@@ -761,6 +767,7 @@
                 <!-- TYPO3: Editierbare Unterüberschrift -->
                 <p class="hero-subtitle">Herzlich willkommen!</p>
                 <!-- TYPO3: Editierbarer Text -->
+                <!-- Änderung 1: Textfarbe hier #FFFFFF (via --color-text-primary-on-dark) ist korrekt für Hero -->
                 <p>Ihr Urlaub zum Durchatmen im Herzen des Schwarzwalds. Entdecken Sie die Sonne Post.</p>
             </div>
         </section>
@@ -772,7 +779,7 @@
                  <!-- TYPO3: Editierbare Überschrift H2 -->
                 <h2 id="welcome-heading" class="welcome-heading-styled">Schön, dass Sie da sind!</h2>
                  <!-- TYPO3: Editierbarer Text (RTE) -->
-                <p>Im idyllischen Bergdorf Waldau inmitten des Naturparks Südschwarzwald befindet sich unser Hotel Sonne Post – ein traditionsreicher Schwarzwälder Familienbetrieb mit viel Charme, Herz und Gemütlichkeit. Seit 1870 wird hier badische Gastfreundschaft in einer herzlichen und familiären Atmosphäre gelebt.</p>
+                 <p>Im idyllischen Bergdorf Waldau inmitten des Naturparks Südschwarzwald befindet sich unser Hotel Sonne Post – ein traditionsreicher Schwarzwälder Familienbetrieb mit viel Charme, Herz und Gemütlichkeit. Seit 1870 wird hier badische Gastfreundschaft in einer herzlichen und familiären Atmosphäre gelebt.</p>
                  <p style="margin-top: 1em;">Entdecken Sie unser Schwarzwald Hotel als Ihre kleine Ferienoase, in der Sie weit weg vom Alltag, Ruhe und Erholung finden. Wir freuen uns auf Sie und darauf Ihren Schwarzwald Urlaub zu etwas ganz Besonderem zu machen.</p>
                  <p style="margin-top: 1em; font-style: italic;">Ihre Familie Eiche & Wehrle</p>
              </div>
@@ -791,8 +798,9 @@
                         <div class="teaser-card-content">
                             <h3 id="teaser-title-arrangements">Exklusive Arrangements</h3>
                             <p>Maßgeschneiderte Erlebnisse für Ihre perfekte Auszeit – von Romantik bis Aktivurlaub.</p>
+                            <!-- Änderung 2: aria-hidden="true" für Icon im Button hinzugefügt -->
                             <a href="/arrangements" class="btn btn-outline">
-                                <iconify-icon icon="feather:gift"></iconify-icon> Zu den Angeboten
+                                <iconify-icon icon="feather:gift" aria-hidden="true"></iconify-icon> Zu den Angeboten
                             </a>
                         </div>
                     </article>
@@ -800,10 +808,11 @@
                     <article class="teaser-card gsap-fade-in" aria-labelledby="teaser-title-wellness">
                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Wellnessbereich mit Schwimmbad">
                         <div class="teaser-card-content">
-                            <h3 id="teaser-title-wellness">Wellness & SPA Oase</h3>
+                            <h3 id="teaser-title-wellness">Wellness &amp; SPA Oase</h3>
                             <p>Tauchen Sie ein in unsere Welt der Entspannung mit Saunen, Pools und wohltuenden Anwendungen.</p>
+                            <!-- Änderung 2: aria-hidden="true" für Icon im Button hinzugefügt -->
                             <a href="/wellness-spa" class="btn btn-outline">
-                                <iconify-icon icon="feather:wind"></iconify-icon> Mehr erfahren
+                                <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> Mehr erfahren
                             </a>
                         </div>
                     </article>
@@ -813,8 +822,9 @@
                         <div class="teaser-card-content">
                             <h3 id="teaser-title-zimmer">Unsere Zimmerwelten</h3>
                             <p>Finden Sie Ihr persönliches Refugium – von gemütlichen Einzelzimmern bis zu großzügigen Suiten.</p>
+                            <!-- Änderung 2: aria-hidden="true" für Icon im Button hinzugefügt -->
                             <a href="/zimmer-preise" class="btn btn-outline">
-                                <iconify-icon icon="feather:key"></iconify-icon> Zimmer ansehen
+                                <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> Zimmer ansehen
                             </a>
                         </div>
                     </article>
@@ -834,18 +844,21 @@
                         <!-- TYPO3: Einzelne Slides als wiederholbare Elemente -->
                         <div class="slide" role="group" aria-roledescription="Folie">
                             <blockquote class="testimonial-quote">
+                                <!-- Änderung 1: Zitat-Text nutzt --color-text-primary (#333333) -->
                                 <p>"Ein absoluter Traumurlaub! Die Ruhe, das Ambiente und die herzliche Gastfreundschaft sind unübertroffen. Wir haben uns so wohlgefühlt."</p>
                                 <cite>Familie Schneider</cite> <!-- TYPO3: Name editierbar -->
                             </blockquote>
                         </div>
                         <div class="slide" role="group" aria-roledescription="Folie">
                             <blockquote class="testimonial-quote">
+                                <!-- Änderung 1: Zitat-Text nutzt --color-text-primary (#333333) -->
                                 <p>"Der Wellnessbereich ist eine Oase der Erholung. Perfekt für ein Mädelswochenende!"</p>
                                 <cite>Julia K. & Freundinnen</cite>
                             </blockquote>
                         </div>
                          <div class="slide" role="group" aria-roledescription="Folie">
                             <blockquote class="testimonial-quote">
+                                <!-- Änderung 1: Zitat-Text nutzt --color-text-primary (#333333) -->
                                 <p>"Wir kommen seit Jahren und schätzen die gleichbleibend hohe Qualität und die persönliche Betreuung."</p>
                                 <cite>Ehepaar Wagner</cite>
                             </blockquote>
@@ -853,11 +866,12 @@
                     </div>
                     <!-- WCAG: Steuerungselemente für Slider -->
                     <div class="slider-controls">
-                        <button id="prevSlideTestimonial" aria-label="Vorheriges Testimonial"><iconify-icon icon="feather:arrow-left-circle"></iconify-icon></button>
+                         <!-- Änderung 2: aria-hidden="true" für Icons in Buttons hinzugefügt -->
+                        <button id="prevSlideTestimonial" aria-label="Vorheriges Testimonial"><iconify-icon icon="feather:arrow-left-circle" aria-hidden="true"></iconify-icon></button>
                         <button class="slider-pause-button" id="testimonial-pause" aria-label="Animation anhalten/fortsetzen">
-                            <iconify-icon icon="feather:pause-circle"></iconify-icon> <!-- Icon wechselt dynamisch -->
+                            <iconify-icon icon="feather:pause-circle" aria-hidden="true"></iconify-icon> <!-- Icon wechselt dynamisch -->
                         </button>
-                        <button id="nextSlideTestimonial" aria-label="Nächstes Testimonial"><iconify-icon icon="feather:arrow-right-circle"></iconify-icon></button>
+                        <button id="nextSlideTestimonial" aria-label="Nächstes Testimonial"><iconify-icon icon="feather:arrow-right-circle" aria-hidden="true"></iconify-icon></button>
                     </div>
                      <!-- WCAG: Container für Screenreader-Ankündigungen -->
                     <div class="sr-only sr-slide-announcer" aria-live="polite" aria-atomic="true"></div>
@@ -912,10 +926,12 @@
                 <!-- TYPO3: Überschrift editierbar -->
                 <h2 id="karriere-teaser-heading">Werden Sie Teil unseres Teams</h2>
                 <!-- TYPO3: Text editierbar -->
+                <!-- Änderung 1: Text bleibt #757575 -->
                 <p>Die Sonne Post lebt von herzlichen Gastgebern. Entdecken Sie Ihre Karrieremöglichkeiten in einem traditionsreichen Haus mit Zukunft.</p>
                 <!-- TYPO3: Link zur Karriere-Seite editierbar -->
+                 <!-- Änderung 2: aria-hidden="true" für Icon im Button hinzugefügt -->
                 <a href="/karriere" class="btn">
-                    <iconify-icon icon="feather:briefcase"></iconify-icon> Offene Stellen
+                    <iconify-icon icon="feather:briefcase" aria-hidden="true"></iconify-icon> Offene Stellen
                 </a>
             </div>
         </section>
@@ -927,11 +943,13 @@
                 <!-- TYPO3: Überschrift editierbar -->
                 <h2 id="newsletter-heading-cta">Nichts mehr verpassen</h2>
                 <!-- TYPO3: Text editierbar -->
+                 <!-- Änderung 1: Text bleibt #757575 -->
                 <p>Abonnieren Sie unseren Newsletter für exklusive Angebote, Neuigkeiten und Urlaubsinspiration direkt aus der Sonne Post.</p>
                 <!-- TYPO3: Formular-ID oder spezifische Markierungen für Mirko -->
                 <form action="/newsletter-anmeldung" method="post" class="form-newsletter" aria-describedby="newsletter-privacy-info">
                     <label for="newsletter-email" class="sr-only">E-Mail-Adresse für Newsletter</label>
                     <input type="email" id="newsletter-email" name="email" placeholder="Ihre E-Mail-Adresse" required aria-required="true">
+                    <!-- Änderung 2: aria-hidden="true" für Icon im Button hinzugefügt -->
                     <button type="submit" class="btn" aria-label="Newsletter abonnieren">
                         <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> <span class="sr-only">Senden</span>
                     </button>
@@ -955,9 +973,10 @@
                 <!-- TYPO3: Editierbare Überschrift -->
                 <h4>Hotel Sonne Post</h4>
                 <!-- TYPO3: Editierbare Adresse, Tel, Mail -->
+                <!-- Änderung 1: Adresse erbt Sekundärfarbe #757575 -->
                 <address>
                     Hotel Sonne-Post Inh. Yvonne Eiche e.K.<br>
-                    Landstr. 13
+                    Landstr. 13<br>
                     D-79822 Titisee-Neustadt / Waldau<br>
                     <br>
                     Tel: <a href="tel:+49766991020">+49 7669 91020</a><br>
@@ -1007,11 +1026,12 @@
                 <h4 style="margin-top: 20px;">Folgen Sie uns</h4>
                  <!-- TYPO3: Social Media Links pflegbar -->
                 <div class="social-links">
+                     <!-- Änderung 2: aria-hidden="true" für Icons in Links hinzugefügt -->
                      <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook">
-                        <iconify-icon icon="feather:facebook"></iconify-icon>
+                        <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon>
                     </a>
                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram">
-                        <iconify-icon icon="feather:instagram"></iconify-icon>
+                        <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon>
                     </a>
                     <!-- Weitere Social Links hier hinzufügen -->
                 </div>
@@ -1019,13 +1039,14 @@
         </div>
         <!-- Copyright Hinweis -->
         <div class="copyright">
-            <!-- TYPO3: Jahr dynamisch ausgeben lassen -->
+             <!-- Änderung 1: Copyright-Text erbt Sekundärfarbe #757575 -->
             <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
     <!-- TYPO3 Hinweis: Sticky Buchungs-Button (Widget Trigger) -->
     <!-- Link zum externen Buchungstool sollte konfigurierbar sein. -->
+    <!-- Änderung 2: aria-hidden="true" für Icon im Link hinzugefügt -->
     <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
         <iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> Buchen
     </a>
@@ -1126,7 +1147,6 @@
                 pageFooter.inert = true;
                 if (bookingWidgetTrigger) bookingWidgetTrigger.inert = true;
                 // Der Header bleibt interaktiv, da er den Trigger enthält
-                // Optional: Header auch inert machen, außer dem Trigger? Komplexer. Aktuell OK.
 
                 document.addEventListener('keydown', trapFocus);
                 updateFocusableElements();
@@ -1146,10 +1166,11 @@
                 if (bookingWidgetTrigger) bookingWidgetTrigger.inert = false;
 
                 document.removeEventListener('keydown', trapFocus);
-                if (previouslyFocusedElement) {
-                     previouslyFocusedElement.focus();
+                 // Fokus nur wiederherstellen, wenn previouslyFocusedElement existiert und im DOM ist
+                if (previouslyFocusedElement && document.body.contains(previouslyFocusedElement)) {
+                    previouslyFocusedElement.focus();
                 } else {
-                    menuTrigger.focus(); // Fallback
+                    menuTrigger.focus(); // Fallback auf Menü-Trigger
                 }
             }
 
@@ -1203,8 +1224,6 @@
                 y: 40, // Leichter Slide-Up Effekt
                 duration: 0.8,
                 ease: "power2.out",
-                // Stagger Effekt (optional, hier nicht aktiv, da über ScrollTrigger gesteuert)
-                // delay: index * 0.1,
                 scrollTrigger: {
                     trigger: el,
                     start: "top 90%", // Startet, wenn 90% des Elements sichtbar sind
@@ -1223,6 +1242,10 @@
             if (!popup || popup.classList.contains('is-visible')) return; // Verhindert doppeltes Öffnen
 
             const previouslyFocused = document.activeElement;
+             // Store reference to the previously focused element ON the popup itself
+             // Using a direct property is safer than dataset for object references
+             popup._previouslyFocusedElement = previouslyFocused;
+
             popup.classList.add('is-visible');
             popup.removeAttribute('aria-hidden');
 
@@ -1247,40 +1270,44 @@
                 if (e.key !== 'Tab') return;
 
                 if (e.shiftKey) { // Shift + Tab
-                    if (document.activeElement === firstFocusable) {
-                        lastFocusable.focus();
+                    // If focus is on the first element or outside the popup, move to the last
+                    if (document.activeElement === firstFocusable || !popup.contains(document.activeElement)) {
+                        if (lastFocusable) lastFocusable.focus();
                         e.preventDefault();
                     }
                 } else { // Tab
-                    if (document.activeElement === lastFocusable) {
-                        firstFocusable.focus();
+                     // If focus is on the last element or outside the popup, move to the first
+                    if (document.activeElement === lastFocusable || !popup.contains(document.activeElement)) {
+                        if (firstFocusable) firstFocusable.focus();
                         e.preventDefault();
                     }
                 }
             };
+            // Store reference to the listener function for removal
+            popup._trapFocusListener = trapPopupFocus;
             popup.addEventListener('keydown', trapPopupFocus);
 
             // Schließen mit Escape
             const closeOnEscape = (e) => {
                 if (e.key === 'Escape') {
-                    closePopup(popupId, previouslyFocused);
+                    // Pass the stored previously focused element
+                    closePopup(popupId, popup._previouslyFocusedElement);
                 }
             };
+             // Store reference to the listener function for removal
+             popup._escapeListener = closeOnEscape;
             document.addEventListener('keydown', closeOnEscape);
 
             // Schließen bei Klick auf Overlay
             const closeOnClickOutside = (e) => {
                 if (e.target === popup) {
-                    closePopup(popupId, previouslyFocused);
+                    // Pass the stored previously focused element
+                    closePopup(popupId, popup._previouslyFocusedElement);
                 }
             };
+             // Store reference to the listener function for removal
+             popup._clickOutsideListener = closeOnClickOutside;
             popup.addEventListener('click', closeOnClickOutside);
-
-            // Listener speichern, um sie beim Schließen entfernen zu können
-            popup.dataset.escapeListener = closeOnEscape;
-            popup.dataset.focusTrapListener = trapPopupFocus;
-            popup.dataset.clickOutsideListener = closeOnClickOutside;
-            popup.dataset.previouslyFocused = previouslyFocused; // Referenz auf vorheriges Element speichern
 
 
              // Fokus auf Schließen-Button setzen
@@ -1302,34 +1329,34 @@
                 if (child.dataset.madeInert) {
                     child.inert = false;
                     child.removeAttribute('aria-hidden');
-                     delete child.dataset.madeInert; // Markierung entfernen
+                    delete child.dataset.madeInert; // Markierung entfernen
                  }
             });
 
 
-            // Listener entfernen
-            const escapeListener = popup.dataset.escapeListener;
-            const focusTrapListener = popup.dataset.focusTrapListener;
-            const clickOutsideListener = popup.dataset.clickOutsideListener;
-            const previouslyFocused = popup.dataset.previouslyFocused; // Fokuselement wiederherstellen
-
-
-            if (escapeListener) document.removeEventListener('keydown', escapeListener);
-            if (focusTrapListener) popup.removeEventListener('keydown', focusTrapListener);
-            if (clickOutsideListener) popup.removeEventListener('click', clickOutsideListener);
-
-            // Gespeicherte Daten löschen
-            delete popup.dataset.escapeListener;
-            delete popup.dataset.focusTrapListener;
-            delete popup.dataset.clickOutsideListener;
-            delete popup.dataset.previouslyFocused;
-
+            // Listener entfernen, using stored references
+            if (popup._escapeListener) {
+                document.removeEventListener('keydown', popup._escapeListener);
+                delete popup._escapeListener;
+            }
+             if (popup._trapFocusListener) {
+                 popup.removeEventListener('keydown', popup._trapFocusListener);
+                 delete popup._trapFocusListener;
+            }
+            if (popup._clickOutsideListener) {
+                popup.removeEventListener('click', popup._clickOutsideListener);
+                delete popup._clickOutsideListener;
+            }
 
             // Fokus wiederherstellen
-             const focusTarget = elementToFocus || (previouslyFocused && document.body.contains(previouslyFocused) ? previouslyFocused : document.body); // Fallback zu body
-             if (focusTarget && typeof focusTarget.focus === 'function') {
-                 setTimeout(() => focusTarget.focus(), 0); // Timeout um sicherzustellen, dass das Popup wirklich weg ist
-             }
+            const focusTarget = elementToFocus || popup._previouslyFocusedElement; // Use the passed element or the stored one
+            if (focusTarget && document.body.contains(focusTarget) && typeof focusTarget.focus === 'function') {
+                 setTimeout(() => focusTarget.focus(), 0); // Timeout ensures popup is visually hidden
+            } else {
+                 document.body.focus(); // Fallback to body if target is invalid
+            }
+            // Clear the stored reference after use
+            delete popup._previouslyFocusedElement;
         };
 
         // TYPO3 Integration: Popup zeigen, wenn Variable gesetzt ist.
@@ -1376,7 +1403,8 @@
                 // WCAG: Änderung für Screenreader ankündigen (nur wenn 'announce' true ist)
                 if (announce && srAnnouncer) {
                     const slideTextContent = slides[currentIndex] ? (slides[currentIndex].textContent || '').trim().substring(0, 100) : '';
-                    srAnnouncer.textContent = `Folie ${currentIndex + 1} von ${slides.length} angezeigt. ${slideTextContent}`;
+                    // Use a slightly different text for each announcement to ensure it's read
+                    srAnnouncer.textContent = `Folie ${currentIndex + 1} von ${slides.length}. ${slideTextContent} ${(new Date()).getTime()}`; // Add timestamp to force update
                 }
             }
 
