@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -6,82 +7,106 @@
     <title>Hotel Sonne Post | Urlaub zum Durchatmen im Schwarzwald</title>
     <meta name="description" content="Erleben Sie traditionsbewusste Gastfreundschaft und modernen Komfort im Hotel Sonne Post. Ihr Refugium für Wellness und Natur im Schwarzwald.">
 
+    <!-- Favicon - Bitte absolute URL verwenden -->
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts: Cormorant Garamond (Headlines), Epilogue (Text) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
+        /* === CSS Variablen für zentrale Werte === */
         :root {
             --color-white: #FFFFFF;
-            --color-beige: #F7F2EC;
-            --color-sand: #E6DCCF;
-            --color-bordeaux: #8C1E2D;
+            --color-beige: #F7F2EC; /* Heller, leicht texturierter Hintergrund für Menü und Hauptinhalt */
+            --color-sand: #E6DCCF; /* Sandton für Akzentbereiche */
+            --color-bordeaux: #8C1E2D; /* Dunkler Weinrot-Akzent */
+
+            /* Textfarben für Kontrast auf verschiedenen Hintergründen */
             --color-text-primary: #333333; /* Dunkler für besseren Kontrast auf hellem Grund */
-            --color-text-primary-on-dark: #FFFFFF; /* Weißer Text auf dunklem Grund */
-            --color-text-secondary: #757575;
-            --color-border-subtle: #E0D8CE;
-            --color-header-bg-initial: transparent;
-            --color-header-bg-scrolled: var(--color-white);
-            --color-header-icon-initial: var(--color-white);
-            --color-header-icon-scrolled: var(--color-text-primary);
+            --color-text-primary-on-dark: #FFFFFF; /* Weißer Text auf dunklem Grund (z.B. Bordeaux) */
+            --color-text-secondary: #757575; /* Sekundärtext (Grau) */
+            --color-border-subtle: #E0D8CE; /* Feine Linien und Bordüren */
 
-            --font-primary: 'Epilogue', sans-serif;
-            --font-secondary: 'Cormorant Garamond', serif;
+            /* Header spezifische Farben */
+            --color-header-bg-initial: transparent; /* Initial transparent über Hero */
+            --color-header-bg-scrolled: var(--color-white); /* Heller Hintergrund bei Scroll */
+            --color-header-icon-initial: var(--color-white); /* Weiße Icons auf transparent/Video */
+            --color-header-icon-scrolled: var(--color-text-primary); /* Dunkle Icons auf hellem Header */
+            --color-header-contact-icon-scrolled: var(--color-bordeaux); /* Kontakt Icon spezifisch Bordeaux bei Scroll */
 
-            --header-height: 70px;
-            --menu-icon-size: 24px;
-            --header-scroll-threshold: 50px;
+            /* Typografie */
+            --font-primary: 'Epilogue', sans-serif; /* Für Fließtext und UI-Elemente */
+            --font-secondary: 'Cormorant Garamond', serif; /* Für Überschriften */
+
+            /* Layout Maße */
+            --header-height: 70px; /* Höhe des festen Headers */
+            --menu-icon-size: 24px; /* Größe des Hamburger-Icons */
+            --header-scroll-threshold: 50px; /* Scroll-Distanz für Header-Farbwechsel */
+            --sticky-footer-height: 80px; /* Geschätzte Höhe der Sticky Footer Buttons + Padding */
         }
 
+        /* === Allgemeine und Reset Stile === */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: var(--font-primary);
             line-height: 1.6;
             color: var(--color-text-primary);
             background-color: var(--color-white); /* Hauptseitenhintergrund auf Weiß */
-            font-size: 16px;
+            font-size: 16px; /* Standard Schriftgröße */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        body.fullscreen-nav-open { overflow: hidden; }
+        body.fullscreen-nav-open { overflow: hidden; } /* Verhindert Scrollen des Bodys, wenn Navi offen */
+
         img, video { max-width: 100%; height: auto; display: block; }
-        img { loading: lazy; }
+        img { loading: lazy; } /* Standardmäßig Lazy Loading */
         a { color: var(--color-bordeaux); text-decoration: none; }
-        a:hover, a:focus-visible { text-decoration: underline; }
-        *:focus-visible { outline: 2px solid var(--color-bordeaux); outline-offset: 2px; }
+        a:hover, a:focus-visible { text-decoration: underline; } /* Standard-Hover/Fokus */
+        *:focus-visible { outline: 2px solid var(--color-bordeaux); outline-offset: 2px; } /* WCAG Fokus Indikator */
+
+        /* Screenreader Only Klasse */
         .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+
+        /* Container für maximale Breite und Zentrierung */
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+        /* Überschriften Stile */
         h1, h2, h3, h4, h5, h6 { font-family: var(--font-secondary); font-weight: 600; line-height: 1.2; margin-bottom: 0.75em; }
         h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
         h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5em; text-align: center; }
         h3 { font-size: clamp(1.3rem, 3vw, 1.8rem); }
 
+        /* Button Stile */
         .btn { display: inline-flex; align-items: center; padding: 0.8em 1.8em; background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); font-family: var(--font-primary); font-weight: 500; text-decoration: none; border: 1px solid var(--color-bordeaux); border-radius: 4px; transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; cursor: pointer; }
         .btn:hover, .btn:focus-visible { background-color: #701623; color: var(--color-text-primary-on-dark); text-decoration: none; transform: translateY(-2px); }
         .btn-outline { background-color: transparent; color: var(--color-bordeaux); border: 1px solid var(--color-bordeaux); }
         .btn-outline:hover, .btn-outline:focus-visible { background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); }
         .btn iconify-icon { vertical-align: middle; margin-right: 0.5em; font-size: 1.2em; }
 
-        /* Header (Sticky) mit Farbwechsel */
+        /* === Header (Sticky) mit Farbwechsel === */
         .site-header {
             position: fixed; top: 0; left:0; right:0; z-index: 1000;
             height: var(--header-height);
             background-color: var(--color-header-bg-initial);
-            background-image: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.10) 60%, rgba(0,0,0,0) 100%);
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.10) 60%, rgba(0,0,0,0) 100%); /* Verlauf über Hero */
             display: flex; align-items: center; padding: 0 20px;
             transition: background-color 0.3s ease, background-image 0.3s ease, box-shadow 0.3s ease;
         }
         .site-header.scrolled {
             background-color: var(--color-header-bg-scrolled);
-            background-image: none;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background-image: none; /* Verlauf entfernen */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Dezenter Schatten */
         }
         .header-content-wrapper { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+        /* Linke Seite: Menü Button + Text */
         .header-left .menu-trigger-wrapper { display: flex; flex-direction: column; align-items: center; cursor: pointer; padding: 10px; background: none; border: none; }
         .header-left .menu-trigger-wrapper .menu-trigger-text { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-header-icon-initial); margin-top: 4px; transition: color 0.3s ease; }
         .site-header.scrolled .header-left .menu-trigger-wrapper .menu-trigger-text { color: var(--color-header-icon-scrolled); }
 
+        /* Hamburger Icon Animation */
         .hamburger-icon { width: var(--menu-icon-size); height: calc(var(--menu-icon-size) * 0.7); position: relative; transition: transform 0.3s ease-in-out; }
         .hamburger-icon span { display: block; position: absolute; height: 2px; width: 100%; background: var(--color-header-icon-initial); border-radius: 2px; opacity: 1; left: 0; transform: rotate(0deg); transition: .25s ease-in-out, background-color 0.3s ease; }
         .site-header.scrolled .hamburger-icon span { background: var(--color-header-icon-scrolled); }
@@ -93,70 +118,232 @@
         .menu-trigger-wrapper[aria-expanded="true"] .hamburger-icon span:nth-child(2) { transform: rotate(45deg); }
         .menu-trigger-wrapper[aria-expanded="true"] .hamburger-icon span:nth-child(3) { transform: rotate(-45deg); }
 
+        /* Mitte: Logo mit Wechsel */
         .header-center .central-logo img {
             height: calc(var(--header-height) * 0.6);
             max-height: 40px;
-            /* Das weiße Logo ist initial sichtbar, das rote bei scroll */
+            /* SVGs verwenden currentColor, falls Farbe via CSS gesteuert werden soll */
+            /* Hier werden zwei separate SVGs verwendet, die ein- und ausgeblendet werden */
         }
-        .header-center .central-logo .logo-initial { display: block; }
-        .header-center .central-logo .logo-scrolled { display: none; }
+        .header-center .central-logo .logo-initial { display: block; } /* Weißes Logo initial sichtbar */
+        .header-center .central-logo .logo-scrolled { display: none; } /* Rotes Logo initial versteckt */
         .site-header.scrolled .header-center .central-logo .logo-initial { display: none; }
         .site-header.scrolled .header-center .central-logo .logo-scrolled { display: block; }
 
-
+        /* Rechte Seite: Kontakt Icon Button */
         .header-right .contact-icon-btn iconify-icon { font-size: 1.5rem; color: var(--color-header-icon-initial); transition: color 0.3s ease; }
-        .site-header.scrolled .header-right .contact-icon-btn iconify-icon { color: var(--color-bordeaux); }
+        .site-header.scrolled .header-right .contact-icon-btn iconify-icon { color: var(--color-header-contact-icon-scrolled); } /* Rot bei Scroll */
         .header-right .contact-icon-btn { background: none; border: none; padding: 10px; cursor: pointer; }
 
-        .fullscreen-nav { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background-color: var(--color-beige); z-index: 1001; transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; overflow-y: auto; }
+        /* === Fullscreen Navigation === */
+        .fullscreen-nav {
+            position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+            background-color: var(--color-beige);
+            z-index: 1001;
+            transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Slide-In Animation */
+            display: flex; flex-direction: column;
+            overflow-y: auto; /* Nur vertikal scrollbar */
+        }
         .fullscreen-nav.is-open { left: 0; }
-        .fullscreen-nav-header { display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: var(--header-height); border-bottom: 1px solid var(--color-border-subtle); flex-shrink: 0; }
-        .fullscreen-nav-header .logo-fullscreen img { max-height: 40px; }
-        .fullscreen-nav-close-btn iconify-icon { font-size: 1.8rem; color: var(--color-text-primary); }
+
+        /* Header innerhalb der Fullscreen Navi */
+        .fullscreen-nav-header {
+            display: flex;
+            justify-content: space-between; /* Platz für alle Elemente */
+            align-items: center;
+            padding: 0 20px; /* Linker/rechter Innenabstand */
+            height: var(--header-height);
+            border-bottom: 1px solid var(--color-border-subtle);
+            flex-shrink: 0; /* Verhindert Schrumpfen */
+        }
+         /* Linke Seite im Navi Header: Close Button */
+        .fullscreen-nav-close-btn { background: none; border: none; padding: 10px; cursor: pointer; margin-right: 20px; /* Abstand zum Logo */ }
+        .fullscreen-nav-close-btn iconify-icon { font-size: 1.8rem; color: var(--color-text-primary); } /* Passend zu den anderen dunklen Icons */
+
+        /* Mitte im Navi Header: Leerraum (Flex Spacer) */
+        .fullscreen-nav-header .header-spacer { flex-grow: 1; }
+
+        /* Rechte Seite im Navi Header: Logo und CTAs */
+        .fullscreen-header-right-group { /* Wrapper für Logo und CTAs, um sie rechts zu gruppieren */
+            display: flex;
+            align-items: center;
+             /* Kein margin-left: auto mehr hier, da Spacer die Arbeit übernimmt */
+        }
+        .fullscreen-nav-header .logo-fullscreen { margin-right: 20px; /* Abstand Logo zu CTAs */ }
+        .fullscreen-nav-header .logo-fullscreen img { max-height: 40px; } /* Rotes Logo auf hellem Grund */
+
         .fullscreen-nav-ctas { display: flex; gap: 10px; }
         .fullscreen-nav-ctas .btn { font-size: 0.8rem; padding: 0.6em 1.2em; text-transform: uppercase; }
         .fullscreen-nav-ctas .btn-light { background-color: var(--color-white); color: var(--color-text-primary); border: 1px solid var(--color-border-subtle); }
+        .fullscreen-nav-ctas .btn-light:hover { background-color: var(--color-sand); }
         .fullscreen-nav-ctas .btn-dark { background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); }
-        .fullscreen-nav-quicklinks { display: flex; justify-content: space-around; padding: 20px 0; border-bottom: 1px solid var(--color-border-subtle); flex-shrink: 0; }
-        .fullscreen-nav-quicklinks .quicklink-item { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; color: var(--color-text-secondary); text-decoration: none; }
-        .fullscreen-nav-quicklinks .quicklink-item iconify-icon { font-size: 1.8rem; margin-bottom: 5px; color: var(--color-text-primary); }
-        .fullscreen-nav-main { padding: 20px; flex-grow: 1; }
+        @media (max-width: 480px) { /* Kleinere CTAs auf sehr kleinen Screens */
+            .fullscreen-nav-ctas .btn { padding: 0.5em 0.8em; }
+        }
+
+
+        /* Quicklinks im Menü (Icons + Text) */
+        .fullscreen-nav-quicklinks {
+            display: flex;
+            justify-content: space-around; /* Gleichmäßiger Abstand */
+            padding: 20px 0;
+            border-bottom: 1px solid var(--color-border-subtle);
+            flex-shrink: 0; /* Verhindert Schrumpfen */
+             /* Optional: Padding links/rechts anpassen, falls nicht volle Breite gewünscht */
+            padding-left: 20px; padding-right: 20px;
+        }
+        .fullscreen-nav-quicklinks .quicklink-item {
+            display: flex; flex-direction: column; align-items: center;
+            font-size: 0.75rem; color: var(--color-text-secondary); text-decoration: none;
+            text-align: center; /* Text zentrieren */
+             /* Flex-Basis optional, um gleichmäßige Breite zu erzwingen, kann aber auf kleinen Screens Probleme machen */
+            flex-basis: 20%; /* Beispiel */
+        }
+        .fullscreen-nav-quicklinks .quicklink-item iconify-icon { font-size: 1.8rem; margin-bottom: 5px; color: var(--color-text-primary); transition: color 0.2s ease; }
+        .fullscreen-nav-quicklinks .quicklink-item:hover iconify-icon,
+        .fullscreen-nav-quicklinks .quicklink-item:hover { color: var(--color-bordeaux); }
+
+        /* Hauptbereich des Menüs (Sektionen mit horizontal scrollbaren Kacheln) */
+        .fullscreen-nav-main {
+            padding: 20px; /* Innenabstand */
+            flex-grow: 1; /* Nimmt restlichen Platz ein, wird scrollbar */
+            width: 100%;
+            max-width: 700px; /* Maximale Breite für Lesbarkeit im Swiss Style */
+            margin: 0 auto; /* Zentrierung der Navigationsliste */
+        }
         .nav-section { margin-bottom: 30px; }
         .nav-section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 15px; }
         .nav-section-title { font-family: var(--font-secondary); font-size: 2rem; color: var(--color-text-primary); font-weight: 600; }
-        .nav-section-viewall { font-size: 0.8rem; color: var(--color-text-secondary); text-decoration: none; }
-        .horizontal-scroll-container { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 15px; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--color-border-subtle) transparent; }
-        .horizontal-scroll-container::-webkit-scrollbar { height: 6px; } .horizontal-scroll-container::-webkit-scrollbar-track { background: transparent; } .horizontal-scroll-container::-webkit-scrollbar-thumb { background-color: var(--color-border-subtle); border-radius: 3px; }
-        .nav-tile { flex: 0 0 auto; width: 220px; height: 280px; border-radius: 8px; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; text-decoration: none; color: var(--color-text-primary-on-dark); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .nav-tile img.tile-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.3s ease; }
+        .nav-section-viewall { font-size: 0.8rem; color: var(--color-text-secondary); text-decoration: none; transition: color 0.2s ease; }
+         .nav-section-viewall:hover { color: var(--color-bordeaux); text-decoration: underline; }
+
+        /* Horizontale Scroll-Container für Kacheln */
+        .horizontal-scroll-container {
+            display: flex;
+            overflow-x: auto; /* Ermöglicht horizontales Scrollen */
+            overflow-y: hidden; /* Verhindert vertikales Scrollen der Kacheln */
+            gap: 15px; /* Abstand zwischen Kacheln */
+            padding-bottom: 15px; /* Platz für Scrollbar, falls sichtbar */
+            -webkit-overflow-scrolling: touch; /* Sanftes Scrollen auf iOS */
+            scrollbar-width: thin; /* Firefox Scrollbar */
+            scrollbar-color: var(--color-border-subtle) transparent; /* Firefox Scrollbar Farben */
+        }
+        /* Webkit Scrollbar Styling */
+        .horizontal-scroll-container::-webkit-scrollbar { height: 6px; }
+        .horizontal-scroll-container::-webkit-scrollbar-track { background: transparent; }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb { background-color: var(--color-border-subtle); border-radius: 3px; }
+
+        /* Navigationskacheln (Tiles) */
+        .nav-tile {
+            flex: 0 0 auto; /* Kacheln nicht stretchen/schrumpfen, Breite wird durch width gesetzt */
+            width: 220px; /* Breite der Kacheln */
+            height: 280px; /* Höhe der Kacheln */
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column; /* Inhalt stapeln */
+            justify-content: flex-end; /* Inhalt am unteren Rand */
+            text-align: left; /* Text linksbündig */
+            text-decoration: none;
+            color: var(--color-text-primary-on-dark); /* Textfarbe weiß */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .nav-tile:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
+        .nav-tile img.tile-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 1; transition: transform 0.3s ease;
+        }
         .nav-tile:hover img.tile-bg { transform: scale(1.05); }
-        .nav-tile::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.0) 100%); z-index: 2; }
-        .nav-tile-content { position: relative; z-index: 3; padding: 15px; }
-        .nav-tile-title { font-size: 1.3rem; font-weight: 600; line-height: 1.2; }
-        .nav-tile-subtitle { font-size: 0.9rem; font-weight: 400; opacity: 0.9; margin-top: 5px; }
-        .fullscreen-nav-footer { padding: 20px; border-top: 1px solid var(--color-border-subtle); flex-shrink: 0; }
-        .footer-links ul { list-style: none; margin-bottom: 20px; } .footer-links li { margin-bottom: 10px; }
-        .footer-links a { font-size: 0.9rem; color: var(--color-text-secondary); text-decoration: none; }
+        .nav-tile::before { /* Overlay für Textlesbarkeit */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.0) 100%); /* Stärkerer Verlauf unten */
+            z-index: 2;
+        }
+        .nav-tile-content {
+            position: relative; z-index: 3;
+            padding: 20px; /* Innenabstand am unteren Rand */
+            width: 100%; /* Nimmt volle Breite der Kachel */
+        }
+        .nav-tile-title {
+            font-size: 1.2rem; /* Angepasst für Lesbarkeit */
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 0; /* Kein extra Margin */
+        }
+        .nav-tile-subtitle {
+            font-size: 0.8rem; /* Kleiner für Untertitel */
+            font-weight: 400;
+            opacity: 0.9;
+            margin-top: 5px;
+            text-transform: uppercase; /* Beispiel: Versalien für Untertitel */
+        }
+
+        /* Footer Bereich innerhalb der Fullscreen Navi */
+        .fullscreen-nav-footer {
+            padding: 20px;
+            border-top: 1px solid var(--color-border-subtle);
+            flex-shrink: 0; /* Verhindert Schrumpfen */
+        }
+        .footer-links ul { list-style: none; margin-bottom: 20px; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
         .footer-links a:hover { color: var(--color-bordeaux); }
-        .footer-cta-button { display: block; width: 100%; text-align: center; padding: 0.8em 1.5em; background-color: transparent; color: var(--color-text-primary); border: 1px solid var(--color-text-primary); border-radius: 4px; text-transform: uppercase; font-weight: 500; font-size: 0.9rem; margin-bottom: 20px; text-decoration: none; }
+        .footer-cta-button {
+            display: block; width: 100%; text-align: center; padding: 0.8em 1.5em;
+            background-color: transparent; color: var(--color-text-primary); border: 1px solid var(--color-text-primary);
+            border-radius: 4px; text-transform: uppercase; font-weight: 500; font-size: 0.9rem;
+            margin-bottom: 20px; text-decoration: none; transition: background-color 0.2s ease, color 0.2s ease;
+        }
         .footer-cta-button:hover { background-color: var(--color-text-primary); color: var(--color-text-primary-on-dark); }
+
         .social-media-nav { display: flex; justify-content: center; gap: 20px; }
-        .social-media-nav a iconify-icon { font-size: 1.5rem; color: var(--color-text-secondary); }
+        .social-media-nav a iconify-icon { font-size: 1.5rem; color: var(--color-text-secondary); transition: color 0.2s ease; }
         .social-media-nav a:hover iconify-icon { color: var(--color-bordeaux); }
 
 
-        .hero-section { min-height: 100vh; padding-top: var(--header-height); position: relative; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--color-text-primary-on-dark); padding-left: 20px; padding-right: 20px; padding-bottom: 40px; overflow: hidden; }
-        .hero-video-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
-        .hero-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0, 0.35); z-index: -1; }
+        /* === Hauptseitenbereiche === */
+
+        /* Hero-Sektion mit Video */
+        .hero-section {
+            min-height: 100vh; /* Volle Höhe */
+            padding-top: var(--header-height); /* Platz für den fixierten Header */
+            position: relative; display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--color-text-primary-on-dark); /* Textfarbe auf Video/Overlay */
+            padding-left: 20px; padding-right: 20px; padding-bottom: 40px;
+            overflow: hidden;
+        }
+        .hero-video-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -2;
+        }
+        .hero-section::before { /* Overlay für Textlesbarkeit */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0, 0.35);
+            z-index: -1;
+        }
         .hero-content { position: relative; z-index: 1; animation: fadeInHeroText 1.2s ease-out 0.3s forwards; opacity:0; transform: translateY(20px); }
         .hero-content h1 { margin-bottom: 0.3em; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
         .hero-content p { font-size: clamp(1rem, 2.5vw, 1.3rem); margin-bottom: 1.5em; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
         @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
 
+
+        /* Allgemeine Inhaltssektionen */
         .content-section { padding: 80px 0; }
+         .content-section:first-of-type { /* Optional: Platz für Header, falls kein Hero ganz oben ist */
+             /* padding-top: calc(80px + var(--header-height)); */
+         }
         .content-section.bg-beige { background-color: var(--color-beige); }
         .content-section.bg-sand { background-color: var(--color-sand); }
 
+
+        /* Teaser Grid */
         .teaser-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .teaser-card { background-color: var(--color-white); border: 1px solid var(--color-border-subtle); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .teaser-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.07); }
@@ -166,6 +353,7 @@
         .teaser-card p { margin-bottom: 1.5em; color: var(--color-text-secondary); font-size: 0.95rem; flex-grow: 1; }
         .teaser-card .btn { margin-top: auto; }
 
+        /* Testimonials Slider */
         .testimonials-section { background-color: var(--color-beige); }
         .testimonial-quote { text-align: center; padding: 20px; max-width: 700px; margin: 0 auto; }
         .testimonial-quote p { font-size: 1.2rem; font-style: italic; color: var(--color-text-primary); margin-bottom: 1em; }
@@ -180,8 +368,11 @@
         .slider-controls button:disabled { color: var(--color-border-subtle); cursor: not-allowed; background-color: transparent; }
         .slider-pause-button iconify-icon { font-size: 1.5rem; }
 
+        /* Karriere Teaser */
         .karriere-teaser-section { background-color: var(--color-sand); text-align: center; }
         .karriere-teaser-section .btn { margin-top: 1em; }
+
+        /* Newsletter CTA */
         .cta-section { background-color: var(--color-beige); padding: 60px 0; text-align: center; }
         .cta-section h2 { color: var(--color-text-primary); }
         .cta-section p { margin-bottom: 25px; font-size: 1.1rem; max-width: 550px; margin-left: auto; margin-right: auto;}
@@ -191,21 +382,52 @@
         .form-newsletter button { border-radius: 0 4px 4px 0; padding: 0.8em 1.5em; }
         .form-newsletter button iconify-icon { margin-right: 0; }
 
-        .site-footer { background-color: var(--color-white); color: var(--color-text-secondary); padding: 60px 0 30px 0; font-size: 0.9rem; border-top: 1px solid var(--color-border-subtle); margin-bottom: 80px; /* Platz für Sticky Footer Buttons */ }
+        /* Footer */
+        .site-footer { background-color: var(--color-white); color: var(--color-text-secondary); padding: 60px 0 30px 0; font-size: 0.9rem; border-top: 1px solid var(--color-border-subtle); margin-bottom: var(--sticky-footer-height); /* Platz für Sticky Booking Button */ }
         .site-footer .container-footer { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         .site-footer h4 { font-family: var(--font-secondary); font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); font-weight: 600; }
         .site-footer ul { list-style: none; } .site-footer ul li { margin-bottom: 10px; } .site-footer a { color: var(--color-text-secondary); }
         .site-footer a:hover, .site-footer a:focus-visible { color: var(--color-bordeaux); text-decoration: underline; }
         .social-links a { margin-right: 12px; }
-        .social-links iconify-icon { font-size: 1.5rem; color: var(--color-text-secondary); }
+        .social-links iconify-icon { font-size: 1.5rem; color: var(--color-text-secondary); transition: color 0.2s ease; }
         .social-links a:hover iconify-icon, .social-links a:focus-visible iconify-icon { color: var(--color-bordeaux); }
         .copyright { text-align: center; padding-top: 40px; border-top: 1px solid var(--color-border-subtle); margin-top: 40px; font-size: 0.85rem; color: var(--color-text-secondary); }
 
-        .sticky-footer-buttons { position: fixed; bottom: 0; left: 0; right: 0; display: flex; z-index: 990; background-color: var(--color-white); padding: 15px; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
-        .sticky-footer-buttons .btn { flex: 1; margin: 0 5px; text-transform: uppercase; font-size: 0.9rem; }
-        .sticky-footer-buttons .btn-light { background-color: var(--color-white); color: var(--color-text-primary); border: 1px solid var(--color-border-subtle); }
-        .sticky-footer-buttons .btn-dark { background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); }
+        /* === Sticky Buchungs-Button (rechts) === */
+        .booking-widget-trigger {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: bottom right;
+            background-color: var(--color-bordeaux);
+            color: var(--color-text-primary-on-dark);
+            padding: 12px 22px;
+            font-family: var(--font-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            z-index: 999; /* Unter Header/Navi, über normalem Content */
+            border-radius: 4px 4px 0 0;
+            box-shadow: -2px -2px 8px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease;
+            display: flex; align-items: center;
+        }
+        .booking-widget-trigger:hover, .booking-widget-trigger:focus-visible {
+            background-color: #701623;
+            text-decoration: none;
+            color: var(--color-text-primary-on-dark);
+        }
+        .booking-widget-trigger iconify-icon {
+            margin-right: 8px;
+            font-size: 1.3em;
+            transform: rotate(90deg);
+        }
+        /* Hide Sticky Button when Fullscreen Nav is open */
+        body.fullscreen-nav-open .booking-widget-trigger {
+            display: none; /* Oder opacity: 0; visibility: hidden; */
+        }
 
+        /* Pop-Up (Betriebsferien) */
         .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(50,50,50,0.7); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .popup-overlay.is-visible { opacity: 1; visibility: visible; }
         .popup-content { background-color: var(--color-white); padding: 40px; border-radius: 6px; max-width: 550px; text-align: center; position: relative; transform: scale(0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.15); transition: transform 0.3s ease; }
@@ -219,8 +441,10 @@
 </head>
 <body>
 
+    <!-- Skip-Link für Barrierefreiheit -->
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
+    <!-- PopUp (Betriebsferien) - Kann per JS/CMS ein-/ausgeblendet werden -->
     <div class="popup-overlay" id="betriebsferien-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-description">
         <div class="popup-content">
             <button class="close-popup" aria-label="Schließen" onclick="closePopup('betriebsferien-popup')">
@@ -234,8 +458,10 @@
         </div>
     </div>
 
+    <!-- === Sticky Header === -->
     <header class="site-header" id="site-header" role="banner">
         <div class="header-content-wrapper">
+            <!-- Linke Seite: Menü Button + Text -->
             <div class="header-left">
                 <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
                     <div class="hamburger-icon">
@@ -244,14 +470,16 @@
                     <span class="menu-trigger-text">MENÜ</span>
                 </button>
             </div>
+            <!-- Mitte: Logo mit Farbwechsel -->
             <div class="header-center">
                 <a href="/" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
-                    <!-- Logo für initialen (transparenten) Zustand -->
+                    <!-- Logo für initialen (transparenten) Zustand - WEISS -->
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial">
-                    <!-- Logo für gescrollten (weißen) Zustand -->
+                    <!-- Logo für gescrollten (weißen) Zustand - ROT -->
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled">
                 </a>
             </div>
+            <!-- Rechte Seite: Kontakt Icon Button -->
             <div class="header-right">
                 <a href="/kontakt-anreise" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
                     <iconify-icon icon="feather:phone"></iconify-icon>
@@ -260,18 +488,25 @@
         </div>
     </header>
 
+    <!-- === Fullscreen Navigation === -->
     <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="fullscreen-nav-header">
-             <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
-                <!-- Logo für den Header der Fullscreen-Navi (auf hellem Grund rot) -->
-                <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post">
-            </a>
+            <!-- Linke Seite im Navi Header: Close Button -->
             <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
                 <iconify-icon icon="feather:x"></iconify-icon>
             </button>
-            <div class="fullscreen-nav-ctas">
-                <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener" class="btn btn-light">Jetzt Buchen</a>
-                <a href="/anfragen" class="btn btn-dark">Anfragen</a>
+            <!-- Mitte im Navi Header: Leerraum (Flex Spacer) -->
+             <div class="header-spacer"></div>
+             <!-- Rechte Seite im Navi Header: Logo und CTAs -->
+             <div class="fullscreen-header-right-group">
+                 <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
+                    <!-- Logo für den Header der Fullscreen-Navi (auf hellem Grund ROT) -->
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post">
+                </a>
+                <div class="fullscreen-nav-ctas">
+                    <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener" class="btn btn-light">Jetzt Buchen</a>
+                    <a href="/anfragen" class="btn btn-dark">Anfragen</a>
+                </div>
             </div>
         </div>
 
@@ -285,7 +520,8 @@
                 <span>Wellness</span>
             </a>
             <a href="/kulinarik" class="quicklink-item">
-                <iconify-icon icon="material-symbols:restaurant-outline"></iconify-icon>
+                <!-- Passendes Icon für Kulinarik -->
+                <iconify-icon icon="mdi:silverware-crossed"></iconify-icon> <!-- Beispiel: Gekreuztes Besteck -->
                 <span>Kulinarik</span>
             </a>
             <a href="/region" class="quicklink-item">
@@ -295,6 +531,7 @@
         </div>
 
         <div class="fullscreen-nav-main">
+            <!-- Sektion: Arrangements -->
             <section class="nav-section" aria-labelledby="nav-section-title-arrangements">
                 <div class="nav-section-header">
                     <h2 id="nav-section-title-arrangements" class="nav-section-title">Unsere Arrangements</h2>
@@ -332,6 +569,7 @@
                 </div>
             </section>
 
+            <!-- Sektion: Zimmer & Suiten -->
             <section class="nav-section" aria-labelledby="nav-section-title-zimmer">
                 <div class="nav-section-header">
                     <h2 id="nav-section-title-zimmer" class="nav-section-title">Zimmer & Suiten</h2>
@@ -361,8 +599,10 @@
                     </a>
                 </div>
             </section>
+             <!-- Hier weitere Nav-Sektionen hinzufügen (z.B. Wellness, Kulinarik) -->
         </div>
 
+        <!-- Footer Bereich im Menü -->
         <div class="fullscreen-nav-footer">
             <div class="footer-links">
                 <ul>
@@ -382,7 +622,9 @@
         </div>
     </nav>
 
+    <!-- === Hauptseiteninhalt === -->
     <main id="main-content" role="main">
+        <!-- Hero-Sektion mit Video -->
         <section class="hero-section" aria-labelledby="hero-heading">
             <video class="hero-video-bg" autoplay muted loop playsinline poster="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" aria-hidden="true">
                 <source src="https://sion7-ai.github.io/Spck/sonnepost2/video1.mp4" type="video/mp4">
@@ -397,6 +639,7 @@
             </div>
         </section>
 
+        <!-- Teaser Sektion -->
         <section class="content-section teaser-section" aria-labelledby="highlights-heading">
             <div class="container">
                 <h2 id="highlights-heading">Urlaubsmomente, die bleiben</h2>
@@ -435,6 +678,7 @@
             </div>
         </section>
 
+         <!-- Testimonials Sektion -->
          <section class="content-section testimonials-section bg-beige" aria-labelledby="testimonials-heading">
             <div class="container">
                 <h2 id="testimonials-heading">Stimmen unserer Gäste</h2>
@@ -470,6 +714,7 @@
             </div>
         </section>
 
+        <!-- Karriere Teaser Sektion -->
         <section class="content-section karriere-teaser-section bg-sand" aria-labelledby="karriere-teaser-heading">
              <div class="container">
                 <h2 id="karriere-teaser-heading">Werden Sie Teil unseres Teams</h2>
@@ -480,6 +725,7 @@
             </div>
         </section>
 
+        <!-- Newsletter CTA Sektion -->
         <section class="cta-section bg-beige" aria-labelledby="newsletter-heading-cta">
             <div class="container">
                 <h2 id="newsletter-heading-cta">Nichts mehr verpassen</h2>
@@ -498,6 +744,7 @@
         </section>
     </main>
 
+    <!-- === Footer === -->
     <footer class="site-footer" role="contentinfo">
         <div class="container-footer">
             <div class="footer-column">
@@ -555,22 +802,24 @@
         </div>
     </footer>
 
-    <div class="sticky-footer-buttons">
-        <a href="/anfragen" class="btn btn-light">Unverbindlich Anfragen</a>
-        <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener" class="btn btn-dark">Direkt Buchen</a>
-    </div>
+    <!-- === Sticky Buchungs-Button (rechts) === -->
+    <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
+        <iconify-icon icon="feather:calendar"></iconify-icon> Buchen
+    </a>
 
 
+    <!-- === JavaScript Dateien === -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Iconify Icon Web Component -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // --- Header Scroll Logic ---
         const siteHeader = document.getElementById('site-header');
         const headerScrollThresholdRaw = getComputedStyle(document.documentElement).getPropertyValue('--header-scroll-threshold').trim();
         const headerScrollThreshold = parseInt(headerScrollThresholdRaw, 10) || 50;
-
 
         function handleHeaderScroll() {
             if (window.scrollY > headerScrollThreshold) {
@@ -580,103 +829,152 @@
             }
         }
         window.addEventListener('scroll', handleHeaderScroll, { passive: true });
-        handleHeaderScroll();
+        handleHeaderScroll(); // Initial check on load
 
+        // --- Fullscreen Navigation Logic ---
         const menuTrigger = document.getElementById('menu-trigger');
         const fullscreenNav = document.getElementById('fullscreen-nav');
         const navCloseBtn = document.getElementById('fullscreen-nav-close-btn');
         const mainContent = document.getElementById('main-content');
-        const pageFooter = document.querySelector('.site-footer');
-        const stickyFooterButtons = document.querySelector('.sticky-footer-buttons');
+        const pageFooter = document.querySelector('.site-footer'); // Actual Footer
+        const bookingWidgetTrigger = document.querySelector('.booking-widget-trigger'); // Sticky Booking Button
+
+        // Variables for Focus Trap
         let previouslyFocusedElement = null;
         let focusableElementsInNav = [];
         let firstFocusableElement = null;
         let lastFocusableElement = null;
 
+        // Update list of focusable elements inside the nav (called on open)
         function updateFocusableElements() {
             focusableElementsInNav = Array.from(
                 fullscreenNav.querySelectorAll(
-                    'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'
+                    'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
                 )
             ).filter(el => el.offsetWidth > 0 || el.offsetHeight > 0 || el.getClientRects().length > 0);
+
             if (focusableElementsInNav.length > 0) {
                 firstFocusableElement = focusableElementsInNav[0];
                 lastFocusableElement = focusableElementsInNav[focusableElementsInNav.length - 1];
             } else {
+                 // Fallback if no focusable elements found (shouldn't happen with this menu structure)
                 firstFocusableElement = navCloseBtn;
                 lastFocusableElement = navCloseBtn;
             }
         }
 
+        // Trap Focus inside the open modal/nav
         function trapFocus(e) {
-            if (!fullscreenNav.classList.contains('is-open')) return;
+            if (!fullscreenNav.classList.contains('is-open')) return; // Only trap if nav is open
+
             let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
             if (!isTabPressed) return;
-            if (e.shiftKey) {
-                if (document.activeElement === firstFocusableElement) {
+
+            updateFocusableElements(); // Re-check in case DOM changed dynamically (less likely here, but good practice)
+
+            if (e.shiftKey) { // Shift + Tab
+                if (document.activeElement === firstFocusableElement || !fullscreenNav.contains(document.activeElement)) {
                     lastFocusableElement.focus();
                     e.preventDefault();
                 }
-            } else {
-                if (document.activeElement === lastFocusableElement) {
+            } else { // Tab
+                if (document.activeElement === lastFocusableElement || !fullscreenNav.contains(document.activeElement)) {
                     firstFocusableElement.focus();
                     e.preventDefault();
                 }
             }
         }
 
+        // Open Fullscreen Navigation
         function openFullscreenNav() {
-            previouslyFocusedElement = document.activeElement;
+            previouslyFocusedElement = document.activeElement; // Store the element that was focused before opening
+
             document.body.classList.add('fullscreen-nav-open');
             fullscreenNav.classList.add('is-open');
             fullscreenNav.setAttribute('aria-hidden', 'false');
             menuTrigger.setAttribute('aria-expanded', 'true');
             menuTrigger.setAttribute('aria-label', 'Menü schließen');
-            updateFocusableElements();
-            if (firstFocusableElement) firstFocusableElement.focus(); else navCloseBtn.focus();
-            document.addEventListener('keydown', trapFocus);
+
+            // Mark content outside the nav as inert for screen readers and focus management
             if (mainContent) mainContent.setAttribute('inert', '');
             if (pageFooter) pageFooter.setAttribute('inert', '');
-            if (stickyFooterButtons) stickyFooterButtons.setAttribute('inert', '');
-            const currentHeader = document.getElementById('site-header');
-            if(currentHeader && currentHeader !== menuTrigger.closest('header')) currentHeader.setAttribute('inert', '');
+            if (bookingWidgetTrigger) bookingWidgetTrigger.style.display = 'none'; // Hide sticky button
+
+
+            // Add event listener for trapping focus
+            document.addEventListener('keydown', trapFocus);
+
+            // Update focusable elements and set initial focus
+            updateFocusableElements();
+             if (firstFocusableElement) {
+                 firstFocusableElement.focus();
+             } else {
+                navCloseBtn.focus(); // Fallback if no elements found
+             }
         }
 
+        // Close Fullscreen Navigation
         function closeFullscreenNav() {
             document.body.classList.remove('fullscreen-nav-open');
             fullscreenNav.classList.remove('is-open');
             fullscreenNav.setAttribute('aria-hidden', 'true');
             menuTrigger.setAttribute('aria-expanded', 'false');
             menuTrigger.setAttribute('aria-label', 'Menü öffnen');
-            document.removeEventListener('keydown', trapFocus);
+
+            // Remove inert attribute from content outside the nav
             if (mainContent) mainContent.removeAttribute('inert');
             if (pageFooter) pageFooter.removeAttribute('inert');
-            if (stickyFooterButtons) stickyFooterButtons.removeAttribute('inert');
-            const currentHeader = document.getElementById('site-header');
-            if(currentHeader) currentHeader.removeAttribute('inert');
-            if (previouslyFocusedElement) previouslyFocusedElement.focus();
-            else menuTrigger.focus();
+            if (bookingWidgetTrigger) bookingWidgetTrigger.style.display = 'flex'; // Show sticky button again
+
+            // Remove event listener for trapping focus
+            document.removeEventListener('keydown', trapFocus);
+
+            // Restore focus to the element that was focused before opening
+            if (previouslyFocusedElement) {
+                 previouslyFocusedElement.focus();
+            } else {
+                menuTrigger.focus(); // Fallback
+            }
         }
 
+        // Add event listeners to open/close buttons
         if (menuTrigger && fullscreenNav && navCloseBtn) {
             menuTrigger.addEventListener('click', () => {
-                if (fullscreenNav.classList.contains('is-open')) closeFullscreenNav();
-                else openFullscreenNav();
+                if (fullscreenNav.classList.contains('is-open')) {
+                    closeFullscreenNav();
+                } else {
+                    openFullscreenNav();
+                }
             });
             navCloseBtn.addEventListener('click', closeFullscreenNav);
+
+            // Close nav when a link inside the nav is clicked (except for potential accordions)
             fullscreenNav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', (e) => {
-                    if (link.getAttribute('href') && link.getAttribute('href') !== "#" && !link.closest('.has-dropdown-toggle')) {
-                        closeFullscreenNav();
+                     // Check if the link is not purely for navigating within the current page (#-link without section ID)
+                    // and not part of a potential accordion toggle (if accordions were implemented differently)
+                    // For this specific menu structure, all links trigger navigation and should close the menu.
+                    if (link.getAttribute('href') && link.getAttribute('href') !== "#") {
+                        // Small delay to allow navigation click to register
+                         setTimeout(closeFullscreenNav, 100);
                     }
                 });
             });
+
+            // Close nav when Escape key is pressed
             document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && fullscreenNav.classList.contains('is-open')) closeFullscreenNav();
+                if (event.key === 'Escape' && fullscreenNav.classList.contains('is-open')) {
+                    closeFullscreenNav();
+                }
             });
         }
 
+        // === Restlichen JavaScript Logiken (GSAP, Slider, PopUp, Cookie) ===
+
+        // Set current year in footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // GSAP Animations (Example Fade-In/Slide-Up)
         gsap.registerPlugin(ScrollTrigger);
         gsap.utils.toArray('.teaser-card').forEach(el => {
             gsap.from(el, {
@@ -692,20 +990,37 @@
         });
 
 
+        // PopUp Logic
         window.showPopup = function(popupId) {
             const popup = document.getElementById(popupId);
             if (popup) {
                 popup.classList.add('is-visible');
+                // Set focus to the close button for accessibility
                 if(popup.querySelector('.close-popup')) popup.querySelector('.close-popup').focus();
+                // Optional: Add event listener to close popup on click outside
+                popup.addEventListener('click', function(event) {
+                    if (event.target === popup) { // Check if click is on the overlay itself
+                        closePopup(popupId);
+                    }
+                });
+                 // Optional: Add event listener to close popup on Escape key
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape' && popup.classList.contains('is-visible')) {
+                        closePopup(popupId);
+                    }
+                }, { once: true }); // Remove listener after closing once
             }
         };
         window.closePopup = function(popupId) {
             const popup = document.getElementById(popupId);
             if (popup) popup.classList.remove('is-visible');
+             // Remove the Escape listener specifically for this popup if needed,
+             // but the 'once: true' handles it mostly.
         };
-        // if (BEDINGUNG_AUS_CMS_FUER_POPUP) { showPopup('betriebsferien-popup'); }
+        // Example TYPO3 Integration: if (CMS_VARIABLE_BETRIEBSFERIEN_AKTIV) { showPopup('betriebsferien-popup'); }
 
 
+        // Slider Logic (Testimonials)
         function initializeSlider(sliderId, prevBtnId, nextBtnId, pauseBtnId = null, autoPlay = false, autoPlayInterval = 5000) {
             const sliderWrapper = document.getElementById(sliderId);
             if (!sliderWrapper) return;
@@ -732,8 +1047,8 @@
             }
             function nextSlideAction() {
                 if (currentIndex < slides.length - 1) currentIndex++;
-                else if (isAutoplayActive) currentIndex = 0;
-                else return;
+                else if (isAutoplayActive) currentIndex = 0; // Loop only if autoplay is active
+                else return; // Don't loop if manual navigation reaches end
                 updateSlider();
             }
             function prevSlideAction() { if (currentIndex > 0) { currentIndex--; updateSlider(); } }
@@ -770,6 +1085,7 @@
         }
         initializeSlider('testimonial-slider', 'prevSlideTestimonial', 'nextSlideTestimonial', 'testimonial-pause', true, 7000);
 
+        // Cookie Settings Trigger (Example)
         const cookieSettingsTrigger = document.getElementById('cookie-settings-trigger');
         if (cookieSettingsTrigger) {
             cookieSettingsTrigger.addEventListener('click', function(event) {
