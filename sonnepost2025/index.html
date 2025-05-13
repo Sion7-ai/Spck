@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -458,15 +457,22 @@
             text-decoration: none;
         }
 
-                /* === TYPO3 Hinweis: Wrapper für Sticky Buttons rechts === */
-                .sticky-buttons-right-wrapper {
+                    /* === TYPO3 Hinweis: Wrapper für die Gruppe der Sticky Buttons rechts === */
+        .sticky-buttons-right-wrapper {
             position: fixed;
             top: 50%;
-            right: 0; /* Der Wrapper ist ganz rechts */
-            transform: translateY(-50%); /* Wrapper vertikal zentrieren */
+            right: 0; /* Der äußere Wrapper ist ganz rechts */
+            transform: translateY(-50%); /* Äußeren Wrapper vertikal zentrieren */
             z-index: 999;
-            /* Wichtig: Damit der Wrapper eine Referenz für die absolute Positionierung der Buttons wird,
-               und damit wir die Breite der Buttons für die Verschiebung nutzen können. */
+            /* Wichtig: Dieser Wrapper ist die Referenz für die Position des inneren Containers. */
+        }
+
+        /* === TYPO3 Hinweis: Innerer Container für die vertikale Anordnung der Buttons === */
+        .sticky-buttons-inner-container {
+            position: relative; /* Erlaubt absolute Positionierung der Buttons, falls doch mal nötig */
+            display: flex;
+            flex-direction: column; /* Buttons untereinander anordnen */
+            align-items: flex-end; /* Buttons am rechten Rand des inneren Containers ausrichten */
         }
 
         /* Allgemeine Styles für die Sticky Buttons */
@@ -474,71 +480,61 @@
         .newsletter-widget-trigger {
             display: flex;
             align-items: center;
-            position: absolute; /* Absolut im Wrapper */
             white-space: nowrap;
-            border-radius: 4px 4px 0 0;
+            border-radius: 4px 4px 0 0; /* Oben abgerundet (visuell links nach Drehung) */
             font-family: var(--font-primary);
             font-weight: 500;
             font-size: 1rem;
-            padding: 12px 22px; /* Gleiches Padding für gleiche "Höhe" */
+            padding: 12px 22px;
             text-decoration: none;
-            transform-origin: top right; /* Drehpunkt oben rechts vom unrotierten Element */
+            margin-top:-100px;
             transform: rotate(-90deg);
+            /* Der Drehpunkt beeinflusst, wie die Buttons relativ zueinander platziert werden,
+               wenn sie unterschiedlich breit wären und `align-items: flex-end` aktiv ist.
+               Für den oberen Button sollte es 'bottom right' und für den unteren 'top right' sein,
+               damit der Abstand durch margin korrekt wirkt. */
+            /* Wir setzen den Ursprung so, dass die rechte Kante des rotierten Buttons
+               der Bezugspunkt für margin-bottom ist. */
+            transform-origin: bottom right; /* Standard für beide, Abstand wird via margin gehandhabt */
         }
 
-        /* === TYPO3 Hinweis: Sticky Buchungs-Button === */
+        /* === TYPO3 Hinweis: Sticky Buchungs-Button (oben) === */
         .booking-widget-trigger {
             background-color: var(--color-bordeaux);
             color: var(--color-text-primary-on-dark);
             box-shadow: -2px -2px 8px rgba(0,0,0,0.1);
             transition: background-color 0.3s ease;
-            /* Positionierung NACH der Rotation.
-               Drehpunkt ist oben rechts. Wir verschieben ihn jetzt so, dass er
-               oberhalb der Mitte des Wrappers landet.
-               'right' bezieht sich auf den Abstand des Drehpunkts vom rechten Rand des Wrappers.
-               'top' bezieht sich auf den Abstand des Drehpunkts vom oberen Rand des Wrappers.
-               Da der Wrapper selbst zentriert ist, müssen wir ihn relativ zur Mitte des Wrappers verschieben.
-               Wir verschieben den Button entlang seiner neuen horizontalen Achse (die jetzt vertikal ist).
+            /* TYPO3 Hinweis: Button ist der erste im Flex-Container, erscheint also oben. */
+            /* Der Abstand zum nächsten Button wird durch margin-bottom (nach Rotation visuell 'rechts') gesteuert. */
+            /* Da die Buttons gedreht sind, wirkt margin-bottom wie ein Abstand rechts vom Button.
+               Um einen vertikalen Abstand *zwischen* den Buttons zu erzeugen,
+               müssen wir den Abstand vor der Rotation denken.
+               Nach der Drehung wird `margin-bottom` zu einem Abstand rechts vom oberen Element.
+               Wir brauchen aber einen Abstand, der den *nächsten* Button nach "unten" (visuell) schiebt.
+               Das erledigen wir mit einem Margin am unteren Button.
+               Oder, einfacher, der Flex-Container mit `gap`.
             */
-            right: 0; /* Hält den rechten Rand des rotierten Buttons bündig mit dem rechten Rand des Wrappers */
-            /* Verschiebung nach oben: Die Hälfte seiner eigenen "Höhe" (Breite vor Rotation) plus halber Abstand */
-            /* Annahme: Breite des Buttons ist ca. 100px (Text "Buchen" + Icon + Padding)
-               Wenn der Button 100px breit ist, ist seine halbe Breite 50px.
-               Gewünschter Abstand 10px, also 5px pro Button.
-               Verschiebung nach oben = 50px (halbe Breite) + 5px (halber Abstand) = 55px.
-               Da die Rotation um top right erfolgt, müssen wir es von der 'top'-Position des Wrappers abziehen.
-               Nach der Drehung ist die "Breite" des Buttons seine Höhe.
-               Die 'top'-Eigenschaft des Buttons im rotierten Zustand ist schwer direkt zu setzen.
-               Wir nutzen stattdessen einen negativen margin-bottom auf dem oberen Button,
-               oder einen positiven margin-top auf dem unteren.
-
-               Alternative: Positionierung über transform: translateY() nach der Rotation.
-            */
-            top: auto; /* Zurücksetzen */
-            bottom: 5px; /* 5px ist halber Abstand; der Button ist mit seiner Unterkante 5px über der Mitte des Wrappers */
-            transform: rotate(-90deg) translateX(0); /* translateX(0) ist hier neutraler, da origin gesetzt */
-            transform-origin: bottom right; /* Drehpunkt unten rechts */
-
+            /* Entferne alte top/bottom Positionierungen */
         }
         .booking-widget-trigger:hover, .booking-widget-trigger:focus-visible {
             background-color: #701623;
             color: var(--color-text-primary-on-dark);
         }
 
-        /* === TYPO3 Hinweis: Sticky Newsletter-Button === */
+        /* === TYPO3 Hinweis: Sticky Newsletter-Button (unten) === */
         .newsletter-widget-trigger {
             background-color: var(--color-beige);
             color: var(--color-bordeaux);
-            border: 1px solid var(--color-bordeaux);
+            border: 1px solid var(--color-bordeaux); /* Nur oben, links, rechts nach Drehung */
             box-shadow: -2px -2px 8px rgba(0,0,0,0.08);
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            /* Der Newsletter-Button wird relativ zum Wrapper positioniert,
-               und seine Oberkante (nach Rotation) ist 5px unter der Mitte des Wrappers.
-            */
-            right: 0; /* Hält den rechten Rand des rotierten Buttons bündig mit dem rechten Rand des Wrappers */
-            top: 5px; /* 5px ist halber Abstand; der Button ist mit seiner Oberkante 5px unter der Mitte des Wrappers */
-            transform: rotate(-90deg) translateX(0);
-            transform-origin: top right; /* Drehpunkt oben rechts */
+            /* TYPO3 Hinweis: Dieser Button folgt dem Buchungs-Button im Flex-Container. */
+            /* Abstand zum oberen Button: */
+            margin-top: 90px;
+            margin-right: 50px; /* Dies erzeugt einen visuellen Abstand UNTER dem oberen Button nach der Drehung. */
+            /* Der transform-origin hier sollte so sein, dass die linke Kante des rotierten Buttons
+               sich korrekt am rechten Rand des darüberliegenden ausrichtet. */
+             transform-origin: top right; /* Stellt sicher, dass er sich korrekt unter dem oberen ausrichtet */
         }
         .newsletter-widget-trigger:hover, .newsletter-widget-trigger:focus-visible {
             background-color: var(--color-sand);
@@ -549,9 +545,9 @@
         /* Icons in den Sticky Buttons (müssen zurückgedreht werden) */
         .booking-widget-trigger iconify-icon,
         .newsletter-widget-trigger iconify-icon {
-            margin-right: 8px;
+            margin-right: 8px; /* Abstand zwischen Icon und Text */
             font-size: 1.3em;
-            transform: rotate(90deg);
+            transform: rotate(90deg); /* Icon zurückdrehen, damit es lesbar ist */
         }
 
         /* Sticky Buttons ausblenden, wenn Fullscreen-Navigation offen ist */
@@ -868,14 +864,18 @@
         </div>
     </footer>
 
-    <div class="sticky-buttons-right-wrapper">
-        <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
-            <iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> Buchen
-        </a>
-        <a href="/newsletter" class="newsletter-widget-trigger" aria-label="Newsletter abonnieren">
-            <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> Newsletter
-        </a>
-    </div>
+        <!-- TYPO3 Hinweis: Wrapper für die Gruppe der Sticky Buttons rechts -->
+        <div class="sticky-buttons-right-wrapper">
+            <!-- TYPO3 Hinweis: Innerer Container für die vertikale Anordnung der Buttons -->
+            <div class="sticky-buttons-inner-container">
+                <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
+                    <iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> Buchen
+                </a>
+                <a href="/newsletter" class="newsletter-widget-trigger" aria-label="Newsletter abonnieren">
+                    <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> Newsletter
+                </a>
+            </div>
+        </div>
 
     <div class="lightbox-overlay" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
         <div class="lightbox-content">
