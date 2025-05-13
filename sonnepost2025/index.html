@@ -420,6 +420,79 @@
          /* === TYPO3 Hinweis: Inert Attribut Polyfill Style === */
         [inert] { pointer-events: none; cursor: default; }
         [inert] * { pointer-events: none; cursor: default; user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
+        /* === TYPO3 Hinweis: Lightbox für Bildergalerie === */
+        .lightbox-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(30, 30, 30, 0.9); /* Dunkleres Overlay */
+            display: flex; align-items: center; justify-content: center;
+            z-index: 2000; /* Über Popups, aber unter Menü bei Bedarf anpassen */
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0s 0.3s;
+            padding: 20px; /* Platz für Schließen-Button, falls Bild sehr groß */
+        }
+        .lightbox-overlay.is-visible {
+            opacity: 1; visibility: visible;
+            transition: opacity 0.3s ease, visibility 0s 0s;
+        }
+        .lightbox-content {
+            position: relative;
+            background-color: var(--color-white); /* Optional, falls man einen Rahmen möchte */
+            padding: 10px; /* Kleiner Padding um das Bild */
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 90vw; /* Maximale Breite */
+            max-height: 90vh; /* Maximale Höhe */
+            display: flex; /* Flexbox für Bildzentrierung und -skalierung */
+            flex-direction: column; /* Damit Caption darunter passt, falls sichtbar gemacht */
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        .lightbox-overlay.is-visible .lightbox-content {
+            transform: scale(1);
+        }
+        .lightbox-image-container {
+            display: flex; /* Stellt sicher, dass das Bild sich im Container zentriert */
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Verhindert, dass das Bild über den Container hinausragt, falls max-Maße greifen */
+            width: 100%;
+            height: 100%;
+        }
+        #lightbox-image {
+            display: block;
+            max-width: 100%; /* Bild skaliert innerhalb des Containers */
+            max-height: calc(90vh - 60px); /* Berücksichtigt Padding und Close-Button */
+            width: auto;
+            height: auto;
+            object-fit: contain; /* Stellt sicher, dass das ganze Bild sichtbar ist */
+            border-radius: 3px;
+        }
+        .lightbox-close {
+            position: absolute; top: -15px; right: -15px;
+            background-color: var(--color-white); color: var(--color-text-primary);
+            border: none; border-radius: 50%;
+            width: 40px; height: 40px;
+            font-size: 1.2rem; /* Größe des Icons selbst */
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 10; /* Über dem Bild */
+            padding: 0;
+        }
+        .lightbox-close iconify-icon {
+            font-size: 1.8rem; /* Macht das Icon größer */
+        }
+        .lightbox-close:hover, .lightbox-close:focus-visible {
+            background-color: var(--color-bordeaux);
+            color: var(--color-white);
+        }
+        .lightbox-caption { /* Standardmäßig sr-only, kann aber auch sichtbar gemacht werden */
+            padding-top: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+        
     </style>
 </head>
 <body>
@@ -877,30 +950,34 @@
                 <!-- TYPO3: Editierbare Überschrift H2 -->
                 <h2 id="gallery-heading">Ein kleiner Rundgang</h2>
                 <div class="gallery-grid">
-                    <!-- TYPO3: Bilder und Links sollten aus einer Galerie oder einzeln pflegbar sein -->
-                    <a href="/hotelrundgang-galerie#bild1" aria-label="Bild 1 ansehen: Außenansicht Hotel">
-                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" alt="Außenansicht Hotel Sonne Post im Sommer">
+                    <!-- TYPO3: Bilder und Links sollten aus einer Galerie oder einzeln pflegbar sein.
+                                 Das href Attribut des <a>-Tags enthält die URL zum Vollbild.
+                                 Das data-alt Attribut des <a>-Tags enthält den Alternativtext für das Vollbild.
+                                 Das img src Attribut enthält die URL zum Vorschaubild.
+                                 Das alt Attribut des <img>-Tags enthält den Alternativtext für das Vorschaubild. -->
+                    <a href="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" class="gallery-lightbox-trigger" data-alt="Außenansicht Hotel Sonne Post im Sommer" aria-label="Bild vergrößern: Außenansicht Hotel Sonne Post im Sommer">
+                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" alt="Vorschaubild: Außenansicht Hotel Sonne Post im Sommer">
                     </a>
-                    <a href="/hotelrundgang-galerie#bild2" aria-label="Bild 2 ansehen: Suite Bergblick">
-                        <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Helle Suite mit Bergblick">
+                    <a href="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" class="gallery-lightbox-trigger" data-alt="Helle Suite mit Bergblick" aria-label="Bild vergrößern: Helle Suite mit Bergblick">
+                        <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Vorschaubild: Helle Suite mit Bergblick">
                     </a>
-                    <a href="/hotelrundgang-galerie#bild3" aria-label="Bild 3 ansehen: Restaurantbereich">
-                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" alt="Gemütlicher Restaurantbereich mit Holztischen">
+                    <a href="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" class="gallery-lightbox-trigger" data-alt="Gemütlicher Restaurantbereich mit Holztischen" aria-label="Bild vergrößern: Gemütlicher Restaurantbereich mit Holztischen">
+                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" alt="Vorschaubild: Gemütlicher Restaurantbereich mit Holztischen">
                     </a>
-                    <a href="/hotelrundgang-galerie#bild4" aria-label="Bild 4 ansehen: Wellnessbereich Pool">
-                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Innenpool mit Liegen">
+                    <a href="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" class="gallery-lightbox-trigger" data-alt="Innenpool mit Liegen" aria-label="Bild vergrößern: Innenpool mit Liegen">
+                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Vorschaubild: Innenpool mit Liegen">
                     </a>
-                    <a href="/hotelrundgang-galerie#bild5" aria-label="Bild 5 ansehen: Terrasse">
-                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/Terrasse_La_Cuisine2_small.jpg" alt="Sonnige Terrasse mit Bestuhlung">
+                    <a href="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/Terrasse_La_Cuisine2_small.jpg" class="gallery-lightbox-trigger" data-alt="Sonnige Terrasse mit Bestuhlung" aria-label="Bild vergrößern: Sonnige Terrasse mit Bestuhlung">
+                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/Terrasse_La_Cuisine2_small.jpg" alt="Vorschaubild: Sonnige Terrasse mit Bestuhlung">
                      </a>
-                     <a href="/hotelrundgang-galerie#bild6" aria-label="Bild 6 ansehen: Familienzimmer Beispiel">
-                         <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Beispiel Familienzimmer">
+                     <a href="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=1200" class="gallery-lightbox-trigger" data-alt="Beispiel Familienzimmer mit großem Bett und stilvoller Einrichtung" aria-label="Bild vergrößern: Beispiel Familienzimmer"> <!-- Pexels: Breitere Version für Lightbox -->
+                         <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Vorschaubild: Beispiel Familienzimmer">
                      </a>
-                     <a href="/hotelrundgang-galerie#bild7" aria-label="Bild 7 ansehen: Saunabereich">
-                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Sauna/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna5014_300dpi-WEB.jpg" alt="Ruhebereich in der Sauna">
+                     <a href="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Sauna/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna5014_300dpi-WEB.jpg" class="gallery-lightbox-trigger" data-alt="Ruhebereich in der Sauna mit bequemen Liegen" aria-label="Bild vergrößern: Ruhebereich in der Sauna">
+                         <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Sauna/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna5014_300dpi-WEB.jpg" alt="Vorschaubild: Ruhebereich in der Sauna">
                      </a>
-                     <a href="/hotelrundgang-galerie#bild8" aria-label="Bild 8 ansehen: Bar / Lounge Bereich">
-                         <img src="https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Gemütlicher Lounge Bereich">
+                     <a href="https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=1200" class="gallery-lightbox-trigger" data-alt="Gemütlicher Lounge Bereich mit Sesseln und Tisch" aria-label="Bild vergrößern: Gemütlicher Lounge Bereich"> <!-- Pexels: Breitere Version für Lightbox -->
+                         <img src="https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Vorschaubild: Gemütlicher Lounge Bereich">
                      </a>
                 </div>
                  <!-- TYPO3: Link zur Galerie-Seite editierbar -->
@@ -1053,7 +1130,139 @@
     <!-- === TYPO3 Hinweis: Individuelles JavaScript === -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // --- Image Lightbox Logic ---
+        const imageLightbox = document.getElementById('image-lightbox');
+        const lightboxImageElement = document.getElementById('lightbox-image');
+        const lightboxCloseButton = imageLightbox ? imageLightbox.querySelector('.lightbox-close') : null;
+        let activeLightboxTrigger = null; // Um den Fokus zurückzusetzen
 
+        function openImageLightbox(imageUrl, altText, triggerElement) {
+            if (!imageLightbox || !lightboxImageElement) return;
+
+            lightboxImageElement.setAttribute('src', imageUrl);
+            lightboxImageElement.setAttribute('alt', altText);
+            // Optional: Wenn Sie eine sichtbare Caption möchten, können Sie diese hier setzen
+            // const lightboxCaptionElement = document.getElementById('lightbox-caption');
+            // if (lightboxCaptionElement) lightboxCaptionElement.textContent = altText;
+
+            activeLightboxTrigger = triggerElement; // Element speichern, das die Lightbox geöffnet hat
+
+            // Barrierefreiheit: Fokusmanagement und Inert für Hintergrundelemente
+            imageLightbox._previouslyFocusedElement = document.activeElement; // Speichert das Element, das vor dem Öffnen den Fokus hatte
+            imageLightbox.classList.add('is-visible');
+            imageLightbox.removeAttribute('aria-hidden');
+
+            Array.from(document.body.children).forEach(child => {
+                if (child !== imageLightbox && !imageLightbox.contains(child) && !child.hasAttribute('aria-hidden') && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE') {
+                    child.inert = true;
+                    child.setAttribute('aria-hidden', 'true');
+                    child.dataset.madeInertByLightbox = true; // Eindeutiges Dataset-Attribut
+                }
+            });
+
+            // Fokus-Trapping Logik (vereinfacht, da nur ein Button fokussierbar ist)
+            const focusableElementsInLightbox = [lightboxCloseButton].filter(el => el && el.offsetParent !== null);
+            const firstFocusableLightbox = focusableElementsInLightbox[0];
+            const lastFocusableLightbox = focusableElementsInLightbox[focusableElementsInLightbox.length - 1];
+
+            imageLightbox._trapFocusListener = (e) => {
+                if (!imageLightbox.classList.contains('is-visible') || e.key !== 'Tab') return;
+                if (focusableElementsInLightbox.length === 0) { e.preventDefault(); return; }
+
+                const isFocusInside = imageLightbox.contains(document.activeElement);
+
+                if (e.shiftKey) {
+                    if ((isFocusInside && document.activeElement === firstFocusableLightbox) || !isFocusInside) {
+                        if (lastFocusableLightbox) lastFocusableLightbox.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if ((isFocusInside && document.activeElement === lastFocusableLightbox) || !isFocusInside) {
+                        if (firstFocusableLightbox) firstFocusableLightbox.focus();
+                        e.preventDefault();
+                    }
+                }
+            };
+            document.addEventListener('keydown', imageLightbox._trapFocusListener);
+
+            imageLightbox._escapeListener = (e) => {
+                if (e.key === 'Escape') {
+                    closeImageLightbox();
+                }
+            };
+            document.addEventListener('keydown', imageLightbox._escapeListener);
+
+            imageLightbox._clickOutsideListener = (e) => {
+                // Schließen, wenn auf das Overlay geklickt wird, aber nicht auf den Content-Bereich
+                if (e.target === imageLightbox) {
+                    closeImageLightbox();
+                }
+            };
+            imageLightbox.addEventListener('click', imageLightbox._clickOutsideListener);
+
+            setTimeout(() => {
+                if (lightboxCloseButton) lightboxCloseButton.focus();
+            }, 50); // Kurze Verzögerung für Übergänge
+        }
+
+        function closeImageLightbox() {
+            if (!imageLightbox) return;
+
+            imageLightbox.classList.remove('is-visible');
+            imageLightbox.setAttribute('aria-hidden', 'true');
+
+            Array.from(document.body.children).forEach(child => {
+                if (child.dataset.madeInertByLightbox) { // Nur von dieser Lightbox gesetzte Attribute entfernen
+                    child.inert = false;
+                    child.removeAttribute('aria-hidden');
+                    delete child.dataset.madeInertByLightbox;
+                }
+            });
+
+            if (imageLightbox._escapeListener) {
+                document.removeEventListener('keydown', imageLightbox._escapeListener);
+                delete imageLightbox._escapeListener;
+            }
+            if (imageLightbox._trapFocusListener) {
+                document.removeEventListener('keydown', imageLightbox._trapFocusListener);
+                delete imageLightbox._trapFocusListener;
+            }
+            if (imageLightbox._clickOutsideListener) {
+                imageLightbox.removeEventListener('click', imageLightbox._clickOutsideListener);
+                delete imageLightbox._clickOutsideListener;
+            }
+
+            // Fokus auf das Element zurücksetzen, das die Lightbox geöffnet hat
+            if (activeLightboxTrigger && typeof activeLightboxTrigger.focus === 'function') {
+                 activeLightboxTrigger.focus();
+            } else if (imageLightbox._previouslyFocusedElement && document.body.contains(imageLightbox._previouslyFocusedElement) && typeof imageLightbox._previouslyFocusedElement.focus === 'function') {
+                 imageLightbox._previouslyFocusedElement.focus();
+            } else {
+                 document.body.focus(); // Fallback
+            }
+            delete imageLightbox._previouslyFocusedElement;
+            activeLightboxTrigger = null;
+
+            // Bildquelle leeren, um Laden im Hintergrund zu vermeiden
+            if (lightboxImageElement) {
+                lightboxImageElement.setAttribute('src', '');
+                lightboxImageElement.setAttribute('alt', '');
+            }
+        }
+
+        if (imageLightbox && lightboxCloseButton) {
+            lightboxCloseButton.addEventListener('click', closeImageLightbox);
+        }
+
+        const galleryTriggers = document.querySelectorAll('.gallery-lightbox-trigger');
+        galleryTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function(event) {
+                event.preventDefault(); // Verhindert das Standardverhalten des Links
+                const imageUrl = this.getAttribute('href');
+                const altText = this.dataset.alt || (this.querySelector('img') ? this.querySelector('img').getAttribute('alt') : 'Vergrößerte Bildansicht');
+                openImageLightbox(imageUrl, altText, this);
+            });
+        });
         // --- Header Scroll Logic ---
         const siteHeader = document.getElementById('site-header');
         if (siteHeader) {
@@ -1294,7 +1503,25 @@
 
     }); // Ende DOMContentLoaded
     </script>
+    <!-- TYPO3 Hinweis: Lightbox Komponente für Bildergalerie -->
+    <!-- Wird per JS sichtbar gemacht und mit Bildinhalt gefüllt. -->
+    <div class="lightbox-overlay" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
+        <div class="lightbox-content">
+            <!-- WCAG: aria-hidden="true" für Icon im Button -->
+            <button class="lightbox-close" aria-label="Bildansicht schließen">
+                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
+            </button>
+            <div class="lightbox-image-container">
+                <img src="" alt="" id="lightbox-image">
+                <!-- Optional: Navigation für mehrere Bilder (hier nicht implementiert) -->
+                <!--
+                <button class="lightbox-prev" aria-label="Vorheriges Bild"><iconify-icon icon="feather:chevron-left"></iconify-icon></button>
+                <button class="lightbox-next" aria-label="Nächstes Bild"><iconify-icon icon="feather:chevron-right"></iconify-icon></button>
+                -->
+            </div>
+            <div id="lightbox-caption" class="lightbox-caption sr-only">Vergrößerte Bildansicht</div> <!-- Für aria-labelledby -->
+        </div>
+    </div>
 </body>
   
 </html>
-
