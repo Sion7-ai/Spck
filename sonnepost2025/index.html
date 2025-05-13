@@ -396,17 +396,72 @@
             margin-bottom: 15px;
             /* Standardmäßig linksbündig, wenn nicht .text-center */
         }
+        .combined-column .form-newsletter {
+            display: flex;
+            /* align-items: stretch; ist Standard und sollte hier greifen */
+        }
+
+        .combined-column .form-newsletter input[type="email"],
+        .combined-column .form-newsletter button {
+            font-family: var(--font-primary);
+            font-size: 0.95rem;
+            border: 1px solid; /* Wird unten spezifisch gesetzt */
+            padding-top: 0.8em;
+            padding-bottom: 0.8em;
+            margin: 0; /* Sicherstellen, dass kein unerwünschter Margin da ist */
+            line-height: 1.4; /* Eine konsistente Line-Height für beide kann helfen */
+            box-sizing: border-box; /* Ist global, aber zur Sicherheit hier nochmal */
+        }
+
         .combined-column .form-newsletter input[type="email"] {
-            padding: 0.8em 1em; flex-grow: 1; border: 1px solid var(--color-border-subtle);
-            border-right: none; border-radius: 4px 0 0 4px;
-            font-family: var(--font-primary); font-size: 0.95rem;
-            background-color: var(--color-white); /* Sicherstellen, dass Input auf Sand-BG hell ist */
+            flex-grow: 1;
+            border-color: var(--color-border-subtle);
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            padding-left: 1em;
+            padding-right: 1em;
+            background-color: var(--color-white);
         }
         .combined-column .form-newsletter input[type="email"]:focus-visible {
             border-color: var(--color-bordeaux); outline: none; box-shadow: none; z-index: 1;
         }
+
         .combined-column .form-newsletter button {
-            border-radius: 0 4px 4px 0; padding: 0.8em 1.5em;
+            display: inline-flex; /* Wichtig für Icon-Zentrierung */
+            align-items: center; /* Vertikale Zentrierung des Icons */
+            justify-content: center; /* Horizontale Zentrierung des Icons */
+            border-radius: 0 4px 4px 0;
+            padding-left: 1.2em;
+            padding-right: 1.2em;
+            border-color: var(--color-bordeaux);
+            background-color: var(--color-bordeaux);
+            color: var(--color-text-primary-on-dark);
+            cursor: pointer;
+        }
+        /* Da der Button `display: inline-flex` und `align-items: center` hat,
+           und das Padding (0.8em oben/unten) sowie line-height (1.4)
+           jetzt identisch zum Input-Feld gesetzt sind (oder sein sollten),
+           sollte Flexbox im Parent (.form-newsletter) die Höhen angleichen.
+           Das Icon selbst sollte die Höhe nicht negativ beeinflussen, wenn es kleiner
+           als die resultierende Content-Box-Höhe ist.
+        */
+
+        .combined-column .form-newsletter button iconify-icon {
+            display: block; /* Hilft manchmal bei der genauen Größenberechnung von Icons */
+            font-size: 1em; /* Größe des Icons relativ zur Schriftgröße des Buttons (0.95rem) */
+            /* Wenn das Icon immer noch Probleme macht, kann man ihm eine feste line-height geben,
+               oder seine Größe feiner justieren. */
+        }
+
+        .combined-column .form-newsletter button:hover,
+        .combined-column .form-newsletter button:focus-visible {
+             background-color: #701623;
+             border-color: #701623;
+        }
+        .combined-column .form-newsletter button:hover,
+        .combined-column .form-newsletter button:focus-visible {
+             background-color: #701623; /* Dunkleres Bordeaux für Hover/Fokus */
+             border-color: #701623;
         }
         .combined-column .form-newsletter button iconify-icon {
             margin-right: 0;
