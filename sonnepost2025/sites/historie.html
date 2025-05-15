@@ -3,24 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
     <title>Geschichte | Hotel Sonne Post</title>
-    <!-- TYPO3 Hinweis: Dynamische Meta Description -->
     <meta name="description" content="Entdecken Sie die reiche Geschichte des Hotel Sonne Post, von den Anfängen im Jahr 1870 bis heute.">
-
-    <!-- FAVICON: Pfad anpassen, falls nötig. TYPO3 kann dies verwalten. -->
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
 
-    <!-- FONTS: Google Fonts Einbindung -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- TYPO3 Hinweis: Globale CSS-Datei einbinden. Pfad geht davon aus, dass historie.html im selben Ordner wie index.html liegt ODER in einem Unterordner und css/js sind eine Ebene höher.
-        Wenn historie.html im Hauptverzeichnis liegt: href="css/main.css"
-        Wenn historie.html in z.B. /sites/ liegt: href="../css/main.css"
-        Ich gehe für dieses Beispiel von der zweiten Variante aus.
-    -->
+    <!-- Pfad zur globalen CSS-Datei (angenommen, historie.html ist im Unterordner /sites/) -->
     <link rel="stylesheet" href="../css/main.css">
 
     <style>
@@ -30,6 +21,8 @@
         }
 
         /* Anpassung für den Header auf Unterseiten, der direkt sichtbar ist */
+        /* Die globalen Header-Stile aus main.css werden angewendet.
+           Diese Regeln hier überschreiben oder ergänzen sie für den Unterseiten-Kontext. */
         .site-header {
             background-color: var(--color-header-bg-scrolled); /* Startet direkt mit gescrolltem Hintergrund */
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -45,6 +38,12 @@
         .site-header .header-center .central-logo .logo-scrolled { display: block; opacity: 1; } /* Scrolled-Logo (rot) immer zeigen */
         .site-header .header-right .contact-icon-btn iconify-icon { color: var(--color-header-contact-icon-scrolled); }
 
+        /* Optional: Menü-Button visuell deaktivieren, falls die JS-Logik ihn nicht schon ignoriert */
+        /*
+        .site-header .menu-trigger-wrapper {
+            cursor: default;
+        }
+        */
 
         /* === Stile für einfachen Page-Hero auf Unterseiten === */
         .page-hero-section {
@@ -59,7 +58,7 @@
             justify-content: center;
             text-align: center;
             color: var(--color-text-primary-on-dark);
-            margin-top: var(--header-height); /* Platz für den fixen Header */
+            margin-top: var(--header-height);
         }
         .page-hero-image {
             position: absolute;
@@ -84,9 +83,9 @@
             z-index: 3;
             padding: 20px;
         }
-        .page-hero-title { /* Dies ist die H1 für die Unterseite */
+        .page-hero-title {
             font-family: var(--font-secondary);
-            font-size: clamp(2.2rem, 5vw, 3.2rem); /* Angepasste Größe */
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
             color: var(--color-white);
             margin: 0;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
@@ -94,12 +93,11 @@
 
         /* === Timeline Sektion spezifische Stile === */
         .timeline-section {
-            padding-top: 60px; /* Abstand nach dem Page-Hero */
+            padding-top: 60px;
             padding-bottom: 60px;
         }
-        /* Die H1 ist jetzt im Page-Hero. Diese h2 ist optional für die Sektion. */
         .timeline-section-heading {
-            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Als H2 gestylt */
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             text-align: center;
             color: var(--color-text-primary);
             margin-bottom: 0.5em;
@@ -111,7 +109,6 @@
             font-size: 1rem;
             color: var(--color-text-secondary);
         }
-
         .timeline-navigation-wrapper {
             position: relative;
             margin-top: 30px;
@@ -128,153 +125,49 @@
             list-style: none;
             justify-content: flex-start;
         }
-        @media (min-width: 992px) {
-            .timeline-navigation {
-                justify-content: center;
-            }
-        }
+        @media (min-width: 992px) { .timeline-navigation { justify-content: center; } }
         .timeline-navigation::-webkit-scrollbar { height: 6px; }
         .timeline-navigation::-webkit-scrollbar-track { background: transparent; }
         .timeline-navigation::-webkit-scrollbar-thumb { background-color: var(--color-border-subtle); border-radius: 3px; }
-
-        .timeline-navigation li {
-            flex-shrink: 0;
-        }
+        .timeline-navigation li { flex-shrink: 0; }
         .timeline-year-btn {
-            background: none;
-            border: none;
-            padding: 10px 18px;
-            margin: 0 5px;
-            font-family: var(--font-primary);
-            font-size: 1rem;
-            color: var(--color-text-secondary);
-            cursor: pointer;
-            transition: color 0.3s ease, font-weight 0.3s ease, background-color 0.3s ease;
-            position: relative;
-            border-radius: 4px;
+            background: none; border: none; padding: 10px 18px; margin: 0 5px;
+            font-family: var(--font-primary); font-size: 1rem; color: var(--color-text-secondary);
+            cursor: pointer; transition: color 0.3s ease, font-weight 0.3s ease, background-color 0.3s ease;
+            position: relative; border-radius: 4px;
         }
-        .timeline-year-btn:hover,
-        .timeline-year-btn:focus-visible {
-            color: var(--color-bordeaux);
-            background-color: rgba(140, 30, 45, 0.05);
-        }
-        .timeline-year-btn.active {
-            color: var(--color-bordeaux);
-            font-weight: 700;
-        }
+        .timeline-year-btn:hover, .timeline-year-btn:focus-visible { color: var(--color-bordeaux); background-color: rgba(140, 30, 45, 0.05); }
+        .timeline-year-btn.active { color: var(--color-bordeaux); font-weight: 700; }
         .static-year-indicator {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 40px;
-            background-color: var(--color-bordeaux);
+            position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+            width: 2px; height: 40px; background-color: var(--color-bordeaux);
         }
-
-        .timeline-content-display {
-            text-align: center;
-            max-width: 750px;
-            margin: 0 auto;
-            position: relative;
-            min-height: 250px;
-        }
-
+        .timeline-content-display { text-align: center; max-width: 750px; margin: 0 auto; position: relative; min-height: 250px; }
         .displayed-year {
-            font-family: var(--font-secondary);
-            font-size: clamp(3.5rem, 10vw, 5.5rem);
-            font-weight: 400;
-            color: var(--color-border-subtle);
-            margin-bottom: 0.1em;
-            line-height: 1;
+            font-family: var(--font-secondary); font-size: clamp(3.5rem, 10vw, 5.5rem); font-weight: 400;
+            color: var(--color-border-subtle); margin-bottom: 0.1em; line-height: 1;
         }
-        .timeline-item-title {
-            font-family: var(--font-primary);
-            font-size: clamp(1.4rem, 3.5vw, 1.9rem);
-            font-weight: 700;
-            color: var(--color-text-primary);
-            margin-bottom: 0.7em;
+        .timeline-item-title { /* Ist eine h3 in der Struktur */
+            font-family: var(--font-primary); font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 700;
+            color: var(--color-text-primary); margin-bottom: 0.7em;
         }
-        .timeline-item-description {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--color-text-secondary);
-        }
-        .timeline-item-description p {
-            margin-bottom: 1em;
-        }
-        .timeline-item-description p:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 40px;
-        }
+        .timeline-item-description { font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); }
+        .timeline-item-description p { margin-bottom: 1em; }
+        .timeline-item-description p:last-child { margin-bottom: 0; }
+        .timeline-controls { display: flex; justify-content: center; align-items: center; margin-top: 40px; }
         .timeline-nav-arrow {
-            background: none;
-            border: 1px solid var(--color-border-subtle);
-            color: var(--color-text-secondary);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin: 0 12px;
+            background: none; border: 1px solid var(--color-border-subtle); color: var(--color-text-secondary);
+            width: 44px; height: 44px; border-radius: 50%; display: inline-flex;
+            align-items: center; justify-content: center; cursor: pointer;
+            transition: all 0.2s ease; margin: 0 12px;
         }
-        .timeline-nav-arrow iconify-icon {
-            font-size: 1.6rem;
-        }
-        .timeline-nav-arrow:hover,
-        .timeline-nav-arrow:focus-visible {
-            background-color: var(--color-bordeaux);
-            border-color: var(--color-bordeaux);
-            color: var(--color-white);
-        }
-        .timeline-nav-arrow:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            background-color: transparent;
-            border-color: var(--color-border-subtle);
-            color: var(--color-text-secondary);
-        }
+        .timeline-nav-arrow iconify-icon { font-size: 1.6rem; }
+        .timeline-nav-arrow:hover, .timeline-nav-arrow:focus-visible { background-color: var(--color-bordeaux); border-color: var(--color-bordeaux); color: var(--color-white); }
+        .timeline-nav-arrow:disabled { opacity: 0.4; cursor: not-allowed; background-color: transparent; border-color: var(--color-border-subtle); color: var(--color-text-secondary); }
 
-        /* Stile für Footer-Tools, falls benötigt, ansonsten globale Footer-Stile nutzen */
-        .footer-tools {
-            text-align: center;
-            margin-top: 30px;
-            padding-bottom: 20px; /* Um etwas Abstand vor dem Copyright zu schaffen */
-        }
-        .footer-tools select, .footer-tools button {
-            font-family: var(--font-primary);
-            font-size: 0.9rem;
-            padding: 8px 12px;
-            margin: 0 8px;
-            border: 1px solid var(--color-border-subtle);
-            border-radius: 4px;
-            background-color: var(--color-white);
-            color: var(--color-text-secondary);
-        }
-        .footer-tools button { cursor: pointer; }
-        .footer-tools button:hover { border-color: var(--color-bordeaux); color: var(--color-bordeaux); }
-        .footer-tools select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            padding-right: 30px;
-            background-image: none;
-        }
-        .footer-column h4 { /* Sicherstellen, dass dieser Stil aus main.css korrekt angewendet wird */
-             font-family: var(--font-primary);
-             font-weight: 700;
-             font-size: 1rem;
-             margin-bottom: 15px;
-             color: var(--color-text-primary);
+        .footer-column h4 {
+             font-family: var(--font-primary); font-weight: 700; font-size: 1rem;
+             margin-bottom: 15px; color: var(--color-text-primary);
         }
     </style>
 </head>
@@ -282,6 +175,12 @@
 
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
+    <!-- Header-Struktur bleibt erhalten für das Aussehen.
+         Der Menü-Button (#menu-trigger) wird von main.js gefunden.
+         Da aber das zugehörige <nav id="fullscreen-nav"> Element auf dieser Seite fehlt,
+         wird die openFullscreenNav() Funktion in main.js (oder Teile davon) nicht korrekt ausgeführt,
+         was den gewünschten Effekt hat (Button ist da, löst aber keine Navigation aus).
+    -->
     <header class="site-header" id="site-header" role="banner">
         <div class="header-content-wrapper">
             <div class="header-left">
@@ -293,22 +192,22 @@
                 </button>
             </div>
             <div class="header-center">
-                <!-- Pfad zur Startseite, wenn historie.html im selben Ordner wie index.html liegt -->
+                <!-- Pfad zur Startseite anpassen, falls historie.html in einem Unterverzeichnis liegt -->
                 <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
-                <!-- Wenn historie.html in /sites/ liegt, dann href="../index.html" -->
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
                 </a>
             </div>
             <div class="header-right">
-                <a href="../kontakt-anreise.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen"> <!-- Pfad anpassen -->
+                 <!-- Pfad zur Kontaktseite anpassen -->
+                <a href="../kontakt-anreise.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
                     <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Fullscreen-Navigation wird für diese Demo-Unterseite nicht geladen -->
+    <!-- Die Fullscreen-Navigation <nav id="fullscreen-nav">...</nav> wird hier NICHT eingefügt. -->
 
     <main id="main-content" role="main">
         <section class="page-hero-section" aria-labelledby="page-hero-heading-historie">
@@ -321,7 +220,6 @@
 
         <section class="timeline-section" aria-labelledby="timeline-section-heading-main">
             <div class="container">
-                <!-- Optionale H2 für die Sektion, falls semantisch gewünscht -->
                 <h2 id="timeline-section-heading-main" class="timeline-section-heading sr-only">Zeitleiste der Hotelgeschichte</h2>
                 <p class="timeline-intro-text">
                     Gegründet im Jahr 1870, steht unser Haus für eine lange Tradition aus Handwerkskunst und Innovation. Entdecken Sie unsere Geschichte und erleben Sie die gelebte Tradition der Exzellenz, die das Hotel Sonne Post auszeichnet.
@@ -337,7 +235,7 @@
                 <div class="timeline-content-display" id="timeline-content-display" role="tabpanel" aria-live="polite">
                     <div class="timeline-item-content" id="timeline-item-content-placeholder">
                         <div class="displayed-year" id="displayed-year-text" aria-hidden="true"></div>
-                        <h3 class="timeline-item-title" id="timeline-item-title-text"></h3> <!-- Geändert zu H3, da H1 im Hero und H2 optional für Sektion -->
+                        <h3 class="timeline-item-title" id="timeline-item-title-text"></h3>
                         <div class="timeline-item-description" id="timeline-item-description-text"></div>
                     </div>
                 </div>
@@ -363,7 +261,6 @@
             </div>
             <div class="footer-column">
                  <h4>Entdecken</h4>
-                 <!-- Pfade ggf. anpassen, falls historie.html in einem Unterordner liegt -->
                 <ul> <li><a href="../zimmer-preise.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="../kulinarik.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
             </div>
             <div class="footer-column">
@@ -380,20 +277,6 @@
                 </div>
             </div>
         </div>
-        <!-- Optional: Footer Tools, wenn benötigt -->
-        <!--
-        <div class="footer-tools container">
-            <div style="display: inline-block; position: relative;">
-                <label for="language-select" class="sr-only">Sprache auswählen</label>
-                <select id="language-select" name="language">
-                    <option value="de" selected>Deutsch</option>
-                    <option value="en">English</option>
-                </select>,
-                <iconify-icon icon="feather:chevron-down" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;" aria-hidden="true"></iconify-icon>
-            </div>
-            <button id="cookie-settings-trigger-footer" type="button">Datenschutzeinstellungen</button>
-        </div>
-        -->
         <div class="copyright">
             <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
         </div>
@@ -403,13 +286,13 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
 
-    <!-- Pfad zur globalen JS-Datei. Wenn historie.html im Hauptverzeichnis: "js/main.js" -->
+    <!-- Pfad zur globalen JS-Datei anpassen, falls nötig -->
     <script src="../js/main.js" defer></script>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Die globale Header-Scroll-Logik und Fullscreen-Nav-Logik (falls <nav> vorhanden wäre)
-        // wird von ../js/main.js übernommen.
+        // Globale Skripte (Header-Scroll, Copyright etc.) werden von ../js/main.js gehandhabt.
+        // Die Fullscreen-Navigation wird nicht ausgelöst, da das <nav id="fullscreen-nav"> Element fehlt.
 
         const timelineData = [
             { year: "1870", title: "Die Geschichte der Sonne-Post beginnt", description: "Die Geschichte der Sonne-Post beginnt schon im Jahre 1870, als Stefan Wehrle (1828-1913), der zuvor noch Glashofbauer, Uhrenhändler und Frachtfuhrmann gewesen war, das Gasthaus „Zur Sonne“ eröffnete. Gleichzeitig wurde die „Sonne“ Posthaltestation der Großherzoglich Badischen Post, was 100 Jahre später auch zum Namen Sonne-Post führen sollte. Neben der Gastwirtschaft betrieb Stefan Wehrle die Landwirtschaft weiter." },
@@ -451,11 +334,9 @@
 
         function displayYearData(index, direction = 'none') {
             if (!timelineData || timelineData.length === 0 || index < 0 || index >= timelineData.length) {
-                console.warn("Timeline-Daten nicht verfügbar oder Index außerhalb des Bereichs.");
                 return;
             }
             currentYearIndex = index;
-
             const data = timelineData[index];
             const tl = gsap.timeline();
             let slideYOffset = 30;
@@ -471,7 +352,6 @@
                     if (timelineItemDescriptionText) {
                         timelineItemDescriptionText.innerHTML = data.description.split('\n').map(p => `<p>${p.replace(/<br\s*\/?>/gi, '<br>')}</p>`).join('');
                     }
-                    
                     if(timelineContentPlaceholder) {
                         gsap.fromTo(timelineContentPlaceholder,
                             { opacity: 0, y: direction === 'next' ? slideYOffset : (direction === 'prev' ? -slideYOffset : 0) },
@@ -491,7 +371,6 @@
                     }
                 });
             }
-
             if (prevButton) prevButton.disabled = index === 0;
             if (nextButton) nextButton.disabled = index === timelineData.length - 1;
         }
@@ -505,7 +384,6 @@
                 button.setAttribute('role', 'tab');
                 button.setAttribute('aria-controls', 'timeline-content-display');
                 button.id = `year-btn-${item.year.replace(/\s|-/g, '')}`;
-
                 button.addEventListener('click', () => {
                     const direction = index > currentYearIndex ? 'next' : (index < currentYearIndex ? 'prev' : 'none');
                     displayYearData(index, direction);
@@ -513,7 +391,7 @@
                 li.appendChild(button);
                 timelineYearsList.appendChild(li);
             });
-            displayYearData(0, 'none'); // Ersten Eintrag anzeigen
+            displayYearData(0, 'none');
         } else {
             if (timelineContentPlaceholder) timelineContentPlaceholder.innerHTML = "<p>Keine Daten für die Zeitleiste verfügbar.</p>";
             if (prevButton) prevButton.style.display = 'none';
@@ -525,8 +403,6 @@
 
         if (prevButton) prevButton.addEventListener('click', () => displayYearData(currentYearIndex - 1, 'prev'));
         if (nextButton) nextButton.addEventListener('click', () => displayYearData(currentYearIndex + 1, 'next'));
-
-        // Das Copyright-Jahr und Cookie-Einstellungen werden von ../js/main.js gehandhabt.
     });
     </script>
 </body>
