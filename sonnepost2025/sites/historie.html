@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Pfad zur globalen CSS-Datei (angenommen, historie.html ist im Unterordner z.B. /sites/) -->
     <link rel="stylesheet" href="../css/main.css">
 
     <style>
@@ -20,7 +19,6 @@
             background-color: var(--color-white);
         }
 
-        /* Anpassung für den Header auf Unterseiten, der direkt sichtbar ist */
         .site-header {
             background-color: var(--color-header-bg-scrolled);
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -32,28 +30,21 @@
          .site-header .hamburger-icon span {
             background: var(--color-header-icon-scrolled);
         }
-        /* Logo-Steuerung für Unterseiten-Header: Rotes Logo immer sichtbar */
         .site-header .header-center .central-logo .logo-initial {
-            display: block;
-            opacity: 0;
-            position: absolute; /* Verhindert, dass es Platz einnimmt */
-            pointer-events: none; /* Nicht klickbar */
+            display: block; opacity: 0; position: absolute; pointer-events: none;
         }
         .site-header .header-center .central-logo .logo-scrolled {
-            display: block;
-            opacity: 1;
-            position: relative; /* Bleibt im normalen Fluss */
+            display: block; opacity: 1; position: relative;
         }
         .site-header .header-right .contact-icon-btn iconify-icon {
             color: var(--color-header-contact-icon-scrolled);
         }
 
-        /* === Stile für einfachen Page-Hero auf Unterseiten === */
+        /* === Stile für einfachen Page-Hero auf Unterseiten (jetzt ohne Text) === */
         .page-hero-section {
             position: relative; width: 100%; height: 40vh;
-            min-height: 300px; max-height: 500px; overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; color: var(--color-text-primary-on-dark);
+            min-height: 300px; max-height: 450px; /* Höhe leicht reduziert, da kein Text mehr drin */
+            overflow: hidden;
             margin-top: var(--header-height);
         }
         .page-hero-image {
@@ -61,21 +52,30 @@
             object-fit: cover; z-index: 1;
         }
         .page-hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.35); z-index: 2;
+            /* display: none; */ /* Overlay entfernt für klares Bild */
+            /* oder background-color: transparent; */
+            /* Für dieses Beispiel lasse ich es weg, da kein Text mehr im Hero ist, der Kontrast bräuchte */
+             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+             background-color: transparent; /* Explizit transparent */
+             z-index: 2;
         }
-        .page-hero-content { position: relative; z-index: 3; padding: 20px; }
-        .page-hero-title {
-            font-family: var(--font-secondary); font-size: clamp(2.2rem, 5vw, 3.2rem);
-            color: var(--color-white); margin: 0; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        .page-hero-content { /* Dieser Container ist jetzt leer, kann aber für zukünftige Erweiterungen bleiben */
+            display: none; /* Da keine sichtbare Überschrift mehr im Hero ist */
         }
+
 
         /* === Timeline Sektion spezifische Stile === */
         .timeline-section { padding-top: 60px; padding-bottom: 60px; }
-        .timeline-section-heading {
-            font-size: clamp(1.8rem, 4vw, 2.5rem); text-align: center;
-            color: var(--color-text-primary); margin-bottom: 0.5em;
+
+        /* Neue Hauptüberschrift H1 für die Seite, über dem Intro-Text */
+        .page-main-heading {
+            font-family: var(--font-secondary);
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: 0.7em; /* Abstand zum Intro-Text */
         }
+
         .timeline-intro-text {
             text-align: center; max-width: 700px; margin: 0 auto 40px auto;
             font-size: 1rem; color: var(--color-text-secondary);
@@ -111,7 +111,7 @@
             font-family: var(--font-secondary); font-size: clamp(3.5rem, 10vw, 5.5rem); font-weight: 400;
             color: var(--color-border-subtle); margin-bottom: 0.1em; line-height: 1;
         }
-        .timeline-item-title {
+        .timeline-item-title { /* Ist eine h3 in der Struktur */
             font-family: var(--font-primary); font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 700;
             color: var(--color-text-primary); margin-bottom: 0.7em;
         }
@@ -150,7 +150,6 @@
                 </button>
             </div>
             <div class="header-center">
-                <!-- Link zur Startseite, eine Ebene höher von /sites/historie.html -->
                 <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
@@ -165,17 +164,18 @@
     </header>
 
     <main id="main-content" role="main">
-        <section class="page-hero-section" aria-labelledby="page-hero-heading-historie">
-            <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historische Ansicht des Hotel Sonne Post" class="page-hero-image" width="1600" height="500" loading="eager">
+        <section class="page-hero-section" aria-label="Historische Ansicht des Hotels als Bannerbild">
+            <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historische Ansicht des Hotel Sonne Post" class="page-hero-image" width="1600" height="450" loading="eager">
             <div class="page-hero-overlay"></div>
+            <!-- Inhalt des Hero-Banners ist jetzt leer, da die Überschrift verschoben wurde -->
             <div class="page-hero-content container">
-                <h1 id="page-hero-heading-historie" class="page-hero-title">Unsere Geschichte</h1>
+                <!-- <h1 id="page-hero-heading-historie" class="page-hero-title">Unsere Geschichte</h1> -->
             </div>
         </section>
 
-        <section class="timeline-section" aria-labelledby="timeline-section-heading-main">
+        <section class="timeline-section" aria-labelledby="page-main-heading-historie">
             <div class="container">
-                <h2 id="timeline-section-heading-main" class="timeline-section-heading sr-only">Zeitleiste der Hotelgeschichte</h2>
+                <h1 id="page-main-heading-historie" class="page-main-heading">Unsere Geschichte</h1>
                 <p class="timeline-intro-text">
                     Gegründet im Jahr 1870, steht unser Haus für eine lange Tradition aus Handwerkskunst und Innovation. Entdecken Sie unsere Geschichte und erleben Sie die gelebte Tradition der Exzellenz, die das Hotel Sonne Post auszeichnet.
                 </p>
@@ -188,7 +188,7 @@
                 <div class="timeline-content-display" id="timeline-content-display" role="tabpanel" aria-live="polite">
                     <div class="timeline-item-content" id="timeline-item-content-placeholder">
                         <div class="displayed-year" id="displayed-year-text" aria-hidden="true"></div>
-                        <h3 class="timeline-item-title" id="timeline-item-title-text"></h3>
+                        <h2 class="timeline-item-title" id="timeline-item-title-text"></h2> <!-- Geändert zu H2, da H1 jetzt "Unsere Geschichte" ist -->
                         <div class="timeline-item-description" id="timeline-item-description-text"></div>
                     </div>
                 </div>
@@ -294,7 +294,7 @@
                 duration: 0.3, ease: "power2.in",
                 onComplete: () => {
                     if (displayedYearText) displayedYearText.textContent = data.year;
-                    if (timelineItemTitleText) timelineItemTitleText.textContent = data.title;
+                    if (timelineItemTitleText) timelineItemTitleText.textContent = data.title; // Titel ist jetzt H2
                     if (timelineItemDescriptionText) {
                         timelineItemDescriptionText.innerHTML = data.description.split('\n').map(p => `<p>${p.replace(/<br\s*\/?>/gi, '<br>')}</p>`).join('');
                     }
