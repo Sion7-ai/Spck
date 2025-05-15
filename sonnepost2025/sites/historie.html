@@ -268,40 +268,22 @@
         </div>
     </header>
 
-    <!-- TYPO3 Hinweis: Globale Fullscreen Navigation. Inhalt wird von main.js gesteuert. -->
-    <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
-        <div class="fullscreen-nav-header">
-            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
-                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
-            </button>
-             <a href="../index.html" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
-                 <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40">
-             </a>
-             <!-- TYPO3 Hinweis: Hier würden die CTAs aus der globalen Navigation geladen. -->
-            <div class="fullscreen-nav-ctas">
-                 <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="btn btn-light">Jetzt Buchen</a>
-                 <a href="/anfragen" class="btn btn-dark">Anfragen</a>
-            </div>
-        </div>
-        <!-- TYPO3 Hinweis: Der Hauptteil der Navigation (`.fullscreen-nav-main` und `.fullscreen-nav-quicklinks`)
-             würde dynamisch aus der globalen Navigation (aus main.js/HTML-Struktur der index.html) geladen.
-             Für dieses Standalone-Beispiel bleibt es leer oder enthält Platzhalter.
-             In einer echten TYPO3-Integration wäre dies ein globales Partial. -->
-        <div class="fullscreen-nav-quicklinks">
-            <a href="/zimmer-preise" class="quicklink-item"> <iconify-icon icon="feather:key"></iconify-icon> <span>Wohnen</span> </a>
-            <a href="/wellness-spa" class="quicklink-item"> <iconify-icon icon="feather:wind"></iconify-icon> <span>Entspannen</span> </a>
-        </div>
-        <div class="fullscreen-nav-main">
-            <p style="padding:20px; text-align:center;">Vollständige Navigation wird hier geladen (siehe index.html).</p>
-        </div>
-        <div class="fullscreen-nav-footer">
-             <div class="footer-links">
-                <ul><li><a href="/impressum">Impressum</a></li> <li><a href="/datenschutz">Datenschutz</a></li></ul>
-            </div>
-        </div>
-    </nav>
+        <!-- TYPO3 Hinweis: Globale Fullscreen Navigation wird für diese Demo-Unterseite nicht geladen.
+                         Der Trigger im Header wird weiterhin von main.js angesprochen,
+                         aber da das <nav>-Element fehlt, passiert nichts.
+                         Für eine produktive Seite wäre hier das globale Navigations-Template.
+    -->
 
     <main id="main-content" role="main">
+            <main id="main-content" role="main">
+        <!-- TYPO3 Hinweis: Einfacher Hero-Bereich für Unterseiten -->
+        <section class="page-hero-section" aria-labelledby="page-hero-heading-historie">
+            <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historische Ansicht des Hotel Sonne Post" class="page-hero-image" width="1600" height="500"> <!-- TYPO3: Bildquelle und Alt-Text editierbar. width/height anpassen. -->
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content container">
+                <h1 id="page-hero-heading-historie" class="page-hero-title">Unsere Geschichte</h1>
+            </div>
+        </section>
         <section class="timeline-section" aria-labelledby="timeline-main-heading">
             <div class="container">
                 <h1 id="timeline-main-heading">Die Geschichte der Sonne-Post</h1>
@@ -337,42 +319,31 @@
         </section>
     </main>
 
-    <!-- TYPO3 Hinweis: Globaler Footer -->
-    <footer class="site-footer" role="contentinfo" aria-labelledby="footer-heading-global">
-        <h2 id="footer-heading-global" class="sr-only">Fußbereich</h2>
-       <div class="container-footer">
+        <!-- TYPO3 Hinweis: Globaler Footer (Struktur von index.html übernommen) -->
+    <footer class="site-footer" role="contentinfo" aria-labelledby="footer-heading">
+         <h2 id="footer-heading" class="sr-only">Fußbereich</h2>
+        <div class="container-footer">
             <div class="footer-column">
                 <h4>Hotel Sonne Post</h4>
                 <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
             </div>
             <div class="footer-column">
                  <h4>Entdecken</h4>
-                <ul> <li><a href="/zimmer-preise">Wohnen & Preise</a></li> <li><a href="/wellness-spa">Spa</a></li> <li><a href="/kulinarik">Geniessen & Kulinarik</a></li> <li><a href="/arrangements">Arrangements</a></li> <li><a href="/region">Freizeit & Region</a></li> </ul>
+                <ul> <li><a href="../zimmer-preise.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="../kulinarik.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
             </div>
             <div class="footer-column">
                 <h4>Information</h4>
-                 <ul> <li><a href="/kontakt-anreise">Kontakt & Anreise</a></li> <li><a href="/hotel/ueber-uns">Über uns</a></li> <li><a href="./historie.html">Unsere Geschichte</a></li> <li><a href="/karriere">Karriere</a></li> <li><a href="/faq">FAQ</a></li> </ul>
+                 <ul> <li><a href="../kontakt-anreise.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./historie.html">Unsere Geschichte</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
             </div>
             <div class="footer-column">
                 <h4>Rechtliches</h4>
-                 <ul> <li><a href="/impressum">Impressum</a></li> <li><a href="/datenschutz">Datenschutz</a></li> <li><a href="/agb">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
                 <h4 style="margin-top: 20px;">Folgen Sie uns</h4>
                 <div class="social-links">
                      <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
                      <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
                 </div>
             </div>
-        </div>
-         <div class="footer-tools container">
-            <div style="display: inline-block; position: relative;">
-                <label for="language-select" class="sr-only">Sprache auswählen</label>
-                <select id="language-select" name="language">
-                    <option value="de" selected>Deutsch</option>
-                    <option value="en">English</option>
-                </select>
-                <iconify-icon icon="feather:chevron-down" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none;"></iconify-icon>
-            </div>
-            <button id="cookie-settings-trigger-footer" type="button">Datenschutzeinstellungen</button>
         </div>
         <div class="copyright">
             <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
