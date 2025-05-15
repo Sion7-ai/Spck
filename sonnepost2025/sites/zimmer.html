@@ -4,122 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
-    <title>Unsere Zimmer & Suiten | Hotel Sonne Post</title>
+    <title>Zimmer & Preise | Hotel Sonne Post</title>
     <!-- TYPO3 Hinweis: Dynamische Meta Description -->
-    <meta name="description" content="Entdecken Sie unsere komfortablen Zimmer und großzügigen Suiten im Hotel Sonne Post. Ihr perfektes Refugium im Schwarzwald.">
-
+    <meta name="description" content="Entdecken Sie unsere komfortablen Zimmer und Suiten im Hotel Sonne Post. Finden Sie Ihr perfektes Urlaubsdomizil im Schwarzwald.">
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Pfad zur globalen CSS-Datei (angenommen, zimmer.html ist im Unterordner /sites/) -->
+    <!-- Pfad zur globalen CSS-Datei (angenommen, zimmer.html ist im Unterordner z.B. /sites/) -->
     <link rel="stylesheet" href="../css/main.css">
 
     <style>
         /* === TYPO3 Hinweis: Spezifische Stile für die Zimmer-Seite === */
         body {
-            background-color: var(--color-white); /* Oder var(--color-beige) je nach Wunsch */
+            background-color: var(--color-beige); /* Heller Hintergrund für die Seite */
         }
 
-        /* Anpassung für den Header auf Unterseiten */
-        .site-header {
-            background-color: var(--color-header-bg-scrolled);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            background-image: none;
-        }
-        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
-            color: var(--color-header-icon-scrolled);
-        }
-         .site-header .hamburger-icon span {
-            background: var(--color-header-icon-scrolled);
-        }
-        .site-header .header-center .central-logo .logo-initial {
-            display: block; opacity: 0; position: absolute; pointer-events: none;
-        }
-        .site-header .header-center .central-logo .logo-scrolled {
-            display: block; opacity: 1; position: relative;
-        }
-        .site-header .header-right .contact-icon-btn iconify-icon {
-            color: var(--color-header-contact-icon-scrolled);
-        }
+        /* Der Header soll sich wie auf der Startseite verhalten (transparent über Hero, dann weiß)
+           Daher keine spezifischen Header-Overrides hier, außer das .site-header.scrolled
+           wird von der globalen main.css und dem JS in main.js gesteuert.
+        */
 
-        /* === Stile für einfachen Page-Hero auf Unterseiten === */
+        /* === Stile für Page-Hero auf der Zimmer-Seite === */
         .page-hero-section {
-            position: relative; width: 100%; height: 45vh; /* Höhe anpassbar */
-            min-height: 320px; max-height: 550px;
+            position: relative; width: 100%;
+            height: 60vh; /* Etwas höherer Hero für Zimmerübersicht */
+            min-height: 400px; max-height: 650px;
             overflow: hidden;
             display: flex; align-items: center; justify-content: center;
             text-align: center; color: var(--color-text-primary-on-dark);
-            margin-top: var(--header-height);
+            /* margin-top: var(--header-height); /* Wird nicht benötigt, da Header darüber liegt */
         }
         .page-hero-image {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: 1;
         }
-        .page-hero-overlay { /* Etwas dunkleres Overlay für Text im Hero */
+        .page-hero-overlay { /* Leichter Verlauf wie auf der Startseite, um Header-Kontrast zu verbessern */
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0.0) 100%);
             z-index: 2;
         }
         .page-hero-content {
             position: relative; z-index: 3; padding: 20px;
+            animation: fadeInHeroText 1.2s ease-out 0.3s forwards; /* Animation von Startseite übernehmen */
+            opacity:0; transform: translateY(20px);
         }
-        .page-hero-title { /* H1 der Seite */
-            font-family: var(--font-secondary); font-size: clamp(2.4rem, 5.5vw, 3.5rem);
-            color: var(--color-white); margin: 0; text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+        @keyframes fadeInHeroText { to { opacity: 1; transform: translateY(0); } }
+
+        .page-hero-title {
+            font-family: var(--font-secondary); font-size: clamp(2.5rem, 6vw, 3.8rem);
+            color: var(--color-white); margin: 0 0 0.3em 0; text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
         }
-        .page-hero-subtitle { /* Optionaler Untertitel im Hero */
-            font-family: var(--font-primary); font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--color-white); margin-top: 0.5em;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-            max-width: 600px; margin-left: auto; margin-right: auto;
+        .page-hero-subtitle {
+            font-family: var(--font-primary); font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--color-white); font-weight: 400;
+            max-width: 600px; margin: 0 auto; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
-
-        /* === Stile für Zimmerübersicht (Beispiel) === */
+        /* === Zimmerübersicht Sektion === */
         .room-overview-section {
-            padding: 60px 0;
+            padding-top: 80px; /* Abstand nach dem Hero (falls Header noch nicht gescrollt ist) */
+            padding-bottom: 80px;
+            background-color: var(--color-white); /* Weißer Hintergrund für die Zimmerkarten */
         }
-        .page-main-heading { /* Für die H1 der Seite, falls sie nicht im Hero ist */
-             font-family: var(--font-secondary);
-             font-size: clamp(2.2rem, 5vw, 3.2rem);
-             color: var(--color-text-primary);
-             text-align: center;
-             margin-bottom: 1em;
-        }
-        .section-intro-text {
-            text-align: center; max-width: 700px; margin: 0 auto 40px auto;
-            font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.7;
+         .room-overview-section .container > h2 { /* Optional: Allgemeine Überschrift für die Sektion */
+            margin-bottom: 2em;
+            color: var(--color-text-primary);
         }
 
-        /* Beispiel für Zimmer-Karten (ähnlich wie Teaser-Karten) */
-        .room-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+        .room-category {
+            margin-bottom: 60px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid var(--color-border-subtle);
         }
-        .room-card { /* Kann Stile von .teaser-card erben oder eigene haben */
+        .room-category:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .room-category-header {
+            text-align: left; /* Titel linksbündig */
+            margin-bottom: 30px;
+        }
+        .room-category-title { /* Ist eine h3 in der Struktur */
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            color: var(--color-bordeaux);
+            margin-bottom: 0.2em;
+        }
+        .room-category-subtitle {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        .room-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .room-card {
             background-color: var(--color-white);
-            border: 1px solid var(--color-border-subtle);
             border-radius: 6px;
             overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            text-decoration: none; /* Falls die ganze Karte ein Link ist */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .room-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
-        .room-card-image-link { display: block; } /* Falls nur das Bild klickbar sein soll */
-        .room-card img {
+        .room-card-image-link { display: block; }
+        .room-card-image {
             width: 100%;
-            height: 250px; /* Feste Höhe für Konsistenz */
+            height: 240px;
             object-fit: cover;
+            border-bottom: 3px solid var(--color-bordeaux); /* Akzentfarbe */
         }
         .room-card-content {
             padding: 25px;
@@ -127,26 +130,50 @@
             display: flex;
             flex-direction: column;
         }
-        .room-card h3 { /* H3, da H1 Seitenüberschrift und H2 ggf. für Sektionen */
-            font-family: var(--font-secondary);
-            font-size: clamp(1.4rem, 3vw, 1.8rem);
-            color: var(--color-text-primary);
+        .room-card-title { /* Ist eine h4 */
+            font-size: 1.5rem; /* Größer für Zimmernamen */
             margin-bottom: 0.5em;
+            color: var(--color-text-primary);
         }
-        .room-card p {
+        .room-card-description {
             font-size: 0.95rem;
             color: var(--color-text-secondary);
             margin-bottom: 1.5em;
-            flex-grow: 1; /* Sorgt dafür, dass der Button unten bleibt */
+            flex-grow: 1; /* Lässt Beschreibung wachsen, Button bleibt unten */
         }
-        .room-card .btn {
-            margin-top: auto; /* Button am unteren Rand der Karte ausrichten */
-            align-self: flex-start; /* Button linksbündig */
+        .room-card-features {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5em;
+            font-size: 0.9rem;
+            color: var(--color-text-primary);
         }
-        /* --- Ende Beispiel Zimmer-Karten --- */
+        .room-card-features li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        .room-card-features li iconify-icon {
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--color-bordeaux);
+            font-size: 1.1em;
+        }
+        .room-card-actions {
+            margin-top: auto; /* Buttons am unteren Rand der Karte */
+            display: flex;
+            gap: 10px; /* Abstand zwischen Buttons */
+        }
+        .room-card-actions .btn {
+            flex-grow: 1; /* Buttons nehmen verfügbaren Platz ein */
+            text-align: center;
+            justify-content: center; /* Icon und Text zentrieren */
+        }
+        .room-card-actions .btn iconify-icon { margin-right: 0.4em; }
 
 
-        .footer-column h4 {
+        .footer-column h4 { /* Aus globalem CSS übernommen */
              font-family: var(--font-primary); font-weight: 700; font-size: 1rem;
              margin-bottom: 15px; color: var(--color-text-primary);
         }
@@ -156,6 +183,7 @@
 
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
+    <!-- Header-Struktur wie auf der Startseite. Das Scroll-Verhalten wird von ../js/main.js gesteuert. -->
     <header class="site-header" id="site-header" role="banner">
         <div class="header-content-wrapper">
             <div class="header-left">
@@ -167,7 +195,6 @@
                 </button>
             </div>
             <div class="header-center">
-                <!-- Pfad zur Startseite, wenn zimmer.html im Unterordner /sites/ liegt -->
                 <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
@@ -181,69 +208,160 @@
         </div>
     </header>
 
+    <!-- Fullscreen-Navigation (exakt wie auf index.html, damit main.js sie korrekt steuern kann) -->
+    <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="fullscreen-nav-header">
+            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
+                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
+            </button>
+             <a href="../index.html" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
+                 <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40">
+             </a>
+            <div class="fullscreen-nav-ctas">
+                 <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="btn btn-light">Jetzt Buchen</a>
+                 <a href="../anfragen.html" class="btn btn-dark">Anfragen</a>
+             </div>
+        </div>
+        <div class="fullscreen-nav-quicklinks">
+            <a href="./zimmer.html" class="quicklink-item"> <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> <span>Wohnen</span> </a>
+            <a href="../wellness-spa.html" class="quicklink-item"> <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> <span>Entspannen</span> </a>
+            <a href="../kulinarik.html" class="quicklink-item"> <iconify-icon icon="tabler:tools-kitchen" aria-hidden="true"></iconify-icon> <span>Geniessen</span> </a>
+            <a href="../region.html" class="quicklink-item"> <iconify-icon icon="feather:map" aria-hidden="true"></iconify-icon> <span>Freizeit</span> </a>
+        </div>
+        <div class="fullscreen-nav-main">
+            <!-- Hotel & Gastgeber -->
+            <section class="nav-section" aria-labelledby="nav-section-title-hotel-zimmer">
+                <div class="nav-section-header">
+                    <h2 id="nav-section-title-hotel-zimmer" class="nav-section-title">Hotel & Gastgeber</h2>
+                    <a href="../hotel/ueber-uns.html" class="nav-section-viewall">Mehr erfahren</a>
+                </div>
+                <div class="horizontal-scroll-container">
+                    <a href="../hotel/ueber-uns.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Team/220925_Hotel_Sonne-Post_MA_CorinaBeha_300dpi_11.jpg" alt="Gastgeber Familie Eiche & Wehrle" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Ihre Gastgeber</span> <span class="nav-tile-subtitle">Herzlich & Familiär</span> </div> </a>
+                    <a href="./historie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historisches Bild des Hotels" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Unsere Geschichte</span> <span class="nav-tile-subtitle">Seit 1870</span> </div> </a>
+                </div>
+            </section>
+            <!-- Wohnen & Angebote -->
+            <section class="nav-section" aria-labelledby="nav-section-title-wohnen-zimmer">
+                <div class="nav-section-header">
+                    <h2 id="nav-section-title-wohnen-zimmer" class="nav-section-title">Wohnen & Angebote</h2>
+                    <a href="./zimmer.html" class="nav-section-viewall">Alle Zimmer & Preise</a>
+                </div>
+                 <div class="horizontal-scroll-container">
+                    <a href="#suite-bergblick" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Suite Bergblick Hotel Sonne Post" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Suiten</span> <span class="nav-tile-subtitle">Luxus & Aussicht</span> </div> </a>
+                    <a href="#doppelzimmer" class="nav-tile"> <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop&crop=focalpoint" alt="Modernes Hotelzimmer" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Doppelzimmer</span> <span class="nav-tile-subtitle">Gemütlichkeit</span> </div> </a>
+                    <a href="../arrangements.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Top Angebote Teaserbild" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Arrangements</span> <span class="nav-tile-subtitle">Unsere Pakete</span> </div> </a>
+                 </div>
+            </section>
+            <!-- Weitere Sektionen wie Geniessen, Entspannen, Freizeit können hier analog zur index.html eingefügt werden -->
+        </div>
+        <div class="fullscreen-nav-footer">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="../kontakt-anreise.html">Kontakt & Anreise</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="#" id="cookie-settings-trigger-nav">Cookie-Einstellungen</a></li>
+                </ul>
+            </div>
+            <div class="social-media-nav">
+                <a href="https://facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                <a href="https://instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+            </div>
+        </div>
+    </nav>
+
     <main id="main-content" role="main">
         <section class="page-hero-section" aria-labelledby="page-hero-heading-zimmer">
-            <!-- TYPO3 Hinweis: Bildquelle und Alt-Text im CMS editierbar machen. Width/height für CLS! -->
-            <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Gemütliches Hotelzimmer mit Bergblick" class="page-hero-image" width="1600" height="600" loading="eager">
+            <!-- TYPO3: Bildquelle und Alt-Text editierbar machen -->
+            <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Stilvolles Hotelzimmer mit Bergblick im Hotel Sonne Post" class="page-hero-image" width="1920" height="800" loading="eager">
             <div class="page-hero-overlay"></div>
             <div class="page-hero-content container">
                 <h1 id="page-hero-heading-zimmer" class="page-hero-title">Unsere Zimmer & Suiten</h1>
-                <p class="page-hero-subtitle">Finden Sie Ihr persönliches Refugium für unvergessliche Tage im Herzen des Schwarzwalds.</p>
+                <p class="page-hero-subtitle">Finden Sie Ihr persönliches Refugium im Herzen des Schwarzwalds. Gemütlichkeit, Komfort und ein Hauch von Luxus erwarten Sie.</p>
             </div>
         </section>
 
-        <section class="room-overview-section" aria-labelledby="room-overview-main-heading">
+        <section class="room-overview-section">
             <div class="container">
-                <!-- Die h1 ist jetzt im Hero. Diese Überschrift ist optional oder kann eine h2 sein. -->
-                <!-- <h2 id="room-overview-main-heading" class="page-main-heading">Wohlfühlen & Träumen</h2> -->
-                <p class="section-intro-text">
-                    Jedes unserer Zimmer ist mit Liebe zum Detail eingerichtet und bietet Ihnen modernen Komfort in behaglicher Atmosphäre. Ob gemütliches Einzelzimmer, großzügiges Doppelzimmer oder luxuriöse Suite – bei uns finden Sie den idealen Rückzugsort nach einem erlebnisreichen Tag.
-                </p>
+                <!-- TYPO3 Hinweis: Diese Sektion kann dynamisch mit Zimmerkategorien und Zimmern gefüllt werden. -->
 
-                <!-- TYPO3 Hinweis: Zimmer-Grid. Jede Karte kann ein Inhaltselement oder Datensatz sein. -->
-                <div class="room-grid">
-                    <article class="room-card gsap-fade-in" aria-labelledby="room-title-suite-bergblick">
-                        <a href="zimmer-detail/suite-bergblick.html" class="room-card-image-link" aria-label="Details zur Suite Bergblick anzeigen">
-                            <!-- TYPO3 Hinweis: width/height für Bilder wichtig! -->
-                            <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Suite Bergblick mit großem Fenster" width="400" height="250">
-                        </a>
-                        <div class="room-card-content">
-                            <h3 id="room-title-suite-bergblick"><a href="zimmer-detail/suite-bergblick.html">Suite Bergblick</a></h3>
-                            <p>Genießen Sie puren Luxus und einen atemberaubenden Ausblick in unserer geräumigen Suite Bergblick. Perfekt für besondere Anlässe.</p>
-                            <a href="zimmer-detail/suite-bergblick.html" class="btn btn-outline">Details & Preise</a>
-                        </div>
-                    </article>
+                <!-- Kategorie: Suiten -->
+                <article class="room-category" id="suiten" aria-labelledby="category-title-suiten">
+                    <header class="room-category-header">
+                        <h2 id="category-title-suiten" class="room-category-title">Suiten</h2>
+                        <p class="room-category-subtitle">Großzügigkeit und exklusiver Komfort für höchste Ansprüche.</p>
+                    </header>
+                    <div class="room-card-grid">
+                        <!-- TYPO3: Wiederholbares Element für jedes Zimmer in dieser Kategorie -->
+                        <article class="room-card" aria-labelledby="room-title-suite-bergblick">
+                            <a href="./zimmer-detail/suite-bergblick.html" class="room-card-image-link" aria-label="Details zur Suite Bergblick">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Suite Bergblick mit komfortablem Wohnbereich" class="room-card-image" width="400" height="240">
+                            </a>
+                            <div class="room-card-content">
+                                <h3 id="room-title-suite-bergblick" class="room-card-title">Suite Bergblick</h3>
+                                <p class="room-card-description">Genießen Sie puren Luxus mit separatem Wohn- und Schlafbereich und einem atemberaubenden Blick auf die Berge.</p>
+                                <ul class="room-card-features">
+                                    <li><iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> ca. 55 m²</li>
+                                    <li><iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> 2-4 Personen</li>
+                                    <li><iconify-icon icon="feather:sun" aria-hidden="true"></iconify-icon> Balkon mit Bergsicht</li>
+                                </ul>
+                                <div class="room-card-actions">
+                                    <a href="./zimmer-detail/suite-bergblick.html" class="btn btn-outline"><iconify-icon icon="feather:eye" aria-hidden="true"></iconify-icon> Details</a>
+                                    <a href="../anfragen.html?zimmer=suite-bergblick" class="btn"><iconify-icon icon="feather:send" aria-hidden="true"></iconify-icon> Anfragen</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Weitere Zimmerkarten für Suiten hier -->
+                    </div>
+                </article>
 
-                    <article class="room-card gsap-fade-in" aria-labelledby="room-title-dz-komfort">
-                        <a href="zimmer-detail/doppelzimmer-komfort.html" class="room-card-image-link" aria-label="Details zum Doppelzimmer Komfort anzeigen">
-                            <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop" alt="Modern eingerichtetes Doppelzimmer Komfort" width="400" height="250">
-                        </a>
-                        <div class="room-card-content">
-                            <h3 id="room-title-dz-komfort"><a href="zimmer-detail/doppelzimmer-komfort.html">Doppelzimmer Komfort</a></h3>
-                            <p>Unsere Komfort-Doppelzimmer bieten viel Platz zum Entspannen und Wohlfühlen, ausgestattet mit allem, was Sie für einen angenehmen Aufenthalt benötigen.</p>
-                            <a href="zimmer-detail/doppelzimmer-komfort.html" class="btn btn-outline">Details & Preise</a>
-                        </div>
-                    </article>
+                <!-- Kategorie: Doppelzimmer -->
+                <article class="room-category" id="doppelzimmer" aria-labelledby="category-title-doppelzimmer">
+                    <header class="room-category-header">
+                        <h2 id="category-title-doppelzimmer" class="room-category-title">Doppelzimmer</h2>
+                        <p class="room-category-subtitle">Ihr gemütlicher Rückzugsort für erholsame Nächte.</p>
+                    </header>
+                    <div class="room-card-grid">
+                        <article class="room-card" aria-labelledby="room-title-dz-komfort">
+                             <a href="./zimmer-detail/doppelzimmer-komfort.html" class="room-card-image-link" aria-label="Details zum Doppelzimmer Komfort">
+                                <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Modernes Doppelzimmer Komfort" class="room-card-image" width="400" height="240">
+                            </a>
+                            <div class="room-card-content">
+                                <h3 id="room-title-dz-komfort" class="room-card-title">Doppelzimmer Komfort</h3>
+                                <p class="room-card-description">Unsere Komfort-Doppelzimmer bieten modernen Standard und eine behagliche Atmosphäre für Ihren Aufenthalt.</p>
+                                 <ul class="room-card-features">
+                                    <li><iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> ca. 28 m²</li>
+                                    <li><iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> 2 Personen</li>
+                                    <li><iconify-icon icon="feather:coffee" aria-hidden="true"></iconify-icon> Teilweise mit Balkon</li>
+                                </ul>
+                                <div class="room-card-actions">
+                                    <a href="./zimmer-detail/doppelzimmer-komfort.html" class="btn btn-outline"><iconify-icon icon="feather:eye" aria-hidden="true"></iconify-icon> Details</a>
+                                    <a href="../anfragen.html?zimmer=dz-komfort" class="btn"><iconify-icon icon="feather:send" aria-hidden="true"></iconify-icon> Anfragen</a>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="room-card" aria-labelledby="room-title-dz-standard">
+                             <a href="./zimmer-detail/doppelzimmer-standard.html" class="room-card-image-link" aria-label="Details zum Doppelzimmer Standard">
+                                <img src="https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Gemütliches Doppelzimmer Standard" class="room-card-image" width="400" height="240">
+                            </a>
+                            <div class="room-card-content">
+                                <h3 id="room-title-dz-standard" class="room-card-title">Doppelzimmer Standard</h3>
+                                <p class="room-card-description">Ideal für Paare oder Alleinreisende, die Wert auf Gemütlichkeit und eine funktionale Ausstattung legen.</p>
+                                 <ul class="room-card-features">
+                                    <li><iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> ca. 22 m²</li>
+                                    <li><iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> 1-2 Personen</li>
+                                </ul>
+                                <div class="room-card-actions">
+                                    <a href="./zimmer-detail/doppelzimmer-standard.html" class="btn btn-outline"><iconify-icon icon="feather:eye" aria-hidden="true"></iconify-icon> Details</a>
+                                    <a href="../anfragen.html?zimmer=dz-standard" class="btn"><iconify-icon icon="feather:send" aria-hidden="true"></iconify-icon> Anfragen</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Weitere Zimmerkarten für Doppelzimmer hier -->
+                    </div>
+                </article>
 
-                    <article class="room-card gsap-fade-in" aria-labelledby="room-title-ez-standard">
-                        <a href="zimmer-detail/einzelzimmer-standard.html" class="room-card-image-link" aria-label="Details zum Einzelzimmer Standard anzeigen">
-                             <img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop" alt="Gemütliches Einzelzimmer Standard" width="400" height="250">
-                        </a>
-                        <div class="room-card-content">
-                            <h3 id="room-title-ez-standard"><a href="zimmer-detail/einzelzimmer-standard.html">Einzelzimmer Standard</a></h3>
-                            <p>Ideal für Alleinreisende: Unsere Standard-Einzelzimmer sind gemütlich eingerichtet und bieten einen ruhigen Rückzugsort.</p>
-                            <a href="zimmer-detail/einzelzimmer-standard.html" class="btn btn-outline">Details & Preise</a>
-                        </div>
-                    </article>
-                    <!-- Weitere Zimmerkarten hier einfügen -->
-                </div>
-                 <div style="text-align:center; margin-top: 40px;">
-                    <a href="/anfragen" class="btn">Jetzt unverbindlich anfragen</a>
-                </div>
+                <!-- Weitere Zimmerkategorien (z.B. Einzelzimmer) können hier folgen -->
+
             </div>
         </section>
-        <!-- Weitere Sektionen für Zimmerübersicht oder spezielle Angebote können hier folgen -->
-
     </main>
 
     <footer class="site-footer" role="contentinfo" aria-labelledby="footer-heading">
@@ -277,41 +395,14 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script> <!-- ScrollTrigger für .gsap-fade-in -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script> <!-- ScrollTrigger hier benötigt für Header -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
 
-    <!-- Pfad zur globalen JS-Datei anpassen, falls nötig -->
+    <!-- Pfad zur globalen JS-Datei (angenommen, zimmer.html ist im Unterordner /sites/) -->
     <script src="../js/main.js" defer></script>
 
-    <!-- Spezifisches JS für diese Seite (falls benötigt, z.B. für Filter oder spezielle Zimmer-Animationen) -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Globale Skripte (Header-Scroll, Copyright etc.) werden von ../js/main.js gehandhabt.
-        // Die Fullscreen-Navigation wird nicht ausgelöst, da das <nav id="fullscreen-nav"> Element fehlt.
+    <!-- Kein spezifisches JS für diese Seite nötig, da alles von globalen Skripten oder CSS gehandhabt wird. -->
 
-        // GSAP Fade-In für Zimmerkarten (identisch zur Startseite, wird von main.js übernommen, wenn dort global definiert)
-        // Wenn .gsap-fade-in spezifisch hier anders animiert werden soll, dann hier definieren.
-        // Da es in main.js schon gibt, ist dieser Block hier optional oder für Anpassungen.
-        /*
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-            gsap.utils.toArray('.gsap-fade-in').forEach((el) => {
-                gsap.from(el, {
-                    opacity: 0,
-                    y: 40,
-                    duration: 0.8,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 90%",
-                        toggleActions: "play none none none",
-                        once: true
-                    }
-                });
-            });
-        }
-        */
-    });
-    </script>
 </body>
 </html>
