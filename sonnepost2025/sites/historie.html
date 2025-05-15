@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <!-- Pfad zur globalen CSS-Datei (angenommen, historie.html ist im Unterordner /sites/) -->
+    <!-- Pfad zur globalen CSS-Datei (angenommen, historie.html ist im Unterordner z.B. /sites/) -->
     <link rel="stylesheet" href="../css/main.css">
 
     <style>
@@ -21,109 +21,73 @@
         }
 
         /* Anpassung für den Header auf Unterseiten, der direkt sichtbar ist */
-        /* Die globalen Header-Stile aus main.css werden angewendet.
-           Diese Regeln hier überschreiben oder ergänzen sie für den Unterseiten-Kontext. */
         .site-header {
-            background-color: var(--color-header-bg-scrolled); /* Startet direkt mit gescrolltem Hintergrund */
+            background-color: var(--color-header-bg-scrolled);
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            background-image: none; /* Kein Gradient-Overlay auf Unterseiten-Header */
+            background-image: none;
         }
         .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
             color: var(--color-header-icon-scrolled);
         }
          .site-header .hamburger-icon span {
-            background: var(--color-header-icon-scrolled); /* Striche des Hamburger-Icons */
+            background: var(--color-header-icon-scrolled);
         }
-                .site-header .header-center .central-logo .logo-initial { display: none; } /* Initial-Logo (weiß) nicht zeigen */
-        .site-header .header-center .central-logo .logo-scrolled { display: block; opacity: 1; } /* Scrolled-Logo (rot) immer zeigen */
-        .site-header .header-right .contact-icon-btn iconify-icon { color: var(--color-header-contact-icon-scrolled); }
-
-        /* Optional: Menü-Button visuell deaktivieren, falls die JS-Logik ihn nicht schon ignoriert */
-        /*
-        .site-header .menu-trigger-wrapper {
-            cursor: default;
+        /* Logo-Steuerung für Unterseiten-Header: Rotes Logo immer sichtbar */
+        .site-header .header-center .central-logo .logo-initial {
+            display: block;
+            opacity: 0;
+            position: absolute; /* Verhindert, dass es Platz einnimmt */
+            pointer-events: none; /* Nicht klickbar */
         }
-        */
+        .site-header .header-center .central-logo .logo-scrolled {
+            display: block;
+            opacity: 1;
+            position: relative; /* Bleibt im normalen Fluss */
+        }
+        .site-header .header-right .contact-icon-btn iconify-icon {
+            color: var(--color-header-contact-icon-scrolled);
+        }
 
         /* === Stile für einfachen Page-Hero auf Unterseiten === */
         .page-hero-section {
-            position: relative;
-            width: 100%;
-            height: 40vh;
-            min-height: 300px;
-            max-height: 500px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--color-text-primary-on-dark);
+            position: relative; width: 100%; height: 40vh;
+            min-height: 300px; max-height: 500px; overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; color: var(--color-text-primary-on-dark);
             margin-top: var(--header-height);
         }
         .page-hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 1;
         }
         .page-hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.35);
-            z-index: 2;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.35); z-index: 2;
         }
-        .page-hero-content {
-            position: relative;
-            z-index: 3;
-            padding: 20px;
-        }
+        .page-hero-content { position: relative; z-index: 3; padding: 20px; }
         .page-hero-title {
-            font-family: var(--font-secondary);
-            font-size: clamp(2.2rem, 5vw, 3.2rem);
-            color: var(--color-white);
-            margin: 0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-family: var(--font-secondary); font-size: clamp(2.2rem, 5vw, 3.2rem);
+            color: var(--color-white); margin: 0; text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
         }
 
         /* === Timeline Sektion spezifische Stile === */
-        .timeline-section {
-            padding-top: 60px;
-            padding-bottom: 60px;
-        }
+        .timeline-section { padding-top: 60px; padding-bottom: 60px; }
         .timeline-section-heading {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            text-align: center;
-            color: var(--color-text-primary);
-            margin-bottom: 0.5em;
+            font-size: clamp(1.8rem, 4vw, 2.5rem); text-align: center;
+            color: var(--color-text-primary); margin-bottom: 0.5em;
         }
         .timeline-intro-text {
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-            font-size: 1rem;
-            color: var(--color-text-secondary);
+            text-align: center; max-width: 700px; margin: 0 auto 40px auto;
+            font-size: 1rem; color: var(--color-text-secondary);
         }
         .timeline-navigation-wrapper {
-            position: relative;
-            margin-top: 30px;
-            margin-bottom: 50px;
-            padding: 10px 0;
+            position: relative; margin-top: 30px; margin-bottom: 50px; padding: 10px 0;
         }
         .timeline-navigation {
-            display: flex;
-            overflow-x: auto;
-            padding-bottom: 15px;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
+            display: flex; overflow-x: auto; padding-bottom: 15px;
+            -webkit-overflow-scrolling: touch; scrollbar-width: thin;
             scrollbar-color: var(--color-border-subtle) transparent;
-            list-style: none;
-            justify-content: flex-start;
+            list-style: none; justify-content: flex-start;
         }
         @media (min-width: 992px) { .timeline-navigation { justify-content: center; } }
         .timeline-navigation::-webkit-scrollbar { height: 6px; }
@@ -147,7 +111,7 @@
             font-family: var(--font-secondary); font-size: clamp(3.5rem, 10vw, 5.5rem); font-weight: 400;
             color: var(--color-border-subtle); margin-bottom: 0.1em; line-height: 1;
         }
-        .timeline-item-title { /* Ist eine h3 in der Struktur */
+        .timeline-item-title {
             font-family: var(--font-primary); font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 700;
             color: var(--color-text-primary); margin-bottom: 0.7em;
         }
@@ -175,12 +139,6 @@
 
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
-    <!-- Header-Struktur bleibt erhalten für das Aussehen.
-         Der Menü-Button (#menu-trigger) wird von main.js gefunden.
-         Da aber das zugehörige <nav id="fullscreen-nav"> Element auf dieser Seite fehlt,
-         wird die openFullscreenNav() Funktion in main.js (oder Teile davon) nicht korrekt ausgeführt,
-         was den gewünschten Effekt hat (Button ist da, löst aber keine Navigation aus).
-    -->
     <header class="site-header" id="site-header" role="banner">
         <div class="header-content-wrapper">
             <div class="header-left">
@@ -192,22 +150,19 @@
                 </button>
             </div>
             <div class="header-center">
-                <!-- Pfad zur Startseite anpassen, falls historie.html in einem Unterverzeichnis liegt -->
+                <!-- Link zur Startseite, eine Ebene höher von /sites/historie.html -->
                 <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
                 </a>
             </div>
             <div class="header-right">
-                 <!-- Pfad zur Kontaktseite anpassen -->
                 <a href="../kontakt-anreise.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
                     <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
                 </a>
             </div>
         </div>
     </header>
-
-    <!-- Die Fullscreen-Navigation <nav id="fullscreen-nav">...</nav> wird hier NICHT eingefügt. -->
 
     <main id="main-content" role="main">
         <section class="page-hero-section" aria-labelledby="page-hero-heading-historie">
@@ -227,9 +182,7 @@
 
                 <div class="timeline-navigation-wrapper" role="tablist" aria-label="Jahresauswahl der Hotelgeschichte">
                     <div class="static-year-indicator" id="static-year-indicator" aria-hidden="true"></div>
-                    <ul class="timeline-navigation" id="timeline-years-list">
-                        <!-- Jahreszahlen werden hier per JS eingefügt -->
-                    </ul>
+                    <ul class="timeline-navigation" id="timeline-years-list"></ul>
                 </div>
 
                 <div class="timeline-content-display" id="timeline-content-display" role="tabpanel" aria-live="polite">
@@ -286,14 +239,10 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
 
-    <!-- Pfad zur globalen JS-Datei anpassen, falls nötig -->
     <script src="../js/main.js" defer></script>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Globale Skripte (Header-Scroll, Copyright etc.) werden von ../js/main.js gehandhabt.
-        // Die Fullscreen-Navigation wird nicht ausgelöst, da das <nav id="fullscreen-nav"> Element fehlt.
-
         const timelineData = [
             { year: "1870", title: "Die Geschichte der Sonne-Post beginnt", description: "Die Geschichte der Sonne-Post beginnt schon im Jahre 1870, als Stefan Wehrle (1828-1913), der zuvor noch Glashofbauer, Uhrenhändler und Frachtfuhrmann gewesen war, das Gasthaus „Zur Sonne“ eröffnete. Gleichzeitig wurde die „Sonne“ Posthaltestation der Großherzoglich Badischen Post, was 100 Jahre später auch zum Namen Sonne-Post führen sollte. Neben der Gastwirtschaft betrieb Stefan Wehrle die Landwirtschaft weiter." },
             { year: "1903", title: "Neuer „Sonnenwirt“ und Posthalter", description: "Der jüngste Sohn Stefan (1878-1916) übernahm 1903 das Gasthaus und wurde somit neuer „Sonnenwirt“ und Posthalter. Als Stefan Wehrle im Ersten Weltkrieg an seinen Kriegsverletzungen gestorben war, regierte seine Witwe Berta Wehrle (1880-1952) weitere 22 Jahre als Sonnenwirtin und Posthalterin. In dieser Zeit begründete sie auch die Fremdenpension." },
@@ -333,9 +282,7 @@
         let currentYearIndex = 0;
 
         function displayYearData(index, direction = 'none') {
-            if (!timelineData || timelineData.length === 0 || index < 0 || index >= timelineData.length) {
-                return;
-            }
+            if (!timelineData || timelineData.length === 0 || index < 0 || index >= timelineData.length) { return; }
             currentYearIndex = index;
             const data = timelineData[index];
             const tl = gsap.timeline();
@@ -344,8 +291,7 @@
             tl.to(timelineContentPlaceholder, {
                 opacity: 0,
                 y: direction === 'next' ? -slideYOffset : (direction === 'prev' ? slideYOffset : 0),
-                duration: 0.3,
-                ease: "power2.in",
+                duration: 0.3, ease: "power2.in",
                 onComplete: () => {
                     if (displayedYearText) displayedYearText.textContent = data.year;
                     if (timelineItemTitleText) timelineItemTitleText.textContent = data.title;
@@ -366,9 +312,7 @@
                 yearButtons.forEach((btn, i) => {
                     btn.classList.toggle('active', i === index);
                     btn.setAttribute('aria-selected', (i === index).toString());
-                    if (i === index) {
-                        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }
+                    if (i === index) { btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
                 });
             }
             if (prevButton) prevButton.disabled = index === 0;
