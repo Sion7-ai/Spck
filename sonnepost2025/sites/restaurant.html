@@ -89,43 +89,61 @@
             z-index: 1;
         }
 
-        .kulinarik-section .container {
+                .kulinarik-section .container {
             position: relative;
             z-index: 2;
             display: grid;
             grid-template-columns: 1fr; /* Standard: eine Spalte */
             align-items: center;
             gap: 40px;
+            width: 100%; /* Stellt sicher, dass der Container die volle Breite der Sektion nutzt */
         }
 
         @media (min-width: 992px) { /* Desktop: Zweispaltig */
-            .kulinarik-section .container.layout-image-left { grid-template-columns: 1.2fr 0.8fr; } /* Bild links breiter */
-            .kulinarik-section .container.layout-image-right { grid-template-columns: 0.8fr 1.2fr; } /* Bild rechts breiter */
-            .kulinarik-section .container.layout-image-right .kulinarik-text-content { grid-column: 1; grid-row: 1; } /* Text links anordnen */
-            .kulinarik-section .container.layout-image-right .kulinarik-image-content { grid-column: 2; grid-row: 1; } /* Bild rechts anordnen */
+            .kulinarik-section .container.layout-image-left {
+                grid-template-columns: 1.2fr 0.8fr; /* Bild (wenn als Element vorhanden) links breiter, Text rechts */
+                /* Wenn das Bild als Sektionshintergrund dient und nur Text da ist, ist dies weniger relevant */
+            }
+            .kulinarik-section .container.layout-image-right {
+                grid-template-columns: 0.8fr 1.2fr; /* Text links, Bild (wenn als Element vorhanden) rechts breiter */
+            }
+            /* Diese expliziten Grid-Column/Row-Zuweisungen sind nur nötig, wenn du tatsächlich
+               zwei sichtbare Elemente im Grid hast (z.B. ein Textblock und ein Bildblock).
+               Wenn das Bild nur der Hintergrund der gesamten Sektion ist und der Textblock
+               das einzige Element im Grid ist, sind diese nicht erforderlich. */
+            .kulinarik-section .container.layout-image-right .kulinarik-text-content { grid-column: 1; grid-row: 1; }
+            .kulinarik-section .container.layout-image-right .kulinarik-image-content { grid-column: 2; grid-row: 1; }
         }
 
-        .kulinarik-background-image { /* Container für das Hintergrundbild einer Sektion */
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: 0;
+        /* Anpassungen für .kulinarik-text-content, um ihn innerhalb der Sektion zu zentrieren,
+           besonders wenn er das einzige Element im Grid der Sektion ist. */
+        .kulinarik-text-content {
+            text-align: center; /* Zentriert den Text innerhalb dieses Blocks */
+            width: 100%; /* Nimmt die volle Breite der Grid-Zelle ein */
+            /* Wenn der .container selbst kein display:flex/grid mit justify-content:center hat
+               und .kulinarik-text-content nicht die volle Breite einnimmt, dann:
+               margin-left: auto;
+               margin-right: auto;
+               max-width: 700px; /* Beispiel für maximale Textbreite */
+            */
         }
+
 
         .kulinarik-text-content h1, .kulinarik-text-content h2 {
             font-size: clamp(2.2rem, 5vw, 3.5rem);
             margin-bottom: 0.5em;
-            color: inherit; /* Erbt Farbe von .text-on-image oder Standard */
+            color: inherit;
+            /* text-align: center; ist jetzt vom Parent geerbt oder kann hier explizit gesetzt werden */
         }
-        .kulinarik-text-content h2.subtitle { /* Für kleinere Zwischentitel */
+        .kulinarik-text-content h2.subtitle {
             font-size: clamp(1.5rem, 3vw, 2rem);
-            font-weight: 400; /* Leichter */
-            color: var(--color-bordeaux); /* Akzentfarbe für Subtitel auf hellem Grund */
+            font-weight: 400;
+            color: var(--color-bordeaux);
             margin-bottom: 1em;
+            /* text-align: center; ist jetzt vom Parent geerbt */
         }
         .kulinarik-section.text-on-image .kulinarik-text-content h2.subtitle {
-            color: var(--text-on-dark-bg); /* Heller auf dunklem Bild */
+            color: var(--text-on-dark-bg);
             opacity: 0.9;
         }
 
@@ -134,6 +152,41 @@
             line-height: 1.7;
             margin-bottom: 1.5em;
             max-width: 600px; /* Begrenzt Textbreite für Lesbarkeit */
+            margin-left: auto; /* Zentriert den Paragraphenblock, wenn max-width gesetzt ist */
+            margin-right: auto; /* Zentriert den Paragraphenblock */
+            /* text-align: center; ist jetzt vom Parent geerbt */
+        }
+        .kulinarik-section.text-on-image .kulinarik-text-content p {
+            color: inherit;
+        }
+        .kulinarik-text-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5em;
+            /* text-align: center; wird geerbt, ggf. für Listenitems anpassen, wenn sie linksbündig sein sollen */
+        }
+        .kulinarik-text-content ul li {
+            margin-bottom: 0.5em;
+            font-size: 1rem;
+            /* Wenn Listenpunkte linksbündig innerhalb des zentrierten Blocks sein sollen:
+               display: inline-block; text-align: left; oder den ul-Container schmaler machen.
+               Für dieses Beispiel bleiben sie zentriert.
+            */
+        }
+        .kulinarik-text-content ul li strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.2em;
+            color: var(--color-bordeaux);
+        }
+        .kulinarik-section.text-on-image .kulinarik-text-content ul li strong {
+            color: var(--text-on-dark-bg);
+        }
+
+        /* Stellt sicher, dass der CTA-Button-Container zentriert ist, wenn der Text-Content zentriert ist */
+        .kulinarik-cta {
+            text-align: center; /* Ist schon auf .kulinarik-text-content, aber zur Sicherheit */
+            margin-top: 2em;
         }
         .kulinarik-section.text-on-image .kulinarik-text-content p {
             color: inherit; /* Erbt von .text-on-image */
@@ -288,7 +341,7 @@
         <section class="kulinarik-section text-on-image" aria-labelledby="kueche-heading">
             <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');"></div>
             <div class="container layout-image-left"> <!-- Text rechts, Bild (imaginär) links -->
-                 <div class="kulinarik-text-content" style="text-align: right;"> <!-- Text rechtsbündig für diese Anordnung -->
+                 <div class="kulinarik-text-content">
                     <h2 id="kueche-heading">Ein Blick in unsere Küche</h2>
                     <p>Kommen Sie mit und erfahren Sie mehr über unsere Philosophie und die frischen, regionalen Zutaten, die unsere Gerichte so besonders machen.</p>
                     <!-- Hier könnte noch mehr Text oder ein Link zu einer Detailseite stehen -->
