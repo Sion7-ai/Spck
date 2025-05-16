@@ -556,6 +556,12 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
     font-size: 1.3em;
     transform: rotate(90deg);
 }
+.footer-column address, /* Zielgerichtet für die Adresse in der Spalte */
+address { /* Oder allgemeiner für alle Adress-Tags, falls gewünscht */
+    font-style: normal; /* Entfernt die Standard-Kursivstellung */
+    /* Du kannst hier weitere Adress-spezifische Stile hinzufügen,
+       z.B. Zeilenhöhe oder Abstände, falls nötig. */
+}
 body.fullscreen-nav-open .sticky-buttons-right-wrapper { display: none; }
 
 /* === TYPO3 Hinweis: Popup Stile === */
