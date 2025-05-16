@@ -20,72 +20,74 @@
             /* Standard-Hintergrund wird von main.css oder einer spezifischen Sektion gesetzt */
         }
 
-        /* Header-Verhalten wird von main.css und main.js gesteuert (transparent über Hero, dann weiß) */
-
         /* === Stile für Kulinarik Sektionen (Hero-ähnlich mit Bild) === */
-        .kulinarik-section {
-            min-height: 80vh; /* Höhe anpassbar */
-            padding: 0; /* Kein Padding, da der Inhalt es steuert und der Header darüber liegt */
+        .kulinarik-section { /* Allgemeine Basis für alle Kulinarik-Sektionen */
+            padding: 0; /* Kein Padding direkt auf der Sektion, wird im Container gehandhabt */
             display: flex;
-            align-items: center; /* Vertikale Zentrierung des .container */
-            justify-content: center; /* Horizontale Zentrierung des .container */
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
-            color: var(--text-on-dark-bg); /* Standard Textfarbe für diese Sektionen */
         }
 
-        .kulinarik-section::before { /* Overlay für Hintergrundbild */
+        /* Spezifisch für Sektionen MIT Hintergrundbild und hellem Text darauf */
+        .kulinarik-section.has-bg-image {
+            min-height: 80vh; /* Höhe der Bild-Sektionen */
+            color: var(--text-on-dark-bg, #F7F2EC); /* Heller Text, Fallback falls Variable nicht da */
+        }
+        .kulinarik-section.has-bg-image::before { /* Overlay NUR für Sektionen mit dieser Klasse */
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: var(--dark-overlay-bg, rgba(20, 20, 20, 0.65)); /* Fallback, falls Variable nicht definiert */
-            z-index: 1;
+            background-color: var(--dark-overlay-bg, rgba(20, 20, 20, 0.65)); /* Dunkles Overlay */
+            z-index: 1; /* Liegt über dem Hintergrundbild, aber unter dem Inhalt */
         }
 
-        .kulinarik-background-image {
+        .kulinarik-background-image { /* Das eigentliche Hintergrundbild */
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            z-index: 0; /* Liegt hinter dem Overlay und dem Inhalt */
+            z-index: 0; /* Liegt hinter allem anderen in der Sektion */
         }
 
-        .kulinarik-section .container { /* Der Container für den Textinhalt */
+        .kulinarik-section .container { /* Container für den Inhalt (Textblock) */
             position: relative;
             z-index: 2; /* Über dem Overlay und Hintergrundbild */
-            text-align: center; /* Zentriert allen Inline-Inhalt */
-            padding-top: calc(var(--header-height) + 40px); /* Platz für den fixen Header + etwas Abstand */
-            padding-bottom: 40px;
-            max-width: 750px; /* Begrenzt die Breite des Textinhalts für bessere Lesbarkeit */
+            text-align: center; /* Zentriert den Inline-Inhalt (Text, Buttons) */
+            padding-top: calc(var(--header-height) + 60px); /* Platz für den fixen Header + extra Abstand */
+            padding-bottom: 60px; /* Abstand unten */
+            padding-left: 20px; /* Seitliches Padding */
+            padding-right: 20px;
+            width: 100%;
+            max-width: 750px; /* Maximale Breite des Textblocks für bessere Lesbarkeit */
+            margin-left: auto; /* Zentriert den Container selbst, wenn er schmaler ist als die Sektion */
+            margin-right: auto;
         }
 
-        /* Kein Grid-Layout mehr im .container hier, da wir nur einen Textblock haben, der zentriert wird.
-           Die layout-image-left/right Klassen sind für diese Implementierung nicht mehr nötig,
-           da das Bild immer den gesamten Hintergrund der Sektion einnimmt. */
-
-        .kulinarik-text-content h1, .kulinarik-text-content h2 {
-            font-size: clamp(2.4rem, 5.5vw, 3.8rem); /* Größer für Haupttitel */
+        .kulinarik-text-content h1,
+        .kulinarik-text-content h2 {
+            font-size: clamp(2.4rem, 5.5vw, 3.8rem);
             margin-bottom: 0.4em;
-            color: inherit; /* Erbt von .kulinarik-section */
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Leichter Schatten für Lesbarkeit */
+            color: inherit; /* Erbt die helle Textfarbe von .kulinarik-section.has-bg-image */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Leichter Schatten für Lesbarkeit auf Bild */
         }
         .kulinarik-text-content h2.subtitle {
-            font-size: clamp(1.5rem, 3.5vw, 2.2rem); /* Etwas größerer Subtitel */
-            font-weight: 400;
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 400; /* Leichter als Hauptüberschrift */
             opacity: 0.9;
             margin-bottom: 1em;
-            color: inherit; /* Erbt von .kulinarik-section */
+            color: inherit;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
         }
 
         .kulinarik-text-content p {
-            font-size: 1.1rem; /* Etwas größerer Fließtext */
+            font-size: 1.1rem;
             line-height: 1.75;
             margin-bottom: 1.5em;
-            color: inherit; /* Erbt von .kulinarik-section */
-            /* max-width ist jetzt auf dem .container */
+            color: inherit;
         }
-        .kulinarik-text-content ul {
+        .kulinarik-text-content ul { /* Für die Liste der Öffnungszeiten (falls im Textblock) */
             list-style: none;
             padding-left: 0;
             margin-bottom: 1.5em;
@@ -100,49 +102,48 @@
             display: block;
             font-weight: 600;
             margin-bottom: 0.2em;
-            color: inherit; /* Erbt und ist hell */
+            color: inherit;
         }
 
-        .kulinarik-cta {
+        .kulinarik-cta { /* Container für Call-to-Action Buttons */
             margin-top: 1.5em;
         }
-        .kulinarik-cta .btn { /* Button-Stil ggf. anpassen, .btn-outline-light ist schon definiert */
-            padding: 0.9em 2em; /* Etwas größeres Padding für den Button */
-            font-size: 1rem;
-        }
+        /* .btn-outline-light ist bereits in main.css definiert (oder sollte dort sein) für helle Buttons auf dunklem Grund */
 
-        /* Spezifische Section für Öffnungszeiten mit hellem Hintergrund */
+
+        /* === Spezifische Section für Öffnungszeiten mit hellem Hintergrund === */
         .kulinarik-section-oeffnungszeiten {
-            background-color: var(--color-beige); /* Heller Hintergrund für Kontrast */
-            padding-top: 80px;
+            background-color: var(--color-beige);
+            padding-top: 80px; /* Oberer/unterer Abstand für diese Sektion */
             padding-bottom: 80px;
-            min-height: auto; /* Keine Mindesthöhe hier */
-            color: var(--color-text-primary); /* Dunkler Text auf hellem Grund */
+            min-height: auto; /* Diese Sektion braucht keine Mindesthöhe */
+            color: var(--color-text-primary); /* Standard dunkler Text auf hellem Grund */
         }
         .kulinarik-section-oeffnungszeiten .container {
-            max-width: 850px;
-            text-align: left; /* Text in dieser Sektion standardmäßig linksbündig */
+            max-width: 850px; /* Etwas breiterer Container für die tabellarische Darstellung */
+            text-align: left; /* Standard Textausrichtung für diese Sektion linksbündig */
         }
-         .kulinarik-section-oeffnungszeiten h2 { /* Die Hauptüberschrift der Öffnungszeiten-Sektion */
+         .kulinarik-section-oeffnungszeiten h2 { /* Die Hauptüberschrift "Unsere Restaurant- & Küchenzeiten" */
             text-align: center; /* Diese spezielle Überschrift zentrieren */
             font-size: clamp(1.8rem, 4vw, 2.5rem);
-            color: var(--color-bordeaux);
+            color: var(--color-bordeaux); /* Bordeaux für die Überschrift */
             margin-bottom: 1.5em;
+            text-shadow: none; /* Kein Textschatten hier */
         }
         .oeffnungszeiten-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr; /* Einspaltig auf Mobilgeräten */
             gap: 30px;
             font-size: 0.95rem;
         }
-        @media (min-width: 768px) {
+        @media (min-width: 768px) { /* Mehrspaltig auf größeren Bildschirmen */
             .oeffnungszeiten-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible Spaltenanzahl */
                 gap: 40px;
             }
         }
-        .oeffnungszeiten-block h3 {
-            font-family: var(--font-primary);
+        .oeffnungszeiten-block h3 { /* Titel für jeden Block (z.B. "Öffnungszeiten Restaurant") */
+            font-family: var(--font-primary); /* Fließtext-Schrift für diese untergeordneten Titel */
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--color-text-primary);
@@ -152,18 +153,18 @@
         }
         .oeffnungszeiten-block ul { list-style: none; padding-left: 0; }
         .oeffnungszeiten-block li { margin-bottom: 0.6em; }
-        .oeffnungszeiten-block li strong { font-weight: 600; color: var(--color-text-primary); }
+        .oeffnungszeiten-block li strong { font-weight: 600; color: var(--color-text-primary); } /* Tage fett */
 
-        .kulinarik-section-oeffnungszeiten .kulinarik-text-content { /* Für den Text unter den Öffnungszeiten */
+        .kulinarik-section-oeffnungszeiten .kulinarik-text-content { /* Für den Text unterhalb der Öffnungszeiten-Grid */
             text-align:center; /* Diesen spezifischen Textblock zentrieren */
             margin-top: 40px;
             color: var(--color-text-secondary);
         }
-        .kulinarik-section-oeffnungszeiten .kulinarik-text-content p a {
-            color: var(--color-bordeaux); /* Telefonnummer hervorheben */
+         .kulinarik-section-oeffnungszeiten .kulinarik-text-content p a {
+            color: var(--color-bordeaux); /* Telefonnummer Link hervorheben */
         }
 
-        .footer-column h4 { /* Aus globalem CSS übernommen */
+        .footer-column h4 { /* Stellt sicher, dass Footer-Überschriften korrekt gestylt sind */
              font-family: var(--font-primary); font-weight: 700; font-size: 1rem;
              margin-bottom: 15px; color: var(--color-text-primary);
         }
@@ -220,11 +221,10 @@
                     <a href="../hotel/ueber-uns.html" class="nav-section-viewall">Mehr erfahren</a>
                 </div>
                 <div class="horizontal-scroll-container">
-                    <a href="../hotel/ueber-uns.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Team/220925_Hotel_Sonne-Post_MA_CorinaBeha_300dpi_11.jpg" alt="Gastgeber" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Ihre Gastgeber</span> <span class="nav-tile-subtitle">Herzlich & Familiär</span> </div> </a>
-                    <a href="./historie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Unsere Geschichte" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Unsere Geschichte</span> <span class="nav-tile-subtitle">Seit 1870</span> </div> </a>
+                    <a href="../hotel/ueber-uns.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Team/220925_Hotel_Sonne-Post_MA_CorinaBeha_300dpi_11.jpg" alt="Gastgeber" class="tile-bg" width="300" height="380" loading="lazy"> <div class="nav-tile-content"> <span class="nav-tile-title">Ihre Gastgeber</span> <span class="nav-tile-subtitle">Herzlich & Familiär</span> </div> </a>
+                    <a href="./historie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Unsere Geschichte" class="tile-bg" width="300" height="380" loading="lazy"> <div class="nav-tile-content"> <span class="nav-tile-title">Unsere Geschichte</span> <span class="nav-tile-subtitle">Seit 1870</span> </div> </a>
                 </div>
             </section>
-            <!-- Weitere Nav-Sektionen hier einfügen, falls benötigt -->
         </div>
         <div class="fullscreen-nav-footer">
             <div class="footer-links">
@@ -236,7 +236,7 @@
     </nav>
 
     <main id="main-content" role="main">
-        <section class="kulinarik-section" aria-labelledby="kulinarik-intro-heading">
+        <section class="kulinarik-section has-bg-image" aria-labelledby="kulinarik-intro-heading">
             <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');"></div>
             <div class="container">
                 <div class="kulinarik-text-content">
@@ -285,14 +285,14 @@
                         </ul>
                     </div>
                 </div>
-                <div class="kulinarik-text-content"> <!-- Wiederverwendung der Klasse für den Textblock hier -->
+                <div class="kulinarik-text-content">
                     <p>Montags ist unser à la carte Restaurant geschlossen. Für unsere Hotelgäste bieten wir am Montagabend die Halbpension mit Wahl zwischen Fleischmenü oder vegetarischem Menü zur festen Tischzeit um 18:30 Uhr an.</p>
                     <p>Ihre Tischreservierung nehmen wir gerne telefonisch unter der Telefonnummer <a href="tel:+49766991020">+49 (0) 7669 91020</a> entgegen.</p>
                 </div>
             </div>
         </section>
 
-        <section class="kulinarik-section" aria-labelledby="kueche-heading">
+        <section class="kulinarik-section has-bg-image" aria-labelledby="kueche-heading">
             <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');"></div>
             <div class="container">
                  <div class="kulinarik-text-content">
@@ -344,20 +344,16 @@
     <script src="../js/main.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Globale Logik (Header, Fullscreen Nav, Copyright) wird von ../js/main.js gehandhabt.
-
-            // Optionale GSAP Animationen für Textblöcke beim Scrollen
             if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                // ScrollTrigger ist bereits in main.js registriert.
-                gsap.utils.toArray('.kulinarik-text-content').forEach((el) => {
+                gsap.utils.toArray('.kulinarik-section.has-bg-image .kulinarik-text-content').forEach((el) => {
                     gsap.from(el, {
                         opacity: 0,
-                        y: 50, // Kommt von unten
+                        y: 50,
                         duration: 0.8,
                         ease: "power2.out",
                         scrollTrigger: {
-                            trigger: el.closest('.kulinarik-section'), // Trigger ist die gesamte Sektion
-                            start: "top 75%", // Startet, wenn 75% der Sektion im Viewport sind
+                            trigger: el.closest('.kulinarik-section'),
+                            start: "top 75%",
                             toggleActions: "play none none none",
                             once: true
                         }
