@@ -322,6 +322,70 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
     grid-template-columns: 1fr; /* Mobile: untereinander */
     gap: 40px;
 }
+/* === TYPO3 Hinweis: Stile für die kombinierte Karriere & CTA Sektion - Variante 1 === */
+
+/* Grundlegende Stile für die Spalten, die für beide Varianten gelten (oder schon existieren) */
+.combined-column {
+    padding: 30px; /* Innenabstand für den Inhalt der Spalten */
+    border-radius: 6px; /* Abgerundete Ecken für beide Spalten */
+    display: flex; /* Ermöglicht dem inneren div zu wachsen */
+    flex-direction: column;
+}
+.combined-column > div { /* Der direkte Kind-Div mit dem eigentlichen Inhalt */
+    flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Zentriert Inhalt vertikal, wenn Spalten gestreckt sind */
+}
+.combined-column.text-center .btn-container,
+.combined-column.text-center .newsletter-form-container {
+    margin-top: auto; /* Schiebt Button/Formular nach unten bei text-center */
+}
+
+
+/* Spezifische Stile für die "Karriere"-Spalte (linke Spalte) */
+.combined-column-karriere {
+    background-color: var(--color-sand); /* Standardhintergrund der Sektion, kann auch transparent sein, wenn .bg-sand-combined auf der Sektion bleibt */
+    /* Wenn die Sektion selbst .bg-sand-combined ist, ist diese Zeile optional,
+       es sei denn, du willst sicherstellen, dass es Sand ist, auch wenn die Sektion eine andere Farbe hat. */
+}
+/* Textfarben für die Karriere-Spalte (sollten bereits durch globale Stile passen, aber zur Sicherheit) */
+.combined-column-karriere h2 {
+    color: var(--color-text-primary);
+}
+.combined-column-karriere p {
+    color: var(--color-text-secondary);
+}
+
+
+/* Spezifische Stile für die "Newsletter"-Spalte (rechte Spalte) */
+.combined-column-newsletter {
+    background-color: var(--color-white); /* Weißer Hintergrund */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07); /* Leichter Schatten für den 3D-Effekt */
+}
+/* Textfarben für die Newsletter-Spalte auf weißem Hintergrund */
+.combined-column-newsletter h2 {
+    color: var(--color-text-primary);
+}
+.combined-column-newsletter p {
+    color: var(--color-text-secondary);
+}
+/* Spezifische Anpassung für den Datenschutzlink im Newsletter-Bereich auf weißem Grund */
+.combined-column-newsletter #newsletter-privacy-info-combined a {
+    color: var(--color-text-secondary); /* Oder var(--color-bordeaux) für mehr Hervorhebung */
+}
+.combined-column-newsletter .form-newsletter input[type="email"] {
+    /* Stellt sicher, dass der Input-Hintergrund auf weißem Grund auch weiß ist, falls global anders gesetzt */
+    background-color: var(--color-white);
+}
+
+/* Anpassung für Grid-Abstand, falls die Spalten sich berühren und Padding Probleme macht */
+@media (min-width: 992px) {
+    .combined-row-grid {
+        /* align-items: stretch; */ /* Stellt sicher, dass Spalten die gleiche Höhe einnehmen, falls sie unterschiedliche Inhaltshöhen haben.
+                                      Dies ist wichtig, wenn eine Spalte einen Hintergrund hat. Ist bereits in der Demo-CSS gesetzt. */
+    }
+}
 @media (min-width: 992px) {
     .combined-row-grid {
         grid-template-columns: 1fr 1fr; /* Zwei gleich breite Spalten */
