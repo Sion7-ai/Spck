@@ -141,10 +141,31 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
     display: flex; justify-content: space-around; padding: 20px;
     border-bottom: 1px solid var(--color-border-subtle); flex-shrink: 0;
 }
-.fullscreen-nav-quicklinks .quicklink-item { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; color: var(--color-text-secondary); text-decoration: none; text-align: center; flex-basis: 20%; }
-.fullscreen-nav-quicklinks .quicklink-item iconify-icon { font-size: 1.8rem; margin-bottom: 5px; color: var(--color-text-primary); transition: color 0.2s ease; }
+.fullscreen-nav-quicklinks .quicklink-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--color-bordeaux);
+    text-decoration: none;
+    text-align: center;
+    flex-basis: 20%;
+    transition: opacity 0.2s ease;
+}
+.fullscreen-nav-quicklinks .quicklink-item:hover {
+    opacity: 0.8;
+}
+
+.fullscreen-nav-quicklinks .quicklink-item iconify-icon {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: var(--color-bordeaux);
+}
+
 .fullscreen-nav-quicklinks .quicklink-item:hover iconify-icon,
-.fullscreen-nav-quicklinks .quicklink-item:hover span { color: var(--color-bordeaux); }
+.fullscreen-nav-quicklinks .quicklink-item:hover span {
+    color: var(--color-bordeaux);
+}
 .fullscreen-nav-main { padding: 30px 0; flex-grow: 1; width: 100%; }
 .nav-section { margin-bottom: 40px; padding: 0 20px; }
 .nav-section-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; }
