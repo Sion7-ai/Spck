@@ -7,7 +7,7 @@
 
             /* Textfarben */
             --color-text-primary: #333333; /* Haupttextfarbe auf hellem Grund */
-            --color-text-primary-on-dark: #FFFFFF; /* Textfarbe auf dunklem Grund (z.B. Hero, Buttons) */
+            --color-text-primary-on-dark: #FFFFFF; /* Textfearbe auf dunklem Grund (z.B. Hero, Buttons) */
             --color-text-secondary: #525252; /* Sekundärtext (Grau, z.B. im Footer) */
             --color-border-subtle: #E0D8CE; /* Feine Linien, Bordüren, Trenner */
 
@@ -297,8 +297,8 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
     font-size: clamp(2.8rem, 5.25vw, 4.8rem); /* Responsive Schriftgröße, ggf. anpassen */
     font-weight: 700; /* Oder 600, je nach gewünschter Stärke */
     color: var(--color-text-primary-on-dark); /* Weißer Text */
-    text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.65), /* Stärkerer Schatten für große Schrift */
-                 0px 0px 15px rgba(0, 0, 0, 0.4);
+    text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.9), 
+                 0px 0px 15px rgba(0, 0, 0, 0.6);
     margin-bottom: 0.4em; /* Abstand zur ersten Subline */
     padding: 5px 10px; /* Kleines Padding, falls gewünscht, oder 0 */
     background: none; /* Sicherstellen, dass kein Hintergrund da ist */
@@ -312,8 +312,8 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
     font-size: clamp(1.1rem, 2.8vw, 1.3rem); /* Responsive Schriftgröße für Sublines */
     font-weight: 400; /* Normale Schriftstärke */
     color: var(--color-text-primary-on-dark); /* Weißer Text */
-    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.7), /* Subtilerer Schatten */
-                 0px 0px 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.9), 
+                 0px 0px 8px rgba(0, 0, 0, 0.6);
     line-height: 1.5;
     max-width: 650px; /* Begrenzt die Breite der Sublines für bessere Lesbarkeit */
     margin-left: auto;
