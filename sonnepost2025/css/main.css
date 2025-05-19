@@ -294,7 +294,7 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
 
 .hero-content h1 {
     font-family: var(--font-secondary); /* Schriftart für die Hauptüberschrift */
-    font-size: clamp(2.8rem, 5vw, 4.8rem); /* Responsive Schriftgröße, ggf. anpassen */
+    font-size: clamp(2.8rem, 5vw, 4rem); /* Responsive Schriftgröße, ggf. anpassen */
     font-weight: 700; /* Oder 600, je nach gewünschter Stärke */
     color: var(--color-text-primary-on-dark); /* Weißer Text */
     text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.9), 
