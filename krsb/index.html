@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krematorium Südbaden - Würdevolle Begleitung</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- GSAP & ScrollTrigger CDN (cdnjs ist eine gute Alternative) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- SplitText ist entfernt, da es ein Premium-Plugin ist -->
+
+    <!-- Iconify CDN -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <style>
+        :root {
+            --color-background: #F3ECD9;
+            --color-background-alt: #FFFFFF; /* Für kontrastierende Sektionen */
+            --color-primary-accent: #B08E37;
+            --color-text: #191919;
+            --color-text-light: #5c5c5c; /* Für weniger wichtigen Text */
+            --color-button-text: #FFFFFF;
+            --color-button-bg: var(--color-primary-accent);
+            --color-button-hover-bg: #9c7d2e; /* Dunkleres Gold */
+            --color-border: rgba(25, 25, 25, 0.15);
+
+            --font-headline: 'Spectral', serif;
+            --font-body: 'Barlow', sans-serif;
+
+            --container-padding: 0 5%;
+            --section-padding: 5rem 0; /* Vertikales Padding für Sektionen */
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px; /* Basis-Schriftgröße */
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background-color: var(--color-background);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px; /* Maximale Breite des Inhalts */
+            margin-left: auto;
+            margin-right: auto;
+            padding: var(--container-padding);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-headline);
+            color: var(--color-text); /* Standardmäßig dunkler Text für Headlines */
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); } /* Große Hero-Headline */
+        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 2rem; }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem; }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--color-text-light);
+            font-weight: 300;
+        }
+        p.lead {
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--color-text);
+        }
+
+        a {
+            color: var(--color-primary-accent);
+            text-decoration: none;
+        }
+
+        hr.styled-hr {
+            border: 0;
+            height: 1px;
+            background: var(--color-border);
+            margin: 2.5rem 0;
+        }
+
+        /* --- Header (ähnlich Q Psychology) --- */
+        #main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%; /* Angepasst, um container-padding zu nutzen */
+            background-color: rgba(243, 236, 217, 0.9); /* Leichter Blur-Effekt wenn gescrollt */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        #main-header.scrolled {
+            background-color: rgba(243, 236, 217, 0.95);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.07);
+            backdrop-filter: blur(10px);
+        }
+        #main-header .logo { height: 40px; }
+        #main-header nav { display: flex; gap: 2rem; }
+        #main-header nav a {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--color-text);
+            padding-bottom: 0.25rem;
+            position: relative;
+        }
+        #main-header nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1.5px;
+            background-color: var(--color-primary-accent);
+            transition: width 0.3s ease;
+        }
+        #main-header nav a:hover::after, #main-header nav a.active::after { width: 100%; }
+
+        .cta-button {
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 0.9rem;
+            background-color: var(--color-button-bg);
+            color: var(--color-button-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px; /* Rund wie Q Psychology */
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .cta-button .iconify { font-size: 1.2em; transition: transform 0.3s ease; }
+        .cta-button:hover {
+            background-color: var(--color-button-hover-bg);
+            transform: translateY(-2px);
+        }
+        .cta-button:hover .iconify { transform: translateX(3px); }
+
+        .cta-button.secondary { /* Für Buttons mit Rahmen */
+            background-color: transparent;
+            color: var(--color-primary-accent);
+            border: 1.5px solid var(--color-primary-accent);
+        }
+        .cta-button.secondary:hover {
+            background-color: var(--color-primary-accent);
+            color: var(--color-button-text);
+        }
+         .cta-button.secondary:hover .iconify {
+            color: var(--color-button-text);
+        }
+
+
+        /* --- Hero Section (Layout inspiriert von Q Psychology) --- */
+        .hero-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 8rem; /* Platz für Header */
+            padding-bottom: 4rem;
+            background: url('https://krematorium-suedbaden.de/files/krema-suedbaden/images/header/Headerbild-Krematorium-Suedbaden-1.jpg') no-repeat center center/cover;
+        }
+        .hero-section::before { /* Dunkles Overlay für bessere Lesbarkeit */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(25, 25, 25, 0.3);
+            z-index: 1;
+        }
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            align-items: flex-end; /* Text rechts unten von Headline */
+        }
+         @media (min-width: 768px) {
+            .hero-content-wrapper {
+                grid-template-columns: 3fr 2fr; /* Headline nimmt mehr Platz ein */
+                gap: 4rem;
+            }
+        }
+
+        .hero-headline {
+            font-family: var(--font-headline);
+            font-weight: 500; /* Etwas leichter als Standard */
+            color: var(--color-background-alt); /* Weißer Text */
+            line-height: 1.1;
+        }
+         .hero-headline .hero-line { /* Für Zeilen-Animation ohne SplitText */
+            display: block; /* Jede Zeile ist ein Block */
+            overflow: hidden; /* Versteckt den Inhalt vor der Animation */
+        }
+        .hero-headline .hero-line-content {
+            display: block; /* Notwendig für yPercent Transform */
+            transform: translateY(100%); /* Startposition außerhalb des Sichtfelds */
+            opacity: 0; /* Start unsichtbar */
+        }
+
+
+        .hero-text-column p {
+            color: rgba(243, 236, 217, 0.9); /* Helles Beige, fast weiß */
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .hero-text-column .cta-button {
+            background-color: rgba(243, 236, 217, 0.2); /* Semi-transparenter Button */
+            border: 1px solid rgba(243, 236, 217, 0.7);
+            color: var(--color-background-alt);
+        }
+         .hero-text-column .cta-button:hover {
+            background-color: rgba(243, 236, 217, 0.4);
+        }
+
+
+        .scroll-to-explore {
+            position: absolute;
+            bottom: 2rem;
+            left: 5%; /* Angepasst, um container-padding zu nutzen */
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-background-alt);
+            font-size: 0.85rem;
+            opacity: 0; /* Wird per JS animiert */
+        }
+        .scroll-to-explore .iconify { font-size: 1.8em; }
+
+
+        /* --- Standard Content Sektionen --- */
+        .content-section {
+            padding: var(--section-padding);
+            position: relative;
+        }
+        .content-section.alt-bg {
+            background-color: var(--color-background-alt);
+        }
+
+        .two-column-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        @media (min-width: 768px) {
+            .two-column-layout {
+                grid-template-columns: 1fr 1fr;
+                gap: 5rem;
+            }
+            .two-column-layout.image-left .image-wrapper { order: -1; }
+        }
+        .two-column-layout .image-wrapper {
+            border-radius: 12px; /* Abgerundete Ecken wie Q Psychology */
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .two-column-layout .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .two-column-layout .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+        .two-column-layout h2, .two-column-layout h3 {
+            margin-top: 0; /* Reset, falls erster Textblock */
+            color: var(--color-text); /* Dunkle Headline */
+        }
+
+        /* --- Interaktive Service Liste (inspiriert von Q Psychology) --- */
+        .interactive-services-section {
+            padding: var(--section-padding);
+        }
+        .interactive-services-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+         @media (min-width: 992px) { /* Ab Desktop */
+            .interactive-services-wrapper {
+                grid-template-columns: 1fr 1fr; /* Oder 2fr 3fr etc. */
+                gap: 4rem;
+            }
+        }
+
+        .service-list-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        .service-list-nav li a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+            font-family: var(--font-headline);
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--color-text-light);
+            transition: color 0.3s ease;
+        }
+        .service-list-nav li:first-child a { border-top: 1px solid var(--color-border); }
+        .service-list-nav li a .iconify {
+            font-size: 1.5em;
+            color: var(--color-text-light);
+            opacity: 0.5;
+            transform: translateX(0);
+            transition: opacity 0.3s ease, transform 0.3s ease, color 0.3s ease;
+        }
+        .service-list-nav li a:hover,
+        .service-list-nav li a.active {
+            color: var(--color-text);
+        }
+        .service-list-nav li a:hover .iconify,
+        .service-list-nav li a.active .iconify {
+            opacity: 1;
+            transform: translateX(5px);
+            color: var(--color-primary-accent);
+        }
+
+        .service-content-display {
+            min-height: 300px; /* Damit es nicht springt */
+            background-color: var(--color-background-alt); /* Hintergrund für den Inhaltsbereich */
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            position: sticky; /* Bleibt beim Scrollen sichtbar, falls Liste länger */
+            top: 100px; /* Abstand vom Header */
+        }
+        .service-content-item {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute; /* Damit sie sich überlagern und nicht den Fluss stören */
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .service-content-item.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative; /* Zurück in den normalen Fluss, wenn aktiv */
+        }
+        .service-content-item h3 {
+            color: var(--color-primary-accent);
+            margin-bottom: 1rem;
+        }
+        .service-content-item img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #2a2a2a; /* Dunkler Footer */
+            color: #b0b0b0; /* Helle Textfarbe */
+            padding: 4rem 5% 2rem; /* padding anstatt container-padding */
+            font-size: 0.9rem;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto; /* Zentriert den Grid-Container */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #404040;
+        }
+        .footer-column h4 {
+            font-family: var(--font-body); /* Barlow für Footer-Überschriften */
+            font-weight: 600;
+            color: #e0e0e0; /* Etwas heller */
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .footer-column p, .footer-column address {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        .footer-column a {
+            color: #b0b0b0;
+            transition: color 0.3s ease;
+        }
+        .footer-column a:hover { color: var(--color-background-alt); }
+        .footer-column .logo-footer { max-width: 180px; opacity: 0.8; margin-top: 1rem; }
+        .copyright {
+             max-width: 1200px;
+             margin: 0 auto; /* Zentriert den Copyright-Text */
+             text-align: center;
+             font-size: 0.85rem;
+             color: #777;
+        }
+
+
+        /* --- GSAP Animation Helpers --- */
+        .g-initial-hidden, .g-fade-in, .g-slide-up { opacity: 0; } /* Initial unsichtbar machen */
+
+    </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <a href="#">
+            <img src="https://krematorium-suedbaden.de/files/krema-suedbaden/images/logo-inverse.png" alt="Krematorium Südbaden Logo" class="logo">
+        </a>
+        <nav class="g-initial-hidden">
+            <a href="#ueber-uns">Über uns</a>
+            <a href="#leistungen">Leistungen</a>
+            <a href="#hausfuehrung">Hausführung</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+        <a href="tel:07634550910" class="cta-button g-initial-hidden">
+            Direkt anrufen <span class="iconify" data-icon="mdi:arrow-right"></span>
+        </a>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container hero-content-wrapper">
+                <div class="hero-headline-column">
+                    <h1 class="hero-headline">
+                        <span class="hero-line"><span class="hero-line-content">Würdevolle</span></span>
+                        <span class="hero-line"><span class="hero-line-content">Begleitung in</span></span>
+                        <span class="hero-line"><span class="hero-line-content">Südbaden.</span></span>
+                    </h1>
+                </div>
+                <div class="hero-text-column g-initial-hidden">
+                    <p>Ihr Zentrum für Feuerbestattungen. Wir schaffen einen Ort des Respekts und der persönlichen Abschiednahme.</p>
+                    <a href="#leistungen" class="cta-button">
+                        Unsere Leistungen entdecken <span class="iconify" data-icon="mdi:arrow-right"></span>
+                    </a>
+                </div>
+            </div>
+            <a href="#ueber-uns" class="scroll-to-explore g-initial-hidden">
+                <span class="iconify" data-icon="mdi:arrow-down-thin-circle-outline"></span>
+                Scrollen zum Entdecken
+            </a>
+        </section>
+
+        <section id="ueber-uns" class="content-section">
+            <div class="container">
+                <div class="two-column-layout">
+                    <div class="text-content">
+                        <h2 class="g-slide-up">Ein Ort des Respekts und der Ruhe</h2>
+                        <p class="lead g-slide-up">Das Krematorium Südbaden in Eschbach ist mehr als nur ein Ort für Einäscherungen. Wir verstehen uns als Begleiter in schweren Zeiten und bieten Raum für individuelle Abschiedsrituale.</p>
+                        <p class="g-slide-up">Für diesen bewussten Weg haben wir unser Haus mit einer hellen, freundlichen Atmosphäre und modernen Räumlichkeiten für Trauerfeiern ausgestattet. So geben wir Ihnen Zeit und Raum für eine persönliche Verabschiedung.</p>
+                        <a href="#kontakt" class="cta-button secondary g-slide-up">
+                            Mehr über uns <span class="iconify" data-icon="mdi:arrow-right"></span>
+                        </a>
+                    </div>
+                    <div class="image-wrapper g-fade-in">
+                        <img src="https://images.pexels.com/photos/3801468/pexels-photo-3801468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Ruhige Atmosphäre im Krematorium">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="leistungen" class="content-section alt-bg interactive-services-section">
+            <div class="container">
+                <h2 class="g-slide-up" style="text-align: left; margin-bottom: 3rem;">Unsere Angebote für Sie</h2>
+                <div class="interactive-services-wrapper">
+                    <nav class="service-list-nav">
+                        <ul>
+                            <li class="g-slide-up"><a href="#" data-service="hinterbliebene" class="active">
+                                Ein Herz für Hinterbliebene <span class="iconify" data-icon="mdi:arrow-right"></span>
+                            </a></li>
+                            <li class="g-slide-up"><a href="#" data-service="trauerhalle">
+                                Trauerhalle & Café <span class="iconify" data-icon="mdi:arrow-right"></span>
+                            </a></li>
+                            <li class="g-slide-up"><a href="#" data-service="partner">
+                                Bestattungspartner <span class="iconify" data-icon="mdi:arrow-right"></span>
+                            </a></li>
+                             <li class="g-slide-up"><a href="#" data-service="fuehrungen">
+                                Hausführungen <span class="iconify" data-icon="mdi:arrow-right"></span>
+                            </a></li>
+                        </ul>
+                    </nav>
+                    <div class="service-content-display g-fade-in">
+                        <div id="service-hinterbliebene" class="service-content-item active">
+                            <img src="https://images.pexels.com/photos/4491478/pexels-photo-4491478.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Hinterbliebene">
+                            <h3>Ein Herz für Hinterbliebene</h3>
+                            <p>Wir nehmen Verstorbene mit vollem Respekt in unsere Obhut und geben Ihnen die Möglichkeit, sich in angenehmer Atmosphäre zu verabschieden. Regionale Verbundenheit und Würde stehen im Mittelpunkt.</p>
+                        </div>
+                        <div id="service-trauerhalle" class="service-content-item">
+                             <img src="https://images.pexels.com/photos/7524831/pexels-photo-7524831.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Trauerhalle">
+                            <h3>Trauerhalle & Trauercafé</h3>
+                            <p>Unsere ansprechenden Räumlichkeiten, einschließlich einer modernen Trauerhalle und eines ruhigen Trauercafés, bieten den idealen Rahmen für einen bewussten und persönlichen Abschied.</p>
+                        </div>
+                        <div id="service-partner" class="service-content-item">
+                            <img src="https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Partner">
+                            <h3>Unsere Partner</h3>
+                            <p>Wir arbeiten eng mit erstklassigen Bestattungsunternehmen in der Region Baden zusammen. Ihr Bestatter wird alle Details rund um die Einäscherung und Abschiednahme in Ihrem Sinne mit uns arrangieren.</p>
+                        </div>
+                         <div id="service-fuehrungen" class="service-content-item">
+                            <img src="https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1" alt="Hausführung">
+                            <h3>Transparenz durch Hausführungen</h3>
+                            <p>Offenheit ist uns wichtig. Gerne laden wir Sie ein, unser Haus, die technischen Anlagen und die Möglichkeiten der Abschiednahme kennenzulernen. Bitte vereinbaren Sie telefonisch einen Termin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hausfuehrung" class="content-section">
+            <div class="container">
+                 <div class="two-column-layout image-left">
+                    <div class="text-content">
+                        <h2 class="g-slide-up">Offenheit und Transparenz</h2>
+                        <p class="lead g-slide-up">Wir legen Wert darauf, dass Sie sich bei uns gut aufgehoben fühlen. Unsicherheit schafft oft Ängste, daher laden wir Sie herzlich ein, unser Krematorium persönlich kennenzulernen.</p>
+                        <p class="g-slide-up">Bei einer Hausführung zeigen wir Ihnen unsere Räumlichkeiten, die technischen Anlagen und erläutern die Abläufe. Für individuelle Fragen und Auskünfte stehen wir Ihnen gerne zur Verfügung. Kontaktieren Sie uns für eine Terminvereinbarung.</p>
+                        <p class="g-slide-up"><strong>Telefon: 07634 / 55091 - 0</strong> (Mo-Fr, 8:30 - 16:00 Uhr)</p>
+                    </div>
+                    <div class="image-wrapper g-fade-in">
+                        <img src="https://images.pexels.com/photos/267507/pexels-photo-267507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Moderne Architektur Krematorium">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="kontakt">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h4>Krematorium Südbaden GmbH</h4>
+                <address>
+                    Im Stühlinger 12<br>
+                    D-79252 Eschbach
+                </address>
+                <p>
+                    Tel: <a href="tel:07634550910">07634 / 55091 - 0</a><br>
+                    Fax: 07634 / 55091 - 20
+                </p>
+                <p>
+                    <a href="mailto:info@krematorium-suedbaden.de">info@krematorium-suedbaden.de</a>
+                </p>
+            </div>
+            <div class="footer-column">
+                <h4>Navigation</h4>
+                <a href="#ueber-uns">Über uns</a><br>
+                <a href="#leistungen">Leistungen</a><br>
+                <a href="#hausfuehrung">Hausführung</a><br>
+                <a href="#">FAQ (bald)</a>
+            </div>
+            <div class="footer-column">
+                <h4>Rechtliches</h4>
+                <a href="#">Impressum</a><br>
+                <a href="#">Datenschutz</a><br>
+                <a href="#">Bestatter Login</a>
+            </div>
+            <div class="footer-column">
+                <h4>Ihr Partner</h4>
+                <p>Vertrauen und Respekt sind die Grundpfeiler unserer Arbeit.</p>
+                <img src="https://krematorium-suedbaden.de/files/krema-suedbaden/images/logo-krema-suedbaden.png" alt="Krematorium Südbaden Logo Groß" class="logo-footer">
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; <span id="current-year"></span> Krematorium Südbaden GmbH. Alle Rechte vorbehalten. Design inspiriert und modern umgesetzt.
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        gsap.registerPlugin(ScrollTrigger); // Nur ScrollTrigger wird benötigt
+
+        // Update Copyright Year
+        const currentYearEl = document.getElementById('current-year');
+        if (currentYearEl) {
+            currentYearEl.textContent = new Date().getFullYear();
+        }
+
+        // --- Header Scroll-Effekt ---
+        const header = document.getElementById('main-header');
+        ScrollTrigger.create({
+            trigger: "body",
+            start: "top top-=50",
+            onEnter: () => header.classList.add('scrolled'),
+            onLeaveBack: () => header.classList.remove('scrolled'),
+        });
+        
+        // --- Header Elemente Einblenden ---
+        gsap.fromTo("#main-header nav, #main-header .cta-button",
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, delay: 0.2, ease: "power2.out"}
+        );
+
+
+        // --- Hero Headline Animation (ohne SplitText) ---
+        const heroLines = document.querySelectorAll('.hero-headline .hero-line-content');
+        if (heroLines.length > 0) {
+            gsap.to(heroLines, {
+                duration: 1,
+                delay: 0.5, // Start nach Header-Animation
+                y: "0%", // Von translateY(100%) zu translateY(0%)
+                opacity: 1,
+                ease: "power3.out",
+                stagger: 0.15,
+            });
+        }
+
+        // --- Hero Text und Scroll-Indikator Animation ---
+        gsap.fromTo(".hero-text-column",
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.8, delay: 1.2, ease: "power2.out" }
+        );
+
+        gsap.to(".scroll-to-explore", {
+            opacity: 1,
+            y: 0, 
+            duration: 0.8,
+            delay: 1.5, 
+            ease: "sine.inOut"
+        });
+        gsap.to(".scroll-to-explore .iconify", {
+            y: 5,
+            repeat: -1,
+            yoyo: true,
+            duration: 1,
+            ease: "sine.inOut",
+            delay: 2 // Startet, nachdem der Text erschienen ist
+        });
+
+
+        // --- Allgemeine Scroll-Animationen für Sektionen/Elemente ---
+        gsap.utils.toArray('.g-fade-in').forEach(el => {
+            gsap.fromTo(el, { opacity: 0, y: 20 }, {
+                opacity: 1, y: 0, duration: 0.8, ease: 'power2.out',
+                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' }
+            });
+        });
+        gsap.utils.toArray('.g-slide-up').forEach(el => {
+            gsap.fromTo(el, { opacity: 0, y: 50 }, {
+                opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+                scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' }
+            });
+        });
+
+
+        // --- Interaktive Service Liste ---
+        const serviceLinks = document.querySelectorAll('.service-list-nav a');
+        const serviceContents = document.querySelectorAll('.service-content-item');
+        const serviceContentDisplay = document.querySelector('.service-content-display');
+
+
+        function showServiceContent(serviceId) {
+            let foundActive = false;
+            serviceContents.forEach(content => {
+                if (content.id === 'service-' + serviceId) {
+                    gsap.to(content, { opacity: 1, visibility: 'visible', duration: 0.4, onStart: () => content.classList.add('active') });
+                    foundActive = true;
+                } else {
+                    gsap.to(content, { opacity: 0, visibility: 'hidden', duration: 0.2, onComplete: () => content.classList.remove('active') });
+                }
+            });
+             // Fallback, falls kein passender Inhalt gefunden wird (sollte nicht passieren bei korrekten data-Attributen)
+            if (!foundActive && serviceContents.length > 0) {
+                gsap.to(serviceContents[0], { opacity: 1, visibility: 'visible', duration: 0.4, onStart: () => serviceContents[0].classList.add('active') });
+            }
+        }
+
+        serviceLinks.forEach(link => {
+            link.addEventListener('mouseenter', function(e) {
+                e.preventDefault();
+                
+                serviceLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                const serviceId = this.dataset.service;
+                showServiceContent(serviceId);
+            });
+        });
+
+        // Initial den ersten Inhalt anzeigen und aktiv setzen
+        if (serviceLinks.length > 0 && serviceContents.length > 0) {
+            const firstServiceId = serviceLinks[0].dataset.service;
+            const firstContent = document.getElementById('service-' + firstServiceId);
+            
+            serviceLinks[0].classList.add('active');
+            if (firstContent) {
+                firstContent.classList.add('active'); // Klasse setzen für CSS
+                gsap.set(firstContent, { opacity: 1, visibility: 'visible' }); // Sofort sichtbar machen
+            }
+        }
+    });
+    </script>
+</body>
+</html>
