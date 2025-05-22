@@ -109,7 +109,7 @@
         /* Header */
         .main-header {
             background-color: transparent;
-            padding: 1.5rem 0;
+            padding: 1.5rem 0; /* Initiales Padding für größeres Logo */
             position: fixed;
             top: 0;
             left: 0;
@@ -121,8 +121,7 @@
         .main-header.scrolled {
             background-color: var(--color-bg-light);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-bottom: 1px solid #ddd;
-            padding: 0.75rem 0;
+            padding: 0.75rem 0; /* Weniger Padding beim Scrollen */
         }
         .main-header .container-header {
             display: flex;
@@ -132,26 +131,40 @@
             max-width: var(--container-width);
             margin: 0 auto;
         }
+
+        /* Container für die Logos */
         .logo-header {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
+            display: block;
             position: relative;
-            height: 70px;
+            height: 70px;     /* INITIALE HÖHE DES LOGO-BEREICHS */
             transition: height var(--transition-short);
+            flex-shrink: 0;
         }
+        .main-header.scrolled .logo-header {
+            height: 50px;     /* KLEINERE HÖHE BEIM SCROLLEN */
+        }
+
+        /* Styling für BEIDE Logo-Versionen */
         .logo-version {
+            display: block;
             height: 100%;
             width: auto;
-            transition: opacity var(--transition-short);
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 50%; /* Zentriert das Logo vertikal im Container */
             left: 0;
+            transform: translateY(-50%); /* Exakte vertikale Zentrierung */
+            opacity: 0; /* Standardmäßig BEIDE unsichtbar */
+            transition: opacity var(--transition-short);
         }
-        #headerLogoTransparent { opacity: 1; }
-        #headerLogoSolid { opacity: 0; } /* Start with solid logo hidden */
+        /* Spezifische Sichtbarkeit für die Logos */
+        .main-header:not(.scrolled) #headerLogoTransparent {
+            opacity: 1; /* Transparentes Logo sichtbar, wenn Header NICHT gescrollt */
+        }
+        .main-header.scrolled #headerLogoSolid {
+            opacity: 1; /* Solides Logo sichtbar, wenn Header gescrollt */
+        }
 
+        /* Button-Styling im Header */
         .initial-hero-btn {
             background-color: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.7);
@@ -164,27 +177,20 @@
         .menu-toggle-btn.initial-hero-btn .iconify {
              color: var(--color-white);
         }
-
-        .main-header.scrolled #headerLogoTransparent { opacity: 0; }
-        .main-header.scrolled #headerLogoSolid { opacity: 1; }
-        .main-header.scrolled .logo-header {
-             height: 50px;
-        }
-        .main-header.scrolled .initial-hero-btn {
+        .main-header.scrolled .initial-hero-btn { /* Buttons im gescrollten Header */
             background-color: var(--color-accent-primary);
             border-color: var(--color-accent-primary);
             color: var(--color-white);
         }
         .main-header.scrolled .menu-toggle-btn.initial-hero-btn .iconify {
-             color: var(--color-white);
+             color: var(--color-white); /* Icon bleibt weiß, da Button Akzentfarbe hat */
         }
          .main-header.scrolled .initial-hero-btn:hover {
             background-color: var(--color-text-dark);
             border-color: var(--color-text-dark);
          }
-
         .header-actions { display: flex; align-items: center; gap: 1rem; }
-        .menu-toggle-btn {
+        .menu-toggle-btn { /* Basis-Stil für Toggle-Buttons */
             background-color: var(--color-accent-primary);
             color: var(--color-white);
             border: none;
@@ -210,7 +216,6 @@
             height: 100%;
             background-color: var(--color-bg-light);
             z-index: 999;
-            padding-top: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -226,11 +231,12 @@
             transform: translateY(0);
         }
         .mobile-menu-overlay .menu-header {
-            position: absolute;
+            position: fixed; /* Fixed, damit es oben bleibt, auch wenn Menü scrollt (falls lang) */
             top: 0;
             left: 0;
             width: 100%;
-            padding: 1.5rem 5%;
+            padding: 1rem 5%; /* Konsistentes Padding */
+            box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -239,9 +245,12 @@
             letter-spacing: 0.1em;
             font-size: 0.9rem;
             color: var(--color-text-medium);
-            box-sizing: border-box;
+            /* Hintergrund, damit es über den Links liegt, falls die Scrollen */
+            background-color: var(--color-bg-light); 
+            border-bottom: 1px solid #ddd; /* Leichte Trennlinie */
+
         }
-        .mobile-menu-overlay .menu-header .menu-toggle-btn { /* Der explizite Schließen-Button im Menü */
+        .mobile-menu-overlay .menu-header .menu-toggle-btn {
             background-color: var(--color-text-dark);
         }
         .mobile-menu-overlay .menu-header .menu-toggle-btn:hover {
@@ -252,9 +261,12 @@
         }
         .mobile-menu-overlay nav {
              width: 100%;
-             margin-top: 4rem;
+             padding-top: 100px; /* Platz für den fixierten Menü-Header + Puffer */
+             text-align: center;
+             overflow-y: auto; /* Falls Menü länger als Bildschirm */
+             flex-grow: 1; /* Nimmt verfügbaren Platz ein */
         }
-        .mobile-menu-overlay nav ul { list-style: none; text-align: center; }
+        .mobile-menu-overlay nav ul { list-style: none; text-align: center; padding-bottom: 1rem; }
         .mobile-menu-overlay nav li a {
             font-family: var(--font-heading);
             font-size: clamp(1.8rem, 5vw, 2.5rem);
@@ -265,7 +277,7 @@
             transition: color var(--transition-speed);
         }
         .mobile-menu-overlay nav li a:hover { color: var(--color-accent-primary); }
-        .mobile-menu-buttons { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; width: 80%; max-width: 300px;}
+        .mobile-menu-buttons { margin-top: auto; /* Buttons nach unten schieben */ padding: 2rem 0; display: flex; flex-direction: column; gap: 1rem; width: 80%; max-width: 300px;}
         .mobile-menu-buttons .btn { width: 100%; text-align: center;}
 
 
@@ -281,7 +293,7 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            padding-top: 120px;
+            padding-top: 120px; /* Platz für transparenten Header, ca. Logo-Höhe + Padding */
         }
         .hero-subtitle {
             font-family: var(--font-body);
@@ -445,7 +457,7 @@
 
         /* Instagram Promo Section */
         .instagram-promo-section {
-            background-color: var(--color-bg-light); /* Passt sich dem hellen Stil an */
+            background-color: var(--color-bg-light);
             padding: 5rem 0;
         }
         .instagram-promo-content {
@@ -462,7 +474,7 @@
             font-size: 1.05rem;
         }
         .instagram-text .btn .iconify {
-            vertical-align: -0.15em; /* Bessere Ausrichtung des Icons im Button */
+            vertical-align: -0.15em;
             font-size: 1.2em;
             margin-right: 0.5em;
         }
@@ -545,6 +557,7 @@
             .main-header.scrolled .logo-header { height: 40px; }
             .header-actions .btn-accent { display: none; }
             .mobile-menu-overlay .menu-header { padding: 1rem 5%; }
+            .mobile-menu-overlay nav { padding-top: 80px; /* Fester Wert für Mobil, anpassen falls Header-Höhe stark variiert */ }
             .image-text-grid { grid-template-columns: 1fr; }
             .image-text-grid img.order-last-mobile { order: 1; margin-top: 2rem; }
             .gallery-thumbnails img { width: 80px; height: 60px; }
@@ -664,10 +677,10 @@
                 </div>
 
                 <div class="gallery-thumbnails reveal-on-scroll" data-delay="100">
-                    <img src="https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Badischer Spargel" data-title="Saisonale Highlights" class="active">
-                    <img src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Herzhaftes Fleischgericht" data-title="Unsere Klassiker">
-                    <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Süße Verführung" data-title="Süße Verführungen">
-                    <img src="https://images.pexels.com/photos/1639556/pexels-photo-1639556.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Burger vom BBQ" data-title="Smoke & Fire Specials">
+                    <img src="https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Badischer Spargel" data-title="Saisonale Highlights" class="active">
+                    <img src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Herzhaftes Fleischgericht" data-title="Unsere Klassiker">
+                    <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Süße Verführung" data-title="Süße Verführungen">
+                    <img src="https://images.pexels.com/photos/1639556/pexels-photo-1639556.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Burger vom BBQ" data-title="Smoke & Fire Specials">
                 </div>
                 <span class="iconify decorative-leaf" data-icon="mdi:leaf-maple"></span>
             </div>
@@ -774,13 +787,36 @@
     <script>
         // Sticky Header
         const header = document.getElementById('mainHeader');
+        let headerInitialHeight = 0; // Um die Höhe des Headers im Overlay Menü zu berechnen
+
+        function updateHeaderHeight() {
+            if(header) {
+                 headerInitialHeight = header.offsetHeight;
+                 // Dynamisches Padding für die Nav im mobilen Menü anpassen, wenn es offen ist
+                 const mobileMenuNav = mobileMenu.querySelector('nav');
+                 if (mobileMenu.classList.contains('active') && mobileMenuNav) {
+                    mobileMenuNav.style.paddingTop = (headerInitialHeight + 20) + 'px'; // + Puffer
+                 }
+                 const menuHeaderOverlay = mobileMenu.querySelector('.menu-header');
+                 if (mobileMenu.classList.contains('active') && menuHeaderOverlay) {
+                     menuHeaderOverlay.style.paddingTop = getComputedStyle(header).paddingTop;
+                     menuHeaderOverlay.style.paddingBottom = getComputedStyle(header).paddingBottom;
+                 }
+            }
+        }
+
+
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
+            if (header && window.scrollY > 50) {
                 header.classList.add('scrolled');
-            } else {
+            } else if (header) {
                 header.classList.remove('scrolled');
             }
+            updateHeaderHeight(); // Höhe bei Scroll-Events aktualisieren (für den Fall, dass Padding sich ändert)
         });
+         window.addEventListener('resize', updateHeaderHeight); // Höhe bei Resize aktualisieren
+         document.addEventListener('DOMContentLoaded', updateHeaderHeight); // Initiale Höhe setzen
+
 
         // Mobile Menu Toggle
         const menuToggleBtn = document.getElementById('menuToggle');
@@ -792,6 +828,7 @@
         const menuToggleIconClose = 'mdi:close';
 
         function openMenu() {
+            updateHeaderHeight(); // Stellt sicher, dass die Höhe aktuell ist, bevor das Menü geöffnet wird
             mobileMenu.classList.add('active');
             mainToggleIconElement.setAttribute('data-icon', menuToggleIconClose);
             menuToggleBtn.setAttribute('aria-label', 'Menü schließen');
@@ -832,29 +869,25 @@
                     galleryThumbnails.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                     
-                    galleryMainImage.classList.remove('active'); // For text fade
-                    // Update main image source, ensure to get a larger version if thumbnails are small
+                    galleryMainImage.classList.remove('active');
                     let largeImageSrc = this.src;
-                    if (this.src.includes('w=300')) { // Example check if it's a Pexels thumbnail
-                        largeImageSrc = this.src.replace('w=300','w=1260').replace('h=300','h=750');
-                    } else if (this.src.includes('fit=crop')) { // another pexels variant
-                         largeImageSrc = this.src.replace('&w=300&h=300&fit=crop','&w=1260&h=750');
+                    if (this.src.includes('w=300') && this.src.includes('h=300') && this.src.includes('fit=crop')) { // Pexels Thumbnail
+                        largeImageSrc = this.src.replace('&w=300','&w=1260').replace('&h=300','&h=750').replace('&fit=crop','');
+                    } else if (this.src.includes('w=300')) { // Andere Pexels Größe
+                         largeImageSrc = this.src.replace('w=300','w=1260');
                     }
-
                     galleryMainImage.style.backgroundImage = `url('${largeImageSrc}')`;
                     galleryOverlayText.textContent = this.dataset.title;
-                    setTimeout(() => galleryMainImage.classList.add('active'), 50); // Trigger text fade in
+                    setTimeout(() => galleryMainImage.classList.add('active'), 50);
                 });
             });
         }
-
 
         // Update current year in footer
         const currentYearEl = document.getElementById('currentYear');
         if (currentYearEl) {
             currentYearEl.textContent = new Date().getFullYear();
         }
-
 
         // Scroll Reveal Animation
         const revealElements = document.querySelectorAll('.reveal-on-scroll');
