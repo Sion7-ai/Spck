@@ -108,22 +108,23 @@
 
         /* Header */
         .main-header {
-            background-color: var(--color-bg-light); /* Oder transparent am Anfang, wird sticky */
-            padding: 1.5rem 0;
-            position: fixed; /* Fixed wie bei Linde */
+            background-color: var(--color-bg-light);
+            padding: 1rem 0; /* Angepasst für Logo-Höhe */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border-bottom: 1px solid transparent; /* Für sticky Effekt */
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, padding 0.3s ease-in-out;
+            border-bottom: 1px solid transparent;
         }
         .main-header.scrolled {
             background-color: var(--color-bg-light);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             border-bottom: 1px solid #ddd;
+            padding: 0.75rem 0; /* Weniger Padding im Scrolled-Zustand */
         }
-        .main-header .container-header { /* Eigener Container für Flex */
+        .main-header .container-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -132,20 +133,19 @@
             margin: 0 auto;
         }
         .logo-header {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--color-text-dark);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            letter-spacing: 0.05em;
+            text-decoration: none;
         }
-        .logo-header .iconify {
-            font-size: 1.8rem; /* Etwas kleiner */
-            margin-right: 0.6rem;
-            color: var(--color-accent-secondary); /* Schillinger Grün */
+        #headerLogo {
+            height: 50px;
+            width: auto;
+            transition: height 0.3s ease-in-out;
         }
+        .main-header.scrolled #headerLogo {
+            height: 40px;
+        }
+
         .header-actions { display: flex; align-items: center; gap: 1rem; }
         .menu-toggle-btn {
             background-color: var(--color-accent-primary);
@@ -189,9 +189,10 @@
         }
         .mobile-menu-overlay .menu-header {
             position: absolute;
-            top: 1.5rem;
+            top: 1.5rem; /* Wert basierend auf Header Padding anpassen */
             left: 5%; /* Match container */
-            width: 90%;
+            right: 5%; /* Match container */
+            /* width: 90%; Entfernt, da left/right gesetzt */
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -297,7 +298,6 @@
             width: 60px;
             height: 60px;
             color: var(--color-accent-secondary); /* Schillinger Grün */
-            /* background-image: url('path-to-schillinger-icon.svg'); SVG would be better */
         }
         .image-text-grid .text-content.text-center { text-align: center; }
 
@@ -368,7 +368,6 @@
             margin: 3rem auto;
             width: 40px;
             opacity: 0.5;
-            /* Use an SVG or a character like 🍂 */
         }
 
         /* Menu Links Section */
@@ -441,11 +440,13 @@
 
         @media (max-width: 768px) {
             .main-header { padding: 1rem 0; }
-            .logo-header { font-size: 1.3rem; }
-            .header-actions .btn { display: none; } /* Reservieren Button im Header auf Mobil ausblenden, ist im Menü */
+            #headerLogo { height: 40px; } /* Logo kleiner auf Mobil */
+            .main-header.scrolled #headerLogo { height: 35px; }
+            .header-actions .btn { display: none; }
             .image-text-grid { grid-template-columns: 1fr; }
             .image-text-grid img.order-last-mobile { order: 1; margin-top: 2rem; }
             .gallery-thumbnails img { width: 80px; height: 60px; }
+            .mobile-menu-overlay .menu-header { top: 1rem; } /* Anpassung an Header-Padding */
         }
 
     </style>
@@ -455,8 +456,7 @@
     <header class="main-header" id="mainHeader">
         <div class="container-header">
             <a href="#" class="logo-header">
-                <span class="iconify" data-icon="mdi:silverware-fork-knife"></span>
-                SCHILLINGER
+                <img src="https://sion7-ai.github.io/Spck/test/schillinger_logo.png" alt="Landgasthaus Schillinger Logo" id="headerLogo">
             </a>
             <div class="header-actions">
                 <a href="#reservierung-section" class="btn btn-accent">Reservieren</a>
@@ -470,7 +470,7 @@
     <div class="mobile-menu-overlay" id="mobileMenu">
         <div class="menu-header">
             <span>MENU</span>
-            <button class="menu-toggle-btn" id="menuClose" aria-label="Menü schließen">
+            <button class="menu-toggle-btn" id="menuClose" aria-label="Menü schließen" style="background-color: var(--color-text-dark);"> <!-- Abgehobener Schließen-Button -->
                 <span class="iconify" data-icon="mdi:close"></span>
             </button>
         </div>
@@ -510,7 +510,7 @@
             <div class="container">
                 <div class="image-text-grid">
                     <div class="text-content text-center reveal-on-scroll">
-                        <span class="iconify logo-icon-section" data-icon="mdi:chef-hat"></span> <!-- Placeholder Icon -->
+                        <span class="iconify logo-icon-section" data-icon="mdi:chef-hat"></span>
                         <h2>Ein Ort für Genießer und Freunde.</h2>
                         <p>Wir sind Gastgeber aus Überzeugung. Menschen, die an gutes Essen glauben und an das, was es auslösen kann. Wir servieren aufmerksam, persönlich und mit einem offenen Blick für das Wesentliche: Sie, unsere Gäste.</p>
                         <a href="#reservierung-section" class="btn">Tisch reservieren</a>
@@ -563,7 +563,7 @@
                     <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Süße Verführung" data-title="Süße Verführungen">
                     <img src="https://images.pexels.com/photos/1639556/pexels-photo-1639556.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Burger vom BBQ" data-title="Smoke & Fire Specials">
                 </div>
-                <span class="iconify decorative-leaf" data-icon="mdi:leaf-maple"></span> <!-- Placeholder Leaf -->
+                <span class="iconify decorative-leaf" data-icon="mdi:leaf-maple"></span>
             </div>
         </section>
 
@@ -573,7 +573,6 @@
                 <a href="#">Speisekarte</a>
                 <a href="#">Mittagskarte</a>
                 <a href="#">Getränkekarte</a>
-                <!-- <a href="#">Weinkarte</a> -->
             </div>
         </section>
         
@@ -640,7 +639,7 @@
                 </div>
             </div>
             <div class="footer-bottom reveal-on-scroll">
-                &copy; <span id="currentYear"></span> Landgasthaus Schillinger. Alle Rechte vorbehalten. Konzept & Design by EMOVIA.
+                © <span id="currentYear"></span> Landgasthaus Schillinger. Alle Rechte vorbehalten. Konzept & Design by EMOVIA.
             </div>
         </div>
     </footer>
@@ -665,18 +664,19 @@
 
         function openMenu() {
             mobileMenu.classList.add('active');
-            menuToggleIcon.setAttribute('data-icon', 'mdi:close');
+            menuToggleIcon.setAttribute('data-icon', 'mdi:close'); // Change open icon to close
             menuToggleBtn.setAttribute('aria-label', 'Menü schließen');
-            document.body.style.overflow = 'hidden'; // Prevent background scroll
+            document.body.style.overflow = 'hidden';
         }
 
         function closeMenu() {
             mobileMenu.classList.remove('active');
-            menuToggleIcon.setAttribute('data-icon', 'mdi:plus');
+            menuToggleIcon.setAttribute('data-icon', 'mdi:plus'); // Change close icon back to open
             menuToggleBtn.setAttribute('aria-label', 'Menü öffnen');
             document.body.style.overflow = '';
         }
-
+        
+        // Listener for the main toggle button (plus/close)
         menuToggleBtn.addEventListener('click', () => {
             if (mobileMenu.classList.contains('active')) {
                 closeMenu();
@@ -684,7 +684,9 @@
                 openMenu();
             }
         });
+        // Listener for the explicit close button inside the menu
         menuCloseBtn.addEventListener('click', closeMenu);
+
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', closeMenu);
         });
@@ -699,13 +701,12 @@
                 galleryThumbnails.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
                 
-                galleryMainImage.classList.remove('active'); // For text fade
-                galleryMainImage.style.backgroundImage = `url('${this.src.replace('w=300','w=1260')}')`; // Load larger image
+                galleryMainImage.classList.remove('active');
+                galleryMainImage.style.backgroundImage = `url('${this.src.replace('w=300','w=1260')}')`;
                 galleryOverlayText.textContent = this.dataset.title;
-                setTimeout(() => galleryMainImage.classList.add('active'), 50); // Trigger text fade in
+                setTimeout(() => galleryMainImage.classList.add('active'), 50);
             });
         });
-
 
         // Update current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
