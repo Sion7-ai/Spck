@@ -13,12 +13,12 @@
 
     <style>
         :root {
-            --color-bg-light: #F4F1ED; /* Sehr helles, warmes Beige/Grau, angelehnt an "Zur Linde" */
-            --color-bg-medium: #EAE7E2; /* Etwas dunkleres Beige für Kontraste */
-            --color-text-dark: #3D352F; /* Dunkles Braun, abgeleitet von Schillinger */
+            --color-bg-light: #F4F1ED;
+            --color-bg-medium: #EAE7E2;
+            --color-text-dark: #3D352F;
             --color-text-medium: #5C514A;
-            --color-accent-primary: #B58653; /* Ein warmer Gold/Messing-Ton als Hauptakzent (wie Orange bei Linde) */
-            --color-accent-secondary: #689F38; /* Schillinger Grün als Sekundärakzent */
+            --color-accent-primary: #B58653;
+            --color-accent-secondary: #689F38;
             --color-white: #FFFFFF;
             --color-overlay: rgba(0,0,0,0.4);
 
@@ -26,9 +26,10 @@
             --font-body: 'Open Sans', sans-serif;
 
             --container-width: 1200px;
-            --border-radius: 6px; /* Etwas subtiler */
+            --border-radius: 6px;
             --shadow: 0 5px 15px rgba(0,0,0,0.08);
             --transition-speed: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-short: 0.3s ease-in-out;
         }
 
         *, *::before, *::after {
@@ -63,10 +64,10 @@
             color: var(--color-text-dark);
             line-height: 1.2;
             margin-bottom: 1.5rem;
-            font-weight: 500; /* Weniger fett für Eleganz */
+            font-weight: 500;
         }
 
-        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); } /* Responsive Schriftgröße */
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
         h2 { font-size: clamp(2rem, 5vw, 3rem); }
         h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
         p { margin-bottom: 1.5rem; color: var(--color-text-medium); }
@@ -76,13 +77,13 @@
 
         .btn {
             display: inline-block;
-            padding: 0.75rem 1.75rem; /* Etwas schlanker */
+            padding: 0.75rem 1.75rem;
             background-color: var(--color-text-dark);
             color: var(--color-bg-light);
             font-weight: 600;
             text-decoration: none;
             border-radius: var(--border-radius);
-            transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+            transition: background-color var(--transition-short), color var(--transition-short), border-color var(--transition-short), transform var(--transition-short);
             border: 1px solid var(--color-text-dark);
             cursor: pointer;
             text-transform: uppercase;
@@ -105,24 +106,23 @@
             border-color: var(--color-text-dark);
          }
 
-
         /* Header */
         .main-header {
-            background-color: var(--color-bg-light);
-            padding: 1rem 0; /* Angepasst für Logo-Höhe */
+            background-color: transparent;
+            padding: 1.5rem 0;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, padding 0.3s ease-in-out;
+            transition: background-color var(--transition-short), box-shadow var(--transition-short), padding var(--transition-short);
             border-bottom: 1px solid transparent;
         }
         .main-header.scrolled {
             background-color: var(--color-bg-light);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             border-bottom: 1px solid #ddd;
-            padding: 0.75rem 0; /* Weniger Padding im Scrolled-Zustand */
+            padding: 0.75rem 0;
         }
         .main-header .container-header {
             display: flex;
@@ -136,15 +136,52 @@
             display: flex;
             align-items: center;
             text-decoration: none;
-        }
-        #headerLogo {
+            position: relative;
             height: 70px;
+            transition: height var(--transition-short);
+        }
+        .logo-version {
+            height: 100%;
             width: auto;
-            transition: height 0.3s ease-in-out;
+            transition: opacity var(--transition-short);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
         }
-        .main-header.scrolled #headerLogo {
-            height: 40px;
+        #headerLogoTransparent { opacity: 1; }
+        #headerLogoSolid { opacity: 0; } /* Start with solid logo hidden */
+
+        .initial-hero-btn {
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            color: var(--color-white);
         }
+        .initial-hero-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-color: var(--color-white);
+        }
+        .menu-toggle-btn.initial-hero-btn .iconify {
+             color: var(--color-white);
+        }
+
+        .main-header.scrolled #headerLogoTransparent { opacity: 0; }
+        .main-header.scrolled #headerLogoSolid { opacity: 1; }
+        .main-header.scrolled .logo-header {
+             height: 50px;
+        }
+        .main-header.scrolled .initial-hero-btn {
+            background-color: var(--color-accent-primary);
+            border-color: var(--color-accent-primary);
+            color: var(--color-white);
+        }
+        .main-header.scrolled .menu-toggle-btn.initial-hero-btn .iconify {
+             color: var(--color-white);
+        }
+         .main-header.scrolled .initial-hero-btn:hover {
+            background-color: var(--color-text-dark);
+            border-color: var(--color-text-dark);
+         }
 
         .header-actions { display: flex; align-items: center; gap: 1rem; }
         .menu-toggle-btn {
@@ -158,12 +195,13 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: background-color var(--transition-speed);
+            transition: background-color var(--transition-short), border-color var(--transition-short);
         }
         .menu-toggle-btn:hover { background-color: var(--color-text-dark); }
-        .menu-toggle-btn .iconify { font-size: 1.8rem; }
+        .menu-toggle-btn .iconify { font-size: 1.8rem; transition: color var(--transition-short); }
 
-        /* Mobile Menu Overlay (wie "Zur Linde") */
+
+        /* Mobile Menu Overlay */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
@@ -172,7 +210,7 @@
             height: 100%;
             background-color: var(--color-bg-light);
             z-index: 999;
-            padding: 6rem 2rem 2rem; /* Platz für Header */
+            padding-top: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -189,10 +227,10 @@
         }
         .mobile-menu-overlay .menu-header {
             position: absolute;
-            top: 1.5rem; /* Wert basierend auf Header Padding anpassen */
-            left: 5%; /* Match container */
-            right: 5%; /* Match container */
-            /* width: 90%; Entfernt, da left/right gesetzt */
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -201,6 +239,20 @@
             letter-spacing: 0.1em;
             font-size: 0.9rem;
             color: var(--color-text-medium);
+            box-sizing: border-box;
+        }
+        .mobile-menu-overlay .menu-header .menu-toggle-btn { /* Der explizite Schließen-Button im Menü */
+            background-color: var(--color-text-dark);
+        }
+        .mobile-menu-overlay .menu-header .menu-toggle-btn:hover {
+             background-color: var(--color-accent-primary);
+        }
+        .mobile-menu-overlay .menu-header .menu-toggle-btn .iconify {
+            color: var(--color-white);
+        }
+        .mobile-menu-overlay nav {
+             width: 100%;
+             margin-top: 4rem;
         }
         .mobile-menu-overlay nav ul { list-style: none; text-align: center; }
         .mobile-menu-overlay nav li a {
@@ -220,7 +272,7 @@
         /* Hero Section */
         .hero {
             min-height: 100vh;
-            background: linear-gradient(var(--color-overlay), var(--color-overlay)), url('https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover; /* Schillinger Terrasse */
+            background: linear-gradient(var(--color-overlay), var(--color-overlay)), url('https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
             color: var(--color-white);
             display: flex;
             flex-direction: column;
@@ -229,6 +281,7 @@
             text-align: center;
             padding: 2rem;
             position: relative;
+            padding-top: 120px;
         }
         .hero-subtitle {
             font-family: var(--font-body);
@@ -248,11 +301,11 @@
             height: 50px;
             background-color: rgba(255,255,255,0.5);
         }
-        .scroll-indicator::after { /* The moving part */
+        .scroll-indicator::after {
             content: '';
             position: absolute;
             top: 0;
-            left: -2px; /* Center it */
+            left: -2px;
             width: 6px;
             height: 15px;
             background-color: var(--color-white);
@@ -274,7 +327,6 @@
         }
         .section-intro-text h2 { margin-bottom: 1rem;}
 
-        /* About/Philosophy Section (like "Willkommen bei Zur Linde") */
         .philosophy-section { background-color: var(--color-bg-medium); }
         .philosophy-content {
             max-width: 800px;
@@ -283,7 +335,6 @@
         }
         .philosophy-content p { font-size: 1.1rem; line-height: 1.8; }
 
-        /* Image & Text Grid (like "Ein Ort zum Wiederfinden") */
         .image-text-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -292,16 +343,15 @@
         }
         .image-text-grid .text-content { padding: 1rem; }
         .image-text-grid img { border-radius: var(--border-radius); box-shadow: var(--shadow); }
-        .image-text-grid .logo-icon-section { /* For the small icon */
+        .image-text-grid .logo-icon-section {
             display: block;
             margin: 0 auto 1.5rem auto;
             width: 60px;
             height: 60px;
-            color: var(--color-accent-secondary); /* Schillinger Grün */
+            color: var(--color-accent-secondary);
         }
         .image-text-grid .text-content.text-center { text-align: center; }
 
-        /* Full Width Image Teaser */
         .full-width-teaser {
             height: 60vh;
             background-size: cover;
@@ -315,12 +365,11 @@
         }
         .full-width-teaser h2 { color: var(--color-white); text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 
-        /* Inspirations / Gallery Teaser */
         .inspirations-gallery { text-align: center; }
         .gallery-main-image-wrapper {
             position: relative;
             height: 60vh;
-            background-color: #ccc; /* Fallback */
+            background-color: #ccc;
             background-size: cover;
             background-position: center;
             border-radius: var(--border-radius);
@@ -370,7 +419,6 @@
             opacity: 0.5;
         }
 
-        /* Menu Links Section */
         .menu-links-section { text-align: center; }
         .menu-links-section a {
             font-family: var(--font-heading);
@@ -382,7 +430,7 @@
             position: relative;
         }
         .menu-links-section a:hover { color: var(--color-accent-primary); }
-        .menu-links-section a::after { /* Underline on hover */
+        .menu-links-section a::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -395,8 +443,49 @@
         }
         .menu-links-section a:hover::after { width: 50%; }
 
+        /* Instagram Promo Section */
+        .instagram-promo-section {
+            background-color: var(--color-bg-light); /* Passt sich dem hellen Stil an */
+            padding: 5rem 0;
+        }
+        .instagram-promo-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .instagram-text h2 {
+            margin-bottom: 1rem;
+        }
+        .instagram-text p {
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+        .instagram-text .btn .iconify {
+            vertical-align: -0.15em; /* Bessere Ausrichtung des Icons im Button */
+            font-size: 1.2em;
+            margin-right: 0.5em;
+        }
+        .instagram-visuals {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .instagram-visuals .insta-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .instagram-visuals .insta-img:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
 
-        /* Footer */
+
         .main-footer {
             background-color: var(--color-bg-medium);
             padding: 4rem 0;
@@ -424,9 +513,8 @@
         .social-links-footer a:hover { color: var(--color-accent-primary); }
         .footer-bottom { text-align: center; font-size: 0.9rem; color: var(--color-text-medium); padding-top: 2rem; border-top: 1px solid #dcd8d3;}
         .google-reviews { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; color: var(--color-text-medium); }
-        .google-reviews .iconify { color: #fbbc05; /* Google yellow */ font-size: 1.2rem; }
+        .google-reviews .iconify { color: #fbbc05; font-size: 1.2rem; }
 
-        /* Animations */
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(30px);
@@ -437,18 +525,34 @@
             transform: translateY(0);
         }
 
+        @media (max-width: 992px) {
+            .instagram-promo-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .instagram-visuals {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                margin-top: 2rem;
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
 
         @media (max-width: 768px) {
             .main-header { padding: 1rem 0; }
-            #headerLogo { height: 40px; } /* Logo kleiner auf Mobil */
-            .main-header.scrolled #headerLogo { height: 35px; }
-            .header-actions .btn { display: none; }
+            .logo-header { height: 60px; }
+            .main-header.scrolled .logo-header { height: 40px; }
+            .header-actions .btn-accent { display: none; }
+            .mobile-menu-overlay .menu-header { padding: 1rem 5%; }
             .image-text-grid { grid-template-columns: 1fr; }
             .image-text-grid img.order-last-mobile { order: 1; margin-top: 2rem; }
             .gallery-thumbnails img { width: 80px; height: 60px; }
-            .mobile-menu-overlay .menu-header { top: 1rem; } /* Anpassung an Header-Padding */
+            .instagram-visuals {
+                 max-width: 100%;
+                 grid-template-columns: repeat(3, 1fr);
+            }
         }
-
     </style>
 </head>
 <body>
@@ -456,11 +560,12 @@
     <header class="main-header" id="mainHeader">
         <div class="container-header">
             <a href="#" class="logo-header">
-                <img src="https://sion7-ai.github.io/Spck/test/schillinger_logo.png" alt="Landgasthaus Schillinger Logo" id="headerLogo">
+                <img src="https://cdn.gastronovi.com/de/tmp/images/logo-curves-06-2020-002_770x140_or_1182559329a36cfbe.png" alt="Landgasthaus Schillinger Logo Transparent" id="headerLogoTransparent" class="logo-version">
+                <img src="https://sion7-ai.github.io/Spck/test/schillinger_logo.png" alt="Landgasthaus Schillinger Logo Solid" id="headerLogoSolid" class="logo-version">
             </a>
             <div class="header-actions">
-                <a href="#reservierung-section" class="btn btn-accent">Reservieren</a>
-                <button class="menu-toggle-btn" id="menuToggle" aria-label="Menü öffnen">
+                <a href="#reservierung-section" class="btn btn-accent initial-hero-btn">Reservieren</a>
+                <button class="menu-toggle-btn initial-hero-btn" id="menuToggle" aria-label="Menü öffnen">
                     <span class="iconify" data-icon="mdi:plus"></span>
                 </button>
             </div>
@@ -470,7 +575,7 @@
     <div class="mobile-menu-overlay" id="mobileMenu">
         <div class="menu-header">
             <span>MENU</span>
-            <button class="menu-toggle-btn" id="menuClose" aria-label="Menü schließen" style="background-color: var(--color-text-dark);"> <!-- Abgehobener Schließen-Button -->
+            <button class="menu-toggle-btn" id="menuCloseInside" aria-label="Menü schließen">
                 <span class="iconify" data-icon="mdi:close"></span>
             </button>
         </div>
@@ -480,6 +585,7 @@
                 <li><a href="#philosophy" class="mobile-menu-link">Unsere Werte</a></li>
                 <li><a href="#menu-links" class="mobile-menu-link">Speisekarten</a></li>
                 <li><a href="#bbq-teaser-section" class="mobile-menu-link">Smoke & Fire</a></li>
+                <li><a href="#instagram-promo" class="mobile-menu-link">Instagram</a></li>
                 <li><a href="#contact-footer" class="mobile-menu-link">Kontakt</a></li>
             </ul>
         </nav>
@@ -493,7 +599,7 @@
         <section class="hero" id="hero">
             <span class="hero-subtitle reveal-on-scroll">LANDGASTHAUS SCHILLINGER VÖRSTETTEN</span>
             <h1 class="reveal-on-scroll" data-delay="100">Das Gefühl, im Schillinger<br>genau richtig zu sein.</h1>
-            <a href="#philosophy" class="btn reveal-on-scroll" data-delay="200" style="margin-top: 1rem; background-color: rgba(255,255,255,0.1); border-color:var(--color-white); color:var(--color-white);">Mehr erfahren</a>
+            <a href="#philosophy" class="btn initial-hero-btn reveal-on-scroll" data-delay="200" style="margin-top: 1rem;">Mehr erfahren</a>
             <div class="scroll-indicator"></div>
         </section>
 
@@ -575,6 +681,27 @@
                 <a href="#">Getränkekarte</a>
             </div>
         </section>
+
+        <section class="section instagram-promo-section" id="instagram-promo">
+            <div class="container">
+                <div class="instagram-promo-content reveal-on-scroll">
+                    <div class="instagram-text">
+                        <span style="font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; color: var(--color-text-medium);">#LandgasthausSchillinger</span>
+                        <h2>Folgen Sie uns auf Instagram</h2>
+                        <p>Entdecken Sie aktuelle Einblicke, saisonale Spezialitäten frisch aus der Küche und die schönsten Momente aus unserem Landgasthaus. Lassen Sie sich inspirieren und werden Sie Teil unserer Community!</p>
+                        <a href="https://www.instagram.com/landgasthaus_schillinger_/" target="_blank" rel="noopener noreferrer" class="btn btn-accent">
+                            <span class="iconify" data-icon="mdi:instagram"></span>
+                            @landgasthaus_schillinger_
+                        </a>
+                    </div>
+                    <div class="instagram-visuals">
+                        <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Instagram Post Beispiel 1" class="insta-img">
+                        <img src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Instagram Post Beispiel 2" class="insta-img">
+                        <img src="https://images.pexels.com/photos/3184183/pexels-photo-3184183.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop" alt="Instagram Post Beispiel 3" class="insta-img">
+                    </div>
+                </div>
+            </div>
+        </section>
         
         <section class="section reservierung-section" id="reservierung-section" style="background-color: var(--color-bg-medium);">
              <div class="container">
@@ -634,7 +761,7 @@
                     </div>
                     <div class="social-links-footer">
                         <a href="#" aria-label="Facebook"><span class="iconify" data-icon="mdi:facebook"></span></a>
-                        <a href="#" aria-label="Instagram"><span class="iconify" data-icon="mdi:instagram"></span></a>
+                        <a href="https://www.instagram.com/landgasthaus_schillinger_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><span class="iconify" data-icon="mdi:instagram"></span></a>
                     </div>
                 </div>
             </div>
@@ -657,26 +784,27 @@
 
         // Mobile Menu Toggle
         const menuToggleBtn = document.getElementById('menuToggle');
-        const menuCloseBtn = document.getElementById('menuClose');
+        const menuCloseInsideBtn = document.getElementById('menuCloseInside');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-        const menuToggleIcon = menuToggleBtn.querySelector('.iconify');
+        const mainToggleIconElement = menuToggleBtn.querySelector('.iconify');
+        const menuToggleIconOpen = 'mdi:plus';
+        const menuToggleIconClose = 'mdi:close';
 
         function openMenu() {
             mobileMenu.classList.add('active');
-            menuToggleIcon.setAttribute('data-icon', 'mdi:close'); // Change open icon to close
+            mainToggleIconElement.setAttribute('data-icon', menuToggleIconClose);
             menuToggleBtn.setAttribute('aria-label', 'Menü schließen');
             document.body.style.overflow = 'hidden';
         }
 
         function closeMenu() {
             mobileMenu.classList.remove('active');
-            menuToggleIcon.setAttribute('data-icon', 'mdi:plus'); // Change close icon back to open
+            mainToggleIconElement.setAttribute('data-icon', menuToggleIconOpen);
             menuToggleBtn.setAttribute('aria-label', 'Menü öffnen');
             document.body.style.overflow = '';
         }
         
-        // Listener for the main toggle button (plus/close)
         menuToggleBtn.addEventListener('click', () => {
             if (mobileMenu.classList.contains('active')) {
                 closeMenu();
@@ -684,8 +812,10 @@
                 openMenu();
             }
         });
-        // Listener for the explicit close button inside the menu
-        menuCloseBtn.addEventListener('click', closeMenu);
+        
+        if(menuCloseInsideBtn) {
+            menuCloseInsideBtn.addEventListener('click', closeMenu);
+        }
 
         mobileMenuLinks.forEach(link => {
             link.addEventListener('click', closeMenu);
@@ -696,20 +826,35 @@
         const galleryOverlayText = document.getElementById('galleryOverlayText');
         const galleryThumbnails = document.querySelectorAll('.gallery-thumbnails img');
 
-        galleryThumbnails.forEach(thumb => {
-            thumb.addEventListener('click', function() {
-                galleryThumbnails.forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                
-                galleryMainImage.classList.remove('active');
-                galleryMainImage.style.backgroundImage = `url('${this.src.replace('w=300','w=1260')}')`;
-                galleryOverlayText.textContent = this.dataset.title;
-                setTimeout(() => galleryMainImage.classList.add('active'), 50);
+        if (galleryMainImage && galleryOverlayText && galleryThumbnails.length > 0) {
+            galleryThumbnails.forEach(thumb => {
+                thumb.addEventListener('click', function() {
+                    galleryThumbnails.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    galleryMainImage.classList.remove('active'); // For text fade
+                    // Update main image source, ensure to get a larger version if thumbnails are small
+                    let largeImageSrc = this.src;
+                    if (this.src.includes('w=300')) { // Example check if it's a Pexels thumbnail
+                        largeImageSrc = this.src.replace('w=300','w=1260').replace('h=300','h=750');
+                    } else if (this.src.includes('fit=crop')) { // another pexels variant
+                         largeImageSrc = this.src.replace('&w=300&h=300&fit=crop','&w=1260&h=750');
+                    }
+
+                    galleryMainImage.style.backgroundImage = `url('${largeImageSrc}')`;
+                    galleryOverlayText.textContent = this.dataset.title;
+                    setTimeout(() => galleryMainImage.classList.add('active'), 50); // Trigger text fade in
+                });
             });
-        });
+        }
+
 
         // Update current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        const currentYearEl = document.getElementById('currentYear');
+        if (currentYearEl) {
+            currentYearEl.textContent = new Date().getFullYear();
+        }
+
 
         // Scroll Reveal Animation
         const revealElements = document.querySelectorAll('.reveal-on-scroll');
