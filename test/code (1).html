@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landgasthaus Schillinger - Genuss trifft Seele</title>
+    <meta name="description" content="Erleben Sie im Landgasthaus Schillinger in Vörstetten eine Symbiose aus traditioneller Kochkunst, regionalen Produkten und herzlicher Gastfreundschaft in stilvollem Ambiente.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <style>
+        :root {
+            --color-bg-light: #F4F1ED; /* Sehr helles, warmes Beige/Grau, angelehnt an "Zur Linde" */
+            --color-bg-medium: #EAE7E2; /* Etwas dunkleres Beige für Kontraste */
+            --color-text-dark: #3D352F; /* Dunkles Braun, abgeleitet von Schillinger */
+            --color-text-medium: #5C514A;
+            --color-accent-primary: #B58653; /* Ein warmer Gold/Messing-Ton als Hauptakzent (wie Orange bei Linde) */
+            --color-accent-secondary: #689F38; /* Schillinger Grün als Sekundärakzent */
+            --color-white: #FFFFFF;
+            --color-overlay: rgba(0,0,0,0.4);
+
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Open Sans', sans-serif;
+
+            --container-width: 1200px;
+            --border-radius: 6px; /* Etwas subtiler */
+            --shadow: 0 5px 15px rgba(0,0,0,0.08);
+            --transition-speed: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text-dark);
+            line-height: 1.7;
+            background-color: var(--color-bg-light);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            color: var(--color-text-dark);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 500; /* Weniger fett für Eleganz */
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); } /* Responsive Schriftgröße */
+        h2 { font-size: clamp(2rem, 5vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+        p { margin-bottom: 1.5rem; color: var(--color-text-medium); }
+        a { color: var(--color-accent-primary); text-decoration: none; transition: color var(--transition-speed); }
+        a:hover { color: var(--color-text-dark); }
+        img { max-width: 100%; height: auto; display: block; }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem; /* Etwas schlanker */
+            background-color: var(--color-text-dark);
+            color: var(--color-bg-light);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: background-color var(--transition-speed), color var(--transition-speed), transform var(--transition-speed);
+            border: 1px solid var(--color-text-dark);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9rem;
+        }
+        .btn:hover {
+            background-color: var(--color-accent-primary);
+            border-color: var(--color-accent-primary);
+            color: var(--color-white);
+            transform: translateY(-2px);
+        }
+        .btn-accent {
+            background-color: var(--color-accent-primary);
+            border-color: var(--color-accent-primary);
+            color: var(--color-white);
+        }
+         .btn-accent:hover {
+            background-color: var(--color-text-dark);
+            border-color: var(--color-text-dark);
+         }
+
+
+        /* Header */
+        .main-header {
+            background-color: var(--color-bg-light); /* Oder transparent am Anfang, wird sticky */
+            padding: 1.5rem 0;
+            position: fixed; /* Fixed wie bei Linde */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border-bottom: 1px solid transparent; /* Für sticky Effekt */
+        }
+        .main-header.scrolled {
+            background-color: var(--color-bg-light);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #ddd;
+        }
+        .main-header .container-header { /* Eigener Container für Flex */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+        .logo-header {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.05em;
+        }
+        .logo-header .iconify {
+            font-size: 1.8rem; /* Etwas kleiner */
+            margin-right: 0.6rem;
+            color: var(--color-accent-secondary); /* Schillinger Grün */
+        }
+        .header-actions { display: flex; align-items: center; gap: 1rem; }
+        .menu-toggle-btn {
+            background-color: var(--color-accent-primary);
+            color: var(--color-white);
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color var(--transition-speed);
+        }
+        .menu-toggle-btn:hover { background-color: var(--color-text-dark); }
+        .menu-toggle-btn .iconify { font-size: 1.8rem; }
+
+        /* Mobile Menu Overlay (wie "Zur Linde") */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg-light);
+            z-index: 999;
+            padding: 6rem 2rem 2rem; /* Platz für Header */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity var(--transition-speed), visibility var(--transition-speed), transform var(--transition-speed);
+        }
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .mobile-menu-overlay .menu-header {
+            position: absolute;
+            top: 1.5rem;
+            left: 5%; /* Match container */
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            color: var(--color-text-medium);
+        }
+        .mobile-menu-overlay nav ul { list-style: none; text-align: center; }
+        .mobile-menu-overlay nav li a {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--color-text-dark);
+            text-decoration: none;
+            display: block;
+            padding: 0.75rem 0;
+            transition: color var(--transition-speed);
+        }
+        .mobile-menu-overlay nav li a:hover { color: var(--color-accent-primary); }
+        .mobile-menu-buttons { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; width: 80%; max-width: 300px;}
+        .mobile-menu-buttons .btn { width: 100%; text-align: center;}
+
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(var(--color-overlay), var(--color-overlay)), url('https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover; /* Schillinger Terrasse */
+            color: var(--color-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        .hero-subtitle {
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .hero h1 { color: var(--color-white); margin-bottom: 2rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 50px;
+            background-color: rgba(255,255,255,0.5);
+        }
+        .scroll-indicator::after { /* The moving part */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2px; /* Center it */
+            width: 6px;
+            height: 15px;
+            background-color: var(--color-white);
+            border-radius: 3px;
+            animation: scrollHint 2s infinite ease-in-out;
+        }
+        @keyframes scrollHint {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(35px); opacity: 0.5; }
+            100% { transform: translateY(35px); opacity: 0; }
+        }
+
+        /* General Section Styling */
+        .section { padding: 5rem 0; }
+        .section-intro-text {
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 4rem auto;
+        }
+        .section-intro-text h2 { margin-bottom: 1rem;}
+
+        /* About/Philosophy Section (like "Willkommen bei Zur Linde") */
+        .philosophy-section { background-color: var(--color-bg-medium); }
+        .philosophy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .philosophy-content p { font-size: 1.1rem; line-height: 1.8; }
+
+        /* Image & Text Grid (like "Ein Ort zum Wiederfinden") */
+        .image-text-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+        .image-text-grid .text-content { padding: 1rem; }
+        .image-text-grid img { border-radius: var(--border-radius); box-shadow: var(--shadow); }
+        .image-text-grid .logo-icon-section { /* For the small icon */
+            display: block;
+            margin: 0 auto 1.5rem auto;
+            width: 60px;
+            height: 60px;
+            color: var(--color-accent-secondary); /* Schillinger Grün */
+            /* background-image: url('path-to-schillinger-icon.svg'); SVG would be better */
+        }
+        .image-text-grid .text-content.text-center { text-align: center; }
+
+        /* Full Width Image Teaser */
+        .full-width-teaser {
+            height: 60vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white);
+            margin: 3rem 0;
+        }
+        .full-width-teaser h2 { color: var(--color-white); text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+
+        /* Inspirations / Gallery Teaser */
+        .inspirations-gallery { text-align: center; }
+        .gallery-main-image-wrapper {
+            position: relative;
+            height: 60vh;
+            background-color: #ccc; /* Fallback */
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .gallery-main-image-wrapper .image-overlay-text {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--color-white);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .gallery-main-image-wrapper.active .image-overlay-text { opacity: 1; }
+
+        .gallery-thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .gallery-thumbnails img {
+            width: 100px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color var(--transition-speed), transform var(--transition-speed);
+            opacity: 0.7;
+        }
+        .gallery-thumbnails img.active, .gallery-thumbnails img:hover {
+            border-color: var(--color-accent-primary);
+            transform: scale(1.05);
+            opacity: 1;
+        }
+        .decorative-leaf {
+            display: block;
+            margin: 3rem auto;
+            width: 40px;
+            opacity: 0.5;
+            /* Use an SVG or a character like 🍂 */
+        }
+
+        /* Menu Links Section */
+        .menu-links-section { text-align: center; }
+        .menu-links-section a {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: var(--color-text-dark);
+            display: block;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        .menu-links-section a:hover { color: var(--color-accent-primary); }
+        .menu-links-section a::after { /* Underline on hover */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent-primary);
+            transition: width var(--transition-speed);
+        }
+        .menu-links-section a:hover::after { width: 50%; }
+
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--color-bg-medium);
+            padding: 4rem 0;
+            border-top: 1px solid #dcd8d3;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        .footer-col h4 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.75rem; }
+        .footer-col ul a, .footer-col p, .footer-col span { font-size: 0.95rem; color: var(--color-text-medium); }
+        .footer-col ul a:hover { color: var(--color-text-dark); }
+        .social-links-footer { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-links-footer a { font-size: 1.3rem; color: var(--color-text-medium); }
+        .social-links-footer a:hover { color: var(--color-accent-primary); }
+        .footer-bottom { text-align: center; font-size: 0.9rem; color: var(--color-text-medium); padding-top: 2rem; border-top: 1px solid #dcd8d3;}
+        .google-reviews { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; color: var(--color-text-medium); }
+        .google-reviews .iconify { color: #fbbc05; /* Google yellow */ font-size: 1.2rem; }
+
+        /* Animations */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--transition-speed), transform 0.8s var(--transition-speed);
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        @media (max-width: 768px) {
+            .main-header { padding: 1rem 0; }
+            .logo-header { font-size: 1.3rem; }
+            .header-actions .btn { display: none; } /* Reservieren Button im Header auf Mobil ausblenden, ist im Menü */
+            .image-text-grid { grid-template-columns: 1fr; }
+            .image-text-grid img.order-last-mobile { order: 1; margin-top: 2rem; }
+            .gallery-thumbnails img { width: 80px; height: 60px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="main-header" id="mainHeader">
+        <div class="container-header">
+            <a href="#" class="logo-header">
+                <span class="iconify" data-icon="mdi:silverware-fork-knife"></span>
+                SCHILLINGER
+            </a>
+            <div class="header-actions">
+                <a href="#reservierung-section" class="btn btn-accent">Reservieren</a>
+                <button class="menu-toggle-btn" id="menuToggle" aria-label="Menü öffnen">
+                    <span class="iconify" data-icon="mdi:plus"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <div class="menu-header">
+            <span>MENU</span>
+            <button class="menu-toggle-btn" id="menuClose" aria-label="Menü schließen">
+                <span class="iconify" data-icon="mdi:close"></span>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#hero" class="mobile-menu-link">Startseite</a></li>
+                <li><a href="#philosophy" class="mobile-menu-link">Unsere Werte</a></li>
+                <li><a href="#menu-links" class="mobile-menu-link">Speisekarten</a></li>
+                <li><a href="#bbq-teaser-section" class="mobile-menu-link">Smoke & Fire</a></li>
+                <li><a href="#contact-footer" class="mobile-menu-link">Kontakt</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-buttons">
+            <a href="#reservierung-section" class="btn btn-accent mobile-menu-link">Reservieren</a>
+            <a href="#contact-footer" class="btn mobile-menu-link">Kontakt aufnehmen</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero" id="hero">
+            <span class="hero-subtitle reveal-on-scroll">LANDGASTHAUS SCHILLINGER VÖRSTETTEN</span>
+            <h1 class="reveal-on-scroll" data-delay="100">Das Gefühl, im Schillinger<br>genau richtig zu sein.</h1>
+            <a href="#philosophy" class="btn reveal-on-scroll" data-delay="200" style="margin-top: 1rem; background-color: rgba(255,255,255,0.1); border-color:var(--color-white); color:var(--color-white);">Mehr erfahren</a>
+            <div class="scroll-indicator"></div>
+        </section>
+
+        <section class="section philosophy-section" id="philosophy">
+            <div class="container">
+                <div class="philosophy-content reveal-on-scroll">
+                    <h2>Willkommen im Landgasthaus Schillinger, wo Genuss beginnt und badische Gastfreundschaft entsteht.</h2>
+                    <p>Bei uns geht es um das Gefühl, genau am richtigen Ort zu sein. Um ehrliche Küche, die mit Sorgfalt aus regionalen Zutaten entsteht. Um Gastgeber, die sich wirklich kümmern, und um Momente, die man nicht plant, aber gern wiederholen möchte. Hier treffen Menschen auf Qualität, auf Wärme, auf das, was bleibt: unvergessliche Geschmackserlebnisse.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="image-text-grid">
+                    <div class="text-content text-center reveal-on-scroll">
+                        <span class="iconify logo-icon-section" data-icon="mdi:chef-hat"></span> <!-- Placeholder Icon -->
+                        <h2>Ein Ort für Genießer und Freunde.</h2>
+                        <p>Wir sind Gastgeber aus Überzeugung. Menschen, die an gutes Essen glauben und an das, was es auslösen kann. Wir servieren aufmerksam, persönlich und mit einem offenen Blick für das Wesentliche: Sie, unsere Gäste.</p>
+                        <a href="#reservierung-section" class="btn">Tisch reservieren</a>
+                    </div>
+                    <div class="reveal-on-scroll" data-delay="100">
+                        <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Gastgeber Daniel Schillinger mit einem Gericht">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="full-width-teaser reveal-on-scroll" id="bbq-teaser-section" style="background-image: url('https://images.pexels.com/photos/13069139/pexels-photo-13069139.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+            <div class="container">
+                 <h2>Smoke & Fire: Unser BBQ Erlebnis</h2>
+                 <p style="color: var(--color-white); max-width: 600px; margin: 1rem auto 2rem;">Jeden Freitagabend verwandelt sich unsere Terrasse in ein Paradies für Grillfans. Entdecken Sie saftige Steaks, zarte Ribs und hausgemachte BBQ-Spezialitäten direkt vom Smoker.</p>
+                 <a href="#" class="btn btn-accent">Mehr zum BBQ</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                 <div class="image-text-grid">
+                    <div class="reveal-on-scroll">
+                        <img src="https://images.pexels.com/photos/67468/pexels-photo-67468.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sonnige Gartenterrasse des Landgasthaus Schillinger">
+                    </div>
+                    <div class="text-content reveal-on-scroll" data-delay="100">
+                        <h2>Für jeden Anlass bereit und für Sie da.</h2>
+                        <p>Ob ein romantisches Dinner zu zweit, eine fröhliche Familienfeier oder ein entspannter Sommerabend auf unserer großzügigen Gartenterrasse – wir schaffen den passenden Rahmen für Ihre besonderen Momente. Unser Spielplatz sorgt dafür, dass auch die kleinen Gäste auf ihre Kosten kommen.</p>
+                         <a href="#" class="btn btn-accent">Galerie ansehen</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section inspirations-gallery" id="inspirations">
+            <div class="container">
+                <div class="section-intro-text reveal-on-scroll">
+                    <span style="font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; color: var(--color-text-medium);">Saisonale Küche mit Charakter</span>
+                    <h2>Inspirationen aus unserer Küche</h2>
+                    <p>Unsere Speisekarte spiegelt das wider, was wir lieben: Ehrliche Produkte, kreative Gerichte und Aromen, die im Kopf bleiben. Mit Inspiration aus der Region und der Welt gestalten wir ein kulinarisches Erlebnis, das handwerklich gedacht und mit Hingabe gekocht ist.</p>
+                </div>
+
+                <div class="gallery-main-image-wrapper active reveal-on-scroll" id="galleryMainImage" style="background-image: url('https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+                    <span class="image-overlay-text" id="galleryOverlayText">Saisonale Highlights</span>
+                </div>
+
+                <div class="gallery-thumbnails reveal-on-scroll" data-delay="100">
+                    <img src="https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Badischer Spargel" data-title="Saisonale Highlights" class="active">
+                    <img src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Herzhaftes Fleischgericht" data-title="Unsere Klassiker">
+                    <img src="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Süße Verführung" data-title="Süße Verführungen">
+                    <img src="https://images.pexels.com/photos/1639556/pexels-photo-1639556.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Burger vom BBQ" data-title="Smoke & Fire Specials">
+                </div>
+                <span class="iconify decorative-leaf" data-icon="mdi:leaf-maple"></span> <!-- Placeholder Leaf -->
+            </div>
+        </section>
+
+        <section class="section menu-links-section" id="menu-links">
+            <div class="container reveal-on-scroll">
+                <span style="font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; color: var(--color-text-medium);">MENÜ</span>
+                <a href="#">Speisekarte</a>
+                <a href="#">Mittagskarte</a>
+                <a href="#">Getränkekarte</a>
+                <!-- <a href="#">Weinkarte</a> -->
+            </div>
+        </section>
+        
+        <section class="section reservierung-section" id="reservierung-section" style="background-color: var(--color-bg-medium);">
+             <div class="container">
+                <div class="section-intro-text reveal-on-scroll">
+                    <span style="font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; color: var(--color-text-medium);">RESERVIEREN</span>
+                    <h2>Ihr Tisch im Schillinger</h2>
+                    <p>Sichern Sie sich Ihren Platz für ein unvergessliches Erlebnis. Wir freuen uns auf Ihren Besuch!</p>
+                    <a href="tel:+4976662775" class="btn" style="margin-right: 1rem;">Telefonisch: 07666 / 2775</a>
+                    <a href="#" class="btn btn-accent">Online Reservieren</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer" id="contact-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col reveal-on-scroll">
+                    <h4>Kontakt</h4>
+                    <p>Landgasthaus Schillinger<br>
+                    Denzlinger Straße 26<br>
+                    79279 Vörstetten, Deutschland</p>
+                    <p>T: <a href="tel:+4976662775">+49 7666 2775</a><br>
+                    E: <a href="mailto:info@landgasthaus-schillinger.de">info@landgasthaus-schillinger.de</a></p>
+                </div>
+                <div class="footer-col reveal-on-scroll" data-delay="100">
+                    <h4>Öffnungszeiten</h4>
+                    <ul>
+                        <li>Mo, Do, Fr: 11:00-14:00 & 17:00-22:00</li>
+                        <li>Sa: 17:00-22:00</li>
+                        <li>So & Feiertag: 11:00-22:00</li>
+                        <li>Di & Mi: Ruhetag</li>
+                        <li><span>Küchenzeiten können abweichen.</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col reveal-on-scroll" data-delay="200">
+                    <h4>Navigation</h4>
+                     <ul>
+                        <li><a href="#hero">Startseite</a></li>
+                        <li><a href="#philosophy">Unsere Werte</a></li>
+                        <li><a href="#menu-links">Speisekarten</a></li>
+                        <li><a href="#reservierung-section">Reservierung</a></li>
+                        <li><a href="#">Impressum</a></li>
+                        <li><a href="#">Datenschutz</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col reveal-on-scroll" data-delay="300">
+                    <h4>Bleiben Sie verbunden</h4>
+                    <div class="google-reviews">
+                        <span class="iconify" data-icon="mdi:star"></span>
+                        <span class="iconify" data-icon="mdi:star"></span>
+                        <span class="iconify" data-icon="mdi:star"></span>
+                        <span class="iconify" data-icon="mdi:star"></span>
+                        <span class="iconify" data-icon="mdi:star-half-full"></span>
+                        <span>4.7 / basierend auf Google</span>
+                    </div>
+                    <div class="social-links-footer">
+                        <a href="#" aria-label="Facebook"><span class="iconify" data-icon="mdi:facebook"></span></a>
+                        <a href="#" aria-label="Instagram"><span class="iconify" data-icon="mdi:instagram"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom reveal-on-scroll">
+                &copy; <span id="currentYear"></span> Landgasthaus Schillinger. Alle Rechte vorbehalten. Konzept & Design by EMOVIA.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Header
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuToggleBtn = document.getElementById('menuToggle');
+        const menuCloseBtn = document.getElementById('menuClose');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+        const menuToggleIcon = menuToggleBtn.querySelector('.iconify');
+
+        function openMenu() {
+            mobileMenu.classList.add('active');
+            menuToggleIcon.setAttribute('data-icon', 'mdi:close');
+            menuToggleBtn.setAttribute('aria-label', 'Menü schließen');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            menuToggleIcon.setAttribute('data-icon', 'mdi:plus');
+            menuToggleBtn.setAttribute('aria-label', 'Menü öffnen');
+            document.body.style.overflow = '';
+        }
+
+        menuToggleBtn.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+        menuCloseBtn.addEventListener('click', closeMenu);
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Gallery Switcher
+        const galleryMainImage = document.getElementById('galleryMainImage');
+        const galleryOverlayText = document.getElementById('galleryOverlayText');
+        const galleryThumbnails = document.querySelectorAll('.gallery-thumbnails img');
+
+        galleryThumbnails.forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                galleryThumbnails.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                galleryMainImage.classList.remove('active'); // For text fade
+                galleryMainImage.style.backgroundImage = `url('${this.src.replace('w=300','w=1260')}')`; // Load larger image
+                galleryOverlayText.textContent = this.dataset.title;
+                setTimeout(() => galleryMainImage.classList.add('active'), 50); // Trigger text fade in
+            });
+        });
+
+
+        // Update current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+        const revealObserverOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseInt(entry.target.dataset.delay) || 0;
+                    setTimeout(() => {
+                        entry.target.classList.add('is-visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, revealObserverOptions);
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+    </script>
+
+</body>
+</html>
