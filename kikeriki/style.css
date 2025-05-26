@@ -223,7 +223,7 @@ p { font-size: 1rem; color: var(--color-text-medium); margin-bottom: var(--spaci
 }
 #mobile-menu nav ul li a.nav-link.active-link { color: var(--color-secondary-petrol); }
 #mobile-menu .mobile-dropdown-menu { list-style: none; padding-left: var(--spacing-m); display: none; }
-#mobile-menu .mobile-dropdown-menu li a.nav-link { font-size: 1rem; font-weight: 400; padding: var(--spacing-s) 0;}
+#mobile-menu .mobile-dropdown-menu li a.nav-link { font-size: 1.0rem; font-weight: 400; padding: var(--spacing-s) 0;}
 #mobile-menu .mobile-menu-cta { display: block; width: 100%; margin-top: var(--spacing-l); text-align: center; }
 
 /* --- Hero Slider Section --- */
@@ -234,6 +234,7 @@ p { font-size: 1rem; color: var(--color-text-medium); margin-bottom: var(--spaci
     position: relative;
     overflow: hidden;
     background-color: var(--color-background-lighter);
+    /* Desktop: flex-direction: row implicitly for hero-slide-content children */
 }
 .vertical-text-left {
     writing-mode: vertical-rl; text-orientation: mixed;
@@ -264,7 +265,7 @@ p { font-size: 1rem; color: var(--color-text-medium); margin-bottom: var(--spaci
 .hero-text-column .cta-button.primary-cta { padding: calc(var(--spacing-s) + 2px) calc(var(--spacing-l) + 4px); font-size: 1rem; }
 
 .hero-slider-nav {
-    position: absolute; bottom: var(--spacing-l);
+    position: absolute; bottom: var(--spacing-l); /* Default for desktop */
     left: calc(var(--spacing-xl) + 40px);
     display: flex; gap: var(--spacing-s); z-index: 5;
 }
@@ -467,16 +468,66 @@ p { font-size: 1rem; color: var(--color-text-medium); margin-bottom: var(--spaci
     #header .logo img { height: 30px; }
     #header.scrolled .logo img { height: 28px; }
 
-    .hero-slider-section { min-height: auto; /* Allow content to define height on mobile */ }
-    .hero-slider-wrapper { height: auto; padding-bottom: 50px; /* Space for nav dots */ }
-    .hero-slide-content { flex-direction: column; }
-    .hero-text-column {
-        flex-basis: auto; width:100%; order: 2; text-align: center;
-        padding: var(--spacing-l) var(--spacing-m);
+    .hero-slider-section {
+        min-height: auto; /* Allow content to define height on mobile */
+        flex-direction: column; /* Stack direct children (wrapper, nav) vertically */
+        align-items: center; /* Center content horizontally within the column */
+        padding-bottom: var(--spacing-xl); /* Ensure overall section has sufficient bottom padding */
+        justify-content: flex-start; /* Ensure content starts from the top */
     }
-    .hero-text-column .sub-headline { max-width: 100%; margin-left:auto; margin-right:auto; }
-    .hero-image-column { flex-basis: auto; width:100%; height: 300px; order: 1; }
-    .hero-slider-nav { left: 50%; transform: translateX(-50%); bottom: var(--spacing-m); }
+
+    .hero-slider-wrapper {
+        height: auto; /* Allow content to define height */
+        padding-bottom: var(--spacing-m); /* Reduce internal padding, spacing for dots handled externally */
+        width: 100%; /* Ensure it takes full width for centering text content */
+        order: 2; /* Place wrapper second, after navigation */
+    }
+
+    .hero-slide {
+        position: static; /* Let it flow normally */
+        width: 100%; /* Ensure it takes full width */
+        height: auto; /* Allow content to define its height */
+        top: auto; /* Reset absolute positioning */
+        left: auto; /* Reset absolute positioning */
+    }
+    .hero-slide.active {
+        z-index: auto; /* No longer needed if not absolute */
+    }
+    
+    .hero-slide-content {
+        flex-direction: column; /* Stack image and text column */
+        height: auto; /* Allow content to define height */
+    }
+    
+    .hero-text-column {
+        flex-basis: auto; /* No longer fixed width */
+        width: 100%; /* Take full width */
+        order: 2; /* Place text column second, after image */
+        text-align: center; /* Center text */
+        padding: var(--spacing-l) var(--spacing-m); /* Adjust padding for mobile */
+    }
+    .hero-text-column .sub-headline {
+        max-width: 100%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .hero-image-column {
+        flex-basis: auto; /* No longer fixed width */
+        width: 100%; /* Take full width */
+        height: 300px; /* Fixed height for image on mobile */
+        order: 1; /* Place image column first */
+    }
+
+    .hero-slider-nav {
+        order: 1; /* Place nav first, before the wrapper */
+        position: static; /* Let it flow normally */
+        margin-top: var(--spacing-l); /* Add space above it from header */
+        margin-bottom: var(--spacing-l); /* Add space below it, separating from content */
+        left: auto; /* Reset absolute positioning */
+        transform: none; /* Reset absolute positioning */
+        bottom: auto; /* Reset absolute positioning */
+        width: auto; /* Allow content to define width */
+    }
     .vertical-text-left { display: none; }
 
     .logoband-section .container img { height: 25px; }
@@ -488,6 +539,8 @@ p { font-size: 1rem; color: var(--color-text-medium); margin-bottom: var(--spaci
     .testimonial-slider-wrapper { padding: 0; min-height: 340px;}
     .quote-text { font-size: 1rem; }
     .final-cta-section p.large-text { font-size: 1.1rem; }
+    .cta-buttons-final .cta-button { width: 100%; margin-bottom: var(--spacing-s); }
+    .cta-buttons-final .cta-button:last-child { margin-bottom: 0; }
 }
 
 @media (max-width: 480px) {
@@ -497,6 +550,4 @@ p { font-size: 1rem; color: var(--color-text-medium); margin-bottom: var(--spaci
     .hero-text-column .cta-button.primary-cta { font-size: 0.9rem; padding: var(--spacing-s) var(--spacing-m); }
     .hero-image-column { height: 250px; }
     .testimonial-nav button { width: 35px; height: 35px; font-size: 1.1rem; }
-    .cta-buttons-final .cta-button { width: 100%; margin-bottom: var(--spacing-s); }
-    .cta-buttons-final .cta-button:last-child { margin-bottom: 0; }
 }
