@@ -145,21 +145,25 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 0.75rem;
+    font-size: 0.75rem; /* Mobile default */
     color: var(--color-bordeaux);
     text-decoration: none;
     text-align: center;
     flex-basis: 20%;
     transition: opacity 0.2s ease;
 }
-.fullscreen-nav-quicklinks .quicklink-item:hover {
-    opacity: 0.8;
-}
-
 .fullscreen-nav-quicklinks .quicklink-item iconify-icon {
-    font-size: 1.8rem;
+    font-size: 1.8rem; /* Mobile default */
     margin-bottom: 5px;
     color: var(--color-bordeaux);
+}
+@media (min-width: 768px) {
+    .fullscreen-nav-quicklinks .quicklink-item {
+        font-size: 1.125rem; /* 150% of 0.75rem */
+    }
+    .fullscreen-nav-quicklinks .quicklink-item iconify-icon {
+        font-size: 2.7rem; /* 150% of 1.8rem */
+    }
 }
 
 .fullscreen-nav-quicklinks .quicklink-item:hover iconify-icon,
@@ -184,13 +188,14 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
 .horizontal-scroll-container::-webkit-scrollbar-track { background: transparent; }
 .horizontal-scroll-container::-webkit-scrollbar-thumb { background-color: var(--color-border-subtle); border-radius: 4px; }
 .nav-tile {
-    flex: 0 0 auto; width: 250px; height: 320px; border-radius: 8px; overflow: hidden;
+    flex: 0 0 auto; width: 260px; max-width: 455px; height: 330px; border-radius: 8px; overflow: hidden;
     position: relative; display: flex; flex-direction: column; justify-content: flex-end;
     text-align: left; text-decoration: none; color: var(--color-text-primary-on-dark);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;
     scroll-snap-align: start;
 }
 @media (min-width: 768px) { .nav-tile { width: 300px; height: 380px; } }
+@media (min-width: 1200px) { .nav-tile { width: 455px; height: 450px; } }
 .nav-tile:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
 /* TYPO3 Hinweis: Bilder in .nav-tile sollten width/height Attribute bekommen, auch wenn CSS sie kontrolliert. */
 .nav-tile img.tile-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; transition: transform 0.4s ease; }
