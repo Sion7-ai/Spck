@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kikeriki GmbH - Reload your business</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#hero" class="logo" aria-label="Kikeriki GmbH Startseite">
+                <img src="https://sion7-ai.github.io/Spck/kikeriki/assets/kik_log_p.svg" alt="Kikeriki GmbH Logo">
+            </a>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#hero" class="nav-link">Home</a></li>
+                    <li><a href="#warum-wir" class="nav-link">Über Uns</a></li>
+                    <li class="dropdown-li">
+                        <a href="#leistungen" class="nav-link nav-link-dropdown" id="desktop-leistungen-trigger" aria-haspopup="true" aria-expanded="false">Leistungen <iconify-icon icon="mdi:chevron-down"></iconify-icon></a>
+                        <ul class="dropdown-menu" id="desktop-leistungen-menu" aria-labelledby="desktop-leistungen-trigger">
+                            <li><a href="#leadgenerierung-detail" class="nav-link">Leadgenerierung</a></li>
+                            <li><a href="#recruiting-detail" class="nav-link">Recruiting</a></li>
+                            <li><a href="#strategie-detail" class="nav-link">Strategie & Marketing</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#social-proof" class="nav-link">Cases</a></li>
+                    <li><a href="#cta-final" class="nav-link">Kontakt</a></li>
+                </ul>
+            </nav>
+            <a href="#cta-final" class="header-cta-icon" aria-label="Kontakt aufnehmen">
+                <iconify-icon icon="mdi:email-outline"></iconify-icon>
+            </a>
+            <button id="mobile-menu-toggle" aria-label="Menü öffnen/schließen" aria-expanded="false" aria-controls="mobile-menu">
+                <iconify-icon icon="mdi:menu"></iconify-icon>
+            </button>
+        </div>
+    </header>
+    <div id="mobile-menu">
+        <nav>
+            <ul>
+                 <li><a href="#hero" class="nav-link">Home</a></li>
+                 <li><a href="#warum-wir" class="nav-link">Über Uns</a></li>
+                 <li class="mobile-dropdown-li">
+                    <span class="nav-link-dropdown" role="button" aria-expanded="false" aria-controls="mobile-leistungen-submenu">Leistungen <iconify-icon icon="mdi:chevron-down"></iconify-icon></span>
+                    <ul class="mobile-dropdown-menu" id="mobile-leistungen-submenu">
+                        <li><a href="#leadgenerierung-detail" class="nav-link">Leadgenerierung</a></li>
+                        <li><a href="#recruiting-detail" class="nav-link">Recruiting</a></li>
+                        <li><a href="#strategie-detail" class="nav-link">Strategie & Marketing</a></li>
+                    </ul>
+                </li>
+                 <li><a href="#social-proof" class="nav-link">Cases</a></li>
+                 <li><a href="#cta-final" class="nav-link">Kontakt</a></li>
+                 <li><a href="#cta-final" class="cta-button primary-cta mobile-menu-cta">Kontakt aufnehmen</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT WRAPPER (für Sections) -->
+    <main id="main-content">
+        <!-- HERO SLIDER SECTION -->
+        <section id="hero" class="hero-slider-section">
+            <div class="vertical-text-left">
+                <span>RELOAD YOUR BUSINESS</span>
+            </div>
+            <div class="hero-slider-wrapper">
+                <!-- Slide 1 -->
+                <div class="hero-slide active">
+                    <div class="hero-slide-content">
+                        <div class="hero-text-column">
+                            <h1>Ihr Weckruf für messbaren Erfolg: Wir bringen Ihnen qualifizierte Leads & die besten Talente.</h1>
+                            <p class="sub-headline">Praxiserprobte Strategien von erfahrenen Unternehmerinnen – pragmatisch, messbar, effektiv. Für KMUs und Konzerne im DACH-Raum.</p>
+                            <div class="hero-button-container">
+                                <a href="#cta-final" class="cta-button primary-cta">Kostenloses Strategiegespräch</a>
+                            </div>
+                        </div>
+                        <div class="hero-image-column" style="background-image: url('https://static.wixstatic.com/media/8ee62a_a10a910810834fc28a47f6db40486c7e~mv2.jpg/v1/fill/w_1905,h_948,fp_0.20_0.51,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8ee62a_a10a910810834fc28a47f6db40486c7e~mv2.jpg');">
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="hero-slide">
+                     <div class="hero-slide-content">
+                        <div class="hero-text-column">
+                            <h1>Mehr Kunden. Bessere Mitarbeiter. Klare Strategie.</h1>
+                            <p class="sub-headline">Kikeriki macht's möglich – mit pragmatischen Lösungen, die wirklich zünden.</p>
+                            <div class="hero-button-container">
+                                <a href="#leistungen" class="cta-button primary-cta">Unsere Leistungen entdecken</a>
+                            </div>
+                        </div>
+                        <div class="hero-image-column" style="background-image: url('https://static.wixstatic.com/media/8ee62a_6c001e8318de44219066fbb5f4246f07~mv2.jpg/v1/fill/w_1905,h_831,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8ee62a_6c001e8318de44219066fbb5f4246f07~mv2.jpg');">
+                        </div>
+                    </div>
+                </div>
+                 <!-- Slide 3 -->
+                <div class="hero-slide">
+                    <div class="hero-slide-content">
+                        <div class="hero-text-column">
+                            <h1>Deine Vision. Unsere Stärke. Deine Zukunft.</h1>
+                            <p class="sub-headline">Gemeinsam entwickeln wir Strategien, die Ihr Unternehmen auf das nächste Level heben.</p>
+                            <div class="hero-button-container">
+                                <a href="#warum-wir" class="cta-button primary-cta">Warum Kikeriki?</a>
+                            </div>
+                        </div>
+                        <div class="hero-image-column" style="background-image: url('https://static.wixstatic.com/media/8ee62a_0e2d5f8f39014743b2cd9fb3a1e445f3~mv2.jpg/v1/fill/w_683,h_969,fp_0.49_0.56,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Frame%2094%20(1).jpg');">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-slider-nav">
+                <button class="nav-dot active" data-slide="0" aria-label="Gehe zu Slide 1">01</button>
+                <button class="nav-dot" data-slide="1" aria-label="Gehe zu Slide 2">02</button>
+                <button class="nav-dot" data-slide="2" aria-label="Gehe zu Slide 3">03</button>
+            </div>
+        </section>
+
+        <!-- LOGOBAND SECTION -->
+        <section id="logoband" class="logoband-section dark-bg">
+            <div class="container">
+                <img src="https://static.wixstatic.com/media/533acc_cc695f24607b4480a60875c6f1c5a252~mv2.webp" alt="Kundenlogos und Partner von Kikeriki">
+            </div>
+        </section>
+
+        <!-- PROBLEM / LÖSUNG (Adapted style) -->
+        <section id="problem-solution" class="problem-solution-section section-padding">
+            <div class="container split-layout">
+                <div class="split-text-column">
+                    <h2 class="section-title-left fade-in">Kennen Sie das? <br>Wachstumspotenziale ungenutzt?</h2>
+                    <p class="fade-in">Viele Unternehmen stehen vor ähnlichen Herausforderungen. Doch für jede gibt es eine Lösung, die wirklich passt.</p>
+                </div>
+                <div class="split-content-column">
+                    <div class="problem-item fade-in">
+                        <iconify-icon icon="mdi:comment-question-outline" class="problem-icon"></iconify-icon>
+                        <div>
+                            <h3>Zu wenige qualifizierte Anfragen?</h3>
+                            <p>Ihre Pipeline könnte voller sein, aber die richtigen Leads bleiben aus.</p>
+                        </div>
+                    </div>
+                    <div class="problem-item fade-in">
+                        <iconify-icon icon="mdi:account-multiple-minus-outline" class="problem-icon"></iconify-icon>
+                        <div>
+                            <h3>Schwierigkeiten, passende Mitarbeiter zu finden?</h3>
+                            <p>Der War for Talents ist real und Sie suchen nach den Nadeln im Heuhaufen.</p>
+                        </div>
+                    </div>
+                    <div class="problem-item fade-in">
+                        <iconify-icon icon="mdi:target-arrow" class="problem-icon"></iconify-icon>
+                        <div>
+                            <h3>Marketing-Maßnahmen ohne klare Ergebnisse?</h3>
+                            <p>Sie investieren, aber der ROI ist unklar und Erfolge sind nicht messbar.</p>
+                        </div>
+                    </div>
+                     <p class="solution-transition fade-in"><strong>Wir haben die Lösung: Kikeriki.</strong> Wir analysieren, strategisieren und setzen um – damit Sie Ihre Ziele erreichen.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- KERNLEISTUNGEN (Visual cards, new style) -->
+        <section id="leistungen" class="core-services-section section-padding alt-bg">
+            <div class="container">
+                <h2 class="section-title fade-in">Unsere Expertise für Ihren Erfolg</h2>
+                <div class="services-grid-visual">
+                    <div class="service-card-visual fade-in" id="leadgenerierung-detail">
+                        <div class="service-card-image" style="background-image: url('https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');"></div>
+                        <div class="service-card-content">
+                            <iconify-icon icon="mdi:account-search-outline" class="service-icon-small"></iconify-icon>
+                            <h3>Leadgenerierung</h3>
+                            <p>Wir verwandeln Interessenten in zahlende Kunden durch datengetriebene Kampagnen und überzeugenden Content.</p>
+                            <a href="#leadgenerierung-detail" class="link-arrow">Mehr erfahren <iconify-icon icon="mdi:arrow-right"></iconify-icon></a>
+                        </div>
+                    </div>
+                    <div class="service-card-visual fade-in" id="recruiting-detail">
+                        <div class="service-card-image" style="background-image: url('https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');"></div>
+                        <div class="service-card-content">
+                            <iconify-icon icon="mdi:account-group-outline" class="service-icon-small"></iconify-icon>
+                            <h3>Recruiting</h3>
+                            <p>Finden Sie Top-Talente, die Ihr Unternehmen wirklich voranbringen – mit intelligenten Recruiting-Strategien.</p>
+                            <a href="#recruiting-detail" class="link-arrow">Mehr erfahren <iconify-icon icon="mdi:arrow-right"></iconify-icon></a>
+                        </div>
+                    </div>
+                    <div class="service-card-visual fade-in" id="strategie-detail">
+                        <div class="service-card-image" style="background-image: url('https://static.wixstatic.com/media/8ee62a_0e2d5f8f39014743b2cd9fb3a1e445f3~mv2.jpg/v1/fill/w_683,h_969,fp_0.49_0.56,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Frame%2094%20(1).jpg');"></div>
+                        <div class="service-card-content">
+                            <iconify-icon icon="mdi:chart-line" class="service-icon-small"></iconify-icon>
+                            <h3>Strategie & Marketing</h3>
+                            <p>Fundierte Strategien als Basis für nachhaltigen Erfolg. Wir denken voraus – für Sie.</p>
+                            <a href="#strategie-detail" class="link-arrow">Mehr erfahren <iconify-icon icon="mdi:arrow-right"></iconify-icon></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WARUM KIKERIKI? - USPs (Accordion Style) -->
+        <section id="warum-wir" class="why-us-section section-padding">
+            <div class="container">
+                <h2 class="section-title fade-in">Mehr als nur eine Agentur: <br>Das macht uns einzigartig</h2>
+                <div class="accordion">
+                    <div class="accordion-item fade-in">
+                        <button class="accordion-header" aria-expanded="false" aria-controls="accordion-content-1">
+                            <h4><img src="https://sion7-ai.github.io/Spck/kikeriki/assets/bullet_p.svg" alt="" class="bullet-icon">Praxis & Erfahrung</h4>
+                            <iconify-icon icon="mdi:plus" class="accordion-icon"></iconify-icon>
+                        </button>
+                        <div class="accordion-content" id="accordion-content-1">
+                            <p>Jahrelange Erfahrung auf Agentur-UND Unternehmerseite (C-Level). Wir kennen beide Welten und sprechen Ihre Sprache – pragmatisch und lösungsorientiert.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item fade-in">
+                        <button class="accordion-header" aria-expanded="false" aria-controls="accordion-content-2">
+                            <h4><img src="https://sion7-ai.github.io/Spck/kikeriki/assets/bullet_p.svg" alt="" class="bullet-icon">Strategie zuerst</h4>
+                            <iconify-icon icon="mdi:plus" class="accordion-icon"></iconify-icon>
+                        </button>
+                        <div class="accordion-content" id="accordion-content-2">
+                            <p>Wir hinterfragen, denken neu und setzen dann erst um. Warum? Weil wir es können und es zu besseren, nachhaltigen Ergebnissen führt. Keine Schnellschüsse, sondern durchdachte Konzepte.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item fade-in">
+                        <button class="accordion-header" aria-expanded="false" aria-controls="accordion-content-3">
+                            <h4><img src="https://sion7-ai.github.io/Spck/kikeriki/assets/bullet_p.svg" alt="" class="bullet-icon">Messbarkeit & Pragmatismus</h4>
+                            <iconify-icon icon="mdi:plus" class="accordion-icon"></iconify-icon>
+                        </button>
+                        <div class="accordion-content" id="accordion-content-3">
+                            <p>Zahlen, Daten, Fakten. Wir lieben es, Erfolge messbar zu machen und pragmatische Lösungen zu finden, die wirklich funktionieren und keinen unnötigen Overhead produzieren.</p>
+                        </div>
+                    </div>
+                     <div class="accordion-item fade-in">
+                        <button class="accordion-header" aria-expanded="false" aria-controls="accordion-content-4">
+                            <h4><img src="https://sion7-ai.github.io/Spck/kikeriki/assets/bullet_p.svg" alt="" class="bullet-icon">Starke Gründerinnen & Experten-Netzwerk</h4>
+                            <iconify-icon icon="mdi:plus" class="accordion-icon"></iconify-icon>
+                        </button>
+                        <div class="accordion-content" id="accordion-content-4">
+                            <p>Zwei erfahrene Köpfe, unterstützt von einem flexiblen Netzwerk aus Top-Spezialisten – maßgeschneidert für Ihr Projekt und Ihre Branche. So garantieren wir höchste Qualität.</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="text-center fade-in why-us-cta-container">
+                    <a href="#team" class="cta-button secondary-cta">Lernen Sie die Köpfe dahinter kennen</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEAM SECTION (Katja & Verena) -->
+        <section id="team" class="team-section section-padding alt-bg">
+            <div class="container">
+                <h2 class="section-title fade-in">Unsere Gründerinnen – Ihre Ansprechpartnerinnen</h2>
+                <div class="team-grid">
+                    <div class="team-member-card fade-in">
+                        <div class="team-member-image-container">
+                            <img src="https://static.wixstatic.com/media/8ee62a_384f75635adf4e2e912fde732b883e01~mv2.jpg/v1/crop/x_0,y_1681,w_2731,h_1504/fill/w_655,h_361,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Untitled.jpg" alt="Katja Kenk" class="team-member-photo">
+                        </div>
+                        <div class="team-member-info">
+                            <h3>Katja Kenk</h3>
+                            <p class="member-title">Bachelor of Media engineering and operations (cci)</p>
+                            <div class="contact-links">
+                                <a href="mailto:katja@kikeriki.gmbh" class="contact-link"><iconify-icon icon="mdi:email-outline"></iconify-icon> E-Mail schicken</a>
+                                <a href="#" class="contact-link"><iconify-icon icon="mdi:calendar-month-outline"></iconify-icon> Termin buchen</a>
+                                <a href="tel:+4915146539725" class="contact-link"><iconify-icon icon="mdi:phone-outline"></iconify-icon> +49 151 465 39 725</a>
+                                <a href="#" class="contact-link"><iconify-icon icon="mdi:card-account-details-outline"></iconify-icon> VCF Card</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-member-card fade-in">
+                         <div class="team-member-image-container">
+                            <img src="https://static.wixstatic.com/media/533acc_1fe3fec46bf54b2daeee6ceba643486a~mv2.png/v1/fill/w_655,h_361,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Bildschirmfoto%202024-10-25%20um%2015_05_06.png" alt="Verena Ruhmann" class="team-member-photo">
+                        </div>
+                        <div class="team-member-info">
+                            <h3>Verena Ruhmann</h3>
+                            <p class="member-title">Diplom Betriebswirtin Fachrichtung Marketing und Kommunikation</p>
+                             <div class="contact-links">
+                                <a href="mailto:verena@kikeriki.gmbh" class="contact-link"><iconify-icon icon="mdi:email-outline"></iconify-icon> E-Mail schicken</a>
+                                <a href="#" class="contact-link"><iconify-icon icon="mdi:calendar-month-outline"></iconify-icon> Termin buchen</a>
+                                <a href="tel:+4915730887098" class="contact-link"><iconify-icon icon="mdi:phone-outline"></iconify-icon> +49 157 30 88 70 98</a>
+                                <a href="#" class="contact-link"><iconify-icon icon="mdi:card-account-details-outline"></iconify-icon> VCF Card</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOCIAL PROOF / TESTIMONIALS (Slider Style) -->
+        <section id="social-proof" class="testimonial-slider-section section-padding">
+            <div class="container">
+                <h2 class="section-title fade-in">Erfolge, die für sich sprechen</h2>
+                <div class="testimonial-slider-wrapper">
+                    <div class="testimonial-slider">
+                        <div class="testimonial-slide">
+                            <iconify-icon icon="mdi:format-quote-open" class="quote-icon"></iconify-icon>
+                            <p class="quote-text">"Dank Kikeriki konnten wir unsere Schlüsselpositionen doppelt so schnell besetzen. Absolute Profis mit Herz!"</p>
+                            <p class="attribution">- Zufriedener Kunde A, Technologie-Branche</p>
+                        </div>
+                        <div class="testimonial-slide">
+                            <iconify-icon icon="mdi:format-quote-open" class="quote-icon"></iconify-icon>
+                            <p class="quote-text">"Die Lead-Qualität hat sich signifikant verbessert. Endlich messbare Erfolge im Marketing und eine super Zusammenarbeit."</p>
+                            <p class="attribution">- Geschäftsführer B, Mittelstand Industrie</p>
+                        </div>
+                        <div class="testimonial-slide">
+                             <iconify-icon icon="mdi:format-quote-open" class="quote-icon"></iconify-icon>
+                            <p class="quote-text">"Strategisch top, menschlich super. Kikeriki versteht unsere Bedürfnisse und liefert Ergebnisse, die überzeugen."</p>
+                            <p class="attribution">- Marketingleiterin C, Dienstleistungssektor</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-nav">
+                        <button class="prev-testimonial" aria-label="Vorheriges Testimonial"><iconify-icon icon="mdi:arrow-left"></iconify-icon></button>
+                        <button class="next-testimonial" aria-label="Nächstes Testimonial"><iconify-icon icon="mdi:arrow-right"></iconify-icon></button>
+                    </div>
+                </div>
+                 <div class="text-center fade-in testimonial-cta-container">
+                    <a href="#" class="cta-button secondary-cta">Alle Fallstudien ansehen</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION (FINAL) -->
+        <section id="cta-final" class="final-cta-section section-padding dark-bg">
+            <div class="container text-center">
+                <h2 class="section-title fade-in">Bereit für den nächsten Schritt? <br>Lassen Sie uns gemeinsam durchstarten!</h2>
+                <p class="fade-in large-text">Kontaktieren Sie uns für ein unverbindliches Erstgespräch und erfahren Sie, wie Kikeriki Ihr Unternehmen voranbringen kann. Wir freuen uns auf Ihre Herausforderung!</p>
+                <div class="cta-buttons-final fade-in">
+                    <a href="mailto:hallo@kikeriki.gmbh" class="cta-button primary-cta">E-Mail schreiben</a>
+                    <a href="#" class="cta-button secondary-cta on-dark">Termin vereinbaren</a>
+                </div>
+                 <div class="contact-alternatives-final fade-in">
+                    <p>Oder rufen Sie uns direkt an:</p>
+                    <p><a href="tel:+4915146539725">Katja: +49 151 465 39 725</a> | <a href="tel:+4915730887098">Verena: +49 157 30 88 70 98</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="footer" class="dark-bg">
+        <div class="container footer-grid">
+            <div class="footer-branding">
+                <img src="https://sion7-ai.github.io/Spck/kikeriki/assets/kik_log_n.svg" alt="Kikeriki GmbH Logo" class="footer-logo-img">
+                <p>Kikeriki GmbH<br>Reload your business.</p>
+            </div>
+            <div class="footer-links-column">
+                <h4>Unternehmen</h4>
+                <ul>
+                    <li><a href="#warum-wir">Über Uns</a></li>
+                    <li><a href="#leistungen">Leistungen</a></li>
+                    <li><a href="#social-proof">Cases</a></li>
+                    <li><a href="#team">Team</a></li>
+                </ul>
+            </div>
+            <div class="footer-links-column">
+                <h4>Rechtliches</h4>
+                <ul>
+                    <li><a href="#">Impressum</a></li>
+                    <li><a href="#">Datenschutz</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Kontakt</h4>
+                <p><a href="mailto:hallo@kikeriki.gmbh">hallo@kikeriki.gmbh</a></p>
+                <div class="social-media-icons-footer">
+                    <a href="#" aria-label="Kikeriki auf LinkedIn"><iconify-icon icon="mdi:linkedin"></iconify-icon></a>
+                    <a href="#" aria-label="Kikeriki auf Xing"><iconify-icon icon="mdi:xing"></iconify-icon></a>
+                </div>
+            </div>
+        </div>
+        <div class="container copyright-footer">
+            <p>© <span id="current-year"></span> Kikeriki GmbH. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+    <!-- Swiper JS ist optional, wenn komplexere Slider benötigt werden. Für dieses Beispiel nicht aktiv genutzt. -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script> -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
