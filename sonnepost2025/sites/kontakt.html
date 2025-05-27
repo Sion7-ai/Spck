@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
+    <title>Kontakt & Anreise | Hotel Sonne Post</title>
+    <!-- TYPO3 Hinweis: Dynamische Meta Description -->
+    <meta name="description" content="Kontaktieren Sie uns für Anfragen und Reservierungen im Hotel Sonne Post. Finden Sie alle wichtigen Kontaktdaten und Anreiseinformationen.">
+
+    <!-- FAVICON: Pfad anpassen, falls nötig. TYPO3 kann dies verwalten. -->
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+
+    <!-- FONTS: Google Fonts Einbindung. TYPO3 kann dies über Page TSConfig oder Extension verwalten. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- TYPO3 Hinweis: Ausgelagerte CSS-Datei. Pfad ggf. anpassen (relativ zum sites/ Ordner). -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        /* === TYPO3 Hinweis: Spezifische Stile für die Kontaktseite === */
+        /* Diese Stile würden in einem realen TYPO3-Projekt idealerweise in die zentrale `main.css`
+           oder in eine dedizierte seiten- oder modul-spezifische CSS-Datei integriert werden. */
+
+        body {
+            background-color: var(--color-white); /* Standardmäßig heller Hintergrund */
+        }
+
+        /* Header Anpassung für Unterseiten: Immer im "scrolled" Zustand */
+        .site-header {
+            background-color: var(--color-header-bg-scrolled);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background-image: none;
+        }
+        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
+            color: var(--color-header-icon-scrolled);
+        }
+         .site-header .hamburger-icon span {
+            background: var(--color-header-icon-scrolled);
+        }
+        /* Logos tauschen sich nicht aus, immer das dunkle */
+        .site-header .header-center .central-logo .logo-initial {
+            display: none; opacity: 0; position: absolute; pointer-events: none;
+        }
+        .site-header .header-center .central-logo .logo-scrolled {
+            display: block; opacity: 1; position: relative;
+        }
+        .site-header .header-right .contact-icon-btn iconify-icon {
+            color: var(--color-header-contact-icon-scrolled);
+        }
+
+
+        /* Hero Sektion auf Unterseiten */
+       .page-hero-section {
+            position: relative;
+            width: 100%;
+            height: 60vh; /* Responsive Höhe für Hero */
+            min-height: 350px;
+            max-height: 550px;
+            overflow: hidden;
+            margin-top: var(--header-height); /* Berücksichtigt die Höhe des fixen Headers */
+            display: flex; /* Ermöglicht vertikale/horizontale Zentrierung des Inhalts, falls vorhanden */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white); /* Textfarbe für Hero-Inhalt, falls vorhanden */
+            background-size: cover; /* Bild füllend darstellen */
+            background-position: center; /* Bild zentrieren */
+            background-repeat: no-repeat; /* Kachelung verhindern */
+        }
+        .page-hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1; /* Liegt unter dem Overlay */
+        }
+        .page-hero-overlay { /* Optional: Für einen leichten Fade-Effekt oder Verdunkelung */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.0) 100%);
+            z-index: 2; /* Liegt über dem Bild, unter dem Text */
+        }
+        .page-hero-content {
+             /* Dieses Element ist leer, da keine sichtbare Überschrift auf dem Bild gewünscht ist.
+                Die Überschrift ist für Screenreader in .sr-only. */
+             display: none; /* Versteckt das Content-Wrapper-Element, wenn es keine sichtbaren Inhalte hat */
+        }
+
+        /* Kontaktbereich Sektion (Container für Kontaktinfo und Formular) */
+        .contact-page-section {
+            background-color: var(--color-white); /* Hintergrundfarbe für die gesamte Sektion */
+            padding: 80px 0; /* Vertikaler Abstand */
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Standard: Eine Spalte für Mobilgeräte */
+            gap: 50px; /* Abstand zwischen den Spalten/Zeilen */
+            max-width: 1000px; /* Maximale Breite des Rasters */
+            margin: 0 auto; /* Zentrierung des Rasters */
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr 1.5fr; /* Links: 1 Teil, Rechts (Formular): 1.5 Teile */
+                gap: 60px; /* Größerer Abstand auf größeren Bildschirmen */
+            }
+        }
+        @media (min-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr 2fr; /* Links: 1 Teil, Rechts (Formular): 2 Teile */
+            }
+        }
+
+        .contact-info-column,
+        .contact-form-column {
+            background-color: var(--color-white); /* Hintergrund für beide Spalten (kann individuell sein) */
+            padding: 40px; /* Innenabstand der Spalten */
+            border-radius: 6px; /* Abgerundete Ecken */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Leichter Schatten für Tiefenwirkung */
+        }
+        /* Spezieller Hintergrund für die Informationsspalte, falls gewünscht */
+        .contact-info-column {
+            background-color: var(--color-beige);
+        }
+
+        .contact-info-column h2,
+        .contact-form-column h2 {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--color-bordeaux);
+            text-align: left; /* Überschrift links ausrichten */
+            margin-bottom: 1em; /* Abstand zur Adresse/zum Formular */
+        }
+
+        .contact-info-column address {
+            font-style: normal; /* Entfernt die Standard-Kursivstellung */
+            line-height: 1.7;
+            margin-bottom: 2em;
+            color: var(--color-text-secondary);
+        }
+        .contact-info-column address a {
+            color: var(--color-bordeaux); /* Links in der Adresse in Akzentfarbe */
+        }
+        .contact-info-column address br { display: block; } /* Sicherstellen, dass Zeilenumbrüche sichtbar sind */
+
+        .contact-info-column h4 {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--color-text-primary);
+            margin-top: 2em; /* Abstand zur vorherigen Sektion */
+            margin-bottom: 1em;
+        }
+        .contact-info-column .btn-outline {
+             margin-top: 1.5em; /* Abstand zum Text darüber */
+        }
+
+        /* Kontaktformular Styling */
+        .contact-form-column form {
+            display: grid;
+            grid-template-columns: 1fr; /* Standard: Eine Spalte für alle Felder */
+            gap: 20px; /* Abstand zwischen Formularfeldern */
+        }
+        .form-group.enquiry-type-group {
+            background-color: var(--color-beige); /* Hintergrundfarbe für das Anliegen-Feld */
+            padding: 15px 20px; /* Innenabstand für das hervorgehobene Feld */
+            border-radius: 6px; /* Abgerundete Ecken */
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Leichter Schatten nach innen */
+        }
+        .form-group.enquiry-type-group label {
+            font-size: 1.1rem; /* Größere Schrift für das Label */
+            font-weight: 600; /* Stärkerer Font-Weight */
+            color: var(--color-bordeaux); /* Akzentfarbe für das Label */
+            margin-bottom: 10px; /* Mehr Abstand zum Select-Feld */
+        }
+        .form-group.enquiry-type-group select {
+            border-color: var(--color-border-subtle); /* Leichte Umrandung */
+            background-color: var(--color-white); /* Weißer Hintergrund für das Select-Feld selbst */
+        }        @media (min-width: 550px) {
+            .contact-form-column form {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Zwei Spalten, wenn genug Platz */
+            }
+            .form-group-full-width {
+                grid-column: 1 / -1; /* Nimmt die volle Breite im Grid ein */
+            }
+        }
+        .form-group {
+            position: relative; /* Für zukünftige Validierungs-Overlays etc. */
+            margin-bottom: 0; /* Abstand wird durch gap im Grid kontrolliert */
+        }
+        .form-group label {
+            display: block; /* Label über dem Input */
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            font-size: 0.95rem;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="number"], /* Für Zimmeranfrage: Anzahl */
+        .form-group input[type="date"], /* Für Zimmeranfrage: Anreise/Abreise */
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--color-border-subtle);
+            border-radius: 4px;
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            color: var(--color-text-primary);
+            background-color: var(--color-white);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--color-text-secondary);
+            opacity: 0.7;
+        }
+        .form-group input:focus-visible,
+        .form-group select:focus-visible,
+        .form-group textarea:focus-visible {
+            border-color: var(--color-bordeaux);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(140, 30, 45, 0.2);
+        }
+        .form-group textarea {
+            min-height: 120px; /* Mindesthöhe für Textarea */
+            resize: vertical; /* Nur vertikale Größenänderung erlauben */
+        }
+        .form-group select {
+             /* Pfeil für Selectbox anpassen */
+             -webkit-appearance: none;
+             -moz-appearance: none;
+             appearance: none;
+             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238C1E2D'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+             background-repeat: no-repeat;
+             background-position: right 15px center;
+             background-size: 24px;
+             cursor: pointer;
+        }
+
+        /* Hidden fields for dynamic display */
+        .form-group.hidden-field {
+            display: none;
+            /* Important: When changing display, ensure accessibility by managing inert attribute if needed,
+               but simple display:none is often sufficient for forms if logic is handled correctly. */
+        }
+
+        .form-required-info {
+            grid-column: 1 / -1; /* Nimmt die volle Breite ein */
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin-top: -10px; /* Etwas näher an das Formular rücken */
+        }
+
+        /* Captcha Styling */
+        .captcha-group {
+            grid-column: 1 / -1; /* Nimmt die volle Breite ein */
+            display: flex;
+            flex-wrap: wrap; /* Erlaubt Umbruch auf kleineren Bildschirmen */
+            align-items: center; /* Vertikale Ausrichtung der Elemente */
+            gap: 15px; /* Abstand zwischen Captcha-Elementen */
+        }
+        .captcha-group label {
+            flex: 1 1 100%; /* Label nimmt volle Breite ein */
+            margin-bottom: 0; /* Keine zusätzliche Marge */
+        }
+        .captcha-input-container {
+            display: flex;
+            gap: 10px;
+            flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+        }
+        .captcha-input-container input {
+            flex-grow: 1;
+            max-width: 180px; /* Max. Breite für Captcha-Input */
+        }
+        .captcha-image-wrapper {
+            background-color: var(--color-sand);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: 4px;
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px; /* Feste Breite für Captcha-Bild */
+            height: 40px; /* Feste Höhe */
+            overflow: hidden;
+            flex-shrink: 0; /* Verhindert Schrumpfung */
+        }
+        .captcha-image-wrapper img {
+            width: 100%;
+            height: auto;
+            object-fit: contain; /* Bild im Container halten */
+        }
+        .captcha-refresh-btn {
+            background: none;
+            border: 1px solid var(--color-border-subtle);
+            border-radius: 4px;
+            color: var(--color-bordeaux);
+            padding: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            width: 40px; /* Quadratisch */
+            height: 40px;
+        }
+        .captcha-refresh-btn:hover, .captcha-refresh-btn:focus-visible {
+            background-color: var(--color-bordeaux);
+            color: var(--color-white);
+            border-color: var(--color-bordeaux);
+        }
+        .captcha-refresh-btn iconify-icon {
+            font-size: 1.4rem;
+        }
+        .captcha-hint {
+            grid-column: 1 / -1; /* Nimmt die volle Breite ein */
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin-top: -5px; /* Etwas näher an das Captcha rücken */
+        }
+        .captcha-hint a {
+            color: var(--color-text-secondary);
+            text-decoration: underline;
+        }
+
+        .form-submit-group {
+            grid-column: 1 / -1; /* Nimmt die volle Breite ein */
+            text-align: right; /* Button rechts ausrichten */
+            margin-top: 20px;
+        }
+        .form-submit-group .btn {
+            padding: 1em 2em;
+            font-size: 1.1rem;
+            min-width: 180px;
+        }
+
+        /* Anpassung der kombinierten Sektion für Newsletter & Social Media (dieser Block fehlte und wird hinzugefügt) */
+        .contact-page-combined-cta {
+            background-color: var(--color-sand); /* Hintergrundfarbe für die gesamte Sektion */
+            padding: 80px 0; /* Vertikaler Abstand */
+        }
+        .contact-page-combined-cta .container {
+            max-width: 1000px;
+        }
+        .contact-page-combined-cta .combined-row-grid {
+             display: grid;
+             grid-template-columns: 1fr; /* Mobile: untereinander */
+             gap: 40px;
+             align-items: stretch; /* Spalten haben gleiche Höhe */
+             justify-content: center;
+        }
+        @media (min-width: 768px) {
+            .contact-page-combined-cta .combined-row-grid {
+                grid-template-columns: repeat(2, 1fr); /* Desktop: nebeneinander */
+                gap: 60px;
+            }
+        }
+        .contact-page-combined-cta .combined-column {
+            background-color: var(--color-white);
+            padding: 40px;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex; /* Flexbox um Inhalt zu zentrieren und vertikal zu verteilen */
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center; /* Zentriert horizontal */
+            text-align: center;
+        }
+        .contact-page-combined-cta .combined-column h2 {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            color: var(--color-bordeaux);
+            margin-bottom: 0.75em;
+            text-align: center;
+        }
+        .contact-page-combined-cta .combined-column p {
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5em;
+            max-width: 400px; /* Begrenzt Textbreite für Lesbarkeit */
+            text-align: center;
+        }
+        .contact-page-combined-cta .combined-column .btn-container {
+             margin-top: auto; /* Schiebt Button/Inhalt an den unteren Rand, wenn Spalten gestreckt sind */
+        }
+        
+        .contact-page-combined-cta .social-links {
+            display: flex;            /* Aktiviert Flexbox für die horizontale Anordnung */
+            flex-direction: row;      /* Stellt explizit die Ausrichtung in einer Reihe ein */
+            justify-content: center;  /* Zentriert die Icons horizontal im Container */
+            align-items: center;      /* Zentriert die Icons vertikal, falls sie unterschiedliche Höhen hätten */
+            gap: 20px;                /* Abstand zwischen den Icons */
+            margin-top: auto;         /* Schiebt diesen Block an den unteren Rand, wenn die Spalten gestreckt sind */
+        }
+
+        .contact-page-combined-cta .social-links a {
+            display: inline-flex;     /* Wichtig, um die Iconify-Icons als Flex-Elemente zu behandeln und vertikal zu zentrieren */
+            align-items: center;      /* Zentriert das Icon innerhalb des Anker-Tags */
+            justify-content: center;  /* Zentriert das Icon innerhalb des Anker-Tags */
+            text-decoration: none;    /* Entfernt die Unterstreichung von Links */
+            color: var(--color-bordeaux); /* Farbe des Links/Icons setzen */
+            transition: transform 0.2s ease, color 0.2s ease; /* Übergang für Hover-Effekte */
+        }
+
+        .contact-page-combined-cta .social-links a iconify-icon {
+            font-size: 2.2rem; /* Größe der Icons */
+            color: inherit; /* Erbt die Farbe vom übergeordneten Link */
+        }
+
+        .contact-page-combined-cta .social-links a:hover {
+            transform: scale(1.1); /* Zoom-Effekt beim Hover */
+            color: #701623; /* Dunkleres Bordeaux beim Hover */
+        }
+         .contact-page-combined-cta .form-newsletter {
+            display: flex;
+            flex-direction: column; /* Input und Button untereinander */
+            align-items: center; /* Zentriert die Elemente */
+            max-width: 350px; /* Engere Formularbreite */
+            width: 100%;
+            margin: 0 auto;
+        }
+        .contact-page-combined-cta .form-newsletter input[type="email"] {
+            width: 100%;
+            border-radius: 4px; /* Einheitliche Rundung */
+            border-right: 1px solid var(--color-border-subtle); /* Kein fehlender Rand */
+            margin-bottom: 15px; /* Abstand zum Button */
+        }
+        .contact-page-combined-cta .form-newsletter button {
+            width: 100%;
+            border-radius: 4px;
+            padding: 0.8em 1.5em;
+        }
+        .contact-page-combined-cta .form-newsletter button iconify-icon {
+            margin-right: 8px; /* Abstand zum Text im Button */
+        }
+        .contact-page-combined-cta #newsletter-privacy-info-combined {
+            text-align: center;
+            max-width: none; /* Nicht beschränken, um Zeilenumbruch zu vermeiden */
+            margin-top: 15px;
+        }
+
+        /* Anpassung der kombinierten Sektion für Newsletter & Social Media */
+        .contact-page-combined-cta {
+            background-color: var(--color-sand); /* Hintergrundfarbe für die gesamte Sektion */
+            padding: 80px 0; /* Vertikaler Abstand */
+        }
+        .contact-page-combined-cta .container {
+            max-width: 1000px;
+        }
+        .contact-page-combined-cta .combined-row-grid {
+             display: grid;
+             grid-template-columns: 1fr; /* Mobile: untereinander */
+             gap: 40px;
+             align-items: stretch; /* Spalten haben gleiche Höhe */
+             justify-content: center;
+        }
+        @media (min-width: 768px) {
+            .contact-page-combined-cta .combined-row-grid {
+                grid-template-columns: repeat(2, 1fr); /* Desktop: nebeneinander */
+                gap: 60px;
+            }
+        }
+        .contact-page-combined-cta .combined-column {
+            background-color: var(--color-white);
+            padding: 40px;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex; /* Flexbox um Inhalt zu zentrieren und vertikal zu verteilen */
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center; /* Zentriert horizontal */
+            text-align: center;
+        }
+        .contact-page-combined-cta .combined-column h2 {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+            color: var(--color-bordeaux);
+            margin-bottom: 0.75em;
+            text-align: center;
+        }
+        .contact-page-combined-cta .combined-column p {
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5em;
+            max-width: 400px; /* Begrenzt Textbreite für Lesbarkeit */
+            text-align: center;
+        }
+        .contact-page-combined-cta .combined-column .btn-container {
+             margin-top: auto; /* Schiebt Button/Inhalt an den unteren Rand, wenn Spalten gestreckt sind */
+        }
+        .contact-page-combined-cta .social-links {
+             margin-top: auto; /* Schiebt Social Links an den unteren Rand */
+             display: flex;
+             gap: 20px;
+             justify-content: center;
+        }
+         .contact-page-combined-cta .social-links a iconify-icon {
+            font-size: 2.2rem;
+            color: var(--color-bordeaux);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+         .contact-page-combined-cta .social-links a:hover iconify-icon {
+            transform: scale(1.1);
+            color: #701623; /* Dunkleres Bordeaux beim Hover */
+        }
+         .contact-page-combined-cta .form-newsletter {
+            display: flex;
+            flex-direction: column; /* Input und Button untereinander */
+            align-items: center; /* Zentriert die Elemente */
+            max-width: 350px; /* Engere Formularbreite */
+            width: 100%;
+            margin: 0 auto;
+        }
+        .contact-page-combined-cta .form-newsletter input[type="email"] {
+            width: 100%;
+            border-radius: 4px; /* Einheitliche Rundung */
+            border-right: 1px solid var(--color-border-subtle); /* Kein fehlender Rand */
+            margin-bottom: 15px; /* Abstand zum Button */
+        }
+        .contact-page-combined-cta .form-newsletter button {
+            width: 100%;
+            border-radius: 4px;
+            padding: 0.8em 1.5em;
+        }
+        .contact-page-combined-cta .form-newsletter button iconify-icon {
+            margin-right: 8px; /* Abstand zum Text im Button */
+        }
+        .contact-page-combined-cta #newsletter-privacy-info-combined {
+            text-align: center;
+            max-width: none; /* Nicht beschränken, um Zeilenumbruch zu vermeiden */
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- TYPO3 Hinweis: 'Zum Hauptinhalt springen' Link für Barrierefreiheit -->
+    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+
+    <!-- TYPO3 Hinweis: Header-Struktur. Kann in ein TYPO3 Partial/Template ausgelagert werden. -->
+    <header class="site-header" id="site-header" role="banner">
+        <div class="header-content-wrapper">
+            <div class="header-left">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
+                    <div class="hamburger-icon" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="menu-trigger-text">MENÜ</span>
+                </button>
+            </div>
+            <div class="header-center">
+                <!-- TYPO3 Hinweis: Logo-Link und Bildquellen können im CMS verwaltet werden. width/height hinzufügen! -->
+                <!-- Pfad zur Startseite vom Unterordner /sites/ -->
+                <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
+                </a>
+            </div>
+            <div class="header-right">
+                <!-- TYPO3 Hinweis: Link zum Kontakt kann im CMS verwaltet werden. Link zur aktuellen Seite. -->
+                <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- TYPO3 Hinweis: Fullscreen Navigation. Struktur kann in ein TYPO3 Partial/Template ausgelagert werden. Navigationspunkte dynamisch generieren. -->
+    <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="fullscreen-nav-header">
+            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
+                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
+            </button>
+             <!-- Pfad zur Startseite vom Unterordner /sites/ -->
+             <a href="../index.html" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
+                 <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40">
+             </a>
+            <div class="fullscreen-nav-ctas">
+                 <!-- TYPO3 Hinweis: Links und Texte editierbar machen -->
+                 <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="btn btn-light">Jetzt Buchen</a>
+                 <a href="../anfragen.html" class="btn btn-dark">Anfragen</a>
+             </div>
+        </div>
+        <div class="fullscreen-nav-quicklinks">
+            <!-- TYPO3 Hinweis: Quicklinks dynamisch aus Seitendaten oder konfigurierten Links generieren -->
+            <!-- Relative Pfade vom Ordner /sites/ -->
+            <a href="../zimmer-preise.html" class="quicklink-item"> <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> <span>Wohnen</span> </a>
+            <a href="../wellness-spa.html" class="quicklink-item"> <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> <span>Entspannen</span> </a>
+            <a href="../kulinarik.html" class="quicklink-item"> <iconify-icon icon="tabler:tools-kitchen" aria-hidden="true"></iconify-icon> <span>Geniessen</span> </a>
+            <a href="../region.html" class="quicklink-item"> <iconify-icon icon="feather:map" aria-hidden="true"></iconify-icon> <span>Freizeit</span> </a>
+        </div>
+        <div class="fullscreen-nav-main">
+            <!-- TYPO3 Hinweis: Navigationssektionen können als Schleife über Menüpunkte oder konfigurierbare Content Elemente realisiert werden -->
+            <section class="nav-section" aria-labelledby="nav-section-title-hotel">
+                <div class="nav-section-header">
+                    <h2 id="nav-section-title-hotel" class="nav-section-title">Hotel & Gastgeber</h2>
+                    <a href="../hotel/ueber-uns.html" class="nav-section-viewall">Mehr erfahren</a>
+                </div>
+                <div class="horizontal-scroll-container">
+                    <!-- Relative Pfade vom Ordner /sites/ -->
+                    <a href="../hotel/ueber-uns.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Team/220925_Hotel_Sonne-Post_MA_CorinaBeha_300dpi_11.jpg" alt="Gastgeber Familie Eiche & Wehrle" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Ihre Gastgeber</span> <span class="nav-tile-subtitle">Herzlich & Familiär</span> </div> </a>
+                    <a href="./historie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historisches Bild des Hotels" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Unsere Geschichte</span> <span class="nav-tile-subtitle">Seit 1870</span> </div> </a>
+                    <a href="../hotelrundgang-galerie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" alt="Außenansicht Hotel Sonne Post" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Hotelrundgang</span> <span class="nav-tile-subtitle">Impressionen</span> </div> </a>
+                    <a href="../hotel/nachhaltigkeit.html" class="nav-tile"> <img src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop" alt="Grüne Landschaft im Schwarzwald" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Nachhaltigkeit</span> <span class="nav-tile-subtitle">Unsere Verantwortung</span> </div> </a>
+                </div>
+            </section>
+            <section class="nav-section" aria-labelledby="nav-section-title-wohnen">
+                <div class="nav-section-header">
+                    <h2 id="nav-section-title-wohnen" class="nav-section-title">Wohnen & Angebote</h2>
+                    <a href="../zimmer-preise.html" class="nav-section-viewall">Alle Zimmer & Preise</a>
+                    </div>
+                 <div class="horizontal-scroll-container">
+                    <a href="../zimmer/suite-bergblick.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Suite Bergblick Hotel Sonne Post" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Suiten</span> <span class="nav-tile-subtitle">Luxus & Aussicht</span> </div> </a>
+                    <a href="../zimmer/doppelzimmer-komfort.html" class="nav-tile"> <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop&crop=focalpoint" alt="Modernes Hotelzimmer" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Doppelzimmer</span> <span class="nav-tile-subtitle">Gemütlichkeit</span> </div> </a>
+                    <a href="../zimmer/einzelzimmer.html" class="nav-tile"> <img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop&crop=focalpoint" alt="Helles Einzelzimmer" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Einzelzimmer</span> <span class="nav-tile-subtitle">Für Alleinreisende</span> </div> </a>
+                    <a href="../arrangements.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Top Angebote Teaserbild" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Arrangements</span> <span class="nav-tile-subtitle">Unsere Pakete</span> </div> </a>
+                 </div>
+            </section>
+            <section class="nav-section" aria-labelledby="nav-section-title-geniessen">
+                <div class="nav-section-header">
+                     <h2 id="nav-section-title-geniessen" class="nav-section-title">Geniessen</h2>
+                     <a href="../kulinarik.html" class="nav-section-viewall">Mehr erfahren</a>
+                     </div>
+                 <div class="horizontal-scroll-container">
+                    <a href="../kulinarik.html" class="nav-tile"> <img src="https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop" alt="Stimmungsvoll gedeckter Tisch im Restaurant" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Restaurant</span> <span class="nav-tile-subtitle">Badische Küche</span> </div> </a>
+                    <a href="../kulinarik/terrasse.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Terrasse/Headerbilde-2021-Terrasse_1600x704.png" alt="Sonnige Terrasse mit Sitzgelegenheiten" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Terrasse</span> <span class="nav-tile-subtitle">Sonne genießen</span> </div> </a>
+                    <a href="../kulinarik/feiern.html" class="nav-tile"> <img src="https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop" alt="Festlich dekorierter Raum für Feiern" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Feiern</span> <span class="nav-tile-subtitle">Ihre Veranstaltung</span> </div> </a>
+                 </div>
+            </section>
+            <section class="nav-section" aria-labelledby="nav-section-title-entspannen">
+                <div class="nav-section-header">
+                     <h2 id="nav-section-title-entspannen" class="nav-section-title">Entspannen</h2>
+                     <a href="../wellness-spa.html" class="nav-section-viewall">Mehr erfahren</a>
+                     </div>
+                 <div class="horizontal-scroll-container">
+                    <a href="../wellness-spa.html#pool" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Innenpool des Hotels" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Schwimmbad</span> <span class="nav-tile-subtitle">Wasser & Wärme</span> </div> </a>
+                    <a href="../wellness-spa.html#sauna" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/_processed_/d/b/csm_SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna5137_300dpi-WEB_fc9be228d0.jpg" alt="Saunabereich mit Ruheliegen" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Saunawelt</span> <span class="nav-tile-subtitle">Ruhe & Erholung</span> </div> </a>
+                    <a href="../wellness-spa/anwendungen.html" class="nav-tile"> <img src="https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=400&h=560&fit=crop" alt="Person erhält eine Massage" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Anwendungen</span> <span class="nav-tile-subtitle">Für Körper & Seele</span> </div> </a>
+                 </div>
+            </section>
+            <section class="nav-section" aria-labelledby="nav-section-title-freizeit">
+                <div class="nav-section-header">
+                     <h2 id="nav-section-title-freizeit" class="nav-section-title">Freizeit</h2>
+                     <a href="../region.html" class="nav-section-viewall">Mehr erfahren</a>
+                </div>
+                 <div class="horizontal-scroll-container">
+                     <a href="../region/sommer.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Feldbergpanorama_Sommer_Header_001.png" alt="Titisee im Sommer" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Sommer</span> <span class="nav-tile-subtitle">Wandern & Natur</span> </div> </a>
+                    <a href="../region/winter.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Bildschirmfoto_2023-05-12_um_12.54.28.png" alt="Verschneite Landschaft am Feldberg" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Winter</span> <span class="nav-tile-subtitle">Ski & Schnee</span> </div> </a>
+                    <a href="../region/ausflugsziele.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/hc_Schauinsland_Turm.png" alt="Badeparadies Schwarzwald" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Ausflugsziele</span> <span class="nav-tile-subtitle">Für Groß & Klein</span> </div> </a>
+                    <a href="../region/hochschwarzwald-card.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/hc_HTG_Cleverle-Paket-1.png" alt="Hochschwarzwald Card" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Hochschwarzwald Card</span> <span class="nav-tile-subtitle">Ihr Vorteil</span> </div> </a>
+                 </div>
+            </section>
+        </div>
+        <div class="fullscreen-nav-footer">
+            <div class="footer-links">
+                <!-- TYPO3 Hinweis: Footer-Links dynamisch generieren (z.B. aus Footer-Navigation) -->
+                <!-- Relative Pfade vom Ordner /sites/ -->
+                <ul>
+                    <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../gutschein-bestellung.html">Gutscheine</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger-nav">Cookie-Einstellungen</a></li>
+                </ul>
+            </div>
+            <div class="social-media-nav">
+                <!-- TYPO3 Hinweis: Social Media Links konfigurierbar machen -->
+                <a href="https://facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                <a href="https://instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- TYPO3 Hinweis: Hauptinhaltsbereich. Hier werden die TYPO3 Content Elemente (tt_content) gerendert. -->
+    <main id="main-content" role="main">
+        <!-- TYPO3 Hinweis: Hero Sektion der Unterseite. -->
+        <section class="page-hero-section" aria-labelledby="contact-hero-heading" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Kontakt/hc_Kontakt_24.png');">
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content container">
+                <!-- Überschrift für Screenreader, visuell nicht sichtbar, da Bild für sich spricht -->
+                <h1 id="contact-hero-heading" class="sr-only">Kontakt & Anreise zum Hotel Sonne Post</h1>
+            </div>
+        </section>
+
+        <!-- TYPO3 Hinweis: Kontaktinformationen & Formular Sektion -->
+        <section class="content-section contact-page-section" aria-labelledby="contact-main-heading">
+            <div class="container contact-grid">
+                <!-- Linke Spalte: Kontaktinformationen -->
+                <div class="contact-info-column" role="complementary" aria-labelledby="contact-info-heading">
+                    <h2 id="contact-info-heading">Kontakt</h2>
+                    <address>
+                        <strong>Hotel Sonne Post</strong> <br>
+                        Fam. Eiche & Wehrle<br>
+                        Landstr. 13<br>
+                        D-79822 Titisee-Neustadt / Waldau
+                        <br><br>
+                        Tel.: <a href="tel:+49766991020">+49 (0) 7669 91020</a><br>
+                        Fax: +49 (0) 7669 910299<br><br>
+                        Web: <a href="https://www.sonne-post.de" target="_blank" rel="noopener noreferrer">www.sonne-post.de</a><br>
+                        E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a>
+                    </address>
+                    <!-- TYPO3 Hinweis: Anreise-Informationen könnten hier als eigener Textblock oder Element verwaltet werden. -->
+                    <h4>Anreise mit dem Auto</h4>
+                    <p>Unser Hotel ist verkehrsgünstig gelegen und gut über die B31 und B500 zu erreichen. Kostenlose Parkplätze stehen direkt am Haus zur Verfügung.</p>
+                    <p>
+                        <a href="https://maps.google.com/?q=Hotel+Sonne+Post,+Landstr.+13,+79822+Titisee-Neustadt" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                            <iconify-icon icon="feather:map-pin" aria-hidden="true"></iconify-icon> Route planen
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Rechte Spalte: Kontaktformular -->
+                <div class="contact-form-column" role="form" aria-labelledby="contact-form-heading">
+                    <h2 id="contact-form-heading">Ihre Anfrage an uns</h2>
+                    <!-- TYPO3 Hinweis: Dieses Formular kann dynamisch über das TYPO3 Form Framework oder eine Extension wie Powermail generiert werden.
+                                      Die 'action' des Formulars und das 'name' Attribut der Inputs wären dann TYPO3-spezifisch. -->
+                    <form action="/formular-senden" method="post" aria-describedby="form-required-info">
+                        <div class="form-group form-group-full-width enquiry-type-group">
+                            <label for="enquiry-type">Ihr Anliegen *</label>
+                            <!-- TYPO3 Hinweis: Optionen für das Dropdown können im CMS konfiguriert werden. -->
+                            <select id="enquiry-type" name="enquiry_type" required aria-required="true">
+                                <option value="">Bitte wählen Sie Ihr Anliegen</option>
+                                <option value="general_contact">Allgemeine Kontaktanfrage</option>
+                                <option value="room_inquiry">Zimmeranfrage</option>
+                                <option value="offer_inquiry">Anfrage Top-Angebote/Arrangements</option>
+                                <option value="voucher_order">Gutscheinbestellung</option>
+                                <option value="event_inquiry">Anfrage für Veranstaltung/Feier</option>
+                                <option value="career_inquiry">Karriere / Bewerbung</option>
+                            </select>
+                        </div>
+
+                        <!-- Allgemeine Pflichtfelder für alle Anfragen -->
+                        <div class="form-group">
+                            <label for="salutation" class="sr-only">Anrede</label>
+                            <select id="salutation" name="salutation" aria-label="Anrede">
+                                <option value="">Anrede</option>
+                                <option value="Herr">Herr</option>
+                                <option value="Frau">Frau</option>
+                                <option value="Divers">Divers</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="sr-only">Titel</label>
+                            <input type="text" id="title" name="title" placeholder="Titel">
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname">Vorname *</label>
+                            <input type="text" id="firstname" name="firstname" placeholder="Vorname *" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname">Nachname *</label>
+                            <input type="text" id="lastname" name="lastname" placeholder="Nachname *" required aria-required="true">
+                        </div>
+                        <div class="form-group form-group-full-width">
+                            <label for="street">Straße, Hausnummer *</label>
+                            <input type="text" id="street" name="street" placeholder="Straße, Hausnummer *" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="zipcode">PLZ *</label>
+                            <input type="text" id="zipcode" name="zipcode" placeholder="PLZ *" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Ort *</label>
+                            <input type="text" id="city" name="city" placeholder="Ort *" required aria-required="true">
+                        </div>
+                        <div class="form-group form-group-full-width">
+                            <label for="email">E-Mail *</label>
+                            <input type="email" id="email" name="email" placeholder="E-Mail *" required aria-required="true">
+                        </div>
+                        <div class="form-group form-group-full-width">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Telefon">
+                        </div>
+
+                        <!-- Spezifische Felder für "Zimmeranfrage" -->
+                        <div class="form-group hidden-field room_inquiry-field">
+                            <label for="arrival-date">Anreise *</label>
+                            <input type="date" id="arrival-date" name="arrival_date">
+                        </div>
+                        <div class="form-group hidden-field room_inquiry-field">
+                            <label for="departure-date">Abreise *</label>
+                            <input type="date" id="departure-date" name="departure_date">
+                        </div>
+                        <div class="form-group hidden-field room_inquiry-field">
+                            <label for="adults">Anzahl Erwachsene *</label>
+                            <input type="number" id="adults" name="adults" min="1" value="1">
+                        </div>
+                        <div class="form-group hidden-field room_inquiry-field">
+                            <label for="children">Anzahl Kinder</label>
+                            <input type="number" id="children" name="children" min="0" value="0">
+                        </div>
+                        <div class="form-group form-group-full-width hidden-field room_inquiry-field">
+                            <label for="room-type">Bevorzugte Zimmerkategorie</label>
+                            <!-- TYPO3 Hinweis: Optionen können dynamisch aus Zimmer-Datensätzen generiert werden -->
+                            <select id="room-type" name="room_type">
+                                <option value="">Keine Präferenz</option>
+                                <option value="suite-superior">Doppelzimmer-Appartement Superior</option>
+                                <option value="family-app">Familien-Appartement</option>
+                                <option value="single-room">Einzelzimmer</option>
+                                <!-- Weitere Zimmerkategorien hier -->
+                            </select>
+                        </div>
+
+                        <!-- Spezifische Felder für "Anfrage Top-Angebote/Arrangements" -->
+                        <div class="form-group form-group-full-width hidden-field offer_inquiry-field">
+                            <label for="preferred-offer">Interesse an folgendem Angebot</label>
+                            <!-- TYPO3 Hinweis: Optionen können dynamisch aus Arrangements/Angeboten generiert werden -->
+                            <select id="preferred-offer" name="preferred_offer">
+                                <option value="">Nicht zutreffend / Allgemein</option>
+                                <option value="wellness-package">Wellness-Auszeit</option>
+                                <option value="hiking-package">Wandergenuss im Schwarzwald</option>
+                                <option value="family-break">Familien-Ferien</option>
+                                <!-- Weitere Angebote hier -->
+                            </select>
+                        </div>
+                        <div class="form-group form-group-full-width hidden-field offer_inquiry-field">
+                            <label for="offer-message">Ihre Nachricht zum Angebot</label>
+                            <textarea id="offer-message" name="offer_message" placeholder="Ihre individuelle Nachricht zu diesem Angebot"></textarea>
+                        </div>
+
+
+                        <!-- Spezifische Felder für "Gutscheinbestellung" -->
+                        <div class="form-group hidden-field voucher_order-field">
+                            <label for="voucher-type">Gutschein-Art *</label>
+                            <select id="voucher-type" name="voucher_type">
+                                <option value="">Bitte wählen</option>
+                                <option value="value">Wertgutschein</option>
+                                <option value="stay">Übernachtungsgutschein</option>
+                                <option value="wellness">Wellnessgutschein</option>
+                            </select>
+                        </div>
+                         <div class="form-group hidden-field voucher_order-field">
+                            <label for="voucher-value">Wert des Gutscheins (in €)</label>
+                            <input type="number" id="voucher-value" name="voucher_value" min="10" step="5" placeholder="z.B. 50">
+                        </div>
+                        <div class="form-group hidden-field voucher_order-field">
+                            <label for="voucher-recipient">Name des Gutscheinempfängers</label>
+                            <input type="text" id="voucher-recipient" name="voucher_recipient" placeholder="Optional">
+                        </div>
+                        <div class="form-group form-group-full-width hidden-field voucher_order-field">
+                            <label for="voucher-delivery">Lieferart</label>
+                            <select id="voucher-delivery" name="voucher_delivery">
+                                <option value="email">Per E-Mail (PDF)</option>
+                                <option value="mail">Per Post</option>
+                            </select>
+                        </div>
+
+                         <!-- Spezifische Felder für "Anfrage für Veranstaltung/Feier" -->
+                         <div class="form-group form-group-full-width hidden-field event_inquiry-field">
+                            <label for="event-type">Art der Veranstaltung *</label>
+                            <input type="text" id="event-type" name="event_type" placeholder="z.B. Geburtstag, Hochzeit, Firmenfeier">
+                        </div>
+                        <div class="form-group hidden-field event_inquiry-field">
+                            <label for="event-date">Bevorzugtes Datum</label>
+                            <input type="date" id="event-date" name="event_date">
+                        </div>
+                        <div class="form-group hidden-field event_inquiry-field">
+                            <label for="event-guests">Anzahl Gäste (ca.) *</label>
+                            <input type="number" id="event-guests" name="event_guests" min="2" value="2">
+                        </div>
+                        <div class="form-group form-group-full-width hidden-field event_inquiry-field">
+                            <label for="event-requirements">Spezielle Anforderungen / Wünsche</label>
+                            <textarea id="event-requirements" name="event_requirements" placeholder="Buffet, Menü, Raumgröße, Technik etc."></textarea>
+                        </div>
+
+                         <!-- Spezifische Felder für "Karriere / Bewerbung" -->
+                         <div class="form-group form-group-full-width hidden-field career_inquiry-field">
+                            <label for="career-position">Interesse an Position</label>
+                            <!-- TYPO3 Hinweis: Optionen können dynamisch aus offenen Stellen generiert werden -->
+                            <select id="career-position" name="career_position">
+                                <option value="">Initiativbewerbung</option>
+                                <option value="service-staff">Servicekraft</option>
+                                <option value="chef">Koch/Köchin</option>
+                                <option value="reception">Mitarbeiter Rezeption</option>
+                                <!-- Weitere offene Stellen hier -->
+                            </select>
+                        </div>
+                         <div class="form-group form-group-full-width hidden-field career_inquiry-field">
+                            <label for="career-message">Ihre Nachricht / Bewerbungstext</label>
+                            <textarea id="career-message" name="career_message" placeholder="Erzählen Sie uns von sich und Ihren Qualifikationen."></textarea>
+                        </div>
+                         <div class="form-group form-group-full-width hidden-field career_inquiry-field">
+                            <label for="career-upload">Lebenslauf / Anhänge (optional)</label>
+                            <input type="file" id="career-upload" name="career_upload" accept=".pdf,.doc,.docx" multiple>
+                            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-top: 5px;">Max. 5MB. Erlaubte Formate: PDF, DOC, DOCX.</p>
+                        </div>
+
+
+                        <!-- Allgemeine Nachricht für alle Anfragen, wenn keine spezifische Nachrichtengruppe vorhanden ist -->
+                        <div class="form-group form-group-full-width general_contact-field" id="general-message-field">
+                            <label for="message">Ihre Nachricht *</label>
+                            <textarea id="message" name="message" placeholder="Ihre Nachricht *" required aria-required="true"></textarea>
+                        </div>
+
+                        <!-- TYPO3 Hinweis: Captcha Bereich. Das Bild und die Validierung werden serverseitig (TYPO3) generiert/geprüft. -->
+                        <div class="captcha-group">
+                            <label for="captcha-input">Captcha: Bitte Zeichen eingeben.*</label>
+                            <div class="captcha-input-container">
+                                <input type="text" id="captcha-input" name="captcha" placeholder="Bitte Zeichen eingeben." required aria-required="true">
+                                <div class="captcha-image-wrapper">
+                                    <img src="https://via.placeholder.com/150x40/E6DCCF/8C1E2D?text=T1X4Q" alt="Captcha-Bild mit Zeichen T1X4Q" id="captcha-image" width="150" height="40">
+                                </div>
+                                <button type="button" class="captcha-refresh-btn" aria-label="Captcha aktualisieren">
+                                    <iconify-icon icon="feather:refresh-ccw" aria-hidden="true"></iconify-icon>
+                                </button>
+                            </div>
+                            <p class="captcha-hint">Hinweis: Bitte Zeichen aus dem rechten Bild eingeben. Sollten die Zeichen nicht gut lesbar sein, bitte über die Aktualisierungs-Pfeile rechts daneben neue Zeichen auslösen.</p>
+                        </div>
+
+                        <p id="form-required-info" class="form-required-info">* Pflichtfelder</p>
+
+                        <div class="form-submit-group">
+                            <button type="submit" class="btn">ANFRAGE SENDEN</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- TYPO3 Hinweis: Kombinierte Sektion für Newsletter & Social Media. Kann als eigenes Content-Element oder Teil eines Templates verwaltet werden. -->
+        <section class="content-section contact-page-combined-cta" aria-labelledby="combined-cta-main-heading">
+            <!-- Überschrift für Screenreader -->
+            <h2 id="combined-cta-main-heading" class="sr-only">Weitere Optionen</h2>
+            <div class="container">
+                <div class="combined-row-grid">
+                    <!-- Linke Spalte - Newsletter -->
+                    <div class="combined-column social-media-column" role="region" aria-labelledby="social-media-heading-cta">
+                        <h2 id="social-media-heading-cta">Folgen Sie uns</h2>
+                        <p>Bleiben Sie auf dem Laufenden und verpassen Sie keine Neuigkeiten, Einblicke hinter die Kulissen und exklusive Angebote.</p>
+                        <div class="social-links">
+                            <!-- TYPO3 Hinweis: Social Media Links konfigurierbar machen. -->
+                            <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                            <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                        </div>
+                    </div>
+
+                    <!-- Rechte Spalte - Social Media -->
+                    <div class="combined-column newsletter-column" role="region" aria-labelledby="newsletter-heading-cta-combined">
+                        <h2 id="newsletter-heading-cta-combined">Nichts mehr verpassen</h2>
+                        <p>Abonnieren Sie unseren Newsletter für exklusive Angebote, Neuigkeiten und Urlaubsinspiration direkt aus der Sonne Post.</p>
+                        <div class="newsletter-form-container">
+                            <!-- TYPO3 Hinweis: Formular-Action und Feldnamen dynamisch im CMS verwalten. -->
+                            <form action="/newsletter-anmeldung" method="post" class="form-newsletter" aria-describedby="newsletter-privacy-info-combined">
+                              <label for="newsletter-email-contact-page" class="sr-only">E-Mail-Adresse für Newsletter</label>
+                              <input type="email" id="newsletter-email-contact-page" name="email" placeholder="Ihre E-Mail-Adresse" required aria-required="true">
+                              <button type="submit" class="btn" aria-label="Newsletter abonnieren">
+                                  <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> Newsletter abonnieren
+                              </button>
+                          </form>
+                          <p id="newsletter-privacy-info-combined"> Ihre Daten sind bei uns sicher. Mehr Infos: <a href="../datenschutz.html">Datenschutz</a>. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- TYPO3 Hinweis: Footer-Struktur. Kann in ein TYPO3 Partial/Template ausgelagert werden. Inhalte (Adressen, Links, Social Media) dynamisch befüllen. -->
+    <footer class="site-footer" role="contentinfo" aria-labelledby="footer-heading">
+         <h2 id="footer-heading" class="sr-only">Fußbereich</h2>
+        <div class="container-footer">
+            <!-- TYPO3 Hinweis: Footer-Spalten können als konfigurierbare Bereiche oder über Menüs gefüllt werden. -->
+            <div class="footer-column">
+                <h4>Hotel Sonne Post</h4>
+                <!-- TYPO3 Hinweis: Adressdaten als Konstanten oder aus Extension-Settings. -->
+                <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
+            </div>
+            <div class="footer-column">
+                 <h4>Entdecken</h4>
+                 <!-- TYPO3 Hinweis: Navigationsliste, z.B. aus einer TYPO3 Footer-Navigation. Relative Pfade vom Ordner /sites/ -->
+                <ul> <li><a href="../zimmer-preise.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="../kulinarik.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Information</h4>
+                <!-- Relative Pfade vom Ordner /sites/ -->
+                <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Rechtliches</h4>
+                 <!-- Relative Pfade vom Ordner /sites/ -->
+                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <h4 style="margin-top: 20px;">Folgen Sie uns</h4>
+                <div class="social-links">
+                     <!-- TYPO3 Hinweis: Social Media Links konfigurierbar machen. -->
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- TYPO3 Hinweis: Sticky Buttons. Links und Texte konfigurierbar machen. Relative Pfade vom Ordner /sites/ -->
+    <div class="sticky-buttons-right-wrapper">
+        <div class="sticky-buttons-inner-container">
+            <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
+                <iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> Buchen
+            </a>
+            <a href="../newsletter.html" class="newsletter-widget-trigger" aria-label="Newsletter abonnieren">
+                <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> Newsletter
+            </a>
+        </div>
+    </div>
+
+    <!-- TYPO3 Hinweis: Lightbox für Galeriebilder. Struktur für die Lightbox. -->
+    <div class="lightbox-overlay" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Bildansicht schließen"> <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon> </button>
+            <div class="lightbox-image-container"> <img src="" alt="" id="lightbox-image" width="800" height="600"> <!-- Placeholder width/height --> </div>
+            <div id="lightbox-caption" class="lightbox-caption sr-only">Vergrößerte Bildansicht</div>
+        </div>
+    </div>
+
+    <!-- TYPO3 Hinweis: CDN Skripte. Können auch lokal über TYPO3 Asset Management eingebunden werden. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
+    <!-- Lottie ist hier nicht direkt für die Kontaktseite nötig, aber falls es global genutzt wird, bleibt es. -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script> -->
+
+    <!-- TYPO3 Hinweis: Ausgelagerte JavaScript-Datei. Pfad ggf. anpassen (relativ zum sites/ Ordner). 'defer' ist wichtig. -->
+    <script src="../js/main.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // GSAP Animation für die Kontakt- und Formularspalten
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.utils.toArray('.contact-info-column, .contact-form-column').forEach((el, index) => {
+                    gsap.from(el, {
+                        opacity: 0,
+                        x: index % 2 === 0 ? -50 : 50, // Linke Spalte von links, rechte von rechts
+                        duration: 0.8,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 85%", // Startet, wenn 85% der Spalte im Viewport sind
+                            toggleActions: "play none none none",
+                            once: true
+                        }
+                    });
+                });
+
+                // GSAP Animation für die Newsletter/Social Media Spalten
+                gsap.utils.toArray('.contact-page-combined-cta .combined-column').forEach((el, index) => {
+                    gsap.from(el, {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.8,
+                        delay: index * 0.1, // Leichte Staffelung
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 90%",
+                            toggleActions: "play none none none",
+                            once: true
+                        }
+                    });
+                });
+            } else {
+                console.warn("GSAP oder ScrollTrigger nicht geladen. Animationen für Kontaktseite sind deaktiviert.");
+            }
+
+            // JavaScript für die dynamische Formular-Anzeige
+            const enquiryTypeSelect = document.getElementById('enquiry-type');
+            const formGroups = document.querySelectorAll('.form-group');
+            const generalMessageField = document.getElementById('general-message-field');
+
+            function toggleFormFields() {
+                const selectedType = enquiryTypeSelect.value;
+
+                formGroups.forEach(group => {
+                    // Verstecke alle spezifischen Felder
+                    if (group.classList.contains('room_inquiry-field') ||
+                        group.classList.contains('offer_inquiry-field') ||
+                        group.classList.contains('voucher_order-field') ||
+                        group.classList.contains('event_inquiry-field') ||
+                        group.classList.contains('career_inquiry-field')) {
+                        group.classList.add('hidden-field');
+                        // Optional: Felder leeren und 'required' Attribut entfernen
+                        group.querySelectorAll('input, select, textarea').forEach(field => {
+                            if (field.hasAttribute('required')) {
+                                field.dataset.wasRequired = true; // Speichern, dass es required war
+                                field.removeAttribute('required');
+                            }
+                            // field.value = ''; // Optional: Felder beim Verstecken leeren
+                        });
+                    }
+                });
+
+                // Blende spezifische Felder basierend auf der Auswahl ein
+                if (selectedType && selectedType !== 'general_contact') {
+                    document.querySelectorAll(`.${selectedType}-field`).forEach(field => {
+                        field.classList.remove('hidden-field');
+                        // Optional: 'required' Attribut zurücksetzen
+                        field.querySelectorAll('input, select, textarea').forEach(subField => {
+                            if (subField.dataset.wasRequired) {
+                                subField.setAttribute('required', 'true');
+                                delete subField.dataset.wasRequired;
+                            }
+                        });
+                    });
+                    // Verstecke das allgemeine Nachrichtenfeld, wenn spezifische Felder angezeigt werden
+                    if (generalMessageField) {
+                        generalMessageField.classList.add('hidden-field');
+                        generalMessageField.querySelector('textarea').removeAttribute('required');
+                    }
+                } else {
+                    // Zeige das allgemeine Nachrichtenfeld wieder an, wenn "Allgemeine Kontaktanfrage" gewählt ist oder nichts ausgewählt
+                    if (generalMessageField) {
+                        generalMessageField.classList.remove('hidden-field');
+                        generalMessageField.querySelector('textarea').setAttribute('required', 'true');
+                    }
+                }
+            }
+
+            if (enquiryTypeSelect) {
+                enquiryTypeSelect.addEventListener('change', toggleFormFields);
+                toggleFormFields(); // Initialer Aufruf, um den korrekten Zustand beim Laden zu setzen
+            }
+
+            // Captcha Refresh Logik (frontendseitig, echtes Captcha benötigt serverseitige Logik)
+            const captchaImage = document.getElementById('captcha-image');
+            const captchaRefreshBtn = document.querySelector('.captcha-refresh-btn');
+            if (captchaRefreshBtn && captchaImage) {
+                captchaRefreshBtn.addEventListener('click', function() {
+                    // In einer echten TYPO3-Umgebung würde hier ein AJAX-Aufruf zum Backend erfolgen,
+                    // der ein neues Captcha-Bild und die entsprechende Validierungslogik generiert.
+                    // Hier ein einfaches Platzhalter-Update:
+                    const randomString = Math.random().toString(36).substring(2, 7).toUpperCase();
+                    captchaImage.src = `https://via.placeholder.com/150x40/E6DCCF/8C1E2D?text=${randomString}`;
+                    captchaImage.alt = `Captcha-Bild mit Zeichen ${randomString}`;
+                    const captchaInput = document.getElementById('captcha-input');
+                    if (captchaInput) {
+                        captchaInput.value = ''; // Eingabefeld leeren
+                        captchaInput.focus(); // Fokus zurücksetzen
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
