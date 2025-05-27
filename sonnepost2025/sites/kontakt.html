@@ -21,27 +21,6 @@
             background-color: var(--color-white);
         }
 
-        .site-header {
-            background-color: var(--color-header-bg-scrolled);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            background-image: none;
-        }
-        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
-            color: var(--color-header-icon-scrolled);
-        }
-         .site-header .hamburger-icon span {
-            background: var(--color-header-icon-scrolled);
-        }
-        .site-header .header-center .central-logo .logo-initial {
-            display: none; opacity: 0; position: absolute; pointer-events: none;
-        }
-        .site-header .header-center .central-logo .logo-scrolled {
-            display: block; opacity: 1; position: relative;
-        }
-        .site-header .header-right .contact-icon-btn iconify-icon {
-            color: var(--color-header-contact-icon-scrolled);
-        }
-
        .page-hero-section {
             position: relative;
             width: 100%;
@@ -49,12 +28,32 @@
             min-height: 350px;
             max-height: 550px;
             overflow: hidden;
-            margin-top: var(--header-height);
+            /* margin-top: var(--header-height); ENTFERNT oder auf 0 setzen, wenn der Header absolut positioniert ist */
+            margin-top: 0; /* Stellt sicher, dass der Hero oben beginnt, der Header liegt darüber */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--color-white);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+       .page-hero-section {
+            position: relative;
+            width: 100%;
+            height: 60vh; /* Höhe anpassbar */
+            min-height: 350px;
+            max-height: 550px;
+            overflow: hidden;
+            margin-top: 0; 
+            padding-top: var(--header-height); 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white); 
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -583,7 +582,7 @@
     </nav>
 
     <main id="main-content" role="main">
-        <section class="page-hero-section" aria-labelledby="contact-hero-heading" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Kontakt/hc_Kontakt_24.png');">
+        <section class="page-hero-section" aria-labelledby="contact-hero-heading" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/hc_Kontakt.png');">
             <div class="page-hero-overlay"></div>
             <div class="page-hero-content container">
                 <h1 id="contact-hero-heading" class="sr-only">Kontakt & Anreise zum Hotel Sonne Post</h1>
