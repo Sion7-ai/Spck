@@ -20,12 +20,8 @@
     <link rel="stylesheet" href="../css/main.css">
 
     <style>
-        /* === TYPO3 Hinweis: Spezifische Stile für die Kontaktseite === */
-        /* Diese Stile würden in einem realen TYPO3-Projekt idealerweise in die zentrale `main.css`
-           oder in eine dedizierte seiten- oder modul-spezifische CSS-Datei integriert werden. */
-
         body {
-            background-color: var(--color-white); /* Standardmäßig heller Hintergrund */
+            background-color: var(--color-white);
         }
 
         /* Header Anpassung für Unterseiten: Immer im "scrolled" Zustand */
@@ -56,19 +52,19 @@
        .page-hero-section {
             position: relative;
             width: 100%;
-            height: 60vh; /* Responsive Höhe für Hero */
+            height: 60vh;
             min-height: 350px;
             max-height: 550px;
             overflow: hidden;
-            margin-top: var(--header-height); /* Berücksichtigt die Höhe des fixen Headers */
-            display: flex; /* Ermöglicht vertikale/horizontale Zentrierung des Inhalts, falls vorhanden */
+            margin-top: var(--header-height);
+            display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--color-white); /* Textfarbe für Hero-Inhalt, falls vorhanden */
-            background-size: cover; /* Bild füllend darstellen */
-            background-position: center; /* Bild zentrieren */
-            background-repeat: no-repeat; /* Kachelung verhindern */
+            color: var(--color-white);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
         .page-hero-image {
             position: absolute;
@@ -77,55 +73,52 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 1; /* Liegt unter dem Overlay */
+            z-index: 1;
         }
-        .page-hero-overlay { /* Optional: Für einen leichten Fade-Effekt oder Verdunkelung */
+        .page-hero-overlay {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.0) 100%);
-            z-index: 2; /* Liegt über dem Bild, unter dem Text */
+            z-index: 2;
         }
         .page-hero-content {
-             /* Dieses Element ist leer, da keine sichtbare Überschrift auf dem Bild gewünscht ist.
-                Die Überschrift ist für Screenreader in .sr-only. */
-             display: none; /* Versteckt das Content-Wrapper-Element, wenn es keine sichtbaren Inhalte hat */
+             display: none;
         }
 
-        /* Kontaktbereich Sektion (Container für Kontaktinfo und Formular) */
+        /* Kontaktbereich Sektion */
         .contact-page-section {
-            background-color: var(--color-white); /* Hintergrundfarbe für die gesamte Sektion */
-            padding: 80px 0; /* Vertikaler Abstand */
+            background-color: var(--color-white);
+            padding: 80px 0;
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: 1fr; /* Standard: Eine Spalte für Mobilgeräte */
-            gap: 50px; /* Abstand zwischen den Spalten/Zeilen */
-            max-width: 1000px; /* Maximale Breite des Rasters */
-            margin: 0 auto; /* Zentrierung des Rasters */
+            grid-template-columns: 1fr;
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         @media (min-width: 768px) {
             .contact-grid {
-                grid-template-columns: 1fr 1.5fr; /* Links: 1 Teil, Rechts (Formular): 1.5 Teile */
-                gap: 60px; /* Größerer Abstand auf größeren Bildschirmen */
+                grid-template-columns: 1fr 1.5fr;
+                gap: 60px;
             }
         }
         @media (min-width: 992px) {
             .contact-grid {
-                grid-template-columns: 1fr 2fr; /* Links: 1 Teil, Rechts (Formular): 2 Teile */
+                grid-template-columns: 1fr 2fr;
             }
         }
 
         .contact-info-column,
         .contact-form-column {
-            background-color: var(--color-white); /* Hintergrund für beide Spalten (kann individuell sein) */
-            padding: 40px; /* Innenabstand der Spalten */
-            border-radius: 6px; /* Abgerundete Ecken */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Leichter Schatten für Tiefenwirkung */
+            background-color: var(--color-white);
+            padding: 40px;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        /* Spezieller Hintergrund für die Informationsspalte, falls gewünscht */
         .contact-info-column {
             background-color: var(--color-beige);
         }
@@ -135,68 +128,69 @@
             font-family: var(--font-secondary);
             font-size: clamp(1.8rem, 4vw, 2.5rem);
             color: var(--color-bordeaux);
-            text-align: left; /* Überschrift links ausrichten */
-            margin-bottom: 1em; /* Abstand zur Adresse/zum Formular */
+            text-align: left;
+            margin-bottom: 1em;
         }
 
         .contact-info-column address {
-            font-style: normal; /* Entfernt die Standard-Kursivstellung */
+            font-style: normal;
             line-height: 1.7;
             margin-bottom: 2em;
             color: var(--color-text-secondary);
         }
         .contact-info-column address a {
-            color: var(--color-bordeaux); /* Links in der Adresse in Akzentfarbe */
+            color: var(--color-bordeaux);
         }
-        .contact-info-column address br { display: block; } /* Sicherstellen, dass Zeilenumbrüche sichtbar sind */
+        .contact-info-column address br { display: block; }
 
         .contact-info-column h4 {
             font-family: var(--font-primary);
             font-weight: 700;
             font-size: 1rem;
             color: var(--color-text-primary);
-            margin-top: 2em; /* Abstand zur vorherigen Sektion */
+            margin-top: 2em;
             margin-bottom: 1em;
         }
         .contact-info-column .btn-outline {
-             margin-top: 1.5em; /* Abstand zum Text darüber */
+             margin-top: 1.5em;
         }
 
         /* Kontaktformular Styling */
         .contact-form-column form {
             display: grid;
-            grid-template-columns: 1fr; /* Standard: Eine Spalte für alle Felder */
-            gap: 20px; /* Abstand zwischen Formularfeldern */
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
         .form-group.enquiry-type-group {
-            background-color: var(--color-beige); /* Hintergrundfarbe für das Anliegen-Feld */
-            padding: 15px 20px; /* Innenabstand für das hervorgehobene Feld */
-            border-radius: 6px; /* Abgerundete Ecken */
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Leichter Schatten nach innen */
+            background-color: var(--color-beige);
+            padding: 15px 20px;
+            border-radius: 6px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
         }
         .form-group.enquiry-type-group label {
-            font-size: 1.1rem; /* Größere Schrift für das Label */
-            font-weight: 600; /* Stärkerer Font-Weight */
-            color: var(--color-bordeaux); /* Akzentfarbe für das Label */
-            margin-bottom: 10px; /* Mehr Abstand zum Select-Feld */
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-bordeaux);
+            margin-bottom: 10px;
         }
         .form-group.enquiry-type-group select {
-            border-color: var(--color-border-subtle); /* Leichte Umrandung */
-            background-color: var(--color-white); /* Weißer Hintergrund für das Select-Feld selbst */
-        }        @media (min-width: 550px) {
+            border-color: var(--color-border-subtle);
+            background-color: var(--color-white);
+        }
+        @media (min-width: 550px) {
             .contact-form-column form {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Zwei Spalten, wenn genug Platz */
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
             .form-group-full-width {
-                grid-column: 1 / -1; /* Nimmt die volle Breite im Grid ein */
+                grid-column: 1 / -1;
             }
         }
         .form-group {
-            position: relative; /* Für zukünftige Validierungs-Overlays etc. */
-            margin-bottom: 0; /* Abstand wird durch gap im Grid kontrolliert */
+            position: relative;
+            margin-bottom: 0;
         }
         .form-group label {
-            display: block; /* Label über dem Input */
+            display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--color-text-primary);
@@ -205,8 +199,8 @@
         .form-group input[type="text"],
         .form-group input[type="email"],
         .form-group input[type="tel"],
-        .form-group input[type="number"], /* Für Zimmeranfrage: Anzahl */
-        .form-group input[type="date"], /* Für Zimmeranfrage: Anreise/Abreise */
+        .form-group input[type="number"],
+        .form-group input[type="date"],
         .form-group select,
         .form-group textarea {
             width: 100%;
@@ -232,11 +226,10 @@
             box-shadow: 0 0 0 3px rgba(140, 30, 45, 0.2);
         }
         .form-group textarea {
-            min-height: 120px; /* Mindesthöhe für Textarea */
-            resize: vertical; /* Nur vertikale Größenänderung erlauben */
+            min-height: 120px;
+            resize: vertical;
         }
         .form-group select {
-             /* Pfeil für Selectbox anpassen */
              -webkit-appearance: none;
              -moz-appearance: none;
              appearance: none;
@@ -247,40 +240,37 @@
              cursor: pointer;
         }
 
-        /* Hidden fields for dynamic display */
         .form-group.hidden-field {
             display: none;
-            /* Important: When changing display, ensure accessibility by managing inert attribute if needed,
-               but simple display:none is often sufficient for forms if logic is handled correctly. */
         }
 
         .form-required-info {
-            grid-column: 1 / -1; /* Nimmt die volle Breite ein */
+            grid-column: 1 / -1;
             font-size: 0.85rem;
             color: var(--color-text-secondary);
-            margin-top: -10px; /* Etwas näher an das Formular rücken */
+            margin-top: -10px;
         }
 
         /* Captcha Styling */
         .captcha-group {
-            grid-column: 1 / -1; /* Nimmt die volle Breite ein */
+            grid-column: 1 / -1;
             display: flex;
-            flex-wrap: wrap; /* Erlaubt Umbruch auf kleineren Bildschirmen */
-            align-items: center; /* Vertikale Ausrichtung der Elemente */
-            gap: 15px; /* Abstand zwischen Captcha-Elementen */
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
         }
         .captcha-group label {
-            flex: 1 1 100%; /* Label nimmt volle Breite ein */
-            margin-bottom: 0; /* Keine zusätzliche Marge */
+            flex: 1 1 100%;
+            margin-bottom: 0;
         }
         .captcha-input-container {
             display: flex;
             gap: 10px;
-            flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+            flex-grow: 1;
         }
         .captcha-input-container input {
             flex-grow: 1;
-            max-width: 180px; /* Max. Breite für Captcha-Input */
+            max-width: 180px;
         }
         .captcha-image-wrapper {
             background-color: var(--color-sand);
@@ -290,15 +280,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 150px; /* Feste Breite für Captcha-Bild */
-            height: 40px; /* Feste Höhe */
+            width: 150px;
+            height: 40px;
             overflow: hidden;
-            flex-shrink: 0; /* Verhindert Schrumpfung */
+            flex-shrink: 0;
         }
         .captcha-image-wrapper img {
             width: 100%;
             height: auto;
-            object-fit: contain; /* Bild im Container halten */
+            object-fit: contain;
         }
         .captcha-refresh-btn {
             background: none;
@@ -312,7 +302,7 @@
             justify-content: center;
             transition: all 0.2s ease;
             flex-shrink: 0;
-            width: 40px; /* Quadratisch */
+            width: 40px;
             height: 40px;
         }
         .captcha-refresh-btn:hover, .captcha-refresh-btn:focus-visible {
@@ -324,10 +314,10 @@
             font-size: 1.4rem;
         }
         .captcha-hint {
-            grid-column: 1 / -1; /* Nimmt die volle Breite ein */
+            grid-column: 1 / -1;
             font-size: 0.85rem;
             color: var(--color-text-secondary);
-            margin-top: -5px; /* Etwas näher an das Captcha rücken */
+            margin-top: -5px;
         }
         .captcha-hint a {
             color: var(--color-text-secondary);
@@ -335,8 +325,8 @@
         }
 
         .form-submit-group {
-            grid-column: 1 / -1; /* Nimmt die volle Breite ein */
-            text-align: right; /* Button rechts ausrichten */
+            grid-column: 1 / -1;
+            text-align: right;
             margin-top: 20px;
         }
         .form-submit-group .btn {
@@ -345,130 +335,24 @@
             min-width: 180px;
         }
 
-        /* Anpassung der kombinierten Sektion für Newsletter & Social Media (dieser Block fehlte und wird hinzugefügt) */
-        .contact-page-combined-cta {
-            background-color: var(--color-sand); /* Hintergrundfarbe für die gesamte Sektion */
-            padding: 80px 0; /* Vertikaler Abstand */
-        }
-        .contact-page-combined-cta .container {
-            max-width: 1000px;
-        }
-        .contact-page-combined-cta .combined-row-grid {
-             display: grid;
-             grid-template-columns: 1fr; /* Mobile: untereinander */
-             gap: 40px;
-             align-items: stretch; /* Spalten haben gleiche Höhe */
-             justify-content: center;
-        }
-        @media (min-width: 768px) {
-            .contact-page-combined-cta .combined-row-grid {
-                grid-template-columns: repeat(2, 1fr); /* Desktop: nebeneinander */
-                gap: 60px;
-            }
-        }
-        .contact-page-combined-cta .combined-column {
-            background-color: var(--color-white);
-            padding: 40px;
-            border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: flex; /* Flexbox um Inhalt zu zentrieren und vertikal zu verteilen */
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center; /* Zentriert horizontal */
-            text-align: center;
-        }
-        .contact-page-combined-cta .combined-column h2 {
-            font-family: var(--font-secondary);
-            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
-            color: var(--color-bordeaux);
-            margin-bottom: 0.75em;
-            text-align: center;
-        }
-        .contact-page-combined-cta .combined-column p {
-            color: var(--color-text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5em;
-            max-width: 400px; /* Begrenzt Textbreite für Lesbarkeit */
-            text-align: center;
-        }
-        .contact-page-combined-cta .combined-column .btn-container {
-             margin-top: auto; /* Schiebt Button/Inhalt an den unteren Rand, wenn Spalten gestreckt sind */
-        }
-        
-        .contact-page-combined-cta .social-links {
-            display: flex;            /* Aktiviert Flexbox für die horizontale Anordnung */
-            flex-direction: row;      /* Stellt explizit die Ausrichtung in einer Reihe ein */
-            justify-content: center;  /* Zentriert die Icons horizontal im Container */
-            align-items: center;      /* Zentriert die Icons vertikal, falls sie unterschiedliche Höhen hätten */
-            gap: 20px;                /* Abstand zwischen den Icons */
-            margin-top: auto;         /* Schiebt diesen Block an den unteren Rand, wenn die Spalten gestreckt sind */
-        }
-
-        .contact-page-combined-cta .social-links a {
-            display: inline-flex;     /* Wichtig, um die Iconify-Icons als Flex-Elemente zu behandeln und vertikal zu zentrieren */
-            align-items: center;      /* Zentriert das Icon innerhalb des Anker-Tags */
-            justify-content: center;  /* Zentriert das Icon innerhalb des Anker-Tags */
-            text-decoration: none;    /* Entfernt die Unterstreichung von Links */
-            color: var(--color-bordeaux); /* Farbe des Links/Icons setzen */
-            transition: transform 0.2s ease, color 0.2s ease; /* Übergang für Hover-Effekte */
-        }
-
-        .contact-page-combined-cta .social-links a iconify-icon {
-            font-size: 2.2rem; /* Größe der Icons */
-            color: inherit; /* Erbt die Farbe vom übergeordneten Link */
-        }
-
-        .contact-page-combined-cta .social-links a:hover {
-            transform: scale(1.1); /* Zoom-Effekt beim Hover */
-            color: #701623; /* Dunkleres Bordeaux beim Hover */
-        }
-         .contact-page-combined-cta .form-newsletter {
-            display: flex;
-            flex-direction: column; /* Input und Button untereinander */
-            align-items: center; /* Zentriert die Elemente */
-            max-width: 350px; /* Engere Formularbreite */
-            width: 100%;
-            margin: 0 auto;
-        }
-        .contact-page-combined-cta .form-newsletter input[type="email"] {
-            width: 100%;
-            border-radius: 4px; /* Einheitliche Rundung */
-            border-right: 1px solid var(--color-border-subtle); /* Kein fehlender Rand */
-            margin-bottom: 15px; /* Abstand zum Button */
-        }
-        .contact-page-combined-cta .form-newsletter button {
-            width: 100%;
-            border-radius: 4px;
-            padding: 0.8em 1.5em;
-        }
-        .contact-page-combined-cta .form-newsletter button iconify-icon {
-            margin-right: 8px; /* Abstand zum Text im Button */
-        }
-        .contact-page-combined-cta #newsletter-privacy-info-combined {
-            text-align: center;
-            max-width: none; /* Nicht beschränken, um Zeilenumbruch zu vermeiden */
-            margin-top: 15px;
-        }
-
         /* Anpassung der kombinierten Sektion für Newsletter & Social Media */
         .contact-page-combined-cta {
-            background-color: var(--color-sand); /* Hintergrundfarbe für die gesamte Sektion */
-            padding: 80px 0; /* Vertikaler Abstand */
+            background-color: var(--color-sand);
+            padding: 80px 0;
         }
         .contact-page-combined-cta .container {
             max-width: 1000px;
         }
         .contact-page-combined-cta .combined-row-grid {
              display: grid;
-             grid-template-columns: 1fr; /* Mobile: untereinander */
+             grid-template-columns: 1fr;
              gap: 40px;
-             align-items: stretch; /* Spalten haben gleiche Höhe */
+             align-items: stretch;
              justify-content: center;
         }
         @media (min-width: 768px) {
             .contact-page-combined-cta .combined-row-grid {
-                grid-template-columns: repeat(2, 1fr); /* Desktop: nebeneinander */
+                grid-template-columns: repeat(2, 1fr);
                 gap: 60px;
             }
         }
@@ -477,10 +361,10 @@
             padding: 40px;
             border-radius: 6px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: flex; /* Flexbox um Inhalt zu zentrieren und vertikal zu verteilen */
+            display: flex;
             flex-direction: column;
             justify-content: space-between;
-            align-items: center; /* Zentriert horizontal */
+            align-items: center;
             text-align: center;
         }
         .contact-page-combined-cta .combined-column h2 {
@@ -495,40 +379,49 @@
             font-size: 1rem;
             line-height: 1.6;
             margin-bottom: 1.5em;
-            max-width: 400px; /* Begrenzt Textbreite für Lesbarkeit */
+            max-width: 400px;
             text-align: center;
         }
         .contact-page-combined-cta .combined-column .btn-container {
-             margin-top: auto; /* Schiebt Button/Inhalt an den unteren Rand, wenn Spalten gestreckt sind */
+             margin-top: auto;
         }
         .contact-page-combined-cta .social-links {
-             margin-top: auto; /* Schiebt Social Links an den unteren Rand */
              display: flex;
-             gap: 20px;
+             flex-direction: row;
              justify-content: center;
+             align-items: center;
+             gap: 20px;
+             margin-top: auto;
         }
-         .contact-page-combined-cta .social-links a iconify-icon {
-            font-size: 2.2rem;
+         .contact-page-combined-cta .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
             color: var(--color-bordeaux);
             transition: transform 0.2s ease, color 0.2s ease;
         }
-         .contact-page-combined-cta .social-links a:hover iconify-icon {
+         .contact-page-combined-cta .social-links a iconify-icon {
+            font-size: 2.2rem;
+            color: inherit;
+        }
+         .contact-page-combined-cta .social-links a:hover {
             transform: scale(1.1);
-            color: #701623; /* Dunkleres Bordeaux beim Hover */
+            color: #701623;
         }
          .contact-page-combined-cta .form-newsletter {
             display: flex;
-            flex-direction: column; /* Input und Button untereinander */
-            align-items: center; /* Zentriert die Elemente */
-            max-width: 350px; /* Engere Formularbreite */
+            flex-direction: column;
+            align-items: center;
+            max-width: 350px;
             width: 100%;
             margin: 0 auto;
         }
         .contact-page-combined-cta .form-newsletter input[type="email"] {
             width: 100%;
-            border-radius: 4px; /* Einheitliche Rundung */
-            border-right: 1px solid var(--color-border-subtle); /* Kein fehlender Rand */
-            margin-bottom: 15px; /* Abstand zum Button */
+            border-radius: 4px;
+            border-right: 1px solid var(--color-border-subtle);
+            margin-bottom: 15px;
         }
         .contact-page-combined-cta .form-newsletter button {
             width: 100%;
@@ -536,17 +429,16 @@
             padding: 0.8em 1.5em;
         }
         .contact-page-combined-cta .form-newsletter button iconify-icon {
-            margin-right: 8px; /* Abstand zum Text im Button */
+            margin-right: 8px;
         }
         .contact-page-combined-cta #newsletter-privacy-info-combined {
             text-align: center;
-            max-width: none; /* Nicht beschränken, um Zeilenumbruch zu vermeiden */
+            max-width: none;
             margin-top: 15px;
         }
     </style>
 </head>
 <body>
-    <!-- TYPO3 Hinweis: 'Zum Hauptinhalt springen' Link für Barrierefreiheit -->
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
     <!-- TYPO3 Hinweis: Header-Struktur. Kann in ein TYPO3 Partial/Template ausgelagert werden. -->
@@ -562,7 +454,6 @@
             </div>
             <div class="header-center">
                 <!-- TYPO3 Hinweis: Logo-Link und Bildquellen können im CMS verwaltet werden. width/height hinzufügen! -->
-                <!-- Pfad zur Startseite vom Unterordner /sites/ -->
                 <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
@@ -583,7 +474,6 @@
             <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
                 <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
             </button>
-             <!-- Pfad zur Startseite vom Unterordner /sites/ -->
              <a href="../index.html" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
                  <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40">
              </a>
@@ -595,7 +485,6 @@
         </div>
         <div class="fullscreen-nav-quicklinks">
             <!-- TYPO3 Hinweis: Quicklinks dynamisch aus Seitendaten oder konfigurierten Links generieren -->
-            <!-- Relative Pfade vom Ordner /sites/ -->
             <a href="../zimmer-preise.html" class="quicklink-item"> <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> <span>Wohnen</span> </a>
             <a href="../wellness-spa.html" class="quicklink-item"> <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> <span>Entspannen</span> </a>
             <a href="../kulinarik.html" class="quicklink-item"> <iconify-icon icon="tabler:tools-kitchen" aria-hidden="true"></iconify-icon> <span>Geniessen</span> </a>
@@ -609,7 +498,6 @@
                     <a href="../hotel/ueber-uns.html" class="nav-section-viewall">Mehr erfahren</a>
                 </div>
                 <div class="horizontal-scroll-container">
-                    <!-- Relative Pfade vom Ordner /sites/ -->
                     <a href="../hotel/ueber-uns.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Team/220925_Hotel_Sonne-Post_MA_CorinaBeha_300dpi_11.jpg" alt="Gastgeber Familie Eiche & Wehrle" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Ihre Gastgeber</span> <span class="nav-tile-subtitle">Herzlich & Familiär</span> </div> </a>
                     <a href="./historie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historisches Bild des Hotels" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Unsere Geschichte</span> <span class="nav-tile-subtitle">Seit 1870</span> </div> </a>
                     <a href="../hotelrundgang-galerie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" alt="Außenansicht Hotel Sonne Post" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Hotelrundgang</span> <span class="nav-tile-subtitle">Impressionen</span> </div> </a>
@@ -666,7 +554,6 @@
         <div class="fullscreen-nav-footer">
             <div class="footer-links">
                 <!-- TYPO3 Hinweis: Footer-Links dynamisch generieren (z.B. aus Footer-Navigation) -->
-                <!-- Relative Pfade vom Ordner /sites/ -->
                 <ul>
                     <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../gutschein-bestellung.html">Gutscheine</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger-nav">Cookie-Einstellungen</a></li>
                 </ul>
@@ -682,7 +569,7 @@
     <!-- TYPO3 Hinweis: Hauptinhaltsbereich. Hier werden die TYPO3 Content Elemente (tt_content) gerendert. -->
     <main id="main-content" role="main">
         <!-- TYPO3 Hinweis: Hero Sektion der Unterseite. -->
-        <section class="page-hero-section" aria-labelledby="contact-hero-heading" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Kontakt/hc_Kontakt_24.png');">
+        <section class="page-hero-section" aria-labelledby="contact-hero-heading" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/hc_Kontakt.png');">
             <div class="page-hero-overlay"></div>
             <div class="page-hero-content container">
                 <!-- Überschrift für Screenreader, visuell nicht sichtbar, da Bild für sich spricht -->
@@ -864,7 +751,7 @@
                         </div>
                         <div class="form-group hidden-field event_inquiry-field">
                             <label for="event-guests">Anzahl Gäste (ca.) *</label>
-                            <input type="number" id="event-guests" name="event_guests" min="2" value="2">
+                            <input type="number" id="event-guests" name="event-guests" min="2" value="2">
                         </div>
                         <div class="form-group form-group-full-width hidden-field event_inquiry-field">
                             <label for="event-requirements">Spezielle Anforderungen / Wünsche</label>
@@ -931,7 +818,7 @@
             <h2 id="combined-cta-main-heading" class="sr-only">Weitere Optionen</h2>
             <div class="container">
                 <div class="combined-row-grid">
-                    <!-- Linke Spalte - Newsletter -->
+                    <!-- Linke Spalte - Social Media -->
                     <div class="combined-column social-media-column" role="region" aria-labelledby="social-media-heading-cta">
                         <h2 id="social-media-heading-cta">Folgen Sie uns</h2>
                         <p>Bleiben Sie auf dem Laufenden und verpassen Sie keine Neuigkeiten, Einblicke hinter die Kulissen und exklusive Angebote.</p>
@@ -942,7 +829,7 @@
                         </div>
                     </div>
 
-                    <!-- Rechte Spalte - Social Media -->
+                    <!-- Rechte Spalte - Newsletter -->
                     <div class="combined-column newsletter-column" role="region" aria-labelledby="newsletter-heading-cta-combined">
                         <h2 id="newsletter-heading-cta-combined">Nichts mehr verpassen</h2>
                         <p>Abonnieren Sie unseren Newsletter für exklusive Angebote, Neuigkeiten und Urlaubsinspiration direkt aus der Sonne Post.</p>
@@ -1017,7 +904,7 @@
     <div class="lightbox-overlay" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
         <div class="lightbox-content">
             <button class="lightbox-close" aria-label="Bildansicht schließen"> <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon> </button>
-            <div class="lightbox-image-container"> <img src="" alt="" id="lightbox-image" width="800" height="600"> <!-- Placeholder width/height --> </div>
+            <div class="lightbox-image-container"> <img src="" alt="" id="lightbox-image" width="800" height="600"> </div>
             <div id="lightbox-caption" class="lightbox-caption sr-only">Vergrößerte Bildansicht</div>
         </div>
     </div>
@@ -1027,8 +914,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
-    <!-- Lottie ist hier nicht direkt für die Kontaktseite nötig, aber falls es global genutzt wird, bleibt es. -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script> -->
 
     <!-- TYPO3 Hinweis: Ausgelagerte JavaScript-Datei. Pfad ggf. anpassen (relativ zum sites/ Ordner). 'defer' ist wichtig. -->
     <script src="../js/main.js" defer></script>
@@ -1040,12 +925,12 @@
                 gsap.utils.toArray('.contact-info-column, .contact-form-column').forEach((el, index) => {
                     gsap.from(el, {
                         opacity: 0,
-                        x: index % 2 === 0 ? -50 : 50, // Linke Spalte von links, rechte von rechts
+                        x: index % 2 === 0 ? -50 : 50,
                         duration: 0.8,
                         ease: "power2.out",
                         scrollTrigger: {
                             trigger: el,
-                            start: "top 85%", // Startet, wenn 85% der Spalte im Viewport sind
+                            start: "top 85%",
                             toggleActions: "play none none none",
                             once: true
                         }
@@ -1058,7 +943,7 @@
                         opacity: 0,
                         y: 50,
                         duration: 0.8,
-                        delay: index * 0.1, // Leichte Staffelung
+                        delay: index * 0.1,
                         ease: "power2.out",
                         scrollTrigger: {
                             trigger: el,
@@ -1088,13 +973,11 @@
                         group.classList.contains('event_inquiry-field') ||
                         group.classList.contains('career_inquiry-field')) {
                         group.classList.add('hidden-field');
-                        // Optional: Felder leeren und 'required' Attribut entfernen
                         group.querySelectorAll('input, select, textarea').forEach(field => {
                             if (field.hasAttribute('required')) {
-                                field.dataset.wasRequired = true; // Speichern, dass es required war
+                                field.dataset.wasRequired = true;
                                 field.removeAttribute('required');
                             }
-                            // field.value = ''; // Optional: Felder beim Verstecken leeren
                         });
                     }
                 });
@@ -1103,7 +986,6 @@
                 if (selectedType && selectedType !== 'general_contact') {
                     document.querySelectorAll(`.${selectedType}-field`).forEach(field => {
                         field.classList.remove('hidden-field');
-                        // Optional: 'required' Attribut zurücksetzen
                         field.querySelectorAll('input, select, textarea').forEach(subField => {
                             if (subField.dataset.wasRequired) {
                                 subField.setAttribute('required', 'true');
@@ -1135,16 +1017,13 @@
             const captchaRefreshBtn = document.querySelector('.captcha-refresh-btn');
             if (captchaRefreshBtn && captchaImage) {
                 captchaRefreshBtn.addEventListener('click', function() {
-                    // In einer echten TYPO3-Umgebung würde hier ein AJAX-Aufruf zum Backend erfolgen,
-                    // der ein neues Captcha-Bild und die entsprechende Validierungslogik generiert.
-                    // Hier ein einfaches Platzhalter-Update:
                     const randomString = Math.random().toString(36).substring(2, 7).toUpperCase();
                     captchaImage.src = `https://via.placeholder.com/150x40/E6DCCF/8C1E2D?text=${randomString}`;
                     captchaImage.alt = `Captcha-Bild mit Zeichen ${randomString}`;
                     const captchaInput = document.getElementById('captcha-input');
                     if (captchaInput) {
-                        captchaInput.value = ''; // Eingabefeld leeren
-                        captchaInput.focus(); // Fokus zurücksetzen
+                        captchaInput.value = '';
+                        captchaInput.focus();
                     }
                 });
             }
