@@ -370,12 +370,12 @@ h4 { font-size: 1.1rem; margin-bottom: 15px; color: var(--color-text-primary); f
 .combined-column-newsletter #newsletter-privacy-info-combined a { color: var(--color-text-secondary); }
 .combined-column-newsletter .form-newsletter input[type="email"] { background-color: var(--color-white); }
 @media (min-width: 992px) {
-    .combined-row-grid { grid-template-columns: 1fr 1fr; gap: 60px; align-items: stretch; } /* stretch damit beide Spalten gleich hoch sind */
-    .combined-column-karriere h2, .combined-column-karriere p,
-    .combined-column-newsletter h2, .combined-column-newsletter p { text-align: left; } /* Auf Desktop linksbündig in den Spalten */
-    .combined-column.text-center .btn-container { justify-content: flex-start; }
-    .combined-column .form-newsletter { margin-left:0; margin-right: 0;}
-    .combined-column #newsletter-privacy-info-combined { margin-left:0; margin-right: 0;}
+    .combined-row-grid { grid-template-columns: 1fr 1fr; gap: 60px; align-items: stretch; }
+    .combined-column.text-center > div { text-align: center; }
+
+    .combined-column.text-center .btn-container { justify-content: center; }
+    .combined-column .form-newsletter { margin-left: auto; margin-right: auto;}
+    .combined-column #newsletter-privacy-info-combined { margin-left: auto; margin-right: auto; text-align: center;}
 }
 .combined-column h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin-bottom: 0.75em; }
 .combined-column p { font-size: 1rem; line-height: 1.6; margin-bottom: 1.5em; }
