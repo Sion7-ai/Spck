@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -23,233 +24,142 @@
             background-color: var(--color-white); /* Heller Hintergrund für die Seite */
         }
 
-        /* Hero-Sektion für die Angebotsseite */
         .page-hero-section.angebote-hero {
-            position: relative;
-            width: 100%;
-            height: 55vh; /* Höhe für den Hero-Banner */
-            min-height: 350px;
-            max-height: 500px;
-            overflow: hidden;
-            margin-top: 0; /* Header liegt darüber */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--color-white);
-            background-size: cover;
-            background-position: center 70%; /* Fokus etwas nach unten für Landschaftsbilder */
-            background-repeat: no-repeat;
+            position: relative; width: 100%; height: 55vh;
+            min-height: 350px; max-height: 500px; overflow: hidden; margin-top: 0;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--color-white); background-size: cover; background-position: center 70%; background-repeat: no-repeat;
         }
         .page-hero-section.angebote-hero .page-hero-overlay {
             background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.0) 100%);
         }
         .page-hero-section.angebote-hero .page-hero-content {
-            position: relative;
-            z-index: 3;
-            padding-top: var(--header-height);
-            display: block; /* Damit Text sichtbar wird */
+            position: relative; z-index: 3; padding-top: var(--header-height); display: block;
         }
         .page-hero-section.angebote-hero .page-hero-title {
-            font-size: clamp(2.5rem, 5.5vw, 3.8rem);
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            margin-bottom: 0.2em;
+            font-size: clamp(2.5rem, 5.5vw, 3.8rem); text-shadow: 0 2px 5px rgba(0,0,0,0.5); margin-bottom: 0.2em;
         }
         .page-hero-section.angebote-hero .page-hero-subtitle {
-            font-size: clamp(1.2rem, 2.5vw, 1.7rem);
-            font-family: var(--font-primary);
-            font-weight: 400;
-            opacity: 0.9;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-family: var(--font-primary);
+            font-weight: 400; opacity: 0.9; text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+
+        /* Intro Text Sektion */
+        .angebote-intro-section {
+            padding: 60px 0 40px 0;
+            background-color: var(--color-white); /* Geändert auf Weiß für besseren Kontrast zur Filterleiste */
+        }
+        .angebote-intro-section .container {
+            max-width: 900px;
+            text-align: center;
+        }
+        .angebote-intro-section .intro-lead {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+            color: var(--color-text-primary);
+            font-weight: 600;
+            margin-bottom: 1em;
+            line-height: 1.4;
+        }
+        .angebote-intro-section p {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1em;
+        }
+         .angebote-intro-section p.important-notes {
+            font-size: 0.9rem;
+            /* font-style: italic; */ /* Entfernt, um die Lesbarkeit der Hinweise zu verbessern */
+            margin-top: 2em;
+            padding: 15px;
+            background-color: var(--color-beige); /* Leichter Hintergrund für die Hinweise */
+            border-radius: 4px;
+            display: inline-block; /* Passt sich der Textbreite an, wenn zentriert */
+        }
+        .angebote-intro-section p.important-notes strong {
+            color: var(--color-bordeaux);
         }
 
 
-        /* Filter Bar Sektion */
         .angebote-filter-bar-section {
-            padding: 30px 0;
-            background-color: var(--color-beige); /* Heller Hintergrund für die Filterleiste */
+            padding: 30px 0; background-color: var(--color-beige);
+            border-top: 1px solid var(--color-border-subtle);
             border-bottom: 1px solid var(--color-border-subtle);
         }
-        .angebote-filter-bar-section .container {
-            max-width: 1200px; /* Breite der Filterleiste */
-        }
+        .angebote-filter-bar-section .container { max-width: 1200px; }
         .angebote-filter-controls {
-            display: flex;
-            flex-wrap: wrap; /* Umbruch bei vielen Filtern */
-            gap: 10px 15px; /* Abstand zwischen Filterelementen */
-            align-items: center;
-            justify-content: center; /* Filter zentrieren */
+            display: flex; flex-wrap: wrap; gap: 10px 15px;
+            align-items: center; justify-content: center;
         }
-        .angebote-filter-controls .filter-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .angebote-filter-controls label {
-            font-weight: 500;
-            color: var(--color-text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0;
-        }
+        .angebote-filter-controls .filter-group { display: flex; align-items: center; gap: 8px; }
+        .angebote-filter-controls label { font-weight: 500; color: var(--color-text-secondary); font-size: 0.9rem; margin-bottom: 0; }
         .angebote-filter-controls select,
         .angebote-filter-controls input[type="date"],
         .angebote-filter-controls .btn-filter {
-            padding: 8px 12px;
-            border: 1px solid var(--color-border-subtle);
-            border-radius: 4px;
-            font-family: var(--font-primary);
-            font-size: 0.9rem;
-            background-color: var(--color-white);
+            padding: 8px 12px; border: 1px solid var(--color-border-subtle); border-radius: 4px;
+            font-family: var(--font-primary); font-size: 0.9rem; background-color: var(--color-white);
         }
-        .angebote-filter-controls select {
-            min-width: 150px;
-        }
-        .angebote-filter-controls .btn-filter {
-            background-color: var(--color-bordeaux);
-            color: var(--color-white);
-            cursor: pointer;
-        }
-        .angebote-filter-controls .btn-filter:hover {
-            background-color: #701623;
-        }
+        .angebote-filter-controls select { min-width: 150px; }
+        .angebote-filter-controls .btn-filter { background-color: var(--color-bordeaux); color: var(--color-white); cursor: pointer; }
+        .angebote-filter-controls .btn-filter:hover { background-color: #701623; }
         .filter-buttons-group button {
-            background-color: var(--color-white);
-            color: var(--color-bordeaux);
-            border: 1px solid var(--color-border-subtle);
-            padding: 0.6em 1.2em;
-            border-radius: 20px; /* Abgerundete Buttons */
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            background-color: var(--color-white); color: var(--color-bordeaux);
+            border: 1px solid var(--color-border-subtle); padding: 0.6em 1.2em; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease;
         }
         .filter-buttons-group button:hover,
         .filter-buttons-group button.active {
-            background-color: var(--color-bordeaux);
-            color: var(--color-white);
-            border-color: var(--color-bordeaux);
+            background-color: var(--color-bordeaux); color: var(--color-white); border-color: var(--color-bordeaux);
         }
-        .filter-buttons-group button.active {
-             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        .filter-buttons-group button.active { box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-
-        /* Angebotsliste Sektion */
-        .angebote-list-section {
-            padding: 60px 0;
-            background-color: var(--color-white);
-        }
-        .angebote-list-section .container {
-            max-width: 1200px; /* Breite für die Angebotskacheln */
-        }
-        .angebote-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
-        }
-        @media (min-width: 1000px) { /* Auf größeren Desktops ggf. 3 Spalten */
-            .angebote-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-         @media (min-width: 680px) and (max-width: 999.98px) { /* Auf Tablets 2 Spalten */
-            .angebote-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        .angebote-list-section { padding: 60px 0; background-color: var(--color-white); }
+        .angebote-list-section .container { max-width: 1200px; }
+        .angebote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        @media (min-width: 1000px) { .angebote-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 680px) and (max-width: 999.98px) { .angebote-grid { grid-template-columns: repeat(2, 1fr); } }
 
         .angebot-card {
-            background-color: var(--color-beige); /* Hintergrund für Kacheln */
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-            display: flex;
-            flex-direction: column;
-            text-decoration: none; /* Falls die ganze Karte ein Link ist */
-            color: var(--color-text-primary);
+            background-color: var(--color-beige); border-radius: 6px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07); display: flex; flex-direction: column;
+            text-decoration: none; color: var(--color-text-primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .angebot-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        .angebot-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .angebot-card-link-wrapper {
+            text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;
         }
-        .angebot-card-image-wrapper {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 16 / 10; /* Seitenverhältnis für das Bild */
+        .angebot-card-image-wrapper { position: relative; overflow: hidden; aspect-ratio: 16 / 10; }
+        .angebot-card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .angebot-card-badge {
+            position: absolute; top: 15px; left: 15px; background-color: rgba(140, 30, 45, 0.9);
+            color: var(--color-white); padding: 5px 10px; border-radius: 4px;
+            font-size: 0.8rem; font-weight: 500; z-index: 1;
         }
-        .angebot-card-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .angebot-card-badge { /* Optionaler Badge auf dem Bild */
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background-color: rgba(140, 30, 45, 0.9); /* Bordeaux mit Transparenz */
-            color: var(--color-white);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            z-index: 1;
-        }
-        .angebot-card-content {
-            padding: 20px 25px 25px 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
+        .angebot-card-content { padding: 20px 25px 25px 25px; flex-grow: 1; display: flex; flex-direction: column; }
         .angebot-card-title {
-            font-family: var(--font-secondary);
-            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
-            font-weight: 600;
-            color: var(--color-bordeaux);
-            margin-bottom: 0.5em;
-            min-height: 2.8em; /* Platz für ca. 2 Zeilen Titel */
-            display: flex;
-            align-items: center;
+            font-family: var(--font-secondary); font-size: clamp(1.3rem, 2.5vw, 1.6rem); font-weight: 600;
+            color: var(--color-bordeaux); margin-bottom: 0.5em;
+            min-height: 2.8em;
+            display: flex; align-items: center;
         }
-        .angebot-card-description {
-            font-size: 0.9rem;
-            color: var(--color-text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1em;
-            flex-grow: 1; /* Nimmt verfügbaren Platz ein */
-        }
-        .angebot-card-description p { margin-bottom: 0.5em; }
+        .angebot-card-description { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1em; flex-grow: 1; }
+        .angebot-card-description p, .angebot-card-description ul { margin-bottom: 0.7em; }
+        .angebot-card-description ul { list-style: disc; padding-left: 20px; }
+        .angebot-card-description li { margin-bottom: 0.3em; }
 
-        .angebot-card-meta {
-            margin-top: auto; /* Schiebt Meta-Infos und Button nach unten */
-            padding-top: 15px;
-            border-top: 1px solid var(--color-border-subtle);
-        }
-        .angebot-card-meta .meta-item {
-            font-size: 0.85rem;
+        .angebot-card-meta { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--color-border-subtle); }
+        .angebot-card-meta .meta-item { font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 8px; display: flex; align-items: flex-start; }
+        .angebot-card-meta .meta-item iconify-icon { font-size: 1.1em; color: var(--color-bordeaux); margin-right: 8px; flex-shrink: 0; margin-top: 2px; }
+        .angebot-card-meta .meta-item strong { font-weight: 600; color: var(--color-text-primary); }
+        .angebot-card-actions { margin-top: 15px; text-align: right; }
+        .angebot-card-actions .btn { font-size: 0.9rem; padding: 0.6em 1.4em; }
+        .no-results-message { /* Für die Filtermeldung */
+            text-align: center;
+            grid-column: 1 / -1; /* Über alle Spalten des Grids */
+            padding: 30px 20px;
+            font-size: 1.1rem;
             color: var(--color-text-secondary);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-        .angebot-card-meta .meta-item iconify-icon {
-            font-size: 1.1em;
-            color: var(--color-bordeaux);
-            margin-right: 8px;
-            flex-shrink: 0;
-        }
-        .angebot-card-meta .meta-item strong { /* Für Preis etc. */
-            font-weight: 600;
-            color: var(--color-text-primary);
-        }
-        .angebot-card-actions {
-            margin-top: 15px;
-            text-align: right; /* Button rechtsbündig */
-        }
-        .angebot-card-actions .btn {
-            font-size: 0.9rem;
-            padding: 0.6em 1.4em;
         }
 
     </style>
@@ -257,7 +167,6 @@
 <body>
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
-    <!-- Header (identisch zu anderen Seiten) -->
     <header class="site-header" id="site-header" role="banner">
         <div class="header-content-wrapper">
             <div class="header-left">
@@ -280,58 +189,78 @@
         </div>
     </header>
 
-    <!-- Fullscreen Navigation (identisch zu anderen Seiten, Pfade anpassen) -->
     <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
+        <!-- Vollbildnavigation hier einfügen (identisch zu anderen Seiten) -->
         <div class="fullscreen-nav-header">
-            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
-                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
-            </button>
-             <a href="../index.html" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
-                 <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40">
-             </a>
+            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen"><iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon></button>
+            <a href="../index.html" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)"><img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40"></a>
             <div class="fullscreen-nav-ctas">
                  <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="btn btn-light">Jetzt Buchen</a>
-                 <a href="../anfragen.html" class="btn btn-dark">Anfragen</a>
+                 <a href="./kontakt.html" class="btn btn-dark">Anfragen</a>
              </div>
         </div>
         <div class="fullscreen-nav-quicklinks">
-            <a href="./zimmer.html" class="quicklink-item"> <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> <span>Wohnen</span> </a>
-            <a href="./wellness.html" class="quicklink-item"> <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> <span>Entspannen</span> </a>
-            <a href="./restaurant.html" class="quicklink-item"> <iconify-icon icon="tabler:tools-kitchen" aria-hidden="true"></iconify-icon> <span>Geniessen</span> </a>
-            <a href="./region.html" class="quicklink-item"> <iconify-icon icon="feather:map" aria-hidden="true"></iconify-icon> <span>Freizeit</span> </a>
+            <a href="./zimmer.html" class="quicklink-item"><iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> <span>Wohnen</span></a>
+            <a href="./wellness.html" class="quicklink-item"><iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> <span>Entspannen</span></a>
+            <a href="./restaurant.html" class="quicklink-item"><iconify-icon icon="tabler:tools-kitchen" aria-hidden="true"></iconify-icon> <span>Geniessen</span></a>
+            <a href="./region.html" class="quicklink-item"><iconify-icon icon="feather:map" aria-hidden="true"></iconify-icon> <span>Freizeit</span></a>
         </div>
         <div class="fullscreen-nav-main">
-            <!-- Nav Sektionen hier ... -->
+             <section class="nav-section" aria-labelledby="nav-section-title-angebote-hotel">
+                <div class="nav-section-header"><h2 id="nav-section-title-angebote-hotel" class="nav-section-title">Hotel & Gastgeber</h2></div>
+                <div class="horizontal-scroll-container">
+                    <a href="../hotel/ueber-uns.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Team/220925_Hotel_Sonne-Post_MA_CorinaBeha_300dpi_11.jpg" alt="Gastgeber" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Ihre Gastgeber</span> <span class="nav-tile-subtitle">Herzlich & Familiär</span> </div> </a>
+                    <a href="./historie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Geschichte" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Unsere Geschichte</span> <span class="nav-tile-subtitle">Seit 1870</span> </div> </a>
+                </div>
+            </section>
         </div>
         <div class="fullscreen-nav-footer">
-            <!-- Footer Links hier ... -->
+            <div class="footer-links">
+                <ul>
+                    <li><a href="./kontakt.html">Kontakt</a></li><li><a href="./karriere.html">Karriere</a></li><li><a href="./impressum.html">Impressum</a></li><li><a href="./datenschutz.html">Datenschutz</a></li><li><a href="#" id="cookie-settings-trigger-nav">Cookie-Einstellungen</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <main id="main-content" role="main">
-        <!-- TYPO3 Hinweis: Hero-Sektion für die Angebotsseite -->
-        <section class="page-hero-section angebote-hero" aria-labelledby="angebote-hero-heading" style="background-image: url('https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop');">
+        <section class="page-hero-section angebote-hero" aria-labelledby="angebote-hero-heading" style="background-image: url('https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop');">
             <div class="page-hero-overlay"></div>
             <div class="page-hero-content container">
-                <!-- TYPO3 Hinweis: Titel und Subtitel editierbar -->
                 <h1 id="angebote-hero-heading" class="page-hero-title">Unsere Top-Angebote</h1>
                 <p class="page-hero-subtitle">Entdecken Sie exklusive Arrangements für Ihren Traumurlaub im Schwarzwald.</p>
             </div>
         </section>
 
-        <!-- TYPO3 Hinweis: Filterleiste für Angebote -->
+        <section class="angebote-intro-section">
+            <div class="container">
+                <p class="intro-lead">Entspannen, sparen & den Schwarzwald genießen -<br>unsere Angebote für Ihren Schwarzwald Urlaub</p>
+                <p>Ein Schwarzwald-Urlaub bei uns im Hotel Sonne-Post verbindet Natur mit Erholung und Genuss. Bei uns können Sie den Schwarzwald genießen und sich verwöhnen lassen - dabei noch zu sparen macht Ihren Aufenthalt bei uns zu einem unvergesslichen Erlebnis.</p>
+                <p>Ein Feinschmeckermenü der Extraklasse aus unserem Schwarzwald Restaurant, ein romantischer Aufenthalt zu zweit oder ein unvergesslicher Familienurlaub - in unserer Sonne-Post können Sie rundum genießen, sich erholen, schlemmen und mit unseren Angeboten sogar noch sparen!</p>
+                <p>Sind Sie auf der Suche nach Wellness Angeboten im Schwarzwald? Dann sind unsere Auszeitwochen genau das Richtige für Sie: Vom wohltuenden DaySpa in unserem Schwarzwald Hotel mit Pool und Sauna, über die Erweiterung mit Abendmenü, bis hin zur Kombination aus DaySpa, Menü und Übernachtung - wir bieten eine kleine Auszeit mit großer Wirkung für jedes Budget.</p>
+                <p>Buchen Sie jetzt eines unserer Angebote und genießen Sie Ihre Auszeit bei uns im Haus in vollen Zügen - alleine, zu zweit oder als Familie.</p>
+                <p><strong>Wir freuen uns auf Sie.</strong></p>
+                <p class="important-notes">
+                    <strong>Wichtige Hinweise:</strong><br>
+                    Nur mit Reservierung buchbar.<br>
+                    Bitte beachten Sie die festgelegten Buchungs-Zeiträume.
+                </p>
+            </div>
+        </section>
+
         <section class="angebote-filter-bar-section" aria-labelledby="filter-heading">
             <div class="container">
                 <h2 id="filter-heading" class="sr-only">Angebote filtern</h2>
                 <div class="angebote-filter-controls">
-                    <!-- TYPO3 Hinweis: Filterkategorien dynamisch aus Taxonomie oder konfigurierten Optionen -->
                     <div class="filter-buttons-group" role="group" aria-label="Angebotskategorien filtern">
                         <button type="button" class="active" data-filter="all" aria-pressed="true">Alle Angebote</button>
                         <button type="button" data-filter="wellness" aria-pressed="false">Wellness</button>
                         <button type="button" data-filter="familie" aria-pressed="false">Familie</button>
                         <button type="button" data-filter="aktiv" aria-pressed="false">Aktiv</button>
                         <button type="button" data-filter="kulinarik" aria-pressed="false">Kulinarik</button>
+                        <button type="button" data-filter="sparen" aria-pressed="false">Spar-Tipp</button>
                     </div>
+                    <!--  Optional: Datumsfilter
                     <div class="filter-group">
                         <label for="filter-reisezeitraum-start">Reisezeitraum von:</label>
                         <input type="date" id="filter-reisezeitraum-start" name="reisezeitraum_start" aria-label="Startdatum des Reisezeitraums">
@@ -343,160 +272,357 @@
                     <div class="filter-group">
                         <button type="button" class="btn-filter">Filter anwenden</button>
                     </div>
+                    -->
                 </div>
             </div>
         </section>
 
-        <!-- TYPO3 Hinweis: Liste der Angebote -->
         <section class="angebote-list-section" aria-labelledby="angebote-list-heading">
             <div class="container">
                 <h2 id="angebote-list-heading" class="sr-only">Verfügbare Angebote</h2>
                 <div class="angebote-grid">
-                    <!-- TYPO3 Hinweis: Angebotskacheln als wiederholbare Inhaltselemente oder Datensätze. Alle Inhalte (Bild, Titel, Text, Meta, Link) editierbar. -->
-                    <article class="angebot-card" data-category="wellness">
-                        <a href="./angebot-detail/wellness-glueckstage.html" class="angebot-card-link-wrapper">
-                            <div class="angebot-card-image-wrapper">
-                                <img src="https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Wellness Glückstage im Hotel Sonne Post" width="600" height="400">
-                                <!-- <span class="angebot-card-badge">Tipp</span> -->
-                            </div>
-                            <div class="angebot-card-content">
-                                <h3 class="angebot-card-title">Wellness-Glückstage</h3>
-                                <div class="angebot-card-description">
-                                    <p>Absolute Erholung und Tiefenentspannung. Profitieren Sie von 200 € Spa-Guthaben. Tage voller innerer Gelassenheit warten auf Sie.</p>
-                                </div>
-                                <div class="angebot-card-meta">
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig buchbar (außer Feiertage)</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 3 Nächten</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Ab <strong>499 €</strong> p.P.</span></div>
-                                </div>
-                                <div class="angebot-card-actions">
-                                    <span class="btn">Zum Angebot</span>
-                                </div>
-                            </div>
-                        </a>
-                    </article>
 
-                    <article class="angebot-card" data-category="aktiv kulinarik">
-                        <a href="./angebot-detail/schwarzwald-genusswanderung.html" class="angebot-card-link-wrapper">
+                    <article class="angebot-card" data-category="aktiv golf">
+                        <a href="./angebot-detail/golf-special.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
-                                <img src="https://images.pexels.com/photos/1000382/pexels-photo-1000382.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Wanderer in Schwarzwaldlandschaft" width="600" height="400">
+                                <img src="https://images.pexels.com/photos/163065/golf-sport-competition-club-163065.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Golfplatz mit Golfer" width="600" height="400">
                             </div>
                             <div class="angebot-card-content">
-                                <h3 class="angebot-card-title">Schwarzwälder Genusswanderung</h3>
+                                <h3 class="angebot-card-title">Golf-Special Aktivtage</h3>
                                 <div class="angebot-card-description">
-                                    <p>Erkunden Sie die malerische Natur des Schwarzwalds auf geführten Wanderungen und lassen Sie sich abends mit regionalen Spezialitäten verwöhnen.</p>
+                                    <ul>
+                                        <li>Pro Übernachtung Greenfee auf dem 18 Loch Golfplatz des Golfclub Hochschwarzwald in Titisee</li>
+                                        <li>Eine Flasche Sekt im Zimmer während Ihres Aufenthalts</li>
+                                        <li>Nutzung des neuen Schwimmbad- und Saunabereichs</li>
+                                    </ul>
                                 </div>
                                 <div class="angebot-card-meta">
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>April - Oktober</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>4 Nächte</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Ab <strong>580 €</strong> p.P.</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Doppelzimmer-Appartement ab <strong>295,- €</strong></span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig buchbar, ab 2 Nächten</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
-                                     <span class="btn">Zum Angebot</span>
+                                    <span class="btn">Jetzt mehr erfahren</span>
                                 </div>
                             </div>
                         </a>
                     </article>
 
                     <article class="angebot-card" data-category="familie">
-                         <a href="./angebot-detail/familienzeit.html" class="angebot-card-link-wrapper">
+                        <a href="./angebot-detail/happy-family.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
-                                <img src="https://images.pexels.com/photos/161043/children-selectable-young-people-female-161043.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Familie hat Spaß in der Natur" width="600" height="400">
+                                <img src="https://images.pexels.com/photos/1257110/pexels-photo-1257110.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Glückliche Familie im Urlaub" width="600" height="400">
                             </div>
                             <div class="angebot-card-content">
-                                <h3 class="angebot-card-title">Familienzeit im Schwarzwald</h3>
+                                <h3 class="angebot-card-title">Happy Family Familienwochen</h3>
                                 <div class="angebot-card-description">
-                                    <p>Verbringen Sie unvergessliche Tage mit der ganzen Familie. Inklusive Kinderbetreuung und spannenden Ausflügen in die Region.</p>
+                                    <ul>
+                                        <li>Kostenfreie Übernachtung für Kinder bis 13 Jahre</li>
+                                        <li>Kostenfreies Frühstück für Kinder bis 13 Jahre</li>
+                                        <li>Inkl. Hochschwarzwald Card für Familienerlebnisse</li>
+                                    </ul>
                                 </div>
                                 <div class="angebot-card-meta">
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ferienzeiten & auf Anfrage</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 5 Nächten</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Ab <strong>1.250 €</strong> (2 Erw. + 2 Ki.)</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>04.11.24-20.12.24, 06.01.25-26.01.25, uvm. (Details beachten)</span></div>
+                                     <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 2 Nächten</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
-                                     <span class="btn">Zum Angebot</span>
+                                    <span class="btn">Jetzt mehr erfahren</span>
                                 </div>
                             </div>
                         </a>
                     </article>
-                     <!-- Weitere Angebotskacheln hier ... -->
+
+                    <article class="angebot-card" data-category="wellness sparen">
+                        <a href="./angebot-detail/4-gleich-3.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Gemütliches Hotelzimmer mit Ausblick" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">4 = 3: Erholsame Nächte zum Preis von 3</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>4 Übernachtungen in Ihrer Wunschkategorie zum Preis von 3</li>
+                                        <li>Nachmittagskaffee und hausgemachter Kuchen an 3 Tagen</li>
+                                        <li>Aperitif und 3-Gang-Menü (Fleisch oder vegetarisch) an allen 4 Abenden</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>DZ ab <strong>892,- €</strong>, EZ ab <strong>496,- €</strong></span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Anreise So/Mo, 04.11.24-20.12.24, uvm. (Details beachten)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="wellness kulinarik">
+                        <a href="./angebot-detail/geniesser-special-day-spa-menue.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/322338/pexels-photo-322338.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Wellnessbereich mit Kerzen und Handtüchern" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Genießer-Special: Day Spa + Menü</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Nutzung des Schwimmbad- und Saunabereichs</li>
+                                        <li>Inkl. Wellnesskörbchen mit Bademantel und Saunatuch</li>
+                                        <li>3-Gang-Abendmenü (Fleisch oder vegetarisch) inkl. Aperitif</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>72,-€</strong> pro Person</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do, 13.10.24-24.10.24, uvm. (Details beachten)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="kulinarik">
+                        <a href="./angebot-detail/schlemmerwochen-sommerkueche.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                 <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Frische Sommergerichte" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Schlemmerwochen "leichte Sommerküche"</h3>
+                                <div class="angebot-card-description">
+                                    <p>Vielfältige kulinarische Genüsse, leicht, aromareich und kreativ.</p>
+                                    <ul>
+                                        <li>Übernachtung in der Zimmerkategorie Ihrer Wahl</li>
+                                        <li>Abendliches 7-Gang-Menü inklusive Aperitif und Käsebuffet zum regulären Halbpensionspreis von 36,-€</li>
+                                        <li>Erweitertes Frühstücksbuffet mit Live-Cooking-Station</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>29.06.2025 bis 13.07.2025</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 5 Nächten</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="wellness sparen">
+                         <a href="./angebot-detail/wochenende-plus-eins.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Sektflasche im Hotelzimmer" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Wochenende +1: Verlängertes Wochenende</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Unser Geschenk für Sie: Eine Flasche Sekt im Zimmer</li>
+                                        <li>Inkl. Sonne-Post 3-Gang-Menü (Fleisch oder vegetarisch) an allen 3 Abenden</li>
+                                        <li>Mindestens 10% Rabatt auf den Angebotspreis</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>DZ ab <strong>648,- €</strong>, EZ ab <strong>369,- €</strong></span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig (Do-So oder Fr-Mo), ausgenommen Schulferien Ba-Wü und Feiertagswochenenden</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="wellness">
+                        <a href="./angebot-detail/relax-special-day-spa.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/8411309/pexels-photo-8411309.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Entspannte Atmosphäre im Spa-Bereich" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Relax-Special: Day Spa</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Nutzung des Schwimmbadbereichs mit Whirlliegen</li>
+                                        <li>Nutzung des Saunabereichs</li>
+                                        <li>Inkl. Wellnesskörbchen mit Bademantel und Saunatuch</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>35,-€</strong> pro Person</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do, 13.10.24-24.10.24, uvm. (Details beachten)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                     <article class="angebot-card" data-category="wellness kulinarik">
+                        <a href="./angebot-detail/auszeit-special-day-spa-menue-uebernachtung.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/3887985/pexels-photo-3887985.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Wellnessbereich und gedeckter Tisch" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Auszeit-Special: Day Spa + Menü + Übernachtung</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Nutzung des Schwimmbad- und Saunabereichs</li>
+                                        <li>Wellnesskörbchen mit Bademantel und Saunatuch</li>
+                                        <li>3-Gang-Abendmenü (Fleisch oder vegetarisch) inkl. Aperitif</li>
+                                        <li>Übernachtung im Überraschungszimmer</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>120,-€</strong> pro Person</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do (1-2 Nächte), 13.10.24-24.10.24, uvm. (Details beachten)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="kulinarik">
+                        <a href="./angebot-detail/schlemmerwochen-wintergenuss.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Winterliche Tafel mit Kerzenlicht" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Schlemmerwochen "Winterlicher Genuss"</h3>
+                                 <div class="angebot-card-description">
+                                    <p>Vielfältige kulinarische Genüsse, winterlich, aromareich und kreativ.</p>
+                                    <ul>
+                                        <li>Übernachtung in der Zimmerkategorie Ihrer Wahl</li>
+                                        <li>Abendliches 7-Gang-Menü inklusive Aperitif und Käsebuffet zum regulären Halbpensionspreis von 36,-€</li>
+                                        <li>Erweitertes Frühstücksbuffet mit Live-Cooking-Station</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                     <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>25.01.2026 bis 08.02.2026</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 5 Nächten</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer (identisch zu anderen Seiten) -->
     <footer class="site-footer" role="contentinfo" aria-labelledby="footer-heading">
-        <!-- ... Footer Inhalt ... -->
+         <h2 id="footer-heading" class="sr-only">Fußbereich</h2>
+        <div class="container-footer">
+            <div class="footer-column">
+                <h4>Hotel Sonne Post</h4>
+                <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
+            </div>
+            <div class="footer-column">
+                 <h4>Entdecken</h4>
+                <ul> <li><a href="./zimmer.html">Wohnen & Preise</a></li> <li><a href="./wellness.html">Spa</a></li> <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="./top-angebote.html">Arrangements</a></li> <li><a href="./region.html">Freizeit & Region</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Information</h4>
+                 <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="./newsletter.html">Newsletter</a></li> <li><a href="./faq.html">FAQ</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Rechtliches</h4>
+                 <ul> <li><a href="./impressum.html">Impressum</a></li> <li><a href="./datenschutz.html">Datenschutz</a></li> <li><a href="./agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <h4 style="margin-top: 20px;">Folgen Sie uns</h4>
+                <div class="social-links">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+        </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- Optional: GSAP Flip Plugin für erweiterte Filter-Animationen -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script> -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
 
     <script src="../js/main.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // GSAP Animation für Angebotskacheln
             if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.utils.toArray('.angebot-card').forEach((card, index) => {
-                    gsap.from(card, {
+                const cards = gsap.utils.toArray('.angebot-card');
+                if (cards.length > 0 && cards[0].closest('.angebote-grid')) { // Sicherstellen, dass Trigger-Element existiert
+                    gsap.from(cards, {
                         opacity: 0,
                         y: 50,
                         duration: 0.6,
-                        delay: index * 0.08, // Leichte Verzögerung für gestaffeltes Einfliegen
+                        stagger: 0.1,
+                        ease: "power2.out",
                         scrollTrigger: {
-                            trigger: card.closest('.angebote-grid'), // Trigger ist das Grid, nicht jede Karte einzeln für den Start
+                            trigger: cards[0].closest('.angebote-grid'),
                             start: "top 85%",
                             toggleActions: "play none none none",
                             once: true
                         }
                     });
-                });
+                }
             }
 
-            // Einfache Filter-Logik (Beispiel)
             const filterButtons = document.querySelectorAll('.filter-buttons-group button[data-filter]');
             const angebotCards = document.querySelectorAll('.angebot-card[data-category]');
+            const angeboteGrid = document.querySelector('.angebote-grid');
 
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Active-Klasse umschalten
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        btn.setAttribute('aria-pressed', 'false');
-                    });
-                    this.classList.add('active');
-                    this.setAttribute('aria-pressed', 'true');
+            if (filterButtons.length > 0 && angebotCards.length > 0 && angeboteGrid) {
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        filterButtons.forEach(btn => {
+                            btn.classList.remove('active');
+                            btn.setAttribute('aria-pressed', 'false');
+                        });
+                        this.classList.add('active');
+                        this.setAttribute('aria-pressed', 'true');
+                        const filterValue = this.getAttribute('data-filter');
 
-                    const filterValue = this.getAttribute('data-filter');
-
-                    angebotCards.forEach(card => {
-                        const cardCategories = card.getAttribute('data-category').split(' ');
-                        if (filterValue === 'all' || cardCategories.includes(filterValue)) {
-                            card.style.display = ''; // Oder die Klasse für "sichtbar" hinzufügen
-                            // Optional: Animation für Einblenden
-                            // gsap.to(card, {opacity: 1, duration: 0.3, delay: Math.random() * 0.1});
+                        let visibleCount = 0;
+                        angebotCards.forEach(card => {
+                            const cardCategories = card.getAttribute('data-category').split(' ');
+                            const shouldShow = filterValue === 'all' || cardCategories.includes(filterValue);
+                            
+                            card.style.display = shouldShow ? '' : 'none';
+                            if(shouldShow) visibleCount++;
+                        });
+                        
+                        let noResultsMessage = angeboteGrid.querySelector('.no-results-message');
+                        if (visibleCount === 0) {
+                            if (!noResultsMessage) {
+                                noResultsMessage = document.createElement('p');
+                                noResultsMessage.classList.add('no-results-message');
+                                noResultsMessage.textContent = 'Für Ihre Auswahl wurden leider keine passenden Angebote gefunden.';
+                                angeboteGrid.appendChild(noResultsMessage);
+                            }
                         } else {
-                            card.style.display = 'none'; // Oder Klasse für "versteckt" hinzufügen
-                            // Optional: Animation für Ausblenden
-                            // gsap.to(card, {opacity: 0, duration: 0.3});
+                            if (noResultsMessage) {
+                                noResultsMessage.remove();
+                            }
                         }
                     });
                 });
-            });
-             // Klick-Handler für die gesamte Angebotskachel, wenn ein Link-Wrapper verwendet wird
+            }
+
             document.querySelectorAll('.angebot-card-link-wrapper').forEach(linkWrapper => {
+                linkWrapper.setAttribute('tabindex', '0');
                 linkWrapper.addEventListener('click', function(event) {
-                    // Verhindert, dass Klicks auf interaktive Elemente innerhalb der Karte (z.B. wenn man später doch Buttons reinpackt) die Navigation auslösen
                     if (event.target.closest('button, input, select, textarea, a:not(.angebot-card-link-wrapper)')) {
                         return;
                     }
                     window.location.href = this.getAttribute('href');
                 });
-                 // Macht den Link-Wrapper fokussierbar und per Enter aktivierbar
-                linkWrapper.setAttribute('tabindex', '0');
                 linkWrapper.addEventListener('keydown', function(event) {
                     if (event.key === 'Enter' || event.key === ' ') {
                         event.preventDefault();
@@ -504,7 +630,6 @@
                     }
                 });
             });
-
         });
     </script>
 </body>
