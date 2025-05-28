@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -21,7 +20,7 @@
     <style>
         /* === Spezifische Stile für Top-Angebote Seite === */
         body {
-            background-color: var(--color-white); /* Heller Hintergrund für die Seite */
+            background-color: var(--color-white);
         }
 
         .page-hero-section.angebote-hero {
@@ -44,10 +43,9 @@
             font-weight: 400; opacity: 0.9; text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
 
-        /* Intro Text Sektion */
         .angebote-intro-section {
             padding: 60px 0 40px 0;
-            background-color: var(--color-white); /* Geändert auf Weiß für besseren Kontrast zur Filterleiste */
+            background-color: var(--color-white);
         }
         .angebote-intro-section .container {
             max-width: 900px;
@@ -69,17 +67,15 @@
         }
          .angebote-intro-section p.important-notes {
             font-size: 0.9rem;
-            /* font-style: italic; */ /* Entfernt, um die Lesbarkeit der Hinweise zu verbessern */
             margin-top: 2em;
             padding: 15px;
-            background-color: var(--color-beige); /* Leichter Hintergrund für die Hinweise */
+            background-color: var(--color-beige);
             border-radius: 4px;
-            display: inline-block; /* Passt sich der Textbreite an, wenn zentriert */
+            display: inline-block;
         }
         .angebote-intro-section p.important-notes strong {
             color: var(--color-bordeaux);
         }
-
 
         .angebote-filter-bar-section {
             padding: 30px 0; background-color: var(--color-beige);
@@ -113,7 +109,7 @@
         }
         .filter-buttons-group button.active { box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
-        .angebote-list-section { padding: 60px 0; background-color: var(--color-white); }
+        .angebote-list-section { padding: 60px 0 100px 0; background-color: var(--color-white); } /* padding-bottom erhöht */
         .angebote-list-section .container { max-width: 1200px; }
         .angebote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
         @media (min-width: 1000px) { .angebote-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -154,9 +150,9 @@
         .angebot-card-meta .meta-item strong { font-weight: 600; color: var(--color-text-primary); }
         .angebot-card-actions { margin-top: 15px; text-align: right; }
         .angebot-card-actions .btn { font-size: 0.9rem; padding: 0.6em 1.4em; }
-        .no-results-message { /* Für die Filtermeldung */
+        .no-results-message {
             text-align: center;
-            grid-column: 1 / -1; /* Über alle Spalten des Grids */
+            grid-column: 1 / -1;
             padding: 30px 20px;
             font-size: 1.1rem;
             color: var(--color-text-secondary);
@@ -190,7 +186,6 @@
     </header>
 
     <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
-        <!-- Vollbildnavigation hier einfügen (identisch zu anderen Seiten) -->
         <div class="fullscreen-nav-header">
             <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen"><iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon></button>
             <a href="../index.html" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)"><img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40"></a>
@@ -224,7 +219,7 @@
     </nav>
 
     <main id="main-content" role="main">
-        <section class="page-hero-section angebote-hero" aria-labelledby="angebote-hero-heading" style="background-image: url('https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop');">
+        <section class="page-hero-section angebote-hero" aria-labelledby="angebote-hero-heading" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Arrangements/Sonne-Post_Headerbild-Arrangements_Familienzimmer_1280x854.png');">
             <div class="page-hero-overlay"></div>
             <div class="page-hero-content container">
                 <h1 id="angebote-hero-heading" class="page-hero-title">Unsere Top-Angebote</h1>
@@ -260,7 +255,6 @@
                         <button type="button" data-filter="kulinarik" aria-pressed="false">Kulinarik</button>
                         <button type="button" data-filter="sparen" aria-pressed="false">Spar-Tipp</button>
                     </div>
-                    <!--  Optional: Datumsfilter
                     <div class="filter-group">
                         <label for="filter-reisezeitraum-start">Reisezeitraum von:</label>
                         <input type="date" id="filter-reisezeitraum-start" name="reisezeitraum_start" aria-label="Startdatum des Reisezeitraums">
@@ -272,7 +266,6 @@
                     <div class="filter-group">
                         <button type="button" class="btn-filter">Filter anwenden</button>
                     </div>
-                    -->
                 </div>
             </div>
         </section>
@@ -282,10 +275,10 @@
                 <h2 id="angebote-list-heading" class="sr-only">Verfügbare Angebote</h2>
                 <div class="angebote-grid">
 
-                    <article class="angebot-card" data-category="aktiv golf">
+                    <article class="angebot-card" data-category="aktiv golf" data-start-date="2024-01-01" data-end-date="2025-12-31">
                         <a href="./angebot-detail/golf-special.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
-                                <img src="https://images.pexels.com/photos/163065/golf-sport-competition-club-163065.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Golfplatz mit Golfer" width="600" height="400">
+                                <img src="https://images.pexels.com/photos/163065/golf-sport-competition-club-163065.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Golfplatz Hochschwarzwald" width="600" height="400">
                             </div>
                             <div class="angebot-card-content">
                                 <h3 class="angebot-card-title">Golf-Special Aktivtage</h3>
@@ -298,7 +291,8 @@
                                 </div>
                                 <div class="angebot-card-meta">
                                     <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Doppelzimmer-Appartement ab <strong>295,- €</strong></span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig buchbar, ab 2 Nächten</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 2 Nächten</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig buchbar</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
                                     <span class="btn">Jetzt mehr erfahren</span>
@@ -307,7 +301,7 @@
                         </a>
                     </article>
 
-                    <article class="angebot-card" data-category="familie">
+                    <article class="angebot-card" data-category="familie" data-start-date="2024-11-04" data-end-date="2025-12-19"> <!-- Grober Rahmen für die vielen Zeiträume -->
                         <a href="./angebot-detail/happy-family.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
                                 <img src="https://images.pexels.com/photos/1257110/pexels-photo-1257110.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Glückliche Familie im Urlaub" width="600" height="400">
@@ -322,8 +316,8 @@
                                     </ul>
                                 </div>
                                 <div class="angebot-card-meta">
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>04.11.24-20.12.24, 06.01.25-26.01.25, uvm. (Details beachten)</span></div>
                                      <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 2 Nächten</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ausgewählte Zeiträume (Details siehe Angebot)</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
                                     <span class="btn">Jetzt mehr erfahren</span>
@@ -332,23 +326,23 @@
                         </a>
                     </article>
 
-                    <article class="angebot-card" data-category="wellness sparen">
+                    <article class="angebot-card" data-category="wellness sparen" data-start-date="2024-11-04" data-end-date="2025-12-19">
                         <a href="./angebot-detail/4-gleich-3.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
-                                <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Gemütliches Hotelzimmer mit Ausblick" width="600" height="400">
+                                <img src="https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Gemütliches Hotelzimmer" width="600" height="400">
                             </div>
                             <div class="angebot-card-content">
                                 <h3 class="angebot-card-title">4 = 3: Erholsame Nächte zum Preis von 3</h3>
                                 <div class="angebot-card-description">
                                     <ul>
-                                        <li>4 Übernachtungen in Ihrer Wunschkategorie zum Preis von 3</li>
-                                        <li>Nachmittagskaffee und hausgemachter Kuchen an 3 Tagen</li>
-                                        <li>Aperitif und 3-Gang-Menü (Fleisch oder vegetarisch) an allen 4 Abenden</li>
+                                        <li>4 Übernachtungen zum Preis von 3</li>
+                                        <li>Nachmittagskaffee & Kuchen (3 Tage)</li>
+                                        <li>Aperitif & 3-Gang-Menü (4 Abende)</li>
                                     </ul>
                                 </div>
                                 <div class="angebot-card-meta">
                                     <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>DZ ab <strong>892,- €</strong>, EZ ab <strong>496,- €</strong></span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Anreise So/Mo, 04.11.24-20.12.24, uvm. (Details beachten)</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Anreise So/Mo, ausgewählte Zeiträume (Details beachten)</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
                                     <span class="btn">Jetzt mehr erfahren</span>
@@ -357,23 +351,23 @@
                         </a>
                     </article>
 
-                    <article class="angebot-card" data-category="wellness kulinarik">
+                    <article class="angebot-card" data-category="wellness kulinarik" data-start-date="2024-10-13" data-end-date="2025-12-18">
                         <a href="./angebot-detail/geniesser-special-day-spa-menue.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
-                                <img src="https://images.pexels.com/photos/322338/pexels-photo-322338.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Wellnessbereich mit Kerzen und Handtüchern" width="600" height="400">
+                                <img src="https://images.pexels.com/photos/322338/pexels-photo-322338.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Day Spa und Menü" width="600" height="400">
                             </div>
                             <div class="angebot-card-content">
                                 <h3 class="angebot-card-title">Genießer-Special: Day Spa + Menü</h3>
                                 <div class="angebot-card-description">
                                     <ul>
-                                        <li>Nutzung des Schwimmbad- und Saunabereichs</li>
-                                        <li>Inkl. Wellnesskörbchen mit Bademantel und Saunatuch</li>
-                                        <li>3-Gang-Abendmenü (Fleisch oder vegetarisch) inkl. Aperitif</li>
+                                        <li>Nutzung Schwimmbad & Sauna</li>
+                                        <li>Wellnesskörbchen</li>
+                                        <li>3-Gang-Abendmenü inkl. Aperitif</li>
                                     </ul>
                                 </div>
                                 <div class="angebot-card-meta">
                                     <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>72,-€</strong> pro Person</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do, 13.10.24-24.10.24, uvm. (Details beachten)</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do, ausgewählte Zeiträume (Details beachten)</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
                                     <span class="btn">Jetzt mehr erfahren</span>
@@ -382,19 +376,19 @@
                         </a>
                     </article>
 
-                    <article class="angebot-card" data-category="kulinarik">
+                    <article class="angebot-card" data-category="kulinarik" data-start-date="2025-06-29" data-end-date="2025-07-13">
                         <a href="./angebot-detail/schlemmerwochen-sommerkueche.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
-                                 <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Frische Sommergerichte" width="600" height="400">
+                                 <img src="https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Leichte Sommerküche" width="600" height="400">
                             </div>
                             <div class="angebot-card-content">
                                 <h3 class="angebot-card-title">Schlemmerwochen "leichte Sommerküche"</h3>
                                 <div class="angebot-card-description">
                                     <p>Vielfältige kulinarische Genüsse, leicht, aromareich und kreativ.</p>
                                     <ul>
-                                        <li>Übernachtung in der Zimmerkategorie Ihrer Wahl</li>
-                                        <li>Abendliches 7-Gang-Menü inklusive Aperitif und Käsebuffet zum regulären Halbpensionspreis von 36,-€</li>
-                                        <li>Erweitertes Frühstücksbuffet mit Live-Cooking-Station</li>
+                                        <li>Übernachtung Ihrer Wahl</li>
+                                        <li>Abendliches 7-Gang-Menü inkl. Aperitif & Käsebuffet (zum HP-Preis von 36,-€)</li>
+                                        <li>Erweitertes Frühstücksbuffet mit Live-Cooking</li>
                                     </ul>
                                 </div>
                                 <div class="angebot-card-meta">
@@ -408,23 +402,23 @@
                         </a>
                     </article>
 
-                    <article class="angebot-card" data-category="wellness sparen">
+                    <article class="angebot-card" data-category="wellness sparen" data-start-date="2024-01-01" data-end-date="2025-12-31"> <!-- Ganzjährig, außer Ferien/Feiertage -->
                          <a href="./angebot-detail/wochenende-plus-eins.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
-                                <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Sektflasche im Hotelzimmer" width="600" height="400">
+                                <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Sekt im Hotelzimmer" width="600" height="400">
                             </div>
                             <div class="angebot-card-content">
                                 <h3 class="angebot-card-title">Wochenende +1: Verlängertes Wochenende</h3>
                                 <div class="angebot-card-description">
                                     <ul>
-                                        <li>Unser Geschenk für Sie: Eine Flasche Sekt im Zimmer</li>
-                                        <li>Inkl. Sonne-Post 3-Gang-Menü (Fleisch oder vegetarisch) an allen 3 Abenden</li>
-                                        <li>Mindestens 10% Rabatt auf den Angebotspreis</li>
+                                        <li>Geschenk: Eine Flasche Sekt im Zimmer</li>
+                                        <li>Sonne-Post 3-Gang-Menü (3 Abende)</li>
+                                        <li>Mind. 10% Rabatt auf Angebotspreis</li>
                                     </ul>
                                 </div>
                                 <div class="angebot-card-meta">
                                     <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>DZ ab <strong>648,- €</strong>, EZ ab <strong>369,- €</strong></span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig (Do-So oder Fr-Mo), ausgenommen Schulferien Ba-Wü und Feiertagswochenenden</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig (Do-So/Fr-Mo), außer Ferien/Feiertage</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
                                     <span class="btn">Jetzt mehr erfahren</span>
@@ -433,7 +427,7 @@
                         </a>
                     </article>
 
-                    <article class="angebot-card" data-category="wellness">
+                    <article class="angebot-card" data-category="wellness" data-start-date="2024-10-13" data-end-date="2025-12-18">
                         <a href="./angebot-detail/relax-special-day-spa.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
                                 <img src="https://images.pexels.com/photos/8411309/pexels-photo-8411309.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Entspannte Atmosphäre im Spa-Bereich" width="600" height="400">
@@ -442,14 +436,14 @@
                                 <h3 class="angebot-card-title">Relax-Special: Day Spa</h3>
                                 <div class="angebot-card-description">
                                     <ul>
-                                        <li>Nutzung des Schwimmbadbereichs mit Whirlliegen</li>
-                                        <li>Nutzung des Saunabereichs</li>
-                                        <li>Inkl. Wellnesskörbchen mit Bademantel und Saunatuch</li>
+                                        <li>Nutzung Schwimmbadbereich mit Whirlliegen</li>
+                                        <li>Nutzung Saunabereich</li>
+                                        <li>Inkl. Wellnesskörbchen</li>
                                     </ul>
                                 </div>
                                 <div class="angebot-card-meta">
                                     <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>35,-€</strong> pro Person</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do, 13.10.24-24.10.24, uvm. (Details beachten)</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do, ausgewählte Zeiträume (Details beachten)</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
                                     <span class="btn">Jetzt mehr erfahren</span>
@@ -458,7 +452,7 @@
                         </a>
                     </article>
 
-                     <article class="angebot-card" data-category="wellness kulinarik">
+                     <article class="angebot-card" data-category="wellness kulinarik" data-start-date="2024-10-13" data-end-date="2025-12-18">
                         <a href="./angebot-detail/auszeit-special-day-spa-menue-uebernachtung.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
                                 <img src="https://images.pexels.com/photos/3887985/pexels-photo-3887985.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Wellnessbereich und gedeckter Tisch" width="600" height="400">
@@ -467,15 +461,15 @@
                                 <h3 class="angebot-card-title">Auszeit-Special: Day Spa + Menü + Übernachtung</h3>
                                 <div class="angebot-card-description">
                                     <ul>
-                                        <li>Nutzung des Schwimmbad- und Saunabereichs</li>
-                                        <li>Wellnesskörbchen mit Bademantel und Saunatuch</li>
-                                        <li>3-Gang-Abendmenü (Fleisch oder vegetarisch) inkl. Aperitif</li>
+                                        <li>Nutzung Schwimmbad & Sauna</li>
+                                        <li>Wellnesskörbchen</li>
+                                        <li>3-Gang-Abendmenü inkl. Aperitif</li>
                                         <li>Übernachtung im Überraschungszimmer</li>
                                     </ul>
                                 </div>
                                 <div class="angebot-card-meta">
                                     <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>120,-€</strong> pro Person</span></div>
-                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do (1-2 Nächte), 13.10.24-24.10.24, uvm. (Details beachten)</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do (1-2 Nächte), ausgewählte Zeiträume (Details beachten)</span></div>
                                 </div>
                                 <div class="angebot-card-actions">
                                     <span class="btn">Jetzt mehr erfahren</span>
@@ -484,7 +478,7 @@
                         </a>
                     </article>
 
-                    <article class="angebot-card" data-category="kulinarik">
+                    <article class="angebot-card" data-category="kulinarik" data-start-date="2026-01-25" data-end-date="2026-02-08">
                         <a href="./angebot-detail/schlemmerwochen-wintergenuss.html" class="angebot-card-link-wrapper">
                             <div class="angebot-card-image-wrapper">
                                 <img src="https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Winterliche Tafel mit Kerzenlicht" width="600" height="400">
@@ -494,9 +488,9 @@
                                  <div class="angebot-card-description">
                                     <p>Vielfältige kulinarische Genüsse, winterlich, aromareich und kreativ.</p>
                                     <ul>
-                                        <li>Übernachtung in der Zimmerkategorie Ihrer Wahl</li>
-                                        <li>Abendliches 7-Gang-Menü inklusive Aperitif und Käsebuffet zum regulären Halbpensionspreis von 36,-€</li>
-                                        <li>Erweitertes Frühstücksbuffet mit Live-Cooking-Station</li>
+                                        <li>Übernachtung Ihrer Wahl</li>
+                                        <li>Abendliches 7-Gang-Menü inkl. Aperitif & Käsebuffet (zum HP-Preis von 36,-€)</li>
+                                        <li>Erweitertes Frühstücksbuffet mit Live-Cooking</li>
                                     </ul>
                                 </div>
                                 <div class="angebot-card-meta">
@@ -547,8 +541,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- Optional: GSAP Flip Plugin für erweiterte Filter-Animationen -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script> -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
 
@@ -557,7 +549,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                 const cards = gsap.utils.toArray('.angebot-card');
-                if (cards.length > 0 && cards[0].closest('.angebote-grid')) { // Sicherstellen, dass Trigger-Element existiert
+                if (cards.length > 0 && cards[0] && cards[0].closest('.angebote-grid')) {
                     gsap.from(cards, {
                         opacity: 0,
                         y: 50,
@@ -577,6 +569,77 @@
             const filterButtons = document.querySelectorAll('.filter-buttons-group button[data-filter]');
             const angebotCards = document.querySelectorAll('.angebot-card[data-category]');
             const angeboteGrid = document.querySelector('.angebote-grid');
+            const dateStartInput = document.getElementById('filter-reisezeitraum-start');
+            const dateEndInput = document.getElementById('filter-reisezeitraum-ende');
+            const applyDateFilterButton = document.querySelector('.angebote-filter-controls .btn-filter');
+
+            function applyFilters() {
+                const activeCategoryButton = document.querySelector('.filter-buttons-group button.active');
+                const categoryFilterValue = activeCategoryButton ? activeCategoryButton.getAttribute('data-filter') : 'all';
+                
+                const selectedStartDateStr = dateStartInput ? dateStartInput.value : null;
+                const selectedEndDateStr = dateEndInput ? dateEndInput.value : null;
+                
+                let selectedStartDate = null;
+                if (selectedStartDateStr) {
+                    selectedStartDate = new Date(selectedStartDateStr);
+                    selectedStartDate.setUTCHours(0,0,0,0); // Nur Datum berücksichtigen
+                }
+
+                let selectedEndDate = null;
+                if (selectedEndDateStr) {
+                    selectedEndDate = new Date(selectedEndDateStr);
+                    selectedEndDate.setUTCHours(0,0,0,0); // Nur Datum berücksichtigen
+                }
+
+
+                let visibleCount = 0;
+                angebotCards.forEach(card => {
+                    const cardCategories = card.getAttribute('data-category').split(' ');
+                    const cardStartDateAttr = card.getAttribute('data-start-date');
+                    const cardEndDateAttr = card.getAttribute('data-end-date');
+
+                    let matchesCategory = categoryFilterValue === 'all' || cardCategories.includes(categoryFilterValue);
+                    let matchesDate = true; 
+
+                    if (selectedStartDate || selectedEndDate) { // Nur filtern, wenn mind. ein Datum gewählt
+                        if (cardStartDateAttr && cardEndDateAttr) {
+                            const cardStartDate = new Date(cardStartDateAttr);
+                            const cardEndDate = new Date(cardEndDateAttr);
+                            cardStartDate.setUTCHours(0,0,0,0);
+                            cardEndDate.setUTCHours(0,0,0,0);
+
+                            if (selectedStartDate && selectedEndDate) {
+                                matchesDate = cardStartDate <= selectedEndDate && cardEndDate >= selectedStartDate;
+                            } else if (selectedStartDate) {
+                                matchesDate = selectedStartDate <= cardEndDate;
+                            } else { // Nur selectedEndDate
+                                matchesDate = selectedEndDate >= cardStartDate;
+                            }
+                        } else {
+                             matchesDate = false; // Wenn Datumsfilter aktiv, aber Karte keine Daten hat
+                        }
+                    }
+
+                    const shouldShow = matchesCategory && matchesDate;
+                    card.style.display = shouldShow ? '' : 'none';
+                    if (shouldShow) visibleCount++;
+                });
+
+                let noResultsMessage = angeboteGrid.querySelector('.no-results-message');
+                if (visibleCount === 0) {
+                    if (!noResultsMessage) {
+                        noResultsMessage = document.createElement('p');
+                        noResultsMessage.classList.add('no-results-message');
+                        noResultsMessage.textContent = 'Für Ihre Auswahl wurden leider keine passenden Angebote gefunden.';
+                        angeboteGrid.appendChild(noResultsMessage);
+                    }
+                } else {
+                    if (noResultsMessage) {
+                        noResultsMessage.remove();
+                    }
+                }
+            }
 
             if (filterButtons.length > 0 && angebotCards.length > 0 && angeboteGrid) {
                 filterButtons.forEach(button => {
@@ -587,32 +650,15 @@
                         });
                         this.classList.add('active');
                         this.setAttribute('aria-pressed', 'true');
-                        const filterValue = this.getAttribute('data-filter');
-
-                        let visibleCount = 0;
-                        angebotCards.forEach(card => {
-                            const cardCategories = card.getAttribute('data-category').split(' ');
-                            const shouldShow = filterValue === 'all' || cardCategories.includes(filterValue);
-                            
-                            card.style.display = shouldShow ? '' : 'none';
-                            if(shouldShow) visibleCount++;
-                        });
-                        
-                        let noResultsMessage = angeboteGrid.querySelector('.no-results-message');
-                        if (visibleCount === 0) {
-                            if (!noResultsMessage) {
-                                noResultsMessage = document.createElement('p');
-                                noResultsMessage.classList.add('no-results-message');
-                                noResultsMessage.textContent = 'Für Ihre Auswahl wurden leider keine passenden Angebote gefunden.';
-                                angeboteGrid.appendChild(noResultsMessage);
-                            }
-                        } else {
-                            if (noResultsMessage) {
-                                noResultsMessage.remove();
-                            }
-                        }
+                        applyFilters();
                     });
                 });
+
+                if (applyDateFilterButton) {
+                    applyDateFilterButton.addEventListener('click', applyFilters);
+                }
+                if(dateStartInput) dateStartInput.addEventListener('change', () => { if(!applyDateFilterButton) applyFilters(); });
+                if(dateEndInput) dateEndInput.addEventListener('change', () => { if(!applyDateFilterButton) applyFilters(); });
             }
 
             document.querySelectorAll('.angebot-card-link-wrapper').forEach(linkWrapper => {
