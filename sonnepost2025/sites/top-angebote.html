@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
+    <title>Top Angebote & Arrangements | Hotel Sonne Post</title>
+    <!-- TYPO3 Hinweis: Dynamische Meta Description -->
+    <meta name="description" content="Entdecken Sie unsere exklusiven Top-Angebote und Arrangements für Ihren unvergesslichen Urlaub im Hotel Sonne Post.">
+
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Pfad zur globalen CSS-Datei -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        /* === Spezifische Stile für Top-Angebote Seite === */
+        body {
+            background-color: var(--color-white); /* Heller Hintergrund für die Seite */
+        }
+
+        /* Hero-Sektion für die Angebotsseite */
+        .page-hero-section.angebote-hero {
+            position: relative;
+            width: 100%;
+            height: 55vh; /* Höhe für den Hero-Banner */
+            min-height: 350px;
+            max-height: 500px;
+            overflow: hidden;
+            margin-top: 0; /* Header liegt darüber */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white);
+            background-size: cover;
+            background-position: center 70%; /* Fokus etwas nach unten für Landschaftsbilder */
+            background-repeat: no-repeat;
+        }
+        .page-hero-section.angebote-hero .page-hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.0) 100%);
+        }
+        .page-hero-section.angebote-hero .page-hero-content {
+            position: relative;
+            z-index: 3;
+            padding-top: var(--header-height);
+            display: block; /* Damit Text sichtbar wird */
+        }
+        .page-hero-section.angebote-hero .page-hero-title {
+            font-size: clamp(2.5rem, 5.5vw, 3.8rem);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            margin-bottom: 0.2em;
+        }
+        .page-hero-section.angebote-hero .page-hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+            font-family: var(--font-primary);
+            font-weight: 400;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+
+
+        /* Filter Bar Sektion */
+        .angebote-filter-bar-section {
+            padding: 30px 0;
+            background-color: var(--color-beige); /* Heller Hintergrund für die Filterleiste */
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+        .angebote-filter-bar-section .container {
+            max-width: 1200px; /* Breite der Filterleiste */
+        }
+        .angebote-filter-controls {
+            display: flex;
+            flex-wrap: wrap; /* Umbruch bei vielen Filtern */
+            gap: 10px 15px; /* Abstand zwischen Filterelementen */
+            align-items: center;
+            justify-content: center; /* Filter zentrieren */
+        }
+        .angebote-filter-controls .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .angebote-filter-controls label {
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+        .angebote-filter-controls select,
+        .angebote-filter-controls input[type="date"],
+        .angebote-filter-controls .btn-filter {
+            padding: 8px 12px;
+            border: 1px solid var(--color-border-subtle);
+            border-radius: 4px;
+            font-family: var(--font-primary);
+            font-size: 0.9rem;
+            background-color: var(--color-white);
+        }
+        .angebote-filter-controls select {
+            min-width: 150px;
+        }
+        .angebote-filter-controls .btn-filter {
+            background-color: var(--color-bordeaux);
+            color: var(--color-white);
+            cursor: pointer;
+        }
+        .angebote-filter-controls .btn-filter:hover {
+            background-color: #701623;
+        }
+        .filter-buttons-group button {
+            background-color: var(--color-white);
+            color: var(--color-bordeaux);
+            border: 1px solid var(--color-border-subtle);
+            padding: 0.6em 1.2em;
+            border-radius: 20px; /* Abgerundete Buttons */
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .filter-buttons-group button:hover,
+        .filter-buttons-group button.active {
+            background-color: var(--color-bordeaux);
+            color: var(--color-white);
+            border-color: var(--color-bordeaux);
+        }
+        .filter-buttons-group button.active {
+             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+
+        /* Angebotsliste Sektion */
+        .angebote-list-section {
+            padding: 60px 0;
+            background-color: var(--color-white);
+        }
+        .angebote-list-section .container {
+            max-width: 1200px; /* Breite für die Angebotskacheln */
+        }
+        .angebote-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        @media (min-width: 1000px) { /* Auf größeren Desktops ggf. 3 Spalten */
+            .angebote-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+         @media (min-width: 680px) and (max-width: 999.98px) { /* Auf Tablets 2 Spalten */
+            .angebote-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .angebot-card {
+            background-color: var(--color-beige); /* Hintergrund für Kacheln */
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none; /* Falls die ganze Karte ein Link ist */
+            color: var(--color-text-primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .angebot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .angebot-card-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16 / 10; /* Seitenverhältnis für das Bild */
+        }
+        .angebot-card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .angebot-card-badge { /* Optionaler Badge auf dem Bild */
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: rgba(140, 30, 45, 0.9); /* Bordeaux mit Transparenz */
+            color: var(--color-white);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 1;
+        }
+        .angebot-card-content {
+            padding: 20px 25px 25px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .angebot-card-title {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+            font-weight: 600;
+            color: var(--color-bordeaux);
+            margin-bottom: 0.5em;
+            min-height: 2.8em; /* Platz für ca. 2 Zeilen Titel */
+            display: flex;
+            align-items: center;
+        }
+        .angebot-card-description {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1em;
+            flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+        }
+        .angebot-card-description p { margin-bottom: 0.5em; }
+
+        .angebot-card-meta {
+            margin-top: auto; /* Schiebt Meta-Infos und Button nach unten */
+            padding-top: 15px;
+            border-top: 1px solid var(--color-border-subtle);
+        }
+        .angebot-card-meta .meta-item {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .angebot-card-meta .meta-item iconify-icon {
+            font-size: 1.1em;
+            color: var(--color-bordeaux);
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        .angebot-card-meta .meta-item strong { /* Für Preis etc. */
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+        .angebot-card-actions {
+            margin-top: 15px;
+            text-align: right; /* Button rechtsbündig */
+        }
+        .angebot-card-actions .btn {
+            font-size: 0.9rem;
+            padding: 0.6em 1.4em;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+
+    <!-- Header (identisch zu anderen Seiten) -->
+    <header class="site-header" id="site-header" role="banner">
+        <div class="header-content-wrapper">
+            <div class="header-left">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
+                    <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                    <span class="menu-trigger-text">MENÜ</span>
+                </button>
+            </div>
+            <div class="header-center">
+                <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
+                </a>
+            </div>
+            <div class="header-right">
+                <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Fullscreen Navigation (identisch zu anderen Seiten, Pfade anpassen) -->
+    <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="fullscreen-nav-header">
+            <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
+                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
+            </button>
+             <a href="../index.html" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
+                 <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40">
+             </a>
+            <div class="fullscreen-nav-ctas">
+                 <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="btn btn-light">Jetzt Buchen</a>
+                 <a href="../anfragen.html" class="btn btn-dark">Anfragen</a>
+             </div>
+        </div>
+        <div class="fullscreen-nav-quicklinks">
+            <a href="./zimmer.html" class="quicklink-item"> <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> <span>Wohnen</span> </a>
+            <a href="./wellness.html" class="quicklink-item"> <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> <span>Entspannen</span> </a>
+            <a href="./restaurant.html" class="quicklink-item"> <iconify-icon icon="tabler:tools-kitchen" aria-hidden="true"></iconify-icon> <span>Geniessen</span> </a>
+            <a href="./region.html" class="quicklink-item"> <iconify-icon icon="feather:map" aria-hidden="true"></iconify-icon> <span>Freizeit</span> </a>
+        </div>
+        <div class="fullscreen-nav-main">
+            <!-- Nav Sektionen hier ... -->
+        </div>
+        <div class="fullscreen-nav-footer">
+            <!-- Footer Links hier ... -->
+        </div>
+    </nav>
+
+    <main id="main-content" role="main">
+        <!-- TYPO3 Hinweis: Hero-Sektion für die Angebotsseite -->
+        <section class="page-hero-section angebote-hero" aria-labelledby="angebote-hero-heading" style="background-image: url('https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop');">
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content container">
+                <!-- TYPO3 Hinweis: Titel und Subtitel editierbar -->
+                <h1 id="angebote-hero-heading" class="page-hero-title">Unsere Top-Angebote</h1>
+                <p class="page-hero-subtitle">Entdecken Sie exklusive Arrangements für Ihren Traumurlaub im Schwarzwald.</p>
+            </div>
+        </section>
+
+        <!-- TYPO3 Hinweis: Filterleiste für Angebote -->
+        <section class="angebote-filter-bar-section" aria-labelledby="filter-heading">
+            <div class="container">
+                <h2 id="filter-heading" class="sr-only">Angebote filtern</h2>
+                <div class="angebote-filter-controls">
+                    <!-- TYPO3 Hinweis: Filterkategorien dynamisch aus Taxonomie oder konfigurierten Optionen -->
+                    <div class="filter-buttons-group" role="group" aria-label="Angebotskategorien filtern">
+                        <button type="button" class="active" data-filter="all" aria-pressed="true">Alle Angebote</button>
+                        <button type="button" data-filter="wellness" aria-pressed="false">Wellness</button>
+                        <button type="button" data-filter="familie" aria-pressed="false">Familie</button>
+                        <button type="button" data-filter="aktiv" aria-pressed="false">Aktiv</button>
+                        <button type="button" data-filter="kulinarik" aria-pressed="false">Kulinarik</button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-reisezeitraum-start">Reisezeitraum von:</label>
+                        <input type="date" id="filter-reisezeitraum-start" name="reisezeitraum_start" aria-label="Startdatum des Reisezeitraums">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-reisezeitraum-ende">bis:</label>
+                        <input type="date" id="filter-reisezeitraum-ende" name="reisezeitraum_ende" aria-label="Enddatum des Reisezeitraums">
+                    </div>
+                    <div class="filter-group">
+                        <button type="button" class="btn-filter">Filter anwenden</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TYPO3 Hinweis: Liste der Angebote -->
+        <section class="angebote-list-section" aria-labelledby="angebote-list-heading">
+            <div class="container">
+                <h2 id="angebote-list-heading" class="sr-only">Verfügbare Angebote</h2>
+                <div class="angebote-grid">
+                    <!-- TYPO3 Hinweis: Angebotskacheln als wiederholbare Inhaltselemente oder Datensätze. Alle Inhalte (Bild, Titel, Text, Meta, Link) editierbar. -->
+                    <article class="angebot-card" data-category="wellness">
+                        <a href="./angebot-detail/wellness-glueckstage.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/3768131/pexels-photo-3768131.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Wellness Glückstage im Hotel Sonne Post" width="600" height="400">
+                                <!-- <span class="angebot-card-badge">Tipp</span> -->
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Wellness-Glückstage</h3>
+                                <div class="angebot-card-description">
+                                    <p>Absolute Erholung und Tiefenentspannung. Profitieren Sie von 200 € Spa-Guthaben. Tage voller innerer Gelassenheit warten auf Sie.</p>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig buchbar (außer Feiertage)</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 3 Nächten</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Ab <strong>499 €</strong> p.P.</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Zum Angebot</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="aktiv kulinarik">
+                        <a href="./angebot-detail/schwarzwald-genusswanderung.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/1000382/pexels-photo-1000382.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Wanderer in Schwarzwaldlandschaft" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Schwarzwälder Genusswanderung</h3>
+                                <div class="angebot-card-description">
+                                    <p>Erkunden Sie die malerische Natur des Schwarzwalds auf geführten Wanderungen und lassen Sie sich abends mit regionalen Spezialitäten verwöhnen.</p>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>April - Oktober</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>4 Nächte</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Ab <strong>580 €</strong> p.P.</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                     <span class="btn">Zum Angebot</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="familie">
+                         <a href="./angebot-detail/familienzeit.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://images.pexels.com/photos/161043/children-selectable-young-people-female-161043.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Familie hat Spaß in der Natur" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Familienzeit im Schwarzwald</h3>
+                                <div class="angebot-card-description">
+                                    <p>Verbringen Sie unvergessliche Tage mit der ganzen Familie. Inklusive Kinderbetreuung und spannenden Ausflügen in die Region.</p>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ferienzeiten & auf Anfrage</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 5 Nächten</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Ab <strong>1.250 €</strong> (2 Erw. + 2 Ki.)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                     <span class="btn">Zum Angebot</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                     <!-- Weitere Angebotskacheln hier ... -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (identisch zu anderen Seiten) -->
+    <footer class="site-footer" role="contentinfo" aria-labelledby="footer-heading">
+        <!-- ... Footer Inhalt ... -->
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
+
+    <script src="../js/main.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // GSAP Animation für Angebotskacheln
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.utils.toArray('.angebot-card').forEach((card, index) => {
+                    gsap.from(card, {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.6,
+                        delay: index * 0.08, // Leichte Verzögerung für gestaffeltes Einfliegen
+                        scrollTrigger: {
+                            trigger: card.closest('.angebote-grid'), // Trigger ist das Grid, nicht jede Karte einzeln für den Start
+                            start: "top 85%",
+                            toggleActions: "play none none none",
+                            once: true
+                        }
+                    });
+                });
+            }
+
+            // Einfache Filter-Logik (Beispiel)
+            const filterButtons = document.querySelectorAll('.filter-buttons-group button[data-filter]');
+            const angebotCards = document.querySelectorAll('.angebot-card[data-category]');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Active-Klasse umschalten
+                    filterButtons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-pressed', 'false');
+                    });
+                    this.classList.add('active');
+                    this.setAttribute('aria-pressed', 'true');
+
+                    const filterValue = this.getAttribute('data-filter');
+
+                    angebotCards.forEach(card => {
+                        const cardCategories = card.getAttribute('data-category').split(' ');
+                        if (filterValue === 'all' || cardCategories.includes(filterValue)) {
+                            card.style.display = ''; // Oder die Klasse für "sichtbar" hinzufügen
+                            // Optional: Animation für Einblenden
+                            // gsap.to(card, {opacity: 1, duration: 0.3, delay: Math.random() * 0.1});
+                        } else {
+                            card.style.display = 'none'; // Oder Klasse für "versteckt" hinzufügen
+                            // Optional: Animation für Ausblenden
+                            // gsap.to(card, {opacity: 0, duration: 0.3});
+                        }
+                    });
+                });
+            });
+             // Klick-Handler für die gesamte Angebotskachel, wenn ein Link-Wrapper verwendet wird
+            document.querySelectorAll('.angebot-card-link-wrapper').forEach(linkWrapper => {
+                linkWrapper.addEventListener('click', function(event) {
+                    // Verhindert, dass Klicks auf interaktive Elemente innerhalb der Karte (z.B. wenn man später doch Buttons reinpackt) die Navigation auslösen
+                    if (event.target.closest('button, input, select, textarea, a:not(.angebot-card-link-wrapper)')) {
+                        return;
+                    }
+                    window.location.href = this.getAttribute('href');
+                });
+                 // Macht den Link-Wrapper fokussierbar und per Enter aktivierbar
+                linkWrapper.setAttribute('tabindex', '0');
+                linkWrapper.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        window.location.href = this.getAttribute('href');
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>

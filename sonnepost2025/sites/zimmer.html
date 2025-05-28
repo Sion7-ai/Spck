@@ -99,9 +99,25 @@
             line-height: 1.5;
             text-align: left;
         }
-         .zimmer-intro-section .ausstattung-info strong {
+		.zimmer-intro-section .ausstattung-info strong {
             color: var(--color-text-primary);
             font-weight: 600;
+        }
+        .ausstattung-info-wrapper { /* Neuer Wrapper für die Box */
+            max-width: 700px; /* Breite der Box */
+            margin: 2.5em auto 0 auto; /* Zentriert die Box und gibt Abstand nach oben */
+            padding: 25px; /* Innenabstand der Box */
+            background-color: var(--color-beige); /* Hintergrundfarbe der Box */
+            border-radius: 6px; /* Abgerundete Ecken */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Leichter Schatten */
+        }
+        .zimmer-intro-section .ausstattung-info { /* Bestehender Block, aber ohne Margin und Textausrichtung von außen */
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            /* max-width und margin: auto werden vom Wrapper übernommen */
+            margin: 0; /* Margin wird vom Wrapper gesteuert */
+            line-height: 1.6;
+            text-align: left; /* Text innerhalb der Box linksbündig */
         }
 
         .zimmer-kategorien-section {
@@ -180,6 +196,18 @@
             font-weight: 600;
             color: var(--color-bordeaux);
             margin-bottom: 0.5em;
+            min-height: 2.6em; /* ca. 2 Zeilen (1.7rem * 1.2 (line-height) * 2 Zeilen = ~2.4em, etwas Puffer) */
+                               /* Ggf. anpassen basierend auf der tatsächlichen Schriftgröße und Zeilenhöhe */
+            display: flex; /* Um den Link-Inhalt bei Bedarf vertikal zu zentrieren, falls die Höhe größer ist als der Text */
+            align-items: center; /* Zentriert den Text vertikal in der min-height */
+            justify-content: center; /* Zentriert den Text horizontal, da die Kachel zentriert ist */
+        }
+        .zimmer-card-title a { /* Stellt sicher, dass der Link innerhalb des Titels sich richtig verhält */
+            text-decoration: none;
+            color: inherit;
+        }
+        .zimmer-card-title a:hover {
+            text-decoration: underline;
         }
         .zimmer-card-description {
             font-size: 0.95rem;
@@ -223,9 +251,10 @@
         }
 
         .zimmer-card-actions {
-            margin-top: auto;
+            margin-top: auto; /* Schiebt die Buttons nach unten */
+            padding-top: 15px; /* Etwas Abstand von den Features zum Button */
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Zentriert den/die Button(s) horizontal */
         }
         .zimmer-card-actions .btn {
             width: auto;
@@ -361,11 +390,12 @@
                     <p>Bei uns können Sie sich bestens erholen und wohlfühlen: in einem von unseren insgesamt 27 großzügig gestalteten und heimelig mit viel Holz eingerichteten Hotelzimmer oder in einer unserer gemütlichen vier Ferienwohnungen. Mit einmaligem Blick auf die Berg- und Tallandschaft des Hochschwarzwaldes können Sie die Seele richtig baumeln lassen.</p>
                     <p>Entdecken Sie unsere individuellen Räumlichkeiten und wählen Sie Ihr persönliches Feriennest für erholsame Urlaubstage.</p>
                 </div>
-                <div class="ausstattung-info">
-                    <p><strong>Ausstattung Hotelzimmer (Beispiele):</strong><br>
-                    Schreibtisch, HD Flatscreen-TV, Radio, Durchwahltelefon, W-LAN, Minibar, Privatsafe, Wolldecken, Haarfön, Kosmetikspiegel, Wellnesskörble mit Bademantel und Saunatuch, Bettgröße Einzelzimmer 100x200cm und Doppelzimmer 180x200cm.</p>
+				<div class="ausstattung-info-wrapper">
+                    <div class="ausstattung-info">
+                        <p><strong>Ausstattung Hotelzimmer (Beispiele):</strong><br>
+                        Schreibtisch, HD Flatscreen-TV, Radio, Durchwahltelefon, W-LAN, Minibar, Privatsafe, Wolldecken, Haarfön, Kosmetikspiegel, Wellnesskörble mit Bademantel und Saunatuch, Bettgröße Einzelzimmer 100x200cm und Doppelzimmer 180x200cm.</p>
+                    </div>
                 </div>
-            </div>
         </section>
 
         <section class="zimmer-kategorien-section" aria-labelledby="haus-eiche-heading">
