@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const headerScrollThresholdRaw = getComputedStyle(document.documentElement).getPropertyValue('--header-scroll-threshold').trim();
         const headerScrollThreshold = parseInt(headerScrollThresholdRaw, 10) || 50;
         let isScrolled = false;
+
         function handleHeaderScroll() {
             const shouldBeScrolled = window.scrollY > headerScrollThreshold;
             if (shouldBeScrolled !== isScrolled) {
@@ -13,9 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 isScrolled = shouldBeScrolled;
             }
         }
+
         let scrollTimeout;
         window.addEventListener('scroll', () => {
-            if (scrollTimeout) { window.cancelAnimationFrame(scrollTimeout); }
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
             scrollTimeout = window.requestAnimationFrame(handleHeaderScroll);
         }, { passive: true });
         handleHeaderScroll(); // Initial check
@@ -33,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 fullscreenNav.querySelectorAll(
                     'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
                 )
-            ).filter(el => el.offsetParent !== null); // Filter out invisible elements
+            ).filter(el => el.offsetParent !== null); // Nur sichtbare Elemente
         }
 
         function trapFocusInNav(e) {
@@ -70,18 +74,17 @@ document.addEventListener('DOMContentLoaded', function() {
             menuTrigger.setAttribute('aria-expanded', 'true');
             menuTrigger.setAttribute('aria-label', 'Menü schließen');
 
-            // Make rest of the page inert
             Array.from(document.body.children).forEach(child => {
                 if (child !== fullscreenNav && !fullscreenNav.contains(child) && !child.hasAttribute('aria-hidden') && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE') {
                     child.inert = true;
-                    child.setAttribute('aria-hidden', 'true'); // Fallback for browsers without inert
-                    child.dataset.madeInert = true; // Mark element as made inert by this script
+                    child.setAttribute('aria-hidden', 'true');
+                    child.dataset.madeInert = true;
                 }
             });
 
             document.addEventListener('keydown', trapFocusInNav);
             const firstFocusableInNav = updateFocusableElementsInNav()[0] || navCloseBtn;
-            setTimeout(() => { if(firstFocusableInNav) firstFocusableInNav.focus(); }, 50); // Allow transitions to complete
+            setTimeout(() => { if(firstFocusableInNav) firstFocusableInNav.focus(); }, 50);
         }
 
         function closeFullscreenNav() {
@@ -91,8 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             menuTrigger.setAttribute('aria-expanded', 'false');
             menuTrigger.setAttribute('aria-label', 'Menü öffnen');
 
-            // Restore inert status
-             Array.from(document.body.children).forEach(child => {
+            Array.from(document.body.children).forEach(child => {
                 if (child.dataset.madeInert) {
                     child.inert = false;
                     child.removeAttribute('aria-hidden');
@@ -104,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (previouslyFocusedElement && document.body.contains(previouslyFocusedElement)) {
                 previouslyFocusedElement.focus();
             } else {
-                menuTrigger.focus(); // Fallback
+                menuTrigger.focus();
             }
         }
 
@@ -113,24 +115,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         navCloseBtn.addEventListener('click', closeFullscreenNav);
 
-        // Close nav on link click (if it's a page navigation)
         fullscreenNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
                 if (href && href !== '#' && !href.startsWith('javascript:')) {
-                    // Allow default action, then close nav after a slight delay for visual feedback
-                    setTimeout(closeFullscreenNav, 150);
+                    setTimeout(closeFullscreenNav, 150); // Schließt nach Klick auf einen echten Link
                 } else if (href === '#' && link.id === 'cookie-settings-trigger-nav') {
-                     // Handle specific case for cookie settings trigger
-                    setTimeout(closeFullscreenNav, 150);
-                    // The openCookieSettings function will be called by its own event listener
+                     setTimeout(closeFullscreenNav, 150); // Für Cookie-Einstellungs-Trigger
                 } else if (href === '#') {
-                    e.preventDefault(); // Prevent jumping for placeholder links
+                    e.preventDefault(); // Verhindert Springen bei Platzhalter-Links
                 }
             });
         });
 
-        // Close nav on Escape key
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && fullscreenNav.classList.contains('is-open')) {
                 closeFullscreenNav();
@@ -147,6 +144,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // === TYPO3 Hinweis: GSAP Animationen ===
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
+
+        // Allgemeine Fade-In Animation
         gsap.utils.toArray('.gsap-fade-in').forEach((el) => {
             gsap.from(el, {
                 opacity: 0,
@@ -155,14 +154,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 90%", // When the top of the element hits 90% of the viewport height
-                    toggleActions: "play none none none", // Play animation once when it enters viewport
-                    once: true // Ensures the animation only runs once
+                    start: "top 90%",
+                    toggleActions: "play none none none",
+                    once: true
                 }
             });
         });
+
+        // Animation für Hero-Angebot Sektion
+        const heroAngebotSection = document.querySelector('.hero-angebot-section');
+        if (heroAngebotSection) {
+            gsap.from(heroAngebotSection.querySelectorAll('.hero-angebot-text-content > *, .hero-angebot-image-wrapper'), {
+                opacity: 0,
+                y: 30,
+                duration: 0.7,
+                stagger: 0.15, // Elemente erscheinen nacheinander
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: heroAngebotSection,
+                    start: "top 80%",
+                    toggleActions: "play none none none",
+                    once: true
+                }
+            });
+        }
+
     } else {
-        console.warn("GSAP oder ScrollTrigger nicht geladen. Animationen für .gsap-fade-in sind deaktiviert.");
+        console.warn("GSAP oder ScrollTrigger nicht geladen. Animationen sind deaktiviert.");
     }
 
     // === TYPO3 Hinweis: Popup Logik (z.B. für Betriebsferien) ===
@@ -175,7 +193,6 @@ document.addEventListener('DOMContentLoaded', function() {
         popup.classList.add('is-visible');
         popup.removeAttribute('aria-hidden');
 
-        // Make rest of the page inert
         Array.from(document.body.children).forEach(child => {
             if (child !== popup && !popup.contains(child) && !child.hasAttribute('aria-hidden') && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE') {
                 child.inert = true;
@@ -196,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
              if (e.shiftKey) { if ((isFocusInside && document.activeElement === firstFocusable) || !isFocusInside) { if (lastFocusable) lastFocusable.focus(); e.preventDefault(); } }
              else { if ((isFocusInside && document.activeElement === lastFocusable) || !isFocusInside) { if (firstFocusable) firstFocusable.focus(); e.preventDefault(); } }
          };
-        popup._trapFocusListener = trapPopupFocus;
+        popup._trapFocusListener = trapPopupFocus; // Store listener on popup element for removal
         document.addEventListener('keydown', trapPopupFocus);
 
         const closeOnEscape = (e) => {
@@ -204,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.closePopup(popupId);
             }
         };
-        popup._escapeListener = closeOnEscape;
+        popup._escapeListener = closeOnEscape; // Store listener
         document.addEventListener('keydown', closeOnEscape);
 
         const closeOnClickOutside = (e) => {
@@ -212,13 +229,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.closePopup(popupId);
             }
         };
-        popup._clickOutsideListener = closeOnClickOutside;
-        popup.addEventListener('click', closeOnClickOutside); // Attach to overlay
+        popup._clickOutsideListener = closeOnClickOutside; // Store listener
+        popup.addEventListener('click', closeOnClickOutside);
 
         setTimeout(() => {
             if (closeButton) closeButton.focus();
             else if (firstFocusable) firstFocusable.focus();
-        }, 50);
+        }, 50); // Allow transitions to complete
     };
 
     window.closePopup = function(popupId, elementToFocus = null) {
@@ -228,8 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
         popup.classList.remove('is-visible');
         popup.setAttribute('aria-hidden', 'true');
 
-        // Restore inert status
-         Array.from(document.body.children).forEach(child => {
+        Array.from(document.body.children).forEach(child => {
             if (child.dataset.madeInertByPopup) {
                 child.inert = false;
                 child.removeAttribute('aria-hidden');
@@ -237,9 +253,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // Remove stored listeners
         if (popup._escapeListener) { document.removeEventListener('keydown', popup._escapeListener); delete popup._escapeListener; }
         if (popup._trapFocusListener) { document.removeEventListener('keydown', popup._trapFocusListener); delete popup._trapFocusListener; }
         if (popup._clickOutsideListener) { popup.removeEventListener('click', popup._clickOutsideListener); delete popup._clickOutsideListener; }
+
 
         const focusTarget = elementToFocus || popup._previouslyFocusedElement;
         if (focusTarget && document.body.contains(focusTarget) && typeof focusTarget.focus === 'function') {
@@ -250,24 +268,22 @@ document.addEventListener('DOMContentLoaded', function() {
         delete popup._previouslyFocusedElement;
     };
 
-    // Example: Show betriebsferien-popup if a condition is met (e.g. cookie not set)
-    // if (!document.cookie.includes('betriebsferienDismissed=true')) {
-    //     showPopup('betriebsferien-popup');
-    // }
-    // Add event listeners to close buttons of popups
-    // document.querySelectorAll('.close-popup').forEach(button => {
-    //     button.addEventListener('click', function() {
-    //         const popupOverlay = this.closest('.popup-overlay');
-    //         if (popupOverlay) {
-    //             closePopup(popupOverlay.id);
-    //         }
-    //     });
-    // });
-    // This global closePopup function is now used by inline onclick, or can be attached:
+    // Betriebsferien-Popup: Beispielhafte Anzeige beim Laden (Logik anpassen)
     const betriebsferienPopup = document.getElementById('betriebsferien-popup');
     if (betriebsferienPopup) {
+        // HIER Logik einfügen, wann das Popup gezeigt werden soll
+        // z.B. Cookie-Prüfung oder Datumsvergleich
+        // if (bedingungErfuellt) {
+        //    showPopup('betriebsferien-popup');
+        // }
+        // Zu Demonstrationszwecken wird es einmalig beim Laden gezeigt (kann auskommentiert/angepasst werden)
+        if (!sessionStorage.getItem('betriebsferienPopupShown')) {
+             showPopup('betriebsferien-popup');
+             sessionStorage.setItem('betriebsferienPopupShown', 'true'); // Verhindert erneutes Anzeigen in der Session
+        }
+
         const closeBtn = betriebsferienPopup.querySelector('.close-popup');
-        if (closeBtn && !closeBtn.getAttribute('onclick')) { // Avoid double binding if onclick is already there
+        if (closeBtn && !closeBtn.hasAttribute('onclick')) { // Nur binden, wenn kein onclick-Attribut vorhanden ist
             closeBtn.addEventListener('click', () => closePopup('betriebsferien-popup'));
         }
     }
@@ -277,20 +293,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const imageLightbox = document.getElementById('image-lightbox');
     const lightboxImageElement = document.getElementById('lightbox-image');
     const lightboxCloseButton = imageLightbox ? imageLightbox.querySelector('.lightbox-close') : null;
-    let activeLightboxTrigger = null; // To return focus
+    let activeLightboxTrigger = null; // Um den Fokus zurückzugeben
 
     function openImageLightbox(imageUrl, altText, triggerElement) {
         if (!imageLightbox || !lightboxImageElement) return;
 
         lightboxImageElement.setAttribute('src', imageUrl);
         lightboxImageElement.setAttribute('alt', altText);
-        activeLightboxTrigger = triggerElement; // Store the trigger for focus return
+        activeLightboxTrigger = triggerElement; // Trigger für Fokus-Rückgabe speichern
 
-        imageLightbox._previouslyFocusedElement = document.activeElement; // Store current focus
+        imageLightbox._previouslyFocusedElement = document.activeElement;
         imageLightbox.classList.add('is-visible');
         imageLightbox.removeAttribute('aria-hidden');
 
-        // Make rest of the page inert
         Array.from(document.body.children).forEach(child => {
             if (child !== imageLightbox && !imageLightbox.contains(child) && !child.hasAttribute('aria-hidden') && child.tagName !== 'SCRIPT' && child.tagName !== 'STYLE') {
                 child.inert = true;
@@ -299,8 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Trap focus within the lightbox
-        const focusableElementsInLightbox = [lightboxCloseButton].filter(el => el && el.offsetParent !== null); // Only the close button is focusable here
+        const focusableElementsInLightbox = [lightboxCloseButton].filter(el => el && el.offsetParent !== null);
         const firstFocusableLightbox = focusableElementsInLightbox[0];
         const lastFocusableLightbox = focusableElementsInLightbox[focusableElementsInLightbox.length - 1];
 
@@ -308,24 +322,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!imageLightbox.classList.contains('is-visible') || e.key !== 'Tab') return;
             if (focusableElementsInLightbox.length === 0) { e.preventDefault(); return; }
             const isFocusInside = imageLightbox.contains(document.activeElement);
-            if (e.shiftKey) { // Shift + Tab
-                if ((isFocusInside && document.activeElement === firstFocusableLightbox) || !isFocusInside) {
-                    if (lastFocusableLightbox) lastFocusableLightbox.focus(); e.preventDefault();
-                }
-            } else { // Tab
-                if ((isFocusInside && document.activeElement === lastFocusableLightbox) || !isFocusInside) {
-                    if (firstFocusableLightbox) firstFocusableLightbox.focus(); e.preventDefault();
-                }
-            }
+            if (e.shiftKey) { if ((isFocusInside && document.activeElement === firstFocusableLightbox) || !isFocusInside) { if (lastFocusableLightbox) lastFocusableLightbox.focus(); e.preventDefault(); } }
+            else { if ((isFocusInside && document.activeElement === lastFocusableLightbox) || !isFocusInside) { if (firstFocusableLightbox) firstFocusableLightbox.focus(); e.preventDefault(); } }
         };
         document.addEventListener('keydown', imageLightbox._trapFocusListener);
 
-        // Close on Escape
         imageLightbox._escapeListener = (e) => { if (e.key === 'Escape') closeImageLightbox(); };
         document.addEventListener('keydown', imageLightbox._escapeListener);
 
-        // Close on click outside content
-        imageLightbox._clickOutsideListener = (e) => { if (e.target === imageLightbox) closeImageLightbox(); }; // Click on overlay
+        imageLightbox._clickOutsideListener = (e) => { if (e.target === imageLightbox) closeImageLightbox(); };
         imageLightbox.addEventListener('click', imageLightbox._clickOutsideListener);
 
         setTimeout(() => { if (lightboxCloseButton) lightboxCloseButton.focus(); }, 50);
@@ -333,11 +338,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function closeImageLightbox() {
         if (!imageLightbox) return;
-
         imageLightbox.classList.remove('is-visible');
         imageLightbox.setAttribute('aria-hidden', 'true');
 
-        // Restore inert status
         Array.from(document.body.children).forEach(child => {
             if (child.dataset.madeInertByLightbox) {
                 child.inert = false;
@@ -350,18 +353,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (imageLightbox._trapFocusListener) { document.removeEventListener('keydown', imageLightbox._trapFocusListener); delete imageLightbox._trapFocusListener; }
         if (imageLightbox._clickOutsideListener) { imageLightbox.removeEventListener('click', imageLightbox._clickOutsideListener); delete imageLightbox._clickOutsideListener; }
 
-        // Return focus
         if (activeLightboxTrigger && typeof activeLightboxTrigger.focus === 'function') {
             activeLightboxTrigger.focus();
         } else if (imageLightbox._previouslyFocusedElement && document.body.contains(imageLightbox._previouslyFocusedElement) && typeof imageLightbox._previouslyFocusedElement.focus === 'function') {
             imageLightbox._previouslyFocusedElement.focus();
         } else {
-            document.body.focus(); // Fallback
+            document.body.focus();
         }
         delete imageLightbox._previouslyFocusedElement;
         activeLightboxTrigger = null;
 
-        // Clear image
         if (lightboxImageElement) {
             lightboxImageElement.setAttribute('src', '');
             lightboxImageElement.setAttribute('alt', '');
@@ -382,10 +383,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // === TYPO3 Hinweis: Testimonial Slider Logik ===
-    function initializeSlider(sliderId, prevBtnId, nextBtnId, pauseBtnId = null, autoPlay = false, autoPlayInterval = 5000) {
+    // === TYPO3 Hinweis: Generische Slider Initialisierungsfunktion ===
+    function initializeSlider(sliderId, prevBtnId, nextBtnId, pauseBtnId = null, autoPlay = false, autoPlayInterval = 5000, isImageSlider = false) {
         const sliderWrapper = document.getElementById(sliderId);
-        if (!sliderWrapper) { console.warn(`Slider wrapper #${sliderId} not found.`); return; }
+        if (!sliderWrapper) {
+            // console.warn(`Slider wrapper #${sliderId} not found.`); // Kann bei optionalen Slidern stören
+            return;
+        }
 
         const slides = Array.from(sliderWrapper.children).filter(child => child.classList.contains('slide'));
         const prevBtn = document.getElementById(prevBtnId);
@@ -394,12 +398,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const sliderContainer = sliderWrapper.closest('.slider-container');
         const srAnnouncer = sliderContainer ? sliderContainer.querySelector('.sr-slide-announcer') : null;
 
-        if (!prevBtn || !nextBtn || !sliderContainer) { console.warn(`Slider controls or container for #${sliderId} not found.`); return; }
+        if (!prevBtn || !nextBtn || !sliderContainer) {
+            // console.warn(`Slider controls or container for #${sliderId} not found.`);
+            return;
+        }
         if (slides.length <= 1) {
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
             if (pauseBtn) pauseBtn.style.display = 'none';
-            return; // No need for slider functionality if 0 or 1 slide
+            return;
         }
 
         let currentIndex = 0;
@@ -412,38 +419,49 @@ document.addEventListener('DOMContentLoaded', function() {
             prevBtn.disabled = currentIndex === 0;
             nextBtn.disabled = currentIndex === slides.length - 1;
 
-            // ARIA updates for slides
             slides.forEach((slide, index) => {
                 const isCurrent = index === currentIndex;
                 slide.setAttribute('aria-hidden', String(!isCurrent));
-                // Make only current slide's focusable elements tabbable
-                slide.querySelectorAll('a, button, input, textarea, select, [tabindex="0"]').forEach(focusable => {
-                    focusable.setAttribute('tabindex', isCurrent ? '0' : '-1');
-                });
+                // Fokussierbare Elemente in der aktuellen Slide handhaben
+                const focusableInSlide = slide.querySelectorAll('a, button, input, textarea, select, [tabindex="0"]');
+                focusableInSlide.forEach(focusable => focusable.setAttribute('tabindex', isCurrent ? '0' : '-1'));
+
+                // Für Bild-Slider, bei denen die Slide selbst ein Link ist
+                if (isImageSlider && slide.tagName === 'A') {
+                    slide.setAttribute('tabindex', isCurrent ? '0' : '-1');
+                }
             });
+
             if (announce && srAnnouncer) {
-                // Announce slide change for screen readers. Adding timestamp to force announcement on repeat.
-                const slideTextContent = slides[currentIndex] ? (slides[currentIndex].textContent || '').trim().substring(0, 100) : ''; // Get first 100 chars
-                srAnnouncer.textContent = `Folie ${currentIndex + 1} von ${slides.length} angezeigt. ${slideTextContent} ${(new Date()).getTime()}`;
+                let slideTextContent = `Folie ${currentIndex + 1} von ${slides.length} angezeigt.`;
+                if (!isImageSlider && slides[currentIndex]) { // Für Testimonial-Slider, Text holen
+                     slideTextContent += ` ${(slides[currentIndex].textContent || '').trim().substring(0, 100)}`;
+                } else if (isImageSlider && slides[currentIndex]) { // Für Bild-Slider, Alt-Text holen
+                    const imgElement = slides[currentIndex].querySelector('img') || slides[currentIndex]; // Falls Slide selbst img ist
+                    if (imgElement && imgElement.alt) {
+                        slideTextContent += ` Bild: ${imgElement.alt}`;
+                    }
+                }
+                srAnnouncer.textContent = `${slideTextContent} ${(new Date()).getTime()}`; // Timestamp für Screenreader
             }
         }
 
         function navigateSlide(direction) {
-            isPaused = true; // User interaction pauses autoplay
+            isPaused = true; // Benutzerinteraktion pausiert Autoplay
             stopAutoPlay();
             const newIndex = currentIndex + direction;
             if (newIndex >= 0 && newIndex < slides.length) {
                 currentIndex = newIndex;
-                updateSlider(true); // Announce change
+                updateSlider(true); // Änderung ansagen
             }
         }
 
         function startAutoPlay() {
             if (!isAutoplayActive || isPaused || slides.length <= 1) return;
-            clearInterval(slideInterval); // Clear existing interval
+            clearInterval(slideInterval);
             slideInterval = setInterval(() => {
                 currentIndex = (currentIndex + 1) % slides.length;
-                updateSlider(true); // Announce change
+                updateSlider(true);
             }, autoPlayInterval);
             if (pauseBtn) {
                 pauseBtn.setAttribute('aria-label', 'Animation anhalten');
@@ -471,16 +489,15 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Handle prefers-reduced-motion
         const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
         function handleReducedMotion(event) {
             if (event.matches) {
-                isAutoplayActive = false; // Turn off autoplay if reduced motion is preferred
+                isAutoplayActive = false;
                 stopAutoPlay();
-                if (pauseBtn) pauseBtn.style.display = 'none'; // Hide pause button if no autoplay
+                if (pauseBtn) pauseBtn.style.display = 'none';
             } else {
-                isAutoplayActive = autoPlay; // Restore original autoplay setting
-                if (!isPaused) startAutoPlay(); // Start autoplay if not paused by user
+                isAutoplayActive = autoPlay;
+                if (!isPaused) startAutoPlay();
                 if (pauseBtn && slides.length > 1) pauseBtn.style.display = 'inline-block';
             }
         }
@@ -489,14 +506,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateSlider(); // Initial setup
     }
-    initializeSlider('testimonial-slider', 'prevSlideTestimonial', 'nextSlideTestimonial', 'testimonial-pause', true, 7000);
+
+    // Initialisierung der Slider
+    initializeSlider('testimonial-slider', 'prevSlideTestimonial', 'nextSlideTestimonial', 'testimonial-pause', true, 7000, false);
+    initializeSlider('image-slider', 'prevSlideImage', 'nextSlideImage', 'image-slider-pause', true, 6000, true);
+
 
     // === TYPO3 Hinweis: Cookie Einstellungen (Platzhalter) ===
     function openCookieSettings() {
         // Hier würde die Logik zum Öffnen der Cookie-Einstellungen stehen,
         // z.B. durch Aufruf einer API eines Consent Management Platforms (CMP).
         alert('Hier würden die Cookie-Einstellungen geöffnet (z.B. per CMP API).');
-        // Ggf. showPopup('cookie-settings-popup') wenn ein eigenes Popup verwendet wird.
     }
     const cookieSettingsTrigger = document.getElementById('cookie-settings-trigger');
     const cookieSettingsTriggerNav = document.getElementById('cookie-settings-trigger-nav');
