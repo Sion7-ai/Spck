@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexible Inhaltsseite | Hotel Sonne Post</title>
+    <meta name="description" content="Beispielseite für flexible Inhaltsgestaltung im Hotel Sonne Post.">
+
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        body {
+            background-color: var(--color-white);
+        }
+        .site-header {
+            background-color: var(--color-header-bg-scrolled);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background-image: none;
+        }
+        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
+            color: var(--color-header-icon-scrolled);
+        }
+         .site-header .hamburger-icon span {
+            background: var(--color-header-icon-scrolled);
+        }
+        .site-header .header-center .central-logo .logo-initial {
+            display: block; opacity: 0; position: absolute; pointer-events: none;
+        }
+        .site-header .header-center .central-logo .logo-scrolled {
+            display: block; opacity: 1; position: relative;
+        }
+        .site-header .header-right .contact-icon-btn iconify-icon {
+            color: var(--color-header-contact-icon-scrolled);
+        }
+
+        .standard-content-section {
+            padding-top: calc(var(--header-height) + 60px);
+            padding-bottom: 80px;
+        }
+        .standard-content-section .container {
+            max-width: 960px;
+        }
+
+        .content-element {
+            margin-bottom: 40px;
+        }
+        .content-element h1,
+        .content-element h2,
+        .content-element h3,
+        .content-element h4 {
+            text-align: left;
+        }
+        .content-element h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--color-bordeaux);
+            margin-bottom: 1em;
+        }
+        .content-element h2 {
+             font-size: clamp(1.8rem, 4vw, 2.5rem);
+             color: var(--color-text-primary);
+             margin-bottom: 0.8em;
+        }
+        .content-element h3 {
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            color: var(--color-text-primary);
+            margin-bottom: 0.6em;
+        }
+         .content-element h4 {
+            font-size: 1.2rem;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+        .content-element p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.2em;
+        }
+        .content-element ul,
+        .content-element ol {
+            margin-bottom: 1.2em;
+            padding-left: 25px;
+            color: var(--color-text-secondary);
+        }
+        .content-element li {
+            margin-bottom: 0.5em;
+        }
+        /* Erhöhte Spezifität für das allgemeine Blockquote-Styling auf dieser Seite */
+        .standard-content-section .content-element blockquote {
+            border-left: 4px solid var(--color-bordeaux);
+            padding-left: 20px;
+            margin: 30px 0;
+            font-family: var(--font-secondary);
+            font-size: 2rem; 
+            line-height: 1.3;  
+            font-style: italic;
+            color: var(--color-text-secondary);
+        }
+        
+        .standard-content-section .content-element blockquote p {
+            font-size: inherit; 
+            line-height: inherit; 
+            
+        }
+        .content-element blockquote p {
+            margin-bottom: 0.5em;
+        }
+        .content-element blockquote cite {
+            display: block;
+            font-size: 1rem;
+            text-align: right;
+            margin-top: 0.8em;
+            color: var(--color-text-primary);
+            font-style: normal;
+        }
+
+        .text-media-element {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        @media (min-width: 768px) {
+            .text-media-element.image-left .text-media-image { order: 1; }
+            .text-media-element.image-left .text-media-text { order: 2; }
+            .text-media-element.image-right .text-media-image { order: 2; }
+            .text-media-element.image-right .text-media-text { order: 1; }
+            .text-media-element {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .text-media-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .text-media-text h3 {
+            margin-top: 0;
+        }
+
+        .image-element img {
+            display: block;
+            margin: 0 auto 10px auto;
+            max-width: 100%;
+            border-radius: 6px;
+             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .image-element figcaption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            font-style: italic;
+        }
+
+        .gallery-element-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .gallery-element-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .accordion-item {
+            border: 1px solid var(--color-border-subtle);
+            border-radius: 4px;
+            margin-bottom: 10px;
+            background-color: var(--color-beige);
+        }
+        .accordion-item:last-child { margin-bottom: 0; }
+        .accordion-button {
+            background-color: transparent;
+            border: none;
+            width: 100%;
+            padding: 15px 20px;
+            text-align: left;
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-bordeaux);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+        }
+        .accordion-button:hover, .accordion-button:focus-visible {
+            background-color: var(--color-sand);
+        }
+        .accordion-button .accordion-icon {
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+        .accordion-button[aria-expanded="true"] .accordion-icon {
+            transform: rotate(135deg);
+        }
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .accordion-content p { margin-bottom: 0.8em; font-size: 0.95rem; }
+        .accordion-content p:last-child { margin-bottom: 0; }
+
+        .button-element {
+            text-align: center;
+        }
+        .text-button-left {
+            text-align: left;
+            margin-top: 1em;
+            margin-bottom: 1.2em;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+
+    <header class="site-header" id="site-header" role="banner">
+        <div class="header-content-wrapper">
+            <div class="header-left">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+                    <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                    <span class="menu-trigger-text">MENÜ</span>
+                </button>
+            </div>
+            <div class="header-center">
+                <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
+                </a>
+            </div>
+            <div class="header-right">
+                <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <section class="standard-content-section">
+            <div class="container">
+                <div class="content-element">
+                    <h1>Willkommen auf unserer Inhaltsseite</h1>
+                    <p>Dies ist eine Beispielseite, um verschiedene Standard-Inhaltselemente zu demonstrieren, die flexibel über ein Content Management System wie TYPO3 eingefügt werden können. Jeder Block (`.content-element`) stellt ein typisches Inhaltselement dar.</p>
+                </div>
+
+                <div class="content-element">
+                    <h2>Einleitung und Fließtext</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
+                        Weiterer Text folgt hier, um den Fluss zu demonstrieren.
+                    </p>
+                     <div class="text-button-left">
+                        <a href="./kontakt.html" class="btn">Linksbündiger CTA</a>
+                        <a href="./top-angebote.html" class="btn btn-outline">Unsere Angebote</a>
+                    </div>
+                </div>
+
+                <div class="content-element text-media-element image-left">
+                    <div class="text-media-image">
+                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" alt="Außenansicht Hotel Sonne Post" width="800" height="600">
+                    </div>
+                    <div class="text-media-text">
+                        <h3>Text mit Bild (Bild links)</h3>
+                        <p>Hier steht der Text neben dem Bild. Dieses Layout ist ideal, um visuelle Elemente mit beschreibenden Informationen zu kombinieren. Der Text kann mehrere Absätze umfassen und die Vorzüge des Gezeigten hervorheben.</p>
+                        <p>Das Bild kann je nach Konfiguration im CMS austauschbar sein und mit einem Alt-Text für Barrierefreiheit versehen werden.</p>
+                    </div>
+                </div>
+
+                <div class="content-element text-media-element image-right">
+                    <div class="text-media-image">
+                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Schwimmbad_Traditionslogo.jpg" alt="Innenpool des Hotels" width="800" height="600">
+                    </div>
+                    <div class="text-media-text">
+                        <h3>Text mit Bild (Bild rechts)</h3>
+                        <p>Dieses Element zeigt die umgekehrte Anordnung. Der Inhalt passt sich flexibel an, sodass das Bild rechts und der Text links erscheint. Dies sorgt für Abwechslung im Seitenlayout.</p>
+                        <ul>
+                            <li>Flexibles Layout</li>
+                            <li>Einfache Inhaltspflege</li>
+                            <li>Optimale Präsentation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-element">
+                    <h3>Listen und Zitate</h3>
+                    <p>Ungeordnete Liste:</p>
+                    <ul>
+                        <li>Listeneintrag eins</li>
+                        <li>Listeneintrag zwei mit etwas mehr Text</li>
+                        <li>Listeneintrag drei</li>
+                    </ul>
+                    <p>Geordnete Liste:</p>
+                    <ol>
+                        <li>Erster Schritt</li>
+                        <li>Zweiter Schritt</li>
+                        <li>Dritter Schritt</li>
+                    </ol>
+                    <blockquote>
+                        <p>"Das ist ein inspirierendes Zitat, das die Kernaussage einer Seite unterstreichen kann. Es kann auch mal etwas länger sein, um die Wirkung der neuen Schriftgröße und Zeilenhöhe zu testen."</p>
+                        <cite>Max Mustermann</cite>
+                    </blockquote>
+                </div>
+
+                <div class="content-element image-element">
+                    <figure>
+                        <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Wellness Anwendung" width="700" height="450">
+                        <figcaption>Ein einzelnes Bild mit optionaler Bildunterschrift.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="content-element">
+                    <h3>Einfache Bildergalerie</h3>
+                    <div class="gallery-element-grid">
+                        <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" alt="Lobby Hotel Sonne Post" width="400" height="300">
+                        <img src="https://www.sonne-post.de/fileadmin/_processed_/9/1/csm_SonnePost_17-Singdrossel_Zimmer4436_300dpi-WEB_0f9ca5120b.jpg" alt="Hotelzimmer Sonne Post" width="400" height="300">
+                        <img src="https://images.pexels.com/photos/262048/pexels-photo-262048.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop" alt="Lounge Bereich" width="400" height="300">
+                    </div>
+                </div>
+
+                <div class="content-element">
+                    <h3>Akkordeon / Aufklappelemente</h3>
+                    <div class="accordion-item">
+                        <button class="accordion-button" aria-expanded="false" aria-controls="accordion-content-1">
+                            Frage 1: Was ist das Besondere an diesem Hotel?
+                            <iconify-icon class="accordion-icon" icon="feather:plus-circle" aria-hidden="true"></iconify-icon>
+                        </button>
+                        <div class="accordion-content" id="accordion-content-1" role="region" aria-hidden="true">
+                            <p>Unser Hotel zeichnet sich durch seine familiäre Atmosphäre, die exzellente regionale Küche und die einzigartige Lage im Herzen des Schwarzwaldes aus. Wir legen großen Wert auf Nachhaltigkeit und Gastfreundschaft.</p>
+                            <p>Zusätzlicher Text, um sicherzustellen, dass der Inhalt nicht abgeschnitten wird und die Höhe korrekt angepasst wird. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-button" aria-expanded="false" aria-controls="accordion-content-2">
+                            Frage 2: Welche Freizeitmöglichkeiten gibt es in der Umgebung?
+                            <iconify-icon class="accordion-icon" icon="feather:plus-circle" aria-hidden="true"></iconify-icon>
+                        </button>
+                        <div class="accordion-content" id="accordion-content-2" role="region" aria-hidden="true">
+                            <p>Die Umgebung bietet zahlreiche Wander- und Radwege, malerische Seen, Skipisten im Winter und viele kulturelle Sehenswürdigkeiten. Gerne informieren wir Sie an der Rezeption über aktuelle Ausflugstipps.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-element button-element">
+                    <h3>Zentriertes Button Beispiel</h3>
+                    <p><br>Buttons können für verschiedene Call-to-Actions verwendet werden.</p>
+                    <a href="./kontakt.html" class="btn">Zur Kontaktseite</a>
+                    <a href="#" class="btn btn-outline" style="margin-left: 10px;">Weiterer Button</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container-footer">
+            <div class="footer-column">
+                <h2 class="footer-column-title">Hotel Sonne Post</h2>
+                <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
+            </div>
+            <div class="footer-column">
+                 <h2 class="footer-column-title">Entdecken</h2>
+                <ul> <li><a href="./zimmer.html">Wohnen & Preise</a></li> <li><a href="./wellness.html">Spa</a></li> <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="./top-angebote.html">Arrangements</a></li> <li><a href="./region.html">Freizeit & Region</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h2 class="footer-column-title">Information</h2>
+                 <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="./newsletter.html">Newsletter</a></li> <li><a href="./faq.html">FAQ</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h2 class="footer-column-title">Rechtliches</h2>
+                 <ul> <li><a href="./impressum.html">Impressum</a></li> <li><a href="./datenschutz.html">Datenschutz</a></li> <li><a href="./agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
+                <div class="social-links">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
+
+    <script src="../js/main.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.utils.toArray('.content-element').forEach((el, index) => {
+                    gsap.from(el, {
+                        opacity: 0,
+                        y: 40,
+                        duration: 0.7,
+                        delay: index * 0.05,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: el,
+                            start: "top 88%",
+                            toggleActions: "play none none none",
+                            once: true
+                        }
+                    });
+                });
+            }
+
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = document.getElementById(button.getAttribute('aria-controls'));
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    button.setAttribute('aria-expanded', !isExpanded);
+                    content.setAttribute('aria-hidden', isExpanded);
+
+                    const icon = button.querySelector('.accordion-icon');
+
+                    if (!isExpanded) {
+                        // Ensure padding is applied before calculating scrollHeight for accurate measurement
+                        content.style.paddingTop = "15px";
+                        content.style.paddingBottom = "20px";
+                        // Force a reflow to ensure padding is applied before scrollHeight is read
+                        void content.offsetWidth;
+                        content.style.maxHeight = content.scrollHeight + "px";
+
+                        if (icon) icon.style.transform = 'rotate(135deg)'; // X-like shape
+                    } else {
+                        content.style.maxHeight = null; // Triggers CSS transition to 0
+                        // Remove padding during closing animation to avoid jumpiness
+                        // This relies on the transition of max-height.
+                        // A slight delay before removing padding can sometimes help visual smoothness.
+                        setTimeout(() => {
+                             if (button.getAttribute('aria-expanded') === 'false') { // Check if still closed
+                                content.style.paddingTop = "0";
+                                content.style.paddingBottom = "0";
+                             }
+                        }, parseFloat(getComputedStyle(content).transitionDuration) * 1000 * 0.8 ); // Wait for 80% of transition
+
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+                const initialContent = document.getElementById(button.getAttribute('aria-controls'));
+                if (initialContent && button.getAttribute('aria-expanded') === 'false') {
+                    initialContent.style.maxHeight = null;
+                    initialContent.style.paddingTop = "0";
+                    initialContent.style.paddingBottom = "0";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
