@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
+    <title>Top Angebote & Arrangements | Hotel Sonne Post</title>
+    <!-- TYPO3 Hinweis: Dynamische Meta Description -->
+    <meta name="description" content="Entdecken Sie unsere exklusiven Top-Angebote und Arrangements für Ihren unvergesslichen Urlaub im Hotel Sonne Post.">
+
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        /* === Spezifische Stile für Top-Angebote Seite === */
+        body {
+            background-color: var(--color-white);
+        }
+        /* Header Styling für Unterseiten */
+        .site-header {
+            background-color: var(--color-header-bg-scrolled);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background-image: none;
+        }
+        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
+            color: var(--color-header-icon-scrolled);
+        }
+         .site-header .hamburger-icon span {
+            background: var(--color-header-icon-scrolled);
+        }
+        .site-header .header-center .central-logo .logo-initial {
+            display: block; opacity: 0; position: absolute; pointer-events: none;
+        }
+        .site-header .header-center .central-logo .logo-scrolled {
+            display: block; opacity: 1; position: relative;
+        }
+        .site-header .header-right .contact-icon-btn iconify-icon {
+            color: var(--color-header-contact-icon-scrolled);
+        }
+
+        .page-hero-section.angebote-hero {
+            position: relative; width: 100%; height: 55vh;
+            min-height: 350px; max-height: 500px; overflow: hidden;
+            margin-top: var(--header-height); /* Korrektur für fixen Header */
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--color-white); background-size: cover; background-position: center 70%; background-repeat: no-repeat;
+        }
+        .page-hero-section.angebote-hero .page-hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.0) 100%);
+            z-index: 1; /* Overlay über dem Bild, unter dem Content */
+        }
+        .page-hero-section.angebote-hero .page-hero-content {
+            position: relative; z-index: 2; /* Content über dem Overlay */
+            /* padding-top: var(--header-height); entfernt, da margin-top auf section */
+            display: block;
+        }
+        .page-hero-section.angebote-hero .page-hero-title {
+            font-size: clamp(2.5rem, 5.5vw, 3.8rem); text-shadow: 0 2px 5px rgba(0,0,0,0.5); margin-bottom: 0.2em;
+        }
+        .page-hero-section.angebote-hero .page-hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-family: var(--font-primary);
+            font-weight: 400; opacity: 0.9; text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .angebote-intro-section {
+            padding: 60px 0 40px 0;
+            background-color: var(--color-white);
+        }
+        .angebote-intro-section .container {
+            max-width: 900px;
+            text-align: center;
+        }
+        .angebote-intro-section .intro-lead {
+            font-family: var(--font-secondary);
+            font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+            color: var(--color-text-primary);
+            font-weight: 600;
+            margin-bottom: 1em;
+            line-height: 1.4;
+        }
+        .angebote-intro-section p {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1em;
+        }
+         .angebote-intro-section p.important-notes {
+            font-size: 0.9rem;
+            margin-top: 2em;
+            padding: 15px;
+            background-color: var(--color-beige);
+            border-radius: 4px;
+            display: inline-block;
+        }
+        .angebote-intro-section p.important-notes strong {
+            color: var(--color-bordeaux);
+        }
+
+        .angebote-filter-bar-section {
+            padding: 30px 0; background-color: var(--color-beige);
+            border-top: 1px solid var(--color-border-subtle);
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+        .angebote-filter-bar-section .container { max-width: 1200px; }
+        .angebote-filter-controls {
+            display: flex; flex-wrap: wrap;
+            /* GEÄNDERT: row-gap auf 5px gesetzt */
+            gap: 5px 15px;
+            align-items: center; justify-content: center;
+        }
+        .angebote-filter-controls .filter-group { display: flex; align-items: center; gap: 8px; }
+        .angebote-filter-controls label { font-weight: 500; color: var(--color-text-secondary); font-size: 0.9rem; margin-bottom: 0; }
+        .angebote-filter-controls select,
+        .angebote-filter-controls input[type="date"],
+        .angebote-filter-controls .btn-filter {
+            padding: 8px 12px; border: 1px solid var(--color-border-subtle); border-radius: 4px;
+            font-family: var(--font-primary); font-size: 0.9rem; background-color: var(--color-white);
+        }
+        .angebote-filter-controls select { min-width: 150px; }
+        .angebote-filter-controls .btn-filter { background-color: var(--color-bordeaux); color: var(--color-white); cursor: pointer; }
+        .angebote-filter-controls .btn-filter:hover { background-color: #701623; }
+        .filter-buttons-group button {
+            background-color: var(--color-white); color: var(--color-bordeaux);
+            border: 1px solid var(--color-border-subtle); padding: 0.6em 1.2em; border-radius: 20px;
+            font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease;
+        }
+        .filter-buttons-group button:hover,
+        .filter-buttons-group button.active {
+            background-color: var(--color-bordeaux); color: var(--color-white); border-color: var(--color-bordeaux);
+        }
+        .filter-buttons-group button.active { box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        .angebote-list-section { padding: 60px 0 100px 0; background-color: var(--color-white); }
+        .angebote-list-section .container { max-width: 1200px; }
+        .angebote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        @media (min-width: 1000px) { .angebote-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 680px) and (max-width: 999.98px) { .angebote-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .angebot-card {
+            background-color: var(--color-beige); border-radius: 6px; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07); display: flex; flex-direction: column;
+            text-decoration: none; color: var(--color-text-primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .angebot-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .angebot-card-link-wrapper {
+            text-decoration: none; color: inherit; display: flex; flex-direction: column; height: 100%;
+        }
+        .angebot-card-image-wrapper { position: relative; overflow: hidden; aspect-ratio: 16 / 10; }
+        .angebot-card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .angebot-card-badge {
+            position: absolute; top: 15px; left: 15px; background-color: rgba(140, 30, 45, 0.9);
+            color: var(--color-white); padding: 5px 10px; border-radius: 4px;
+            font-size: 0.8rem; font-weight: 500; z-index: 1;
+        }
+        .angebot-card-content { padding: 20px 25px 25px 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .angebot-card-title {
+            font-family: var(--font-secondary); font-size: clamp(1.3rem, 2.5vw, 1.6rem); font-weight: 600;
+            color: var(--color-bordeaux); margin-bottom: 0.5em;
+            min-height: 2.8em;
+            display: flex; align-items: center;
+        }
+        .angebot-card-description { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1em; flex-grow: 1; }
+        .angebot-card-description p, .angebot-card-description ul { margin-bottom: 0.7em; }
+        .angebot-card-description ul { list-style: disc; padding-left: 20px; }
+        .angebot-card-description li { margin-bottom: 0.3em; }
+
+        .angebot-card-meta { margin-top: auto; padding-top: 15px; border-top: 1px solid var(--color-border-subtle); }
+        .angebot-card-meta .meta-item { font-size: 0.85rem; color: var(--color-text-secondary); margin-bottom: 8px; display: flex; align-items: flex-start; }
+        .angebot-card-meta .meta-item iconify-icon { font-size: 1.1em; color: var(--color-bordeaux); margin-right: 8px; flex-shrink: 0; margin-top: 2px; }
+        .angebot-card-meta .meta-item strong { font-weight: 600; color: var(--color-text-primary); }
+        .angebot-card-actions { margin-top: 15px; text-align: right; }
+        .angebot-card-actions .btn { font-size: 0.9rem; padding: 0.6em 1.4em; }
+        .no-results-message {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 30px 20px;
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+
+    <header class="site-header" id="site-header" role="banner">
+        <div class="header-content-wrapper">
+            <div class="header-left">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+                    <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                    <span class="menu-trigger-text">MENÜ</span>
+                </button>
+            </div>
+            <div class="header-center">
+                <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
+                </a>
+            </div>
+            <div class="header-right">
+                <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- TYPO3 Hinweis: Fullscreen Navigation wurde für Unterseiten entfernt (nur auf Startseite) -->
+
+    <main id="main-content" role="main">
+        <!-- GEÄNDERT: aria-labelledby entfernt -->
+        <section class="page-hero-section angebote-hero" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Arrangements/Sonne-Post_Headerbild-Arrangements_Familienzimmer_1280x854.png');">
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content container">
+                <h1 id="angebote-hero-heading" class="page-hero-title">Unsere Top-Angebote</h1>
+                <p class="page-hero-subtitle">Entdecken Sie exklusive Arrangements für Ihren Traumurlaub im Schwarzwald.</p>
+            </div>
+        </section>
+
+        <section class="angebote-intro-section">
+            <div class="container">
+                <p class="intro-lead">Entspannen, sparen & den Schwarzwald genießen -<br>unsere Angebote für Ihren Schwarzwald Urlaub</p>
+                <p>Ein Schwarzwald-Urlaub bei uns im Hotel Sonne-Post verbindet Natur mit Erholung und Genuss. Bei uns können Sie den Schwarzwald genießen und sich verwöhnen lassen - dabei noch zu sparen macht Ihren Aufenthalt bei uns zu einem unvergesslichen Erlebnis.</p>
+                <p>Ein Feinschmeckermenü der Extraklasse aus unserem Schwarzwald Restaurant, ein romantischer Aufenthalt zu zweit oder ein unvergesslicher Familienurlaub - in unserer Sonne-Post können Sie rundum genießen, sich erholen, schlemmen und mit unseren Angeboten sogar noch sparen!</p>
+                <p>Sind Sie auf der Suche nach Wellness Angeboten im Schwarzwald? Dann sind unsere Auszeitwochen genau das Richtige für Sie: Vom wohltuenden DaySpa in unserem Schwarzwald Hotel mit Pool und Sauna, über die Erweiterung mit Abendmenü, bis hin zur Kombination aus DaySpa, Menü und Übernachtung - wir bieten eine kleine Auszeit mit großer Wirkung für jedes Budget.</p>
+                <p>Buchen Sie jetzt eines unserer Angebote und genießen Sie Ihre Auszeit bei uns im Haus in vollen Zügen - alleine, zu zweit oder als Familie.</p>
+                <p><strong>Wir freuen uns auf Sie.</strong></p>
+                <p class="important-notes">
+                    <strong>Wichtige Hinweise:</strong><br>
+                    Nur mit Reservierung buchbar.<br>
+                    Bitte beachten Sie die festgelegten Buchungs-Zeiträume.
+                </p>
+            </div>
+        </section>
+
+        <!-- GEÄNDERT: aria-labelledby entfernt -->
+        <section class="angebote-filter-bar-section">
+            <div class="container">
+                <h2 id="filter-heading" class="sr-only">Angebote filtern</h2>
+                <div class="angebote-filter-controls">
+                    <div class="filter-buttons-group" role="group" aria-label="Angebotskategorien filtern">
+                        <button type="button" class="active" data-filter="all" aria-pressed="true">Alle Angebote</button>
+                        <button type="button" data-filter="wellness" aria-pressed="false">Wellness</button>
+                        <button type="button" data-filter="familie" aria-pressed="false">Familie</button>
+                        <button type="button" data-filter="aktiv" aria-pressed="false">Aktiv</button>
+                        <button type="button" data-filter="kulinarik" aria-pressed="false">Kulinarik</button>
+                        <button type="button" data-filter="sparen" aria-pressed="false">Spar-Tipp</button>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-reisezeitraum-start">Reisezeitraum von:</label>
+                        <input type="date" id="filter-reisezeitraum-start" name="reisezeitraum_start" aria-label="Startdatum des Reisezeitraums">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-reisezeitraum-ende">bis:</label>
+                        <input type="date" id="filter-reisezeitraum-ende" name="reisezeitraum_ende" aria-label="Enddatum des Reisezeitraums">
+                    </div>
+                    <div class="filter-group">
+                        <button type="button" class="btn-filter">Filter anwenden</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GEÄNDERT: aria-labelledby entfernt -->
+        <section class="angebote-list-section">
+            <div class="container">
+                <h2 id="angebote-list-heading" class="sr-only">Verfügbare Angebote</h2>
+                <div class="angebote-grid">
+
+                    <article class="angebot-card" data-category="aktiv golf" data-start-date="2024-01-01" data-end-date="2025-12-31">
+                        <a href="./angebot-detail/golf-special.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/d/7/csm_golfbild_a6d95f2fd2.png" alt="Golfplatz Hochschwarzwald" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Golf-Special Aktivtage</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Pro Übernachtung Greenfee auf dem 18 Loch Golfplatz des Golfclub Hochschwarzwald in Titisee</li>
+                                        <li>Eine Flasche Sekt im Zimmer während Ihres Aufenthalts</li>
+                                        <li>Nutzung des neuen Schwimmbad- und Saunabereichs</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>Doppelzimmer-Appartement ab <strong>295,- €</strong></span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 2 Nächten</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig buchbar</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="familie" data-start-date="2024-11-04" data-end-date="2025-12-19">
+                        <a href="./angebot-detail/happy-family.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/7/1/csm_Sonne-Post_People5911-300dpi_95ec3eaa41.jpg" alt="Glückliche Familie im Urlaub" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Happy Family Familienwochen</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Kostenfreie Übernachtung für Kinder bis 13 Jahre</li>
+                                        <li>Kostenfreies Frühstück für Kinder bis 13 Jahre</li>
+                                        <li>Inkl. Hochschwarzwald Card für Familienerlebnisse</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                     <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 2 Nächten</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ausgewählte Zeiträume (Details siehe Angebot)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="wellness sparen" data-start-date="2024-11-04" data-end-date="2025-12-19">
+                        <a href="./angebot-detail/4-gleich-3.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/2/c/csm_SonnePost_5-Zitronengirlitz_Zimmer4774_300dpi_c6c493f9c4.jpg" alt="Gemütliches Hotelzimmer" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">4 = 3: Erholsame Nächte zum Preis von 3</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>4 Übernachtungen zum Preis von 3</li>
+                                        <li>Nachmittagskaffee & Kuchen (3 Tage)</li>
+                                        <li>Aperitif & 3-Gang-Menü (4 Abende)</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>DZ ab <strong>892,- €</strong>, EZ ab <strong>496,- €</strong></span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Anreise So/Mo, ausgewählte Zeiträume (Details beachten)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="wellness kulinarik" data-start-date="2024-10-13" data-end-date="2025-12-18">
+                        <a href="./angebot-detail/geniesser-special-day-spa-menue.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/0/d/csm_Sonne-Post_People6855-300dpi_7fdb6cfca7.jpg" alt="Day Spa und Menü" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Genießer-Special: Day Spa + Menü</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Nutzung Schwimmbad & Sauna</li>
+                                        <li>Wellnesskörbchen</li>
+                                        <li>3-Gang-Abendmenü inkl. Aperitif</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>72,-€</strong> pro Person</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do, ausgewählte Zeiträume (Details beachten)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="kulinarik" data-start-date="2025-06-29" data-end-date="2025-07-13">
+                        <a href="./angebot-detail/schlemmerwochen-sommerkueche.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                 <img src="https://www.sonne-post.de/fileadmin/_processed_/7/c/csm_lb_Crevetten_auf_Beet_a190667663.png" alt="Leichte Sommerküche" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Schlemmerwochen "leichte Sommerküche"</h3>
+                                <div class="angebot-card-description">
+                                    <p>Vielfältige kulinarische Genüsse, leicht, aromareich und kreativ.</p>
+                                    <ul>
+                                        <li>Übernachtung Ihrer Wahl</li>
+                                        <li>Abendliches 7-Gang-Menü inkl. Aperitif & Käsebuffet (zum HP-Preis von 36,-€)</li>
+                                        <li>Erweitertes Frühstücksbuffet mit Live-Cooking</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>29.06.2025 bis 13.07.2025</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 5 Nächten</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="wellness sparen" data-start-date="2024-01-01" data-end-date="2025-12-31">
+                         <a href="./angebot-detail/wochenende-plus-eins.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/e/4/csm_Header-Zimmer-Arrangements_dc23d9fb77.jpg" alt="Sekt im Hotelzimmer" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Wochenende +1: Verlängertes Wochenende</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Geschenk: Eine Flasche Sekt im Zimmer</li>
+                                        <li>Sonne-Post 3-Gang-Menü (3 Abende)</li>
+                                        <li>Mind. 10% Rabatt auf Angebotspreis</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span>DZ ab <strong>648,- €</strong>, EZ ab <strong>369,- €</strong></span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>Ganzjährig (Do-So/Fr-Mo), außer Ferien/Feiertage</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="wellness" data-start-date="2024-10-13" data-end-date="2025-12-18">
+                        <a href="./angebot-detail/relax-special-day-spa.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/9/8/csm_Sonne-Post_People6659-300dpi_3e30ce09ff.jpg" alt="Entspannte Atmosphäre im Spa-Bereich" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Relax-Special: Day Spa</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Nutzung Schwimmbadbereich mit Whirlliegen</li>
+                                        <li>Nutzung Saunabereich</li>
+                                        <li>Inkl. Wellnesskörbchen</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>35,-€</strong> pro Person</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do, ausgewählte Zeiträume (Details beachten)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                     <article class="angebot-card" data-category="wellness kulinarik" data-start-date="2024-10-13" data-end-date="2025-12-18">
+                        <a href="./angebot-detail/auszeit-special-day-spa-menue-uebernachtung.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/4/a/csm_Sonne-Post_People6020-300dpi_76f2af8c6b.jpg" alt="Wellnessbereich und gedeckter Tisch" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Auszeit-Special: Day Spa + Menü + Übernachtung</h3>
+                                <div class="angebot-card-description">
+                                    <ul>
+                                        <li>Nutzung Schwimmbad & Sauna</li>
+                                        <li>Wellnesskörbchen</li>
+                                        <li>3-Gang-Abendmenü inkl. Aperitif</li>
+                                        <li>Übernachtung im Überraschungszimmer</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                    <div class="meta-item"><iconify-icon icon="feather:tag" aria-hidden="true"></iconify-icon> <span><strong>120,-€</strong> pro Person</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>So-Do (1-2 Nächte), ausgewählte Zeiträume (Details beachten)</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <article class="angebot-card" data-category="kulinarik" data-start-date="2026-01-25" data-end-date="2026-02-08">
+                        <a href="./angebot-detail/schlemmerwochen-wintergenuss.html" class="angebot-card-link-wrapper">
+                            <div class="angebot-card-image-wrapper">
+                                <img src="https://www.sonne-post.de/fileadmin/_processed_/a/e/csm_Sonne-Post_Winter_8B6A9939_5074eba2ae.jpg" alt="Winterliche Tafel mit Kerzenlicht" width="600" height="400">
+                            </div>
+                            <div class="angebot-card-content">
+                                <h3 class="angebot-card-title">Schlemmerwochen "Winterlicher Genuss"</h3>
+                                 <div class="angebot-card-description">
+                                    <p>Vielfältige kulinarische Genüsse, winterlich, aromareich und kreativ.</p>
+                                    <ul>
+                                        <li>Übernachtung Ihrer Wahl</li>
+                                        <li>Abendliches 7-Gang-Menü inkl. Aperitif & Käsebuffet (zum HP-Preis von 36,-€)</li>
+                                        <li>Erweitertes Frühstücksbuffet mit Live-Cooking</li>
+                                    </ul>
+                                </div>
+                                <div class="angebot-card-meta">
+                                     <div class="meta-item"><iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> <span>25.01.2026 bis 08.02.2026</span></div>
+                                    <div class="meta-item"><iconify-icon icon="feather:moon" aria-hidden="true"></iconify-icon> <span>Ab 5 Nächten</span></div>
+                                </div>
+                                <div class="angebot-card-actions">
+                                    <span class="btn">Jetzt mehr erfahren</span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- GEÄNDERT: sr-only H2 entfernt, Spaltenüberschriften zu H2 geändert -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container-footer">
+            <div class="footer-column">
+                <h2 class="footer-column-title">Hotel Sonne Post</h2>
+                <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
+            </div>
+            <div class="footer-column">
+                 <h2 class="footer-column-title">Entdecken</h2>
+                <ul> <li><a href="./zimmer.html">Wohnen & Preise</a></li> <li><a href="./wellness.html">Spa</a></li> <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="./top-angebote.html">Arrangements</a></li> <li><a href="./region.html">Freizeit & Region</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h2 class="footer-column-title">Information</h2>
+                 <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="./newsletter.html">Newsletter</a></li> <li><a href="./faq.html">FAQ</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h2 class="footer-column-title">Rechtliches</h2>
+                 <ul> <li><a href="./impressum.html">Impressum</a></li> <li><a href="./datenschutz.html">Datenschutz</a></li> <li><a href="./agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
+                <div class="social-links">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
+
+    <script src="../js/main.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                const cards = gsap.utils.toArray('.angebot-card');
+                if (cards.length > 0 && cards[0] && cards[0].closest('.angebote-grid')) {
+                    gsap.from(cards, {
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.6,
+                        stagger: 0.1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: cards[0].closest('.angebote-grid'),
+                            start: "top 85%",
+                            toggleActions: "play none none none",
+                            once: true
+                        }
+                    });
+                }
+                 // Animation für den Intro-Text
+                gsap.from('.angebote-intro-section .container > *', {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.7,
+                    stagger: 0.15,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: '.angebote-intro-section .container',
+                        start: "top 80%", // Etwas früher starten
+                        toggleActions: "play none none none",
+                        once: true
+                    }
+                });
+            }
+
+            const filterButtons = document.querySelectorAll('.filter-buttons-group button[data-filter]');
+            const angebotCards = document.querySelectorAll('.angebot-card[data-category]');
+            const angeboteGrid = document.querySelector('.angebote-grid');
+            const dateStartInput = document.getElementById('filter-reisezeitraum-start');
+            const dateEndInput = document.getElementById('filter-reisezeitraum-ende');
+            const applyDateFilterButton = document.querySelector('.angebote-filter-controls .btn-filter');
+
+            function applyFilters() {
+                const activeCategoryButton = document.querySelector('.filter-buttons-group button.active');
+                const categoryFilterValue = activeCategoryButton ? activeCategoryButton.getAttribute('data-filter') : 'all';
+
+                const selectedStartDateStr = dateStartInput ? dateStartInput.value : null;
+                const selectedEndDateStr = dateEndInput ? dateEndInput.value : null;
+
+                let selectedStartDate = null;
+                if (selectedStartDateStr) {
+                    selectedStartDate = new Date(selectedStartDateStr);
+                    selectedStartDate.setUTCHours(0,0,0,0);
+                }
+
+                let selectedEndDate = null;
+                if (selectedEndDateStr) {
+                    selectedEndDate = new Date(selectedEndDateStr);
+                    selectedEndDate.setUTCHours(0,0,0,0);
+                }
+
+
+                let visibleCount = 0;
+                angebotCards.forEach(card => {
+                    const cardCategories = card.getAttribute('data-category').split(' ');
+                    const cardStartDateAttr = card.getAttribute('data-start-date');
+                    const cardEndDateAttr = card.getAttribute('data-end-date');
+
+                    let matchesCategory = categoryFilterValue === 'all' || cardCategories.includes(categoryFilterValue);
+                    let matchesDate = true;
+
+                    if (selectedStartDate || selectedEndDate) {
+                        if (cardStartDateAttr && cardEndDateAttr) {
+                            const cardStartDate = new Date(cardStartDateAttr);
+                            const cardEndDate = new Date(cardEndDateAttr);
+                            cardStartDate.setUTCHours(0,0,0,0);
+                            cardEndDate.setUTCHours(0,0,0,0);
+
+                            if (selectedStartDate && selectedEndDate) {
+                                matchesDate = cardStartDate <= selectedEndDate && cardEndDate >= selectedStartDate;
+                            } else if (selectedStartDate) {
+                                matchesDate = selectedStartDate <= cardEndDate;
+                            } else {
+                                matchesDate = selectedEndDate >= cardStartDate;
+                            }
+                        } else {
+                             matchesDate = false;
+                        }
+                    }
+
+                    const shouldShow = matchesCategory && matchesDate;
+                    card.style.display = shouldShow ? '' : 'none';
+                    if (shouldShow) visibleCount++;
+                });
+
+                let noResultsMessage = angeboteGrid.querySelector('.no-results-message');
+                if (visibleCount === 0) {
+                    if (!noResultsMessage) {
+                        noResultsMessage = document.createElement('p');
+                        noResultsMessage.classList.add('no-results-message');
+                        noResultsMessage.textContent = 'Für Ihre Auswahl wurden leider keine passenden Angebote gefunden.';
+                        angeboteGrid.appendChild(noResultsMessage);
+                    }
+                } else {
+                    if (noResultsMessage) {
+                        noResultsMessage.remove();
+                    }
+                }
+            }
+
+            if (filterButtons.length > 0 && angebotCards.length > 0 && angeboteGrid) {
+                filterButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        filterButtons.forEach(btn => {
+                            btn.classList.remove('active');
+                            btn.setAttribute('aria-pressed', 'false');
+                        });
+                        this.classList.add('active');
+                        this.setAttribute('aria-pressed', 'true');
+                        applyFilters();
+                    });
+                });
+
+                if (applyDateFilterButton) {
+                    applyDateFilterButton.addEventListener('click', applyFilters);
+                }
+                if(dateStartInput) dateStartInput.addEventListener('change', () => { if(!applyDateFilterButton) applyFilters(); });
+                if(dateEndInput) dateEndInput.addEventListener('change', () => { if(!applyDateFilterButton) applyFilters(); });
+            }
+
+            document.querySelectorAll('.angebot-card-link-wrapper').forEach(linkWrapper => {
+                linkWrapper.setAttribute('tabindex', '0');
+                linkWrapper.addEventListener('click', function(event) {
+                    if (event.target.closest('button, input, select, textarea, a:not(.angebot-card-link-wrapper)')) {
+                        return;
+                    }
+                    window.location.href = this.getAttribute('href');
+                });
+                linkWrapper.addEventListener('keydown', function(event) {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        window.location.href = this.getAttribute('href');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
