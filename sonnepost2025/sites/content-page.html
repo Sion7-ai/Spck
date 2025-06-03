@@ -23,216 +23,154 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             background-image: none;
         }
-        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
-            color: var(--color-header-icon-scrolled);
-        }
-         .site-header .hamburger-icon span {
-            background: var(--color-header-icon-scrolled);
-        }
-        .site-header .header-center .central-logo .logo-initial {
-            display: block; opacity: 0; position: absolute; pointer-events: none;
-        }
-        .site-header .header-center .central-logo .logo-scrolled {
-            display: block; opacity: 1; position: relative;
-        }
-        .site-header .header-right .contact-icon-btn iconify-icon {
-            color: var(--color-header-contact-icon-scrolled);
-        }
+        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text { color: var(--color-header-icon-scrolled); }
+        .site-header .hamburger-icon span { background: var(--color-header-icon-scrolled); }
+        .site-header .header-center .central-logo .logo-initial { display: block; opacity: 0; position: absolute; pointer-events: none; }
+        .site-header .header-center .central-logo .logo-scrolled { display: block; opacity: 1; position: relative; }
+        .site-header .header-right .contact-icon-btn iconify-icon { color: var(--color-header-contact-icon-scrolled); }
 
         .standard-content-section {
             padding-top: calc(var(--header-height) + 60px);
             padding-bottom: 80px;
         }
-        .standard-content-section .container {
-            max-width: 960px;
-        }
+        .standard-content-section .container { max-width: 960px; }
 
-        .content-element {
-            margin-bottom: 40px;
-        }
-        .content-element h1,
-        .content-element h2,
-        .content-element h3,
-        .content-element h4 {
-            text-align: left;
-        }
-        .content-element h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            color: var(--color-bordeaux);
-            margin-bottom: 1em;
-        }
-        .content-element h2 {
-             font-size: clamp(1.8rem, 4vw, 2.5rem);
-             color: var(--color-text-primary);
-             margin-bottom: 0.8em;
-        }
-        .content-element h3 {
-            font-size: clamp(1.4rem, 3vw, 1.9rem);
-            color: var(--color-text-primary);
-            margin-bottom: 0.6em;
-        }
-         .content-element h4 {
-            font-size: 1.2rem;
-            color: var(--color-text-primary);
-            margin-bottom: 0.5em;
-            font-weight: 600;
-        }
-        .content-element p {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--color-text-secondary);
-            margin-bottom: 1.2em;
-        }
-        .content-element ul,
-        .content-element ol {
-            margin-bottom: 1.2em;
-            padding-left: 25px;
-            color: var(--color-text-secondary);
-        }
-        .content-element li {
-            margin-bottom: 0.5em;
-        }
-        /* Erhöhte Spezifität für das allgemeine Blockquote-Styling auf dieser Seite */
-        .standard-content-section .content-element blockquote {
-            border-left: 4px solid var(--color-bordeaux);
-            padding-left: 20px;
-            margin: 30px 0;
-            font-family: var(--font-secondary);
-            font-size: 2rem; 
-            line-height: 1.3;  
-            font-style: italic;
-            color: var(--color-text-secondary);
-        }
-        
-        .standard-content-section .content-element blockquote p {
-            font-size: inherit; 
-            line-height: inherit; 
-            
-        }
-        .content-element blockquote p {
-            margin-bottom: 0.5em;
-        }
-        .content-element blockquote cite {
-            display: block;
-            font-size: 1rem;
-            text-align: right;
-            margin-top: 0.8em;
-            color: var(--color-text-primary);
-            font-style: normal;
-        }
+        .content-element { margin-bottom: 40px; }
+        .content-element h1, .content-element h2, .content-element h3, .content-element h4 { text-align: left; }
+        .content-element h1 { font-size: clamp(2rem, 5vw, 3rem); color: var(--color-bordeaux); margin-bottom: 1em; }
+        .content-element h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--color-text-primary); margin-bottom: 0.8em; }
+        .content-element h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); color: var(--color-text-primary); margin-bottom: 0.6em; }
+        .content-element h4 { font-size: 1.2rem; color: var(--color-text-primary); margin-bottom: 0.5em; font-weight: 600; }
+        .content-element p { font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 1.2em; }
+        .content-element ul, .content-element ol { margin-bottom: 1.2em; padding-left: 25px; color: var(--color-text-secondary); }
+        .content-element li { margin-bottom: 0.5em; }
 
-        .text-media-element {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            align-items: flex-start;
+        .content-element blockquote {
+            border-left: 4px solid var(--color-bordeaux); padding-left: 20px; margin: 30px 0;
+            font-family: var(--font-secondary); font-size: 2.6rem; line-height: 1.2;
+            font-style: italic; color: var(--color-text-secondary);
         }
+        .content-element blockquote p { font-size: inherit; line-height: inherit; margin-bottom: 0.5em; }
+        .content-element blockquote cite { display: block; font-size: 1rem; text-align: right; margin-top: 0.8em; color: var(--color-text-primary); font-style: normal; }
+
+        .text-media-element { display: grid; grid-template-columns: 1fr; gap: 30px; align-items: flex-start; }
         @media (min-width: 768px) {
             .text-media-element.image-left .text-media-image { order: 1; }
             .text-media-element.image-left .text-media-text { order: 2; }
             .text-media-element.image-right .text-media-image { order: 2; }
             .text-media-element.image-right .text-media-text { order: 1; }
-            .text-media-element {
-                grid-template-columns: 1fr 1fr;
-            }
+            .text-media-element { grid-template-columns: 1fr 1fr; }
         }
-        .text-media-image img {
-            width: 100%;
-            height: auto;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .text-media-text h3 {
-            margin-top: 0;
-        }
+        .text-media-image img { width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .text-media-text h3 { margin-top: 0; }
 
-        .image-element img {
-            display: block;
-            margin: 0 auto 10px auto;
-            max-width: 100%;
-            border-radius: 6px;
-             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-        .image-element figcaption {
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--color-text-secondary);
-            font-style: italic;
-        }
+        .image-element img { display: block; margin: 0 auto 10px auto; max-width: 100%; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .image-element figcaption { text-align: center; font-size: 0.9rem; color: var(--color-text-secondary); font-style: italic; }
 
-        .gallery-element-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .gallery-element-grid img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        }
+        .gallery-element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .gallery-element-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
 
-        .accordion-item {
-            border: 1px solid var(--color-border-subtle);
-            border-radius: 4px;
-            margin-bottom: 10px;
-            background-color: var(--color-beige);
-        }
+        .accordion-item { border: 1px solid var(--color-border-subtle); border-radius: 4px; margin-bottom: 10px; background-color: var(--color-beige); }
         .accordion-item:last-child { margin-bottom: 0; }
         .accordion-button {
-            background-color: transparent;
-            border: none;
-            width: 100%;
-            padding: 15px 20px;
-            text-align: left;
-            font-family: var(--font-primary);
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--color-bordeaux);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.2s ease;
+            background-color: transparent; border: none; width: 100%; padding: 15px 20px; text-align: left;
+            font-family: var(--font-primary); font-size: 1.1rem; font-weight: 600; color: var(--color-bordeaux);
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            transition: background-color 0.2s ease; line-height: 1.4;
         }
-        .accordion-button:hover, .accordion-button:focus-visible {
-            background-color: var(--color-sand);
-        }
-        .accordion-button .accordion-icon {
-            font-size: 1.3rem;
-            transition: transform 0.3s ease;
-        }
-        .accordion-button[aria-expanded="true"] .accordion-icon {
-            transform: rotate(135deg);
-        }
-        .accordion-content {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-        }
+        .accordion-button:hover, .accordion-button:focus-visible { background-color: var(--color-sand); }
+        .accordion-button .accordion-icon { font-size: 1.3rem; transition: transform 0.3s ease; }
+        .accordion-button[aria-expanded="true"] .accordion-icon { transform: rotate(135deg); }
+        .accordion-content { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
         .accordion-content p { margin-bottom: 0.8em; font-size: 0.95rem; }
         .accordion-content p:last-child { margin-bottom: 0; }
 
         .button-element {
             text-align: center;
         }
-        .text-button-left {
-            text-align: left;
-            margin-top: 1em;
-            margin-bottom: 1.2em;
+        .button-element .buttons-wrapper {
             display: flex;
-            flex-direction: column;
-            gap: 10px; 
-            align-items: flex-start; 
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 1em;
+        }
+        @media (max-width: 479px) {
+             .button-element .buttons-wrapper {
+                flex-direction: column;
+                align-items: center;
+             }
         }
 
-        @media (min-width: 480px) { 
-            .text-button-left {
-                flex-direction: row; 
-                align-items: center; 
-            }
+        .text-button-left {
+            text-align: left; margin-top: 1em; margin-bottom: 1.2em;
+            display: flex; gap: 10px; align-items: flex-start;
+            flex-direction: column;
+        }
+        @media (min-width: 480px) {
+            .text-button-left { flex-direction: row; align-items: center; }
+        }
+
+        .content-angebote-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .content-angebot-card {
+            background-color: var(--color-beige); border-radius: 6px; overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07); display: flex; flex-direction: column;
+            text-decoration: none; color: var(--color-text-primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .content-angebot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .content-angebot-card img { width: 100%; height: 200px; object-fit: cover; }
+        .content-angebot-card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .content-angebot-card-content h4 {
+            font-family: var(--font-secondary); font-size: 1.5rem; color: var(--color-bordeaux);
+            margin-top: 0; margin-bottom: 0.5em; font-weight: 600; text-align: center;
+        }
+        .content-angebot-card-content p {
+            font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.5;
+            margin-bottom: 1em; flex-grow: 1; text-align: center;
+        }
+        .content-angebot-card-content p strong { font-weight: 600; color: var(--color-text-primary); }
+        .content-angebot-card-content .btn { margin-top: auto; align-self: center; font-size: 0.9rem; }
+
+        .sticky-to-top-button-bar {
+            position: fixed;
+            bottom: -100px;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-beige);
+            padding: 15px 0;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+            z-index: 998;
+            transition: bottom 0.4s ease-in-out;
+            display: none;
+        }
+        .sticky-to-top-button-bar.visible {
+            bottom: 0;
+            display: block;
+        }
+        .sticky-to-top-button-bar .container-sticky-to-top {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .sticky-to-top-button-bar .btn {
+            padding: 0.7em 1.5em;
+            font-size: 1rem;
+        }
+        .sticky-to-top-button-bar .btn iconify-icon {
+            margin-right: 0.5em;
         }
 
     </style>
@@ -369,14 +307,69 @@
 
                 <div class="content-element button-element">
                     <h3>Zentriertes Button Beispiel</h3>
-                    <p><br>Buttons können für verschiedene Call-to-Actions verwendet werden.</p>
-                    <a href="./kontakt.html" class="btn">Zur Kontaktseite</a>
-                    <a href="#" class="btn btn-outline" style="margin-left: 10px;">Weiterer Button</a>
+                    <p>Buttons können für verschiedene Call-to-Actions verwendet werden.</p>
+                    <div class="buttons-wrapper">
+                        <a href="./kontakt.html" class="btn">Zur Kontaktseite</a>
+                        <a href="#" class="btn btn-outline">Weiterer Button</a>
+                    </div>
+                </div>
+
+                <div class="content-element">
+                    <h2>Unsere Top-Angebote</h2>
+                    <div class="content-angebote-grid">
+                        <article class="content-angebot-card">
+                            <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Entspannte Frau am Pool" width="600" height="400">
+                            <div class="content-angebot-card-content">
+                                <h4>Top-Angebote</h4>
+                                <p>Abtauchen & entspannen, schlemmen & genießen - mit unseren Top-Angeboten.</p>
+                            </div>
+                        </article>
+                        <article class="content-angebot-card">
+                            <img src="https://www.sonne-post.de/fileadmin/user_upload/Arrangements/Sonne-Post_Headerbild-Arrangements_Paar-Sekt_1280x854.png" alt="Paar mit Sekt, Teaser für Newsletter" width="600" height="400">
+                            <div class="content-angebot-card-content">
+                                <h4>Newsletter</h4>
+                                <p><strong>Exklusive Tipps & Angebote aus der Sonne Post.</strong> So bleiben Sie auf dem Laufenden...</p>
+                            </div>
+                        </article>
+                        <article class="content-angebot-card">
+                             <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Sauna/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna5014_300dpi-WEB.jpg" alt="Atmosphärischer Wellnessbereich, Teaser für Social Media" width="600" height="400">
+                            <div class="content-angebot-card-content">
+                                <h4>Social Media</h4>
+                                <p>Verpassen Sie keine Sonne-Post - News und bleiben Sie immer up-to-date.</p>
+                            </div>
+                        </article>
+                    </div>
+                     <div class="content-angebote-grid" style="margin-top: 30px;">
+                        <article class="content-angebot-card">
+                            <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" alt="Gemütliche Lobby" width="600" height="400">
+                            <div class="content-angebot-card-content">
+                                <h4>Unsere Lobby</h4>
+                                <p>Der perfekte Ort zum Ankommen und Verweilen. Entdecken Sie unsere gemütliche Atmosphäre.</p>
+                            </div>
+                        </article>
+                        <article class="content-angebot-card">
+                            <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Schimmbad/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna4942_300dpi-WEB.jpg" alt="Wellnessbereich" width="600" height="400">
+                            <div class="content-angebot-card-content">
+                                <h4>Wellness & Spa</h4>
+                                <p>Tauchen Sie ein in unsere Welt der Entspannung und genießen Sie wohltuende Momente.</p>
+                            </div>
+                        </article>
+                    </div>
                 </div>
 
             </div>
         </section>
     </main>
+
+    <div class="sticky-to-top-button-bar" id="sticky-to-top-bar">
+        <div class="container-sticky-to-top">
+            <!-- GEÄNDERT: href="#" für direkten Sprung nach oben -->
+            <a href="#" class="btn" aria-label="Zum Seitenanfang springen">
+                <iconify-icon icon="feather:arrow-up-circle" aria-hidden="true"></iconify-icon>
+                Zum Seitenanfang
+            </a>
+        </div>
+    </div>
 
     <footer class="site-footer" role="contentinfo">
         <div class="container-footer">
@@ -445,26 +438,19 @@
                     const icon = button.querySelector('.accordion-icon');
 
                     if (!isExpanded) {
-                        // Ensure padding is applied before calculating scrollHeight for accurate measurement
                         content.style.paddingTop = "15px";
                         content.style.paddingBottom = "20px";
-                        // Force a reflow to ensure padding is applied before scrollHeight is read
                         void content.offsetWidth;
                         content.style.maxHeight = content.scrollHeight + "px";
-
-                        if (icon) icon.style.transform = 'rotate(135deg)'; // X-like shape
+                        if (icon) icon.style.transform = 'rotate(135deg)';
                     } else {
-                        content.style.maxHeight = null; // Triggers CSS transition to 0
-                        // Remove padding during closing animation to avoid jumpiness
-                        // This relies on the transition of max-height.
-                        // A slight delay before removing padding can sometimes help visual smoothness.
+                        content.style.maxHeight = null;
                         setTimeout(() => {
-                             if (button.getAttribute('aria-expanded') === 'false') { // Check if still closed
+                             if (button.getAttribute('aria-expanded') === 'false') {
                                 content.style.paddingTop = "0";
                                 content.style.paddingBottom = "0";
                              }
-                        }, parseFloat(getComputedStyle(content).transitionDuration) * 1000 * 0.8 ); // Wait for 80% of transition
-
+                        }, parseFloat(getComputedStyle(content).transitionDuration) * 1000 * 0.8 );
                         if (icon) icon.style.transform = 'rotate(0deg)';
                     }
                 });
@@ -475,6 +461,70 @@
                     initialContent.style.paddingBottom = "0";
                 }
             });
+
+            const toTopButtonBar = document.getElementById('sticky-to-top-bar');
+            const siteFooterForSticky = document.querySelector('.site-footer');
+
+            if (toTopButtonBar && typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.create({
+                    trigger: "body", // Trigger ist der Body
+                    start: () => `top top-=${window.innerHeight * 0.5}`, // Erscheint, wenn 50% der Fensterhöhe gescrollt wurde
+                    endTrigger: siteFooterForSticky,
+                    end: () => `top bottom-=${toTopButtonBar.offsetHeight + 20}`, // Verschwindet 20px über dem Footer
+                    onEnter: () => { if (window.scrollY > window.innerHeight * 0.5) toTopButtonBar.classList.add('visible')}, // Zusätzliche Prüfung für den Start
+                    onLeave: () => toTopButtonBar.classList.remove('visible'),
+                    onEnterBack: () => { if (window.scrollY > window.innerHeight * 0.5) toTopButtonBar.classList.add('visible')},
+                    onLeaveBack: () => toTopButtonBar.classList.remove('visible'),
+                    // markers: true,
+                });
+
+                const actualToTopButton = toTopButtonBar.querySelector('a.btn');
+                if (actualToTopButton) {
+                    actualToTopButton.addEventListener('click', function(e) {
+                        // Standardverhalten von href="#" wird den Sprung zum Seitenanfang ausführen.
+                        // e.preventDefault(); // Nicht mehr nötig, wenn href="#" verwendet wird
+                        // window.scrollTo({ top: 0, behavior: 'smooth' }); // Auch nicht mehr nötig
+                    });
+                }
+            } else if (toTopButtonBar) { // Fallback ohne ScrollTrigger
+                 let lastScrollY = window.scrollY;
+                 let ticking = false;
+                 window.addEventListener('scroll', function() {
+                    lastScrollY = window.scrollY;
+                    if (!ticking) {
+                        window.requestAnimationFrame(function() {
+                            if (lastScrollY > window.innerHeight * 0.5) {
+                                if (!toTopButtonBar.classList.contains('visible')) {
+                                    toTopButtonBar.classList.add('visible');
+                                }
+                            } else {
+                                if (toTopButtonBar.classList.contains('visible')) {
+                                    toTopButtonBar.classList.remove('visible');
+                                }
+                            }
+                            // Zusätzliche Logik, um es vor dem Footer auszublenden (vereinfacht)
+                            if (siteFooterForSticky && (window.innerHeight + window.scrollY) >= siteFooterForSticky.offsetTop - toTopButtonBar.offsetHeight - 20) {
+                                if (toTopButtonBar.classList.contains('visible')) {
+                                    toTopButtonBar.classList.remove('visible');
+                                }
+                            } else if (lastScrollY > window.innerHeight * 0.5) { // Wieder einblenden, wenn nicht am Footer
+                                if (!toTopButtonBar.classList.contains('visible')) {
+                                    toTopButtonBar.classList.add('visible');
+                                }
+                            }
+
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                });
+                 const actualToTopButtonFallback = toTopButtonBar.querySelector('a.btn');
+                 if (actualToTopButtonFallback) {
+                    actualToTopButtonFallback.addEventListener('click', function(e) {
+                       // Standardverhalten von href="#"
+                    });
+                 }
+            }
         });
     </script>
 </body>
