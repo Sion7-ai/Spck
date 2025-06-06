@@ -1,440 +1,277 @@
+
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
-    <title>Kontakt & Anreise | Hotel Sonne Post</title>
-    <!-- TYPO3 Hinweis: Dynamische Meta Description -->
-    <meta name="description" content="Kontaktieren Sie uns für Anfragen und Reservierungen im Hotel Sonne Post. Finden Sie alle wichtigen Kontaktdaten und Anreiseinformationen.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
+<title>Kontakt & Anreise | Hotel Sonne Post</title>
+<!-- TYPO3 Hinweis: Dynamische Meta Description -->
+<meta name="description" content="Kontaktieren Sie uns für Anfragen und Reservierungen im Hotel Sonne Post. Finden Sie alle wichtigen Kontaktdaten und Anreiseinformationen.">
 
-    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+<link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/main.css">
 
-    <style>
-        body {
-            background-color: var(--color-white);
-        }
-        /* Header Styling für Unterseiten */
-        .site-header {
-            background-color: var(--color-header-bg-scrolled);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            background-image: none;
-        }
-        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
-            color: var(--color-header-icon-scrolled);
-        }
-         .site-header .hamburger-icon span {
-            background: var(--color-header-icon-scrolled);
-        }
-        .site-header .header-center .central-logo .logo-initial {
-            display: block; opacity: 0; position: absolute; pointer-events: none;
-        }
-        .site-header .header-center .central-logo .logo-scrolled {
-            display: block; opacity: 1; position: relative;
-        }
-        .site-header .header-right .contact-icon-btn iconify-icon {
-            color: var(--color-header-contact-icon-scrolled);
-        }
+<style>
+    body {
+        background-color: var(--color-white);
+    }
+    /* Header Styling für Unterseiten */
+    .site-header {
+        background-color: var(--color-header-bg-scrolled);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        background-image: none;
+    }
+    .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
+        color: var(--color-header-icon-scrolled);
+    }
+     .site-header .hamburger-icon span {
+        background: var(--color-header-icon-scrolled);
+    }
+    .site-header .header-center .central-logo .logo-initial {
+        display: block; opacity: 0; position: absolute; pointer-events: none;
+    }
+    .site-header .header-center .central-logo .logo-scrolled {
+        display: block; opacity: 1; position: relative;
+    }
+    .site-header .header-right .contact-icon-btn iconify-icon {
+        color: var(--color-header-contact-icon-scrolled);
+    }
 
-       .page-hero-section {
-            position: relative;
-            width: 100%;
-            height: 60vh;
-            min-height: 350px;
-            max-height: 550px;
-            overflow: hidden;
-            margin-top: var(--header-height);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--color-white);
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .page-hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-        }
-        .page-hero-overlay {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.0) 100%);
-            z-index: 2;
-        }
-        .page-hero-content {
-             display: none;
-        }
+   .page-hero-section {
+        position: relative;
+        width: 100%;
+        height: 60vh;
+        min-height: 350px;
+        max-height: 550px;
+        overflow: hidden;
+        margin-top: var(--header-height);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: var(--color-white);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .page-hero-overlay {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.0) 100%);
+        z-index: 2;
+    }
+    .page-hero-content {
+         display: none;
+    }
 
-        .contact-page-section {
-            background-color: var(--color-white);
-            padding: 80px 0;
-        }
+    .contact-page-section {
+        background-color: var(--color-white);
+        padding: 80px 0;
+    }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 50px;
-            margin: 0 auto;
-        }
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 50px;
+        margin: 0 auto;
+    }
 
-        .contact-info-column,
-        .contact-form-column {
-            background-color: var(--color-white);
-            padding: 30px;
-            border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .contact-info-column {
-            background-color: var(--color-beige);
-        }
+    .contact-info-column,
+    .contact-form-column {
+        background-color: var(--color-white);
+        padding: 30px;
+        border-radius: 6px;
+    }
+     .contact-form-column {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+     }
+    .contact-info-column {
+        background-color: var(--color-beige);
+    }
 
-        .contact-info-column h2,
-        .contact-form-column h2 {
-            font-family: var(--font-secondary);
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            color: var(--color-bordeaux);
-            text-align: left;
-            margin-top: 0;
-            margin-bottom: 1em;
-        }
+    .contact-info-column h2,
+    .contact-form-column h2 {
+        font-family: var(--font-secondary);
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        color: var(--color-bordeaux);
+        text-align: left;
+        margin-top: 0;
+        margin-bottom: 1em;
+    }
 
-        .contact-info-top-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-bottom: 2em;
-        }
-        @media (min-width: 768px) {
-            .contact-info-top-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 40px;
-                align-items: flex-start;
-            }
-        }
-        .contact-info-address-block,
-        .contact-info-anreise-block {
-            /* Keine spezifischen Stile hier, Layout kommt vom Grid */
-        }
-        .contact-info-address-block address {
-            font-style: normal;
-            line-height: 1.7;
-            color: var(--color-text-secondary);
-            margin-bottom: 0;
-        }
-        .contact-info-address-block address a {
-            color: var(--color-bordeaux);
-        }
-        .contact-info-address-block address br { display: block; }
+    .contact-info-top-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 2em; }
+    @media (min-width: 768px) { .contact-info-top-grid { grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; } }
+    .contact-info-address-block address { font-style: normal; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 0; }
+    .contact-info-address-block address a { color: var(--color-bordeaux); }
+    .contact-info-address-block address br { display: block; }
+    .contact-info-anreise-block h4 { font-family: var(--font-primary); font-weight: 700; font-size: 1rem; color: var(--color-text-primary); margin-top: 0; margin-bottom: 1em; }
+    .contact-info-anreise-block p { font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 1.5em; }
 
-        .contact-info-anreise-block h4 { /* War vorher h3, jetzt h4 im HTML, Styling bleibt ähnlich */
-            font-family: var(--font-primary);
-            font-weight: 700;
-            font-size: 1rem; /* ggf. anpassen, wenn es zu klein wirkt */
-            color: var(--color-text-primary);
-            margin-top: 0;
-            margin-bottom: 1em;
-        }
-        .contact-info-anreise-block p {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--color-text-secondary);
-            margin-bottom: 1.5em;
-        }
-        .contact-info-anreise-block .btn-outline {
-             margin-top: 0;
-        }
+    /* === NEU: Überarbeitete Formularstile === */
+    .contact-form-column form {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
 
+    .form-fieldset {
+        border: 1px solid var(--color-border-subtle);
+        padding: 25px 20px 20px 20px;
+        border-radius: 6px;
+        background-color: #FDFBFA;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .form-legend {
+        padding: 0 10px;
+        margin-left: 10px;
+        font-family: var(--font-secondary);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--color-bordeaux);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 550px) { .form-row.two-cols { grid-template-columns: 1fr 1fr; } }
+    .form-group-full-width { grid-column: 1 / -1; }
+    .form-group, .form-group-float { position: relative; }
 
-        .contact-form-column form {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        .form-group.enquiry-type-group {
-            background-color: var(--color-beige);
-            padding: 15px 20px;
-            border-radius: 6px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .form-group.enquiry-type-group label {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--color-bordeaux);
-            margin-bottom: 10px;
-        }
-        .form-group.enquiry-type-group select {
-            border-color: var(--color-border-subtle);
-            background-color: var(--color-white);
-        }
+    /* Felder ohne Floating Label (select, date etc.) */
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%; padding: 12px 15px; border: 1px solid var(--color-border-subtle);
+        border-radius: 4px; font-family: var(--font-primary); font-size: 1rem;
+        color: var(--color-text-primary); background-color: var(--color-white);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-group label {
+        display: block; margin-bottom: 8px; font-weight: 500;
+        color: var(--color-text-primary); font-size: 0.95rem;
+    }
+    .form-group select {
+         -webkit-appearance: none; -moz-appearance: none; appearance: none;
+         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238C1E2D'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+         background-repeat: no-repeat; background-position: right 15px center; background-size: 24px; cursor: pointer;
+    }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        @media (min-width: 550px) {
-            .form-row.two-cols { grid-template-columns: 1fr 1fr; }
-            .form-row.three-cols { grid-template-columns: 1fr 1fr 1fr; }
-        }
-        .form-group-full-width {
-            grid-column: 1 / -1;
-        }
+    /* NEU: Floating Label Styling */
+    .form-group-float input, .form-group-float textarea {
+    width: 100%; padding: 12px 15px; border: 1px solid var(--color-border-subtle);
+    border-radius: 4px; font-family: var(--font-primary); font-size: 1rem;
+    color: var(--color-text-primary); background-color: transparent;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+    .form-group-float label {
+    position: absolute; top: 50%; left: 15px; transform: translateY(-50%);
+    color: var(--color-text-secondary); font-size: 1rem; padding: 0 5px; margin: 0;
+    transition: all 0.2s ease-out; pointer-events: none; background-color: transparent;
+    z-index: 0;
+}
+    .form-group-float textarea + label { top: 20px; } /* Korrektur für Textarea */
+    .form-group-float input:focus-visible, .form-group-float select:focus-visible, .form-group-float textarea:focus-visible {
+        border-color: var(--color-bordeaux); outline: none; box-shadow: 0 0 0 3px rgba(140, 30, 45, 0.2);
+    }
+    .form-group-float input:focus-visible + label,
+.form-group-float textarea:focus-visible + label,
+.form-group-float input:not(:placeholder-shown) + label,
+.form-group-float textarea:not(:placeholder-shown) + label {
+    top: 0; left: 10px; transform: translateY(-50%); font-size: 0.8rem;
+    color: var(--color-bordeaux); background-color: #FDFBFA; /* Deckt Border ab */
+    z-index: 2;
+}
+    .form-group-float input::placeholder { color: transparent; }
 
+    .hidden-field { display: none; }
+    .form-fieldset.hidden-by-param { border: none; padding: 0; margin: 0; height: 1px; width: 1px; overflow: hidden; position: absolute; clip: rect(0 0 0 0); }
 
-        .form-group {
-            position: relative;
-            margin-bottom: 0;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--color-text-primary);
-            font-size: 0.95rem;
-        }
-        .form-group input[type="text"],
-        .form-group input[type="email"],
-        .form-group input[type="tel"],
-        .form-group input[type="number"],
-        .form-group input[type="date"],
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--color-border-subtle);
-            border-radius: 4px;
-            font-family: var(--font-primary);
-            font-size: 1rem;
-            color: var(--color-text-primary);
-            background-color: var(--color-white);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--color-text-secondary);
-            opacity: 0.7;
-        }
-        .form-group input:focus-visible,
-        .form-group select:focus-visible,
-        .form-group textarea:focus-visible {
-            border-color: var(--color-bordeaux);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(140, 30, 45, 0.2);
-        }
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        .form-group select {
-             -webkit-appearance: none;
-             -moz-appearance: none;
-             appearance: none;
-             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238C1E2D'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-             background-repeat: no-repeat;
-             background-position: right 15px center;
-             background-size: 24px;
-             cursor: pointer;
-        }
+    .captcha-group { display: flex; flex-direction: column; gap: 5px; }
+    .captcha-input-container { display: flex; gap: 10px; align-items: flex-end; width: 100%; }
+    .captcha-image-wrapper { background-color: var(--color-sand); border: 1px solid var(--color-border-subtle); border-radius: 4px; padding: 5px 10px; display: flex; align-items: center; justify-content: center; width: 150px; flex-shrink: 0; }
+    .captcha-refresh-btn { background: none; border: 1px solid var(--color-border-subtle); border-radius: 4px; color: var(--color-bordeaux); padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; width: auto; height: auto; }
+    .captcha-refresh-btn:hover, .captcha-refresh-btn:focus-visible { background-color: var(--color-bordeaux); color: var(--color-white); border-color: var(--color-bordeaux); }
+    .captcha-refresh-btn iconify-icon { font-size: 1.4rem; }
+    .captcha-hint { font-size: 0.85rem; color: var(--color-text-secondary); margin-top: 5px; width: 100%; }
 
-        .form-group.hidden-field {
-            display: none;
-        }
+    .form-required-info { grid-column: 1 / -1; font-size: 0.85rem; color: var(--color-text-secondary); margin-top: -10px; }
+    .form-submit-group { grid-column: 1 / -1; margin-top: 20px; }
+    .form-submit-group.text-center { text-align: center; }
+    .form-submit-group .btn { padding: 1em 2em; font-size: 1.1rem; min-width: 180px; }
 
-        .form-required-info {
-            grid-column: 1 / -1;
-            font-size: 0.85rem;
-            color: var(--color-text-secondary);
-            margin-top: -10px;
-        }
+    /* CTA Sektion Stile (unverändert) */
+    .content-section.bg-sand-combined { padding: 70px 0; background-color: var(--color-sand); } .combined-row-grid { display: grid; grid-template-columns: 1fr; gap: 40px; } @media (min-width: 768px) { .combined-row-grid { grid-template-columns: 1fr 1fr; gap: 60px; } } .combined-column { padding: 30px; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; text-align: center; } .combined-column.combined-column-karriere { background-color: var(--color-sand); } .combined-column.combined-column-newsletter { background-color: var(--color-white); box-shadow: 0 4px 12px rgba(0,0,0,0.07); } .combined-column h2 { font-family: var(--font-secondary); font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--color-text-primary); margin-bottom: 0.75em; } .combined-column p { color: var(--color-text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5em; } .social-links-container .social-links { display: flex; gap: 20px; justify-content: center; } .social-links-container .social-links a iconify-icon { font-size: 2.2rem; color: var(--color-bordeaux); transition: transform 0.2s ease, color 0.2s ease; } .social-links-container .social-links a:hover iconify-icon { transform: scale(1.1); color: #701623; } .combined-column .form-newsletter { display: flex; max-width: 450px; margin: 0 auto 15px auto; } .combined-column .form-newsletter input[type="email"], .combined-column .form-newsletter button { font-family: var(--font-primary); font-size: 0.95rem; border: 1px solid; padding-top: 0.8em; padding-bottom: 0.8em; margin: 0; line-height: 1.4; box-sizing: border-box; } .combined-column .form-newsletter input[type="email"] { flex-grow: 1; border-color: var(--color-border-subtle); border-right: none; border-radius: 4px 0 0 4px; padding-left: 1em; padding-right: 1em; background-color: var(--color-white); } .combined-column .form-newsletter button { display: inline-flex; align-items: center; justify-content: center; border-radius: 0 4px 4px 0; padding-left: 1.2em; padding-right: 1.2em; border-color: var(--color-bordeaux); background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); cursor: pointer; } .combined-column #newsletter-privacy-info-kontakt { display: block; font-size: 0.8em; color: var(--color-text-secondary); max-width: 450px; margin: 0 auto; } .combined-column #newsletter-privacy-info-kontakt a { color: var(--color-text-secondary); text-decoration: underline; }
 
-        .captcha-group {
-            grid-column: 1 / -1;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 15px;
-        }
-        .captcha-group label {
-            flex: 1 1 100%;
-            margin-bottom: 0;
-        }
-        .captcha-input-container {
-            display: flex;
-            gap: 10px;
-            flex-grow: 1;
-        }
-        .captcha-input-container input {
-            flex-grow: 1;
-            max-width: 180px;
-        }
-        .captcha-image-wrapper {
-            background-color: var(--color-sand);
-            border: 1px solid var(--color-border-subtle);
-            border-radius: 4px;
-            padding: 5px 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 150px;
-            height: 40px;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-        .captcha-image-wrapper img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-        }
-        .captcha-refresh-btn {
-            background: none;
-            border: 1px solid var(--color-border-subtle);
-            border-radius: 4px;
-            color: var(--color-bordeaux);
-            padding: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-            width: 40px;
-            height: 40px;
-        }
-        .captcha-refresh-btn:hover, .captcha-refresh-btn:focus-visible {
-            background-color: var(--color-bordeaux);
-            color: var(--color-white);
-            border-color: var(--color-bordeaux);
-        }
-        .captcha-refresh-btn iconify-icon {
-            font-size: 1.4rem;
-        }
-        .captcha-hint {
-            grid-column: 1 / -1;
-            font-size: 0.85rem;
-            color: var(--color-text-secondary);
-            margin-top: -5px;
-        }
-        .captcha-hint a {
-            color: var(--color-text-secondary);
-            text-decoration: underline;
-        }
+</style>
 
-        .form-submit-group {
-            grid-column: 1 / -1;
-            text-align: right;
-            margin-top: 20px;
-        }
-        .form-submit-group .btn {
-            padding: 1em 2em;
-            font-size: 1.1rem;
-            min-width: 180px;
-        }
-
-        /* CTA Sektion (Social/Newsletter) Stile */
-        .content-section.bg-sand-combined { padding: 70px 0; background-color: var(--color-sand); }
-        .content-section.bg-sand-combined .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-        .combined-row-grid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: stretch; }
-        @media (min-width: 768px) { .combined-row-grid { grid-template-columns: 1fr 1fr; gap: 60px; } }
-        .combined-column { padding: 30px; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; }
-        .combined-column.combined-column-karriere { background-color: var(--color-sand); text-align: center; } /* Für Kontaktseite umbenannt in social media */
-        .combined-column.combined-column-newsletter { background-color: var(--color-white); box-shadow: 0 4px 12px rgba(0,0,0,0.07); text-align: center; }
-        .combined-column h2 { font-family: var(--font-secondary); font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--color-text-primary); margin-bottom: 0.75em; text-align: center; }
-        .combined-column p { color: var(--color-text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5em; text-align: center; }
-        .social-links-container .social-links { display: flex; gap: 20px; justify-content: center; align-items: center; padding-bottom: 0; margin-bottom: 0; position: relative; }
-        .social-links-container .social-links a iconify-icon { font-size: 2.2rem; color: var(--color-bordeaux); transition: transform 0.2s ease, color 0.2s ease; }
-        .social-links-container .social-links a:hover iconify-icon { transform: scale(1.1); color: #701623; }
-        .combined-column .form-newsletter { display: flex; max-width: 450px; margin: 0 auto 15px auto; }
-        .combined-column .form-newsletter input[type="email"], .combined-column .form-newsletter button { font-family: var(--font-primary); font-size: 0.95rem; border: 1px solid; padding-top: 0.8em; padding-bottom: 0.8em; margin: 0; line-height: 1.4; box-sizing: border-box; }
-        .combined-column .form-newsletter input[type="email"] { flex-grow: 1; border-color: var(--color-border-subtle); border-right: none; border-radius: 4px 0 0 4px; padding-left: 1em; padding-right: 1em; background-color: var(--color-white); }
-        .combined-column .form-newsletter input[type="email"]:focus-visible { border-color: var(--color-bordeaux); outline: none; box-shadow: none; z-index: 1; }
-        .combined-column .form-newsletter button { display: inline-flex; align-items: center; justify-content: center; border-radius: 0 4px 4px 0; padding-left: 1.2em; padding-right: 1.2em; border-color: var(--color-bordeaux); background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); cursor: pointer; }
-        .combined-column .form-newsletter button iconify-icon { display: block; font-size: 1em; }
-        .combined-column .form-newsletter button:hover, .combined-column .form-newsletter button:focus-visible { background-color: #701623; border-color: #701623; }
-        .combined-column #newsletter-privacy-info-combined, /* Wiederverwendung der Klasse für Konsistenz */
-        .combined-column #newsletter-privacy-info-kontakt {
-            display: block; font-size: 0.8em; color: var(--color-text-secondary); max-width: 450px; margin: 0 auto; text-align: center;
-        }
-        .combined-column #newsletter-privacy-info-combined a,
-        .combined-column #newsletter-privacy-info-kontakt a {
-            color: var(--color-text-secondary); text-decoration: underline;
-        }
-
-    </style>
 </head>
 <body>
-    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+<a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
-    <header class="site-header" id="site-header" role="banner">
-        <div class="header-content-wrapper">
-            <div class="header-left">
-                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
-                    <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-                    <span class="menu-trigger-text">MENÜ</span>
-                </button>
-            </div>
-            <div class="header-center">
-                <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
-                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
-                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
-                </a>
-            </div>
-            <div class="header-right">
-                <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
-                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
-                </a>
-            </div>
+<header class="site-header" id="site-header" role="banner">
+    <div class="header-content-wrapper">
+        <div class="header-left">
+            <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+                <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                <span class="menu-trigger-text">MENÜ</span>
+            </button>
         </div>
-    </header>
+        <div class="header-center">
+            <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
+                <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+            </a>
+        </div>
+    </div>
+</header>
 
-    <!-- TYPO3 Hinweis: Fullscreen Navigation wurde für Unterseiten entfernt (nur auf Startseite) -->
+<main id="main-content" role="main">
+    <section class="page-hero-section" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/hc_Kontakt.png');">
+        <div class="page-hero-overlay"></div>
+        <h1 id="contact-hero-heading" class="sr-only">Kontakt & Anreise zum Hotel Sonne Post</h1>
+    </section>
 
-    <main id="main-content" role="main">
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="page-hero-section" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/hc_Kontakt.png');">
-            <div class="page-hero-overlay"></div>
-            <div class="page-hero-content container">
-                <h1 id="contact-hero-heading" class="sr-only">Kontakt & Anreise zum Hotel Sonne Post</h1>
-            </div>
-        </section>
+    <section class="content-section contact-page-section">
+        <div class="container">
+            <div class="contact-grid">
 
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="content-section contact-page-section">
-            <div class="container">
-                <div class="contact-grid">
-
-                    <div class="contact-form-column" role="form" aria-labelledby="contact-form-heading">
-                        <h2 id="contact-form-heading">Ihre Anfrage an uns</h2>
-                        <form action="/formular-senden" method="post" aria-describedby="form-required-info">
-                            <div class="form-group form-group-full-width enquiry-type-group">
-                                <label for="enquiry-type">Ihr Anliegen *</label>
+                <div class="contact-form-column" role="form" aria-labelledby="contact-form-heading">
+                    <h2 id="contact-form-heading">Ihre Anfrage an uns</h2>
+                    <!-- TYPO3 Hinweis: Formular mit Fieldsets für bessere Struktur und Barrierefreiheit. Floating Labels für modernes UI. -->
+                    <form action="/formular-senden" method="post" aria-describedby="form-required-info">
+                        <fieldset class="form-fieldset">
+                            <legend class="form-legend">Worum geht es bei Ihrer Anfrage?</legend>
+                            <div class="form-group form-group-full-width">
+                                <label for="enquiry-type" class="sr-only">Ihr Anliegen</label>
                                 <select id="enquiry-type" name="enquiry_type" required aria-required="true">
                                     <option value="">Bitte wählen Sie Ihr Anliegen</option>
                                     <option value="general_contact">Allgemeine Kontaktanfrage</option>
-                                    <option value="room_inquiry" selected>Zimmeranfrage</option>
+                                    <option value="room_inquiry">Zimmeranfrage</option>
                                     <option value="offer_inquiry">Anfrage Top-Angebote/Arrangements</option>
                                     <option value="voucher_order">Gutscheinbestellung</option>
                                     <option value="event_inquiry">Anfrage für Veranstaltung/Feier</option>
                                     <option value="career_inquiry">Karriere / Bewerbung</option>
                                 </select>
                             </div>
-
+                        </fieldset>
+                    
+                        <fieldset class="form-fieldset">
+                            <legend class="form-legend">Ihre persönlichen Daten</legend>
                             <div class="form-row two-cols">
                                 <div class="form-group">
-                                    <label for="salutation" class="sr-only">Anrede</label>
                                     <select id="salutation" name="salutation" aria-label="Anrede">
                                         <option value="">Anrede</option>
                                         <option value="Herr">Herr</option>
@@ -442,69 +279,74 @@
                                         <option value="Divers">Divers</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="title" class="sr-only">Titel</label>
-                                    <input type="text" id="title" name="title" placeholder="Titel">
+                                <div class="form-group-float">
+                                    <input type="text" id="title" name="title" placeholder=" ">
+                                    <label for="title">Titel (optional)</label>
                                 </div>
                             </div>
-
+                    
                             <div class="form-row two-cols">
-                                <div class="form-group">
+                                <div class="form-group-float">
+                                    <input type="text" id="firstname" name="firstname" placeholder=" " required aria-required="true">
                                     <label for="firstname">Vorname *</label>
-                                    <input type="text" id="firstname" name="firstname" placeholder="Vorname *" required aria-required="true">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group-float">
+                                    <input type="text" id="lastname" name="lastname" placeholder=" " required aria-required="true">
                                     <label for="lastname">Nachname *</label>
-                                    <input type="text" id="lastname" name="lastname" placeholder="Nachname *" required aria-required="true">
                                 </div>
                             </div>
-
-                            <div class="form-group form-group-full-width">
+                    
+                            <div class="form-group-float form-group-full-width">
+                                <input type="text" id="street" name="street" placeholder=" " required aria-required="true">
                                 <label for="street">Straße, Hausnummer *</label>
-                                <input type="text" id="street" name="street" placeholder="Straße, Hausnummer *" required aria-required="true">
                             </div>
-
+                    
                             <div class="form-row two-cols">
-                                <div class="form-group">
+                                <div class="form-group-float">
+                                    <input type="text" id="zipcode" name="zipcode" placeholder=" " required aria-required="true">
                                     <label for="zipcode">PLZ *</label>
-                                    <input type="text" id="zipcode" name="zipcode" placeholder="PLZ *" required aria-required="true">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group-float">
+                                    <input type="text" id="city" name="city" placeholder=" " required aria-required="true">
                                     <label for="city">Ort *</label>
-                                    <input type="text" id="city" name="city" placeholder="Ort *" required aria-required="true">
                                 </div>
                             </div>
-
-                            <div class="form-group form-group-full-width">
-                                <label for="email">E-Mail *</label>
-                                <input type="email" id="email" name="email" placeholder="E-Mail *" required aria-required="true">
+                    
+                            <div class="form-row two-cols">
+                                <div class="form-group-float">
+                                    <input type="email" id="email" name="email" placeholder=" " required aria-required="true">
+                                    <label for="email">E-Mail *</label>
+                                </div>
+                                <div class="form-group-float">
+                                    <input type="tel" id="phone" name="phone" placeholder=" ">
+                                    <label for="phone">Telefon (optional)</label>
+                                </div>
                             </div>
-                            <div class="form-group form-group-full-width">
-                                <label for="phone">Telefon</label>
-                                <input type="tel" id="phone" name="phone" placeholder="Telefon">
-                            </div>
-
-                            <div class="form-row two-cols hidden-field room_inquiry-field">
+                        </fieldset>
+                    
+                        <fieldset class="form-fieldset hidden-field room_inquiry-field">
+                            <legend class="form-legend">Details zur Zimmeranfrage</legend>
+                            <div class="form-row two-cols">
                                 <div class="form-group">
                                     <label for="arrival-date">Anreise *</label>
-                                    <input type="date" id="arrival-date" name="arrival_date">
+                                    <input type="date" id="arrival-date" name="arrival_date" data-was-required="true">
                                 </div>
                                 <div class="form-group">
                                     <label for="departure-date">Abreise *</label>
-                                    <input type="date" id="departure-date" name="departure_date">
+                                    <input type="date" id="departure-date" name="departure_date" data-was-required="true">
                                 </div>
                             </div>
-                            <div class="form-row two-cols hidden-field room_inquiry-field">
+                            <div class="form-row two-cols">
                                 <div class="form-group">
-                                    <label for="adults">Anzahl Erwachsene *</label>
-                                    <input type="number" id="adults" name="adults" min="1" value="1">
+                                    <label for="adults">Erwachsene *</label>
+                                    <input type="number" id="adults" name="adults" min="1" value="1" data-was-required="true">
                                 </div>
                                 <div class="form-group">
-                                    <label for="children">Anzahl Kinder</label>
+                                    <label for="children">Kinder</label>
                                     <input type="number" id="children" name="children" min="0" value="0">
                                 </div>
                             </div>
-                            <div class="form-group form-group-full-width hidden-field room_inquiry-field">
+                            <div class="form-group form-group-full-width">
                                 <label for="room-type">Bevorzugte Zimmerkategorie</label>
                                 <select id="room-type" name="room_type">
                                     <option value="">Keine Präferenz</option>
@@ -513,8 +355,11 @@
                                     <option value="single-room">Einzelzimmer</option>
                                 </select>
                             </div>
-
-                            <div class="form-group form-group-full-width hidden-field offer_inquiry-field">
+                        </fieldset>
+                    
+                        <fieldset class="form-fieldset hidden-field offer_inquiry-field">
+                            <legend class="form-legend">Details zur Angebotsanfrage</legend>
+                            <div class="form-group form-group-full-width">
                                 <label for="preferred-offer">Interesse an folgendem Angebot</label>
                                 <select id="preferred-offer" name="preferred_offer">
                                     <option value="">Nicht zutreffend / Allgemein</option>
@@ -523,43 +368,49 @@
                                     <option value="family-break">Familien-Ferien</option>
                                 </select>
                             </div>
-                            <div class="form-group form-group-full-width hidden-field offer_inquiry-field">
+                            <div class="form-group-float form-group-full-width">
+                                <textarea id="offer-message" name="offer_message" placeholder=" "></textarea>
                                 <label for="offer-message">Ihre Nachricht zum Angebot</label>
-                                <textarea id="offer-message" name="offer_message" placeholder="Ihre individuelle Nachricht zu diesem Angebot (z.B. gewünschter Zeitraum, Personenzahl)"></textarea>
                             </div>
-
-                            <div class="form-row two-cols hidden-field voucher_order-field">
+                        </fieldset>
+                    
+                         <fieldset class="form-fieldset hidden-field voucher_order-field">
+                            <legend class="form-legend">Details zur Gutscheinbestellung</legend>
+                            <div class="form-row two-cols">
                                 <div class="form-group">
                                     <label for="voucher-type">Gutschein-Art *</label>
-                                    <select id="voucher-type" name="voucher_type">
+                                    <select id="voucher-type" name="voucher_type" data-was-required="true">
                                         <option value="">Bitte wählen</option>
                                         <option value="value">Wertgutschein</option>
                                         <option value="stay">Übernachtungsgutschein</option>
                                         <option value="wellness">Wellnessgutschein</option>
                                     </select>
                                 </div>
-                                 <div class="form-group">
-                                    <label for="voucher-value">Wert des Gutscheins (in €)</label>
-                                    <input type="number" id="voucher-value" name="voucher_value" min="10" step="5" placeholder="z.B. 50">
+                                <div class="form-group-float">
+                                    <input type="number" id="voucher-value" name="voucher_value" min="10" step="5" placeholder=" ">
+                                    <label for="voucher-value">Wert (in €)</label>
                                 </div>
                             </div>
-                            <div class="form-group form-group-full-width hidden-field voucher_order-field">
-                                <label for="voucher-recipient">Name des Gutscheinempfängers (optional)</label>
-                                <input type="text" id="voucher-recipient" name="voucher_recipient" placeholder="Für wen ist der Gutschein?">
+                            <div class="form-group-float form-group-full-width">
+                                <input type="text" id="voucher-recipient" name="voucher_recipient" placeholder=" ">
+                                <label for="voucher-recipient">Name des Empfängers (optional)</label>
                             </div>
-                             <div class="form-group form-group-full-width hidden-field voucher_order-field">
+                            <div class="form-group form-group-full-width">
                                 <label for="voucher-delivery">Lieferart *</label>
-                                <select id="voucher-delivery" name="voucher_delivery">
-                                    <option value="email">Per E-Mail (PDF zum Selbstausdrucken)</option>
-                                    <option value="mail">Per Post (zzgl. Versandkosten)</option>
+                                <select id="voucher-delivery" name="voucher_delivery" data-was-required="true">
+                                    <option value="email">Per E-Mail (PDF)</option>
+                                    <option value="mail">Per Post (zzgl. Versand)</option>
                                 </select>
                             </div>
-                            <div class="form-group form-group-full-width hidden-field voucher_order-field">
-                                <label for="voucher-message">Persönliche Nachricht für den Gutschein (optional)</label>
-                                <textarea id="voucher-message" name="voucher_message" placeholder="Ihre persönliche Widmung"></textarea>
+                            <div class="form-group-float form-group-full-width">
+                                <textarea id="voucher-message" name="voucher_message" placeholder=" "></textarea>
+                                <label for="voucher-message">Persönliche Nachricht (optional)</label>
                             </div>
-
-                            <div class="form-group form-group-full-width hidden-field career_inquiry-field">
+                        </fieldset>
+                    
+                        <fieldset class="form-fieldset hidden-field career_inquiry-field">
+                            <legend class="form-legend">Details zur Bewerbung</legend>
+                            <div class="form-group form-group-full-width">
                                 <label for="career-position">Interesse an Position</label>
                                 <select id="career-position" name="career_position">
                                     <option value="">Initiativbewerbung</option>
@@ -568,25 +419,32 @@
                                     <option value="housekeeping">Mitarbeiter Housekeeping (m/w/d)</option>
                                 </select>
                             </div>
-                             <div class="form-group form-group-full-width hidden-field career_inquiry-field">
+                            <div class="form-group-float form-group-full-width">
+                                <textarea id="career-message" name="career_message" placeholder=" "></textarea>
                                 <label for="career-message">Ihre Nachricht / Kurzbewerbung</label>
-                                <textarea id="career-message" name="career_message" placeholder="Erzählen Sie uns von sich und Ihren Qualifikationen."></textarea>
                             </div>
-                             <div class="form-group form-group-full-width hidden-field career_inquiry-field">
-                                <label for="career-upload">Lebenslauf / Anhänge (max. 5MB, PDF/DOC/DOCX)</label>
+                            <div class="form-group form-group-full-width">
+                                <label for="career-upload">Lebenslauf / Anhänge (max. 5MB)</label>
                                 <input type="file" id="career-upload" name="career_upload" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple>
                             </div>
-
-
-                            <div class="form-group form-group-full-width general_contact-field" id="general-message-field">
+                        </fieldset>
+                    
+                        <fieldset class="form-fieldset general_contact-field" id="general-message-fieldset">
+                             <legend class="form-legend">Ihre Nachricht an uns</legend>
+                            <div class="form-group-float form-group-full-width">
+                                <textarea id="message" name="message" placeholder=" " required aria-required="true" data-was-required="true"></textarea>
                                 <label for="message">Ihre Nachricht *</label>
-                                <textarea id="message" name="message" placeholder="Ihre Nachricht *" required aria-required="true"></textarea>
                             </div>
-
-                            <div class="captcha-group form-group-full-width">
-                                <label for="captcha-input">Captcha: Bitte Zeichen eingeben.*</label>
+                        </fieldset>
+                    
+                        <fieldset class="form-fieldset">
+                            <legend class="form-legend">Sicherheitsabfrage</legend>
+                            <div class="captcha-group">
                                 <div class="captcha-input-container">
-                                    <input type="text" id="captcha-input" name="captcha" placeholder="Bitte Zeichen eingeben." required aria-required="true">
+                                    <div class="form-group-float" style="flex-grow:1;">
+                                        <input type="text" id="captcha-input" name="captcha" placeholder=" " required aria-required="true">
+                                        <label for="captcha-input">Bitte Zeichen eingeben*</label>
+                                    </div>
                                     <div class="captcha-image-wrapper">
                                         <img src="https://via.placeholder.com/150x40/E6DCCF/8C1E2D?text=T1X4Q" alt="Captcha-Bild mit Zeichen T1X4Q" id="captcha-image" width="150" height="40">
                                     </div>
@@ -594,238 +452,211 @@
                                         <iconify-icon icon="feather:refresh-ccw" aria-hidden="true"></iconify-icon>
                                     </button>
                                 </div>
-                                <p class="captcha-hint">Hinweis: Bitte Zeichen aus dem rechten Bild eingeben. Sollten die Zeichen nicht gut lesbar sein, bitte über die Aktualisierungs-Pfeile rechts daneben neue Zeichen auslösen.</p>
+                                <p class="captcha-hint">Klicken Sie auf den Pfeil-Button, um neue Zeichen zu generieren.</p>
                             </div>
-
-                            <p id="form-required-info" class="form-required-info">* Pflichtfelder</p>
-
-                            <div class="form-submit-group form-group-full-width">
-                                <button type="submit" class="btn">ANFRAGE SENDEN</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="contact-info-column" role="complementary" aria-labelledby="contact-info-heading">
-                        <h2 id="contact-info-heading">Kontakt</h2>
-                        <div class="contact-info-top-grid">
-                            <div class="contact-info-address-block">
-                                <address>
-                                    <strong>Hotel Sonne Post</strong> <br>
-                                    Fam. Eiche & Wehrle<br>
-                                    Landstr. 13<br>
-                                    D-79822 Titisee-Neustadt / Waldau
-                                    <br><br>
-                                    Tel.: <a href="tel:+49766991020">+49 (0) 7669 91020</a><br>
-                                    Fax: +49 (0) 7669 910299<br><br>
-                                    Web: <a href="https://www.sonne-post.de" target="_blank" rel="noopener noreferrer">www.sonne-post.de</a><br>
-                                    E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a>
-                                </address>
-                            </div>
-                            <div class="contact-info-anreise-block">
-                                <h4>Anreise mit dem Auto</h4>
-                                <p>Unser Hotel ist verkehrsgünstig gelegen und gut über die B31 und B500 zu erreichen. Kostenlose Parkplätze stehen direkt am Haus zur Verfügung.</p>
-                                <p>
-                                    <a href="https://maps.google.com/?q=Hotel+Sonne+Post,+Landstr.+13,+79822+Titisee-Neustadt" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                                        <iconify-icon icon="feather:map-pin" aria-hidden="true"></iconify-icon> Route planen
-                                    </a>
-                                </p>
-                            </div>
+                        </fieldset>
+                    
+                        <p id="form-required-info" class="form-required-info">* Pflichtfelder</p>
+                    
+                        <div class="form-submit-group form-group-full-width text-center">
+                            <button type="submit" class="btn">ANFRAGE SENDEN</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
-        </section>
 
-        <!-- GEÄNDERT: sr-only H2 und aria-labelledby entfernt -->
-        <section class="content-section bg-sand-combined">
-            <div class="container">
-                <div class="combined-row-grid">
-                    <div class="combined-column combined-column-karriere text-center" role="region" aria-labelledby="social-media-heading-cta-kontakt">
-                        <div>
-                            <h2 id="social-media-heading-cta-kontakt">Folgen Sie uns</h2>
-                            <p>Bleiben Sie auf dem Laufenden und verpassen Sie keine Neuigkeiten, Einblicke hinter die Kulissen und exklusive Angebote.</p>
-                            <div class="social-links-container">
-                                <div class="social-links">
-                                    <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                                    <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
-                                </div>
-                            </div>
+                <div class="contact-info-column" role="complementary" aria-labelledby="contact-info-heading">
+                    <h2 id="contact-info-heading">Kontakt & Anreise</h2>
+                    <div class="contact-info-top-grid">
+                        <div class="contact-info-address-block">
+                            <address>
+                                <strong>Hotel Sonne Post</strong> <br>
+                                Fam. Eiche & Wehrle<br>
+                                Landstr. 13<br>
+                                D-79822 Titisee-Neustadt / Waldau
+                                <br><br>
+                                Tel.: <a href="tel:+49766991020">+49 (0) 7669 91020</a><br>
+                                Fax: +49 (0) 7669 910299<br><br>
+                                Web: <a href="https://www.sonne-post.de" target="_blank" rel="noopener noreferrer">www.sonne-post.de</a><br>
+                                E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a>
+                            </address>
+                        </div>
+                        <div class="contact-info-anreise-block">
+                            <h4>Anreise mit dem Auto</h4>
+                            <p>Unser Hotel ist verkehrsgünstig gelegen und gut über die B31 und B500 zu erreichen. Kostenlose Parkplätze stehen direkt am Haus zur Verfügung.</p>
+                            <p>
+                                <a href="https://maps.google.com/?q=Hotel+Sonne+Post,+Landstr.+13,+79822+Titisee-Neustadt" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                                    <iconify-icon icon="feather:map-pin" aria-hidden="true"></iconify-icon> Route planen
+                                </a>
+                            </p>
                         </div>
                     </div>
-                    <div class="combined-column combined-column-newsletter text-center" role="region" aria-labelledby="newsletter-heading-cta-kontakt">
-                        <div>
-                            <h2 id="newsletter-heading-cta-kontakt">Nichts mehr verpassen</h2>
-                            <p>Abonnieren Sie unseren Newsletter für exklusive Angebote, Neuigkeiten und Urlaubsinspiration direkt aus der Sonne Post.</p>
-                            <div class="newsletter-form-container">
-                                <form action="/newsletter-anmeldung" method="post" class="form-newsletter" aria-describedby="newsletter-privacy-info-kontakt">
-                                  <label for="newsletter-email-kontakt" class="sr-only">E-Mail-Adresse für Newsletter</label>
-                                  <input type="email" id="newsletter-email-kontakt" name="email" placeholder="Ihre E-Mail-Adresse" required aria-required="true">
-                                  <button type="submit" class="btn" aria-label="Newsletter abonnieren">
-                                      <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> <span class="sr-only">Senden</span>
-                                  </button>
-                              </form>
-                              <p id="newsletter-privacy-info-kontakt"> Ihre Daten sind bei uns sicher. Mehr Infos: <a href="../datenschutz.html">Datenschutz</a>. </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- GEÄNDERT: sr-only H2 entfernt, Spaltenüberschriften zu H2 geändert -->
-    <footer class="site-footer" role="contentinfo">
-        <div class="container-footer">
-            <div class="footer-column">
-                <h2 class="footer-column-title">Hotel Sonne Post</h2>
-                <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
-            </div>
-            <div class="footer-column">
-                 <h2 class="footer-column-title">Entdecken</h2>
-                <ul> <li><a href="../zimmer.html">Wohnen & Preise</a></li> <li><a href="../wellness.html">Spa</a></li> <li><a href="../restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
-            </div>
-            <div class="footer-column">
-                <h2 class="footer-column-title">Information</h2>
-                <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
-            </div>
-            <div class="footer-column">
-                <h2 class="footer-column-title">Rechtliches</h2>
-                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
-                <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
-                <div class="social-links">
-                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
                 </div>
             </div>
         </div>
-        <div class="copyright">
-            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
-        </div>
-    </footer>
+    </section>
 
-    <div class="sticky-buttons-right-wrapper">
-        <div class="sticky-buttons-inner-container">
-            <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
-                <iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> Buchen
-            </a>
-            <a href="../newsletter.html" class="newsletter-widget-trigger" aria-label="Newsletter abonnieren">
-                <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> Newsletter
-            </a>
+    <section class="content-section bg-sand-combined">
+        <div class="container">
+            <div class="combined-row-grid">
+                <div class="combined-column combined-column-karriere text-center" role="region" aria-labelledby="social-media-heading-cta-kontakt">
+                    <div>
+                        <h2 id="social-media-heading-cta-kontakt">Folgen Sie uns</h2>
+                        <p>Bleiben Sie auf dem Laufenden und verpassen Sie keine Neuigkeiten, Einblicke hinter die Kulissen und exklusive Angebote.</p>
+                        <div class="social-links-container">
+                            <div class="social-links">
+                                <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                                <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="combined-column combined-column-newsletter text-center" role="region" aria-labelledby="newsletter-heading-cta-kontakt">
+                    <div>
+                        <h2 id="newsletter-heading-cta-kontakt">Nichts mehr verpassen</h2>
+                        <p>Abonnieren Sie unseren Newsletter für exklusive Angebote, Neuigkeiten und Urlaubsinspiration direkt aus der Sonne Post.</p>
+                        <div class="newsletter-form-container">
+                            <form action="/newsletter-anmeldung" method="post" class="form-newsletter" aria-describedby="newsletter-privacy-info-kontakt">
+                              <label for="newsletter-email-kontakt" class="sr-only">E-Mail-Adresse für Newsletter</label>
+                              <input type="email" id="newsletter-email-kontakt" name="email" placeholder="Ihre E-Mail-Adresse" required aria-required="true">
+                              <button type="submit" class="btn" aria-label="Newsletter abonnieren">
+                                  <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> <span class="sr-only">Senden</span>
+                              </button>
+                          </form>
+                          <p id="newsletter-privacy-info-kontakt"> Ihre Daten sind bei uns sicher. Mehr Infos: <a href="../datenschutz.html">Datenschutz</a>. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer" role="contentinfo">
+    <div class="container-footer">
+        <div class="footer-column">
+            <h2 class="footer-column-title">Hotel Sonne Post</h2>
+            <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
+        </div>
+        <div class="footer-column">
+             <h2 class="footer-column-title">Entdecken</h2>
+            <ul> <li><a href="../zimmer.html">Wohnen & Preise</a></li> <li><a href="../wellness.html">Spa</a></li> <li><a href="../restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+        </div>
+        <div class="footer-column">
+            <h2 class="footer-column-title">Information</h2>
+            <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+        </div>
+        <div class="footer-column">
+            <h2 class="footer-column-title">Rechtliches</h2>
+             <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+            <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
+            <div class="social-links">
+                 <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                 <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+            </div>
         </div>
     </div>
-
-    <div class="lightbox-overlay" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
-        <div class="lightbox-content">
-            <button class="lightbox-close" aria-label="Bildansicht schließen"> <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon> </button>
-            <div class="lightbox-image-container"> <img src="" alt="" id="lightbox-image" width="800" height="600"> </div>
-            <div id="lightbox-caption" class="lightbox-caption sr-only">Vergrößerte Bildansicht</div>
-        </div>
+    <div class="copyright">
+        <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
     </div>
+</footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+<script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
 
-    <script src="../js/main.js" defer></script>
+<script src="../js/main.js" defer></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-                gsap.utils.toArray('.contact-form-column, .contact-info-column').forEach((el, index) => {
-                    gsap.from(el, {
-                        opacity: 0,
-                        y: 50,
-                        duration: 0.8,
-                        delay: index * 0.1,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: el,
-                            start: "top 85%",
-                            toggleActions: "play none none none",
-                            once: true
-                        }
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.utils.toArray('.contact-form-column, .contact-info-column').forEach((el, index) => {
+                gsap.from(el, {
+                    opacity: 0, y: 50, duration: 0.8, delay: index * 0.1, ease: "power2.out",
+                    scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none", once: true }
+                });
+            });
+            gsap.utils.toArray('.content-section.bg-sand-combined .combined-column').forEach((el, index) => {
+                gsap.from(el, {
+                    opacity: 0, y: 50, duration: 0.8, delay: index * 0.1, ease: "power2.out",
+                    scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none", once: true }
+                });
+            });
+        }
+
+        const enquiryTypeSelect = document.getElementById('enquiry-type');
+        const allDynamicFieldsets = document.querySelectorAll('.room_inquiry-field, .offer_inquiry-field, .voucher_order-field, .event_inquiry-field, .career_inquiry-field, .general_contact-field');
+        const generalMessageFieldset = document.getElementById('general-message-fieldset');
+
+        function toggleFormFields() {
+            const selectedType = enquiryTypeSelect.value;
+
+            // Alle dynamischen Fieldsets verstecken und required-Attribute temporär entfernen
+            allDynamicFieldsets.forEach(fieldset => {
+                fieldset.classList.add('hidden-field');
+                fieldset.querySelectorAll('[data-was-required="true"]').forEach(field => {
+                    field.removeAttribute('required');
+                });
+            });
+
+            // Das zur Auswahl passende Fieldset anzeigen und required-Attribute wiederherstellen
+            if (selectedType) {
+                const fieldsToShow = document.querySelectorAll(`.${selectedType}-field`);
+                fieldsToShow.forEach(fieldset => {
+                    fieldset.classList.remove('hidden-field');
+                    fieldset.querySelectorAll('[data-was-required="true"]').forEach(field => {
+                        field.setAttribute('required', 'true');
                     });
                 });
-                gsap.utils.toArray('.content-section.bg-sand-combined .combined-column').forEach((el, index) => {
-                    gsap.from(el, {
-                        opacity: 0, y: 50, duration: 0.8, delay: index * 0.1,
-                        ease: "power2.out",
-                        scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none none", once: true }
-                    });
-                });
-            }
-
-            const enquiryTypeSelect = document.getElementById('enquiry-type');
-            const formGroups = document.querySelectorAll('.form-group');
-            const generalMessageField = document.getElementById('general-message-field');
-
-			function toggleFormFields() {
-                const selectedType = enquiryTypeSelect.value;
-
-                formGroups.forEach(group => {
-                    const isPotentiallyDynamic = ['room_inquiry-field', 'offer_inquiry-field', 'voucher_order-field', 'event_inquiry-field', 'career_inquiry-field', 'general_contact-field']
-                                                .some(cls => group.classList.contains(cls));
-                    if (isPotentiallyDynamic) {
-                        group.classList.add('hidden-field');
-                        group.querySelectorAll('input, select, textarea').forEach(field => {
-                            if (field.hasAttribute('required')) {
-                                field.dataset.wasRequired = 'true';
-                                field.removeAttribute('required');
-                            }
-                        });
-                    }
-                });
-
-                if (selectedType) {
-                    const fieldsToShow = document.querySelectorAll(`.${selectedType}-field`);
-                    fieldsToShow.forEach(fieldGroup => {
-                        fieldGroup.classList.remove('hidden-field');
-                        fieldGroup.querySelectorAll('input, select, textarea').forEach(subField => {
-                            if (subField.dataset.wasRequired === 'true') {
-                                subField.setAttribute('required', 'true');
-                            }
-                        });
-                    });
-
-                    if (selectedType === 'general_contact' || selectedType === '') {
-                         if (generalMessageField) {
-                            generalMessageField.classList.remove('hidden-field');
-                            const generalTextarea = generalMessageField.querySelector('textarea');
-                            if (generalTextarea && generalTextarea.dataset.wasRequired === 'true') {
-                                generalTextarea.setAttribute('required', 'true');
-                            }
-                         }
-                    }
-                } else {
-                     if (generalMessageField) {
-                        generalMessageField.classList.remove('hidden-field');
-                        const generalTextarea = generalMessageField.querySelector('textarea');
-                        if (generalTextarea && generalTextarea.dataset.wasRequired === 'true') {
-                            generalTextarea.setAttribute('required', 'true');
-                        }
-                     }
+            } else {
+                // Fallback: Wenn nichts ausgewählt ist, allgemeines Nachrichtenfeld anzeigen
+                if (generalMessageFieldset) {
+                   generalMessageFieldset.classList.remove('hidden-field');
+                   generalMessageFieldset.querySelectorAll('[data-was-required="true"]').forEach(field => {
+                       field.setAttribute('required', 'true');
+                   });
                 }
             }
+        }
 
-            if (enquiryTypeSelect) {
-                enquiryTypeSelect.addEventListener('change', toggleFormFields);
-                toggleFormFields();
-            }
+        if (enquiryTypeSelect) {
+            enquiryTypeSelect.addEventListener('change', toggleFormFields);
+            // Initialer Aufruf, um den Standardzustand (basierend auf 'selected' im HTML) herzustellen
+            toggleFormFields();
+        }
 
-            const captchaImage = document.getElementById('captcha-image');
-            const captchaRefreshBtn = document.querySelector('.captcha-refresh-btn');
-            if (captchaRefreshBtn && captchaImage) {
-                captchaRefreshBtn.addEventListener('click', function() {
-                    const randomString = Math.random().toString(36).substring(2, 7).toUpperCase();
-                    captchaImage.src = `https://via.placeholder.com/150x40/E6DCCF/8C1E2D?text=${randomString}`;
-                    captchaImage.alt = `Captcha-Bild mit Zeichen ${randomString}`;
-                    const captchaInput = document.getElementById('captcha-input');
-                    if (captchaInput) { captchaInput.value = ''; captchaInput.focus(); }
-                });
+        // NEU: Logik zur Formular-Vorauswahl via URL-Parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const anliegen = urlParams.get('anliegen');
+
+        if (anliegen && enquiryTypeSelect) {
+            const optionExists = Array.from(enquiryTypeSelect.options).some(option => option.value === anliegen);
+            if (optionExists) {
+                enquiryTypeSelect.value = anliegen;
+                enquiryTypeSelect.dispatchEvent(new Event('change'));
+
+                // Optional: Das Dropdown-Feld verstecken
+                const enquiryFieldset = enquiryTypeSelect.closest('.form-fieldset');
+                if (enquiryFieldset) {
+                    enquiryFieldset.classList.add('hidden-by-param');
+                }
             }
-        });
-    </script>
+        }
+
+        const captchaImage = document.getElementById('captcha-image');
+        const captchaRefreshBtn = document.querySelector('.captcha-refresh-btn');
+        if (captchaRefreshBtn && captchaImage) {
+            captchaRefreshBtn.addEventListener('click', function() {
+                const randomString = Math.random().toString(36).substring(2, 7).toUpperCase();
+                captchaImage.src = `https://via.placeholder.com/150x40/E6DCCF/8C1E2D?text=${randomString}`;
+                captchaImage.alt = `Captcha-Bild mit Zeichen ${randomString}`;
+                const captchaInput = document.getElementById('captcha-input');
+                if (captchaInput) { captchaInput.value = ''; captchaInput.focus(); }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
