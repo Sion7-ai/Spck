@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flexible Inhaltsseite | Hotel Sonne Post</title>
     <meta name="description" content="Beispielseite für flexible Inhaltsgestaltung im Hotel Sonne Post.">
-
-    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
-
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="../css/main.css">
-
     <style>
         body {
             background-color: var(--color-white);
@@ -27,7 +23,7 @@
         .site-header .hamburger-icon span { background: var(--color-header-icon-scrolled); }
         .site-header .header-center .central-logo .logo-initial { display: block; opacity: 0; position: absolute; pointer-events: none; }
         .site-header .header-center .central-logo .logo-scrolled { display: block; opacity: 1; position: relative; }
-        .site-header .header-right .contact-icon-btn iconify-icon { color: var(--color-header-contact-icon-scrolled); }
+        .site-header .header-right .contact-icon-btn { color: var(--color-header-contact-icon-scrolled); }
 
         .standard-content-section {
             padding-top: calc(var(--header-height) + 60px);
@@ -81,101 +77,123 @@
         .accordion-button:hover, .accordion-button:focus-visible { background-color: var(--color-sand); }
         .accordion-button .accordion-icon { font-size: 1.3rem; transition: transform 0.3s ease; }
         .accordion-button[aria-expanded="true"] .accordion-icon { transform: rotate(135deg); }
-        .accordion-content { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-        .accordion-content p { margin-bottom: 0.8em; font-size: 0.95rem; }
-        .accordion-content p:last-child { margin-bottom: 0; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .accordion-content-inner { padding: 15px 20px 20px; }
+        .accordion-content-inner p { margin-bottom: 0.8em; font-size: 0.95rem; }
+        .accordion-content-inner p:last-child { margin-bottom: 0; }
 
-        .button-element {
-            text-align: center;
-        }
-        .button-element .buttons-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 1em;
-        }
-        @media (max-width: 479px) {
-             .button-element .buttons-wrapper {
-                flex-direction: column;
-                align-items: center;
-             }
-        }
+        .button-element { text-align: center; }
+        .button-element .buttons-wrapper { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 1em; }
+        @media (max-width: 479px) { .button-element .buttons-wrapper { flex-direction: column; align-items: center; } }
 
-        .text-button-left {
-            text-align: left; margin-top: 1em; margin-bottom: 1.2em;
-            display: flex; gap: 10px; align-items: flex-start;
-            flex-direction: column;
-        }
-        @media (min-width: 480px) {
-            .text-button-left { flex-direction: row; align-items: center; }
-        }
+        .text-button-left { text-align: left; margin-top: 1em; margin-bottom: 1.2em; display: flex; gap: 10px; align-items: flex-start; flex-direction: column; }
+        @media (min-width: 480px) { .text-button-left { flex-direction: row; align-items: center; } }
 
-        .content-angebote-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .content-angebot-card {
-            background-color: var(--color-beige); border-radius: 6px; overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.07); display: flex; flex-direction: column;
-            text-decoration: none; color: var(--color-text-primary);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .content-angebot-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
+        .content-angebote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 20px; }
+        .content-angebot-card { background-color: var(--color-beige); border-radius: 6px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.07); display: flex; flex-direction: column; text-decoration: none; color: var(--color-text-primary); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .content-angebot-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
         .content-angebot-card img { width: 100%; height: 200px; object-fit: cover; }
         .content-angebot-card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .content-angebot-card-content h4 {
-            font-family: var(--font-secondary); font-size: 1.5rem; color: var(--color-bordeaux);
-            margin-top: 0; margin-bottom: 0.5em; font-weight: 600; text-align: center;
-        }
-        .content-angebot-card-content p {
-            font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.5;
-            margin-bottom: 1em; flex-grow: 1; text-align: center;
-        }
+        .content-angebot-card-content h4 { font-family: var(--font-secondary); font-size: 1.5rem; color: var(--color-bordeaux); margin-top: 0; margin-bottom: 0.5em; font-weight: 600; text-align: center; }
+        .content-angebot-card-content p { font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 1em; flex-grow: 1; text-align: center; }
         .content-angebot-card-content p strong { font-weight: 600; color: var(--color-text-primary); }
         .content-angebot-card-content .btn { margin-top: auto; align-self: center; font-size: 0.9rem; }
 
-        .sticky-to-top-button-bar {
-            position: fixed;
-            bottom: -100px;
-            left: 0;
-            width: 100%;
-            background-color: var(--color-beige);
-            padding: 15px 0;
-            box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
-            z-index: 998;
-            transition: bottom 0.4s ease-in-out;
-            display: none;
-        }
-        .sticky-to-top-button-bar.visible {
-            bottom: 0;
-            display: block;
-        }
-        .sticky-to-top-button-bar .container-sticky-to-top {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .sticky-to-top-button-bar .btn {
-            padding: 0.7em 1.5em;
-            font-size: 1rem;
-        }
-        .sticky-to-top-button-bar .btn iconify-icon {
-            margin-right: 0.5em;
-        }
-
+        .sticky-to-top-button-bar { position: fixed; bottom: -100px; left: 0; width: 100%; background-color: var(--color-beige); padding: 15px 0; box-shadow: 0 -3px 10px rgba(0,0,0,0.1); z-index: 998; transition: bottom 0.4s ease-in-out; display: none; }
+        .sticky-to-top-button-bar.visible { bottom: 0; display: block; }
+        .sticky-to-top-button-bar .container-sticky-to-top { max-width: 1280px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: center; align-items: center; }
+        .sticky-to-top-button-bar .btn { padding: 0.7em 1.5em; font-size: 1rem; }
+        .sticky-to-top-button-bar .btn .icon-svg { margin-right: 0.5em; }
     </style>
 </head>
 <body>
+    <svg style="display: none;" aria-hidden="true">
+      <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </symbol>
+      <symbol id="icon-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+      </symbol>
+      <symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+      </symbol>
+      <symbol id="icon-tools-kitchen" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M4 3h8l-1 9h-6z"></path>
+        <path d="M7 18h2v3h-2z"></path>
+        <path d="M20 3v12h-5c-.023 -3.681 .184 -7.406 5 -12z"></path>
+        <path d="M20 15v6h-1v-3"></path>
+        <line x1="8" y1="12" x2="8" y2="18"></line>
+      </symbol>
+      <symbol id="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+        <line x1="8" y1="2" x2="8" y2="18"></line>
+        <line x1="16" y1="6" x2="16" y2="22"></line>
+      </symbol>
+      <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+      </symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </symbol>
+      <symbol id="icon-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 12 20 22 4 22 4 12"></polyline>
+        <rect x="2" y="7" width="20" height="5"></rect>
+        <line x1="12" y1="22" x2="12" y2="7"></line>
+        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+      </symbol>
+      <symbol id="icon-arrow-left-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 8 8 12 12 16"></polyline>
+        <line x1="16" y1="12" x2="8" y2="12"></line>
+      </symbol>
+      <symbol id="icon-pause-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="10" y1="15" x2="10" y2="9"></line>
+        <line x1="14" y1="15" x2="14" y2="9"></line>
+      </symbol>
+      <symbol id="icon-play-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+      </symbol>
+      <symbol id="icon-arrow-right-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 16 16 12 12 8"></polyline>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+      </symbol>
+      <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </symbol>
+      <symbol id="icon-plus-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </symbol>
+      <symbol id="icon-arrow-up-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="16 12 12 8 8 12"></polyline>
+        <line x1="12" y1="16" x2="12" y2="8"></line>
+      </symbol>
+    </svg>
+
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
     <header class="site-header" id="site-header" role="banner">
@@ -194,7 +212,7 @@
             </div>
             <div class="header-right">
                 <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
-                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                    <svg class="icon-svg" aria-hidden="true" focusable="false"><use xlink:href="#icon-phone"></use></svg>
                 </a>
             </div>
         </div>
@@ -287,20 +305,24 @@
                     <div class="accordion-item">
                         <button class="accordion-button" aria-expanded="false" aria-controls="accordion-content-1">
                             Frage 1: Was ist das Besondere an diesem Hotel?
-                            <iconify-icon class="accordion-icon" icon="feather:plus-circle" aria-hidden="true"></iconify-icon>
+                            <span class="accordion-icon" aria-hidden="true"><svg class="icon-svg"><use xlink:href="#icon-plus-circle"></use></svg></span>
                         </button>
                         <div class="accordion-content" id="accordion-content-1" role="region" aria-hidden="true">
-                            <p>Unser Hotel zeichnet sich durch seine familiäre Atmosphäre, die exzellente regionale Küche und die einzigartige Lage im Herzen des Schwarzwaldes aus. Wir legen großen Wert auf Nachhaltigkeit und Gastfreundschaft.</p>
-                            <p>Zusätzlicher Text, um sicherzustellen, dass der Inhalt nicht abgeschnitten wird und die Höhe korrekt angepasst wird. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <div class="accordion-content-inner">
+                                <p>Unser Hotel zeichnet sich durch seine familiäre Atmosphäre, die exzellente regionale Küche und die einzigartige Lage im Herzen des Schwarzwaldes aus. Wir legen großen Wert auf Nachhaltigkeit und Gastfreundschaft.</p>
+                                <p>Zusätzlicher Text, um sicherzustellen, dass der Inhalt nicht abgeschnitten wird und die Höhe korrekt angepasst wird. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div>
                         </div>
                     </div>
                     <div class="accordion-item">
                         <button class="accordion-button" aria-expanded="false" aria-controls="accordion-content-2">
                             Frage 2: Welche Freizeitmöglichkeiten gibt es in der Umgebung?
-                            <iconify-icon class="accordion-icon" icon="feather:plus-circle" aria-hidden="true"></iconify-icon>
+                            <span class="accordion-icon" aria-hidden="true"><svg class="icon-svg"><use xlink:href="#icon-plus-circle"></use></svg></span>
                         </button>
                         <div class="accordion-content" id="accordion-content-2" role="region" aria-hidden="true">
-                            <p>Die Umgebung bietet zahlreiche Wander- und Radwege, malerische Seen, Skipisten im Winter und viele kulturelle Sehenswürdigkeiten. Gerne informieren wir Sie an der Rezeption über aktuelle Ausflugstipps.</p>
+                            <div class="accordion-content-inner">
+                                <p>Die Umgebung bietet zahlreiche Wander- und Radwege, malerische Seen, Skipisten im Winter und viele kulturelle Sehenswürdigkeiten. Gerne informieren wir Sie an der Rezeption über aktuelle Ausflugstipps.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -317,40 +339,40 @@
                 <div class="content-element">
                     <h2>Unsere Top-Angebote</h2>
                     <div class="content-angebote-grid">
-                        <article class="content-angebot-card">
+                        <article class="content-angebot-card" aria-labelledby="angebot-card-title-1">
                             <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Entspannte Frau am Pool" width="600" height="400">
                             <div class="content-angebot-card-content">
-                                <h4>Top-Angebote</h4>
+                                <h4 id="angebot-card-title-1">Top-Angebote</h4>
                                 <p>Abtauchen & entspannen, schlemmen & genießen - mit unseren Top-Angeboten.</p>
                             </div>
                         </article>
-                        <article class="content-angebot-card">
+                        <article class="content-angebot-card" aria-labelledby="angebot-card-title-2">
                             <img src="https://www.sonne-post.de/fileadmin/user_upload/Arrangements/Sonne-Post_Headerbild-Arrangements_Paar-Sekt_1280x854.png" alt="Paar mit Sekt, Teaser für Newsletter" width="600" height="400">
                             <div class="content-angebot-card-content">
-                                <h4>Newsletter</h4>
+                                <h4 id="angebot-card-title-2">Newsletter</h4>
                                 <p><strong>Exklusive Tipps & Angebote aus der Sonne Post.</strong> So bleiben Sie auf dem Laufenden...</p>
                             </div>
                         </article>
-                        <article class="content-angebot-card">
+                        <article class="content-angebot-card" aria-labelledby="angebot-card-title-3">
                              <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Sauna/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna5014_300dpi-WEB.jpg" alt="Atmosphärischer Wellnessbereich, Teaser für Social Media" width="600" height="400">
                             <div class="content-angebot-card-content">
-                                <h4>Social Media</h4>
+                                <h4 id="angebot-card-title-3">Social Media</h4>
                                 <p>Verpassen Sie keine Sonne-Post - News und bleiben Sie immer up-to-date.</p>
                             </div>
                         </article>
                     </div>
                      <div class="content-angebote-grid" style="margin-top: 30px;">
-                        <article class="content-angebot-card">
+                        <article class="content-angebot-card" aria-labelledby="angebot-card-title-4">
                             <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" alt="Gemütliche Lobby" width="600" height="400">
                             <div class="content-angebot-card-content">
-                                <h4>Unsere Lobby</h4>
+                                <h4 id="angebot-card-title-4">Unsere Lobby</h4>
                                 <p>Der perfekte Ort zum Ankommen und Verweilen. Entdecken Sie unsere gemütliche Atmosphäre.</p>
                             </div>
                         </article>
-                        <article class="content-angebot-card">
+                        <article class="content-angebot-card" aria-labelledby="angebot-card-title-5">
                             <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Schimmbad/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna4942_300dpi-WEB.jpg" alt="Wellnessbereich" width="600" height="400">
                             <div class="content-angebot-card-content">
-                                <h4>Wellness & Spa</h4>
+                                <h4 id="angebot-card-title-5">Wellness & Spa</h4>
                                 <p>Tauchen Sie ein in unsere Welt der Entspannung und genießen Sie wohltuende Momente.</p>
                             </div>
                         </article>
@@ -363,9 +385,8 @@
 
     <div class="sticky-to-top-button-bar" id="sticky-to-top-bar">
         <div class="container-sticky-to-top">
-            <!-- GEÄNDERT: href="#" für direkten Sprung nach oben -->
-            <a href="#" class="btn" aria-label="Zum Seitenanfang springen">
-                <iconify-icon icon="feather:arrow-up-circle" aria-hidden="true"></iconify-icon>
+            <a href="#" class="btn">
+                <svg class="icon-svg" aria-hidden="true" focusable="false"><use xlink:href="#icon-arrow-up-circle"></use></svg>
                 Zum Seitenanfang
             </a>
         </div>
@@ -379,32 +400,35 @@
             </div>
             <div class="footer-column">
                  <h2 class="footer-column-title">Entdecken</h2>
-                <ul> <li><a href="./zimmer.html">Wohnen & Preise</a></li> <li><a href="./wellness.html">Spa</a></li> <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="./top-angebote.html">Arrangements</a></li> <li><a href="./region.html">Freizeit & Region</a></li> </ul>
+                 <nav aria-label="Entdecken Navigation im Fußbereich">
+                    <ul> <li><a href="./zimmer.html">Wohnen & Preise</a></li> <li><a href="./wellness.html">Spa</a></li> <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="./top-angebote.html">Arrangements</a></li> <li><a href="./region.html">Freizeit & Region</a></li> </ul>
+                 </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Information</h2>
-                 <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="./newsletter.html">Newsletter</a></li> <li><a href="./faq.html">FAQ</a></li> </ul>
+                <nav aria-label="Informationsnavigation im Fußbereich">
+                    <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="./newsletter.html">Newsletter</a></li> <li><a href="./faq.html">FAQ</a></li> </ul>
+                </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Rechtliches</h2>
-                 <ul> <li><a href="./impressum.html">Impressum</a></li> <li><a href="./datenschutz.html">Datenschutz</a></li> <li><a href="./agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <nav aria-label="Rechtliche Navigation im Fußbereich">
+                    <ul> <li><a href="./impressum.html">Impressum</a></li> <li><a href="./datenschutz.html">Datenschutz</a></li> <li><a href="./agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                </nav>
                 <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
-                <div class="social-links">
-                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                <div class="social-links" role="navigation" aria-label="Soziale Medien im Fußbereich">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use xlink:href="#icon-facebook"></use></svg> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use xlink:href="#icon-instagram"></use></svg> </a>
                 </div>
             </div>
         </div>
         <div class="copyright">
-            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+            <p>© <span id="current-year">2024</span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
-
     <script src="../js/main.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -435,95 +459,39 @@
                     button.setAttribute('aria-expanded', !isExpanded);
                     content.setAttribute('aria-hidden', isExpanded);
 
-                    const icon = button.querySelector('.accordion-icon');
-
                     if (!isExpanded) {
-                        content.style.paddingTop = "15px";
-                        content.style.paddingBottom = "20px";
-                        void content.offsetWidth;
-                        content.style.maxHeight = content.scrollHeight + "px";
-                        if (icon) icon.style.transform = 'rotate(135deg)';
+                        content.style.maxHeight = content.querySelector('.accordion-content-inner').scrollHeight + 'px';
                     } else {
                         content.style.maxHeight = null;
-                        setTimeout(() => {
-                             if (button.getAttribute('aria-expanded') === 'false') {
-                                content.style.paddingTop = "0";
-                                content.style.paddingBottom = "0";
-                             }
-                        }, parseFloat(getComputedStyle(content).transitionDuration) * 1000 * 0.8 );
-                        if (icon) icon.style.transform = 'rotate(0deg)';
                     }
                 });
-                const initialContent = document.getElementById(button.getAttribute('aria-controls'));
-                if (initialContent && button.getAttribute('aria-expanded') === 'false') {
-                    initialContent.style.maxHeight = null;
-                    initialContent.style.paddingTop = "0";
-                    initialContent.style.paddingBottom = "0";
-                }
             });
 
             const toTopButtonBar = document.getElementById('sticky-to-top-bar');
-            const siteFooterForSticky = document.querySelector('.site-footer');
-
-            if (toTopButtonBar && typeof ScrollTrigger !== 'undefined') {
-                ScrollTrigger.create({
-                    trigger: "body", // Trigger ist der Body
-                    start: () => `top top-=${window.innerHeight * 0.5}`, // Erscheint, wenn 50% der Fensterhöhe gescrollt wurde
-                    endTrigger: siteFooterForSticky,
-                    end: () => `top bottom-=${toTopButtonBar.offsetHeight + 20}`, // Verschwindet 20px über dem Footer
-                    onEnter: () => { if (window.scrollY > window.innerHeight * 0.5) toTopButtonBar.classList.add('visible')}, // Zusätzliche Prüfung für den Start
-                    onLeave: () => toTopButtonBar.classList.remove('visible'),
-                    onEnterBack: () => { if (window.scrollY > window.innerHeight * 0.5) toTopButtonBar.classList.add('visible')},
-                    onLeaveBack: () => toTopButtonBar.classList.remove('visible'),
-                    // markers: true,
-                });
-
+            if (toTopButtonBar) {
+                const siteFooterForSticky = document.querySelector('.site-footer');
+                if (typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.create({
+                        trigger: "body",
+                        start: "top top-=" + (window.innerHeight * 0.5),
+                        endTrigger: siteFooterForSticky,
+                        end: "top bottom-=" + (toTopButtonBar.offsetHeight + 20),
+                        onToggle: self => {
+                            if (self.isActive) {
+                                toTopButtonBar.classList.add('visible');
+                            } else {
+                                toTopButtonBar.classList.remove('visible');
+                            }
+                        }
+                    });
+                }
                 const actualToTopButton = toTopButtonBar.querySelector('a.btn');
                 if (actualToTopButton) {
                     actualToTopButton.addEventListener('click', function(e) {
-                        // Standardverhalten von href="#" wird den Sprung zum Seitenanfang ausführen.
-                        // e.preventDefault(); // Nicht mehr nötig, wenn href="#" verwendet wird
-                        // window.scrollTo({ top: 0, behavior: 'smooth' }); // Auch nicht mehr nötig
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
                     });
                 }
-            } else if (toTopButtonBar) { // Fallback ohne ScrollTrigger
-                 let lastScrollY = window.scrollY;
-                 let ticking = false;
-                 window.addEventListener('scroll', function() {
-                    lastScrollY = window.scrollY;
-                    if (!ticking) {
-                        window.requestAnimationFrame(function() {
-                            if (lastScrollY > window.innerHeight * 0.5) {
-                                if (!toTopButtonBar.classList.contains('visible')) {
-                                    toTopButtonBar.classList.add('visible');
-                                }
-                            } else {
-                                if (toTopButtonBar.classList.contains('visible')) {
-                                    toTopButtonBar.classList.remove('visible');
-                                }
-                            }
-                            // Zusätzliche Logik, um es vor dem Footer auszublenden (vereinfacht)
-                            if (siteFooterForSticky && (window.innerHeight + window.scrollY) >= siteFooterForSticky.offsetTop - toTopButtonBar.offsetHeight - 20) {
-                                if (toTopButtonBar.classList.contains('visible')) {
-                                    toTopButtonBar.classList.remove('visible');
-                                }
-                            } else if (lastScrollY > window.innerHeight * 0.5) { // Wieder einblenden, wenn nicht am Footer
-                                if (!toTopButtonBar.classList.contains('visible')) {
-                                    toTopButtonBar.classList.add('visible');
-                                }
-                            }
-
-                            ticking = false;
-                        });
-                        ticking = true;
-                    }
-                });
-                 const actualToTopButtonFallback = toTopButtonBar.querySelector('a.btn');
-                 if (actualToTopButtonFallback) {
-                    actualToTopButtonFallback.addEventListener('click', function(e) {
-                       // Standardverhalten von href="#"
-                    });
-                 }
             }
         });
     </script>

@@ -3,36 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
     <title>Hotel Sonne Post | Urlaub zum Durchatmen im Schwarzwald</title>
-    <!-- TYPO3 Hinweis: Dynamische Meta Description -->
     <meta name="description" content="Erleben Sie traditionsbewusste Gastfreundschaft und modernen Komfort im Hotel Sonne Post. Ihr Refugium für Wellness und Natur im Schwarzwald.">
-
-    <!-- FAVICON: Pfad anpassen, falls nötig. TYPO3 kann dies verwalten. -->
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
-
-    <!-- FONTS: Google Fonts Einbindung. TYPO3 kann dies über Page TSConfig oder Extension verwalten. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
-
-    <!-- TYPO3 Hinweis: Ausgelagerte CSS-Datei. Pfad ggf. anpassen. -->
     <link rel="stylesheet" href="css/main.css">
-
 </head>
 <body>
+    <svg style="display: none;" aria-hidden="true">
+      <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </symbol>
+      <symbol id="icon-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+      </symbol>
+      <symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+      </symbol>
+      <symbol id="icon-tools-kitchen" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M4 3h8l-1 9h-6z"></path>
+        <path d="M7 18h2v3h-2z"></path>
+        <path d="M20 3v12h-5c-.023 -3.681 .184 -7.406 5 -12z"></path>
+        <path d="M20 15v6h-1v-3"></path>
+        <line x1="8" y1="12" x2="8" y2="18"></line>
+      </symbol>
+      <symbol id="icon-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+        <line x1="8" y1="2" x2="8" y2="18"></line>
+        <line x1="16" y1="6" x2="16" y2="22"></line>
+      </symbol>
+      <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+      </symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </symbol>
+      <symbol id="icon-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 12 20 22 4 22 4 12"></polyline>
+        <rect x="2" y="7" width="20" height="5"></rect>
+        <line x1="12" y1="22" x2="12" y2="7"></line>
+        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+      </symbol>
+      <symbol id="icon-arrow-left-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 8 8 12 12 16"></polyline>
+        <line x1="16" y1="12" x2="8" y2="12"></line>
+      </symbol>
+      <symbol id="icon-pause-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="10" y1="15" x2="10" y2="9"></line>
+        <line x1="14" y1="15" x2="14" y2="9"></line>
+      </symbol>
+      <symbol id="icon-play-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polygon points="10 8 16 12 10 16 10 8"></polygon>
+      </symbol>
+      <symbol id="icon-arrow-right-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 16 16 12 12 8"></polyline>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+      </symbol>
+      <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </symbol>
+      <symbol id="icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </symbol>
+    </svg>
 
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
-    <!-- TYPO3 Hinweis: Popup für Betriebsferien. Inhalt und Logik (wann anzeigen) kann im CMS verwaltet werden. -->
     <div class="popup-overlay" id="betriebsferien-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-description" aria-hidden="true">
         <div class="popup-content">
             <button class="close-popup" aria-label="Schließen" onclick="closePopup('betriebsferien-popup')">
-                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
+                <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-x"></use></svg>
             </button>
-            <!-- TYPO3 Hinweis: Editierbarer Inhalt für Popup-Titel -->
             <h3 id="popup-title">Betriebsferien Ankündigung</h3>
-            <!-- TYPO3 Hinweis: Editierbarer Inhalt für Popup-Beschreibung -->
             <div id="popup-description">
                 <p>Liebe Gäste,</p>
                 <p>Unser Hotel hat vom <strong>[Startdatum]</strong> bis einschließlich <strong>[Enddatum]</strong> Betriebsferien. Wir freuen uns, Sie danach wieder bei uns begrüßen zu dürfen!</p>
@@ -41,7 +105,6 @@
         </div>
     </div>
 
-    <!-- TYPO3 Hinweis: Header-Struktur. Kann in ein TYPO3 Partial/Template ausgelagert werden. -->
     <header class="site-header" id="site-header" role="banner">
         <div class="header-content-wrapper">
             <div class="header-left">
@@ -53,59 +116,51 @@
                 </button>
             </div>
             <div class="header-center">
-                <!-- TYPO3 Hinweis: Logo-Link und Bildquellen können im CMS verwaltet werden. width/height hinzufügen! -->
                 <a href="/" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
                     <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
                 </a>
             </div>
             <div class="header-right">
-                <!-- TYPO3 Hinweis: Link zum Kontakt kann im CMS verwaltet werden. -->
                 <a href="sites/kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
-                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                    <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-phone"></use></svg>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- TYPO3 Hinweis: Fullscreen Navigation. Struktur kann in ein TYPO3 Partial/Template ausgelagert werden. Navigationspunkte dynamisch generieren. -->
     <nav class="fullscreen-nav" id="fullscreen-nav" aria-label="Hauptnavigation (Vollbild)" aria-hidden="true" role="dialog" aria-modal="true">
         <div class="fullscreen-nav-header">
             <button class="fullscreen-nav-close-btn" id="fullscreen-nav-close-btn" aria-label="Menü schließen">
-                <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon>
+                <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-x"></use></svg>
             </button>
              <a href="/" class="logo-fullscreen" aria-label="Hotel Sonne Post - Zur Startseite (Navigation)">
-                 <!-- TYPO3 Hinweis: width/height für SVG Logo hinzufügen -->
                  <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post" width="150" height="40">
              </a>
             <div class="fullscreen-nav-ctas">
-                 <!-- TYPO3 Hinweis: Links und Texte editierbar machen -->
                  <a href="/anfragen" class="btn btn-light">Anfragen</a>
                  <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="btn btn-dark">Jetzt Buchen</a>
              </div>
         </div>
-        <div class="fullscreen-nav-quicklinks">
-            <!-- TYPO3 Hinweis: Quicklinks dynamisch aus Seitendaten oder konfigurierten Links generieren -->
-            <a href="sites/zimmer.html" class="quicklink-item"> <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> <span>Wohnen</span> </a>
-            <a href="sites/wellness.html" class="quicklink-item"> <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> <span>Entspannen</span> </a>
-            <a href="sites/restaurant.html" class="quicklink-item"> <iconify-icon icon="tabler:tools-kitchen" aria-hidden="true"></iconify-icon> <span>Geniessen</span> </a>
-            <a href="sites/region.html" class="quicklink-item"> <iconify-icon icon="feather:map" aria-hidden="true"></iconify-icon> <span>Freizeit</span> </a>
+        <div class="fullscreen-nav-quicklinks" role="navigation" aria-label="Schnellzugriffe">
+            <a href="sites/zimmer.html" class="quicklink-item"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-key"></use></svg> <span>Wohnen</span> </a>
+            <a href="sites/wellness.html" class="quicklink-item"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-wind"></use></svg> <span>Entspannen</span> </a>
+            <a href="sites/restaurant.html" class="quicklink-item"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-tools-kitchen"></use></svg> <span>Geniessen</span> </a>
+            <a href="sites/region.html" class="quicklink-item"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-map"></use></svg> <span>Freizeit</span> </a>
         </div>
         <div class="fullscreen-nav-main">
-            <!-- TYPO3 Hinweis: Navigationssektionen können als Schleife über Menüpunkte oder konfigurierbare Content Elemente realisiert werden -->
-            <section class="nav-section">
+            <section class="nav-section" aria-labelledby="nav-section-title-hotel">
                 <div class="nav-section-header">
                     <h2 id="nav-section-title-hotel" class="nav-section-title">Hotel & Gastgeber</h2>
                 </div>
                 <div class="horizontal-scroll-container">
-                    <!-- TYPO3 Hinweis: Nav-Tiles können als Datensätze (z.B. Teaser) oder Seiten mit speziellen Feldern (Bild, Titel, Subtitel) realisiert werden. width/height für Bilder! -->
                     <a href="sites/ueber-uns.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Team/220925_Hotel_Sonne-Post_MA_CorinaBeha_300dpi_11.jpg" alt="Gastgeber Familie Eiche & Wehrle" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Ihre Gastgeber</span> <span class="nav-tile-subtitle">Herzlich & Familiär</span> </div> </a>
                     <a href="sites/historie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historisches Bild des Hotels" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Unsere Geschichte</span> <span class="nav-tile-subtitle">Seit 1870</span> </div> </a>
                     <a href="sites/hotelrundgang-galerie.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" alt="Außenansicht Hotel Sonne Post" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Hotelrundgang</span> <span class="nav-tile-subtitle">Impressionen</span> </div> </a>
                     <a href="sites/nachhaltigkeit.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Talblick_Morgensonne_Herbst_Header.png" alt="Grüne Landschaft im Schwarzwald" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Nachhaltigkeit</span> <span class="nav-tile-subtitle">Unsere Verantwortung</span> </div> </a>
                 </div>
             </section>
-            <section class="nav-section">
+            <section class="nav-section" aria-labelledby="nav-section-title-wohnen">
                 <div class="nav-section-header">
                     <h2 id="nav-section-title-wohnen" class="nav-section-title">Wohnen & Angebote</h2>
                     </div>
@@ -116,7 +171,7 @@
                     <a href="sites/arrangements.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" alt="Top Angebote Teaserbild" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Arrangements</span> <span class="nav-tile-subtitle">Unsere Pakete</span> </div> </a>
                  </div>
             </section>
-            <section class="nav-section">
+            <section class="nav-section" aria-labelledby="nav-section-title-geniessen">
                 <div class="nav-section-header">
                      <h2 id="nav-section-title-geniessen" class="nav-section-title">Geniessen</h2>
                      </div>
@@ -126,7 +181,7 @@
                     <a href="sites/feiern.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Arrangements/Header-Sekt-Arrangements.jpg" alt="Festlich dekorierter Raum für Feiern" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Feiern</span> <span class="nav-tile-subtitle">Ihre Veranstaltung</span> </div> </a>
                  </div>
             </section>
-            <section class="nav-section">
+            <section class="nav-section" aria-labelledby="nav-section-title-entspannen">
                 <div class="nav-section-header">
                      <h2 id="nav-section-title-entspannen" class="nav-section-title">Entspannen</h2>
                      </div>
@@ -136,7 +191,7 @@
                     <a href="sites/wellness-anwendungen.html" class="nav-tile"> <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Person erhält eine Massage" class="tile-bg" width="300" height="380"> <div class="nav-tile-content"> <span class="nav-tile-title">Anwendungen</span> <span class="nav-tile-subtitle">Für Körper & Seele</span> </div> </a>
                  </div>
             </section>
-            <section class="nav-section">
+            <section class="nav-section" aria-labelledby="nav-section-title-freizeit">
                 <div class="nav-section-header">
                      <h2 id="nav-section-title-freizeit" class="nav-section-title">Freizeit</h2>
                 </div>
@@ -149,44 +204,33 @@
             </section>
         </div>
         <div class="fullscreen-nav-footer">
-            <div class="footer-links">
-                <!-- TYPO3 Hinweis: Footer-Links dynamisch generieren (z.B. aus Footer-Navigation) -->
+            <nav class="footer-links" aria-label="Weitere Links">
                 <ul>
                     <li><a href="sites/kontakt.html">Kontakt & Anreise</a></li> <li><a href="sites/karriere.html">Karriere</a></li> <li><a href="sites/gutschein-bestellung.html">Gutscheine</a></li> <li><a href="sites/newsletter.html">Newsletter</a></li> <li><a href="sites/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="sites/gastfreund-app.html">Gastfreund App</a></li> <li><a href="sites/impressum.html">Impressum</a></li> <li><a href="sites/datenschutz.html">Datenschutz</a></li> <li><a href="sites/agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger-nav">Cookie-Einstellungen</a></li>
                 </ul>
-            </div>
-            <div class="social-media-nav">
-                <!-- TYPO3 Hinweis: Social Media Links konfigurierbar machen -->
-                <a href="https://facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                <a href="https://instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+            </nav>
+            <div class="social-media-nav" role="navigation" aria-label="Soziale Medien">
+                <a href="https://facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-facebook"></use></svg> </a>
+                <a href="https://instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-instagram"></use></svg> </a>
             </div>
         </div>
     </nav>
 
-    <!-- TYPO3 Hinweis: Hauptinhaltsbereich. Hier werden die TYPO3 Content Elemente (tt_content) gerendert. -->
     <main id="main-content" role="main">
-        <!-- TYPO3 Hinweis: Hero Sektion. Kann als spezielles Inhaltselement oder Teil des Seiten-Templates realisiert werden. -->
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="hero-section">
-            <!-- TYPO3 Hinweis: Video- und Posterquellen im CMS verwalten. loading="eager" für das Poster-Bild, wenn es LCP ist. -->
+        <section class="hero-section" aria-labelledby="hero-heading">
             <video class="hero-video-bg" autoplay muted loop playsinline poster="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" aria-hidden="true">
                 <source src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/Kamerafahrtsp.mp4" type="video/mp4">
                 Ihr Browser unterstützt leider keine HTML5-Videos. Hier könnte ein Standbild des Hotels sein.
             </video>
-            <!-- TYPO3 Hinweis: Hero Badge Bildquelle im CMS verwalten. width/height hinzufügen! -->
-            <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/tradition_badge_outl.svg" alt="Tradition seit 1870 - 4 Sterne S" class="hero-badge" loading="eager" width="130" height="130"> <!-- Annahme: Quadratisches Badge -->
+            <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/tradition_badge_outl.svg" alt="Tradition seit 1870 - 4 Sterne S" class="hero-badge" loading="eager" width="130" height="130">
             <div class="hero-content">
-                <!-- TYPO3 Hinweis: Hero Überschrift und Subtitel editierbar machen. -->
                 <h1 id="hero-heading">Tradition. Erholung. Natur.</h1>
                 <p class="hero-subtitle">Ihr Urlaub zum Durchatmen im Herzen des Schwarzwalds.<br>Entdecken Sie die Sonne Post.</p>
             </div>
         </section>
 
-        <!-- TYPO3 Hinweis: Willkommenstext Sektion. Kann als Standard Text- oder Text-mit-Bild Inhaltselement realisiert werden. -->
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="content-section welcome-text-section bg-beige">
+        <section class="content-section welcome-text-section bg-beige" aria-labelledby="welcome-heading">
             <div class="container">
-                <!-- TYPO3 Hinweis: Überschrift und Text editierbar machen. -->
                 <h2 id="welcome-heading" class="welcome-heading-styled">Schön, dass Sie da sind!</h2>
                 <p>Im idyllischen Bergdorf Waldau inmitten des Naturparks Südschwarzwald befindet sich unser Hotel Sonne Post – ein traditionsreicher Schwarzwälder Familienbetrieb mit viel Charme, Herz und Gemütlichkeit. Seit 1870 wird hier badische Gastfreundschaft in einer herzlichen und familiären Atmosphäre gelebt.</p>
                  <p style="margin-top: 1em;">Entdecken Sie unser Schwarzwald Hotel als Ihre kleine Ferienoase, in der Sie weit weg vom Alltag, Ruhe und Erholung finden. Wir freuen uns auf Sie und darauf Ihren Schwarzwald Urlaub zu etwas ganz Besonderem zu machen.</p>
@@ -194,75 +238,59 @@
              </div>
         </section>
 
-        <!-- TYPO3 Hinweis: NEUE Hero-Angebot Sektion. Inhalt (Texte, Bild, Links) komplett im CMS editierbar machen. -->
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="content-section hero-angebot-section bg-white">
+        <section class="content-section hero-angebot-section bg-white" aria-labelledby="hero-angebot-heading">
             <div class="container">
                 <div class="hero-angebot-grid">
                     <div class="hero-angebot-text-content">
-                        <!-- TYPO3 Hinweis: Überschrift, Subtitel und Text für Angebot editierbar. -->
                         <h2 id="hero-angebot-heading">Wellness-Glückstage</h2>
                         <p class="hero-angebot-subheading">RUHE UND ENTSPANNUNG IN VOLLENDUNG</p>
                         <p>Sie suchen absolute Erholung und Tiefenentspannung? Lassen Sie den Alltag hinter sich und profitieren Sie von 200 € Spa-Guthaben. Tage voller innerer Gelassenheit und Wohlbefinden warten auf Sie.</p>
                         <div class="hero-angebot-actions">
-                            <!-- TYPO3 Hinweis: Links und Button-Texte editierbar. -->
                             <a href="sites/arrangements.html#wellness-glueckstage" class="btn">Zum Angebot</a>
                             <a href="sites/arrangements.html" class="btn btn-outline">Alle Angebote</a>
                         </div>
                     </div>
                     <div class="hero-angebot-image-wrapper">
-                        <!-- TYPO3 Hinweis: Bildquelle (src) und Alt-Text editierbar. width/height Attribute für das Bild setzen! -->
                         <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Entspannter Gast am Pool mit Blick auf die Berge" class="hero-angebot-image" width="1920" height="1200">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TYPO3 Hinweis: Teaser Sektion. Kann als Grid-Element mit Teaser-Datensätzen oder wiederholbaren Inhaltselementen realisiert werden. -->
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="content-section teaser-section bg-beige">
+        <section class="content-section teaser-section bg-beige" aria-labelledby="highlights-heading">
             <div class="container">
-                <!-- TYPO3 Hinweis: Überschrift editierbar. -->
                 <h2 id="highlights-heading">Urlaubsmomente, die bleiben</h2>
                 <div class="teaser-grid">
-                    <!-- TYPO3 Hinweis: Teaser-Karten als wiederholbare Elemente (z.B. IRRE) oder Datensätze. Bild, Titel, Text, Link editierbar. width/height für Bilder! -->
-                    <article class="teaser-card gsap-fade-in" aria-labelledby="teaser-title-arrangements"> <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Top Angebote Teaserbild" width="300" height="220"> <div class="teaser-card-content"> <h3 id="teaser-title-arrangements">Exklusive Arrangements</h3> <p>Maßgeschneiderte Erlebnisse für Ihre perfekte Auszeit – von Romantik bis Aktivurlaub.</p> <a href="sites/arrangements.html" class="btn btn-outline"> <iconify-icon icon="feather:gift" aria-hidden="true"></iconify-icon> Zu den Angeboten </a> </div> </article>
-                    <article class="teaser-card gsap-fade-in" aria-labelledby="teaser-title-wellness"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Schimmbad/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna4942_300dpi-WEB.jpg" alt="Wellnessbereich mit Schwimmbad" width="300" height="220"> <div class="teaser-card-content"> <h3 id="teaser-title-wellness">SPA</h3> <p>Tauchen Sie ein in unsere Welt der Entspannung mit Saunen, Pools und wohltuenden Anwendungen.</p> <a href="sites/wellness.html" class="btn btn-outline"> <iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon> Mehr erfahren </a> </div> </article>
-                    <article class="teaser-card gsap-fade-in" aria-labelledby="teaser-title-zimmer"> <img src="https://www.sonne-post.de/fileadmin/_processed_/9/1/csm_SonnePost_17-Singdrossel_Zimmer4436_300dpi-WEB_0f9ca5120b.jpg" alt="Stilvoll eingerichtetes Hotelzimmer" width="300" height="220"> <div class="teaser-card-content"> <h3 id="teaser-title-zimmer">Unsere Zimmerwelten</h3> <p>Finden Sie Ihr persönliches Refugium – von gemütlichen Einzelzimmern bis zu großzügigen Suiten.</p> <a href="sites/zimmer.html" class="btn btn-outline"> <iconify-icon icon="feather:key" aria-hidden="true"></iconify-icon> Zimmer ansehen </a> </div> </article>
+                    <article class="teaser-card gsap-fade-in" aria-labelledby="teaser-title-arrangements"> <img src="https://www.sonne-post.de/fileadmin/_processed_/9/4/csm_3_dbaa98c25b.png" alt="Top Angebote Teaserbild" width="300" height="220"> <div class="teaser-card-content"> <h3 id="teaser-title-arrangements">Exklusive Arrangements</h3> <p>Maßgeschneiderte Erlebnisse für Ihre perfekte Auszeit – von Romantik bis Aktivurlaub.</p> <a href="sites/arrangements.html" class="btn btn-outline"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-gift"></use></svg> Zu den Angeboten </a> </div> </article>
+                    <article class="teaser-card gsap-fade-in" aria-labelledby="teaser-title-wellness"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Entspannen/Schimmbad/SonnePost_Sauna-Schwimmbad_Schwimmbad-Sauna4942_300dpi-WEB.jpg" alt="Wellnessbereich mit Schwimmbad" width="300" height="220"> <div class="teaser-card-content"> <h3 id="teaser-title-wellness">SPA</h3> <p>Tauchen Sie ein in unsere Welt der Entspannung mit Saunen, Pools und wohltuenden Anwendungen.</p> <a href="sites/wellness.html" class="btn btn-outline"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-wind"></use></svg> Mehr erfahren </a> </div> </article>
+                    <article class="teaser-card gsap-fade-in" aria-labelledby="teaser-title-zimmer"> <img src="https://www.sonne-post.de/fileadmin/_processed_/9/1/csm_SonnePost_17-Singdrossel_Zimmer4436_300dpi-WEB_0f9ca5120b.jpg" alt="Stilvoll eingerichtetes Hotelzimmer" width="300" height="220"> <div class="teaser-card-content"> <h3 id="teaser-title-zimmer">Unsere Zimmerwelten</h3> <p>Finden Sie Ihr persönliches Refugium – von gemütlichen Einzelzimmern bis zu großzügigen Suiten.</p> <a href="sites/zimmer.html" class="btn btn-outline"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-key"></use></svg> Zimmer ansehen </a> </div> </article>
                 </div>
             </div>
         </section>
 
-        <!-- TYPO3 Hinweis: Testimonial Sektion. Kann als Slider-Inhaltselement mit wiederholbaren Testimonial-Einträgen realisiert werden. -->
-        <!-- GEÄNDERT: aria-labelledby von section entfernt -->
-        <section class="content-section testimonials-section bg-white">
+        <section class="content-section testimonials-section bg-white" aria-labelledby="testimonials-heading">
             <div class="container">
                 <h2 id="testimonials-heading">Stimmen unserer Gäste</h2>
-                <!-- GEÄNDERT: aria-controls für Buttons hinzugefügt -->
                 <div class="slider-container" role="region" aria-roledescription="Karussell" aria-labelledby="testimonials-heading">
                     <div class="slider-wrapper" id="testimonial-slider">
-                        <!-- TYPO3 Hinweis: Testimonial-Slides als wiederholbare Elemente. Text und Autor editierbar. -->
-                        <div class="slide" role="group" aria-roledescription="Folie"> <blockquote class="testimonial-quote"> <p>"Ein absoluter Traumurlaub! Die Ruhe, das Ambiente und die herzliche Gastfreundschaft sind unübertroffen. Wir haben uns so wohlgefühlt."</p> <cite>Familie Schneider</cite> </blockquote> </div>
-                        <div class="slide" role="group" aria-roledescription="Folie"> <blockquote class="testimonial-quote"> <p>"Der SPA-Bereich ist eine Oase der Erholung. Perfekt für ein Mädelswochenende!"</p> <cite>Julia K. & Freundinnen</cite> </blockquote> </div>
-                        <div class="slide" role="group" aria-roledescription="Folie"> <blockquote class="testimonial-quote"> <p>"Wir kommen seit Jahren und schätzen die gleichbleibend hohe Qualität und die persönliche Betreuung."</p> <cite>Ehepaar Wagner</cite> </blockquote> </div>
+                        <div class="slide" role="group" aria-roledescription="Folie" aria-label="1 von 3"> <blockquote class="testimonial-quote"> <p>"Ein absoluter Traumurlaub! Die Ruhe, das Ambiente und die herzliche Gastfreundschaft sind unübertroffen. Wir haben uns so wohlgefühlt."</p> <cite>Familie Schneider</cite> </blockquote> </div>
+                        <div class="slide" role="group" aria-roledescription="Folie" aria-label="2 von 3"> <blockquote class="testimonial-quote"> <p>"Der SPA-Bereich ist eine Oase der Erholung. Perfekt für ein Mädelswochenende!"</p> <cite>Julia K. & Freundinnen</cite> </blockquote> </div>
+                        <div class="slide" role="group" aria-roledescription="Folie" aria-label="3 von 3"> <blockquote class="testimonial-quote"> <p>"Wir kommen seit Jahren und schätzen die gleichbleibend hohe Qualität und die persönliche Betreuung."</p> <cite>Ehepaar Wagner</cite> </blockquote> </div>
                     </div>
                     <div class="slider-controls">
-                        <button id="prevSlideTestimonial" aria-label="Vorheriges Testimonial" aria-controls="testimonial-slider"><iconify-icon icon="feather:arrow-left-circle" aria-hidden="true"></iconify-icon></button>
-                        <button class="slider-pause-button" id="testimonial-pause" aria-label="Animation anhalten/fortsetzen" aria-controls="testimonial-slider"> <iconify-icon icon="feather:pause-circle" aria-hidden="true"></iconify-icon> </button>
-                        <button id="nextSlideTestimonial" aria-label="Nächstes Testimonial" aria-controls="testimonial-slider"><iconify-icon icon="feather:arrow-right-circle" aria-hidden="true"></iconify-icon></button>
+                        <button id="prevSlideTestimonial" aria-label="Vorheriges Testimonial" aria-controls="testimonial-slider"><svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-arrow-left-circle"></use></svg></button>
+                        <button class="slider-pause-button" id="testimonial-pause" aria-label="Animation anhalten" aria-controls="testimonial-slider"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-pause-circle"></use></svg> </button>
+                        <button id="nextSlideTestimonial" aria-label="Nächstes Testimonial" aria-controls="testimonial-slider"><svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-arrow-right-circle"></use></svg></button>
                     </div>
                     <div class="sr-only sr-slide-announcer" aria-live="polite" aria-atomic="true"></div>
                 </div>
             </div>
         </section>
 
-        <!-- TYPO3 Hinweis: Galerie Vorschau Sektion. Kann als Galerie-Inhaltselement realisiert werden. -->
-        <!-- GEÄNDERT: aria-labelledby von section entfernt -->
-        <section class="content-section gallery-preview-section bg-beige">
+        <section class="content-section gallery-preview-section bg-beige" aria-labelledby="gallery-heading">
             <div class="container">
                 <h2 id="gallery-heading">Ein kleiner Rundgang</h2>
-                <div class="gallery-grid">
-                    <!-- TYPO3 Hinweis: Galeriebilder als wiederholbare Elemente oder aus einer Dateisammlung. Bildquelle, Alt-Text und Linkziel (für Lightbox) editierbar. width/height für Bilder! -->
+                <div class="gallery-grid" role="group" aria-label="Galerie-Vorschau">
                     <a href="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" class="gallery-lightbox-trigger" data-alt="Außenansicht Hotel Sonne Post im Sommer" aria-label="Bild vergrößern: Außenansicht Hotel Sonne Post im Sommer"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Home/Haus-Traditionslogo.jpg" alt="Vorschaubild: Außenansicht Hotel Sonne Post im Sommer" width="400" height="300"> </a>
                     <a href="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" class="gallery-lightbox-trigger" data-alt="Helle Suite mit Bergblick" aria-label="Bild vergrößern: Helle Suite mit Bergblick"> <img src="https://www.sonne-post.de/fileadmin/_processed_/4/d/csm_SonnePost_Portrait21_Zimmer0766_300dpi_e1fea74a4d.jpg" alt="Vorschaubild: Helle Suite mit Bergblick" width="400" height="300"> </a>
                     <a href="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" class="gallery-lightbox-trigger" data-alt="Gemütlicher Restaurantbereich mit Holztischen" aria-label="Bild vergrößern: Gemütlicher Restaurantbereich mit Holztischen"> <img src="https://www.sonne-post.de/fileadmin/user_upload/Bildgalerien/Home/SonnePost_Lobby5182_300dpi.jpg" alt="Vorschaubild: Gemütlicher Restaurantbereich mit Holztischen" width="400" height="300"> </a>
@@ -276,56 +304,47 @@
             </div>
         </section>
 
-        <!-- TYPO3 Hinweis: NEUER Bild-Slider für Ankündigungen/Arrangements -->
-        <!-- GEÄNDERT: aria-labelledby von section entfernt -->
-        <section class="content-section image-slider-section bg-white">
+        <section class="content-section image-slider-section bg-white" aria-labelledby="image-slider-heading">
             <div class="container">
                 <h2 id="image-slider-heading">Aktuelles & Empfehlungen</h2>
-                <!-- GEÄNDERT: aria-controls für Buttons hinzugefügt -->
                 <div class="slider-container" role="region" aria-roledescription="Karussell" aria-labelledby="image-slider-heading">
                     <div class="slider-wrapper" id="image-slider">
-                        <!-- TYPO3 Hinweis: Image-Slides als wiederholbare Elemente. Bild, Alt-Text und Link editierbar. width/height für Bilder! -->
-                        <a href="sites/arrangements.html#wanderwoche" class="slide slide-image-link" role="group" aria-roledescription="Folie">
+                        <a href="sites/arrangements.html#wanderwoche" class="slide slide-image-link" aria-label="Ankündigung 1 von 3: Wanderarrangement Schwarzwald">
                             <img src="https://www.sonne-post.de/fileadmin/user_upload/Arrangements/Sonne-Post_Headerbild-Arrangements_Familienzimmer_1280x854.png" alt="Wanderarrangement Schwarzwald" width="800" height="500">
                         </a>
-                        <a href="sites/restaurant.html#saisonkarte" class="slide slide-image-link" role="group" aria-roledescription="Folie">
+                        <a href="sites/restaurant.html#saisonkarte" class="slide slide-image-link" aria-label="Ankündigung 2 von 3: Saisonale Spezialitäten im Restaurant">
                             <img src="https://www.sonne-post.de/fileadmin/user_upload/Arrangements/Sonne-Post_Headerbild-Arrangements_Paar-Sekt_1280x854.png" alt="Saisonale Spezialitäten im Restaurant" width="800" height="500">
                         </a>
-                        <a href="sites/veranstaltungen.html#weihnachtsmarkt" class="slide slide-image-link" role="group" aria-roledescription="Folie">
+                        <a href="sites/veranstaltungen.html#weihnachtsmarkt" class="slide slide-image-link" aria-label="Ankündigung 3 von 3: Ankündigung Weihnachtsmarkt in der Region">
                              <img src="https://www.sonne-post.de/fileadmin/user_upload/Arrangements/Sonne-Post_Headerbild-Arrangements_Paar-Bademantel_1280x854.png" alt="Ankündigung Weihnachtsmarkt in der Region" width="800" height="500">
                         </a>
                     </div>
                     <div class="slider-controls">
-                        <button id="prevSlideImage" aria-label="Vorherige Ankündigung" aria-controls="image-slider"><iconify-icon icon="feather:arrow-left-circle" aria-hidden="true"></iconify-icon></button>
-                        <button class="slider-pause-button" id="image-slider-pause" aria-label="Animation anhalten/fortsetzen" aria-controls="image-slider"> <iconify-icon icon="feather:pause-circle" aria-hidden="true"></iconify-icon> </button>
-                        <button id="nextSlideImage" aria-label="Nächste Ankündigung" aria-controls="image-slider"><iconify-icon icon="feather:arrow-right-circle" aria-hidden="true"></iconify-icon></button>
+                        <button id="prevSlideImage" aria-label="Vorherige Ankündigung" aria-controls="image-slider"><svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-arrow-left-circle"></use></svg></button>
+                        <button class="slider-pause-button" id="image-slider-pause" aria-label="Animation anhalten" aria-controls="image-slider"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-pause-circle"></use></svg> </button>
+                        <button id="nextSlideImage" aria-label="Nächste Ankündigung" aria-controls="image-slider"><svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-arrow-right-circle"></use></svg></button>
                     </div>
                     <div class="sr-only sr-slide-announcer" aria-live="polite" aria-atomic="true"></div>
                 </div>
             </div>
         </section>
 
-        <!-- TYPO3 Hinweis: Kombinierte Sektion für Karriere-Teaser und Newsletter CTA. -->
-        <!-- GEÄNDERT: aria-labelledby und sr-only H2 entfernt -->
-        <section class="content-section bg-sand-combined">
+        <section class="content-section bg-sand-combined" aria-label="Karriere und Newsletter">
             <div class="container">
                 <div class="combined-row-grid">
-                    <!-- TYPO3 Hinweis: Linke Spalte - Inhalt für Karriere-Teaser -->
                     <div class="combined-column combined-column-karriere text-center" role="region" aria-labelledby="karriere-teaser-heading-combined">
-                        <div> <!-- Zusätzlicher Div-Wrapper für Padding und Flexbox-Verhalten, falls nicht schon vorhanden -->
+                        <div>
                             <h2 id="karriere-teaser-heading-combined">Werden Sie Teil unseres Teams</h2>
                             <p>Die Sonne Post lebt von herzlichen Gastgebern. Entdecken Sie Ihre Karrieremöglichkeiten in einem traditionsreichen Haus mit Zukunft.</p>
                             <div class="btn-container">
                                 <a href="sites/karriere.html" class="btn">
-                                    <iconify-icon icon="feather:briefcase" aria-hidden="true"></iconify-icon> Offene Stellen
+                                    <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-briefcase"></use></svg> Offene Stellen
                                 </a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- TYPO3 Hinweis: Rechte Spalte - Inhalt für Newsletter CTA -->
                     <div class="combined-column combined-column-newsletter text-center" role="region" aria-labelledby="newsletter-heading-cta-combined">
-                        <div> <!-- Zusätzlicher Div-Wrapper für Padding und Flexbox-Verhalten, falls nicht schon vorhanden -->
+                        <div>
                             <h2 id="newsletter-heading-cta-combined">Nichts mehr verpassen</h2>
                             <p>Abonnieren Sie unseren Newsletter für exklusive Angebote, Neuigkeiten und Urlaubsinspiration direkt aus der Sonne Post.</p>
                             <div class="newsletter-form-container">
@@ -333,7 +352,7 @@
                                   <label for="newsletter-email-combined" class="sr-only">E-Mail-Adresse für Newsletter</label>
                                   <input type="email" id="newsletter-email-combined" name="email" placeholder="Ihre E-Mail-Adresse" required aria-required="true">
                                   <button type="submit" class="btn" aria-label="Newsletter abonnieren">
-                                      <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> <span class="sr-only">Senden</span>
+                                      <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-mail"></use></svg> <span class="sr-only">Senden</span>
                                   </button>
                               </form>
                               <p id="newsletter-privacy-info-combined"> Ihre Daten sind bei uns sicher. Mehr Infos: <a href="sites/datenschutz.html">Datenschutz</a>. </p>
@@ -345,70 +364,62 @@
         </section>
     </main>
 
-    <!-- TYPO3 Hinweis: Footer-Struktur. Kann in ein TYPO3 Partial/Template ausgelagert werden. Inhalte (Adressen, Links, Social Media) dynamisch befüllen. -->
-    <!-- GEÄNDERT: sr-only H2 und aria-labelledby entfernt, Spaltenüberschriften zu H2 geändert -->
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer" role="contentinfo" aria-label="Fußbereich der Webseite">
         <div class="container-footer">
-            <!-- TYPO3 Hinweis: Footer-Spalten können als konfigurierbare Bereiche oder über Menüs gefüllt werden. -->
             <div class="footer-column">
                 <h2 class="footer-column-title">Hotel Sonne Post</h2>
-                <!-- TYPO3 Hinweis: Adressdaten als Konstanten oder aus Extension-Settings. -->
                 <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
             </div>
             <div class="footer-column">
                  <h2 class="footer-column-title">Entdecken</h2>
-                 <!-- TYPO3 Hinweis: Navigationsliste, z.B. aus einer TYPO3 Footer-Navigation. -->
-                <ul> <li><a href="sites/zimmer.html">Wohnen & Preise</a></li> <li><a href="sites/wellness.html">Spa</a></li> <li><a href="sites/restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="sites/arrangements.html">Arrangements</a></li> <li><a href="sites/region.html">Freizeit & Region</a></li> </ul>
+                 <nav aria-label="Entdecken Navigation">
+                    <ul> <li><a href="sites/zimmer.html">Wohnen & Preise</a></li> <li><a href="sites/wellness.html">Spa</a></li> <li><a href="sites/restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="sites/arrangements.html">Arrangements</a></li> <li><a href="sites/region.html">Freizeit & Region</a></li> </ul>
+                 </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Information</h2>
-                <ul> <li><a href="sites/kontakt.html">Kontakt & Anreise</a></li> <li><a href="sites/ueber-uns.html">Über uns</a></li> <li><a href="sites/karriere.html">Karriere</a></li> <li><a href="sites/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="sites/gastfreund-app.html">Gastfreund App</a></li> <li><a href="sites/newsletter.html">Newsletter</a></li> <li><a href="sites/faq.html">FAQ</a></li> </ul>
+                <nav aria-label="Informationsnavigation">
+                    <ul> <li><a href="sites/kontakt.html">Kontakt & Anreise</a></li> <li><a href="sites/ueber-uns.html">Über uns</a></li> <li><a href="sites/karriere.html">Karriere</a></li> <li><a href="sites/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="sites/gastfreund-app.html">Gastfreund App</a></li> <li><a href="sites/newsletter.html">Newsletter</a></li> <li><a href="sites/faq.html">FAQ</a></li> </ul>
+                </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Rechtliches</h2>
-                 <ul> <li><a href="sites/impressum.html">Impressum</a></li> <li><a href="sites/datenschutz.html">Datenschutz</a></li> <li><a href="sites/agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                 <nav aria-label="Rechtliche Navigation">
+                    <ul> <li><a href="sites/impressum.html">Impressum</a></li> <li><a href="sites/datenschutz.html">Datenschutz</a></li> <li><a href="sites/agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                 </nav>
                 <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
-                <div class="social-links">
-                     <!-- TYPO3 Hinweis: Social Media Links konfigurierbar machen. -->
-                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                <div class="social-links" role="navigation" aria-label="Soziale Medien im Fußbereich">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-facebook"></use></svg> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-instagram"></use></svg> </a>
                 </div>
             </div>
         </div>
         <div class="copyright">
-            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+            <p>© <span id="current-year">2024</span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
-    <!-- TYPO3 Hinweis: Sticky Buttons. Links und Texte konfigurierbar machen. -->
-    <div class="sticky-buttons-right-wrapper">
+    <aside class="sticky-buttons-right-wrapper" aria-label="Schnellzugriffe">
         <div class="sticky-buttons-inner-container">
             <a href="EXTERNES_BUCHUNGSTOOL_URL_HIER" target="_blank" rel="noopener noreferrer" class="booking-widget-trigger" aria-label="Zimmer online buchen (öffnet externes Buchungstool)">
-                <iconify-icon icon="feather:calendar" aria-hidden="true"></iconify-icon> Buchen
+                <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-calendar"></use></svg> Buchen
             </a>
             <a href="sites/newsletter.html" class="newsletter-widget-trigger" aria-label="Newsletter abonnieren">
-                <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> Newsletter
+                <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-mail"></use></svg> Newsletter
             </a>
         </div>
-    </div>
+    </aside>
 
-    <!-- TYPO3 Hinweis: Lightbox für Galeriebilder. Struktur für die Lightbox. -->
-    <div class="lightbox-overlay" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
+    <div class="lightbox-overlay" id="image-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption-text" aria-hidden="true">
         <div class="lightbox-content">
-            <button class="lightbox-close" aria-label="Bildansicht schließen"> <iconify-icon icon="feather:x" aria-hidden="true"></iconify-icon> </button>
-            <div class="lightbox-image-container"> <img src="" alt="" id="lightbox-image" width="800" height="600"> <!-- Placeholder width/height --> </div>
-            <div id="lightbox-caption" class="lightbox-caption sr-only">Vergrößerte Bildansicht</div>
+            <button class="lightbox-close" aria-label="Bildansicht schließen"> <svg aria-hidden="true" focusable="false" class="icon-svg"><use href="#icon-x"></use></svg> </button>
+            <div class="lightbox-image-container"> <img src="" alt="" id="lightbox-image" width="800" height="600"> </div>
+            <div id="lightbox-caption" class="lightbox-caption"><span id="lightbox-caption-text" class="sr-only">Vergrößerte Bildansicht</span></div>
         </div>
     </div>
 
-    <!-- TYPO3 Hinweis: CDN Skripte. Können auch lokal über TYPO3 Asset Management eingebunden werden. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
-
-    <!-- TYPO3 Hinweis: Ausgelagerte JavaScript-Datei. Pfad ggf. anpassen. 'defer' ist wichtig. -->
     <script src="js/main.js" defer></script>
 </body>
 </html>
