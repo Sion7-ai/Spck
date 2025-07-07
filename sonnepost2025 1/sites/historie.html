@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geschichte | Hotel Sonne Post</title>
+    <meta name="description" content="Entdecken Sie die reiche Geschichte des Hotel Sonne Post, von den Anfängen im Jahr 1870 bis heute.">
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        /* === TYPO3 Hinweis: Spezifische Stile für die Timeline-Seite === */
+        body {
+            background-color: var(--color-white);
+        }
+
+        .site-header { /* Stellt sicher, dass der Header auf Unterseiten sofort den "scrolled" Look hat */
+            background-color: var(--color-header-bg-scrolled);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background-image: none;
+        }
+        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
+            color: var(--color-header-icon-scrolled);
+        }
+         .site-header .hamburger-icon span {
+            background: var(--color-header-icon-scrolled);
+        }
+        .site-header .header-center .central-logo .logo-initial {
+            display: block; opacity: 0; position: absolute; pointer-events: none;
+        }
+        .site-header .header-center .central-logo .logo-scrolled {
+            display: block; opacity: 1; position: relative;
+        }
+        .site-header .header-right .contact-icon-btn iconify-icon {
+            color: var(--color-header-contact-icon-scrolled);
+        }
+
+        /* === Stile für einfachen Page-Hero auf Unterseiten (jetzt ohne Text) === */
+        .page-hero-section {
+            position: relative; width: 100%; height: 40vh;
+            min-height: 300px; max-height: 450px;
+            overflow: hidden;
+            margin-top: var(--header-height); /* Korrigiert, damit es unter dem fixen Header beginnt */
+        }
+        .page-hero-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 1;
+        }
+        .page-hero-overlay {
+             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+             background-color: transparent;
+             z-index: 2;
+        }
+        .page-hero-content {
+            display: none;
+        }
+
+
+        /* === Timeline Sektion spezifische Stile (jetzt lineare Darstellung) === */
+        .history-section { padding-top: 60px; padding-bottom: 60px; }
+
+        .page-main-heading {
+            font-family: var(--font-secondary);
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            color: var(--color-text-primary); /* Angepasst von --color-bordeaux für bessere Lesbarkeit */
+            text-align: center;
+            margin-bottom: 0.7em;
+        }
+
+        .history-intro-text {
+            text-align: center; max-width: 700px; margin: 0 auto 40px auto;
+            font-size: 1rem; color: var(--color-text-secondary);
+        }
+
+        .history-timeline-container {
+            max-width: 800px; /* Maximale Breite für den Textfluss */
+            margin: 0 auto; /* Zentrierung */
+        }
+
+        .history-event {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--color-border-subtle);
+        }
+        .history-event:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .history-event-year {
+            font-family: var(--font-secondary);
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 600;
+            color: var(--color-bordeaux);
+            margin-bottom: 0.2em;
+            text-align: left; /* Oder center, je nach Designwunsch */
+        }
+
+        .history-event-title { /* Ist eine h3 in der Struktur */
+            font-family: var(--font-primary);
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.7em;
+            line-height: 1.3;
+             text-align: left; /* Oder center */
+        }
+
+        .history-event-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+            text-align: left; /* Oder center */
+        }
+        .history-event-description p { margin-bottom: 1em; }
+        .history-event-description p:last-child { margin-bottom: 0; }
+
+        /* Anpassung für Footer-Überschriften wird durch main.css gehandhabt */
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+
+    <header class="site-header" id="site-header" role="banner">
+        <div class="header-content-wrapper">
+            <div class="header-left">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+                    <div class="hamburger-icon" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="menu-trigger-text">MENÜ</span>
+                </button>
+            </div>
+            <div class="header-center">
+                <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
+                </a>
+            </div>
+            <div class="header-right">
+                <a href="../kontakt-anreise.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- TYPO3 Hinweis: Fullscreen Navigation wurde für Unterseiten entfernt (nur auf Startseite) -->
+
+    <main id="main-content" role="main">
+        <section class="page-hero-section" aria-label="Historische Ansicht des Hotels als Bannerbild">
+            <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historische Ansicht des Hotel Sonne Post" class="page-hero-image" width="1600" height="450" loading="eager">
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content container">
+                <!-- Inhalt des Hero-Banners ist jetzt leer -->
+            </div>
+        </section>
+
+        <!-- GEÄNDERT: Sektion umbenannt und aria-labelledby entfernt -->
+        <section class="history-section">
+            <div class="container">
+                <h1 id="page-main-heading-historie" class="page-main-heading">Unsere Geschichte</h1>
+                <p class="history-intro-text">
+                    Gegründet im Jahr 1870, steht unser Haus für eine lange Tradition aus Handwerkskunst und Innovation. Entdecken Sie unsere Geschichte und erleben Sie die gelebte Tradition der Exzellenz, die das Hotel Sonne Post auszeichnet.
+                </p>
+
+                <div class="history-timeline-container" id="history-content-area">
+                    <!-- Inhalte werden hier per JavaScript eingefügt oder direkt im HTML, wenn kein JS für die Darstellung verwendet wird -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- GEÄNDERT: sr-only H2 entfernt, Spaltenüberschriften zu H2 geändert -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container-footer">
+            <div class="footer-column">
+                <h2 class="footer-column-title">Hotel Sonne Post</h2>
+                <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
+            </div>
+            <div class="footer-column">
+                 <h2 class="footer-column-title">Entdecken</h2>
+                <ul> <li><a href="../zimmer-preise.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="../kulinarik.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h2 class="footer-column-title">Information</h2>
+                 <ul> <li><a href="../kontakt-anreise.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./historie.html">Unsere Geschichte</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h2 class="footer-column-title">Rechtliches</h2>
+                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
+                <div class="social-links">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <!-- TYPO3 Hinweis: Skripte für GSAP, Iconify etc. werden nicht mehr für diese einfache Seite benötigt, es sei denn, es gibt andere Animationen. -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script> -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script> <!-- Für Footer Icons etc. -->
+    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
+
+    <script src="../js/main.js" defer></script> <!-- Globale JS-Datei für Header, Footer etc. -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const timelineData = [
+            { year: "1870", title: "Die Geschichte der Sonne-Post beginnt", description: "Die Geschichte der Sonne-Post beginnt schon im Jahre 1870, als Stefan Wehrle (1828-1913), der zuvor noch Glashofbauer, Uhrenhändler und Frachtfuhrmann gewesen war, das Gasthaus „Zur Sonne“ eröffnete. Gleichzeitig wurde die „Sonne“ Posthaltestation der Großherzoglich Badischen Post, was 100 Jahre später auch zum Namen Sonne-Post führen sollte. Neben der Gastwirtschaft betrieb Stefan Wehrle die Landwirtschaft weiter." },
+            { year: "1903", title: "Neuer „Sonnenwirt“ und Posthalter", description: "Der jüngste Sohn Stefan (1878-1916) übernahm 1903 das Gasthaus und wurde somit neuer „Sonnenwirt“ und Posthalter. Als Stefan Wehrle im Ersten Weltkrieg an seinen Kriegsverletzungen gestorben war, regierte seine Witwe Berta Wehrle (1880-1952) weitere 22 Jahre als Sonnenwirtin und Posthalterin. In dieser Zeit begründete sie auch die Fremdenpension." },
+            { year: "1938", title: "August und Augusta Wehrle übernehmen", description: "Im Jahre 1938 stieg der zweitjüngste Sohn August (1909-1992) zusammen mit seiner Frau Augusta, eine Wirtstochter der „Kalten Herberge“ in Urach, in den Betrieb ein. Er übernahm sowohl den Posten als „Sonnenwirt“ als auch den des Posthalters. Zudem war er 20 Jahre lang (1952 – 1972) Bürgermeister von Waldau. Bereits im September 1939 wurde August zur Armee gerufen und Augusta musste während des Zweiten Weltkrieges bis zur Heimkehr ihres Mannes am Heiligen Abend 1945 das Gasthaus alleine weiterführen. Neben der vielen Arbeit im Gasthaus wurden August und Augusta Eltern von acht Kindern." },
+            { year: "1972", title: "Namensänderung zu Gasthaus Sonne-Post", description: "Über 100 Jahre nach Eröffnung des Gasthauses zur Sonne erfolgte die Änderung des bisherigen Namens in die Bezeichnung Gasthaus Sonne-Post." },
+            { year: "1975", title: "Hochzeit von Gerhard und Ursula", description: "Im April heiratete Sohn Gerhard seine Ursula (geb. Drescher) aus Hinterzarten." },
+            { year: "1976", title: "Gerhard und Ursula Wehrle übernehmen", description: "Gerhard und Ursula Wehrle traten 1976 in die Fußstapfen der Eltern und übernahmen zusammen das Zepter in der Sonne-Post. Gerhard Wehrle führte außerdem bis 1994 die kleine Poststelle in Waldau weiter. Im selben Jahr erblickte Tochter Natalie das Licht der Welt." },
+            { year: "1978", title: "Ausbau des Gasthauses", description: "Nach Aufgabe der Landwirtschaft im Jahr 1971, erfolgte 1978 der Abriss der Stallungen – somit war Platz für den Ausbau des Gasthauses. Mit dem Poststüble und 10 neuen Zimmern mit Blick ins Langenordnachtal entstand die Talseite des Stammhauses." },
+            { year: "1980", title: "Geburt von Tochter Yvonne", description: "Geburt der zweiten Tochter Yvonne." },
+            { year: "1982", title: "Geburt von Tochter Anja", description: "Geburt der dritten Tochter Anja." },
+            { year: "1985", title: "Neues Dachstudio", description: "Erneuerung des kompletten Dachstuhls mit Ausbau eines neuen, geräumigen Dachstudios." },
+            { year: "1991-1992", title: "Großfeuer und Wiederaufbau", description: "In der Nacht zum 17.08.1991 zerstörte ein Großfeuer die Sonne-Post weitgehend. Nach einem Jahr harter Arbeit konnte Familie Wehrle mit dem gesamte Sonne-Post Team, Freunden, Gästen und den fleißigen Helfern am 15.08.1992 Neueröffnung feiern." },
+            { year: "1997", title: "Renovierung Poststüble", description: "Fünf Jahre nach der Neueröffnung bekam auch das Poststüble nach Renovierung und Einbau eines Kachelofens ein neues Gesicht." },
+            { year: "1999-2000", title: "Neues Ferienhaus", description: "Nachdem im Jahr 1999 das alte Sonnenhäusle abgerissen wurde, entstand 2000 das neue Ferienhaus mit vier gemütlichen Ferienwohnungen." },
+            { year: "2007", title: "Hochzeit von Tochter Natalie", description: "Im November heiratete Tochter Natalie Hubert Fehrenbach vom Fürdererhof in Waldau." },
+            { year: "2008", title: "Neugestaltung Hoteleingang", description: "Renovierung und Neugestaltung des Hoteleinganges mit Rezeption." },
+            { year: "2010", title: "Hochzeit von Tochter Yvonne & neuer Spielplatz", description: "Im Mai heiratete Tochter Yvonne Thomas Eiche aus Basel. Im selben Jahr erfolgt die Neugestaltung des Kinderspielplatzes." },
+            { year: "2013", title: "Klassifizierung 3 Sterne Superior", description: "Erreichen der Klassifizierung zum 3 Stern Superior Hotel." },
+            { year: "2014", title: "Zimmerrenovierung", description: "Sanfte Renovierung einiger Hotelzimmer sowie deren Balkone." },
+            { year: "2016", title: "Familien-Appartement & neue Böden", description: "Umbau eines Doppelzimmer-Appartements zum Familien-Appartement sowie Erneuerung der Böden im Dachgeschoss." },
+            { year: "2017", title: "Renovierung Außenfassade", description: "Renovierung und Auffrischung der Außenfassade." },
+            { year: "2018", title: "Yvonne und Thomas Eiche steigen ein", description: "Tochter Yvonne zieht zusammen mit Ihrem Mann Thomas Eiche und den beiden Kindern von Basel zurück nach Waldau. Gemeinsam steigen sie in den Familienbetrieb mit ein." },
+            { year: "2019", title: "Yvonne und Thomas Eiche übernehmen Leitung", description: "Zu Beginn der Wintersaison 2019 übernehmen Yvonne und Thomas Eiche die Leitung des Familienbetriebs. Miteinander führen Sie die Familientradition fort." },
+            { year: "2020", title: "Große An- und Neubaumaßnahmen", description: "Im März starten die großen An- und Neubaumaßnahmen. Es wird ein Anbau geschaffen in dem 6 neue und großzügige Doppelzimmer und Familienappartements sowie ein Schwimmbad- und Saunabereich untergebracht werden. Das Stammhaus wird mit dem neuen Gebäude verbunden, wodurch ein offener Lobbybereich entsteht. Im Untergeschoss befindet sich neu ein Indoor-Pool sowie ein Kinderbecken, ein Saunabereich mit Finnischer Sauna, Infrarotsitzen, Sanarium und Ruheraum. Der gesamte Wellnessbereich ist sehr großzügig gestaltet, mit Wohlfühlnischen, verschiedenen Sitz- und Liegemöglichkeiten und freiem Blick ins Tal.<br>Bei der Energiegewinnung setzen wir auf Nachhaltigkeit und Umweltbewusstsein. Im Herbst wurden auf unserem Gelände 23 Erdsondenbohrungen gemacht, so dass wir als Energiequelle im Neubau inklusive Schwimmbad- und Saunabereich Erdwärme nutzen können. Im Stammhaus wurde die Ölheizung entfernt. In diesem Gebäudeteil wird die Wärme über ein Gastank gewonnen. Ebenfalls ist ein BHKW im Einsatz." },
+            { year: "2022", title: "Umbau zu modernen Doppelzimmern", description: "Im Stammhaus werden zwei ehemalige Mitarbeiterzimmer zu zwei modernen Doppelzimmer umgebaut." },
+            { year: "2023", title: "Komplette Küchenmodernisierung", description: "Nach 32 Jahren wurde innerhalb von 5 Wochen im November und Dezember die komplette Küche entfernt und auf Rohbau zurückgebaucht. Leitungen wurden neu verlegt und eine neue Küche mit neuester Technik wurde eingebaut, so dass unser Küchenteam modernere Arbeitsmethoden anwenden kann." }
+        ];
+
+        const historyContentArea = document.getElementById('history-content-area');
+
+        if (historyContentArea && timelineData && timelineData.length > 0) {
+            timelineData.forEach(item => {
+                const eventDiv = document.createElement('article');
+                eventDiv.classList.add('history-event');
+                eventDiv.setAttribute('aria-labelledby', `event-title-${item.year.replace(/\s|-/g, '')}`);
+
+                const yearH2 = document.createElement('h2'); // Jahreszahl als h2
+                yearH2.classList.add('history-event-year');
+                yearH2.textContent = item.year;
+
+                const titleH3 = document.createElement('h3'); // Titel als h3
+                titleH3.classList.add('history-event-title');
+                titleH3.id = `event-title-${item.year.replace(/\s|-/g, '')}`;
+                titleH3.textContent = item.title;
+
+                const descriptionDiv = document.createElement('div');
+                descriptionDiv.classList.add('history-event-description');
+                descriptionDiv.innerHTML = item.description.split('\n').map(p => `<p>${p.replace(/<br\s*\/?>/gi, '<br>')}</p>`).join('');
+
+                eventDiv.appendChild(yearH2);
+                eventDiv.appendChild(titleH3);
+                eventDiv.appendChild(descriptionDiv);
+                historyContentArea.appendChild(eventDiv);
+            });
+        } else if (historyContentArea) {
+            historyContentArea.innerHTML = "<p>Die Geschichte unseres Hauses wird bald an dieser Stelle für Sie verfügbar sein.</p>";
+        }
+
+        // GSAP Animation für die linear dargestellten Geschichts-Events
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+             gsap.utils.toArray('.history-event').forEach((eventEl, index) => {
+                gsap.from(eventEl, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 0.7,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: eventEl,
+                        start: "top 85%", // Trigger, wenn 85% des Elements von oben sichtbar werden
+                        toggleActions: "play none none none",
+                        once: true // Animation nur einmal abspielen
+                    }
+                });
+            });
+        }
+
+    });
+    </script>
+</body>
+</html>

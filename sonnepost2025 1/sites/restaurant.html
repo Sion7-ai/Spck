@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant & Kulinarik | Hotel Sonne Post</title>
+    <meta name="description" content="Genießen Sie badische Gastlichkeit und regionale Spezialitäten in unserem gemütlichen Restaurant im Schwarzwald.">
+
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        /* === TYPO3 Hinweis: Spezifische Stile für die Restaurant-Seite === */
+        body {
+            /* Standard-Hintergrund wird von main.css oder einer spezifischen Sektion gesetzt */
+        }
+        /* Header Styling für Unterseiten */
+        .site-header {
+            background-color: var(--color-header-bg-scrolled);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background-image: none;
+        }
+        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
+            color: var(--color-header-icon-scrolled);
+        }
+         .site-header .hamburger-icon span {
+            background: var(--color-header-icon-scrolled);
+        }
+        .site-header .header-center .central-logo .logo-initial {
+            display: block; opacity: 0; position: absolute; pointer-events: none;
+        }
+        .site-header .header-center .central-logo .logo-scrolled {
+            display: block; opacity: 1; position: relative;
+        }
+        .site-header .header-right .contact-icon-btn iconify-icon {
+            color: var(--color-header-contact-icon-scrolled);
+        }
+
+        /* === Stile für Kulinarik Sektionen (Hero-ähnlich mit Bild) === */
+        .kulinarik-section {
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0; /* Stellt sicher, dass die erste Sektion direkt unter dem Header beginnt */
+        }
+        .kulinarik-section:first-of-type {
+             padding-top: var(--header-height); /* Nur die erste Kulinarik-Sektion braucht den Abstand für den fixen Header */
+        }
+
+
+        .kulinarik-section.has-bg-image {
+            min-height: 80vh;
+            color: var(--text-on-dark-bg, #F7F2EC);
+        }
+        .kulinarik-section.has-bg-image::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--dark-overlay-bg, rgba(20, 20, 20, 0.65));
+            z-index: 1;
+        }
+
+        .kulinarik-background-image {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .kulinarik-section .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            /* padding-top wird jetzt von .kulinarik-section:first-of-type gehandhabt für die erste Sektion */
+            padding-bottom: 60px;
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 100%;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+         /* Spezifisches Padding für Container in der ersten Kulinarik-Sektion, falls es sich vom globalen .kulinarik-section:first-of-type unterscheidet */
+        .kulinarik-section:first-of-type .container {
+            padding-top: 60px; /* Behält den Abstand von der Header-Oberkante zum Text bei */
+        }
+
+
+        .kulinarik-text-content h1,
+        .kulinarik-text-content h2 {
+            font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+            margin-bottom: 0.4em;
+            color: inherit;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        .kulinarik-text-content h2.subtitle {
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 1em;
+            color: inherit;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+
+        .kulinarik-text-content p {
+            font-size: 1.1rem;
+            line-height: 1.75;
+            margin-bottom: 1.5em;
+            color: inherit;
+        }
+        .kulinarik-text-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 1.5em;
+        }
+        .kulinarik-text-content ul li {
+            margin-bottom: 0.5em;
+            font-size: 1rem;
+             color: inherit;
+        }
+        .kulinarik-text-content ul li strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.2em;
+            color: inherit;
+        }
+
+        .kulinarik-cta {
+            margin-top: 1.5em;
+        }
+
+        .kulinarik-section-oeffnungszeiten {
+            background-color: var(--color-beige);
+            padding-top: 80px;
+            padding-bottom: 80px;
+            min-height: auto;
+            color: var(--color-text-primary);
+        }
+        .kulinarik-section-oeffnungszeiten .container {
+            max-width: 850px;
+            text-align: left;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+         .kulinarik-section-oeffnungszeiten h2 {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: var(--color-bordeaux);
+            margin-bottom: 1.5em;
+            text-shadow: none;
+        }
+        .oeffnungszeiten-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            font-size: 0.95rem;
+        }
+        @media (min-width: 768px) {
+            .oeffnungszeiten-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 40px;
+            }
+        }
+        .oeffnungszeiten-block h3 {
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: 0.8em;
+            border-bottom: 1px solid var(--color-border-subtle);
+            padding-bottom: 0.5em;
+        }
+        .oeffnungszeiten-block ul { list-style: none; padding-left: 0; }
+        .oeffnungszeiten-block li { margin-bottom: 0.6em; }
+        .oeffnungszeiten-block li strong { font-weight: 600; color: var(--color-text-primary); }
+
+        .kulinarik-section-oeffnungszeiten .kulinarik-text-content {
+            text-align:center;
+            margin-top: 40px;
+            color: var(--color-text-secondary);
+        }
+         .kulinarik-section-oeffnungszeiten .kulinarik-text-content p a {
+            color: var(--color-bordeaux);
+        }
+        /* Anpassung für Footer-Überschriften wird durch main.css gehandhabt */
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+
+    <header class="site-header" id="site-header" role="banner">
+        <div class="header-content-wrapper">
+            <div class="header-left">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+                    <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+                    <span class="menu-trigger-text">MENÜ</span>
+                </button>
+            </div>
+            <div class="header-center">
+                <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
+                </a>
+            </div>
+            <div class="header-right">
+                <a href="../kontakt-anreise.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- TYPO3 Hinweis: Fullscreen Navigation wurde für Unterseiten entfernt (nur auf Startseite) -->
+
+    <main id="main-content" role="main">
+        <!-- GEÄNDERT: aria-labelledby entfernt -->
+        <section class="kulinarik-section has-bg-image">
+            <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');"></div>
+            <div class="container">
+                <div class="kulinarik-text-content">
+                    <h1 id="kulinarik-intro-heading">Badische Gastlichkeit...</h1>
+                    <h2 class="subtitle">...im gemütlichen Schwarzwälder Ambiente</h2>
+                    <p>Behaglich, hell und sonnig ist das Restaurant der Mittelpunkt unseres Hauses. Es ist mit viel Holz liebevoll und sehr gemütlich eingerichtet. Durch den Kachelofen und die holzgetäfelten Wände entsteht eine wohltuende, heimelige Schwarzwaldstimmung.</p>
+                    <p>Angefangen beim reichhaltigen Frühstücksbuffet (täglich von 08:00 Uhr bis 10:00 Uhr) bis hin zum abendlichen Menü werden Sie in unserem Restaurant von unserem Serviceteam herzlich umsorgt.</p>
+                    <div class="kulinarik-cta">
+                         <a href="#oeffnungszeiten" class="btn btn-outline-light">Öffnungszeiten & Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GEÄNDERT: aria-labelledby entfernt -->
+        <section class="kulinarik-section kulinarik-section-oeffnungszeiten" id="oeffnungszeiten">
+            <div class="container">
+                <h2 id="oeffnungszeiten-heading">Unsere Restaurant- & Küchenzeiten</h2>
+                <div class="oeffnungszeiten-grid">
+                    <div class="oeffnungszeiten-block">
+                        <h3>Öffnungszeiten Restaurant</h3>
+                        <ul>
+                            <li><strong>Montag:</strong> Ruhetag</li>
+                            <li><strong>Dienstag:</strong> 14:00 Uhr bis 22:00 Uhr</li>
+                            <li><strong>Mittwoch - Sonntag:</strong> 12:00 Uhr bis 22:00 Uhr</li>
+                        </ul>
+                    </div>
+                    <div class="oeffnungszeiten-block">
+                        <h3>Küchenzeiten Dienstag</h3>
+                        <ul>
+                            <li>14:00 - 17:30 Uhr: Kuchen, Vesper</li>
+                            <li>18:00 - 20:00 Uhr: Abendservice</li>
+                        </ul>
+                    </div>
+                    <div class="oeffnungszeiten-block">
+                        <h3>Küchenzeiten Mi - Fr</h3>
+                        <ul>
+                            <li>12:00 - 13:30 Uhr: Mittagservice</li>
+                            <li>13:30 - 17:30 Uhr: Kuchen, Vesper</li>
+                            <li>18:00 - 20:00 Uhr: Abendservice</li>
+                        </ul>
+                    </div>
+                    <div class="oeffnungszeiten-block">
+                        <h3>Küchenzeiten Sa & So</h3>
+                        <ul>
+                            <li>12:30 – 20:00 Uhr: Durchgehend warm</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="kulinarik-text-content">
+                    <p>Montags ist unser à la carte Restaurant geschlossen. Für unsere Hotelgäste bieten wir am Montagabend die Halbpension mit Wahl zwischen Fleischmenü oder vegetarischem Menü zur festen Tischzeit um 18:30 Uhr an.</p>
+                    <p>Ihre Tischreservierung nehmen wir gerne telefonisch unter der Telefonnummer<br> <a href="tel:+49766991020">+49 (0) 7669 91020</a> entgegen.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- GEÄNDERT: aria-labelledby entfernt -->
+        <section class="kulinarik-section has-bg-image">
+            <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');"></div>
+            <div class="container">
+                 <div class="kulinarik-text-content">
+                    <h2 id="kueche-heading">Ein Blick in unsere Küche</h2>
+                    <p>Kommen Sie mit und erfahren Sie mehr über unsere Philosophie und die frischen, regionalen Zutaten, die unsere Gerichte so besonders machen.</p>
+                     <div class="kulinarik-cta">
+                         <a href="/speisekarte-beispiel.pdf" class="btn btn-outline-light" target="_blank" rel="noopener">Speisekarte (Beispiel)</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- GEÄNDERT: sr-only H2 entfernt, Spaltenüberschriften zu H2 geändert -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="container-footer">
+            <div class="footer-column">
+                <h2 class="footer-column-title">Hotel Sonne Post</h2>
+                <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
+            </div>
+            <div class="footer-column">
+                 <h2 class="footer-column-title">Entdecken</h2>
+                <ul> <li><a href="./zimmer.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h2 class="footer-column-title">Information</h2>
+                 <ul> <li><a href="../kontakt-anreise.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./historie.html">Unsere Geschichte</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h2 class="footer-column-title">Rechtliches</h2>
+                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
+                <div class="social-links">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
+
+    <script src="../js/main.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.utils.toArray('.kulinarik-section.has-bg-image .kulinarik-text-content').forEach((el) => {
+                    gsap.from(el.children, { // Animiert die Kinder des Text-Containers
+                        opacity: 0,
+                        y: 50,
+                        duration: 0.8,
+                        stagger: 0.15, // Elemente erscheinen nacheinander
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: el.closest('.kulinarik-section'),
+                            start: "top 75%",
+                            toggleActions: "play none none none",
+                            once: true
+                        }
+                    });
+                });
+
+                 gsap.from('.kulinarik-section-oeffnungszeiten .container > *', { // Animiert Kinder des Containers
+                    opacity: 0,
+                    y: 40,
+                    duration: 0.7,
+                    stagger: 0.1,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: '.kulinarik-section-oeffnungszeiten .container',
+                        start: "top 80%",
+                        toggleActions: "play none none none",
+                        once: true
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

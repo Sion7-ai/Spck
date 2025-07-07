@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geschichte | Hotel Sonne Post</title>
+    <meta name="description" content="Entdecken Sie die reiche Geschichte des Hotel Sonne Post, von den Anfängen im Jahr 1870 bis heute.">
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        /* === TYPO3 Hinweis: Spezifische Stile für die Timeline-Seite === */
+        body {
+            background-color: var(--color-white);
+        }
+
+        .site-header {
+            background-color: var(--color-header-bg-scrolled);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            background-image: none;
+        }
+        .site-header .header-left .menu-trigger-wrapper .menu-trigger-text {
+            color: var(--color-header-icon-scrolled);
+        }
+         .site-header .hamburger-icon span {
+            background: var(--color-header-icon-scrolled);
+        }
+        .site-header .header-center .central-logo .logo-initial {
+            display: block; opacity: 0; position: absolute; pointer-events: none;
+        }
+        .site-header .header-center .central-logo .logo-scrolled {
+            display: block; opacity: 1; position: relative;
+        }
+        .site-header .header-right .contact-icon-btn iconify-icon {
+            color: var(--color-header-contact-icon-scrolled);
+        }
+
+        /* === Stile für einfachen Page-Hero auf Unterseiten (jetzt ohne Text) === */
+        .page-hero-section {
+            position: relative; width: 100%; height: 40vh;
+            min-height: 300px; max-height: 450px; /* Höhe leicht reduziert, da kein Text mehr drin */
+            overflow: hidden;
+            margin-top: var(--header-height);
+        }
+        .page-hero-image {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: 1;
+        }
+        .page-hero-overlay {
+            /* display: none; */ /* Overlay entfernt für klares Bild */
+            /* oder background-color: transparent; */
+            /* Für dieses Beispiel lasse ich es weg, da kein Text mehr im Hero ist, der Kontrast bräuchte */
+             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+             background-color: transparent; /* Explizit transparent */
+             z-index: 2;
+        }
+        .page-hero-content { /* Dieser Container ist jetzt leer, kann aber für zukünftige Erweiterungen bleiben */
+            display: none; /* Da keine sichtbare Überschrift mehr im Hero ist */
+        }
+
+
+        /* === Timeline Sektion spezifische Stile === */
+        .timeline-section { padding-top: 60px; padding-bottom: 60px; }
+
+        /* Neue Hauptüberschrift H1 für die Seite, über dem Intro-Text */
+        .page-main-heading {
+            font-family: var(--font-secondary);
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            color: var(--color-text-primary);
+            text-align: center;
+            margin-bottom: 0.7em; /* Abstand zum Intro-Text */
+        }
+
+        .timeline-intro-text {
+            text-align: center; max-width: 700px; margin: 0 auto 40px auto;
+            font-size: 1rem; color: var(--color-text-secondary);
+        }
+        .timeline-navigation-wrapper {
+            position: relative; margin-top: 30px; margin-bottom: 50px; padding: 10px 0;
+        }
+        .timeline-navigation {
+            display: flex; overflow-x: auto; padding-bottom: 15px;
+            -webkit-overflow-scrolling: touch; scrollbar-width: thin;
+            scrollbar-color: var(--color-border-subtle) transparent;
+            list-style: none; justify-content: flex-start;
+        }
+        @media (min-width: 992px) { .timeline-navigation { justify-content: center; } }
+        .timeline-navigation::-webkit-scrollbar { height: 6px; }
+        .timeline-navigation::-webkit-scrollbar-track { background: transparent; }
+        .timeline-navigation::-webkit-scrollbar-thumb { background-color: var(--color-border-subtle); border-radius: 3px; }
+        .timeline-navigation li { flex-shrink: 0; }
+        .timeline-year-btn {
+            background: none; border: none; padding: 10px 18px; margin: 0 5px;
+            font-family: var(--font-primary); font-size: 1rem; color: var(--color-text-secondary);
+            cursor: pointer; transition: color 0.3s ease, font-weight 0.3s ease, background-color 0.3s ease;
+            position: relative; border-radius: 4px;
+        }
+        .timeline-year-btn:hover, .timeline-year-btn:focus-visible { color: var(--color-bordeaux); background-color: rgba(140, 30, 45, 0.05); }
+        .timeline-year-btn.active { color: var(--color-bordeaux); font-weight: 700; }
+        .static-year-indicator {
+            position: absolute; top: -30px; left: 50%; transform: translateX(-50%);
+            width: 2px; height: 40px; background-color: var(--color-bordeaux);
+        }
+        .timeline-content-display { text-align: center; max-width: 750px; margin: 0 auto; position: relative; min-height: 250px; }
+        .displayed-year {
+            font-family: var(--font-secondary); font-size: clamp(3.5rem, 10vw, 5.5rem); font-weight: 400;
+            color: var(--color-border-subtle); margin-bottom: 0.1em; line-height: 1;
+        }
+        .timeline-item-title { /* Ist eine h3 in der Struktur */
+            font-family: var(--font-primary); font-size: clamp(1.4rem, 3.5vw, 1.9rem); font-weight: 700;
+            color: var(--color-text-primary); margin-bottom: 0.7em;
+        }
+        .timeline-item-description { font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); }
+        .timeline-item-description p { margin-bottom: 1em; }
+        .timeline-item-description p:last-child { margin-bottom: 0; }
+        .timeline-controls { display: flex; justify-content: center; align-items: center; margin-top: 40px; }
+        .timeline-nav-arrow {
+            background: none; border: 1px solid var(--color-border-subtle); color: var(--color-text-secondary);
+            width: 44px; height: 44px; border-radius: 50%; display: inline-flex;
+            align-items: center; justify-content: center; cursor: pointer;
+            transition: all 0.2s ease; margin: 0 12px;
+        }
+        .timeline-nav-arrow iconify-icon { font-size: 1.6rem; }
+        .timeline-nav-arrow:hover, .timeline-nav-arrow:focus-visible { background-color: var(--color-bordeaux); border-color: var(--color-bordeaux); color: var(--color-white); }
+        .timeline-nav-arrow:disabled { opacity: 0.4; cursor: not-allowed; background-color: transparent; border-color: var(--color-border-subtle); color: var(--color-text-secondary); }
+
+        .footer-column h4 {
+             font-family: var(--font-primary); font-weight: 700; font-size: 1rem;
+             margin-bottom: 15px; color: var(--color-text-primary);
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
+
+    <header class="site-header" id="site-header" role="banner">
+        <div class="header-content-wrapper">
+            <div class="header-left">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
+                    <div class="hamburger-icon" aria-hidden="true">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <span class="menu-trigger-text">MENÜ</span>
+                </button>
+            </div>
+            <div class="header-center">
+                <a href="../index.html" class="central-logo" aria-label="Hotel Sonne Post - Zur Startseite">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_w.svg" alt="Logo Hotel Sonne Post Weiß" class="logo-initial" width="150" height="40">
+                    <img src="https://sion7-ai.github.io/Spck/sonnepost2025/assets/sonne_post_logo_r.svg" alt="Logo Hotel Sonne Post Rot" class="logo-scrolled" width="150" height="40">
+                </a>
+            </div>
+            <div class="header-right">
+                <a href="../kontakt-anreise.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <section class="page-hero-section" aria-label="Historische Ansicht des Hotels als Bannerbild">
+            <img src="https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Ueber-Uns/Geschichte-Traditionslogo.jpg" alt="Historische Ansicht des Hotel Sonne Post" class="page-hero-image" width="1600" height="450" loading="eager">
+            <div class="page-hero-overlay"></div>
+            <!-- Inhalt des Hero-Banners ist jetzt leer, da die Überschrift verschoben wurde -->
+            <div class="page-hero-content container">
+                <!-- <h1 id="page-hero-heading-historie" class="page-hero-title">Unsere Geschichte</h1> -->
+            </div>
+        </section>
+
+        <section class="timeline-section" aria-labelledby="page-main-heading-historie">
+            <div class="container">
+                <h1 id="page-main-heading-historie" class="page-main-heading">Unsere Geschichte</h1>
+                <p class="timeline-intro-text">
+                    Gegründet im Jahr 1870, steht unser Haus für eine lange Tradition aus Handwerkskunst und Innovation. Entdecken Sie unsere Geschichte und erleben Sie die gelebte Tradition der Exzellenz, die das Hotel Sonne Post auszeichnet.
+                </p>
+
+                <div class="timeline-navigation-wrapper" role="tablist" aria-label="Jahresauswahl der Hotelgeschichte">
+                    <div class="static-year-indicator" id="static-year-indicator" aria-hidden="true"></div>
+                    <ul class="timeline-navigation" id="timeline-years-list"></ul>
+                </div>
+
+                <div class="timeline-content-display" id="timeline-content-display" role="tabpanel" aria-live="polite">
+                    <div class="timeline-item-content" id="timeline-item-content-placeholder">
+                        <div class="displayed-year" id="displayed-year-text" aria-hidden="true"></div>
+                        <h2 class="timeline-item-title" id="timeline-item-title-text"></h2> <!-- Geändert zu H2, da H1 jetzt "Unsere Geschichte" ist -->
+                        <div class="timeline-item-description" id="timeline-item-description-text"></div>
+                    </div>
+                </div>
+
+                <div class="timeline-controls">
+                    <button class="timeline-nav-arrow" id="timeline-prev" aria-label="Vorheriges Jahr">
+                        <iconify-icon icon="feather:arrow-left" aria-hidden="true"></iconify-icon>
+                    </button>
+                    <button class="timeline-nav-arrow" id="timeline-next" aria-label="Nächstes Jahr">
+                        <iconify-icon icon="feather:arrow-right" aria-hidden="true"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo" aria-labelledby="footer-heading">
+         <h2 id="footer-heading" class="sr-only">Fußbereich</h2>
+        <div class="container-footer">
+            <div class="footer-column">
+                <h4>Hotel Sonne Post</h4>
+                <address> Hotel Sonne-Post <br>Fam. Eiche & Wehrle<br> Landstr. 13<br> D-79822 Titisee-Neustadt / Waldau<br> <br> Tel: <a href="tel:+49766991020">+49 7669 91020</a><br> E-Mail: <a href="mailto:info@sonne-post.de">info@sonne-post.de</a> </address>
+            </div>
+            <div class="footer-column">
+                 <h4>Entdecken</h4>
+                <ul> <li><a href="../zimmer-preise.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="../kulinarik.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Information</h4>
+                 <ul> <li><a href="../kontakt-anreise.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./historie.html">Unsere Geschichte</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Rechtliches</h4>
+                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <h4 style="margin-top: 20px;">Folgen Sie uns</h4>
+                <div class="social-links">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© <span id="current-year"></span> Hotel Sonne Post. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
+
+    <script src="../js/main.js" defer></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const timelineData = [
+            { year: "1870", title: "Die Geschichte der Sonne-Post beginnt", description: "Die Geschichte der Sonne-Post beginnt schon im Jahre 1870, als Stefan Wehrle (1828-1913), der zuvor noch Glashofbauer, Uhrenhändler und Frachtfuhrmann gewesen war, das Gasthaus „Zur Sonne“ eröffnete. Gleichzeitig wurde die „Sonne“ Posthaltestation der Großherzoglich Badischen Post, was 100 Jahre später auch zum Namen Sonne-Post führen sollte. Neben der Gastwirtschaft betrieb Stefan Wehrle die Landwirtschaft weiter." },
+            { year: "1903", title: "Neuer „Sonnenwirt“ und Posthalter", description: "Der jüngste Sohn Stefan (1878-1916) übernahm 1903 das Gasthaus und wurde somit neuer „Sonnenwirt“ und Posthalter. Als Stefan Wehrle im Ersten Weltkrieg an seinen Kriegsverletzungen gestorben war, regierte seine Witwe Berta Wehrle (1880-1952) weitere 22 Jahre als Sonnenwirtin und Posthalterin. In dieser Zeit begründete sie auch die Fremdenpension." },
+            { year: "1938", title: "August und Augusta Wehrle übernehmen", description: "Im Jahre 1938 stieg der zweitjüngste Sohn August (1909-1992) zusammen mit seiner Frau Augusta, eine Wirtstochter der „Kalten Herberge“ in Urach, in den Betrieb ein. Er übernahm sowohl den Posten als „Sonnenwirt“ als auch den des Posthalters. Zudem war er 20 Jahre lang (1952 – 1972) Bürgermeister von Waldau. Bereits im September 1939 wurde August zur Armee gerufen und Augusta musste während des Zweiten Weltkrieges bis zur Heimkehr ihres Mannes am Heiligen Abend 1945 das Gasthaus alleine weiterführen. Neben der vielen Arbeit im Gasthaus wurden August und Augusta Eltern von acht Kindern." },
+            { year: "1972", title: "Namensänderung zu Gasthaus Sonne-Post", description: "Über 100 Jahre nach Eröffnung des Gasthauses zur Sonne erfolgte die Änderung des bisherigen Namens in die Bezeichnung Gasthaus Sonne-Post." },
+            { year: "1975", title: "Hochzeit von Gerhard und Ursula", description: "Im April heiratete Sohn Gerhard seine Ursula (geb. Drescher) aus Hinterzarten." },
+            { year: "1976", title: "Gerhard und Ursula Wehrle übernehmen", description: "Gerhard und Ursula Wehrle traten 1976 in die Fußstapfen der Eltern und übernahmen zusammen das Zepter in der Sonne-Post. Gerhard Wehrle führte außerdem bis 1994 die kleine Poststelle in Waldau weiter. Im selben Jahr erblickte Tochter Natalie das Licht der Welt." },
+            { year: "1978", title: "Ausbau des Gasthauses", description: "Nach Aufgabe der Landwirtschaft im Jahr 1971, erfolgte 1978 der Abriss der Stallungen – somit war Platz für den Ausbau des Gasthauses. Mit dem Poststüble und 10 neuen Zimmern mit Blick ins Langenordnachtal entstand die Talseite des Stammhauses." },
+            { year: "1980", title: "Geburt von Tochter Yvonne", description: "Geburt der zweiten Tochter Yvonne." },
+            { year: "1982", title: "Geburt von Tochter Anja", description: "Geburt der dritten Tochter Anja." },
+            { year: "1985", title: "Neues Dachstudio", description: "Erneuerung des kompletten Dachstuhls mit Ausbau eines neuen, geräumigen Dachstudios." },
+            { year: "1991-1992", title: "Großfeuer und Wiederaufbau", description: "In der Nacht zum 17.08.1991 zerstörte ein Großfeuer die Sonne-Post weitgehend. Nach einem Jahr harter Arbeit konnte Familie Wehrle mit dem gesamte Sonne-Post Team, Freunden, Gästen und den fleißigen Helfern am 15.08.1992 Neueröffnung feiern." },
+            { year: "1997", title: "Renovierung Poststüble", description: "Fünf Jahre nach der Neueröffnung bekam auch das Poststüble nach Renovierung und Einbau eines Kachelofens ein neues Gesicht." },
+            { year: "1999-2000", title: "Neues Ferienhaus", description: "Nachdem im Jahr 1999 das alte Sonnenhäusle abgerissen wurde, entstand 2000 das neue Ferienhaus mit vier gemütlichen Ferienwohnungen." },
+            { year: "2007", title: "Hochzeit von Tochter Natalie", description: "Im November heiratete Tochter Natalie Hubert Fehrenbach vom Fürdererhof in Waldau." },
+            { year: "2008", title: "Neugestaltung Hoteleingang", description: "Renovierung und Neugestaltung des Hoteleinganges mit Rezeption." },
+            { year: "2010", title: "Hochzeit von Tochter Yvonne & neuer Spielplatz", description: "Im Mai heiratete Tochter Yvonne Thomas Eiche aus Basel. Im selben Jahr erfolgt die Neugestaltung des Kinderspielplatzes." },
+            { year: "2013", title: "Klassifizierung 3 Sterne Superior", description: "Erreichen der Klassifizierung zum 3 Stern Superior Hotel." },
+            { year: "2014", title: "Zimmerrenovierung", description: "Sanfte Renovierung einiger Hotelzimmer sowie deren Balkone." },
+            { year: "2016", title: "Familien-Appartement & neue Böden", description: "Umbau eines Doppelzimmer-Appartements zum Familien-Appartement sowie Erneuerung der Böden im Dachgeschoss." },
+            { year: "2017", title: "Renovierung Außenfassade", description: "Renovierung und Auffrischung der Außenfassade." },
+            { year: "2018", title: "Yvonne und Thomas Eiche steigen ein", description: "Tochter Yvonne zieht zusammen mit Ihrem Mann Thomas Eiche und den beiden Kindern von Basel zurück nach Waldau. Gemeinsam steigen sie in den Familienbetrieb mit ein." },
+            { year: "2019", title: "Yvonne und Thomas Eiche übernehmen Leitung", description: "Zu Beginn der Wintersaison 2019 übernehmen Yvonne und Thomas Eiche die Leitung des Familienbetriebs. Miteinander führen Sie die Familientradition fort." },
+            { year: "2020", title: "Große An- und Neubaumaßnahmen", description: "Im März starten die großen An- und Neubaumaßnahmen. Es wird ein Anbau geschaffen in dem 6 neue und großzügige Doppelzimmer und Familienappartements sowie ein Schwimmbad- und Saunabereich untergebracht werden. Das Stammhaus wird mit dem neuen Gebäude verbunden, wodurch ein offener Lobbybereich entsteht. Im Untergeschoss befindet sich neu ein Indoor-Pool sowie ein Kinderbecken, ein Saunabereich mit Finnischer Sauna, Infrarotsitzen, Sanarium und Ruheraum. Der gesamte Wellnessbereich ist sehr großzügig gestaltet, mit Wohlfühlnischen, verschiedenen Sitz- und Liegemöglichkeiten und freiem Blick ins Tal.<br>Bei der Energiegewinnung setzen wir auf Nachhaltigkeit und Umweltbewusstsein. Im Herbst wurden auf unserem Gelände 23 Erdsondenbohrungen gemacht, so dass wir als Energiequelle im Neubau inklusive Schwimmbad- und Saunabereich Erdwärme nutzen können. Im Stammhaus wurde die Ölheizung entfernt. In diesem Gebäudeteil wird die Wärme über ein Gastank gewonnen. Ebenfalls ist ein BHKW im Einsatz." },
+            { year: "2022", title: "Umbau zu modernen Doppelzimmern", description: "Im Stammhaus werden zwei ehemalige Mitarbeiterzimmer zu zwei modernen Doppelzimmer umgebaut." },
+            { year: "2023", title: "Komplette Küchenmodernisierung", description: "Nach 32 Jahren wurde innerhalb von 5 Wochen im November und Dezember die komplette Küche entfernt und auf Rohbau zurückgebaucht. Leitungen wurden neu verlegt und eine neue Küche mit neuester Technik wurde eingebaut, so dass unser Küchenteam modernere Arbeitsmethoden anwenden kann." }
+        ];
+
+        const timelineYearsList = document.getElementById('timeline-years-list');
+        const displayedYearText = document.getElementById('displayed-year-text');
+        const timelineItemTitleText = document.getElementById('timeline-item-title-text');
+        const timelineItemDescriptionText = document.getElementById('timeline-item-description-text');
+        const timelineContentPlaceholder = document.getElementById('timeline-item-content-placeholder');
+        const prevButton = document.getElementById('timeline-prev');
+        const nextButton = document.getElementById('timeline-next');
+
+        let currentYearIndex = 0;
+
+        function displayYearData(index, direction = 'none') {
+            if (!timelineData || timelineData.length === 0 || index < 0 || index >= timelineData.length) { return; }
+            currentYearIndex = index;
+            const data = timelineData[index];
+            const tl = gsap.timeline();
+            let slideYOffset = 30;
+
+            tl.to(timelineContentPlaceholder, {
+                opacity: 0,
+                y: direction === 'next' ? -slideYOffset : (direction === 'prev' ? slideYOffset : 0),
+                duration: 0.3, ease: "power2.in",
+                onComplete: () => {
+                    if (displayedYearText) displayedYearText.textContent = data.year;
+                    if (timelineItemTitleText) timelineItemTitleText.textContent = data.title; // Titel ist jetzt H2
+                    if (timelineItemDescriptionText) {
+                        timelineItemDescriptionText.innerHTML = data.description.split('\n').map(p => `<p>${p.replace(/<br\s*\/?>/gi, '<br>')}</p>`).join('');
+                    }
+                    if(timelineContentPlaceholder) {
+                        gsap.fromTo(timelineContentPlaceholder,
+                            { opacity: 0, y: direction === 'next' ? slideYOffset : (direction === 'prev' ? -slideYOffset : 0) },
+                            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", delay: 0.05 }
+                        );
+                    }
+                }
+            });
+
+            if (timelineYearsList) {
+                const yearButtons = timelineYearsList.querySelectorAll('.timeline-year-btn');
+                yearButtons.forEach((btn, i) => {
+                    btn.classList.toggle('active', i === index);
+                    btn.setAttribute('aria-selected', (i === index).toString());
+                    if (i === index) { btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+                });
+            }
+            if (prevButton) prevButton.disabled = index === 0;
+            if (nextButton) nextButton.disabled = index === timelineData.length - 1;
+        }
+
+        if (timelineYearsList && timelineData && timelineData.length > 0) {
+            timelineData.forEach((item, index) => {
+                const li = document.createElement('li');
+                const button = document.createElement('button');
+                button.classList.add('timeline-year-btn');
+                button.textContent = item.year;
+                button.setAttribute('role', 'tab');
+                button.setAttribute('aria-controls', 'timeline-content-display');
+                button.id = `year-btn-${item.year.replace(/\s|-/g, '')}`;
+                button.addEventListener('click', () => {
+                    const direction = index > currentYearIndex ? 'next' : (index < currentYearIndex ? 'prev' : 'none');
+                    displayYearData(index, direction);
+                });
+                li.appendChild(button);
+                timelineYearsList.appendChild(li);
+            });
+            displayYearData(0, 'none');
+        } else {
+            if (timelineContentPlaceholder) timelineContentPlaceholder.innerHTML = "<p>Keine Daten für die Zeitleiste verfügbar.</p>";
+            if (prevButton) prevButton.style.display = 'none';
+            if (nextButton) nextButton.style.display = 'none';
+            if (timelineYearsList) timelineYearsList.style.display = 'none';
+            const staticIndicator = document.getElementById('static-year-indicator');
+            if (staticIndicator) staticIndicator.style.display = 'none';
+        }
+
+        if (prevButton) prevButton.addEventListener('click', () => displayYearData(currentYearIndex - 1, 'prev'));
+        if (nextButton) nextButton.addEventListener('click', () => displayYearData(currentYearIndex + 1, 'next'));
+    });
+    </script>
+</body>
+</html>
