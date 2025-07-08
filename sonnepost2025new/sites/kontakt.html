@@ -1,28 +1,19 @@
-
 <!DOCTYPE html>
-
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
-<title>Kontakt & Anreise | Hotel Sonne Post</title>
-<!-- TYPO3 Hinweis: Dynamische Meta Description -->
-<meta name="description" content="Kontaktieren Sie uns für Anfragen und Reservierungen im Hotel Sonne Post. Finden Sie alle wichtigen Kontaktdaten und Anreiseinformationen.">
-
-<link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="../css/main.css">
-
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt & Anreise | Hotel Sonne Post</title>
+    <meta name="description" content="Kontaktieren Sie uns für Anfragen und Reservierungen im Hotel Sonne Post. Finden Sie alle wichtigen Kontaktdaten und Anreiseinformationen.">
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Epilogue:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
     body {
         background-color: var(--color-white);
     }
-    /* Header Styling für Unterseiten */
     .site-header {
         background-color: var(--color-header-bg-scrolled);
         box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -35,12 +26,21 @@
         background: var(--color-header-icon-scrolled);
     }
     .site-header .header-center .central-logo .logo-initial {
-        display: block; opacity: 0; position: absolute; pointer-events: none;
+        opacity: 0;
+        position: absolute;
+        pointer-events: none;
     }
     .site-header .header-center .central-logo .logo-scrolled {
-        display: block; opacity: 1; position: relative;
+        opacity: 1;
+        position: relative;
     }
-    .site-header .header-right .contact-icon-btn iconify-icon {
+    .site-header.scrolled .header-center .central-logo .logo-initial {
+        opacity: 0;
+    }
+    .site-header.scrolled .header-center .central-logo .logo-scrolled {
+        opacity: 1;
+    }
+    .site-header .header-right .contact-icon-btn {
         color: var(--color-header-contact-icon-scrolled);
     }
 
@@ -83,6 +83,18 @@
         gap: 50px;
         margin: 0 auto;
     }
+    @media (min-width: 992px) {
+        .contact-grid {
+            grid-template-columns: 1.2fr 0.8fr;
+        }
+        .contact-form-column {
+            order: 1;
+        }
+        .contact-info-column {
+            order: 2;
+        }
+    }
+
 
     .contact-info-column,
     .contact-form-column {
@@ -108,20 +120,18 @@
     }
 
     .contact-info-top-grid { display: grid; grid-template-columns: 1fr; gap: 30px; margin-bottom: 2em; }
-    @media (min-width: 768px) { .contact-info-top-grid { grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; } }
+    @media (min-width: 768px) and (max-width: 991.98px) { .contact-info-top-grid { grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; } }
     .contact-info-address-block address { font-style: normal; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 0; }
     .contact-info-address-block address a { color: var(--color-bordeaux); }
     .contact-info-address-block address br { display: block; }
     .contact-info-anreise-block h4 { font-family: var(--font-primary); font-weight: 700; font-size: 1rem; color: var(--color-text-primary); margin-top: 0; margin-bottom: 1em; }
     .contact-info-anreise-block p { font-size: 1rem; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 1.5em; }
 
-    /* === NEU: Überarbeitete Formularstile === */
     .contact-form-column form {
         display: flex;
         flex-direction: column;
         gap: 35px;
     }
-
     .form-fieldset {
         border: 1px solid var(--color-border-subtle);
         padding: 25px 20px 20px 20px;
@@ -144,8 +154,6 @@
     @media (min-width: 550px) { .form-row.two-cols { grid-template-columns: 1fr 1fr; } }
     .form-group-full-width { grid-column: 1 / -1; }
     .form-group, .form-group-float { position: relative; }
-
-    /* Felder ohne Floating Label (select, date etc.) */
     .form-group input, .form-group select, .form-group textarea {
         width: 100%; padding: 12px 15px; border: 1px solid var(--color-border-subtle);
         border-radius: 4px; font-family: var(--font-primary); font-size: 1rem;
@@ -161,34 +169,32 @@
          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238C1E2D'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
          background-repeat: no-repeat; background-position: right 15px center; background-size: 24px; cursor: pointer;
     }
-
-    /* NEU: Floating Label Styling */
     .form-group-float input, .form-group-float textarea {
-    width: 100%; padding: 12px 15px; border: 1px solid var(--color-border-subtle);
-    border-radius: 4px; font-family: var(--font-primary); font-size: 1rem;
-    color: var(--color-text-primary); background-color: transparent;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    z-index: 1;
-}
+        width: 100%; padding: 12px 15px; border: 1px solid var(--color-border-subtle);
+        border-radius: 4px; font-family: var(--font-primary); font-size: 1rem;
+        color: var(--color-text-primary); background-color: transparent;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        z-index: 1;
+    }
     .form-group-float label {
-    position: absolute; top: 50%; left: 15px; transform: translateY(-50%);
-    color: var(--color-text-secondary); font-size: 1rem; padding: 0 5px; margin: 0;
-    transition: all 0.2s ease-out; pointer-events: none; background-color: transparent;
-    z-index: 0;
-}
-    .form-group-float textarea + label { top: 20px; } /* Korrektur für Textarea */
-    .form-group-float input:focus-visible, .form-group-float select:focus-visible, .form-group-float textarea:focus-visible {
+        position: absolute; top: 50%; left: 15px; transform: translateY(-50%);
+        color: var(--color-text-secondary); font-size: 1rem; padding: 0 5px; margin: 0;
+        transition: all 0.2s ease-out; pointer-events: none; background-color: transparent;
+        z-index: 0;
+    }
+    .form-group-float textarea + label { top: 20px; }
+    .form-group-float input:focus-visible, .form-group-float select:focus-visible, .form-group-float textarea:focus-visible, .form-group input:focus-visible, .form-group select:focus-visible, .form-group textarea:focus-visible {
         border-color: var(--color-bordeaux); outline: none; box-shadow: 0 0 0 3px rgba(140, 30, 45, 0.2);
     }
     .form-group-float input:focus-visible + label,
-.form-group-float textarea:focus-visible + label,
-.form-group-float input:not(:placeholder-shown) + label,
-.form-group-float textarea:not(:placeholder-shown) + label {
-    top: 0; left: 10px; transform: translateY(-50%); font-size: 0.8rem;
-    color: var(--color-bordeaux); background-color: #FDFBFA; /* Deckt Border ab */
-    z-index: 2;
-}
+    .form-group-float textarea:focus-visible + label,
+    .form-group-float input:not(:placeholder-shown) + label,
+    .form-group-float textarea:not(:placeholder-shown) + label {
+        top: 0; left: 10px; transform: translateY(-50%); font-size: 0.8rem;
+        color: var(--color-bordeaux); background-color: #FDFBFA;
+        z-index: 2;
+    }
     .form-group-float input::placeholder { color: transparent; }
 
     .hidden-field { display: none; }
@@ -199,7 +205,7 @@
     .captcha-image-wrapper { background-color: var(--color-sand); border: 1px solid var(--color-border-subtle); border-radius: 4px; padding: 5px 10px; display: flex; align-items: center; justify-content: center; width: 150px; flex-shrink: 0; }
     .captcha-refresh-btn { background: none; border: 1px solid var(--color-border-subtle); border-radius: 4px; color: var(--color-bordeaux); padding: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; flex-shrink: 0; width: auto; height: auto; }
     .captcha-refresh-btn:hover, .captcha-refresh-btn:focus-visible { background-color: var(--color-bordeaux); color: var(--color-white); border-color: var(--color-bordeaux); }
-    .captcha-refresh-btn iconify-icon { font-size: 1.4rem; }
+    .captcha-refresh-btn .icon-svg { font-size: 1.4rem; }
     .captcha-hint { font-size: 0.85rem; color: var(--color-text-secondary); margin-top: 5px; width: 100%; }
 
     .form-required-info { grid-column: 1 / -1; font-size: 0.85rem; color: var(--color-text-secondary); margin-top: -10px; }
@@ -207,19 +213,41 @@
     .form-submit-group.text-center { text-align: center; }
     .form-submit-group .btn { padding: 1em 2em; font-size: 1.1rem; min-width: 180px; }
 
-    /* CTA Sektion Stile (unverändert) */
-    .content-section.bg-sand-combined { padding: 70px 0; background-color: var(--color-sand); } .combined-row-grid { display: grid; grid-template-columns: 1fr; gap: 40px; } @media (min-width: 768px) { .combined-row-grid { grid-template-columns: 1fr 1fr; gap: 60px; } } .combined-column { padding: 30px; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; text-align: center; } .combined-column.combined-column-karriere { background-color: var(--color-sand); } .combined-column.combined-column-newsletter { background-color: var(--color-white); box-shadow: 0 4px 12px rgba(0,0,0,0.07); } .combined-column h2 { font-family: var(--font-secondary); font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--color-text-primary); margin-bottom: 0.75em; } .combined-column p { color: var(--color-text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5em; } .social-links-container .social-links { display: flex; gap: 20px; justify-content: center; } .social-links-container .social-links a iconify-icon { font-size: 2.2rem; color: var(--color-bordeaux); transition: transform 0.2s ease, color 0.2s ease; } .social-links-container .social-links a:hover iconify-icon { transform: scale(1.1); color: #701623; } .combined-column .form-newsletter { display: flex; max-width: 450px; margin: 0 auto 15px auto; } .combined-column .form-newsletter input[type="email"], .combined-column .form-newsletter button { font-family: var(--font-primary); font-size: 0.95rem; border: 1px solid; padding-top: 0.8em; padding-bottom: 0.8em; margin: 0; line-height: 1.4; box-sizing: border-box; } .combined-column .form-newsletter input[type="email"] { flex-grow: 1; border-color: var(--color-border-subtle); border-right: none; border-radius: 4px 0 0 4px; padding-left: 1em; padding-right: 1em; background-color: var(--color-white); } .combined-column .form-newsletter button { display: inline-flex; align-items: center; justify-content: center; border-radius: 0 4px 4px 0; padding-left: 1.2em; padding-right: 1.2em; border-color: var(--color-bordeaux); background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); cursor: pointer; } .combined-column #newsletter-privacy-info-kontakt { display: block; font-size: 0.8em; color: var(--color-text-secondary); max-width: 450px; margin: 0 auto; } .combined-column #newsletter-privacy-info-kontakt a { color: var(--color-text-secondary); text-decoration: underline; }
-
-</style>
+    .content-section.bg-sand-combined { padding: 70px 0; background-color: var(--color-sand); } .combined-row-grid { display: grid; grid-template-columns: 1fr; gap: 40px; } @media (min-width: 768px) { .combined-row-grid { grid-template-columns: 1fr 1fr; gap: 60px; } } .combined-column { padding: 30px; border-radius: 6px; display: flex; flex-direction: column; justify-content: center; text-align: center; } .combined-column.combined-column-karriere { background-color: var(--color-sand); } .combined-column.combined-column-newsletter { background-color: var(--color-white); box-shadow: 0 4px 12px rgba(0,0,0,0.07); } .combined-column h2 { font-family: var(--font-secondary); font-size: clamp(1.6rem, 3.5vw, 2.2rem); color: var(--color-text-primary); margin-bottom: 0.75em; } .combined-column p { color: var(--color-text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5em; } .social-links-container .social-links { display: flex; gap: 20px; justify-content: center; } .social-links-container .social-links .icon-svg { font-size: 2.2rem; color: var(--color-bordeaux); transition: transform 0.2s ease, color 0.2s ease; } .social-links-container .social-links a:hover .icon-svg { transform: scale(1.1); color: #701623; } .combined-column .form-newsletter { display: flex; max-width: 450px; margin: 0 auto 15px auto; } .combined-column .form-newsletter input[type="email"], .combined-column .form-newsletter button { font-family: var(--font-primary); font-size: 0.95rem; border: 1px solid; padding-top: 0.8em; padding-bottom: 0.8em; margin: 0; line-height: 1.4; box-sizing: border-box; } .combined-column .form-newsletter input[type="email"] { flex-grow: 1; border-color: var(--color-border-subtle); border-right: none; border-radius: 4px 0 0 4px; padding-left: 1em; padding-right: 1em; background-color: var(--color-white); } .combined-column .form-newsletter button { display: inline-flex; align-items: center; justify-content: center; border-radius: 0 4px 4px 0; padding-left: 1.2em; padding-right: 1.2em; border-color: var(--color-bordeaux); background-color: var(--color-bordeaux); color: var(--color-text-primary-on-dark); cursor: pointer; } .combined-column #newsletter-privacy-info-kontakt { display: block; font-size: 0.8em; color: var(--color-text-secondary); max-width: 450px; margin: 0 auto; } .combined-column #newsletter-privacy-info-kontakt a { color: var(--color-text-secondary); text-decoration: underline; }
+    </style>
 
 </head>
 <body>
+    <svg style="display: none;" aria-hidden="true">
+      <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </symbol>
+      <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+      <symbol id="icon-refresh-ccw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></symbol>
+      <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+      </symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </symbol>
+      <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </symbol>
+    </svg>
+
 <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
-<header class="site-header" id="site-header" role="banner">
+<header class="site-header scrolled" id="site-header" role="banner">
     <div class="header-content-wrapper">
         <div class="header-left">
-            <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+            <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
                 <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
                 <span class="menu-trigger-text">MENÜ</span>
             </button>
@@ -232,7 +260,7 @@
         </div>
         <div class="header-right">
             <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
-                <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg>
             </a>
         </div>
     </div>
@@ -247,10 +275,8 @@
     <section class="content-section contact-page-section">
         <div class="container">
             <div class="contact-grid">
-
-                <div class="contact-form-column" role="form" aria-labelledby="contact-form-heading">
+                <div class="contact-form-column" aria-labelledby="contact-form-heading">
                     <h2 id="contact-form-heading">Ihre Anfrage an uns</h2>
-                    <!-- TYPO3 Hinweis: Formular mit Fieldsets für bessere Struktur und Barrierefreiheit. Floating Labels für modernes UI. -->
                     <form action="/formular-senden" method="post" aria-describedby="form-required-info">
                         <fieldset class="form-fieldset">
                             <legend class="form-legend">Worum geht es bei Ihrer Anfrage?</legend>
@@ -267,11 +293,12 @@
                                 </select>
                             </div>
                         </fieldset>
-                    
+
                         <fieldset class="form-fieldset">
                             <legend class="form-legend">Ihre persönlichen Daten</legend>
                             <div class="form-row two-cols">
                                 <div class="form-group">
+                                    <label for="salutation" class="sr-only">Anrede</label>
                                     <select id="salutation" name="salutation" aria-label="Anrede">
                                         <option value="">Anrede</option>
                                         <option value="Herr">Herr</option>
@@ -284,7 +311,7 @@
                                     <label for="title">Titel (optional)</label>
                                 </div>
                             </div>
-                    
+
                             <div class="form-row two-cols">
                                 <div class="form-group-float">
                                     <input type="text" id="firstname" name="firstname" placeholder=" " required aria-required="true">
@@ -295,12 +322,12 @@
                                     <label for="lastname">Nachname *</label>
                                 </div>
                             </div>
-                    
+
                             <div class="form-group-float form-group-full-width">
                                 <input type="text" id="street" name="street" placeholder=" " required aria-required="true">
                                 <label for="street">Straße, Hausnummer *</label>
                             </div>
-                    
+
                             <div class="form-row two-cols">
                                 <div class="form-group-float">
                                     <input type="text" id="zipcode" name="zipcode" placeholder=" " required aria-required="true">
@@ -311,7 +338,7 @@
                                     <label for="city">Ort *</label>
                                 </div>
                             </div>
-                    
+
                             <div class="form-row two-cols">
                                 <div class="form-group-float">
                                     <input type="email" id="email" name="email" placeholder=" " required aria-required="true">
@@ -323,7 +350,7 @@
                                 </div>
                             </div>
                         </fieldset>
-                    
+
                         <fieldset class="form-fieldset hidden-field room_inquiry-field">
                             <legend class="form-legend">Details zur Zimmeranfrage</legend>
                             <div class="form-row two-cols">
@@ -356,7 +383,7 @@
                                 </select>
                             </div>
                         </fieldset>
-                    
+
                         <fieldset class="form-fieldset hidden-field offer_inquiry-field">
                             <legend class="form-legend">Details zur Angebotsanfrage</legend>
                             <div class="form-group form-group-full-width">
@@ -373,7 +400,7 @@
                                 <label for="offer-message">Ihre Nachricht zum Angebot</label>
                             </div>
                         </fieldset>
-                    
+
                          <fieldset class="form-fieldset hidden-field voucher_order-field">
                             <legend class="form-legend">Details zur Gutscheinbestellung</legend>
                             <div class="form-row two-cols">
@@ -407,7 +434,7 @@
                                 <label for="voucher-message">Persönliche Nachricht (optional)</label>
                             </div>
                         </fieldset>
-                    
+
                         <fieldset class="form-fieldset hidden-field career_inquiry-field">
                             <legend class="form-legend">Details zur Bewerbung</legend>
                             <div class="form-group form-group-full-width">
@@ -428,7 +455,7 @@
                                 <input type="file" id="career-upload" name="career_upload" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" multiple>
                             </div>
                         </fieldset>
-                    
+
                         <fieldset class="form-fieldset general_contact-field" id="general-message-fieldset">
                              <legend class="form-legend">Ihre Nachricht an uns</legend>
                             <div class="form-group-float form-group-full-width">
@@ -436,7 +463,7 @@
                                 <label for="message">Ihre Nachricht *</label>
                             </div>
                         </fieldset>
-                    
+
                         <fieldset class="form-fieldset">
                             <legend class="form-legend">Sicherheitsabfrage</legend>
                             <div class="captcha-group">
@@ -449,15 +476,15 @@
                                         <img src="https://via.placeholder.com/150x40/E6DCCF/8C1E2D?text=T1X4Q" alt="Captcha-Bild mit Zeichen T1X4Q" id="captcha-image" width="150" height="40">
                                     </div>
                                     <button type="button" class="captcha-refresh-btn" aria-label="Captcha aktualisieren">
-                                        <iconify-icon icon="feather:refresh-ccw" aria-hidden="true"></iconify-icon>
+                                        <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-refresh-ccw"></use></svg>
                                     </button>
                                 </div>
                                 <p class="captcha-hint">Klicken Sie auf den Pfeil-Button, um neue Zeichen zu generieren.</p>
                             </div>
                         </fieldset>
-                    
+
                         <p id="form-required-info" class="form-required-info">* Pflichtfelder</p>
-                    
+
                         <div class="form-submit-group form-group-full-width text-center">
                             <button type="submit" class="btn">ANFRAGE SENDEN</button>
                         </div>
@@ -485,7 +512,7 @@
                             <p>Unser Hotel ist verkehrsgünstig gelegen und gut über die B31 und B500 zu erreichen. Kostenlose Parkplätze stehen direkt am Haus zur Verfügung.</p>
                             <p>
                                 <a href="https://maps.google.com/?q=Hotel+Sonne+Post,+Landstr.+13,+79822+Titisee-Neustadt" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                                    <iconify-icon icon="feather:map-pin" aria-hidden="true"></iconify-icon> Route planen
+                                    <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-map-pin"></use></svg> Route planen
                                 </a>
                             </p>
                         </div>
@@ -504,8 +531,8 @@
                         <p>Bleiben Sie auf dem Laufenden und verpassen Sie keine Neuigkeiten, Einblicke hinter die Kulissen und exklusive Angebote.</p>
                         <div class="social-links-container">
                             <div class="social-links">
-                                <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                                <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                                <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-facebook"></use></svg> </a>
+                                <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-instagram"></use></svg> </a>
                             </div>
                         </div>
                     </div>
@@ -519,10 +546,10 @@
                               <label for="newsletter-email-kontakt" class="sr-only">E-Mail-Adresse für Newsletter</label>
                               <input type="email" id="newsletter-email-kontakt" name="email" placeholder="Ihre E-Mail-Adresse" required aria-required="true">
                               <button type="submit" class="btn" aria-label="Newsletter abonnieren">
-                                  <iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> <span class="sr-only">Senden</span>
+                                  <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-mail"></use></svg> <span class="sr-only">Senden</span>
                               </button>
                           </form>
-                          <p id="newsletter-privacy-info-kontakt"> Ihre Daten sind bei uns sicher. Mehr Infos: <a href="../datenschutz.html">Datenschutz</a>. </p>
+                          <p id="newsletter-privacy-info-kontakt"> Ihre Daten sind bei uns sicher. Mehr Infos: <a href="./datenschutz.html">Datenschutz</a>. </p>
                         </div>
                     </div>
                 </div>
@@ -532,7 +559,7 @@
 
 </main>
 
-<footer class="site-footer" role="contentinfo">
+<footer class="site-footer" role="contentinfo" aria-label="Fußbereich der Webseite">
     <div class="container-footer">
         <div class="footer-column">
             <h2 class="footer-column-title">Hotel Sonne Post</h2>
@@ -540,19 +567,44 @@
         </div>
         <div class="footer-column">
              <h2 class="footer-column-title">Entdecken</h2>
-            <ul> <li><a href="../zimmer.html">Wohnen & Preise</a></li> <li><a href="../wellness.html">Spa</a></li> <li><a href="../restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+             <nav aria-label="Entdecken Navigation">
+                 <ul>
+                     <li><a href="./zimmer.html">Wohnen & Preise</a></li>
+                     <li><a href="./wellness.html">Spa</a></li>
+                     <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li>
+                     <li><a href="./top-angebote.html">Arrangements</a></li>
+                     <li><a href="./region.html">Freizeit & Region</a></li>
+                 </ul>
+             </nav>
         </div>
         <div class="footer-column">
             <h2 class="footer-column-title">Information</h2>
-            <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+            <nav aria-label="Informationsnavigation">
+                <ul>
+                    <li><a href="./kontakt.html">Kontakt & Anreise</a></li>
+                    <li><a href="./ueber-uns.html">Über uns</a></li>
+                    <li><a href="./karriere.html">Karriere</a></li>
+                    <li><a href="./nachhaltigkeit.html">Nachhaltigkeit</a></li>
+                    <li><a href="./gastfreund-app.html">Gastfreund App</a></li>
+                    <li><a href="./newsletter.html">Newsletter</a></li>
+                    <li><a href="./faq.html">FAQ</a></li>
+                </ul>
+            </nav>
         </div>
         <div class="footer-column">
             <h2 class="footer-column-title">Rechtliches</h2>
-             <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+            <nav aria-label="Rechtliche Navigation">
+                <ul>
+                    <li><a href="./impressum.html">Impressum</a></li>
+                    <li><a href="./datenschutz.html">Datenschutz</a></li>
+                    <li><a href="./agb.html">AGB</a></li>
+                    <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li>
+                </ul>
+            </nav>
             <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
-            <div class="social-links">
-                 <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                 <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+            <div class="social-links" role="navigation" aria-label="Soziale Medien im Fußbereich">
+                 <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-facebook"></use></svg> </a>
+                 <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-instagram"></use></svg> </a>
             </div>
         </div>
     </div>
@@ -563,9 +615,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-<script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
-
 <script src="../js/main.js" defer></script>
 
 <script>
@@ -592,7 +641,6 @@
         function toggleFormFields() {
             const selectedType = enquiryTypeSelect.value;
 
-            // Alle dynamischen Fieldsets verstecken und required-Attribute temporär entfernen
             allDynamicFieldsets.forEach(fieldset => {
                 fieldset.classList.add('hidden-field');
                 fieldset.querySelectorAll('[data-was-required="true"]').forEach(field => {
@@ -600,17 +648,24 @@
                 });
             });
 
-            // Das zur Auswahl passende Fieldset anzeigen und required-Attribute wiederherstellen
             if (selectedType) {
                 const fieldsToShow = document.querySelectorAll(`.${selectedType}-field`);
-                fieldsToShow.forEach(fieldset => {
-                    fieldset.classList.remove('hidden-field');
-                    fieldset.querySelectorAll('[data-was-required="true"]').forEach(field => {
-                        field.setAttribute('required', 'true');
+                if(fieldsToShow.length > 0) {
+                    fieldsToShow.forEach(fieldset => {
+                        fieldset.classList.remove('hidden-field');
+                        fieldset.querySelectorAll('[data-was-required="true"]').forEach(field => {
+                            field.setAttribute('required', 'true');
+                        });
                     });
-                });
+                } else {
+                     if (generalMessageFieldset) {
+                       generalMessageFieldset.classList.remove('hidden-field');
+                       generalMessageFieldset.querySelectorAll('[data-was-required="true"]').forEach(field => {
+                           field.setAttribute('required', 'true');
+                       });
+                    }
+                }
             } else {
-                // Fallback: Wenn nichts ausgewählt ist, allgemeines Nachrichtenfeld anzeigen
                 if (generalMessageFieldset) {
                    generalMessageFieldset.classList.remove('hidden-field');
                    generalMessageFieldset.querySelectorAll('[data-was-required="true"]').forEach(field => {
@@ -622,11 +677,9 @@
 
         if (enquiryTypeSelect) {
             enquiryTypeSelect.addEventListener('change', toggleFormFields);
-            // Initialer Aufruf, um den Standardzustand (basierend auf 'selected' im HTML) herzustellen
             toggleFormFields();
         }
 
-        // NEU: Logik zur Formular-Vorauswahl via URL-Parameter
         const urlParams = new URLSearchParams(window.location.search);
         const anliegen = urlParams.get('anliegen');
 
@@ -636,7 +689,6 @@
                 enquiryTypeSelect.value = anliegen;
                 enquiryTypeSelect.dispatchEvent(new Event('change'));
 
-                // Optional: Das Dropdown-Feld verstecken
                 const enquiryFieldset = enquiryTypeSelect.closest('.form-fieldset');
                 if (enquiryFieldset) {
                     enquiryFieldset.classList.add('hidden-by-param');

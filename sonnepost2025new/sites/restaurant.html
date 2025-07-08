@@ -14,11 +14,6 @@
     <link rel="stylesheet" href="../css/main.css">
 
     <style>
-        /* === TYPO3 Hinweis: Spezifische Stile für die Restaurant-Seite === */
-        body {
-            /* Standard-Hintergrund wird von main.css oder einer spezifischen Sektion gesetzt */
-        }
-        /* Header Styling für Unterseiten */
         .site-header {
             background-color: var(--color-header-bg-scrolled);
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -31,16 +26,24 @@
             background: var(--color-header-icon-scrolled);
         }
         .site-header .header-center .central-logo .logo-initial {
-            display: block; opacity: 0; position: absolute; pointer-events: none;
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
         }
         .site-header .header-center .central-logo .logo-scrolled {
-            display: block; opacity: 1; position: relative;
+            opacity: 1;
+            position: relative;
         }
-        .site-header .header-right .contact-icon-btn iconify-icon {
+        .site-header.scrolled .header-center .central-logo .logo-initial {
+            opacity: 0;
+        }
+        .site-header.scrolled .header-center .central-logo .logo-scrolled {
+            opacity: 1;
+        }
+        .site-header .header-right .contact-icon-btn {
             color: var(--color-header-contact-icon-scrolled);
         }
 
-        /* === Stile für Kulinarik Sektionen (Hero-ähnlich mit Bild) === */
         .kulinarik-section {
             padding: 0;
             display: flex;
@@ -48,22 +51,21 @@
             justify-content: center;
             position: relative;
             overflow: hidden;
-            margin-top: 0; /* Stellt sicher, dass die erste Sektion direkt unter dem Header beginnt */
+            margin-top: 0;
         }
         .kulinarik-section:first-of-type {
-             padding-top: var(--header-height); /* Nur die erste Kulinarik-Sektion braucht den Abstand für den fixen Header */
+             padding-top: var(--header-height);
         }
-
 
         .kulinarik-section.has-bg-image {
             min-height: 80vh;
-            color: var(--text-on-dark-bg, #F7F2EC);
+            color: #F7F2EC;
         }
         .kulinarik-section.has-bg-image::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-color: var(--dark-overlay-bg, rgba(20, 20, 20, 0.65));
+            background-color: rgba(20, 20, 20, 0.65);
             z-index: 1;
         }
 
@@ -79,7 +81,6 @@
             position: relative;
             z-index: 2;
             text-align: center;
-            /* padding-top wird jetzt von .kulinarik-section:first-of-type gehandhabt für die erste Sektion */
             padding-bottom: 60px;
             padding-left: 20px;
             padding-right: 20px;
@@ -88,9 +89,8 @@
             margin-left: auto;
             margin-right: auto;
         }
-         /* Spezifisches Padding für Container in der ersten Kulinarik-Sektion, falls es sich vom globalen .kulinarik-section:first-of-type unterscheidet */
         .kulinarik-section:first-of-type .container {
-            padding-top: 60px; /* Behält den Abstand von der Header-Oberkante zum Text bei */
+            padding-top: 60px;
         }
 
 
@@ -190,16 +190,33 @@
          .kulinarik-section-oeffnungszeiten .kulinarik-text-content p a {
             color: var(--color-bordeaux);
         }
-        /* Anpassung für Footer-Überschriften wird durch main.css gehandhabt */
     </style>
 </head>
 <body>
+    <svg style="display: none;" aria-hidden="true">
+      <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </symbol>
+      <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+      </symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </symbol>
+    </svg>
+
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
-    <header class="site-header" id="site-header" role="banner">
+    <header class="site-header scrolled" id="site-header" role="banner">
         <div class="header-content-wrapper">
             <div class="header-left">
-                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
                     <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
                     <span class="menu-trigger-text">MENÜ</span>
                 </button>
@@ -211,19 +228,16 @@
                 </a>
             </div>
             <div class="header-right">
-                <a href="../kontakt-anreise.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
-                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- TYPO3 Hinweis: Fullscreen Navigation wurde für Unterseiten entfernt (nur auf Startseite) -->
-
     <main id="main-content" role="main">
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
         <section class="kulinarik-section has-bg-image">
-            <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');"></div>
+            <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');" role="img" aria-label="Stimmungsvoll gedeckter Tisch in einem Restaurant"></div>
             <div class="container">
                 <div class="kulinarik-text-content">
                     <h1 id="kulinarik-intro-heading">Badische Gastlichkeit...</h1>
@@ -231,14 +245,13 @@
                     <p>Behaglich, hell und sonnig ist das Restaurant der Mittelpunkt unseres Hauses. Es ist mit viel Holz liebevoll und sehr gemütlich eingerichtet. Durch den Kachelofen und die holzgetäfelten Wände entsteht eine wohltuende, heimelige Schwarzwaldstimmung.</p>
                     <p>Angefangen beim reichhaltigen Frühstücksbuffet (täglich von 08:00 Uhr bis 10:00 Uhr) bis hin zum abendlichen Menü werden Sie in unserem Restaurant von unserem Serviceteam herzlich umsorgt.</p>
                     <div class="kulinarik-cta">
-                         <a href="#oeffnungszeiten" class="btn btn-outline-light">Öffnungszeiten & Details</a>
+                         <a href="#oeffnungszeiten" class="btn">Öffnungszeiten & Details</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="kulinarik-section kulinarik-section-oeffnungszeiten" id="oeffnungszeiten">
+        <section class="kulinarik-section kulinarik-section-oeffnungszeiten" id="oeffnungszeiten" aria-labelledby="oeffnungszeiten-heading">
             <div class="container">
                 <h2 id="oeffnungszeiten-heading">Unsere Restaurant- & Küchenzeiten</h2>
                 <div class="oeffnungszeiten-grid">
@@ -279,23 +292,21 @@
             </div>
         </section>
 
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
         <section class="kulinarik-section has-bg-image">
-            <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');"></div>
+            <div class="kulinarik-background-image" style="background-image: url('https://images.pexels.com/photos/3184192/pexels-photo-3184192.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&fit=crop');" role="img" aria-label="Teller mit kunstvoll angerichtetem Essen"></div>
             <div class="container">
                  <div class="kulinarik-text-content">
                     <h2 id="kueche-heading">Ein Blick in unsere Küche</h2>
                     <p>Kommen Sie mit und erfahren Sie mehr über unsere Philosophie und die frischen, regionalen Zutaten, die unsere Gerichte so besonders machen.</p>
                      <div class="kulinarik-cta">
-                         <a href="/speisekarte-beispiel.pdf" class="btn btn-outline-light" target="_blank" rel="noopener">Speisekarte (Beispiel)</a>
+                         <a href="/speisekarte-beispiel.pdf" class="btn" target="_blank" rel="noopener">Speisekarte (Beispiel)</a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- GEÄNDERT: sr-only H2 entfernt, Spaltenüberschriften zu H2 geändert -->
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer" role="contentinfo" aria-label="Fußbereich der Webseite">
         <div class="container-footer">
             <div class="footer-column">
                 <h2 class="footer-column-title">Hotel Sonne Post</h2>
@@ -303,19 +314,45 @@
             </div>
             <div class="footer-column">
                  <h2 class="footer-column-title">Entdecken</h2>
-                <ul> <li><a href="./zimmer.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+                 <nav aria-label="Entdecken Navigation">
+                    <ul>
+                        <li><a href="./zimmer.html">Wohnen & Preise</a></li>
+                        <li><a href="./wellness.html">Spa</a></li>
+                        <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li>
+                        <li><a href="./top-angebote.html">Arrangements</a></li>
+                        <li><a href="./region.html">Freizeit & Region</a></li>
+                    </ul>
+                 </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Information</h2>
-                 <ul> <li><a href="../kontakt-anreise.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./historie.html">Unsere Geschichte</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+                <nav aria-label="Informationsnavigation">
+                    <ul>
+                        <li><a href="./kontakt.html">Kontakt & Anreise</a></li>
+                        <li><a href="./ueber-uns.html">Über uns</a></li>
+                        <li><a href="./historie.html">Unsere Geschichte</a></li>
+                        <li><a href="./karriere.html">Karriere</a></li>
+                        <li><a href="./nachhaltigkeit.html">Nachhaltigkeit</a></li>
+                        <li><a href="./gastfreund-app.html">Gastfreund App</a></li>
+                        <li><a href="./newsletter.html">Newsletter</a></li>
+                        <li><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Rechtliches</h2>
-                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <nav aria-label="Rechtliche Navigation">
+                    <ul>
+                        <li><a href="./impressum.html">Impressum</a></li>
+                        <li><a href="./datenschutz.html">Datenschutz</a></li>
+                        <li><a href="./agb.html">AGB</a></li>
+                        <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li>
+                    </ul>
+                </nav>
                 <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
-                <div class="social-links">
-                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                <div class="social-links" role="navigation" aria-label="Soziale Medien im Fußbereich">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-facebook"></use></svg> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-instagram"></use></svg> </a>
                 </div>
             </div>
         </div>
@@ -326,19 +363,16 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
-
     <script src="../js/main.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                 gsap.utils.toArray('.kulinarik-section.has-bg-image .kulinarik-text-content').forEach((el) => {
-                    gsap.from(el.children, { // Animiert die Kinder des Text-Containers
+                    gsap.from(el.children, {
                         opacity: 0,
                         y: 50,
                         duration: 0.8,
-                        stagger: 0.15, // Elemente erscheinen nacheinander
+                        stagger: 0.15,
                         ease: "power2.out",
                         scrollTrigger: {
                             trigger: el.closest('.kulinarik-section'),
@@ -349,7 +383,7 @@
                     });
                 });
 
-                 gsap.from('.kulinarik-section-oeffnungszeiten .container > *', { // Animiert Kinder des Containers
+                 gsap.from('.kulinarik-section-oeffnungszeiten .container > *', {
                     opacity: 0,
                     y: 40,
                     duration: 0.7,

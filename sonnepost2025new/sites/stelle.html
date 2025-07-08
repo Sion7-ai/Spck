@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- TYPO3 Hinweis: Dynamischer Seitentitel, z.B. "[Jobtitel] | Karriere | Hotel Sonne Post" -->
     <title>Mitarbeiter/in Housekeeping | Karriere | Hotel Sonne Post</title>
-    <!-- TYPO3 Hinweis: Dynamische Meta Description, z.B. Kurzbeschreibung des Jobs -->
     <meta name="description" content="Werden Sie Mitarbeiter/in im Housekeeping (m/w/d) im Hotel Sonne Post. Teilzeit oder Vollzeit, Einstieg nach Vereinbarung.">
 
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
@@ -20,7 +18,6 @@
         body {
             background-color: var(--color-white);
         }
-        /* Header Styling für Unterseiten */
         .site-header {
             background-color: var(--color-header-bg-scrolled);
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -33,12 +30,21 @@
             background: var(--color-header-icon-scrolled);
         }
         .site-header .header-center .central-logo .logo-initial {
-            display: block; opacity: 0; position: absolute; pointer-events: none;
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
         }
         .site-header .header-center .central-logo .logo-scrolled {
-            display: block; opacity: 1; position: relative;
+            opacity: 1;
+            position: relative;
         }
-        .site-header .header-right .contact-icon-btn iconify-icon {
+        .site-header.scrolled .header-center .central-logo .logo-initial {
+            opacity: 0;
+        }
+        .site-header.scrolled .header-center .central-logo .logo-scrolled {
+            opacity: 1;
+        }
+        .site-header .header-right .contact-icon-btn {
             color: var(--color-header-contact-icon-scrolled);
         }
 
@@ -127,6 +133,7 @@
             color: var(--color-bordeaux);
             margin-top: 0;
             margin-bottom: 1em;
+            text-align: left;
         }
         .job-requirement-column ul {
             list-style: none;
@@ -140,7 +147,7 @@
             position: relative;
             margin-bottom: 0.8em;
         }
-        .job-requirement-column ul li iconify-icon {
+        .job-requirement-column ul li .icon-svg {
             position: absolute;
             left: 0;
             top: 4px;
@@ -173,7 +180,7 @@
             color: var(--color-bordeaux);
             font-weight: 500;
         }
-        .job-application-contact p a iconify-icon {
+        .job-application-contact p a .icon-svg {
             vertical-align: -2px;
             margin-right: 3px;
         }
@@ -230,12 +237,101 @@
     </style>
 </head>
 <body>
+    <svg style="display: none;" aria-hidden="true">
+      <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </symbol>
+      <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+      </symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </symbol>
+      <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </symbol>
+      <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </symbol>
+      <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </symbol>
+      <symbol id="icon-smile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+      </symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </symbol>
+      <symbol id="icon-check-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 11 12 14 22 4"></polyline>
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+      </symbol>
+      <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="8" r="7"></circle>
+          <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+      </symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </symbol>
+      <symbol id="icon-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+      </symbol>
+      <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </symbol>
+      <symbol id="icon-trash-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        <line x1="10" y1="11" x2="10" y2="17"></line>
+        <line x1="14" y1="11" x2="14" y2="17"></line>
+      </symbol>
+      <symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+      </symbol>
+      <symbol id="icon-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="21 8 21 21 3 21 3 8"></polyline>
+        <rect x="1" y="3" width="22" height="5"></rect>
+        <line x1="10" y1="12" x2="14" y2="12"></line>
+      </symbol>
+      <symbol id="icon-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+      </symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+      </symbol>
+      <symbol id="icon-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </symbol>
+      <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </symbol>
+    </svg>
+
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
-    <header class="site-header" id="site-header" role="banner">
+    <header class="site-header scrolled" id="site-header" role="banner">
         <div class="header-content-wrapper">
             <div class="header-left">
-                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
                     <div class="hamburger-icon" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
                     <span class="menu-trigger-text">MENÜ</span>
                 </button>
@@ -248,30 +344,22 @@
             </div>
             <div class="header-right">
                 <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
-                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                    <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- TYPO3 Hinweis: Fullscreen Navigation wurde für Unterseiten entfernt (nur auf Startseite) -->
-
     <main id="main-content" role="main">
-        <!-- TYPO3 Hinweis: Hero Bild dynamisch aus Job-Datensatz oder Fallback -->
         <section class="page-hero-section" id="job-detail-hero" aria-label="Mitarbeiterin bei der Arbeit im Housekeeping" style="background-image: url('https://www.sonne-post.de/fileadmin/_processed_/e/3/csm_Bildschirmfoto_2023-11-15_um_18.17.43_eacf76ad83.png');">
             <div class="page-hero-overlay"></div>
         </section>
 
-        <!-- TYPO3 Hinweis: Job-Detail Sektion -->
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
         <section class="job-detail-section">
             <div class="job-detail-header-content">
-                <!-- TYPO3 Hinweis: Jobtitel editierbar -->
                 <h1 class="job-title-main" id="job-title-main-content">Mitarbeiter/in Housekeeping (m/w/d)</h1>
-                <!-- TYPO3 Hinweis: Meta-Infos editierbar -->
                 <p class="job-meta-info">Teilzeit oder Vollzeit · Einstieg nach Vereinbarung</p>
 
-                <!-- TYPO3 Hinweis: Einleitungstext editierbar (Rich Text Editor) -->
                 <p>Zur Verstärkung unseres Housekeeping-Teams suchen wir eine herzliche und zuverlässige Persönlichkeit mit Blick fürs Detail – jemand, der gerne mit anpackt und Freude daran hat, unseren Gästen einen rundum angenehmen Aufenthalt zu bereiten.</p>
                 <p>Du liebst es, wenn alles sauber und ordentlich ist, arbeitest gerne im Team und fühlst Dich in familiärer Atmosphäre wohl? Dann bist Du bei uns genau richtig!</p>
             </div>
@@ -279,40 +367,37 @@
             <div class="job-requirements-wrapper">
                 <div class="job-requirements-grid">
                     <div class="job-requirement-column">
-                        <!-- TYPO3 Hinweis: "Das bringst Du mit" als wiederholbare Listenelemente oder Rich Text -->
                         <h2>Das bringst Du mit:</h2>
                         <ul>
-                            <li><iconify-icon icon="feather:heart" aria-hidden="true"></iconify-icon>Freude an der Hotellerie und am Umgang mit Menschen</li>
-                            <li><iconify-icon icon="feather:eye" aria-hidden="true"></iconify-icon>Ein gutes Gespür für Sauberkeit, Hygiene und Ordnung</li>
-                            <li><iconify-icon icon="feather:smile" aria-hidden="true"></iconify-icon>Freundlichkeit, Teamgeist und Zuverlässigkeit</li>
-                            <li><iconify-icon icon="feather:shield" aria-hidden="true"></iconify-icon>Einen ehrlichen und verantwortungsbewussten Arbeitsstil</li>
-                            <li><iconify-icon icon="feather:check-square" aria-hidden="true"></iconify-icon>Sorgfalt und selbstständiges Arbeiten</li>
-                            <li><iconify-icon icon="feather:award" aria-hidden="true"></iconify-icon>Erste Erfahrungen im Housekeeping? Super – aber kein Muss!</li>
-                            <li><iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon>Auch Quereinsteiger sind bei uns herzlich willkommen.</li>
-                            <li><iconify-icon icon="feather:book-open" aria-hidden="true"></iconify-icon>Wir nehmen uns Zeit für eine gründliche Einarbeitung, damit Du Dich schnell sicher und wohl bei uns fühlst.</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-heart"></use></svg>Freude an der Hotellerie und am Umgang mit Menschen</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-eye"></use></svg>Ein gutes Gespür für Sauberkeit, Hygiene und Ordnung</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-smile"></use></svg>Freundlichkeit, Teamgeist und Zuverlässigkeit</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-shield"></use></svg>Einen ehrlichen und verantwortungsbewussten Arbeitsstil</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-check-square"></use></svg>Sorgfalt und selbstständiges Arbeiten</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-award"></use></svg>Erste Erfahrungen im Housekeeping? Super – aber kein Muss!</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg>Auch Quereinsteiger sind bei uns herzlich willkommen.</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-book-open"></use></svg>Wir nehmen uns Zeit für eine gründliche Einarbeitung, damit Du Dich schnell sicher und wohl bei uns fühlst.</li>
                         </ul>
                     </div>
                     <div class="job-requirement-column">
-                        <!-- TYPO3 Hinweis: "Das erwartet Dich" als wiederholbare Listenelemente oder Rich Text -->
                         <h2>Das erwartet Dich bei uns:</h2>
                         <ul>
-                            <li><iconify-icon icon="feather:home" aria-hidden="true"></iconify-icon>Reinigung und Pflege unserer Hotelzimmer & Ferienwohnungen</li>
-                            <li><iconify-icon icon="feather:trash-2" aria-hidden="true"></iconify-icon>Sauberhalten der öffentlichen Bereiche</li>
-                            <li><iconify-icon icon="feather:wind" aria-hidden="true"></iconify-icon>Unterstützung bei der Reinigung des Schwimmbad- und Saunabereichs</li>
-                            <li><iconify-icon icon="feather:archive" aria-hidden="true"></iconify-icon>Mithilfe in der Wäscherei und bei der Blumenpflege</li>
-                            <li><iconify-icon icon="feather:tool" aria-hidden="true"></iconify-icon>Sorgsamer Umgang mit Reinigungsmitteln und Arbeitsmaterial</li>
-                            <li><iconify-icon icon="feather:briefcase" aria-hidden="true"></iconify-icon>Eigenverantwortliches Arbeiten mit Rückhalt im Team</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-home"></use></svg>Reinigung und Pflege unserer Hotelzimmer & Ferienwohnungen</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-trash-2"></use></svg>Sauberhalten der öffentlichen Bereiche</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-wind"></use></svg>Unterstützung bei der Reinigung des Schwimmbad- und Saunabereichs</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-archive"></use></svg>Mithilfe in der Wäscherei und bei der Blumenpflege</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-tool"></use></svg>Sorgsamer Umgang mit Reinigungsmitteln und Arbeitsmaterial</li>
+                            <li><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-briefcase"></use></svg>Eigenverantwortliches Arbeiten mit Rückhalt im Team</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="job-application-contact-wrapper">
-                <!-- TYPO3 Hinweis: Bewerbungskontakt editierbar -->
                 <div class="job-application-contact" id="application-contact">
                     <h3>Neugierig geworden?</h3>
                     <p>Dann freuen wir uns auf Deine Bewerbung – ganz unkompliziert per E-Mail oder persönlich bei uns vor Ort!</p>
-                    <p>Noch Fragen? <br>Yvonne Eiche ist gerne für Dich da: <br><a href="tel:+49766991020" aria-label="Yvonne Eiche anrufen unter 07669 91020"><iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon> +49 (0) 7669 91020</a> oder <a href="mailto:info@sonne-post.de?subject=Bewerbung%20Housekeeping%20Mitarbeiter/in" aria-label="E-Mail senden an info@sonne-post.de bezüglich Bewerbung Housekeeping"><iconify-icon icon="feather:mail" aria-hidden="true"></iconify-icon> info@sonne-post.de</a>.</p>
+                    <p>Noch Fragen? <br>Yvonne Eiche ist gerne für Dich da: <br><a href="tel:+49766991020" aria-label="Yvonne Eiche anrufen unter 07669 91020"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg> +49 (0) 7669 91020</a> oder <a href="mailto:info@sonne-post.de?subject=Bewerbung%20Housekeeping%20Mitarbeiter/in" aria-label="E-Mail senden an info@sonne-post.de bezüglich Bewerbung Housekeeping"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-mail"></use></svg> info@sonne-post.de</a>.</p>
                     <p><strong>Wir freuen uns auf Dich!</strong><br>Dein Team vom Hotel Sonne Post</p>
                 </div>
             </div>
@@ -320,7 +405,7 @@
             <div class="back-to-jobs-link-wrapper">
                 <div class="back-to-jobs-link">
                     <a href="./karriere.html" class="btn btn-outline">
-                        <iconify-icon icon="feather:arrow-left" aria-hidden="true"></iconify-icon> Zurück zu den Stellen
+                        <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-arrow-left"></use></svg> Zurück zu den Stellen
                     </a>
                 </div>
             </div>
@@ -331,13 +416,12 @@
         <div class="container-sticky-apply">
             <span class="sticky-job-title" id="sticky-job-title-text">Mitarbeiter/in Housekeeping (m/w/d)</span>
             <a href="#application-contact" class="btn">
-                <iconify-icon icon="feather:send" aria-hidden="true"></iconify-icon> Jetzt Bewerben
+                <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-send"></use></svg> Jetzt Bewerben
             </a>
         </div>
     </div>
 
-    <!-- GEÄNDERT: sr-only H2 entfernt, Spaltenüberschriften zu H2 geändert -->
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer" role="contentinfo" aria-label="Fußbereich der Webseite">
         <div class="container-footer">
             <div class="footer-column">
                 <h2 class="footer-column-title">Hotel Sonne Post</h2>
@@ -345,19 +429,44 @@
             </div>
             <div class="footer-column">
                  <h2 class="footer-column-title">Entdecken</h2>
-                <ul> <li><a href="../zimmer-preise.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="../kulinarik.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+                 <nav aria-label="Entdecken Navigation">
+                    <ul>
+                        <li><a href="./zimmer.html">Wohnen & Preise</a></li>
+                        <li><a href="./wellness.html">Spa</a></li>
+                        <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li>
+                        <li><a href="./top-angebote.html">Arrangements</a></li>
+                        <li><a href="./region.html">Freizeit & Region</a></li>
+                    </ul>
+                 </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Information</h2>
-                 <ul> <li><a href="./kontakt.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+                <nav aria-label="Informationsnavigation">
+                    <ul>
+                        <li><a href="./kontakt.html">Kontakt & Anreise</a></li>
+                        <li><a href="./ueber-uns.html">Über uns</a></li>
+                        <li><a href="./karriere.html">Karriere</a></li>
+                        <li><a href="./nachhaltigkeit.html">Nachhaltigkeit</a></li>
+                        <li><a href="./gastfreund-app.html">Gastfreund App</a></li>
+                        <li><a href="./newsletter.html">Newsletter</a></li>
+                        <li><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Rechtliches</h2>
-                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <nav aria-label="Rechtliche Navigation">
+                    <ul>
+                        <li><a href="./impressum.html">Impressum</a></li>
+                        <li><a href="./datenschutz.html">Datenschutz</a></li>
+                        <li><a href="./agb.html">AGB</a></li>
+                        <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li>
+                    </ul>
+                </nav>
                 <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
-                <div class="social-links">
-                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                <div class="social-links" role="navigation" aria-label="Soziale Medien im Fußbereich">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-facebook"></use></svg> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-instagram"></use></svg> </a>
                 </div>
             </div>
         </div>
@@ -368,28 +477,24 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
-
     <script src="../js/main.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const stickyApplyBar = document.getElementById('sticky-apply-bar');
-            const jobDetailHero = document.getElementById('job-detail-hero'); // Trigger, wenn Hero aus Viewport
             const siteFooter = document.querySelector('.site-footer');
             const mainContentStart = document.querySelector('.job-detail-header-content');
 
             if (stickyApplyBar && mainContentStart && siteFooter && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
                 ScrollTrigger.create({
-                    trigger: mainContentStart, // Zeige Bar, wenn dieser Inhalt sichtbar wird
-                    start: "top top+=100px", // Etwas Puffer nach dem Header
+                    trigger: mainContentStart,
+                    start: "top top+=100px",
                     onEnter: () => stickyApplyBar.classList.add('visible'),
                     onLeaveBack: () => stickyApplyBar.classList.remove('visible'),
                 });
 
                 ScrollTrigger.create({
                     trigger: siteFooter,
-                    start: "top bottom-=70px", // Höhe der Bar + Puffer
+                    start: "top bottom-=" + (stickyApplyBar.offsetHeight + 20),
                     onEnter: () => stickyApplyBar.classList.remove('visible'),
                     onLeaveBack: () => stickyApplyBar.classList.add('visible'),
                 });

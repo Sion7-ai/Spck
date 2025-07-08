@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- TYPO3 Hinweis: Dynamischer Seitentitel -->
     <title>Unsere Zimmerwelten | Hotel Sonne Post</title>
-    <!-- TYPO3 Hinweis: Dynamische Meta Description -->
     <meta name="description" content="Entdecken Sie unsere komfortablen Zimmer und Suiten im Hotel Sonne Post. Ihr Zuhause im Schwarzwald.">
     <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon">
 
@@ -16,7 +14,6 @@
     <link rel="stylesheet" href="../css/main.css">
 
     <style>
-        /* Header Styling für Unterseiten */
         .site-header {
             background-color: var(--color-header-bg-scrolled);
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -29,23 +26,31 @@
             background: var(--color-header-icon-scrolled);
         }
         .site-header .header-center .central-logo .logo-initial {
-            display: block; opacity: 0; position: absolute; pointer-events: none;
+            opacity: 0;
+            position: absolute;
+            pointer-events: none;
         }
         .site-header .header-center .central-logo .logo-scrolled {
-            display: block; opacity: 1; position: relative;
+            opacity: 1;
+            position: relative;
         }
-        .site-header .header-right .contact-icon-btn iconify-icon {
+        .site-header.scrolled .header-center .central-logo .logo-initial {
+            opacity: 0;
+        }
+        .site-header.scrolled .header-center .central-logo .logo-scrolled {
+            opacity: 1;
+        }
+        .site-header .header-right .contact-icon-btn {
             color: var(--color-header-contact-icon-scrolled);
         }
 
-        /* Hero Slider Sektion */
         .zimmer-hero-slider-section {
             height: 60vh;
             min-height: 350px;
             max-height: 550px;
             position: relative;
             overflow: hidden;
-            margin-top: var(--header-height); /* Korrektur für fixen Header */
+            margin-top: var(--header-height);
         }
         .hero-slider-wrapper {
             width: 100%;
@@ -250,7 +255,7 @@
             flex-basis: 0;
             flex-grow: 1;
         }
-        .feature-item iconify-icon {
+        .feature-item .icon-svg {
             font-size: 1.8rem;
             margin-bottom: 8px;
             color: var(--color-bordeaux);
@@ -286,16 +291,57 @@
             border-radius: 50%;
             display: inline-block;
         }
-        /* Anpassung für Footer-Überschriften wird durch main.css gehandhabt */
     </style>
 </head>
 <body>
+    <svg style="display: none;" aria-hidden="true">
+      <symbol id="icon-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </symbol>
+      <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </symbol>
+      <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+      </symbol>
+      <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+      </symbol>
+      <symbol id="icon-maximize" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+      </symbol>
+      <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </symbol>
+      <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+        <circle cx="12" cy="7" r="4"></circle>
+      </symbol>
+      <symbol id="icon-shower" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 4h-4a2 2 0 0 0-2 2v3"></path>
+        <path d="M12 9v3m-3 0h6m-3-3v3"></path>
+        <path d="M10 17v1m4-1v1m-2-1v1"></path>
+        <path d="M13 4v-1M11 4v-1"></path>
+      </symbol>
+      <symbol id="icon-bathtub" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 12h1v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4h1"></path>
+        <path d="M4 12V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"></path>
+        <path d="M7 9v3"></path>
+      </symbol>
+    </svg>
+
     <a href="#main-content" class="sr-only sr-only-focusable">Zum Hauptinhalt springen</a>
 
-    <header class="site-header" id="site-header" role="banner">
+    <header class="site-header scrolled" id="site-header" role="banner">
         <div class="header-content-wrapper">
             <div class="header-left">
-                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen (Navigation nur auf Startseite aktiv)">
+                <button class="menu-trigger-wrapper" id="menu-trigger" aria-controls="fullscreen-nav" aria-expanded="false" aria-label="Menü öffnen">
                     <div class="hamburger-icon" aria-hidden="true">
                         <span></span><span></span><span></span><span></span>
                     </div>
@@ -309,17 +355,14 @@
                 </a>
             </div>
             <div class="header-right">
-                <a href="../kontakt-anreise.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
-                    <iconify-icon icon="feather:phone" aria-hidden="true"></iconify-icon>
+                <a href="./kontakt.html" class="contact-icon-btn" aria-label="Kontakt aufnehmen">
+                    <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-phone"></use></svg>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- TYPO3 Hinweis: Fullscreen Navigation wurde für Unterseiten entfernt (nur auf Startseite) -->
-
     <main id="main-content" role="main">
-        <!-- GEÄNDERT: aria-roledescription und aria-label von section entfernt, da es eher auf den Wrapper gehört -->
         <section class="zimmer-hero-slider-section">
             <div class="hero-slider-wrapper" id="zimmer-hero-slider" role="region" aria-roledescription="carousel" aria-label="Impressionen unserer Zimmer">
                 <div class="hero-slide active" style="background-image: url('https://www.sonne-post.de/fileadmin/user_upload/Headerbilder-Sonne-Post-Schwarzwald/Wohnen/wohnen-bilder-buchen/Headerbilde-27_1600x704.png');" role="group" aria-label="Zimmerimpression 1 von 5"></div>
@@ -330,8 +373,7 @@
             </div>
         </section>
 
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="zimmer-intro-section">
+        <section class="zimmer-intro-section" aria-labelledby="zimmer-intro-main-heading">
             <div class="container">
                 <h1 id="zimmer-intro-main-heading">Entspannen, wohlfühlen & übernachten...</h1>
                 <p class="page-subtitle">...in unserem Schwarzwald Hotel</p>
@@ -345,10 +387,10 @@
                         Schreibtisch, HD Flatscreen-TV, Radio, Durchwahltelefon, W-LAN, Minibar, Privatsafe, Wolldecken, Haarfön, Kosmetikspiegel, Wellnesskörble mit Bademantel und Saunatuch, Bettgröße Einzelzimmer 100x200cm und Doppelzimmer 180x200cm.</p>
                     </div>
                 </div>
+            </div>
         </section>
 
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="zimmer-kategorien-section">
+        <section class="zimmer-kategorien-section" aria-labelledby="haus-eiche-heading">
             <div class="container">
                 <h2 class="group-title" id="haus-eiche-heading">Hotelzimmer Haus Eiche</h2>
                 <div class="zimmer-grid zimmer-grid-haus-eiche">
@@ -362,9 +404,9 @@
                             </h3>
                             <div class="zimmer-card-description"><p>Exklusiver Wohnkomfort mit Weitblick im Haus Eiche.</p></div>
                              <ul class="zimmer-features" aria-label="Ausstattungsmerkmale">
-                                <li class="feature-item"> <iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> <span class="feature-label">38 m²</span> <span>Größe</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> <span class="feature-label">bis 4</span> <span>Personen</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="material-symbols:shower-outline" aria-hidden="true"></iconify-icon> <span class="feature-label">Dusche</span> <span>WC</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-maximize"></use></svg><span class="feature-label">38 m²</span> <span>Größe</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg><span class="feature-label">bis 4</span> <span>Personen</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-shower"></use></svg><span class="feature-label">Dusche</span> <span>WC</span> </li>
                             </ul>
                             <div class="zimmer-card-actions"> <a href="./zimmer-detail/doppelzimmer-appartement-superior-eiche.html" class="btn btn-outline">Mehr erfahren</a> </div>
                         </div>
@@ -379,9 +421,9 @@
                             </h3>
                              <div class="zimmer-card-description"> <p>Ideal für Familien, die Freiraum und Gemütlichkeit im Haus Eiche suchen.</p> </div>
                             <ul class="zimmer-features" aria-label="Ausstattungsmerkmale">
-                                <li class="feature-item"> <iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> <span class="feature-label">52 m²</span> <span>Größe</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> <span class="feature-label">bis 5</span> <span>Personen</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="material-symbols:bathtub-outline" aria-hidden="true"></iconify-icon> <span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-maximize"></use></svg><span class="feature-label">52 m²</span> <span>Größe</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg><span class="feature-label">bis 5</span> <span>Personen</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-bathtub"></use></svg><span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
                             </ul>
                             <div class="zimmer-card-actions"> <a href="./zimmer-detail/familien-appartement-eiche.html" class="btn btn-outline">Mehr erfahren</a> </div>
                         </div>
@@ -392,8 +434,7 @@
 
         <div class="section-divider" aria-hidden="true"> <span class="section-divider-dot"></span> </div>
 
-        <!-- GEÄNDERT: aria-labelledby entfernt -->
-        <section class="zimmer-kategorien-section">
+        <section class="zimmer-kategorien-section" aria-labelledby="stammhaus-heading">
             <div class="container">
                 <h2 class="group-title" id="stammhaus-heading">Hotelzimmer Stammhaus</h2>
                  <div class="zimmer-grid zimmer-grid-stammhaus">
@@ -403,9 +444,9 @@
                             <h3 class="zimmer-card-title" id="zimmer-titel-ez-stammhaus"> <a href="./zimmer-detail/einzelzimmer-stammhaus.html">Einzelzimmer</a> </h3>
                             <div class="zimmer-card-description"> <p>Ihr charmanter Rückzugsort für Solo-Reisende.</p> </div>
                              <ul class="zimmer-features" aria-label="Ausstattungsmerkmale">
-                                <li class="feature-item"> <iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> <span class="feature-label">20 m²</span> <span>Größe</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="feather:user" aria-hidden="true"></iconify-icon> <span class="feature-label">1 Person</span> <span>Belegung</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="material-symbols:shower-outline" aria-hidden="true"></iconify-icon> <span class="feature-label">Dusche</span> <span>WC</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-maximize"></use></svg><span class="feature-label">20 m²</span> <span>Größe</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-user"></use></svg><span class="feature-label">1 Person</span> <span>Belegung</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-shower"></use></svg><span class="feature-label">Dusche</span> <span>WC</span> </li>
                             </ul>
                             <div class="zimmer-card-actions"> <a href="./zimmer-detail/einzelzimmer-stammhaus.html" class="btn btn-outline">Mehr erfahren</a> </div>
                         </div>
@@ -416,9 +457,9 @@
                             <h3 class="zimmer-card-title" id="zimmer-titel-dz-stammhaus"> <a href="./zimmer-detail/doppelzimmer-stammhaus.html">Doppelzimmer</a> </h3>
                             <div class="zimmer-card-description"> <p>Gemütlicher Komfort für zwei Personen mit traditionellem Flair.</p> </div>
                             <ul class="zimmer-features" aria-label="Ausstattungsmerkmale">
-                                <li class="feature-item"> <iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> <span class="feature-label">20 m²</span> <span>Größe</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> <span class="feature-label">bis 2</span> <span>Personen</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="material-symbols:shower-outline" aria-hidden="true"></iconify-icon> <span class="feature-label">Dusche</span> <span>WC</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-maximize"></use></svg><span class="feature-label">20 m²</span> <span>Größe</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg><span class="feature-label">bis 2</span> <span>Personen</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-shower"></use></svg><span class="feature-label">Dusche</span> <span>WC</span> </li>
                             </ul>
                             <div class="zimmer-card-actions"> <a href="./zimmer-detail/doppelzimmer-stammhaus.html" class="btn btn-outline">Mehr erfahren</a> </div>
                         </div>
@@ -429,9 +470,9 @@
                             <h3 class="zimmer-card-title" id="zimmer-titel-dz-app-stammhaus"> <a href="./zimmer-detail/doppelzimmer-appartement-stammhaus.html">Doppelzimmer-Appartement</a> </h3>
                             <div class="zimmer-card-description"> <p>Mehr Raum und Komfort für Ihren Aufenthalt zu zweit.</p> </div>
                             <ul class="zimmer-features" aria-label="Ausstattungsmerkmale">
-                                <li class="feature-item"> <iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> <span class="feature-label">30 m²</span> <span>Größe</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> <span class="feature-label">bis 2</span> <span>Personen</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="material-symbols:bathtub-outline" aria-hidden="true"></iconify-icon> <span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-maximize"></use></svg><span class="feature-label">30 m²</span> <span>Größe</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg><span class="feature-label">bis 2</span> <span>Personen</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-bathtub"></use></svg><span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
                             </ul>
                             <div class="zimmer-card-actions"> <a href="./zimmer-detail/doppelzimmer-appartement-stammhaus.html" class="btn btn-outline">Mehr erfahren</a> </div>
                         </div>
@@ -442,9 +483,9 @@
                             <h3 class="zimmer-card-title" id="zimmer-titel-dz-app-sup-stammhaus"> <a href="./zimmer-detail/doppelzimmer-appartement-superior-stammhaus.html">Doppelzimmer-Appartement Superior</a> </h3>
                             <div class="zimmer-card-description"> <p>Traditioneller Charme trifft auf modernen Komfort und Großzügigkeit.</p> </div>
                             <ul class="zimmer-features" aria-label="Ausstattungsmerkmale">
-                                <li class="feature-item"> <iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> <span class="feature-label">36 m²</span> <span>Größe</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> <span class="feature-label">bis 4</span> <span>Personen</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="material-symbols:bathtub-outline" aria-hidden="true"></iconify-icon> <span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-maximize"></use></svg><span class="feature-label">36 m²</span> <span>Größe</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg><span class="feature-label">bis 4</span> <span>Personen</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-bathtub"></use></svg><span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
                             </ul>
                             <div class="zimmer-card-actions"> <a href="./zimmer-detail/doppelzimmer-appartement-superior-stammhaus.html" class="btn btn-outline">Mehr erfahren</a> </div>
                         </div>
@@ -455,9 +496,9 @@
                             <h3 class="zimmer-card-title" id="zimmer-titel-dachstudio-stammhaus"> <a href="./zimmer-detail/dachstudio-stammhaus.html">Großzügige Dachstudios</a> </h3>
                             <div class="zimmer-card-description"> <p>Wohnen unterm Dach mit viel Platz und einzigartiger Atmosphäre.</p> </div>
                             <ul class="zimmer-features" aria-label="Ausstattungsmerkmale">
-                                <li class="feature-item"> <iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> <span class="feature-label">46 m²</span> <span>Größe</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> <span class="feature-label">bis 4</span> <span>Personen</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="material-symbols:bathtub-outline" aria-hidden="true"></iconify-icon> <span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-maximize"></use></svg><span class="feature-label">46 m²</span> <span>Größe</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg><span class="feature-label">bis 4</span> <span>Personen</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-bathtub"></use></svg><span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
                             </ul>
                             <div class="zimmer-card-actions"> <a href="./zimmer-detail/dachstudio-stammhaus.html" class="btn btn-outline">Mehr erfahren</a> </div>
                         </div>
@@ -468,9 +509,9 @@
                             <h3 class="zimmer-card-title" id="zimmer-titel-fam-app-stammhaus"> <a href="./zimmer-detail/familien-appartement-stammhaus.html">Familien-Appartement</a> </h3>
                             <div class="zimmer-card-description"> <p>Perfekt für Familien, mit viel Platz zum Entfalten und Wohlfühlen.</p> </div>
                             <ul class="zimmer-features" aria-label="Ausstattungsmerkmale">
-                                <li class="feature-item"> <iconify-icon icon="feather:maximize" aria-hidden="true"></iconify-icon> <span class="feature-label">48 m²</span> <span>Größe</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="feather:users" aria-hidden="true"></iconify-icon> <span class="feature-label">bis 4</span> <span>Personen</span> </li>
-                                <li class="feature-item"> <iconify-icon icon="material-symbols:bathtub-outline" aria-hidden="true"></iconify-icon> <span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-maximize"></use></svg><span class="feature-label">48 m²</span> <span>Größe</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg><span class="feature-label">bis 4</span> <span>Personen</span> </li>
+                                <li class="feature-item"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-bathtub"></use></svg><span class="feature-label">Bad/Dusche</span> <span>WC</span> </li>
                             </ul>
                             <div class="zimmer-card-actions"> <a href="./zimmer-detail/familien-appartement-stammhaus.html" class="btn btn-outline">Mehr erfahren</a> </div>
                         </div>
@@ -480,8 +521,7 @@
         </section>
     </main>
 
-    <!-- GEÄNDERT: sr-only H2 entfernt, Spaltenüberschriften zu H2 geändert -->
-    <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer" role="contentinfo" aria-label="Fußbereich der Webseite">
         <div class="container-footer">
             <div class="footer-column">
                 <h2 class="footer-column-title">Hotel Sonne Post</h2>
@@ -489,19 +529,44 @@
             </div>
             <div class="footer-column">
                  <h2 class="footer-column-title">Entdecken</h2>
-                <ul> <li><a href="./zimmer.html">Wohnen & Preise</a></li> <li><a href="../wellness-spa.html">Spa</a></li> <li><a href="../kulinarik.html">Geniessen & Kulinarik</a></li> <li><a href="../arrangements.html">Arrangements</a></li> <li><a href="../region.html">Freizeit & Region</a></li> </ul>
+                 <nav aria-label="Entdecken Navigation">
+                    <ul>
+                        <li><a href="./zimmer.html">Wohnen & Preise</a></li>
+                        <li><a href="./wellness.html">Spa</a></li>
+                        <li><a href="./restaurant.html">Geniessen & Kulinarik</a></li>
+                        <li><a href="./top-angebote.html">Arrangements</a></li>
+                        <li><a href="./region.html">Freizeit & Region</a></li>
+                    </ul>
+                 </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Information</h2>
-                 <ul> <li><a href="../kontakt-anreise.html">Kontakt & Anreise</a></li> <li><a href="../hotel/ueber-uns.html">Über uns</a></li> <li><a href="./historie.html">Unsere Geschichte</a></li> <li><a href="../karriere.html">Karriere</a></li> <li><a href="../hotel/nachhaltigkeit.html">Nachhaltigkeit</a></li> <li><a href="../hotel/gastfreund-app.html">Gastfreund App</a></li> <li><a href="../newsletter.html">Newsletter</a></li> <li><a href="../faq.html">FAQ</a></li> </ul>
+                <nav aria-label="Informationsnavigation">
+                    <ul>
+                        <li><a href="./kontakt.html">Kontakt & Anreise</a></li>
+                        <li><a href="./ueber-uns.html">Über uns</a></li>
+                        <li><a href="./karriere.html">Karriere</a></li>
+                        <li><a href="./nachhaltigkeit.html">Nachhaltigkeit</a></li>
+                        <li><a href="./gastfreund-app.html">Gastfreund App</a></li>
+                        <li><a href="./newsletter.html">Newsletter</a></li>
+                        <li><a href="./faq.html">FAQ</a></li>
+                    </ul>
+                </nav>
             </div>
             <div class="footer-column">
                 <h2 class="footer-column-title">Rechtliches</h2>
-                 <ul> <li><a href="../impressum.html">Impressum</a></li> <li><a href="../datenschutz.html">Datenschutz</a></li> <li><a href="../agb.html">AGB</a></li> <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li> </ul>
+                <nav aria-label="Rechtliche Navigation">
+                    <ul>
+                        <li><a href="./impressum.html">Impressum</a></li>
+                        <li><a href="./datenschutz.html">Datenschutz</a></li>
+                        <li><a href="./agb.html">AGB</a></li>
+                        <li><a href="#" id="cookie-settings-trigger">Cookie-Einstellungen</a></li>
+                    </ul>
+                </nav>
                 <h2 class="footer-column-title social-heading">Folgen Sie uns</h2>
-                <div class="social-links">
-                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <iconify-icon icon="feather:facebook" aria-hidden="true"></iconify-icon> </a>
-                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <iconify-icon icon="feather:instagram" aria-hidden="true"></iconify-icon> </a>
+                <div class="social-links" role="navigation" aria-label="Soziale Medien im Fußbereich">
+                     <a href="https://www.facebook.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Facebook"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-facebook"></use></svg> </a>
+                     <a href="https://www.instagram.com/sonnepost" target="_blank" rel="noopener noreferrer" aria-label="Sonne Post auf Instagram"> <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#icon-instagram"></use></svg> </a>
                 </div>
             </div>
         </div>
@@ -512,9 +577,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
-    <script src="https://unpkg.com/wicg-inert@latest/dist/inert.min.js" async></script>
-
     <script src="../js/main.js" defer></script>
 
     <script>
@@ -534,7 +596,6 @@
                         }
                     });
                 });
-                 // Animation für den Intro-Text
                 gsap.from('.zimmer-intro-section .container > *', {
                     opacity: 0,
                     y: 30,
@@ -558,9 +619,11 @@
                 let slideInterval;
 
                 function nextSlide() {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
+                    if (slides.length > 0) {
+                        slides[currentSlide].classList.remove('active');
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        slides[currentSlide].classList.add('active');
+                    }
                 }
 
                 function startSlider() {
@@ -572,14 +635,17 @@
                 function stopSlider() {
                     clearInterval(slideInterval);
                 }
-                startSlider();
-                document.addEventListener("visibilitychange", () => {
-                    if (document.hidden) {
-                        stopSlider();
-                    } else {
-                        startSlider();
-                    }
-                });
+
+                if (slides.length > 1) {
+                    startSlider();
+                    document.addEventListener("visibilitychange", () => {
+                        if (document.hidden) {
+                            stopSlider();
+                        } else {
+                            startSlider();
+                        }
+                    });
+                }
             }
         });
     </script>
