@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sonne Glottertal – Wirtshaus seit 1659</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Erleben Sie das traditionsreiche Wirtshaus Sonne Glottertal im Schwarzwald – regionale Küche, sonnige Terrasse, gemütliche Stuben und familiäre Gastfreundschaft seit 1659." />
+  <meta name="keywords" content="Wirtshaus Glottertal, regionale Küche Schwarzwald, badische Spezialitäten, Terrasse Glottertal, Wildgericht Freiburg" />
+  <meta name="author" content="Sonne Glottertal" />
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;700&family=Just+Another+Hand&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Tailwind configuration (extend colors and fonts) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3A1F14',      // Dunkelbraun
+            secondary: '#D8CFC4',    // Sekundärfarbe
+            accent: '#E4B574',       // Sonnengelb
+            background: '#FDF8F1',   // Naturweiß
+          },
+          fontFamily: {
+            serif: ['\"Playfair Display\"', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            hand: ['\"Just Another Hand\"', 'cursive'],
+          },
+        },
+      },
+    };
+  </script>
+  <!-- Custom styles -->
+  <style>
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Fade-in animation for sections */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Offcanvas navigation */
+    .mobile-menu {
+      transition: transform 0.3s ease;
+    }
+    .mobile-menu.closed {
+      transform: translateX(100%);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body class="font-sans bg-background text-primary antialiased">
+  <!-- Structured data for LocalBusiness -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Wirtshaus Sonne Glottertal",
+      "image": [
+        "images/yurii-zinets-eUVkUEO7TGw-unsplash.webp"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Talstraße 14",
+        "addressLocality": "Glottertal",
+        "postalCode": "79286",
+        "addressCountry": "DE"
+      },
+      "url": "https://www.sonne-glottertal.de",
+      "telephone": "+49 761 666 999",
+      "priceRange": "€€",
+      "servesCuisine": ["regional", "badisch", "wild", "vegetarisch"],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "11:30",
+          "closes": "22:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Saturday"],
+          "opens": "11:30",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Sunday"],
+          "opens": "11:30",
+          "closes": "21:00"
+        }
+      ]
+    }
+  </script>
+
+  <!-- Header & Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-background shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="#start" class="font-serif text-2xl font-bold">Sonne&nbsp;Glottertal</a>
+      <!-- Desktop navigation -->
+      <nav class="hidden md:flex space-x-8">
+        <a href="#start" class="hover:text-accent">Start</a>
+        <a href="#kueche" class="hover:text-accent">Küche</a>
+        <a href="#terrasse" class="hover:text-accent">Terrasse</a>
+        <a href="#geschichte" class="hover:text-accent">Geschichte</a>
+        <a href="#speisekarte" class="hover:text-accent">Speisekarte</a>
+        <a href="#kontakt" class="hover:text-accent">Kontakt</a>
+      </nav>
+      <!-- Mobile Hamburger -->
+      <button id="hamburger" class="md:hidden focus:outline-none" aria-label="Menü öffnen">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile offcanvas menu -->
+    <div id="mobileMenu" class="mobile-menu closed fixed top-0 right-0 w-64 h-full bg-background shadow-lg md:hidden z-50 p-6 space-y-6">
+      <button id="closeMenu" class="absolute top-4 right-4" aria-label="Menü schließen">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <nav class="flex flex-col space-y-4 mt-8">
+        <a href="#start" class="hover:text-accent" onclick="toggleMenu(false)">Start</a>
+        <a href="#kueche" class="hover:text-accent" onclick="toggleMenu(false)">Küche</a>
+        <a href="#terrasse" class="hover:text-accent" onclick="toggleMenu(false)">Terrasse</a>
+        <a href="#geschichte" class="hover:text-accent" onclick="toggleMenu(false)">Geschichte</a>
+        <a href="#speisekarte" class="hover:text-accent" onclick="toggleMenu(false)">Speisekarte</a>
+        <a href="#kontakt" class="hover:text-accent" onclick="toggleMenu(false)">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile sticky footer bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-primary text-background py-2 px-4 flex justify-around items-center md:hidden z-50">
+    <a href="tel:+49761666999" class="flex flex-col items-center text-xs hover:text-accent">
+      <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h2l3.6 7.59a1 1 0 001.2.41l5.24-2.09a1 1 0 011.12.41l1.67 2.5" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h7" />
+      </svg>
+      Anrufen
+    </a>
+    <a href="#oeffnungszeiten" class="flex flex-col items-center text-xs hover:text-accent">
+      <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+        <circle cx="12" cy="12" r="9" stroke-width="2" />
+      </svg>
+      Öffnungszeiten
+    </a>
+    <a href="#kontakt" class="flex flex-col items-center text-xs hover:text-accent">
+      <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 12m0 0L9.172 7.757M13.414 12L9.172 16.243M9.172 7.757L4.929 12m0 0l4.243 4.243" />
+      </svg>
+      Anfahrt
+    </a>
+  </div>
+
+  <main id="start" class="mt-16 md:mt-20 space-y-24">
+    <!-- Hero Section -->
+    <section class="relative h-[60vh] md:h-[75vh] flex items-center justify-center text-center overflow-hidden">
+      <img src="images/yurii-zinets-eUVkUEO7TGw-unsplash.webp" alt="Historisches Fachwerkhaus im Glottertal" class="absolute inset-0 w-full h-full object-cover object-center" loading="lazy" />
+      <div class="absolute inset-0 bg-primary opacity-50"></div>
+      <div class="relative z-10 px-4">
+        <h1 class="font-serif text-3xl md:text-5xl text-background font-bold mb-4">Seit 1659. Regional. Herzlich. Echt Schwarzwald.</h1>
+        <p class="max-w-xl mx-auto text-background text-lg md:text-xl mb-6">Willkommen in der Sonne Glottertal – einem Wirtshaus voller Tradition, regionaler Genussmomente und familiärer Gastfreundschaft. Tauchen Sie ein in unsere Welt und lassen Sie sich verwöhnen.</p>
+        <a href="#speisekarte" class="inline-block bg-accent text-primary font-semibold py-3 px-6 rounded hover:scale-105 transform transition duration-300">Jetzt reservieren</a>
+      </div>
+    </section>
+
+    <!-- Einführung & Teaser Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+      <div class="mb-12 text-center">
+        <h2 class="font-serif text-3xl md:text-4xl mb-4">Willkommen im Wirtshaus der Sonnenseite</h2>
+        <p class="max-w-3xl mx-auto text-secondary">Seit über 350&nbsp;Jahren steht die Sonne im Glottertal für herzliche Gastfreundschaft und badische Lebensfreude. Wir kochen ehrlich, regional und mit viel Leidenschaft – und das schmeckt man bei jedem Bissen.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Küche Teaser -->
+        <div class="bg-background shadow rounded overflow-hidden hover:shadow-lg transition duration-300">
+          <img src="images/farhad-ibrahimzade-D1Rez3AjeVo-unsplash.webp" alt="Fischgericht mit Garnelen und Lachs" class="w-full h-40 object-cover" loading="lazy" />
+          <div class="p-4">
+            <h3 class="font-serif text-xl mb-2">Küche & Angebot</h3>
+            <p class="text-secondary mb-4">Frisch, regional und raffiniert: Entdecken Sie unsere saisonalen Gerichte aus Fisch, Wild, vegetarischen Köstlichkeiten und edlen Weinen.</p>
+            <a href="#kueche" class="text-accent font-semibold hover:underline">Mehr erfahren →</a>
+          </div>
+        </div>
+        <!-- Räume Teaser -->
+        <div class="bg-background shadow rounded overflow-hidden hover:shadow-lg transition duration-300">
+          <img src="images/cody-chan-plb4wNaj6MM-unsplash.webp" alt="Rustikaler Gastraum mit Holzbänken" class="w-full h-40 object-cover" loading="lazy" />
+          <div class="p-4">
+            <h3 class="font-serif text-xl mb-2">Terrasse & Räume</h3>
+            <p class="text-secondary mb-4">Ob sonnige Terrasse oder gemütliche Stube – bei uns findet jede Stimmung den passenden Platz.</p>
+            <a href="#terrasse" class="text-accent font-semibold hover:underline">Mehr erfahren →</a>
+          </div>
+        </div>
+        <!-- Geschichte Teaser -->
+        <div class="bg-background shadow rounded overflow-hidden hover:shadow-lg transition duration-300">
+          <img src="images/jonathan-borba-qhOAo3ZIAdI-unsplash.webp" alt="Atmosphärischer Gastraum mit Holz und Bar" class="w-full h-40 object-cover" loading="lazy" />
+          <div class="p-4">
+            <h3 class="font-serif text-xl mb-2">Unsere Geschichte</h3>
+            <p class="text-secondary mb-4">Erfahren Sie spannende Anekdoten und 350&nbsp;Jahre Wirtshaustradition – von 1659 bis heute.</p>
+            <a href="#geschichte" class="text-accent font-semibold hover:underline">Mehr erfahren →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Testimonials -->
+      <div class="mt-16 grid md:grid-cols-3 gap-8">
+        <div class="bg-secondary bg-opacity-20 p-6 rounded shadow">
+          <p class="italic font-hand text-xl text-primary">„Ein wundervoller Abend mit herrlichem Wildgericht und bestem Wein – wir kommen wieder!“</p>
+          <p class="mt-4 font-semibold">– Katharina&nbsp;M.</p>
+        </div>
+        <div class="bg-secondary bg-opacity-20 p-6 rounded shadow">
+          <p class="italic font-hand text-xl text-primary">„Die Terrasse mit Blick ins Tal ist einfach traumhaft. Freundlicher Service und leckere Speisen.“</p>
+          <p class="mt-4 font-semibold">– Tobias&nbsp;S.</p>
+        </div>
+        <div class="bg-secondary bg-opacity-20 p-6 rounded shadow">
+          <p class="italic font-hand text-xl text-primary">„Eine kulinarische Reise durch den Schwarzwald – man schmeckt die Liebe zum Detail.“</p>
+          <p class="mt-4 font-semibold">– Anja&nbsp;L.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Küche & Angebot -->
+    <section id="kueche" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+      <h2 class="font-serif text-3xl md:text-4xl mb-6 text-center">Küche & Angebot</h2>
+      <p class="max-w-3xl mx-auto text-center text-secondary mb-12">Unsere Küche verbindet Tradition mit Moderne: Wir arbeiten mit frischen, saisonalen Produkten aus der Region und servieren badische Klassiker ebenso wie kreative Neuinterpretationen. Dabei achten wir auf Nachhaltigkeit und höchste Qualität.</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Fisch -->
+        <div class="text-center">
+          <img src="images/farhad-ibrahimzade-D1Rez3AjeVo-unsplash.webp" alt="Feines Fischgericht" class="w-full h-40 object-cover rounded shadow-md transform hover:scale-105 transition duration-300" loading="lazy" />
+          <h3 class="font-serif text-xl mt-4">Fisch</h3>
+          <p class="text-secondary text-sm mt-2">Frischer Fisch aus heimischen Gewässern – zart gebraten oder gedünstet mit aromatischen Kräutern.</p>
+        </div>
+        <!-- Wild -->
+        <div class="text-center">
+          <img src="images/venison-dish.webp" alt="Zartes Wildgericht mit Preiselbeersauce" class="w-full h-40 object-cover rounded shadow-md transform hover:scale-105 transition duration-300" loading="lazy" />
+          <h3 class="font-serif text-xl mt-4">Wild</h3>
+          <p class="text-secondary text-sm mt-2">Unsere Spezialität: Reh- und Hirschgerichte aus dem Schwarzwald, begleitet von kräftigen Saucen.</p>
+        </div>
+        <!-- Vegetarisch -->
+        <div class="text-center">
+          <img src="images/anna-pelzer-IGfIGP5ONV0-unsplash.webp" alt="Frischer vegetarischer Salat" class="w-full h-40 object-cover rounded shadow-md transform hover:scale-105 transition duration-300" loading="lazy" />
+          <h3 class="font-serif text-xl mt-4">Vegetarisch</h3>
+          <p class="text-secondary text-sm mt-2">Abwechslungsreiche vegetarische Gerichte voller Farben und Aromen – ganz ohne Fleisch.</p>
+        </div>
+        <!-- Weine -->
+        <div class="text-center">
+          <img src="images/matthieu-joannon-6ciLddToTgM-unsplash.webp" alt="Weißwein in hohen Gläsern" class="w-full h-40 object-cover rounded shadow-md transform hover:scale-105 transition duration-300" loading="lazy" />
+          <h3 class="font-serif text-xl mt-4">Weine</h3>
+          <p class="text-secondary text-sm mt-2">Edle Tropfen aus Baden und der ganzen Welt – vom leichten Riesling bis zum vollmundigen Spätburgunder.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terrasse & Innenräume -->
+    <section id="terrasse" class="bg-secondary bg-opacity-10 py-16 fade-in">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-serif text-3xl md:text-4xl mb-6 text-center">Terrasse & Räume</h2>
+        <p class="max-w-3xl mx-auto text-center text-secondary mb-12">Ob im Sommer auf der sonnigen Terrasse zwischen Blumen und Weinreben oder im Winter am wärmenden Kachelofen – unsere Räume laden zum Verweilen ein und schenken Ihnen Wohlfühlmomente.</p>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="overflow-hidden rounded shadow-lg">
+            <img src="images/anastacia-dvi-JMWP-VfFsgE-unsplash.webp" alt="Terrasse mit Blumen und Blick ins Tal" class="w-full h-56 object-cover transform hover:scale-105 transition duration-300" loading="lazy" />
+            <div class="p-4">
+              <h3 class="font-serif text-xl mb-2">Sonnenterrasse</h3>
+              <p class="text-secondary text-sm">Genießen Sie den Blick ins Tal bei einem Glas Wein und lassen Sie sich von der Abendsonne verwöhnen.</p>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded shadow-lg">
+            <img src="images/cody-chan-plb4wNaj6MM-unsplash.webp" alt="Gemütliche Stube mit Holzbänken" class="w-full h-56 object-cover transform hover:scale-105 transition duration-300" loading="lazy" />
+            <div class="p-4">
+              <h3 class="font-serif text-xl mb-2">Historische Stuben</h3>
+              <p class="text-secondary text-sm">Rustikale Holzbalken, Kachelofen und liebevolle Details schaffen ein heimeliges Ambiente.</p>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded shadow-lg">
+            <img src="images/jonathan-borba-qhOAo3ZIAdI-unsplash.webp" alt="Eleganter Gastraum mit Bar" class="w-full h-56 object-cover transform hover:scale-105 transition duration-300" loading="lazy" />
+            <div class="p-4">
+              <h3 class="font-serif text-xl mb-2">Bar & Lounge</h3>
+              <p class="text-secondary text-sm">Genießen Sie Aperitifs oder einen Digestif an unserer Bar mit Schwarzwald-Flair.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Geschichte -->
+    <section id="geschichte" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+      <h2 class="font-serif text-3xl md:text-4xl mb-6 text-center">Unsere Geschichte</h2>
+      <p class="max-w-3xl mx-auto text-center text-secondary mb-12">Seit 1659 schreiben wir Geschichte – von den bescheidenen Anfängen als kleine Dorfwirtschaft bis hin zum bekannten Wirtshaus im Schwarzwald. Hier ein Blick auf die wichtigsten Stationen.</p>
+      <div class="relative border-l-2 border-secondary ml-4">
+        <!-- Timeline entries -->
+        <div class="mb-10 ml-6">
+          <span class="absolute -left-3 w-6 h-6 bg-accent rounded-full"></span>
+          <h3 class="font-serif text-xl mb-1">1659</h3>
+          <p class="text-secondary">Gründung der „Sonne“ als kleine Schankstube für Reisende und Dorfbewohner. Damals diente sie auch als Poststation.</p>
+        </div>
+        <div class="mb-10 ml-6">
+          <span class="absolute -left-3 w-6 h-6 bg-accent rounded-full"></span>
+          <h3 class="font-serif text-xl mb-1">18. &nbsp;Jahrhundert</h3>
+          <p class="text-secondary">Erweiterung des Hauses durch eine große Stube und Stallungen. Die sonne wurde zum Treffpunkt für Fuhrleute und Händler.</p>
+        </div>
+        <div class="mb-10 ml-6">
+          <span class="absolute -left-3 w-6 h-6 bg-accent rounded-full"></span>
+          <h3 class="font-serif text-xl mb-1">1980er Jahre</h3>
+          <p class="text-secondary">Die „Schwarzwaldklinik“ entdeckte unsere Stube als Filmkulisse. So fanden sich plötzlich Fernsehstars im Gastraum wieder, während Stammgäste staunend zusahen.</p>
+        </div>
+        <div class="mb-10 ml-6">
+          <span class="absolute -left-3 w-6 h-6 bg-accent rounded-full"></span>
+          <h3 class="font-serif text-xl mb-1">1995</h3>
+          <p class="text-secondary">Komplettsanierung und Modernisierung – ohne den Charme zu verlieren. Ein Kachelofen kam hinzu, der bis heute warme Gemütlichkeit verbreitet.</p>
+        </div>
+        <div class="ml-6">
+          <span class="absolute -left-3 w-6 h-6 bg-accent rounded-full"></span>
+          <h3 class="font-serif text-xl mb-1">Heute</h3>
+          <p class="text-secondary">In der x-ten Generation bewahren wir die Tradition und gehen mit der Zeit. Humorvoll erinnern wir uns an die Anekdote von 1820, als ein französischer Soldat seinen Hut als Pfand hinterließ – er hängt noch heute im Flur.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Speisekarte -->
+    <section id="speisekarte" class="bg-secondary bg-opacity-10 py-16 fade-in">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-serif text-3xl md:text-4xl mb-6 text-center">Speisekarte</h2>
+        <p class="max-w-3xl mx-auto text-center text-secondary mb-10">Unsere Speisekarte wechselt mit den Jahreszeiten. Filtern Sie nach Kategorien, um Ihren Lieblingsgang zu finden.</p>
+        <!-- Category Filters -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          <button class="filter-btn bg-accent text-primary px-4 py-2 rounded" data-category="alle">Alle</button>
+          <button class="filter-btn bg-secondary text-primary px-4 py-2 rounded" data-category="vorspeisen">Vorspeisen</button>
+          <button class="filter-btn bg-secondary text-primary px-4 py-2 rounded" data-category="hauptgerichte">Hauptgerichte</button>
+          <button class="filter-btn bg-secondary text-primary px-4 py-2 rounded" data-category="nachspeisen">Nachspeisen</button>
+          <button class="filter-btn bg-secondary text-primary px-4 py-2 rounded" data-category="getraenke">Getränke</button>
+        </div>
+        <!-- Menu items container -->
+        <div id="menuContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+      </div>
+    </section>
+
+    <!-- Kontakt & Anfahrt -->
+    <section id="kontakt" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 fade-in">
+      <h2 class="font-serif text-3xl md:text-4xl mb-6 text-center">Kontakt & Anfahrt</h2>
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Contact form -->
+        <form class="space-y-4" aria-label="Kontaktformular">
+          <div>
+            <label for="name" class="block font-medium">Name *</label>
+            <input type="text" id="name" name="name" required class="mt-1 w-full border border-secondary rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+          </div>
+          <div>
+            <label for="email" class="block font-medium">E‑Mail *</label>
+            <input type="email" id="email" name="email" required class="mt-1 w-full border border-secondary rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+          </div>
+          <div>
+            <label for="tel" class="block font-medium">Telefon</label>
+            <input type="tel" id="tel" name="tel" class="mt-1 w-full border border-secondary rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+          </div>
+          <div>
+            <label for="date" class="block font-medium">Wunschdatum</label>
+            <input type="date" id="date" name="date" class="mt-1 w-full border border-secondary rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent" />
+          </div>
+          <div>
+            <label for="message" class="block font-medium">Nachricht *</label>
+            <textarea id="message" name="message" required rows="4" class="mt-1 w-full border border-secondary rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent"></textarea>
+          </div>
+          <button type="submit" class="bg-accent text-primary font-semibold px-6 py-2 rounded hover:scale-105 transition duration-300">Nachricht senden</button>
+        </form>
+        <!-- Contact details & map placeholder -->
+        <div>
+          <h3 class="font-serif text-xl mb-3">Adresse</h3>
+          <p>Talstraße 14<br />79286 Glottertal<br />Deutschland</p>
+          <h3 class="font-serif text-xl mt-6 mb-3" id="oeffnungszeiten">Öffnungszeiten</h3>
+          <ul class="space-y-1">
+            <li>Montag: geschlossen</li>
+            <li>Di&nbsp;–&nbsp;Fr: 11:30–22:00 Uhr</li>
+            <li>Samstag: 11:30–23:00 Uhr</li>
+            <li>Sonntag: 11:30–21:00 Uhr</li>
+          </ul>
+          <h3 class="font-serif text-xl mt-6 mb-3">Reservierung</h3>
+          <p>Telefon: <a href="tel:+49761666999" class="text-accent hover:underline">+49&nbsp;761&nbsp;666&nbsp;999</a></p>
+          <p>E‑Mail: <a href="mailto:info@sonne-glottertal.de" class="text-accent hover:underline">info@sonne-glottertal.de</a></p>
+          <!-- Map consent -->
+          <div class="mt-8">
+            <button id="loadMap" class="bg-primary text-background px-4 py-2 rounded hover:bg-accent hover:text-primary transition duration-300">Karte laden</button>
+            <p class="text-secondary text-sm mt-2">Durch das Laden der Karte akzeptieren Sie die Datenschutzbestimmungen von Google.</p>
+            <div id="mapContainer" class="mt-4 w-full h-64 bg-secondary bg-opacity-20 flex items-center justify-center text-secondary">
+              <span>Noch keine Karte geladen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-background py-6 text-center mt-16">
+    <p>© 2025 Sonne Glottertal – Alle Rechte vorbehalten.</p>
+    <p class="mt-2 text-sm"><a href="#" class="hover:underline">Impressum</a> · <a href="#" class="hover:underline">Datenschutz</a></p>
+  </footer>
+
+  <!-- JavaScript for interactions -->
+  <script>
+    // IntersectionObserver for fade-in effect
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.fade-in').forEach(element => {
+      observer.observe(element);
+    });
+
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    const closeMenuBtn = document.getElementById('closeMenu');
+
+    function toggleMenu(open) {
+      if (open) {
+        mobileMenu.classList.remove('closed');
+        mobileMenu.classList.add('open');
+      } else {
+        mobileMenu.classList.add('closed');
+        mobileMenu.classList.remove('open');
+      }
+    }
+    hamburger.addEventListener('click', () => toggleMenu(true));
+    closeMenuBtn.addEventListener('click', () => toggleMenu(false));
+
+    // Speisekarte items
+    const menuItems = [
+      { id: 1, category: 'vorspeisen', name: 'Flädlesuppe', description: 'Kräftige Brühe mit feinen Pfannkuchenstreifen', price: '5,90 €' },
+      { id: 2, category: 'vorspeisen', name: 'Badischer Wurstsalat', description: 'Mit Schwarzwälder Schinken, Gurken und Zwiebeln', price: '7,50 €' },
+      { id: 3, category: 'hauptgerichte', name: 'Forellenfilet', description: 'Mit Mandelbutter, Petersilienkartoffeln und Salat', price: '18,50 €' },
+      { id: 4, category: 'hauptgerichte', name: 'Rehmedaillons', description: 'Zart rosa gebraten mit Preiselbeersauce und Spätzle', price: '23,80 €' },
+      { id: 5, category: 'hauptgerichte', name: 'Gemüsemaultaschen', description: 'Hausgemacht, in Brühe oder gebraten mit Zwiebelschmelze', price: '16,00 €' },
+      { id: 6, category: 'nachspeisen', name: 'Schwarzwälder Kirschtorte', description: 'Klassiker mit Kirschwasser und Sahne', price: '4,80 €' },
+      { id: 7, category: 'nachspeisen', name: 'Apfelstrudel', description: 'Mit Vanillesauce und Zimt', price: '5,20 €' },
+      { id: 8, category: 'getraenke', name: 'Badischer Riesling', description: 'Trocken, frisch und fruchtig', price: '0,2 l · 4,90 €' },
+      { id: 9, category: 'getraenke', name: 'Spätburgunder Rotwein', description: 'Vollmundig mit feinen Tanninen', price: '0,2 l · 5,60 €' },
+      { id: 10, category: 'getraenke', name: 'Hausgemachte Limonade', description: 'Erfrischend mit Kräutern aus dem Garten', price: '0,3 l · 3,50 €' }
+    ];
+    const menuContainer = document.getElementById('menuContainer');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    function renderMenu(category) {
+      menuContainer.innerHTML = '';
+      const filtered = category === 'alle' ? menuItems : menuItems.filter(item => item.category === category);
+      filtered.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bg-background p-4 rounded shadow hover:shadow-md transition duration-300';
+        card.innerHTML = `
+          <h4 class="font-serif text-lg mb-1">${item.name}</h4>
+          <p class="text-secondary text-sm mb-2">${item.description}</p>
+          <p class="font-semibold">${item.price}</p>
+        `;
+        menuContainer.appendChild(card);
+      });
+    }
+    // initial render
+    renderMenu('alle');
+    // filter button events
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('bg-accent'));
+        filterButtons.forEach(b => b.classList.remove('text-primary'));
+        filterButtons.forEach(b => b.classList.add('bg-secondary'));
+        btn.classList.remove('bg-secondary');
+        btn.classList.add('bg-accent');
+        renderMenu(btn.getAttribute('data-category'));
+      });
+    });
+
+    // Map consent and loading
+    document.getElementById('loadMap').addEventListener('click', function() {
+      const container = document.getElementById('mapContainer');
+      container.innerHTML = '';
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('src', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2645.0795719551663!2d7.957235215671634!3d48.04267887921678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47914258fc48f6ef%3A0x881ea7b4f240913d!2sTalstra%C3%9Fe%2014%2C%2079286%20Glottertal!5e0!3m2!1sde!2sde!4v1650000000000!5m2!1sde!2sde');
+      iframe.setAttribute('width', '100%');
+      iframe.setAttribute('height', '100%');
+      iframe.setAttribute('style', 'border:0;');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('loading', 'lazy');
+      iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+      container.appendChild(iframe);
+    });
+  </script>
+</body>
+</html>
