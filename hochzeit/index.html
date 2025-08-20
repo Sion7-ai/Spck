@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="de">
 
@@ -14,7 +15,11 @@
         body {
             font-family: 'Inter', sans-serif;
             color: #3a4d39; /* Angepasstes, weicheres Grün */
-            background-color: #FBF9F6; /* Helles Creme/Beige aus dem Bild */
+            /* NEUE, ZUVERLÄSSIGE BILD-URL */
+            background-image: url('https://cdn.midjourney.com/2db7a6b7-6ca4-45bf-9af0-561feb260e0b/0_3.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         h1, h2, h3 {
@@ -69,108 +74,110 @@
     </style>
 </head>
 
-<body class="antialiased">
+<body class="antialiased p-4 sm:p-8 md:p-12 bg-gray-100 min-h-screen flex items-center justify-center">
 
-    <main class="max-w-6xl mx-auto p-4 sm:p-8 md:p-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            
-            <!-- Linke Spalte: Bild und Einleitung -->
-            <div class="space-y-8 lg:sticky lg:top-12">
-                <header class="text-left">
-                    <h1 class="text-6xl sm:text-7xl md:text-8xl">Wir heiraten!</h1>
-                    <p class="text-xl mt-4 text-gray-600">Marie & Christoph</p>
-                </header>
+    <div class="w-full max-w-7xl bg-[#FBF9F6] rounded-2xl shadow-2xl overflow-hidden">
+        <main class=" p-4 sm:p-8 md:p-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 
-                <!-- Bild-Container -->
-                <div class="relative w-full aspect-[4/5] card overflow-hidden">
-                    <img id="hero-image" src="https://sion7-ai.github.io/Spck/hochzeit/paar.webp" alt="Ein glückliches Brautpaar in einem sonnendurchfluteten Garten" class="absolute inset-0 w-full h-full object-cover">
+                <!-- Linke Spalte: Bild und Einleitung -->
+                <div class="space-y-8 lg:sticky lg:top-12">
+                    <header class="text-left">
+                        <h1 class="text-6xl sm:text-7xl md:text-8xl">Wir heiraten!</h1>
+                        <p class="text-xl mt-4 text-gray-600">Marie & Christoph</p>
+                    </header>
+                    
+                    <!-- Bild-Container -->
+                    <div class="relative w-full aspect-[4/5] card overflow-hidden">
+                        <img id="hero-image" src="https://sion7-ai.github.io/Spck/hochzeit/paar.webp" alt="Ein glückliches Brautpaar in einem sonnendurchfluteten Garten" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                     <p class="text-center text-gray-500 italic px-4">Wir freuen uns riesig, diesen besonderen Tag mit euch, unseren liebsten Menschen, zu teilen und unvergessliche Erinnerungen zu schaffen.</p>
                 </div>
-                 <p class="text-center text-gray-500 italic px-4">Wir freuen uns riesig, diesen besonderen Tag mit euch, unseren liebsten Menschen, zu teilen und unvergessliche Erinnerungen zu schaffen.</p>
-            </div>
 
-            <!-- Rechte Spalte: Details und RSVP -->
-            <div class="space-y-12 pt-0 lg:pt-24">
-                
-                <!-- Zeitplan-Sektion -->
-                <section id="schedule">
-                    <h2 class="text-4xl mb-6">Der große Tag</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/50 transition-colors">
-                            <span class="font-bold text-lg text-[#1E392A] w-24">15:00 Uhr</span>
-                            <div>
-                                <h3 class="font-semibold text-lg">Ankunft & Empfang</h3>
-                                <p class="text-gray-600">Findet euch in unserem Garten ein für erste Gespräche und ein kühles Willkommensgetränk.</p>
+                <!-- Rechte Spalte: Details und RSVP -->
+                <div class="space-y-12 pt-0 lg:pt-24">
+                    
+                    <!-- Zeitplan-Sektion -->
+                    <section id="schedule">
+                        <h2 class="text-4xl mb-6">Der große Tag</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/50 transition-colors">
+                                <span class="font-bold text-lg text-[#1E392A] w-24">15:00 Uhr</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Ankunft & Empfang</h3>
+                                    <p class="text-gray-600">Findet euch in unserem Garten ein für erste Gespräche und ein kühles Willkommensgetränk.</p>
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-200"></div>
+                            <div class="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/50 transition-colors">
+                                <span class="font-bold text-lg text-[#1E392A] w-24">16:00 Uhr</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Freie Trauung</h3>
+                                    <p class="text-gray-600">Die persönliche Zeremonie unter freiem Himmel, bei der wir "Ja" sagen.</p>
+                                </div>
+                            </div>
+                             <div class="border-t border-gray-200"></div>
+                            <div class="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/50 transition-colors">
+                                <span class="font-bold text-lg text-[#1E392A] w-24">18:00 Uhr</span>
+                                <div>
+                                    <h3 class="font-semibold text-lg">Feier & Dinner</h3>
+                                    <p class="text-gray-600">Zeit zum Anstoßen, Feiern, Essen und Tanzen bis in die Nacht.</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="border-t border-gray-200"></div>
-                        <div class="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/50 transition-colors">
-                            <span class="font-bold text-lg text-[#1E392A] w-24">16:00 Uhr</span>
+                    </section>
+                    
+                    <!-- Zusage-Sektion (RSVP) -->
+                    <section id="rsvp" class="card p-8">
+                        <h2 class="text-4xl mb-2">Zusage</h2>
+                        <p class="text-gray-600 mb-6">Bitte gebt uns bis zum 30. September Bescheid.</p>
+                        <form id="rsvp-form" class="space-y-4">
                             <div>
-                                <h3 class="font-semibold text-lg">Freie Trauung</h3>
-                                <p class="text-gray-600">Die persönliche Zeremonie unter freiem Himmel, bei der wir "Ja" sagen.</p>
+                                <label for="name" class="block text-sm font-medium mb-1">Vor- & Nachname</label>
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Max & Maria Mustermann" required>
                             </div>
-                        </div>
-                         <div class="border-t border-gray-200"></div>
-                        <div class="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/50 transition-colors">
-                            <span class="font-bold text-lg text-[#1E392A] w-24">18:00 Uhr</span>
                             <div>
-                                <h3 class="font-semibold text-lg">Feier & Dinner</h3>
-                                <p class="text-gray-600">Zeit zum Anstoßen, Feiern, Essen und Tanzen bis in die Nacht.</p>
+                                <label for="email" class="block text-sm font-medium mb-1">E-Mail Adresse</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="deine@email.com" required>
                             </div>
-                        </div>
-                    </div>
-                </section>
-                
-                <!-- Zusage-Sektion (RSVP) -->
-                <section id="rsvp" class="card p-8">
-                    <h2 class="text-4xl mb-2">Zusage</h2>
-                    <p class="text-gray-600 mb-6">Bitte gebt uns bis zum 30. September Bescheid.</p>
-                    <form id="rsvp-form" class="space-y-4">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-1">Vor- & Nachname</label>
-                            <input type="text" id="name" name="name" class="form-input" placeholder="Max & Maria Mustermann" required>
-                        </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium mb-1">E-Mail Adresse</label>
-                            <input type="email" id="email" name="email" class="form-input" placeholder="deine@email.com" required>
-                        </div>
-                        <div class="pt-4">
-                             <button type="submit" class="btn-primary w-full">
-                                Antwort absenden
-                            </button>
-                        </div>
-                    </form>
-                     <div id="form-message" class="mt-4 text-center hidden"></div>
-                </section>
+                            <div class="pt-4">
+                                 <button type="submit" class="btn-primary w-full">
+                                    Antwort absenden
+                                </button>
+                            </div>
+                        </form>
+                         <div id="form-message" class="mt-4 text-center hidden"></div>
+                    </section>
 
-                 <!-- FAQ-Sektion -->
-                <section id="faq">
-                    <h2 class="text-4xl mb-6">Gut zu wissen</h2>
-                    <div class="space-y-2">
-                        <details class="p-4 rounded-lg hover:bg-white/50 transition-colors group">
-                            <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
-                                Was sollen wir anziehen?
-                                <span class="transform transition-transform duration-300 group-open:rotate-180">&#9660;</span>
-                            </summary>
-                            <p class="mt-2 text-gray-600">Der Dresscode ist "Smart Casual". Fühlt euch schick, aber bequem. Da wir im Garten feiern, sind Absätze, die im Rasen versinken, vielleicht nicht die beste Wahl.</p>
-                        </details>
-                        <div class="border-t border-gray-200"></div>
-                        <details class="p-4 rounded-lg hover:bg-white/50 transition-colors group">
-                            <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
-                                Geschenke?
-                                <span class="transform transition-transform duration-300 group-open:rotate-180">&#9660;</span>
-                            </summary>
-                            <p class="mt-2 text-gray-600">Eure Anwesenheit ist das größte Geschenk für uns! Wenn ihr uns dennoch eine Freude machen möchtet, würden wir uns über einen Beitrag zu unserer Hochzeitsreise freuen.</p>
-                        </details>
-                    </div>
-                </section>
+                     <!-- FAQ-Sektion -->
+                    <section id="faq">
+                        <h2 class="text-4xl mb-6">Gut zu wissen</h2>
+                        <div class="space-y-2">
+                            <details class="p-4 rounded-lg hover:bg-white/50 transition-colors group">
+                                <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                                    Was sollen wir anziehen?
+                                    <span class="transform transition-transform duration-300 group-open:rotate-180">&#9660;</span>
+                                </summary>
+                                <p class="mt-2 text-gray-600">Der Dresscode ist "Smart Casual". Fühlt euch schick, aber bequem. Da wir im Garten feiern, sind Absätze, die im Rasen versinken, vielleicht nicht die beste Wahl.</p>
+                            </details>
+                            <div class="border-t border-gray-200"></div>
+                            <details class="p-4 rounded-lg hover:bg-white/50 transition-colors group">
+                                <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center">
+                                    Geschenke?
+                                    <span class="transform transition-transform duration-300 group-open:rotate-180">&#9660;</span>
+                                </summary>
+                                <p class="mt-2 text-gray-600">Eure Anwesenheit ist das größte Geschenk für uns! Wenn ihr uns dennoch eine Freude machen möchtet, würden wir uns über einen Beitrag zu unserer Hochzeitsreise freuen.</p>
+                            </details>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
-        
-        <footer class="text-center mt-16 py-8 border-t border-gray-200">
-             <p class="text-gray-500">Wir können es kaum erwarten, mit euch zu feiern!</p>
-        </footer>
-    </main>
+            
+            <footer class="text-center mt-16 py-8 border-t border-gray-200 lg:col-span-2">
+                 <p class="text-gray-500">Wir können es kaum erwarten, mit euch zu feiern!</p>
+            </footer>
+        </main>
+    </div>
 
     <script>
         // Formular-Submission-Handler
