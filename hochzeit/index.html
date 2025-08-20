@@ -66,21 +66,6 @@
             transform: translateY(-5px);
             box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
         }
-
-        /* Lade-Spinner für Bilder */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #1E392A;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 
@@ -98,17 +83,7 @@
                 
                 <!-- Bild-Container -->
                 <div class="relative w-full aspect-[4/5] card overflow-hidden">
-                    <div id="hero-loader" class="absolute inset-0 flex items-center justify-center bg-gray-100">
-                        <div class="loader"></div>
-                    </div>
-                    <img id="hero-image" src="" alt="Ein glückliches Brautpaar in einem sonnendurchfluteten Garten" class="absolute inset-0 w-full h-full object-cover hidden">
-                    <button
-                        aria-label="Regenerate image"
-                        tabindex="0"
-                        onclick="generateAndSetImage('hero-image', 'hero-loader', 'A beautiful, candid photo of a joyful bride and groom standing close together in a lush, sun-drenched garden. They are smiling warmly. The style is bright, airy, and romantic with soft focus. Shot on film, fine art photography.')"
-                        class="absolute bottom-3 right-3 z-20 w-8 h-8 rounded-full text-sm font-bold bg-white/80 backdrop-blur border shadow-md flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity">
-                        R
-                    </button>
+                    <img id="hero-image" src="https://sion7-ai.github.io/Spck/hochzeit/paar.webp" alt="Ein glückliches Brautpaar in einem sonnendurchfluteten Garten" class="absolute inset-0 w-full h-full object-cover">
                 </div>
                  <p class="text-center text-gray-500 italic px-4">Wir freuen uns riesig, diesen besonderen Tag mit euch, unseren liebsten Menschen, zu teilen und unvergessliche Erinnerungen zu schaffen.</p>
             </div>
@@ -205,66 +180,6 @@
             messageElement.classList.remove('hidden');
             messageElement.innerHTML = `<p class="text-green-700 font-semibold">Vielen Dank für eure Rückmeldung!</p>`;
             this.reset();
-        });
-
-        // --- Bildgenerierungs-Logik ---
-        async function generateAndSetImage(imageId, loaderId, prompt) {
-            const imageElement = document.getElementById(imageId);
-            const loaderElement = document.getElementById(loaderId);
-
-            loaderElement.classList.remove('hidden');
-            imageElement.classList.add('hidden');
-
-            const apiKey = ""; 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
-            const payload = {
-                instances: [{ prompt: prompt }],
-                parameters: { "sampleCount": 1 }
-            };
-
-            let success = false;
-            let attempts = 0;
-            const maxAttempts = 5;
-
-            while (!success && attempts < maxAttempts) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    if (!response.ok) throw new Error(`API request failed: ${response.status}`);
-                    const result = await response.json();
-                    if (result.predictions && result.predictions[0].bytesBase64Encoded) {
-                        imageElement.src = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
-                        success = true;
-                    } else {
-                        throw new Error('Invalid API response');
-                    }
-                } catch (error) {
-                    console.error(`Attempt ${attempts + 1} failed:`, error);
-                    attempts++;
-                    if (attempts < maxAttempts) {
-                        await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempts) * 1000));
-                    }
-                }
-            }
-
-            loaderElement.classList.add('hidden');
-            imageElement.classList.remove('hidden');
-
-            if (!success) {
-                imageElement.src = 'https://placehold.co/800x1000/EAE6E1/3a4d39?text=Bild+fehlt';
-                console.error('Failed to generate image.');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            generateAndSetImage(
-                'hero-image',
-                'hero-loader',
-                'A beautiful, candid photo of a joyful bride and groom standing close together in a lush, sun-drenched garden. They are smiling warmly. The style is bright, airy, and romantic with soft focus. Shot on film, fine art photography.'
-            );
         });
     </script>
 </body>
