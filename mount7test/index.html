@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mount7 - Ride the Future</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Iconify Icons via CDN -->
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --bg: #002E40; /* UPDATED: New background color */
+            --indigo: #6366F1;
+            --teal: #14B8A6;
+            --text: #F9FAFB;
+            --text2: #9CA3AF;
+        }
+        body {
+            font-family: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            background-color: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .font-head {
+            font-family: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+        }
+        /* Animated hero gradient background */
+        .hero-gradient {
+            position: absolute;
+            inset: -40%;
+            filter: blur(80px);
+            opacity: .6;
+            background: conic-gradient(from 180deg, rgba(99, 102, 241, .25), rgba(20, 184, 166, .2), rgba(99, 102, 241, .25));
+            animation: spin 18s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(1turn); }
+        }
+        /* Bento card border glow effect */
+        .glow-wrap {
+            background: linear-gradient(135deg, rgba(99, 102, 241, .35), rgba(20, 184, 166, .35));
+            padding: 1px;
+            border-radius: 1rem;
+            transition: transform 0.2s ease-out;
+        }
+        .glow-wrap:hover {
+            transform: scale(1.03);
+        }
+        .glow-inner {
+            border-radius: .95rem;
+        }
+    </style>
+</head>
+<body class="bg-[#002E40] text-[#F9FAFB]">
+
+    <!-- Top Utility Bar -->
+    <div class="w-full bg-black/60 text-[#9CA3AF] text-xs fixed top-0 z-50">
+        <div class="px-8 h-9 flex items-center gap-4 justify-between">
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#contact" class="hover:text-white">Hilfe & Kontakt</a>
+                <span class="hidden lg:inline-flex items-center gap-1">
+                    <span class="iconify h-3.5 w-3.5" data-icon="lucide:star"></span>4.86 / 5 bei TrustedShops
+                </span>
+                <span>100 Tage Rückgabegarantie</span>
+            </div>
+            <a href="tel:+4976188793820" class="inline-flex items-center gap-2 hover:text-white">
+                <span class="iconify h-3.5 w-3.5" data-icon="lucide:phone"></span>Service‑Hotline +49 (0)761‑8879 3820
+            </a>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header id="navbar" class="fixed top-9 inset-x-0 z-40 transition-all duration-300">
+        <div class="px-8 h-16 flex items-center justify-between">
+            <a href="#home" class="font-head text-lg tracking-tight inline-flex items-center gap-2">
+                <!-- UPDATED: SVG Logo -->
+                <img src="https://sion7-ai.github.io/Spck/mount7/m7logo_w.svg" alt="Mount7 Logo" class="w-[110px] h-auto">
+            </a>
+
+            <nav class="hidden md:flex items-center gap-6 text-sm text-[#9CA3AF]">
+                <a href="#mission" class="hover:text-white">Unsere Mission</a>
+                <a href="#features" class="hover:text-white">Features</a>
+                <a href="#contact" class="hover:text-white">Kontakt</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-3">
+                <div class="relative">
+                    <span class="iconify absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" data-icon="lucide:search"></span>
+                    <input type="search" placeholder="Suche Bikes, Marken, Zubehör…" class="font-body bg-white/5 text-sm placeholder-[#9CA3AF] pl-9 pr-3 py-2 rounded-lg border border-white/10 outline-none focus:ring-2 focus:ring-[#6366F1]/50">
+                </div>
+                <a href="#cart" class="relative inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10">
+                    <span class="iconify h-5 w-5" data-icon="lucide:shopping-cart"></span>
+                    <span class="absolute -top-1.5 -right-1.5 h-5 min-w-[20px] px-1 rounded-full bg-[#6366F1] text-[10px] grid place-items-center">2</span>
+                </a>
+            </div>
+
+            <button id="menu-btn" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white/5 border border-white/10">
+                <span class="iconify h-5 w-5" data-icon="lucide:menu"></span>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-black/60 backdrop-blur-md">
+            <div class="px-8 py-3 space-y-3 text-[#9CA3AF]">
+                <a href="#mission" class="block hover:text-white">Unsere Mission</a>
+                <a href="#features" class="block hover:text-white">Features</a>
+                <a href="#contact" class="block hover:text-white">Kontakt</a>
+                <div class="pt-2">
+                    <div class="relative">
+                        <span class="iconify absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" data-icon="lucide:search"></span>
+                        <input type="search" placeholder="Suche Bikes, Marken, Zubehör…" class="w-full font-body bg-white/5 text-sm placeholder-[#9CA3AF] pl-9 pr-3 py-2 rounded-lg border border-white/10 outline-none">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="px-8 pt-32 pb-20">
+        <section id="home" class="flex flex-col gap-6">
+            
+            <!-- ABOVE THE FOLD CONTAINER -->
+            <div class="flex flex-col gap-6">
+                <!-- 5-TILE ROW -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 gap-6 auto-rows-[250px] md:auto-rows-[300px] xl:auto-rows-[350px]">
+                    <!-- CATEGORY CARD 1: Mountainbikes -->
+                    <div class="glow-wrap shadow-2xl shadow-black/50">
+                        <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-0 relative overflow-hidden">
+                            <a href="#shop-mtb" class="relative block group h-full">
+                                <img src="https://sion7-ai.github.io/Spck/mount7test/assets/Mountainbikes.png" alt="Mountainbikes" class="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                                <div class="relative z-10 h-full w-full flex flex-col justify-center items-center p-5 text-center overflow-hidden">
+                                    <div class="absolute top-5 transition-all duration-300 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                                        <div class="flex items-center justify-center gap-2 text-xs text-[#9CA3AF]">
+                                            <span class="iconify h-4 w-4" data-icon="lucide:mountain"></span>Kategorie
+                                        </div>
+                                    </div>
+                                    <h4 class="text-2xl font-semibold tracking-tight transition-all duration-300 group-hover:-translate-y-3">Mountainbikes</h4>
+                                    <div class="absolute bottom-5 transition-all duration-300 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                                         <span class="inline-flex items-center gap-2 border border-white/40 px-3 py-1.5 rounded-md text-xs text-[#9CA3AF] bg-black/20 backdrop-blur-sm">433 Räder entdecken &rarr;</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- CATEGORY CARD 2: E-Bikes -->
+                    <div class="glow-wrap shadow-2xl shadow-black/50">
+                        <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-0 relative overflow-hidden">
+                            <a href="#shop-ebikes" class="relative block group h-full">
+                                <img src="https://sion7-ai.github.io/Spck/mount7test/assets/E-Bikes.png" alt="E-Bikes" class="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                                <div class="relative z-10 h-full w-full flex flex-col justify-center items-center p-5 text-center overflow-hidden">
+                                    <div class="absolute top-5 transition-all duration-300 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                                        <div class="flex items-center justify-center gap-2 text-xs text-[#9CA3AF]">
+                                            <span class="iconify h-4 w-4" data-icon="lucide:battery-charging"></span>Kategorie
+                                        </div>
+                                    </div>
+                                    <h4 class="text-2xl font-semibold tracking-tight transition-all duration-300 group-hover:-translate-y-3">E-Bikes</h4>
+                                    <div class="absolute bottom-5 transition-all duration-300 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                                         <span class="inline-flex items-center gap-2 border border-white/40 px-3 py-1.5 rounded-md text-xs text-[#9CA3AF] bg-black/20 backdrop-blur-sm">528 Räder entdecken &rarr;</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- CATEGORY CARD 3: Rennräder -->
+                    <div class="glow-wrap shadow-2xl shadow-black/50">
+                        <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-0 relative overflow-hidden">
+                            <a href="#shop-road" class="relative block group h-full">
+                                <img src="https://sion7-ai.github.io/Spck/mount7test/assets/Rennraeder.png" alt="Rennräder" class="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                                <div class="relative z-10 h-full w-full flex flex-col justify-center items-center p-5 text-center overflow-hidden">
+                                    <div class="absolute top-5 transition-all duration-300 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                                        <div class="flex items-center justify-center gap-2 text-xs text-[#9CA3AF]">
+                                            <span class="iconify h-4 w-4" data-icon="lucide:bike"></span>Kategorie
+                                        </div>
+                                    </div>
+                                    <h4 class="text-2xl font-semibold tracking-tight transition-all duration-300 group-hover:-translate-y-3">Rennräder</h4>
+                                    <div class="absolute bottom-5 transition-all duration-300 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                                         <span class="inline-flex items-center gap-2 border border-white/40 px-3 py-1.5 rounded-md text-xs text-[#9CA3AF] bg-black/20 backdrop-blur-sm">340 Räder entdecken &rarr;</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- CATEGORY CARD 4: E-Mountainbikes -->
+                    <div class="glow-wrap shadow-2xl shadow-black/50">
+                        <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-0 relative overflow-hidden">
+                            <a href="#shop-emtb" class="relative block group h-full">
+                                <img src="https://sion7-ai.github.io/Spck/mount7test/assets/E-Mountainbikes.png" alt="E-Mountainbikes" class="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                                <div class="relative z-10 h-full w-full flex flex-col justify-center items-center p-5 text-center overflow-hidden">
+                                    <div class="absolute top-5 transition-all duration-300 opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                                        <div class="flex items-center justify-center gap-2 text-xs text-[#9CA3AF]">
+                                            <span class="iconify h-4 w-4" data-icon="lucide:zap"></span>Kategorie
+                                        </div>
+                                    </div>
+                                    <h4 class="text-2xl font-semibold tracking-tight transition-all duration-300 group-hover:-translate-y-3">E-Mountainbikes</h4>
+                                    <div class="absolute bottom-5 transition-all duration-300 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+                                         <span class="inline-flex items-center gap-2 border border-white/40 px-3 py-1.5 rounded-md text-xs text-[#9CA3AF] bg-black/20 backdrop-blur-sm">238 Räder entdecken &rarr;</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- SERVICE CARD -->
+                    <div class="glow-wrap shadow-2xl shadow-black/50">
+                        <div class="glow-inner h-full w-full bg-[#1F7373] border border-white/10 p-4 md:p-5 flex flex-col">
+                            <h4 class="text-lg font-semibold tracking-tight text-white">Unser Service für Dich:</h4>
+                            <ul class="mt-3 space-y-2.5 text-sm text-gray-200 flex-grow">
+                                <li class="flex items-start gap-3">
+                                    <span class="iconify h-4 w-4 mt-1 text-gray-300 flex-shrink-0" data-icon="lucide:truck"></span>
+                                    <div>
+                                        <strong>Schneller Versand</strong>
+                                        <p class="text-xs text-gray-400">Overnight Express möglich</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="iconify h-4 w-4 mt-1 text-gray-300 flex-shrink-0" data-icon="lucide:package"></span>
+                                    <span>Fahrfertig montiert</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="iconify h-4 w-4 mt-1 text-gray-300 flex-shrink-0" data-icon="lucide:rotate-cw"></span>
+                                    <span>100 Tage Rückgabegarantie</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="iconify h-4 w-4 mt-1 text-gray-300 flex-shrink-0" data-icon="lucide:phone"></span>
+                                    <div>
+                                        <strong>Service-Hotline</strong>
+                                        <p class="text-xs text-gray-400">+49 (0)761-8879 3820</p>
+                                    </div>
+                                </li>
+                                 <li class="flex items-start gap-3">
+                                    <span class="iconify h-4 w-4 mt-1 text-gray-300 flex-shrink-0" data-icon="lucide:shield-check"></span>
+                                    <div>
+                                        <strong>Trusted Shops</strong>
+                                        <p class="text-xs text-gray-400">Käuferschutz</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3-TILE ROW -->
+                <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6 auto-rows-[250px] md:auto-rows-[300px] xl:auto-rows-[350px]">
+                    <!-- PURE MOMENTS CARD -->
+                    <div class="glow-wrap shadow-2xl shadow-black/50">
+                        <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-0 relative overflow-hidden">
+                            <img src="https://sion7-ai.github.io/Spck/mount7test/assets/pure_Moments.png" alt="Cyclist on a mountain ridge" class="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-500 group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                            <div class="relative z-10 h-full w-full flex flex-col justify-end p-5">
+                                <h4 class="text-2xl font-semibold tracking-tight">Pure Moments</h4>
+                                <a href="#video" class="mt-2 inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-sm font-medium border border-white/10 hover:bg-white/20 max-w-max">
+                                    <span class="iconify h-4 w-4" data-icon="lucide:play-circle"></span> Video ansehen
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAHRRADLADEN FREIBURG CARD -->
+                    <div class="glow-wrap shadow-2xl shadow-black/50">
+                        <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-5 md:p-6 flex flex-col">
+                            <div class="flex items-center gap-3">
+                                <span class="iconify h-6 w-6 text-[#14B8A6]" data-icon="lucide:store"></span>
+                                <h4 class="text-xl font-semibold tracking-tight">Fahrradladen Freiburg</h4>
+                            </div>
+                            <div class="mt-4 flex-grow">
+                                <p class="font-medium text-white">Öffnungszeiten</p>
+                                <p class="text-sm text-[#9CA3AF]">Montag-Freitag: 12:00-18:30 Uhr</p>
+                                <p class="text-sm text-[#9CA3AF]">Samstag: 10:00-14:00 Uhr</p>
+                            </div>
+                            <a href="#contact" class="mt-2 inline-flex items-center gap-2 text-sm text-[#9CA3AF] hover:text-white">
+                                Komm vorbei! <span class="iconify h-4 w-4" data-icon="lucide:arrow-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- SALE CARD -->
+                    <div class="glow-wrap shadow-2xl shadow-black/50">
+                        <div class="glow-inner h-full w-full bg-red-800/20 border border-white/10 p-0 relative overflow-hidden">
+                             <a href="#sale" class="relative block group h-full">
+                                <img src="https://sion7-ai.github.io/Spck/mount7test/assets/sale.png" alt="Sale" class="absolute inset-0 h-full w-full object-cover opacity-30 transition-transform duration-500 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="relative z-10 h-full w-full flex flex-col justify-center items-center text-center p-5">
+                                    <h4 class="font-head text-5xl font-bold tracking-tighter text-red-400">SALE</h4>
+                                    <p class="mt-1 text-white text-lg">592 Produkte entdecken</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HERO CARD (MOVED) -->
+            <div class="glow-wrap shadow-2xl shadow-black/50 relative h-[400px] md:h-[504px] xl:h-[584px] overflow-hidden">
+                <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-5 md:p-6 relative overflow-hidden">
+                    <div class="hero-gradient"></div>
+                    <div class="relative z-10 flex h-full flex-col justify-between">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-[#9CA3AF]">
+                                <span class="iconify h-3.5 w-3.5" data-icon="lucide:shield-check"></span>
+                                Verified Quality • Pro Build • DSGVO‑clean
+                            </div>
+                        </div>
+                        <div class="pt-4 md:pt-6">
+                            <h1 class="font-head text-3xl md:text-5xl xl:text-6xl font-bold leading-tight tracking-tight">
+                                Ride the Future.
+                            </h1>
+                            <p class="font-body mt-3 max-w-2xl text-[#9CA3AF]">
+                                Mount7 ist dein Bike‑Hub für Performance, Design und eine reibungslose Shopping‑Experience – von Mountainbikes bis E‑Road.
+                            </p>
+                            <div class="mt-6 flex flex-wrap items-center gap-3">
+                                <a href="#shop" class="inline-flex items-center gap-2 rounded-xl bg-[#6366F1] px-4 py-2.5 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#6366F1]/50">
+                                    Explore Mount7 <span class="iconify h-4 w-4" data-icon="lucide:chevron-right"></span>
+                                </a>
+                                <a href="#features" class="inline-flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2.5 text-sm font-medium border border-white/10 hover:bg-white/10">
+                                    Unsere Features
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-[#9CA3AF]">
+                            <span class="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-3 py-1"><span class="iconify h-3.5 w-3.5" data-icon="lucide:truck"></span>48h Versand</span>
+                            <span class="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-3 py-1"><span class="iconify h-3.5 w-3.5" data-icon="lucide:shield-check"></span>Käuferschutz</span>
+                            <span class="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-3 py-1"><span class="iconify h-3.5 w-3.5" data-icon="lucide:package"></span>Montage-Service</span>
+                            <span class="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/10 px-3 py-1"><span class="iconify h-3.5 w-3.5" data-icon="lucide:star"></span>4.86/5 Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MISSION SECTION (REDESIGNED & MOVED) -->
+            <div id="mission" class="my-12 md:my-16 p-6 flex flex-col md:flex-row items-center gap-8">
+                <div class="w-full md:w-[30%]">
+                    <h3 class="text-3xl md:text-4xl font-semibold tracking-tight">Unsere Mission</h3>
+                    <p class="mt-4 text-[#9CA3AF] max-w-2xl">
+                        Mount7 verbindet Tech-Mentalität mit Outdoor-Leidenschaft: hochwertige Bikes, klare Beratung und ein Einkaufserlebnis, das sich so smooth anfühlt wie eine perfekt geschaltete 1x12.
+                    </p>
+                </div>
+                <div class="w-full md:w-[70%] relative h-full min-h-[460px] rounded-lg overflow-hidden shadow-2xl shadow-black/50">
+                    <img src="https://sion7-ai.github.io/Spck/mount7test/assets/unsere_mission.png" alt="A modern and clean bike shop" class="absolute inset-0 h-full w-full object-cover">
+                </div>
+            </div>
+
+            <!-- REST OF THE BENTO GRID -->
+            <div class="grid auto-rows-[250px] md:auto-rows-[300px] xl:auto-rows-[350px] grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- VISUAL SHOWCASE CARD -->
+                <div class="glow-wrap shadow-2xl shadow-black/50 relative md:col-span-2 xl:col-span-3 overflow-hidden">
+                    <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-0 relative overflow-hidden">
+                        <img src="https://sion7-ai.github.io/Spck/mount7test/assets/showcase.png" alt="High-speed road sequence" class="absolute inset-0 h-full w-full object-cover opacity-80 scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                        <div class="relative h-full w-full p-6 flex flex-col justify-end">
+                            <h4 class="text-2xl md:text-3xl font-semibold">Showcase: Speed & Control</h4>
+                            <p class="text-[#9CA3AF] mt-1 max-w-xl">
+                                Parallax, sanfte Hover-Glows und klare Typografie – das Mount7-Look & Feel in Action.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- CTA FOOTER / NEWSLETTER -->
+                <div class="glow-wrap shadow-2xl shadow-black/50 md:col-span-1 xl:col-span-1">
+                    <div class="glow-inner h-full w-full bg-[#002E40] border border-white/10 p-5 md:p-6 flex items-center">
+                        <form id="newsletter-form" class="w-full">
+                            <div>
+                                <h3 class="text-2xl font-semibold">Ready to ride?</h3>
+                                <p class="text-[#9CA3AF] mt-1">
+                                    News, Drops & Events direkt in dein Postfach.
+                                </p>
+                            </div>
+                            <div class="w-full mt-4">
+                                <div class="relative w-full mb-2">
+                                    <span class="iconify absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" data-icon="lucide:mail"></span>
+                                    <input required type="email" name="email" placeholder="dein@email.de" class="w-full bg-white/5 text-sm placeholder-[#9CA3AF] pl-10 pr-3 py-2.5 rounded-xl border border-white/10 outline-none focus:ring-2 focus:ring-[#14B8A6]/40">
+                                </div>
+                                <button type="submit" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-[#14B8A6] px-4 py-2.5 text-sm font-medium hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#14B8A6]/50">
+                                    Abonnieren
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-white/10">
+        <div class="px-8 py-10 text-sm text-[#9CA3AF]">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2 text-white">
+                         <!-- UPDATED: SVG Logo -->
+                        <img src="https://sion7-ai.github.io/Spck/mount7/m7logo_w.svg" alt="Mount7 Logo" class="w-[110px] h-auto">
+                    </div>
+                    <p class="max-w-md">
+                        DSGVO‑freundlich, ohne Cookies oder Tracker. Statischer Auftritt, schnelle Ladezeiten, klare UI.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <a href="#mission" class="hover:text-white">About</a><br>
+                        <a href="#features" class="hover:text-white">Features</a><br>
+                        <a href="#shop" class="hover:text-white">Shop</a>
+                    </div>
+                    <div class="space-y-2">
+                        <a href="#impressum" class="hover:text-white">Impressum</a><br>
+                        <a href="#privacy" class="hover:text-white">Privacy</a><br>
+                        <a href="#agb" class="hover:text-white">AGB</a>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-8 text-xs">© 2024 Mount7. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Navbar Scroll Effect ---
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('backdrop-blur-md', 'bg-black/40', 'border-b', 'border-white/10');
+                } else {
+                    navbar.classList.remove('backdrop-blur-md', 'bg-black/40', 'border-b', 'border-white/10');
+                }
+            });
+
+            // --- Mobile Menu Toggle ---
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Newsletter Form Submission ---
+            const newsletterForm = document.getElementById('newsletter-form');
+            newsletterForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const email = new FormData(e.target).get('email');
+                showToast(`Danke! Wir halten dich auf dem Laufenden: ${email}`);
+                e.target.reset();
+            });
+
+            // --- Toast Notification Function ---
+            function showToast(message) {
+                const toastContainer = document.getElementById('toast-container');
+                const toast = document.createElement('div');
+                toast.className = 'bg-teal-500 text-white text-sm font-medium px-4 py-2 rounded-lg shadow-lg animate-fade-in-out';
+                toast.textContent = message;
+                toastContainer.appendChild(toast);
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            }
+            // Add keyframes for toast animation
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes fade-in-out {
+                    0% { opacity: 0; transform: translateY(20px); }
+                    10% { opacity: 1; transform: translateY(0); }
+                    90% { opacity: 1; transform: translateY(0); }
+                    100% { opacity: 0; transform: translateY(20px); }
+                }
+                .animate-fade-in-out {
+                    animation: fade-in-out 3s ease-in-out forwards;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+
+</body>
+</html>
