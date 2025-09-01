@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mount7 - Kuratierte Performance Bikes</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Lato (Regular 400, Bold 700, Semibold 600) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Iconify Icons via CDN -->
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --bg-dark: #002E40;
+            --cta-orange: #E5230C;
+            --accent-teal: #1F7373;
+            --text-light: #F9FAFB;
+        }
+        body {
+            font-family: "Lato", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body class="bg-[#002E40] text-[#F9FAFB]">
+
+    <!-- Top Utility Bar -->
+    <div class="w-full bg-black/60 text-[#9CA3AF] text-xs fixed top-0 z-50">
+        <div class="px-4 lg:px-8 h-9 flex items-center gap-4 justify-between">
+            <div class="hidden md:flex items-center gap-4">
+                <a href="#contact" class="hover:text-white">Hilfe & Kontakt</a>
+                <span class="hidden lg:inline-flex items-center gap-1"><span class="iconify h-3.5 w-3.5" data-icon="lucide:star"></span>4.86 / 5 bei TrustedShops</span>
+                <span>100 Tage Rückgabegarantie</span>
+            </div>
+            <a href="tel:+4976188793820" class="inline-flex items-center gap-2 hover:text-white"><span class="iconify h-3.5 w-3.5" data-icon="lucide:phone"></span>Service‑Hotline +49 (0)761‑8879 3820</a>
+        </div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header id="navbar" class="fixed top-9 inset-x-0 z-40 transition-all duration-300">
+        <div class="px-4 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#home"><img src="https://sion7-ai.github.io/Spck/mount7/m7logo_w.svg" alt="Mount7 Logo" class="w-[110px] h-auto"></a>
+            <nav class="hidden md:flex items-center gap-6 text-sm text-[#9CA3AF]">
+                <a href="#categories" class="hover:text-white">Bikes</a><a href="#mission" class="hover:text-white">Mission</a><a href="#topseller" class="hover:text-white">Topseller</a><a href="#contact" class="hover:text-white">Kontakt</a>
+            </nav>
+            <div class="hidden md:flex items-center gap-3">
+                <div class="relative"><span class="iconify absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" data-icon="lucide:search"></span><input type="search" placeholder="Suche Bikes, Marken, Zubehör…" class="bg-white/5 text-sm placeholder-[#9CA3AF] pl-9 pr-3 py-2 rounded-lg border border-white/10 outline-none focus:ring-2 focus:ring-[#E5230C]/50"></div>
+                <a href="#cart" class="relative inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10"><span class="iconify h-5 w-5" data-icon="lucide:shopping-cart"></span><span class="absolute -top-1.5 -right-1.5 h-5 min-w-[20px] px-1 rounded-full bg-[#E5230C] text-[10px] grid place-items-center">2</span></a>
+            </div>
+            <button id="menu-btn" class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg bg-white/5 border border-white/10"><span class="iconify h-5 w-5" data-icon="lucide:menu"></span></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-black/60 backdrop-blur-md"><div class="px-8 py-3 space-y-3 text-[#9CA3AF]"><a href="#categories" class="block hover:text-white">Bikes</a><a href="#mission" class="block hover:text-white">Mission</a><a href="#topseller" class="block hover:text-white">Topseller</a><a href="#contact" class="block hover:text-white">Kontakt</a></div></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20">
+        <div class="px-4 lg:px-8">
+            <!-- Intro, Service-Panel & Kategorien -->
+            <section id="home" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Linke Spalte: Intro & Kategorien -->
+                <div class="lg:col-span-2 flex flex-col gap-6">
+                    <!-- Intro-Band -->
+                    <div class="bg-[#1F7373] rounded-lg p-8 md:p-10 text-white relative overflow-hidden">
+                        <div class="absolute inset-0 bg-repeat opacity-[0.06]" style="background-image: url('https://sion7-ai.github.io/Spck/mount7/muster_nahtlos_w.svg'); background-size: 400px;"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                        <div class="relative z-10">
+                            <p class="text-lg">Kuratierte Performance – weil Details zählen.</p>
+                            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mt-2">Die besten Bikes. Von uns für dich ausgewählt.</h1>
+                            <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-lg"><a href="#" class="font-bold text-[#E5230C] hover:underline">Road</a><a href="#" class="font-bold text-[#E5230C] hover:underline">Trail</a><a href="#" class="font-bold text-[#E5230C] hover:underline">E-Performance</a></div>
+                        </div>
+                    </div>
+
+                    <!-- Kategorienraster (KORRIGIERT) -->
+                    <div id="categories" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <a href="#" class="group relative block aspect-square sm:aspect-auto sm:h-[300px] rounded-lg overflow-hidden shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#002E40] focus:ring-[#E5230C]" aria-label="Kategorie: Mountainbikes – 433 Räder entdecken">
+                            <img src="https://sion7-ai.github.io/Spck/mount7test/assets/Mountainbikes.png" alt="Mountainbiker auf einem Trail" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-left transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.05] group-focus:scale-[1.05]">
+                            <div class="absolute inset-0 bg-black/20 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                            <div class="relative h-full flex flex-col justify-center items-center p-4 text-white text-center overflow-hidden">
+                                <h3 class="text-2xl font-bold transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-3 group-focus:-translate-y-3">Mountainbikes</h3>
+                                <div class="absolute bottom-6 bg-[#E5230C] text-white text-xs font-semibold px-3 py-2 rounded transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0">433 Räder entdecken &rarr;</div>
+                            </div>
+                        </a>
+                        <a href="#" class="group relative block aspect-square sm:aspect-auto sm:h-[300px] rounded-lg overflow-hidden shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#002E40] focus:ring-[#E5230C]" aria-label="Kategorie: E-Bikes – 528 Räder entdecken">
+                            <img src="https://sion7-ai.github.io/Spck/mount7test/assets/E-Bikes.png" alt="E-Bike in einer Stadt" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.05] group-focus:scale-[1.05]">
+                            <div class="absolute inset-0 bg-black/20 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                            <div class="relative h-full flex flex-col justify-center items-center p-4 text-white text-center overflow-hidden">
+                                <h3 class="text-2xl font-bold transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-3 group-focus:-translate-y-3">E-Bikes</h3>
+                                <div class="absolute bottom-6 bg-[#E5230C] text-white text-xs font-semibold px-3 py-2 rounded transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0">528 Räder entdecken &rarr;</div>
+                            </div>
+                        </a>
+                        <a href="#" class="group relative block aspect-square sm:aspect-auto sm:h-[300px] rounded-lg overflow-hidden shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#002E40] focus:ring-[#E5230C]" aria-label="Kategorie: E-Mountainbikes – 238 Räder entdecken">
+                            <img src="https://sion7-ai.github.io/Spck/mount7test/assets/E-Mountainbikes.png" alt="E-Mountainbike in den Bergen" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.05] group-focus:scale-[1.05]">
+                            <div class="absolute inset-0 bg-black/20 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                            <div class="relative h-full flex flex-col justify-center items-center p-4 text-white text-center overflow-hidden">
+                                <h3 class="text-2xl font-bold transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-3 group-focus:-translate-y-3">E-Mountainbikes</h3>
+                                <div class="absolute bottom-6 bg-[#E5230C] text-white text-xs font-semibold px-3 py-2 rounded transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0">238 Räder entdecken &rarr;</div>
+                            </div>
+                        </a>
+                        <a href="#" class="group relative block aspect-square sm:aspect-auto sm:h-[300px] rounded-lg overflow-hidden shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#002E40] focus:ring-[#E5230C]" aria-label="Kategorie: Rennräder – 340 Räder entdecken">
+                            <img src="https://sion7-ai.github.io/Spck/mount7test/assets/Rennraeder.png" alt="Rennradfahrer auf einer Landstraße" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-right transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.05] group-focus:scale-[1.05]">
+                            <div class="absolute inset-0 bg-black/20 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                            <div class="relative h-full flex flex-col justify-center items-center p-4 text-white text-center overflow-hidden">
+                                <h3 class="text-2xl font-bold transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:-translate-y-3 group-focus:-translate-y-3">Rennräder</h3>
+                                <div class="absolute bottom-6 bg-[#E5230C] text-white text-xs font-semibold px-3 py-2 rounded transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0">340 Räder entdecken &rarr;</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Service-Panel (KORRIGIERT) -->
+                <div class="lg:col-span-1 bg-[#002E40] rounded-lg p-6 lg:sticky lg:top-32 h-max relative overflow-hidden border border-white/10">
+                    <img src="https://www.mount7.com/out/mount7/img/bg-service.jpg" alt="Service Hintergrund" class="absolute inset-0 w-full h-full object-cover opacity-10" loading="lazy">
+                    <div class="relative z-10 flex flex-col h-full">
+                        <div class="flex items-center gap-4 mb-4">
+                            <img src="https://sion7-ai.github.io/Spck/mount7test/assets/unsere_mission.png" alt="Werkstatt in Freiburg" class="h-16 w-16 rounded-md object-cover">
+                            <div>
+                                <h3 class="text-xl font-bold">Unser Versprechen</h3>
+                                <p class="text-sm text-white/60">Handarbeit aus Freiburg</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 text-sm flex-grow">
+                            <li class="flex items-start gap-4"><span class="iconify h-5 w-5 mt-0.5 text-white/70" data-icon="lucide:wrench"></span><div><strong class="text-white">Pro-Build in Freiburg</strong><p class="text-white/60">Drehmoment-protokoll geprüft</p></div></li>
+                            <li class="flex items-start gap-4"><span class="iconify h-5 w-5 mt-0.5 text-white/70" data-icon="lucide:rotate-cw"></span><div><strong class="text-white">Sorglos Testen</strong><p class="text-white/60">100 Tage Rückgaberecht</p></div></li>
+                            <li class="flex items-start gap-4"><span class="iconify h-5 w-5 mt-0.5 text-white/70" data-icon="lucide:phone"></span><div><strong class="text-white">Experten-Beratung</strong><p class="text-white/60">Wir finden dein perfektes Bike</p></div></li>
+                            <li class="flex items-start gap-4 pt-4 border-t border-white/10 mt-4"><img src="https://www.mount7.com/out/mount7/img/Trusted_Shops.svg" alt="Trusted Shops Logo" class="h-6 w-auto mt-0.5"><div><strong class="text-white">Trusted Shops Käuferschutz</strong><p class="text-white/60">Sicher einkaufen</p></div></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Kacheln (KORRIGIERT) -->
+            <section id="mission" class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="#" class="group relative block h-80 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.02]">
+                    <img src="https://sion7-ai.github.io/Spck/mount7test/assets/showcase.png" alt="High-speed road sequence" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.05]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    <div class="relative h-full flex flex-col justify-end p-6 text-white"><h3 class="text-2xl font-bold">Performance im Detail</h3><p class="mt-2 text-sm text-white/80 hover:underline">Alle Details & Spezifikationen &rarr;</p></div>
+                </a>
+                <a href="#" class="group relative block h-80 rounded-lg overflow-hidden shadow-lg transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.02] border border-white/10">
+                    <img src="https://sion7-ai.github.io/Spck/mount7test/assets/unsere_mission.png" alt="Moderner und cleaner Fahrradladen" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300 ease-[cubic-bezier(.22,1,.36,1)]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#002E40]/80 to-transparent"></div>
+                    <div class="relative h-full flex flex-col justify-end p-6 text-white"><h3 class="text-2xl font-bold">Unsere Mission</h3><p class="mt-2 text-sm text-white/80">Getestet am Schauinsland & auf den Trails um Freiburg.</p></div>
+                </a>
+                <a href="#" class="group relative block h-80 rounded-lg overflow-hidden shadow-lg bg-[#E5230C] transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.02]">
+                    <img src="https://sion7-ai.github.io/Spck/mount7test/assets/sale.png" alt="Sale Angebot" loading="lazy" class="absolute inset-0 w-full h-full object-cover opacity-35 group-hover:opacity-40 transition-opacity duration-300 ease-[cubic-bezier(.22,1,.36,1)] mix-blend-multiply">
+                    <div class="relative h-full flex flex-col justify-center items-center text-center p-6 text-white">
+                        <h3 class="text-5xl font-bold tracking-tighter">Sale</h3><p class="mt-2 text-base font-semibold">Ausgewählte Modelle</p><p class="mt-1 text-sm text-white/90 max-w-xs">Zu besonderen Konditionen.</p>
+                        <div class="mt-4 inline-flex items-center border-2 border-white px-6 py-2 rounded text-sm font-semibold bg-transparent group-hover:bg-white/20 transition-colors duration-300 ease-[cubic-bezier(.22,1,.36,1)]">Angebote entdecken</div>
+                    </div>
+                </a>
+            </section>
+        </div>
+
+        <!-- Marken Section (KORRIGIERT) -->
+        <section class="mt-16 bg-white py-12">
+            <div class="px-4 lg:px-8">
+                <div class="text-center">
+                    <h3 class="text-xl font-bold text-center text-[#002E40]">Top Marken bei Mount7</h3>
+                    <p class="mt-2 text-gray-600">Ausgewählt & getestet in Freiburg</p>
+                </div>
+                <div class="mt-8 flex flex-wrap justify-center items-center gap-x-10 gap-y-6">
+                    <a href="#" aria-label="Giant Bikes"><img src="https://www.mount7.com/out/pictures/generated/manufacturer/icon/100_100_75/Giant.jpg" alt="Giant Logo" class="h-10 w-auto transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.05]"></a>
+                    <a href="#" aria-label="Liv Bikes"><img src="https://www.mount7.com/out/pictures/generated/manufacturer/icon/100_100_75/Liv.jpg" alt="Liv Logo" class="h-10 w-auto transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.05]"></a>
+                    <a href="#" aria-label="Cannondale Bikes"><img src="https://www.mount7.com/out/pictures/generated/manufacturer/icon/100_100_75/Cannondale.jpg" alt="Cannondale Logo" class="h-10 w-auto transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.05]"></a>
+                    <a href="#" aria-label="Orbea Bikes"><img src="https://www.mount7.com/out/pictures/generated/manufacturer/icon/100_100_75/Orbea.jpg" alt="Orbea Logo" class="h-10 w-auto transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.05]"></a>
+                    <a href="#" aria-label="Santa Cruz Bikes"><img src="https://www.mount7.com/out/pictures/generated/manufacturer/icon/100_100_75/Santa_Cruz.jpg" alt="Santa Cruz Logo" class="h-10 w-auto transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.05]"></a>
+                    <a href="#" aria-label="Mondraker Bikes"><img src="https://www.mount7.com/out/pictures/generated/manufacturer/icon/100_100_75/Mondraker.jpg" alt="Mondraker Logo" class="h-10 w-auto transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.05]"></a>
+                    <a href="#" aria-label="Trek Bikes"><img src="https://www.mount7.com/out/pictures/generated/manufacturer/icon/100_100_75/Trek.jpg" alt="Trek Logo" class="h-10 w-auto transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.05]"></a>
+                    <a href="#" aria-label="Diamant Bikes"><img src="https://www.mount7.com/out/pictures/generated/manufacturer/icon/100_100_75/Diamant.jpg" alt="Diamant Logo" class="h-10 w-auto transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:scale-[1.05]"></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Topseller Section (KORRIGIERT) -->
+        <section id="topseller" class="py-16 bg-gray-50">
+            <div class="px-4 lg:px-8">
+                <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-gray-900">Topseller</h2><p class="mt-2 text-gray-600 max-w-2xl mx-auto">Unsere meistverkauften Produkte. Finde heraus, welches für dich passt!</p></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="group rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-[cubic-bezier(.22,1,.36,1)] overflow-hidden bg-white"><a href="#" class="block" aria-label="Zum Produkt: GIANT TCR Advanced 0 - 2025"><div class="relative"><div class="aspect-w-4 aspect-h-3 bg-white flex items-center justify-center py-6 px-8"><img src="https://www.mount7.com/out/pictures/ys_generated/320_255_75/out/pictures/master/product/1/MY25-TCR-Advanced-0-PC_Color-A-Frost-Silver.jpg" alt="GIANT TCR Advanced 0 - 2025" class="w-full h-full object-contain max-w-[92%] mx-auto" loading="lazy"></div><div class="absolute top-3 right-3 bg-[#E5230C] text-white text-xs font-bold px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 ease-[cubic-bezier(.22,1,.36,1)]">-25%</div></div><div class="p-4 text-gray-800"><div class="relative h-[72px]"><div class="absolute inset-0 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 group-focus-within:opacity-0 group-focus-within:-translate-y-2 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)]"><p class="text-xs uppercase text-gray-500">GIANT</p><h3 class="font-bold text-gray-900 truncate mt-1">TCR Advanced 0 - 2025</h3><p class="text-lg font-bold text-gray-900 mt-1">ab 2.999€*</p></div><div class="absolute inset-0 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)]"><div class="flex justify-between items-center text-xs"><span class="flex items-center gap-1.5 text-green-600 font-semibold"><span class="h-2 w-2 rounded-full bg-green-500"></span> Auf Lager</span><span class="font-bold text-red-600">1.000 € gespart</span></div><div class="flex items-baseline gap-2 mt-1"><span class="text-lg font-bold text-gray-900">ab 2.999€*</span><span class="text-sm text-gray-500 line-through">3.999€</span></div><p class="text-xs text-gray-600 mt-1">Größen: S, M, ML, L, XL</p></div></div></div></a><div class="max-h-0 group-hover:max-h-20 group-focus-within:max-h-20 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] overflow-hidden"><a href="#" class="block bg-[#1F7373] text-white text-center font-bold py-3 hover:brightness-110">Zum Produkt</a></div></div>
+                    <div class="group rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-[cubic-bezier(.22,1,.36,1)] overflow-hidden bg-white"><a href="#" class="block" aria-label="Zum Produkt: TREK Madone SL 6 Gen 8 - 2025"><div class="relative"><div class="aspect-w-4 aspect-h-3 bg-white flex items-center justify-center py-6 px-8"><img src="https://www.mount7.com/out/pictures/ys_generated/320_255_75/out/pictures/master/product/1/MadoneSL6-25-46219-A-Primary.jpg" alt="TREK Madone SL 6 Gen 8 - 2025" class="w-full h-full object-contain max-w-[92%] mx-auto" loading="lazy"></div><div class="absolute top-3 right-3 bg-[#E5230C] text-white text-xs font-bold px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 ease-[cubic-bezier(.22,1,.36,1)]">-36%</div></div><div class="p-4 text-gray-800"><div class="relative h-[72px]"><div class="absolute inset-0 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 group-focus-within:opacity-0 group-focus-within:-translate-y-2 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)]"><p class="text-xs uppercase text-gray-500">TREK</p><h3 class="font-bold text-gray-900 truncate mt-1">Madone SL 6 Gen 8 - 2025</h3><p class="text-lg font-bold text-gray-900 mt-1">3.199€*</p></div><div class="absolute inset-0 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)]"><div class="flex justify-between items-center text-xs"><span class="flex items-center gap-1.5 text-green-600 font-semibold"><span class="h-2 w-2 rounded-full bg-green-500"></span> Auf Lager</span><span class="font-bold text-red-600">1.800 € gespart</span></div><div class="flex items-baseline gap-2 mt-1"><span class="text-lg font-bold text-gray-900">3.199€*</span><span class="text-sm text-gray-500 line-through">4.999€</span></div><p class="text-xs text-gray-600 mt-1">Größen: M, ML, XL</p></div></div></div></a><div class="max-h-0 group-hover:max-h-20 group-focus-within:max-h-20 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] overflow-hidden"><a href="#" class="block bg-[#1F7373] text-white text-center font-bold py-3 hover:brightness-110">Zum Produkt</a></div></div>
+                    <div class="group rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-[cubic-bezier(.22,1,.36,1)] overflow-hidden bg-white"><a href="#" class="block" aria-label="Zum Produkt: ORBEA Rise SL M10 630W - 2025"><div class="relative"><div class="aspect-w-4 aspect-h-3 bg-white flex items-center justify-center py-6 px-8"><img src="https://www.mount7.com/out/pictures/ys_generated/320_255_75/out/pictures/master/product/1/S394-SX-Side-01-01-RISE-SL-M10.jpg" alt="ORBEA Rise SL M10 630W - 2025" class="w-full h-full object-contain max-w-[92%] mx-auto" loading="lazy"></div><div class="absolute top-3 right-3 bg-[#E5230C] text-white text-xs font-bold px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 ease-[cubic-bezier(.22,1,.36,1)]">-33%</div></div><div class="p-4 text-gray-800"><div class="relative h-[72px]"><div class="absolute inset-0 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 group-focus-within:opacity-0 group-focus-within:-translate-y-2 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)]"><p class="text-xs uppercase text-gray-500">ORBEA</p><h3 class="font-bold text-gray-900 truncate mt-1">Rise SL M10 630W - 2025</h3><p class="text-lg font-bold text-gray-900 mt-1">ab 5.499€*</p></div><div class="absolute inset-0 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)]"><div class="flex justify-between items-center text-xs"><span class="flex items-center gap-1.5 text-green-600 font-semibold"><span class="h-2 w-2 rounded-full bg-green-500"></span> Auf Lager</span><span class="font-bold text-red-600">2.700 € gespart</span></div><div class="flex items-baseline gap-2 mt-1"><span class="text-lg font-bold text-gray-900">ab 5.499€*</span><span class="text-sm text-gray-500 line-through">8.199€</span></div><p class="text-xs text-gray-600 mt-1">Größen: S, M, L, XL</p></div></div></div></a><div class="max-h-0 group-hover:max-h-20 group-focus-within:max-h-20 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] overflow-hidden"><a href="#" class="block bg-[#1F7373] text-white text-center font-bold py-3 hover:brightness-110">Zum Produkt</a></div></div>
+                    <div class="group rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-[cubic-bezier(.22,1,.36,1)] overflow-hidden bg-white"><a href="#" class="block" aria-label="Zum Produkt: TREK Rail 9.8 XT Gen 4 - 2024"><div class="relative"><div class="aspect-w-4 aspect-h-3 bg-white flex items-center justify-center py-6 px-8"><img src="https://www.mount7.com/out/pictures/ys_generated/320_255_75/out/pictures/master/product/1/Rail98XT-23-37028-A-Primary.jpg" alt="TREK Rail 9.8 XT Gen 4 - 2024" class="w-full h-full object-contain max-w-[92%] mx-auto" loading="lazy"></div><div class="absolute top-3 right-3 bg-[#E5230C] text-white text-xs font-bold px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-300 ease-[cubic-bezier(.22,1,.36,1)]">-49%</div></div><div class="p-4 text-gray-800"><div class="relative h-[72px]"><div class="absolute inset-0 opacity-100 group-hover:opacity-0 group-hover:-translate-y-2 group-focus-within:opacity-0 group-focus-within:-translate-y-2 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)]"><p class="text-xs uppercase text-gray-500">TREK</p><h3 class="font-bold text-gray-900 truncate mt-1">Rail 9.8 XT Gen 4 - 2024</h3><p class="text-lg font-bold text-gray-900 mt-1">3.999€*</p></div><div class="absolute inset-0 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0 transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)]"><div class="flex justify-between items-center text-xs"><span class="flex items-center gap-1.5 text-green-600 font-semibold"><span class="h-2 w-2 rounded-full bg-green-500"></span> Auf Lager</span><span class="font-bold text-red-600">3.800 € gespart</span></div><div class="flex items-baseline gap-2 mt-1"><span class="text-lg font-bold text-gray-900">3.999€*</span><span class="text-sm text-gray-500 line-through">7.799€</span></div><p class="text-xs text-gray-600 mt-1">Größen: S, M</p></div></div></div></a><div class="max-h-0 group-hover:max-h-20 group-focus-within:max-h-20 transition-all duration-500 ease-[cubic-bezier(.22,1,.36,1)] overflow-hidden"><a href="#" class="block bg-[#1F7373] text-white text-center font-bold py-3 hover:brightness-110">Zum Produkt</a></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-white/10">
+        <div class="px-4 lg:px-8 py-10 text-sm text-[#9CA3AF]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="space-y-4"><img src="https://sion7-ai.github.io/Spck/mount7/m7logo_w.svg" alt="Mount7 Logo" class="w-[120px] h-auto"><p class="max-w-md">DSGVO‑freundlich, ohne Cookies oder Tracker. Statischer Auftritt, schnelle Ladezeiten, klare UI.</p></div>
+                 <div class="space-y-2"><h4 class="font-bold text-white mb-3">Navigation</h4><a href="#home" class="block hover:text-white">Start</a><a href="#categories" class="block hover:text-white">Shop</a><a href="#mission" class="block hover:text-white">Mission</a><a href="#topseller" class="block hover:text-white">Topseller</a></div>
+                <div class="space-y-2"><h4 class="font-bold text-white mb-3">Rechtliches</h4><a href="#impressum" class="block hover:text-white">Impressum</a><a href="#privacy" class="block hover:text-white">Datenschutz</a><a href="#agb" class="block hover:text-white">AGB</a><div class="flex items-center gap-4 pt-4"><img src="https://www.mount7.com/out/mount7/img/certificates/trusted-2023.png" alt="Trusted Shops Zertifikat" class="h-12"><img src="https://www.mount7.com/out/mount7/img/certificates/kununu-2024.svg" alt="Kununu Top Company 2024" class="h-12"></div></div>
+            </div>
+            <p class="mt-10 text-center text-xs border-t border-white/10 pt-6">© 2024 Mount7. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tailwind CSS Aspect Ratio Plugin Polyfill
+            const style = document.createElement('style');
+            style.innerHTML = `.aspect-w-4 { position: relative; padding-bottom: 75%; } .aspect-h-3 { } .aspect-w-4 > * { position: absolute; height: 100%; width: 100%; top: 0; right: 0; bottom: 0; left: 0; }`;
+            document.head.appendChild(style);
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => { if (window.scrollY > 20) { navbar.classList.add('backdrop-blur-md', 'bg-black/40', 'border-b', 'border-white/10'); } else { navbar.classList.remove('backdrop-blur-md', 'bg-black/40', 'border-b', 'border-white/10'); } });
+            // Mobile Menu Toggle
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+        });
+    </script>
+
+</body>
+</html>
