@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mount7 | Premium Cycling & Lifestyle</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Iconify Icons via CDN -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <script>
+        // Custom Tailwind Configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#1F2937', // Dunkler Text
+                        'brand-light': '#F9FAFB', // Heller Hintergrund
+                        'brand-gray': '#6B7280',   // Sekundärer Text
+                        // Akzentfarbe wird durch Gradient-Klassen ersetzt
+                    },
+                    animation: {
+                        'gradient-pan': 'gradient-pan 6s ease infinite',
+                        'fade-in': 'fade-in 0.8s ease-out forwards',
+                        'slide-up': 'slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                    },
+                    keyframes: {
+                        'gradient-pan': {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        },
+                        'fade-in': {
+                            'from': { opacity: '0' },
+                            'to': { opacity: '1' },
+                        },
+                        'slide-up': {
+                            'from': { transform: 'translateY(30px)', opacity: '0' },
+                            'to': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Grundlegende Stile und Font-Smoothing */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .animated-element {
+            opacity: 0;
+        }
+
+        /* Hover-Video Stile */
+        .hover-video {
+            pointer-events: none;
+        }
+
+        /* --- Neue Klassen für Farbverlauf --- */
+        .brand-gradient-bg {
+            background-image: linear-gradient(90deg, #F3B05D 0%, #E52815 100%);
+            background-size: 200% auto;
+            transition: background-position 0.5s;
+        }
+        .brand-gradient-bg:hover {
+            background-position: right center;
+        }
+        .brand-gradient-text {
+            background: linear-gradient(90deg, #F3B05D 0%, #E52815 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* --- Hero Transition Styles (unverändert) --- */
+        .hero-pane {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translate3d(0, 20px, 0);
+            transition: opacity 280ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s 420ms;
+        }
+        .hero-pane[data-state="active"] {
+            opacity: 1;
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+            transition-delay: 0s;
+        }
+        .hero-pane[data-state="leaving"] {
+            opacity: 0;
+            visibility: visible;
+            transform: translate3d(0, -20px, 0);
+            transition-delay: 0s;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-pane {
+                transform: translate3d(0, 0, 0) !important;
+                transition: opacity 200ms ease;
+            }
+        }
+    </style>
+</head>
+<body class="bg-brand-light text-brand-dark font-sans overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 animated-element" id="header">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="#" aria-label="Homepage">
+                    <!-- Helles Logo -->
+                    <img src="https://sion7-ai.github.io/Spck/mount7/m7logo.svg" alt="Mount7 Logo" class="h-6 w-auto">
+                </a>
+                <div class="hidden md:flex items-center space-x-8 font-medium text-gray-600">
+                    <a href="#worlds" class="hover:text-brand-dark transition-colors">Themenwelten</a>
+                    <a href="#community" class="hover:text-brand-dark transition-colors">Community</a>
+                    <a href="#featured" class="hover:text-brand-dark transition-colors">Bikes</a>
+                    <!-- Button mit Farbverlauf -->
+                    <a href="#" class="brand-gradient-bg text-white font-semibold px-5 py-2 rounded-full transition-all transform hover:scale-105">Store Visit</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-brand-dark">
+                        <span class="iconify w-7 h-7" data-icon="heroicons:bars-3-20-solid"></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative h-screen w-full flex flex-col justify-center items-center text-brand-dark overflow-hidden">
+            <!-- Background Video Container -->
+            <div class="absolute inset-0 z-0">
+                <!-- Heller Overlay für besseren Textkontrast -->
+                <div class="absolute inset-0 bg-white opacity-40 z-10"></div>
+                <video id="hero-video" class="h-full w-full object-cover" autoplay muted loop playsinline preload="metadata"
+                       src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4"
+                       poster="https://i.ibb.co/zWTdfVsJ/Road.jpg">
+                </video>
+            </div>
+            <!-- Bottom Gradient Overlay -->
+            <div class="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-brand-light to-transparent z-10"></div>
+
+            <!-- Hero Content Stack -->
+            <div class="relative z-20 w-full max-w-5xl text-center px-4 min-h-[150px] flex items-center justify-center animated-element">
+                <!-- Panes sind hier gestapelt -->
+                <div id="hero-content-road" class="hero-pane" data-state="active" role="tabpanel" aria-hidden="false">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-tight">Road Performance</h1>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-brand-gray">Die ultimative Geschwindigkeit. Gebaut für Siege, entwickelt im Schwarzwald.</p>
+                </div>
+                <div id="hero-content-gravel" class="hero-pane" role="tabpanel" aria-hidden="true">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-tight">Gravel Adventure</h1>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-brand-gray">Verlasse die ausgetretenen Pfade. Dein Abenteuer beginnt, wo der Asphalt endet.</p>
+                </div>
+                <div id="hero-content-trail" class="hero-pane" role="tabpanel" aria-hidden="true">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-tight">Trail Experience</h1>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-brand-gray">Beherrsche jeden Trail. Präzision und Kontrolle für maximale Endorphine.</p>
+                </div>
+            </div>
+
+            <!-- Hero Tabs -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 w-full max-w-md px-4 animated-element">
+                <div class="bg-white/40 backdrop-blur-md p-2 rounded-full grid grid-cols-3 gap-2 border border-gray-200/50" role="tablist" aria-label="Themenwelten">
+                    <button id="tab-road" class="hero-tab-btn active text-white bg-brand-dark py-3 rounded-full font-semibold transition-all" data-tab="road" role="tab" aria-selected="true" aria-controls="hero-content-road">Road</button>
+                    <button id="tab-gravel" class="hero-tab-btn text-brand-gray hover:text-brand-dark py-3 rounded-full font-semibold transition-all" data-tab="gravel" role="tab" aria-selected="false" aria-controls="hero-content-gravel">Gravel</button>
+                    <button id="tab-trail" class="hero-tab-btn text-brand-gray hover:text-brand-dark py-3 rounded-full font-semibold transition-all" data-tab="trail" role="tab" aria-selected="false" aria-controls="hero-content-trail">Trail</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Themenwelten Section -->
+        <section id="worlds" class="py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 animated-element">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-dark tracking-tighter">Kuratierte Themenwelten</h2>
+                    <p class="mt-4 text-lg text-brand-gray max-w-2xl mx-auto">Mehr als nur Bikes. Ein kuratierter Showroom für deinen Performance-Lifestyle.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Road Card -->
+                    <div class="world-card group relative h-96 rounded-2xl overflow-hidden shadow-lg animated-element" style="--delay: 0.1s;">
+                        <div class="absolute inset-0 z-0">
+                             <img src="https://i.ibb.co/zWTdfVsJ/Road.jpg" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Rennradfahrer in Aktion">
+                             <video src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4" class="hover-video absolute top-0 left-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500" muted loop playsinline></video>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8 z-10">
+                            <h3 class="text-3xl font-bold text-white">Road Performance</h3>
+                            <a href="#" class="mt-4 inline-flex items-center text-white font-semibold group-hover:translate-x-1 transition-transform"><span class="brand-gradient-text">Entdecken</span> <span class="iconify ml-1 brand-gradient-text" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                        </div>
+                    </div>
+                    <!-- Gravel Card -->
+                    <div class="world-card group relative h-96 rounded-2xl overflow-hidden shadow-lg animated-element" style="--delay: 0.2s;">
+                         <div class="absolute inset-0 z-0">
+                             <img src="https://i.ibb.co/bjzx7WzT/Gravel.jpg" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Gravel-Bike in ländlicher Umgebung">
+                             <video src="https://cdn.midjourney.com/video/756cbb18-00ea-45fb-af7e-6ed55d887064/2.mp4" class="hover-video absolute top-0 left-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500" muted loop playsinline></video>
+                         </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8 z-10">
+                            <h3 class="text-3xl font-bold text-white">Gravel Adventure</h3>
+                            <a href="#" class="mt-4 inline-flex items-center text-white font-semibold group-hover:translate-x-1 transition-transform"><span class="brand-gradient-text">Erleben</span> <span class="iconify ml-1 brand-gradient-text" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                        </div>
+                    </div>
+                     <!-- Trail Card -->
+                    <div class="world-card group relative h-96 rounded-2xl overflow-hidden shadow-lg animated-element" style="--delay: 0.3s;">
+                        <div class="absolute inset-0 z-0">
+                             <img src="https://i.ibb.co/9HkKRwM2/Trail.jpg" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" alt="Mountainbike in einer Werkstatt">
+                             <video src="https://cdn.midjourney.com/video/702d4c81-ad77-4cc8-8c25-6b6e48180cc6/2.mp4" class="hover-video absolute top-0 left-0 h-full w-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500" muted loop playsinline></video>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8 z-10">
+                            <h3 class="text-3xl font-bold text-white">Trail Experience</h3>
+                            <a href="#" class="mt-4 inline-flex items-center text-white font-semibold group-hover:translate-x-1 transition-transform"><span class="brand-gradient-text">Bezwingen</span> <span class="iconify ml-1 brand-gradient-text" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="relative overflow-hidden py-20 md:py-32 bg-brand-light">
+            <!-- Dunkles, nahtloses Muster -->
+            <div class="absolute inset-0 z-0 opacity-[0.02]" style="background-image: url('https://sion7-ai.github.io/Spck/mount7/muster_nahtlos.svg'); background-size: 400px;"></div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="animated-element">
+                        <h2 class="text-4xl md:text-5xl font-bold text-brand-dark tracking-tighter">Ride With Us.<br>In The Black Forest.</h2>
+                        <p class="mt-6 text-lg text-brand-gray max-w-lg">
+                            Mount7 ist mehr als ein Shop. Wir sind eine Community, verankert in Freiburg. Entdecke unsere wöchentlichen Ausfahrten, Events und die besten Routen direkt vor unserer Haustür.
+                        </p>
+                        <div class="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                             <a href="#" class="brand-gradient-bg text-white text-center font-semibold px-6 py-3 rounded-full transition-all transform hover:scale-105">Events Kalender</a>
+                             <a href="#" class="bg-gray-200 text-brand-dark text-center font-semibold px-6 py-3 rounded-full hover:bg-gray-300 transition-colors">Community beitreten</a>
+                        </div>
+                    </div>
+                    <div class="relative w-full h-96 rounded-2xl overflow-hidden shadow-lg animated-element" style="--delay: 0.2s;">
+                        <img src="https://i.ibb.co/NDLjYqT/Ride-with-us.png" class="w-full h-full object-cover" alt="Community Ausfahrt im Schwarzwald">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Featured Products Section -->
+        <section id="featured" class="py-20 md:py-32 bg-white">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16 animated-element">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-dark tracking-tighter">Featured Bikes</h2>
+                    <p class="mt-4 text-lg text-brand-gray max-w-2xl mx-auto">Eine Auswahl an Maschinen, die wir lieben und selbst fahren.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Bike 1 -->
+                     <div class="bg-brand-light p-8 rounded-2xl flex flex-col border border-gray-200/80 animated-element" style="--delay: 0.1s;">
+                         <div class="relative -m-8 mb-6 overflow-hidden rounded-t-2xl bg-white">
+                             <img src="https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png" class="w-full h-full object-contain p-4" alt="Cervélo Caledonia 5">
+                         </div>
+                         <h3 class="text-2xl font-bold text-brand-dark">Cervélo Caledonia 5</h3>
+                         <p class="text-brand-gray mt-2 flex-grow">Das ultimative Aero-Rennrad für maximale Effizienz.</p>
+                         <span class="brand-gradient-text font-bold text-xl mt-4 block">ab 8.999 €</span>
+                     </div>
+                     <!-- Bike 2 -->
+                      <div class="bg-brand-light p-8 rounded-2xl flex flex-col border border-gray-200/80 animated-element" style="--delay: 0.2s;">
+                         <div class="relative -m-8 mb-6 overflow-hidden rounded-t-2xl bg-white">
+                              <img src="https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png" class="w-full h-full object-contain p-4" alt="Santa Cruz Stigmata">
+                         </div>
+                         <h3 class="text-2xl font-bold text-brand-dark">Santa Cruz Stigmata</h3>
+                         <p class="text-brand-gray mt-2 flex-grow">Ein vielseitiges Gravel-Bike, das keine Grenzen kennt.</p>
+                         <span class="brand-gradient-text font-bold text-xl mt-4 block">ab 7.299 €</span>
+                     </div>
+                     <!-- Bike 3 -->
+                      <div class="bg-brand-light p-8 rounded-2xl flex flex-col border border-gray-200/80 animated-element" style="--delay: 0.3s;">
+                         <div class="relative -m-8 mb-6 overflow-hidden rounded-t-2xl bg-white">
+                              <img src="https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png" class="w-full h-full object-contain p-4" alt="Trek Fuel EX 9.8">
+                         </div>
+                         <h3 class="text-2xl font-bold text-brand-dark">Trek Fuel EX 9.8</h3>
+                         <p class="text-brand-gray mt-2 flex-grow">Die Trail-Maschine für anspruchsvolles Gelände.</p>
+                         <span class="brand-gradient-text font-bold text-xl mt-4 block">ab 6.499 €</span>
+                     </div>
+                </div>
+             </div>
+        </section>
+
+        <!-- Knowledge Layers Section -->
+        <section id="knowledge" class="py-20 md:py-32 bg-brand-light">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 animated-element">
+                    <h2 class="text-4xl md:text-5xl font-bold text-brand-dark tracking-tighter">Knowledge Layers</h2>
+                    <p class="mt-4 text-lg text-brand-gray max-w-2xl mx-auto">Expertenwissen, das dich weiterbringt.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Knowledge Card 1 -->
+                    <div class="group relative h-96 rounded-2xl overflow-hidden shadow-lg animated-element" style="--delay: 0.1s;">
+                        <img src="https://i.ibb.co/B26hFncR/Suspension-Setup.png" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Suspension Setup">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8 z-10">
+                            <h3 class="text-3xl font-bold text-white">Suspension Setup Guide</h3>
+                            <a href="#" class="mt-4 inline-flex items-center text-white font-semibold group-hover:translate-x-1 transition-transform"><span class="brand-gradient-text">Lesen</span> <span class="iconify ml-1 brand-gradient-text" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                        </div>
+                    </div>
+                     <!-- Knowledge Card 2 -->
+                    <div class="group relative h-96 rounded-2xl overflow-hidden shadow-lg animated-element" style="--delay: 0.2s;">
+                        <img src="https://i.ibb.co/jvQZyL6g/Scheibenbremsen-entl-ften.png" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Scheibenbremsen entlüften">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8 z-10">
+                            <h3 class="text-3xl font-bold text-white">Scheibenbremsen entlüften</h3>
+                            <a href="#" class="mt-4 inline-flex items-center text-white font-semibold group-hover:translate-x-1 transition-transform"><span class="brand-gradient-text">Anleitung ansehen</span> <span class="iconify ml-1 brand-gradient-text" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                        </div>
+                    </div>
+                     <!-- Knowledge Card 3 -->
+                    <div class="group relative h-96 rounded-2xl overflow-hidden shadow-lg animated-element" style="--delay: 0.3s;">
+                        <img src="https://i.ibb.co/FqqkfyV1/Freiburgs-Lieblingsrunden.jpg" class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Rennradfahrer in den Weinbergen bei Freiburg">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8 z-10">
+                            <h3 class="text-3xl font-bold text-white">Freiburgs Lieblingsrunden</h3>
+                            <a href="#" class="mt-4 inline-flex items-center text-white font-semibold group-hover:translate-x-1 transition-transform"><span class="brand-gradient-text">Routen entdecken</span> <span class="iconify ml-1 brand-gradient-text" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Section -->
+         <section id="store" class="relative overflow-hidden py-20 md:py-32 bg-white">
+            <div class="container mx-auto px-6 relative z-10">
+                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="relative w-full h-96 rounded-2xl overflow-hidden shadow-lg animated-element" style="--delay: 0.2s;">
+                        <img src="https://i.ibb.co/DP2Sb5dG/Store-Werkstatt.png" class="w-full h-full object-cover" alt="Mount7 Store und Werkstatt">
+                    </div>
+                    <div class="animated-element lg:order-first">
+                        <h2 class="text-4xl md:text-5xl font-bold text-brand-dark tracking-tighter">Store & Werkstatt.<br>Dein Hub in Freiburg.</h2>
+                        <p class="mt-6 text-lg text-brand-gray max-w-lg">
+                            Besuche unseren Showroom, lass dich von Experten beraten oder gib deinem Bike in unserer High-End-Werkstatt den Service, den es verdient.
+                        </p>
+                        <div class="mt-8 flex">
+                              <a href="#" class="brand-gradient-bg text-white font-semibold px-6 py-3 rounded-full transition-all transform hover:scale-105">Termin buchen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- Footer -->
+    <footer class="bg-brand-light border-t border-gray-200 py-12">
+        <div class="container mx-auto px-6 text-center text-brand-gray">
+            <!-- Helles Logo -->
+            <img src="https://sion7-ai.github.io/Spck/mount7/m7logo.svg" alt="Mount7 Logo" class="h-7 w-auto mx-auto">
+            <div class="flex justify-center space-x-6 my-6 font-medium">
+                 <a href="#" class="hover:text-brand-dark transition-colors">Impressum</a>
+                 <a href="#" class="hover:text-brand-dark transition-colors">Datenschutz</a>
+                 <a href="#" class="hover:text-brand-dark transition-colors">Kontakt</a>
+            </div>
+            <div class="flex justify-center space-x-6">
+                <a href="#" aria-label="Instagram" class="text-brand-gray hover:text-brand-dark transition-colors">
+                    <span class="iconify w-6 h-6" data-icon="mdi:instagram"></span>
+                </a>
+                 <a href="#" aria-label="Facebook" class="text-brand-gray hover:text-brand-dark transition-colors">
+                    <span class="iconify w-6 h-6" data-icon="mdi:facebook"></span>
+                </a>
+                 <a href="#" aria-label="Strava" class="text-brand-gray hover:text-brand-dark transition-colors">
+                    <span class="iconify w-6 h-6" data-icon="mdi:strava"></span>
+                </a>
+            </div>
+            <p class="mt-8 text-sm">&copy; 2025 Mount7 GmbH. Alle Rechte vorbehalten. Freiburg im Breisgau.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Hero Tab Switcher ---
+        const heroVideo = document.getElementById('hero-video');
+        const tabContainer = document.querySelector('[role="tablist"]');
+        const tabButtons = document.querySelectorAll('.hero-tab-btn');
+        const tabPanes = document.querySelectorAll('.hero-pane');
+        let isTransitioning = false;
+
+        const videoSources = {
+            road: {
+                video: 'https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4',
+                poster: 'https://i.ibb.co/zWTdfVsJ/Road.jpg'
+            },
+            gravel: {
+                video: 'https://cdn.midjourney.com/video/756cbb18-00ea-45fb-af7e-6ed55d887064/2.mp4',
+                poster: 'https://i.ibb.co/bjzx7WzT/Gravel.jpg'
+            },
+            trail: {
+                video: 'https://cdn.midjourney.com/video/702d4c81-ad77-4cc8-8c25-6b6e48180cc6/2.mp4',
+                poster: 'https://i.ibb.co/9HkKRwM2/Trail.jpg'
+            }
+        };
+
+        const switchTab = (newTabButton) => {
+            if (isTransitioning || newTabButton.getAttribute('aria-selected') === 'true') {
+                return; // Ignoriere Klicks während der Transition oder auf aktivem Tab
+            }
+            isTransitioning = true;
+            
+            const tabId = newTabButton.dataset.tab;
+            const newPane = document.getElementById(newTabButton.getAttribute('aria-controls'));
+            const oldTabButton = tabContainer.querySelector('[aria-selected="true"]');
+            const oldPane = document.getElementById(oldTabButton.getAttribute('aria-controls'));
+
+            // Button-Stile und ARIA-Status aktualisieren
+            oldTabButton.setAttribute('aria-selected', 'false');
+            oldTabButton.classList.remove('active', 'text-white', 'bg-brand-dark');
+            oldTabButton.classList.add('text-brand-gray', 'hover:text-brand-dark');
+            
+            newTabButton.setAttribute('aria-selected', 'true');
+            newTabButton.classList.add('active', 'text-white', 'bg-brand-dark');
+            newTabButton.classList.remove('text-brand-gray', 'hover:text-brand-dark');
+
+            // Videoquelle sofort wechseln
+            if (heroVideo.src !== videoSources[tabId].video) {
+                heroVideo.poster = videoSources[tabId].poster;
+                heroVideo.src = videoSources[tabId].video;
+                heroVideo.load();
+                heroVideo.play().catch(error => console.error("Video play failed:", error));
+            }
+            
+            // Panes animieren
+            oldPane.setAttribute('data-state', 'leaving');
+            oldPane.setAttribute('aria-hidden', 'true');
+
+            newPane.setAttribute('data-state', 'active');
+            newPane.setAttribute('aria-hidden', 'false');
+
+            // Timeout, um den Status nach der Transition zurückzusetzen
+            setTimeout(() => {
+                oldPane.setAttribute('data-state', '');
+                isTransitioning = false;
+            }, 450);
+        };
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => switchTab(button));
+        });
+
+        // --- Themenwelten Video Hover ---
+        const worldCards = document.querySelectorAll('.world-card');
+        worldCards.forEach(card => {
+            const video = card.querySelector('video');
+            if (video) {
+                 card.addEventListener('mouseenter', () => {
+                    video.play().catch(e => console.log("Hover video couldn't play automatically."));
+                });
+                card.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            }
+        });
+
+        // --- Header Scroll Effect ---
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                // Heller, geblurter Header mit unterer Border
+                header.classList.add('bg-white/80', 'backdrop-blur-lg', 'shadow-sm', 'border-b', 'border-gray-200/80');
+            } else {
+                header.classList.remove('bg-white/80', 'backdrop-blur-lg', 'shadow-sm', 'border-b', 'border-gray-200/80');
+            }
+        });
+
+        // --- Scroll Animations ---
+        const animatedElements = document.querySelectorAll('.animated-element');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = parseFloat(entry.target.style.getPropertyValue('--delay') || '0s') * 1000;
+                    setTimeout(() => {
+                        entry.target.classList.add('animate-slide-up');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        animatedElements.forEach(el => observer.observe(el));
+    });
+    </script>
+</body>
+</html>
