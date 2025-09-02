@@ -411,6 +411,14 @@
             newTabButton.setAttribute('aria-selected', 'true');
             newTabButton.classList.add('active', 'text-white');
             newTabButton.classList.remove('text-brand-gray');
+
+            // Swap video source *instantly*
+            if (heroVideo.src !== videoSources[tabId].video) {
+                heroVideo.poster = videoSources[tabId].poster;
+                heroVideo.src = videoSources[tabId].video;
+                heroVideo.load();
+                heroVideo.play().catch(error => console.error("Video play failed:", error));
+            }
             
             // Animate panes
             oldPane.setAttribute('data-state', 'leaving');
@@ -419,18 +427,9 @@
             newPane.setAttribute('data-state', 'active');
             newPane.setAttribute('aria-hidden', 'false');
 
-            // Timeout to reset states and swap video after transition
+            // Timeout to reset states after transition
             setTimeout(() => {
                 oldPane.setAttribute('data-state', '');
-                
-                // Swap video source *after* text transition
-                if (heroVideo.src !== videoSources[tabId].video) {
-                    heroVideo.poster = videoSources[tabId].poster;
-                    heroVideo.src = videoSources[tabId].video;
-                    heroVideo.load();
-                    heroVideo.play().catch(error => console.error("Video play failed:", error));
-                }
-                
                 isTransitioning = false;
             }, 450); // A bit longer than the CSS transition duration
         };
