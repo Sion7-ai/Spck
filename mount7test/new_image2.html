@@ -60,21 +60,45 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        .hero-tab-content {
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            will-change: transform, opacity;
-        }
-        .hero-tab-content.hidden {
-            opacity: 0;
-            transform: translateY(10px);
-            pointer-events: none;
-        }
         .animated-element {
              opacity: 0;
         }
         /* Ensure videos on hover are silent and don't show controls */
         .hover-video {
             pointer-events: none;
+        }
+
+        /* --- New Hero Transition Styles --- */
+        .hero-pane {
+            /* Base state for all panes */
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translate3d(0, 20px, 0);
+            transition: opacity 280ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s 420ms;
+        }
+        .hero-pane[data-state="active"] {
+            /* Active, visible pane */
+            opacity: 1;
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+            transition-delay: 0s;
+        }
+        .hero-pane[data-state="leaving"] {
+             /* Pane that is animating out */
+            opacity: 0;
+            visibility: visible; /* Keep visible during transition */
+            transform: translate3d(0, -20px, 0);
+            transition-delay: 0s;
+        }
+        
+        /* Reduced Motion Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .hero-pane {
+                transform: translate3d(0, 0, 0) !important;
+                transition: opacity 200ms ease;
+            }
         }
     </style>
 </head>
@@ -108,35 +132,38 @@
             <!-- Background Video Container -->
             <div class="absolute inset-0 z-0">
                 <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
-                <video id="hero-video" class="h-full w-full object-cover" autoplay muted loop playsinline
+                <video id="hero-video" class="h-full w-full object-cover" autoplay muted loop playsinline preload="metadata"
                        src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4"
                        poster="https://i.ibb.co/zWTdfVsJ/Road.jpg">
                 </video>
             </div>
+            
+            <!-- Bottom Gradient Overlay -->
+            <div class="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-brand-black to-transparent z-10"></div>
 
-            <!-- Hero Content -->
-            <div class="relative z-20 text-center px-4 animated-element">
-                <!-- Tab Content -->
-                <div id="hero-content-road" class="hero-tab-content">
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase">Road Performance</h1>
+            <!-- Hero Content Stack -->
+            <div class="relative z-20 w-full max-w-5xl text-center px-4 min-h-[150px] flex items-center justify-center animated-element">
+                <!-- Panes are stacked on top of each other here -->
+                <div id="hero-content-road" class="hero-pane" data-state="active" role="tabpanel" aria-hidden="false">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-tight">Road Performance</h1>
                     <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-brand-gray">Die ultimative Geschwindigkeit. Gebaut für Siege, entwickelt im Schwarzwald.</p>
                 </div>
-                <div id="hero-content-gravel" class="hero-tab-content hidden">
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase">Gravel Adventure</h1>
+                <div id="hero-content-gravel" class="hero-pane" role="tabpanel" aria-hidden="true">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-tight">Gravel Adventure</h1>
                     <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-brand-gray">Verlasse die ausgetretenen Pfade. Dein Abenteuer beginnt, wo der Asphalt endet.</p>
                 </div>
-                <div id="hero-content-trail" class="hero-tab-content hidden">
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase">Trail Experience</h1>
+                <div id="hero-content-trail" class="hero-pane" role="tabpanel" aria-hidden="true">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter uppercase leading-tight">Trail Experience</h1>
                     <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-brand-gray">Beherrsche jeden Trail. Präzision und Kontrolle für maximale Endorphine.</p>
                 </div>
             </div>
 
             <!-- Hero Tabs -->
             <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 w-full max-w-md px-4 animated-element">
-                <div class="bg-black/30 backdrop-blur-sm p-2 rounded-full grid grid-cols-3 gap-2">
-                    <button class="hero-tab-btn active text-white py-3 rounded-full font-semibold transition-all" data-tab="road">Road</button>
-                    <button class="hero-tab-btn text-brand-gray py-3 rounded-full font-semibold transition-all" data-tab="gravel">Gravel</button>
-                    <button class="hero-tab-btn text-brand-gray py-3 rounded-full font-semibold transition-all" data-tab="trail">Trail</button>
+                <div class="bg-black/30 backdrop-blur-sm p-2 rounded-full grid grid-cols-3 gap-2" role="tablist" aria-label="Themenwelten">
+                    <button id="tab-road" class="hero-tab-btn active text-white py-3 rounded-full font-semibold transition-all" data-tab="road" role="tab" aria-selected="true" aria-controls="hero-content-road">Road</button>
+                    <button id="tab-gravel" class="hero-tab-btn text-brand-gray py-3 rounded-full font-semibold transition-all" data-tab="gravel" role="tab" aria-selected="false" aria-controls="hero-content-gravel">Gravel</button>
+                    <button id="tab-trail" class="hero-tab-btn text-brand-gray py-3 rounded-full font-semibold transition-all" data-tab="trail" role="tab" aria-selected="false" aria-controls="hero-content-trail">Trail</button>
                 </div>
             </div>
         </section>
@@ -158,7 +185,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 z-10">
                             <h3 class="text-3xl font-bold text-white">Road Performance</h3>
-                            <a href="#" class="mt-4 inline-block text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Entdecken <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                            <a href="#" class="mt-4 inline-flex items-center text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Entdecken <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
                         </div>
                     </div>
                     <!-- Gravel Card -->
@@ -170,7 +197,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 z-10">
                             <h3 class="text-3xl font-bold text-white">Gravel Adventure</h3>
-                            <a href="#" class="mt-4 inline-block text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Erleben <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                            <a href="#" class="mt-4 inline-flex items-center text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Erleben <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
                         </div>
                     </div>
                      <!-- Trail Card -->
@@ -182,7 +209,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 z-10">
                             <h3 class="text-3xl font-bold text-white">Trail Experience</h3>
-                            <a href="#" class="mt-4 inline-block text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Bezwingen <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                            <a href="#" class="mt-4 inline-flex items-center text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Bezwingen <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
                         </div>
                     </div>
                 </div>
@@ -223,8 +250,8 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Bike 1 -->
                      <div class="bg-[#101010] p-8 rounded-2xl flex flex-col animated-element" style="--delay: 0.1s;">
-                         <div class="relative aspect-video mb-6 rounded-lg overflow-hidden flex-grow">
-                             <img src="https://i.ibb.co/nsntkLbF/Cerv-lo-Caleodnia-5.png" class="w-full h-full object-cover" alt="Cervélo Caledonia 5">
+                         <div class="relative -m-8 mb-6 overflow-hidden rounded-t-2xl">
+                            <img src="https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png" class="w-full h-full object-cover" alt="Cervélo Caledonia 5">
                          </div>
                          <h3 class="text-2xl font-bold text-white">Cervélo Caledonia 5</h3>
                          <p class="text-brand-gray mt-2">Das ultimative Aero-Rennrad für maximale Effizienz.</p>
@@ -232,7 +259,7 @@
                      </div>
                      <!-- Bike 2 -->
                       <div class="bg-[#101010] p-8 rounded-2xl flex flex-col animated-element" style="--delay: 0.2s;">
-                         <div class="relative aspect-video mb-6 rounded-lg overflow-hidden flex-grow">
+                         <div class="relative -m-8 mb-6 overflow-hidden rounded-t-2xl">
                              <img src="https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png" class="w-full h-full object-cover" alt="Santa Cruz Stigmata">
                          </div>
                          <h3 class="text-2xl font-bold text-white">Santa Cruz Stigmata</h3>
@@ -241,7 +268,7 @@
                      </div>
                      <!-- Bike 3 -->
                       <div class="bg-[#101010] p-8 rounded-2xl flex flex-col animated-element" style="--delay: 0.3s;">
-                         <div class="relative aspect-video mb-6 rounded-lg overflow-hidden flex-grow">
+                         <div class="relative -m-8 mb-6 overflow-hidden rounded-t-2xl">
                              <img src="https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png" class="w-full h-full object-cover" alt="Trek Fuel EX 9.8">
                          </div>
                          <h3 class="text-2xl font-bold text-white">Trek Fuel EX 9.8</h3>
@@ -266,7 +293,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 z-10">
                             <h3 class="text-3xl font-bold text-white">Suspension Setup Guide</h3>
-                            <a href="#" class="mt-4 inline-block text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Lesen <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                            <a href="#" class="mt-4 inline-flex items-center text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Lesen <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
                         </div>
                     </div>
                      <!-- Knowledge Card 2 -->
@@ -275,7 +302,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 z-10">
                             <h3 class="text-3xl font-bold text-white">Scheibenbremsen entlüften</h3>
-                            <a href="#" class="mt-4 inline-block text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Anleitung ansehen <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                            <a href="#" class="mt-4 inline-flex items-center text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Anleitung ansehen <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
                         </div>
                     </div>
                      <!-- Knowledge Card 3 -->
@@ -284,7 +311,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                         <div class="absolute bottom-0 left-0 p-8 z-10">
                             <h3 class="text-3xl font-bold text-white">Freiburgs Lieblingsrunden</h3>
-                            <a href="#" class="mt-4 inline-block text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Routen entdecken <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
+                            <a href="#" class="mt-4 inline-flex items-center text-brand-accent font-semibold group-hover:translate-x-1 transition-transform">Routen entdecken <span class="iconify ml-1" data-icon="heroicons:arrow-right-20-solid"></span></a>
                         </div>
                     </div>
                 </div>
@@ -303,7 +330,7 @@
                         <p class="mt-6 text-lg text-brand-gray max-w-lg">
                             Besuche unseren Showroom, lass dich von Experten beraten oder gib deinem Bike in unserer High-End-Werkstatt den Service, den es verdient.
                         </p>
-                        <div class="mt-8 flex space-x-4">
+                        <div class="mt-8 flex">
                              <a href="#" class="bg-brand-accent text-white font-semibold px-6 py-3 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105">Termin buchen</a>
                         </div>
                     </div>
@@ -342,11 +369,13 @@
     <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        // --- Hero Tab Switcher ---
-        const tabButtons = document.querySelectorAll('.hero-tab-btn');
-        const tabContents = document.querySelectorAll('.hero-tab-content');
+        // --- New, Robust Hero Tab Switcher ---
         const heroVideo = document.getElementById('hero-video');
-        
+        const tabContainer = document.querySelector('[role="tablist"]');
+        const tabButtons = document.querySelectorAll('[role="tab"]');
+        const tabPanes = document.querySelectorAll('[role="tabpanel"]');
+        let isTransitioning = false;
+
         const videoSources = {
             road: {
                 video: 'https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4',
@@ -362,33 +391,54 @@
             }
         };
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const tab = button.dataset.tab;
+        const switchTab = (newTabButton) => {
+            if (isTransitioning || newTabButton.getAttribute('aria-selected') === 'true') {
+                return; // Ignore clicks during transition or on active tab
+            }
+            
+            isTransitioning = true;
+            
+            const tabId = newTabButton.dataset.tab;
+            const newPane = document.getElementById(newTabButton.getAttribute('aria-controls'));
+            const oldTabButton = tabContainer.querySelector('[aria-selected="true"]');
+            const oldPane = document.getElementById(oldTabButton.getAttribute('aria-controls'));
 
-                // Update Buttons
-                tabButtons.forEach(btn => {
-                    btn.classList.remove('active', 'text-white');
-                    btn.classList.add('text-brand-gray');
-                });
-                button.classList.add('active', 'text-white');
-                button.classList.remove('text-brand-gray');
+            // Update button styles and ARIA states
+            oldTabButton.setAttribute('aria-selected', 'false');
+            oldTabButton.classList.remove('active', 'text-white');
+            oldTabButton.classList.add('text-brand-gray');
+            
+            newTabButton.setAttribute('aria-selected', 'true');
+            newTabButton.classList.add('active', 'text-white');
+            newTabButton.classList.remove('text-brand-gray');
+            
+            // Animate panes
+            oldPane.setAttribute('data-state', 'leaving');
+            oldPane.setAttribute('aria-hidden', 'true');
 
-                // Update Content
-                tabContents.forEach(content => {
-                    content.classList.add('hidden');
-                });
-                document.getElementById(`hero-content-${tab}`).classList.remove('hidden');
+            newPane.setAttribute('data-state', 'active');
+            newPane.setAttribute('aria-hidden', 'false');
 
-                // Update Video Source
-                if (heroVideo.src !== videoSources[tab].video) {
-                    heroVideo.src = videoSources[tab].video;
-                    heroVideo.poster = videoSources[tab].poster;
+            // Timeout to reset states and swap video after transition
+            setTimeout(() => {
+                oldPane.setAttribute('data-state', '');
+                
+                // Swap video source *after* text transition
+                if (heroVideo.src !== videoSources[tabId].video) {
+                    heroVideo.poster = videoSources[tabId].poster;
+                    heroVideo.src = videoSources[tabId].video;
                     heroVideo.load();
                     heroVideo.play().catch(error => console.error("Video play failed:", error));
                 }
-            });
+                
+                isTransitioning = false;
+            }, 450); // A bit longer than the CSS transition duration
+        };
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => switchTab(button));
         });
+
         
         // --- Themenwelten Video Hover ---
         const worldCards = document.querySelectorAll('.world-card');
@@ -436,5 +486,4 @@
     </script>
 </body>
 </html>
-
 
