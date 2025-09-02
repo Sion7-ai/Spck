@@ -161,7 +161,7 @@
             <!-- Hero Tabs -->
             <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 w-full max-w-md px-4 animated-element">
                 <div class="bg-black/30 backdrop-blur-sm p-2 rounded-full grid grid-cols-3 gap-2" role="tablist" aria-label="Themenwelten">
-                    <button id="tab-road" class="hero-tab-btn active text-white py-3 rounded-full font-semibold transition-all" data-tab="road" role="tab" aria-selected="true" aria-controls="hero-content-road">Road</button>
+                    <button id="tab-road" class="hero-tab-btn active text-white bg-white/10 py-3 rounded-full font-semibold transition-all" data-tab="road" role="tab" aria-selected="true" aria-controls="hero-content-road">Road</button>
                     <button id="tab-gravel" class="hero-tab-btn text-brand-gray py-3 rounded-full font-semibold transition-all" data-tab="gravel" role="tab" aria-selected="false" aria-controls="hero-content-gravel">Gravel</button>
                     <button id="tab-trail" class="hero-tab-btn text-brand-gray py-3 rounded-full font-semibold transition-all" data-tab="trail" role="tab" aria-selected="false" aria-controls="hero-content-trail">Trail</button>
                 </div>
@@ -405,11 +405,11 @@
 
             // Update button styles and ARIA states
             oldTabButton.setAttribute('aria-selected', 'false');
-            oldTabButton.classList.remove('active', 'text-white');
+            oldTabButton.classList.remove('active', 'text-white', 'bg-white/10');
             oldTabButton.classList.add('text-brand-gray');
             
             newTabButton.setAttribute('aria-selected', 'true');
-            newTabButton.classList.add('active', 'text-white');
+            newTabButton.classList.add('active', 'text-white', 'bg-white/10');
             newTabButton.classList.remove('text-brand-gray');
 
             // Swap video source *instantly*
