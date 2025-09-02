@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mount7 - Performance Lifestyle</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Iconify Icons via CDN -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+    <style>
+        /* Define color variables and base styles */
+        :root {
+            --bg: #0b0f10;
+            --surface: #11171A;
+            --text: #EAF0F2;
+            --border: rgba(255, 255, 255, 0.08);
+            --accent: #FF4C24;
+            --teal: #103A3E;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Custom class for the seamless pattern background */
+        .pattern-bg {
+            background-image: url('https://sion7-ai.github.io/Spck/mount7/muster_nahtlos_w.svg');
+            background-repeat: repeat;
+            background-size: 280px auto;
+            opacity: 0.04;
+        }
+
+        /* Helper for navbar blur effect */
+        .backdrop-blur-custom {
+            backdrop-filter: saturate(120%) blur(8px);
+            -webkit-backdrop-filter: saturate(120%) blur(8px);
+        }
+
+        /* Custom select arrow */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgba(255,255,255,0.7)' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.25rem center;
+        }
+        
+        /* Style for the select options */
+        select option {
+            background-color: var(--surface);
+            color: var(--text);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 border-b backdrop-blur-custom" style="border-color: var(--border); background-color: rgba(11,15,16,0.6);">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+            <a href="#" class="flex items-center gap-2">
+                <img src="https://sion7-ai.github.io/Spck/mount7/m7logo_w.svg" alt="Mount7 Logo" class="h-5 sm:h-6 w-auto">
+                 <span class="hidden sm:inline rounded-full border px-2 py-0.5 text-xs text-white/70" style="border-color: var(--border);">Freiburg</span>
+            </a>
+            <nav class="hidden md:flex items-center gap-6 text-sm text-white/80">
+                <a class="transition hover:text-white" href="#bikes">Bikes</a>
+                <a class="transition hover:text-white" href="#configurator">Konfigurator</a>
+                <a class="transition hover:text-white" href="#journal">Journal</a>
+                <a class="transition hover:text-white" href="#community">Community</a>
+                <a class="transition hover:text-white" href="#store">Store</a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <a href="#" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-semibold transition-colors h-9 sm:h-10 px-3 sm:px-4 py-2 text-black" style="background-color: var(--accent);">Online Shop</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative">
+            <div class="relative h-[85vh] sm:h-[75vh] w-full overflow-hidden flex flex-col">
+                
+                <div id="hero-video-container" class="absolute inset-0">
+                    <video id="hero-video" 
+                           src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4" 
+                           poster="https://i.ibb.co/zWTdfVsJ/Road.jpg"
+                           autoplay loop muted playsinline 
+                           class="absolute inset-0 h-full w-full object-cover mix-blend-lighten opacity-70 transition-opacity duration-500">
+                    </video>
+                </div>
+
+                <div id="hero-gradient" class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b0f10]/50 to-[#0b0f10]"></div>
+
+                <div class="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 mt-auto pb-6 sm:pb-10">
+                    <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">Road Performance</h1>
+                    <p id="hero-tagline" class="mt-2 sm:mt-3 max-w-xl text-white/80 text-lg">Precision. Speed. Silence.</p>
+                     <div class="mt-6 flex flex-wrap gap-2">
+                        <button data-variant="road" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border bg-white text-black border-white">
+                            <iconify-icon icon="lucide:bike" class="inline-block mr-2 text-base align-middle"></iconify-icon>
+                            ROAD
+                        </button>
+                        <button data-variant="gravel" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border text-white/80 border-white/20 hover:border-white/40">
+                            <iconify-icon icon="lucide:trees" class="inline-block mr-2 text-base align-middle"></iconify-icon>
+                            GRAVEL
+                        </button>
+                        <button data-variant="trail" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border text-white/80 border-white/20 hover:border-white/40">
+                             <iconify-icon icon="lucide:mountain" class="inline-block mr-2 text-base align-middle"></iconify-icon>
+                            TRAIL
+                        </button>
+                    </div>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base bg-white text-black hover:bg-white/90">Jetzt entdecken</a>
+                        <a href="#configurator" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/40 text-white hover:bg-white/10">Konfigurator Light</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signature Tiles -->
+            <div class="relative mt-16 z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Road Tile -->
+                    <div class="group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border);">
+                        <img src="https://i.ibb.co/zWTdfVsJ/Road.jpg" alt="Road bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                        <video src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100"></video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)]"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
+                            <h3 class="text-xl font-bold text-white">Road Performance</h3>
+                        </div>
+                    </div>
+                    <!-- Gravel Tile -->
+                    <div class="group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border);">
+                        <img src="https://i.ibb.co/bjzx7WzT/Gravel.jpg" alt="Gravel bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                        <video src="https://cdn.midjourney.com/video/756cbb18-00ea-45fb-af7e-6ed55d887064/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100"></video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)]"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
+                            <h3 class="text-xl font-bold text-white">Gravel Adventure</h3>
+                        </div>
+                    </div>
+                    <!-- Trail Tile -->
+                    <div class="group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border);">
+                        <img src="https://i.ibb.co/9HkKRwM2/Trail.jpg" alt="Trail bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-100 group-hover:opacity-0">
+                        <video src="https://cdn.midjourney.com/video/702d4c81-ad77-4cc8-8c25-6b6e48180cc6/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100"></video>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)]"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
+                            <h3 class="text-xl font-bold text-white">Trail Experience</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase Section -->
+        <section id="bikes" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+            <div class="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white">Featured Bikes</h2>
+                    <p class="mt-2 text-white/70">Kuratierte Highlights – getestet in Freiburg.</p>
+                </div>
+                <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-10 px-5 text-sm border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Alle ansehen</a>
+            </div>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Product Card 1 -->
+                <div class="bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col">
+                    <div class="relative h-56">
+                        <img src="https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png" alt="Cervélo Caledonia 5" class="absolute inset-0 h-full w-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-white">Carbon • Ultegra Di2</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex items-start justify-between">
+                           <h3 class="text-white text-lg font-bold">Cervélo Caledonia 5</h3>
+                           <span class="text-white/60 text-base font-normal whitespace-nowrap ml-2">€9.499</span>
+                        </div>
+                        <div class="flex-grow"></div>
+                        <div class="mt-4 flex items-center justify-between text-white/70 text-sm">
+                            <div class="flex items-center gap-2"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black" style="background-color: var(--accent);">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col">
+                    <div class="relative h-56">
+                        <img src="https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png" alt="Santa Cruz Stigmata" class="absolute inset-0 h-full w-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-white">Carbon • Rival AXS</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex items-start justify-between">
+                           <h3 class="text-white text-lg font-bold">Santa Cruz Stigmata</h3>
+                           <span class="text-white/60 text-base font-normal whitespace-nowrap ml-2">€6.799</span>
+                        </div>
+                        <div class="flex-grow"></div>
+                        <div class="mt-4 flex items-center justify-between text-white/70 text-sm">
+                            <div class="flex items-center gap-2"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black" style="background-color: var(--accent);">Details</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col">
+                    <div class="relative h-56">
+                        <img src="https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png" alt="Trek Fuel EX 9.8" class="absolute inset-0 h-full w-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-white">Carbon • 150/140mm</span>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <div class="flex items-start justify-between">
+                           <h3 class="text-white text-lg font-bold">Trek Fuel EX 9.8</h3>
+                           <span class="text-white/60 text-base font-normal whitespace-nowrap ml-2">€7.299</span>
+                        </div>
+                        <div class="flex-grow"></div>
+                        <div class="mt-4 flex items-center justify-between text-white/70 text-sm">
+                            <div class="flex items-center gap-2"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black" style="background-color: var(--accent);">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Configurator Light Section -->
+        <section id="configurator" class="relative border-y" style="border-color: var(--border);">
+            <div class="pattern-bg absolute inset-0"></div>
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+                <div class="grid gap-8 md:grid-cols-2 items-start">
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white">Configurator Light</h3>
+                        <p class="mt-2 text-white/70">Drei Angaben – eine kuratierte Empfehlung.</p>
+        
+                        <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-8">
+                            <div>
+                                <label for="cfg-terrain" class="text-xs font-medium text-white/90 tracking-wide uppercase">Terrain</label>
+                                <select id="cfg-terrain" class="mt-1 block w-full bg-transparent text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 focus:border-accent px-1 py-2 transition">
+                                    <option value="gravel">Gravel</option>
+                                    <option value="road">Road</option>
+                                    <option value="trail">Trail</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="cfg-style" class="text-xs font-medium text-white/90 tracking-wide uppercase">Style</label>
+                                <select id="cfg-style" class="mt-1 block w-full bg-transparent text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 focus:border-accent px-1 py-2 transition">
+                                    <option value="endurance">Endurance</option>
+                                    <option value="race">Race</option>
+                                    <option value="playful">Playful</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="cfg-budget" class="text-xs font-medium text-white/90 tracking-wide uppercase">Budget bis</label>
+                                <select id="cfg-budget" class="mt-1 block w-full bg-transparent text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 focus:border-accent px-1 py-2 transition">
+                                    <option value="6000">€6.000</option>
+                                    <option value="4000">€4.000</option>
+                                    <option value="10000">€10.000</option>
+                                </select>
+                            </div>
+                        </div>
+        
+                        <div class="mt-8 flex items-center gap-3">
+                            <button class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base bg-white text-black hover:bg-white/90">Ergebnis</button>
+                            <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/30 text-white hover:bg-white/10">Termin</a>
+                        </div>
+                    </div>
+        
+                    <div id="recommendation-card" class="bg-surface border border-white/10 rounded-xl overflow-hidden">
+                        <div class="relative h-64">
+                            <img id="reco-img" src="https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png" alt="Empfohlenes Fahrrad" class="absolute inset-0 h-full w-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-white">Empfehlung</span>
+                        </div>
+                        <div class="p-5">
+                             <div class="flex items-start justify-between">
+                                <h4 id="reco-title" class="text-white text-lg font-bold">Santa Cruz Stigmata</h4>
+                                <span id="reco-price" class="text-white/60 text-base font-normal whitespace-nowrap ml-2">€6.799</span>
+                            </div>
+                            <p id="reco-description" class="text-white/70 text-sm mt-1">Passend: <strong class="text-white">gravel</strong> • endurance • bis 6.000€</p>
+                            <div class="mt-4 flex gap-3">
+                                <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black" style="background-color: var(--accent);">Zum Bike</a>
+                                <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/30 text-white hover:bg-white/10">Vergleichen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Knowledge/Journal Section -->
+        <section id="journal" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+            <div class="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white">Knowledge Layers</h3>
+                    <p class="mt-2 text-white/70">Werkstattwissen, Tests & Routen.</p>
+                </div>
+                <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-10 px-5 text-sm border border-white/20 text-white hover:bg-white/10">Alle Artikel</a>
+            </div>
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Article Card 1 -->
+                <div class="bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col">
+                    <div class="relative h-48">
+                        <img src="https://i.ibb.co/B26hFncR/Suspension-Setup.png" alt="Fahrrad-Dämpfer" class="absolute inset-0 h-full w-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <h4 class="text-white text-lg font-bold">Suspension Setup: 7 Schritte zur perfekten Dämpfung</h4>
+                        <p class="text-white/70 text-sm mt-2 flex-grow">Wie du mit Sag, Rebound und Compression das Maximum herausholst.</p>
+                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+                    </div>
+                </div>
+                <!-- Article Card 2 -->
+                <div class="bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col">
+                    <div class="relative h-48">
+                        <img src="https://i.ibb.co/jvQZyL6g/Scheibenbremsen-entl-ften.png" alt="Scheibenbremsen entlüften" class="absolute inset-0 h-full w-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <h4 class="text-white text-lg font-bold">Scheibenbremsen entlüften – Werkstattguide</h4>
+                        <p class="text-white/70 text-sm mt-2 flex-grow">Saubere Power, keine Fading-Probleme: So geht’s richtig.</p>
+                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+                    </div>
+                </div>
+                <!-- Article Card 3 -->
+                <div class="bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col">
+                    <div class="relative h-48">
+                        <img src="https://i.ibb.co/FqqkfyV1/Freiburgs-Lieblingsrunden.jpg" alt="Landschaft bei Freiburg" class="absolute inset-0 h-full w-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex-grow flex flex-col">
+                        <h4 class="text-white text-lg font-bold">Freiburgs Lieblingsrunden: Schauinsland & Kybfelsen</h4>
+                        <p class="text-white/70 text-sm mt-2 flex-grow">Unsere GPX-Favoriten – getestet vom Mount7 Team.</p>
+                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section id="community" class="relative py-16 border-t" style="border-color: var(--border);">
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-8 md:grid-cols-2 items-start">
+                <div class="relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto" style="border: 1px solid var(--border)">
+                    <img src="https://i.ibb.co/NDLjYqT/Ride-with-us.png" alt="Black Forest Map" class="h-full w-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20"></div>
+                    <div class="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-black/50 px-3 py-1 text-white text-sm" style="border: 1px solid var(--border)">
+                        <iconify-icon icon="lucide:map-pin" class="h-4 w-4"></iconify-icon> Freiburg • Black Forest
+                    </div>
+                    <div class="absolute bottom-4 left-4 text-white">
+                        <h4 class="text-xl font-bold">Unsere Lieblingsrouten</h4>
+                        <p class="text-white/80 text-sm">GPX-Downloads • Road & Gravel • getestete Segmente</p>
+                    </div>
+                </div>
+        
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white">Ride with us</h3>
+                    <p class="mt-2 text-white/70">Wöchentliche Ausfahrten, Workshops & Events.</p>
+                    <div class="mt-6 space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+                            <div class="flex items-center gap-3 text-white">
+                                <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-white/70 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <div class="font-medium text-sm sm:text-base">Group Ride – Road | 65 km</div>
+                                    <div class="text-xs sm:text-sm text-white/70">Do, 18:30 • Store Freiburg</div>
+                                </div>
+                            </div>
+                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+                            <div class="flex items-center gap-3 text-white">
+                                <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-white/70 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <div class="font-medium text-sm sm:text-base">Workshop: Tubeless</div>
+                                    <div class="text-xs sm:text-sm text-white/70">Sa, 11:00 • Werkstatt</div>
+                                </div>
+                            </div>
+                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
+                        </div>
+                        <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+                            <div class="flex items-center gap-3 text-white">
+                                <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-white/70 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <div class="font-medium text-sm sm:text-base">Gravel Social – Wald & Trails</div>
+                                    <div class="text-xs sm:text-sm text-white/70">So, 09:00 • Seepark</div>
+                                </div>
+                            </div>
+                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Store Section -->
+        <section id="store" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid gap-8 md:grid-cols-2 items-center">
+                <div>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white">Store & Werkstatt Freiburg</h3>
+                    <p class="mt-2 text-white/70">Bikefitting, Service & Custom Builds – mit obsessiver Sorgfalt.</p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base text-black" style="background-color: var(--accent);">
+                           <iconify-icon icon="lucide:wrench" class="mr-2 h-4 w-4"></iconify-icon>Termin
+                        </a>
+                        <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/30 text-white hover:bg-white/10">
+                            <iconify-icon icon="lucide:map-pin" class="mr-2 h-4 w-4"></iconify-icon>Route
+                        </a>
+                    </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto" style="border: 1px solid var(--border)">
+                    <img src="https://i.ibb.co/DP2Sb5dG/Store-Werkstatt.png" alt="Werkstatt Mount7" class="h-full w-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-black/20"></div>
+                    <div class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1 text-white text-xs sm:text-sm" style="border: 1px solid var(--border)">
+                        <iconify-icon icon="lucide:sparkles" class="h-4 w-4"></iconify-icon> Fahrfertig montiert • 100 Tage Rückgabe
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 border-t" style="border-color: var(--border); background-color: var(--bg);">
+        <div class="relative">
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 grid gap-8 grid-cols-2 md:grid-cols-4 text-white/80">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <img src="https://sion7-ai.github.io/Spck/mount7/m7logo_w.svg" alt="Mount7 Logo" class="h-7 w-auto">
+                    </div>
+                    <p class="mt-3 text-sm text-white/70">Deine Performance-Lifestyle-Destination. Freiburg • Black Forest.</p>
+                </div>
+                <div>
+                    <h5 class="font-semibold text-white">Shop</h5>
+                    <ul class="mt-3 space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Road</a></li>
+                        <li><a href="#" class="hover:text-white">Gravel</a></li>
+                        <li><a href="#" class="hover:text-white">Trail</a></li>
+                        <li><a href="#" class="hover:text-white">Bekleidung</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold text-white">Explore</h5>
+                    <ul class="mt-3 space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Routen & GPX</a></li>
+                        <li><a href="#" class="hover:text-white">Events & Rides</a></li>
+                        <li><a href="#" class="hover:text-white">Journal</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-semibold text-white">Kontakt</h5>
+                    <ul class="mt-3 space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white">Store Freiburg</a></li>
+                        <li><a href="#" class="hover:text-white">Werkstatt Termin</a></li>
+                        <li><a href="#" class="hover:text-white">Impressum</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="relative border-t text-center text-xs text-white/60 py-4" style="border-color: var(--border);">
+                © 2025 Mount7
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Configuration ---
+        const HERO_VARIANTS = {
+            road: {
+                title: "Road Performance",
+                tagline: "Precision. Speed. Silence.",
+                image: "https://i.ibb.co/zWTdfVsJ/Road.jpg",
+                video: "https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4",
+            },
+            gravel: {
+                title: "Gravel Adventure",
+                tagline: "Freedom beyond tarmac.",
+                image: "https://i.ibb.co/bjzx7WzT/Gravel.jpg",
+                video: "https://cdn.midjourney.com/video/756cbb18-00ea-45fb-af7e-6ed55d887064/2.mp4",
+            },
+            trail: {
+                title: "Trail Experience",
+                tagline: "Control. Confidence. Flow.",
+                image: "https://i.ibb.co/9HkKRwM2/Trail.jpg",
+                video: "https://cdn.midjourney.com/video/702d4c81-ad77-4cc8-8c25-6b6e48180cc6/2.mp4",
+            },
+        };
+
+        const RECOMMENDATIONS = {
+            road: {
+                title: 'Cervélo Caledonia 5',
+                price: '€9.499',
+                image: 'https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png'
+            },
+            gravel: {
+                title: 'Santa Cruz Stigmata',
+                price: '€6.799',
+                image: 'https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png'
+            },
+            trail: {
+                title: 'Trek Fuel EX 9.8',
+                price: '€7.299',
+                image: 'https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png'
+            }
+        };
+        const PRODUCT_IMAGES = [
+            'https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png',
+            'https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png',
+            'https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png'
+        ];
+
+
+        // --- Hero Section Interactivity ---
+        const heroTabButtons = document.querySelectorAll('.hero-tab-btn');
+        const heroTitle = document.getElementById('hero-title');
+        const heroTagline = document.getElementById('hero-tagline');
+        const heroVideo = document.getElementById('hero-video');
+
+        heroTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const variantKey = button.dataset.variant;
+                const variant = HERO_VARIANTS[variantKey];
+
+                if (!variant) return;
+
+                // Update text content
+                heroTitle.textContent = variant.title;
+                heroTagline.textContent = variant.tagline;
+
+                // Update active button style
+                heroTabButtons.forEach(btn => {
+                    btn.classList.remove('bg-white', 'text-black', 'border-white');
+                    btn.classList.add('text-white/80', 'border-white/20', 'hover:border-white/40');
+                });
+                button.classList.add('bg-white', 'text-black', 'border-white');
+                button.classList.remove('text-white/80', 'border-white/20', 'hover:border-white/40');
+                
+                // Update video source and poster
+                if (heroVideo.src !== variant.video) {
+                    heroVideo.poster = variant.image;
+                    heroVideo.src = variant.video;
+                    heroVideo.load();
+                    heroVideo.play().catch(error => console.log("Autoplay was prevented:", error));
+                }
+            });
+        });
+
+        // --- Configurator Light Interactivity ---
+        const terrainSelect = document.getElementById('cfg-terrain');
+        const styleSelect = document.getElementById('cfg-style');
+        const budgetSelect = document.getElementById('cfg-budget');
+        const recoImg = document.getElementById('reco-img');
+        const recoTitle = document.getElementById('reco-title');
+        const recoPrice = document.getElementById('reco-price');
+        const recoDesc = document.getElementById('reco-description');
+
+        const updateRecommendation = () => {
+            const terrain = terrainSelect.value;
+            const style = styleSelect.value;
+            const budget = budgetSelect.options[budgetSelect.selectedIndex].text;
+            
+            const recoData = RECOMMENDATIONS[terrain] || RECOMMENDATIONS.gravel;
+
+            recoTitle.textContent = recoData.title;
+            recoPrice.textContent = recoData.price;
+            recoDesc.innerHTML = `Passend: <strong class="text-white">${terrain}</strong> • ${style} • bis ${budget}`;
+            
+            // Randomly select one of the three main product images
+            const randomImage = PRODUCT_IMAGES[Math.floor(Math.random() * PRODUCT_IMAGES.length)];
+            recoImg.src = randomImage;
+        };
+
+        [terrainSelect, styleSelect, budgetSelect].forEach(select => {
+            select.addEventListener('change', updateRecommendation);
+        });
+
+        // Initial call for configurator
+        updateRecommendation();
+    });
+    </script>
+</body>
+</html>
+
