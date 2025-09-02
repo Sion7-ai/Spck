@@ -1,1 +1,757 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mount7 - Performance Lifestyle</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Iconify Icons via CDN -->
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+
+  <style>
+    /* --- MICRO-INTERACTIONS & STYLING (PERFORMANCE OPTIMIZED) --- */
+
+    /* 1. VARIABLES & BASE STYLES */
+    :root {
+      /* Colors */
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --text: #212529;
+      --border: #dee2e6;
+      --accent-start: #F3B05D;
+      --accent-end: #E52815;
+      --accent-gradient: linear-gradient(90deg, var(--accent-start) 0%, var(--accent-end) 100%);
+      --gold: #f59e0b;
+      --error: #e53e3e;
+
+      /* Timing */
+      --timing-fast: 180ms;
+      --timing-base: 320ms;
+      --timing-slow: 500ms;
+
+      /* Easing Curves */
+      --ease-out-quad: cubic-bezier(.25,.46,.45,.94);
+      --ease-out-quint: cubic-bezier(.22,1,.36,1);
+      --ease-standard: cubic-bezier(.2,.0,.2,1);
+      --ease-emphasized: cubic-bezier(.2,0,0,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* 2. GLOBAL TRANSITION BASIS (Optimized) */
+    a, button, [role="button"], .card {
+      transition:
+        transform var(--timing-base) var(--ease-out-quint),
+        opacity var(--timing-base) var(--ease-out-quint),
+        color var(--timing-fast) var(--ease-standard),
+        background-color var(--timing-fast) var(--ease-standard),
+        border-color var(--timing-fast) var(--ease-standard);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-end);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* 3. HOVER & MICRO-INTERACTIONS (Optimized) */
+    .card { position: relative; transform: translate3d(0,0,0); }
+    .card::after {
+      content: "";
+      position: absolute; inset: 0; border-radius: inherit;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,.07), 0 8px 10px -6px rgba(0,0,0,.07);
+      opacity: 0; transform: translateY(6px) scale(.98);
+      transition: transform var(--timing-base) var(--ease-out-quint), opacity var(--timing-base) var(--ease-out-quint);
+      will-change: transform, opacity; z-index: -1;
+    }
+    .card:hover { transform: translateY(-2px) scale(1.015); }
+    .card:hover::after { opacity: 1; transform: translateY(0) scale(1); }
+
+    .img-zoom { overflow: hidden; position: relative; }
+    .img-zoom > * { transition: transform var(--timing-base) var(--ease-out-quint); }
+    .img-zoom:hover > * { transform: scale(1.03); }
+    .img-zoom::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(100deg, rgba(255,255,255,0) 20%, rgba(255,255,255,.25) 50%, rgba(255,255,255,0) 80%);
+      transform: translate3d(-100%,0,0) skewX(-15deg);
+      opacity: 0; transition: opacity var(--timing-fast) var(--ease-standard); will-change: transform, opacity;
+    }
+    .img-zoom:hover::after { opacity: 1; animation: shine 2.2s var(--ease-out-quint) infinite; }
+    @keyframes shine { 0%{transform:translate3d(-100%,0,0) skewX(-15deg)}100%{transform:translate3d(100%,0,0) skewX(-15deg)} }
+
+    .link {
+      background-image: linear-gradient(var(--accent-end), var(--accent-end));
+      background-size: 0% 1px; background-repeat: no-repeat; background-position: left bottom;
+      transition: background-size var(--timing-base) var(--ease-out-quint);
+    }
+    .link:hover { background-size: 100% 1px; }
+
+    /* 4. CTA BUTTONS & STATES (Optimized) */
+    .btn { position: relative; overflow: hidden; transform: translate3d(0,0,0);
+      transition: transform var(--timing-fast) var(--ease-out-quint), box-shadow var(--timing-fast) var(--ease-standard); }
+    .btn--primary { border-radius: 9999px; background-image: var(--accent-gradient); color: white; }
+    .btn--primary:hover { transform: scale(1.035); box-shadow: 0 8px 22px rgba(229, 40, 21, .25); }
+    .btn.is-loading::before { content:''; position:absolute; top:0; left:0; width:100%; height:2px; background-color: rgba(255,255,255,.3); transform: translateX(-100%); animation: progress-stripe 1.5s linear infinite; }
+    .btn.is-success { box-shadow: 0 0 0 2px var(--gold); animation: pulse 1s ease-out; }
+    .btn.is-error { animation: shake .5s ease-in-out; }
+    @keyframes progress-stripe { 100% { transform: translateX(100%); } }
+    @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(245,158,11,.7)}100%{box-shadow:0 0 0 10px rgba(245,158,11,0)} }
+    @keyframes shake { 10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)} }
+
+    /* 5. SCROLL REVEAL (Optimized & actually smooth) */
+    .reveal { opacity: 0; transform: translate3d(0,14px,0); will-change: transform, opacity; }
+    .reveal.in-view { opacity: 1; transform: translate3d(0,0,0); transition: opacity 420ms var(--ease-out-quint), transform 420ms var(--ease-out-quint); }
+
+    /* 6. HEADER COMPACT STATE */
+    #main-header {
+      background-image: linear-gradient(to bottom, rgba(248,249,250,0.7), transparent);
+      transition: background-color var(--timing-base) var(--ease-standard), backdrop-filter var(--timing-base) var(--ease-standard), border-color var(--timing-base) var(--ease-standard);
+    }
+    #main-header.is-compact {
+      background-color: rgba(248,249,250,.8);
+      background-image: none;
+      backdrop-filter: saturate(120%) blur(6px);
+      -webkit-backdrop-filter: saturate(120%) blur(6px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 7. FORM & DROPDOWN STYLING */
+    select {
+      -webkit-appearance: none; -moz-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgba(33,37,41,0.7)' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right .25rem center;
+      background-color: transparent; color: var(--text);
+    }
+    select option { background-color: var(--surface); color: var(--text); }
+    select:focus-visible { border-color: var(--accent-end); }
+
+    /* 8. TOOLTIPS */
+    [data-tooltip]::before { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-12px); opacity: 0; visibility: hidden; pointer-events: none; transition: all var(--timing-fast) var(--ease-standard); z-index: 10; background-color: var(--text); color: var(--bg); padding: 4px 8px; border-radius: 4px; font-size: .8rem; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+    [data-tooltip]:hover::before, [data-tooltip]:focus-visible::before { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-12px); }
+
+    /* 9. BACK-TO-TOP BUTTON */
+    #toTop { position: fixed; bottom: 1rem; right: 1rem; opacity: 0; transform: translateY(100%); visibility: hidden; transition: opacity var(--timing-base) var(--ease-out-quint), transform var(--timing-base) var(--ease-out-quint), visibility var(--timing-base); z-index: 50; }
+    #toTop.is-visible { opacity: 1; transform: translateY(0); visibility: visible; }
+    #toTop:hover { transform: scale(1.1); }
+
+    /* 10. HERO TEXT SWAP (smooth, not instant) */
+    .fade-swap { transition: opacity 360ms var(--ease-emphasized), transform 360ms var(--ease-emphasized), filter 360ms var(--ease-emphasized); }
+    .fade-swap.out { opacity: 0; transform: translateY(-8px); filter: blur(3px); }
+    .fade-swap.in { opacity: 1; transform: translateY(0); filter: blur(0); }
+    
+    /* 11. PATTERN BACKGROUND */
+    .pattern-bg {
+      background-image: url('https://sion7-ai.github.io/Spck/mount7/muster_nahtlos.svg');
+      opacity: 0.04;
+      background-size: 200px;
+    }
+
+    /* 12. REDUCED MOTION */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *,*::before,*::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !import ant; transition-delay: 0ms !important; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <!-- Header / Navigation -->
+  <header id="main-header" class="sticky top-0 z-50 transition-all duration-300">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <img src="https://sion7-ai.github.io/Spck/mount7/m7logo.svg" alt="Mount7 Logo" class="h-5 sm:h-6 w-auto" />
+        <span class="hidden sm:inline rounded-full border px-2 py-0.5 text-xs text-gray-600" style="border-color: var(--border);">Freiburg</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-gray-700">
+        <a class="transition hover:text-gray-950 link" href="#bikes">Bikes</a>
+        <a class="transition hover:text-gray-950 link" href="#configurator">Konfigurator</a>
+        <a class="transition hover:text-gray-950 link" href="#journal">Journal</a>
+        <a class="transition hover:text-gray-950 link" href="#community">Community</a>
+        <a class="transition hover:text-gray-950 link" href="#store">Store</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="#" class="btn btn--primary inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-semibold transition-colors h-9 sm:h-10 px-3 sm:px-4 py-2 text-white">Online Shop</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="hero" class="relative -mt-16">
+      <div class="relative h-screen w-full overflow-hidden flex flex-col">
+        <div id="hero-video-container" class="absolute inset-0">
+          <video id="hero-video" src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4" poster="https://i.ibb.co/zWTdfVsJ/Road.jpg" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover mix-blend-multiply opacity-90 transition-opacity duration-500"></video>
+        </div>
+        <div id="hero-gradient" class="absolute inset-0 bg-gradient-to-b from-transparent via-[#f8f9fa]/50 to-[#f8f9fa]"></div>
+
+        <div class="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 mt-auto pb-6 sm:pb-10">
+          <div class="reveal">
+            <h1 id="hero-title" class="fade-swap in text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900">Road Performance</h1>
+            <p id="hero-tagline" class="fade-swap in mt-2 sm:mt-3 max-w-xl text-gray-700 text-lg">Precision. Speed. Silence.</p>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-2 reveal" style="transition-delay: 100ms;">
+            <button data-variant="road" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border bg-gray-900 text-white border-gray-900" data-tooltip="Roadbikes">
+              <iconify-icon icon="lucide:bike" class="inline-block mr-2 text-base align-middle"></iconify-icon> ROAD
+            </button>
+            <button data-variant="gravel" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border text-gray-700 border-gray-300 hover:border-gray-500" data-tooltip="Gravelbikes">
+              <iconify-icon icon="lucide:trees" class="inline-block mr-2 text-base align-middle"></iconify-icon> GRAVEL
+            </button>
+            <button data-variant="trail" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border text-gray-700 border-gray-300 hover:border-gray-500" data-tooltip="Mountainbikes">
+              <iconify-icon icon="lucide:mountain" class="inline-block mr-2 text-base align-middle"></iconify-icon> TRAIL
+            </button>
+          </div>
+          <div class="mt-6 flex flex-wrap gap-3 reveal" style="transition-delay: 200ms;">
+            <a href="#" class="btn btn--primary inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base text-white">Jetzt entdecken</a>
+            <a href="#configurator" class="btn inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-gray-400 text-gray-800 hover:bg-black/5">Konfigurator Light</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Signature Tiles -->
+      <div class="relative mt-16 z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 reveal">
+          <!-- Road Tile -->
+          <div class="card group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border);">
+            <div class="img-zoom absolute inset-0">
+              <img src="https://i.ibb.co/zWTdfVsJ/Road.jpg" alt="Road bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-transform duration-300 opacity-100 group-hover:opacity-0" />
+              <video src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></video>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+            <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(229,40,21,0.25),transparent)] z-10"></div>
+            <div class="absolute bottom-4 left-4 z-10">
+              <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
+              <h3 class="text-xl font-bold text-white">Road Performance</h3>
+            </div>
+          </div>
+          <!-- Gravel Tile -->
+          <div class="card group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border); transition-delay: 100ms;">
+            <div class="img-zoom absolute inset-0">
+              <img src="https://i.ibb.co/bjzx7WzT/Gravel.jpg" alt="Gravel bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-transform duration-300 opacity-100 group-hover:opacity-0" />
+              <video src="https://cdn.midjourney.com/video/756cbb18-00ea-45fb-af7e-6ed55d887064/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></video>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+            <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(229,40,21,0.25),transparent)] z-10"></div>
+            <div class="absolute bottom-4 left-4 z-10">
+              <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
+              <h3 class="text-xl font-bold text-white">Gravel Adventure</h3>
+            </div>
+          </div>
+          <!-- Trail Tile -->
+          <div class="card group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border); transition-delay: 200ms;">
+            <div class="img-zoom absolute inset-0">
+              <img src="https://i.ibb.co/9HkKRwM2/Trail.jpg" alt="Trail bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-transform duration-300 opacity-100 group-hover:opacity-0" />
+              <video src="https://cdn.midjourney.com/video/702d4c81-ad77-4cc8-8c25-6b6e48180cc6/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></video>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+            <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(229,40,21,0.25),transparent)] z-10"></div>
+            <div class="absolute bottom-4 left-4 z-10">
+              <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
+              <h3 class="text-xl font-bold text-white">Trail Experience</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Showcase Section -->
+    <section id="bikes" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+      <div class="reveal flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900">Featured Bikes</h2>
+          <p class="mt-2 text-gray-600">Kuratierte Highlights – getestet in Freiburg.</p>
+        </div>
+        <a href="#" class="btn inline-flex items-center justify-center rounded-md font-semibold h-10 px-5 text-sm border border-gray-300 text-gray-800 hover:bg-black/5 flex-shrink-0">Alle ansehen</a>
+      </div>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
+        <!-- Product Card 1 -->
+        <div class="card bg-surface border border-gray-200 rounded-xl overflow-hidden flex flex-col">
+          <div class="relative h-56 img-zoom">
+            <img src="https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png" alt="Cervélo Caledonia 5" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <span class="absolute left-3 top-3 rounded-full bg-black/60 backdrop-blur-sm px-2 py-1 text-[10px] uppercase tracking-widest text-white/90">Carbon • Ultegra Di2</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col">
+            <div class="flex items-start justify-between">
+              <h3 class="text-gray-900 text-lg font-bold">Cervélo Caledonia 5</h3>
+              <span class="text-gray-500 text-base font-normal whitespace-nowrap ml-2">€9.499</span>
+            </div>
+            <div class="flex-grow"></div>
+            <div class="mt-4 flex items-center justify-between text-gray-600 text-sm">
+              <div class="flex items-center gap-2" data-tooltip="Ready to ride"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+              <a href="#" class="btn btn--primary cta-test-btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-white">Details</a>
+            </div>
+          </div>
+        </div>
+        <!-- Product Card 2 -->
+        <div class="card bg-surface border border-gray-200 rounded-xl overflow-hidden flex flex-col" style="transition-delay: 100ms;">
+          <div class="relative h-56 img-zoom">
+            <img src="https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png" alt="Santa Cruz Stigmata" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <span class="absolute left-3 top-3 rounded-full bg-black/60 backdrop-blur-sm px-2 py-1 text-[10px] uppercase tracking-widest text-white/90">Carbon • Rival AXS</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col">
+            <div class="flex items-start justify-between">
+              <h3 class="text-gray-900 text-lg font-bold">Santa Cruz Stigmata</h3>
+              <span class="text-gray-500 text-base font-normal whitespace-nowrap ml-2">€6.799</span>
+            </div>
+            <div class="flex-grow"></div>
+            <div class="mt-4 flex items-center justify-between text-gray-600 text-sm">
+              <div class="flex items-center gap-2" data-tooltip="Ready to ride"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+              <a href="#" class="btn btn--primary cta-test-btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-white">Details</a>
+            </div>
+          </div>
+        </div>
+        <!-- Product Card 3 -->
+        <div class="card bg-surface border border-gray-200 rounded-xl overflow-hidden flex flex-col" style="transition-delay: 200ms;">
+          <div class="relative h-56 img-zoom">
+            <img src="https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png" alt="Trek Fuel EX 9.8" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <span class="absolute left-3 top-3 rounded-full bg-black/60 backdrop-blur-sm px-2 py-1 text-[10px] uppercase tracking-widest text-white/90">Carbon • 150/140mm</span>
+          </div>
+          <div class="p-5 flex-grow flex flex-col">
+            <div class="flex items-start justify-between">
+              <h3 class="text-gray-900 text-lg font-bold">Trek Fuel EX 9.8</h3>
+              <span class="text-gray-500 text-base font-normal whitespace-nowrap ml-2">€7.299</span>
+            </div>
+            <div class="flex-grow"></div>
+            <div class="mt-4 flex items-center justify-between text-gray-600 text-sm">
+              <div class="flex items-center gap-2" data-tooltip="Ready to ride"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+              <a href="#" class="btn btn--primary cta-test-btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-white">Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Configurator Light Section -->
+    <section id="configurator" class="relative border-y" style="border-color: var(--border);">
+      <div class="pattern-bg absolute inset-0"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
+        <div class="grid gap-8 md:grid-cols-2 items-start reveal">
+          <div>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Configurator Light</h3>
+            <p class="mt-2 text-gray-600">Drei Angaben – eine kuratierte Empfehlung.</p>
+
+            <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-8">
+              <div>
+                <label for="cfg-terrain" class="text-xs font-medium text-gray-500 tracking-wide uppercase">Terrain</label>
+                <select id="cfg-terrain" class="mt-1 block w-full text-base border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 px-1 py-2 transition">
+                  <option value="gravel">Gravel</option>
+                  <option value="road">Road</option>
+                  <option value="trail">Trail</option>
+                </select>
+              </div>
+              <div>
+                <label for="cfg-style" class="text-xs font-medium text-gray-500 tracking-wide uppercase">Style</label>
+                <select id="cfg-style" class="mt-1 block w-full text-base border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 px-1 py-2 transition">
+                  <option value="endurance">Endurance</option>
+                  <option value="race">Race</option>
+                  <option value="playful">Playful</option>
+                </select>
+              </div>
+              <div>
+                <label for="cfg-budget" class="text-xs font-medium text-gray-500 tracking-wide uppercase">Budget bis</label>
+                <select id="cfg-budget" class="mt-1 block w-full text-base border-0 border-b-2 border-gray-300 focus:ring-0 focus:border-gray-500 px-1 py-2 transition">
+                  <option value="6000">€6.000</option>
+                  <option value="4000">€4.000</option>
+                  <option value="10000">€10.000</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mt-8 flex items-center gap-3">
+              <button class="btn btn--primary inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base text-white">Ergebnis</button>
+              <a href="#" class="btn inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-gray-400 text-gray-800 hover:bg-black/5">Termin</a>
+            </div>
+          </div>
+
+          <div id="recommendation-card" class="card bg-surface border border-gray-200 rounded-xl overflow-hidden">
+            <div class="relative h-64 img-zoom">
+              <img id="reco-img" src="https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png" alt="Empfohlenes Fahrrad" class="absolute inset-0 h-full w-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <span class="absolute left-3 top-3 rounded-full bg-black/60 backdrop-blur-sm px-2 py-1 text-[10px] uppercase tracking-widest text-white/90">Empfehlung</span>
+            </div>
+            <div class="p-5">
+              <div class="flex items-start justify-between">
+                <h4 id="reco-title" class="text-gray-900 text-lg font-bold">Santa Cruz Stigmata</h4>
+                <span id="reco-price" class="text-gray-500 text-base font-normal whitespace-nowrap ml-2">€6.799</span>
+              </div>
+              <p id="reco-description" class="text-gray-600 text-sm mt-1">Passend: <strong class="text-gray-900">gravel</strong> • endurance • bis 6.000€</p>
+              <div class="mt-4 flex gap-3">
+                <a href="#" class="btn btn--primary inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-white">Zum Bike</a>
+                <a href="#" class="btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-gray-400 text-gray-800 hover:bg-black/5">Vergleichen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Knowledge/Journal Section -->
+    <section id="journal" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div class="reveal flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Knowledge Layers</h3>
+          <p class="mt-2 text-gray-600">Werkstattwissen, Tests & Routen.</p>
+        </div>
+        <a href="#" class="btn inline-flex items-center justify-center rounded-md font-semibold h-10 px-5 text-sm border border-gray-300 text-gray-800 hover:bg-black/5">Alle Artikel</a>
+      </div>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
+        <!-- Article Card 1 -->
+        <div class="card bg-surface border-gray-200 rounded-xl overflow-hidden flex flex-col">
+          <div class="relative h-48 img-zoom">
+            <img src="https://i.ibb.co/B26hFncR/Suspension-Setup.png" alt="Fahrrad-Dämpfer" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          </div>
+          <div class="p-5 flex-grow flex flex-col">
+            <h4 class="text-gray-900 text-lg font-bold">Suspension Setup: 7 Schritte zur perfekten Dämpfung</h4>
+            <p class="text-gray-600 text-sm mt-2 flex-grow">Wie du mit Sag, Rebound und Compression das Maximum herausholst.</p>
+            <a href="#" class="mt-2 text-gray-800 hover:bg-black/5 hover:text-gray-950 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md link">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+          </div>
+        </div>
+        <!-- Article Card 2 -->
+        <div class="card bg-surface border-gray-200 rounded-xl overflow-hidden flex flex-col" style="transition-delay: 100ms;">
+          <div class="relative h-48 img-zoom">
+            <img src="https://i.ibb.co/jvQZyL6g/Scheibenbremsen-entl-ften.png" alt="Scheibenbremsen entlüften" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          </div>
+          <div class="p-5 flex-grow flex flex-col">
+            <h4 class="text-gray-900 text-lg font-bold">Scheibenbremsen entlüften – Werkstattguide</h4>
+            <p class="text-gray-600 text-sm mt-2 flex-grow">Saubere Power, keine Fading-Probleme: So geht’s richtig.</p>
+            <a href="#" class="mt-2 text-gray-800 hover:bg-black/5 hover:text-gray-950 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md link">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+          </div>
+        </div>
+        <!-- Article Card 3 -->
+        <div class="card bg-surface border-gray-200 rounded-xl overflow-hidden flex flex-col" style="transition-delay: 200ms;">
+          <div class="relative h-48 img-zoom">
+            <img src="https://i.ibb.co/FqqkfyV1/Freiburgs-Lieblingsrunden.jpg" alt="Landschaft bei Freiburg" class="absolute inset-0 h-full w-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          </div>
+          <div class="p-5 flex-grow flex flex-col">
+            <h4 class="text-gray-900 text-lg font-bold">Freiburgs Lieblingsrunden: Schauinsland & Kybfelsen</h4>
+            <p class="text-gray-600 text-sm mt-2 flex-grow">Unsere GPX-Favoriten – getestet vom Mount7 Team.</p>
+            <a href="#" class="mt-2 text-gray-800 hover:bg-black/5 hover:text-gray-950 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md link">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="relative py-16 border-t" style="border-color: var(--border);">
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-8 md:grid-cols-2 items-start reveal">
+        <div class="relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto card" style="border: 1px solid var(--border)">
+          <img src="https://i.ibb.co/NDLjYqT/Ride-with-us.png" alt="Black Forest Map" class="h-full w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20"></div>
+          <div class="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-black/50 px-3 py-1 text-white text-sm" style="border: 1px solid rgba(255,255,255,0.2)">
+            <iconify-icon icon="lucide:map-pin" class="h-4 w-4"></iconify-icon> Freiburg • Black Forest
+          </div>
+          <div class="absolute bottom-4 left-4 text-white">
+            <h4 class="text-xl font-bold">Unsere Lieblingsrouten</h4>
+            <p class="text-white/80 text-sm">GPX-Downloads • Road & Gravel • getestete Segmente</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Ride with us</h3>
+          <p class="mt-2 text-gray-600">Wöchentliche Ausfahrten, Workshops & Events.</p>
+          <div class="mt-6 space-y-4">
+            <div class="card flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+              <div class="flex items-center gap-3 text-gray-900">
+                <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-gray-500 flex-shrink-0"></iconify-icon>
+                <div>
+                  <div class="font-medium text-sm sm:text-base">Group Ride – Road | 65 km</div>
+                  <div class="text-xs sm:text-sm text-gray-600">Do, 18:30 • Store Freiburg</div>
+                </div>
+              </div>
+              <a href="#" class="btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-gray-300 text-gray-800 hover:bg-black/5 flex-shrink-0">Anmelden</a>
+            </div>
+            <div class="card flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+              <div class="flex items-center gap-3 text-gray-900">
+                <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-gray-500 flex-shrink-0"></iconify-icon>
+                <div>
+                  <div class="font-medium text-sm sm:text-base">Workshop: Tubeless</div>
+                  <div class="text-xs sm:text-sm text-gray-600">Sa, 11:00 • Werkstatt</div>
+                </div>
+              </div>
+              <a href="#" class="btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-gray-300 text-gray-800 hover:bg-black/5 flex-shrink-0">Anmelden</a>
+            </div>
+            <div class="card flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+              <div class="flex items-center gap-3 text-gray-900">
+                <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-gray-500 flex-shrink-0"></iconify-icon>
+                <div>
+                  <div class="font-medium text-sm sm:text-base">Gravel Social – Wald & Trails</div>
+                  <div class="text-xs sm:text-sm text-gray-600">So, 09:00 • Seepark</div>
+                </div>
+              </div>
+              <a href="#" class="btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-gray-300 text-gray-800 hover:bg-black/5 flex-shrink-0">Anmelden</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store Section -->
+    <section id="store" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid gap-8 md:grid-cols-2 items-center reveal">
+        <div>
+          <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Store & Werkstatt Freiburg</h3>
+          <p class="mt-2 text-gray-600">Bikefitting, Service & Custom Builds – mit obsessiver Sorgfalt.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#" class="btn btn--primary inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base text-white"><iconify-icon icon="lucide:wrench" class="mr-2 h-4 w-4"></iconify-icon>Termin</a>
+            <a href="#" class="btn inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-gray-400 text-gray-800 hover:bg-black/5"><iconify-icon icon="lucide:map-pin" class="mr-2 h-4 w-4"></iconify-icon>Route</a>
+          </div>
+        </div>
+        <div class="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto card" style="border: 1px solid var(--border)">
+          <div class="img-zoom"><img src="https://i.ibb.co/DP2Sb5dG/Store-Werkstatt.png" alt="Werkstatt Mount7" class="h-full w-full object-cover" /></div>
+          <div class="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-black/20"></div>
+          <div class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1 text-white text-xs sm:text-sm" style="border: 1px solid rgba(255,255,255,0.2)"><iconify-icon icon="lucide:sparkles" class="h-4 w-4"></iconify-icon> Fahrfertig montiert • 100 Tage Rückgabe</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 border-t bg-white" style="border-color: var(--border);">
+    <div class="relative">
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 grid gap-8 grid-cols-2 md:grid-cols-4 text-gray-700">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex items-center gap-3"><img src="https://sion7-ai.github.io/Spck/mount7/m7logo.svg" alt="Mount7 Logo" class="h-7 w-auto" /></div>
+          <p class="mt-3 text-sm text-gray-600">Deine Performance-Lifestyle-Destination. Freiburg • Black Forest.</p>
+        </div>
+        <div>
+          <h5 class="font-semibold text-gray-900">Shop</h5>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li><a href="#" class="hover:text-gray-950 link">Road</a></li>
+            <li><a href="#" class="hover:text-gray-950 link">Gravel</a></li>
+            <li><a href="#" class="hover:text-gray-950 link">Trail</a></li>
+            <li><a href="#" class="hover:text-gray-950 link">Bekleidung</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-semibold text-gray-900">Explore</h5>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li><a href="#" class="hover:text-gray-950 link">Routen & GPX</a></li>
+            <li><a href="#" class="hover:text-gray-950 link">Events & Rides</a></li>
+            <li><a href="#" class="hover:text-gray-950 link">Journal</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-semibold text-gray-900">Kontakt</h5>
+          <ul class="mt-3 space-y-2 text-sm">
+            <li><a href="#" class="hover:text-gray-950 link">Store Freiburg</a></li>
+            <li><a href="#" class="hover:text-gray-950 link">Werkstatt Termin</a></li>
+            <li><a href="#" class="hover:text-gray-950 link">Impressum</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="relative border-t text-center text-xs text-gray-500 py-4" style="border-color: var(--border);">© 2025 Mount7</div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="toTop" class="btn btn--primary h-12 w-12 flex items-center justify-center rounded-full text-white" aria-label="Nach oben scrollen" data-tooltip="Nach oben">
+    <iconify-icon icon="lucide:arrow-up" class="h-6 w-6"></iconify-icon>
+  </button>
+
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Configuration & State ---
+      const IS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const HERO_VARIANTS = {
+        road: { title: 'Road Performance', tagline: 'Precision. Speed. Silence.', image: 'https://i.ibb.co/zWTdfVsJ/Road.jpg', video: 'https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4' },
+        gravel:{ title: 'Gravel Adventure', tagline: 'Freedom beyond tarmac.', image:'https://i.ibb.co/bjzx7WzT/Gravel.jpg', video:'https://cdn.midjourney.com/video/756cbb18-00ea-45fb-af7e-6ed55d887064/2.mp4' },
+        trail: { title: 'Trail Experience', tagline: 'Control. Confidence. Flow.', image:'https://i.ibb.co/9HkKRwM2/Trail.jpg', video:'https://cdn.midjourney.com/video/702d4c81-ad77-4cc8-8c25-6b6e48180cc6/2.mp4' },
+      };
+
+      const RECOMMENDATIONS = {
+        road: { title: 'Cervélo Caledonia 5', price: '€9.499' },
+        gravel: { title: 'Santa Cruz Stigmata', price: '€6.799' },
+        trail: { title: 'Trek Fuel EX 9.8', price: '€7.299' },
+      };
+      const PRODUCT_IMAGES = [
+        'https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png',
+        'https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png',
+        'https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png',
+      ];
+
+      // --- Helpers ---
+      function swapText(el, newText) {
+        if (!el) return;
+        el.classList.remove('in');
+        el.classList.add('out');
+        const onEnd = () => {
+          el.textContent = newText;
+          el.removeEventListener('transitionend', onEnd);
+          requestAnimationFrame(() => {
+            el.classList.remove('out');
+            el.classList.add('in');
+          });
+        };
+        el.addEventListener('transitionend', onEnd, { once: true });
+      }
+
+      // --- Micro-interaction Initializers ---
+      function initReveal({ rootMargin = '0px 0px -10% 0px', stagger = 80 } = {}) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              el.classList.add('in-view');
+              const children = el.querySelectorAll(':scope .reveal');
+              children.forEach((child, idx) => {
+                child.style.transitionDelay = `${idx * stagger}ms`;
+                child.classList.add('in-view');
+              });
+              observer.unobserve(el);
+            }
+          });
+        }, { rootMargin });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      }
+
+      function initHeaderShrink({ threshold = 50 } = {}) {
+        const header = document.getElementById('main-header');
+        if (!header) return;
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              header.classList.toggle('is-compact', window.scrollY > threshold);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+      }
+
+      function initToTop({ trigger = 0.4 } = {}) {
+        const toTopBtn = document.getElementById('toTop');
+        if (!toTopBtn) return;
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+              toTopBtn.classList.toggle('is-visible', scrollPct > trigger);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+        toTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: IS_REDUCED_MOTION ? 'auto' : 'smooth' });
+        });
+      }
+
+      function initCTAStates() {
+        document.querySelectorAll('.cta-test-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (btn.classList.contains('is-loading')) return;
+            btn.classList.add('is-loading');
+            btn.setAttribute('aria-busy', 'true');
+            setTimeout(() => {
+              btn.classList.remove('is-loading');
+              const isSuccess = Math.random() > 0.5;
+              btn.classList.add(isSuccess ? 'is-success' : 'is-error');
+              setTimeout(() => { btn.classList.remove('is-success', 'is-error'); btn.removeAttribute('aria-busy'); }, 2000);
+            }, 2000);
+          });
+        });
+      }
+
+      // Video crossfade for hero
+      function swapHeroVideo(url, poster) {
+        const container = document.getElementById('hero-video-container');
+        const v = container.querySelector('video');
+        if (!v) return;
+        const clone = v.cloneNode(true);
+        clone.src = url; clone.poster = poster; clone.style.opacity = 0;
+        container.appendChild(clone);
+        clone.play().catch(()=>{});
+        requestAnimationFrame(() => {
+          clone.style.transition = 'opacity 500ms var(--ease-out-quint)';
+          v.style.transition = 'opacity 500ms var(--ease-out-quint)';
+          clone.style.opacity = 0.9; v.style.opacity = 0;
+        });
+        clone.addEventListener('transitionend', () => { v.remove(); clone.id = 'hero-video'; }, { once: true });
+      }
+
+      // Smooth hero text & tabs
+      function initHeroSwitcher() {
+        const heroTabButtons = document.querySelectorAll('.hero-tab-btn');
+        const heroTitle = document.getElementById('hero-title');
+        const heroTagline = document.getElementById('hero-tagline');
+        if (!heroTabButtons.length || !heroTitle) return;
+        heroTabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const heroVideo = document.getElementById('hero-video');
+            const variantKey = button.dataset.variant;
+            const variant = HERO_VARIANTS[variantKey];
+            if (!variant || (heroVideo && heroVideo.src === variant.video)) return;
+            
+            // Tab visuals
+            heroTabButtons.forEach(btn => {
+                btn.classList.remove('bg-gray-900','text-white','border-gray-900');
+                btn.classList.add('text-gray-700','border-gray-300','hover:border-gray-500');
+            });
+            button.classList.add('bg-gray-900','text-white','border-gray-900');
+            button.classList.remove('text-gray-700','border-gray-300','hover:border-gray-500');
+
+            // Text transitions
+            swapText(heroTitle, variant.title);
+            swapText(heroTagline, variant.tagline);
+            
+            // Video crossfade
+            swapHeroVideo(variant.video, variant.image);
+          });
+        });
+      }
+
+      function initConfigurator() {
+        const form = document.getElementById('configurator');
+        if (!form) return;
+        const terrainSelect = form.querySelector('#cfg-terrain');
+        const recoImg = form.querySelector('#reco-img');
+        const recoTitle = form.querySelector('#reco-title');
+        const recoPrice = form.querySelector('#reco-price');
+        const recoDesc = form.querySelector('#reco-description');
+        const updateRecommendation = () => {
+          const terrain = terrainSelect.value;
+          const recoData = RECOMMENDATIONS[terrain] || RECOMMENDATIONS.gravel;
+          const randomImage = PRODUCT_IMAGES[Math.floor(Math.random() * PRODUCT_IMAGES.length)];
+          recoTitle.textContent = recoData.title;
+          recoPrice.textContent = recoData.price;
+          recoImg.src = randomImage;
+          recoDesc.querySelector('strong').textContent = terrain;
+        };
+        form.addEventListener('change', updateRecommendation);
+        updateRecommendation();
+      }
+
+      // --- Run All Initializers ---
+      initReveal();
+      initHeaderShrink();
+      initToTop();
+      initCTAStates();
+      initHeroSwitcher();
+      initConfigurator();
+    });
+  </script>
+</body>
+</html>
 
