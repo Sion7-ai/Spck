@@ -41,12 +41,6 @@
             opacity: 0.04;
         }
 
-        /* Helper for navbar blur effect */
-        .backdrop-blur-custom {
-            backdrop-filter: saturate(120%) blur(8px);
-            -webkit-backdrop-filter: saturate(120%) blur(8px);
-        }
-
         /* Custom select arrow */
         select {
             -webkit-appearance: none;
@@ -62,12 +56,28 @@
             background-color: var(--surface);
             color: var(--text);
         }
+        
+        /* Header scroll effect styles */
+        #main-header {
+            /* Initial state: transparent with gradient for text readability */
+            background-image: linear-gradient(to bottom, rgba(11, 15, 16, 0.7), transparent);
+            border-bottom-color: transparent;
+        }
+
+        #main-header.scrolled {
+            /* Scrolled state: solid background, blur, and border for clear separation */
+            background-color: rgba(11, 15, 16, 0.6);
+            background-image: none;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: saturate(120%) blur(8px);
+            -webkit-backdrop-filter: saturate(120%) blur(8px);
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- Header / Navigation -->
-    <header class="sticky top-0 z-50 border-b backdrop-blur-custom" style="border-color: var(--border); background-color: rgba(11,15,16,0.6);">
+    <header id="main-header" class="sticky top-0 z-50 transition-all duration-300">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
             <a href="#" class="flex items-center gap-2">
                 <img src="https://sion7-ai.github.io/Spck/mount7/m7logo_w.svg" alt="Mount7 Logo" class="h-5 sm:h-6 w-auto">
@@ -88,8 +98,8 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="relative">
-            <div class="relative h-[85vh] sm:h-[75vh] w-full overflow-hidden flex flex-col">
+        <section id="hero" class="relative -mt-16">
+            <div class="relative h-screen w-full overflow-hidden flex flex-col">
                 
                 <div id="hero-video-container" class="absolute inset-0">
                     <video id="hero-video" 
@@ -519,6 +529,15 @@
             'https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png'
         ];
 
+        // --- Header Scroll Effect ---
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) { // a small threshold
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
 
         // --- Hero Section Interactivity ---
         const heroTabButtons = document.querySelectorAll('.hero-tab-btn');
