@@ -17,14 +17,34 @@
     <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
     <style>
-        /* Define color variables and base styles */
+        /* --- MICRO-INTERACTIONS & STYLING (PERFORMANCE OPTIMIZED) --- */
+
+        /* 1. VARIABLES & BASE STYLES */
         :root {
+            /* Colors */
             --bg: #0b0f10;
             --surface: #11171A;
             --text: #EAF0F2;
             --border: rgba(255, 255, 255, 0.08);
             --accent: #FF4C24;
             --teal: #103A3E;
+            --gold: #FFD700;
+            --error: #e53e3e;
+            
+            /* Timing */
+            --timing-fast: 180ms;
+            --timing-base: 320ms;
+            --timing-slow: 500ms;
+
+            /* Easing Curves */
+            --ease-out-quad: cubic-bezier(.25,.46,.45,.94);
+            --ease-out-quint: cubic-bezier(.22,1,.36,1);
+            --ease-standard: cubic-bezier(.2,.0,.2,1);
+            --ease-emphasized: cubic-bezier(.2,0,0,1);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -33,44 +53,244 @@
             font-family: 'Inter', sans-serif;
         }
         
-        /* Custom class for the seamless pattern background */
-        .pattern-bg {
-            background-image: url('https://sion7-ai.github.io/Spck/mount7/muster_nahtlos_w.svg');
-            background-repeat: repeat;
-            background-size: 280px auto;
-            opacity: 0.04;
+        /* 2. GLOBAL TRANSITION BASIS (Optimized) */
+        a, button, [role="button"], .card {
+            transition:
+                transform var(--timing-base) var(--ease-out-quint),
+                opacity var(--timing-base) var(--ease-out-quint),
+                color var(--timing-fast) var(--ease-standard),
+                background-color var(--timing-fast) var(--ease-standard),
+                border-color var(--timing-fast) var(--ease-standard);
+        }
+        
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        
+        /* 3. HOVER & MICRO-INTERACTIONS (Optimized) */
+
+        /* Card Lift Effect without animating box-shadow */
+        .card { 
+            position: relative;
+            transform: translate3d(0,0,0); /* Promote to GPU layer */
+        }
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,.30), 0 8px 10px -6px rgba(0,0,0,.30);
+            opacity: 0;
+            transform: translateY(6px) scale(.98);
+            transition: transform var(--timing-base) var(--ease-out-quint), opacity var(--timing-base) var(--ease-out-quint);
+            will-change: transform, opacity;
+            z-index: -1;
+        }
+        .card:hover { 
+            transform: translateY(-2px) scale(1.015);
+        }
+        .card:hover::after {
+            opacity: 1;
+            transform: translateY(0) scale(1);
         }
 
-        /* Custom select arrow */
+        /* Image Zoom & Shine Effect (GPU Accelerated) */
+        .img-zoom {
+            overflow: hidden;
+            position: relative;
+        }
+        .img-zoom > * { /* Target img and video */
+             transition: transform var(--timing-base) var(--ease-out-quint);
+        }
+        .img-zoom:hover > * {
+            transform: scale(1.03);
+        }
+        .img-zoom::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(100deg, rgba(255,255,255,0) 20%, rgba(255,255,255,.08) 50%, rgba(255,255,255,0) 80%);
+            transform: translate3d(-100%,0,0) skewX(-15deg);
+            opacity: 0;
+            transition: opacity var(--timing-fast) var(--ease-standard);
+            will-change: transform, opacity;
+        }
+        .img-zoom:hover::after {
+            opacity: 1;
+            animation: shine 2.2s var(--ease-out-quint) infinite;
+        }
+        @keyframes shine {
+            0%   { transform: translate3d(-100%,0,0) skewX(-15deg); }
+            100% { transform: translate3d(100%,0,0)  skewX(-15deg); }
+        }
+
+        /* Animated Underline for Links */
+        .link {
+             background-image: linear-gradient(var(--accent), var(--accent));
+             background-size: 0% 1px;
+             background-repeat: no-repeat;
+             background-position: left bottom;
+             transition: background-size var(--timing-base) var(--ease-out-quint);
+        }
+        .link:hover {
+            background-size: 100% 1px;
+        }
+
+        /* 4. CTA BUTTONS & STATES (Optimized) */
+        .btn {
+            position: relative;
+            overflow: hidden;
+            transform: translate3d(0,0,0);
+            transition: transform var(--timing-fast) var(--ease-out-quint), box-shadow var(--timing-fast) var(--ease-standard);
+        }
+        .btn--primary {
+            border-radius: 9999px;
+            background-image: linear-gradient(to right, var(--accent), #e04624);
+        }
+        .btn--primary:hover {
+            transform: scale(1.035);
+            box-shadow: 0 8px 22px rgba(255,76,36,.20);
+        }
+        .btn.is-loading::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(-100%);
+            animation: progress-stripe 1.5s linear infinite;
+        }
+        .btn.is-success {
+            box-shadow: 0 0 0 2px var(--gold);
+            animation: pulse 1s ease-out;
+        }
+        .btn.is-error {
+             animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes progress-stripe {
+            100% { transform: translateX(100%); }
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            100% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+        }
+        @keyframes shake {
+            10%, 90% { transform: translateX(-1px); }
+            20%, 80% { transform: translateX(2px); }
+            30%, 50%, 70% { transform: translateX(-4px); }
+            40%, 60% { transform: translateX(4px); }
+        }
+
+        /* 5. SCROLL REVEAL (Optimized) */
+        .reveal {
+            opacity: 0;
+            transform: translate3d(0,14px,0);
+            transition: opacity 420ms var(--ease-out-quint), transform 420ms var(--ease-out-quint);
+            will-change: transform, opacity;
+        }
+        .reveal.in-view {
+            opacity: 1;
+            transform: translate3d(0,0,0);
+        }
+
+        /* 6. HEADER COMPACT STATE (Optimized) */
+        #main-header {
+            background-image: linear-gradient(to bottom, rgba(11, 15, 16, 0.7), transparent);
+            border-bottom: 1px solid transparent;
+            transition: background-color var(--timing-base) var(--ease-standard), border-color var(--timing-base) var(--ease-standard);
+        }
+        #main-header.is-compact {
+            background-color: rgba(11, 15, 16, .7);
+            background-image: none;
+            border-bottom-color: var(--border);
+            backdrop-filter: saturate(120%) blur(6px);
+            -webkit-backdrop-filter: saturate(120%) blur(6px);
+        }
+        
+        /* 7. FORM & DROPDOWN STYLING */
         select {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgba(255,255,255,0.7)' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='rgba(255,255,255,0.7)' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 0.25rem center;
+            background-color: transparent; /* Changed from fixed color */
         }
-        
-        /* Style for the select options */
         select option {
             background-color: var(--surface);
             color: var(--text);
         }
-        
-        /* Header scroll effect styles */
-        #main-header {
-            /* Initial state: transparent with gradient for text readability */
-            background-image: linear-gradient(to bottom, rgba(11, 15, 16, 0.7), transparent);
-            border-bottom-color: transparent;
+        select:focus-visible {
+             border-color: var(--accent);
         }
-
-        #main-header.scrolled {
-            /* Scrolled state: solid background, blur, and border for clear separation */
-            background-color: rgba(11, 15, 16, 0.6);
-            background-image: none;
-            border-bottom: 1px solid var(--border);
-            backdrop-filter: saturate(120%) blur(8px);
-            -webkit-backdrop-filter: saturate(120%) blur(8px);
+        
+        /* 8. TOOLTIPS */
+        [data-tooltip] {
+            position: relative;
+        }
+        [data-tooltip]::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-12px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all var(--timing-fast) var(--ease-standard);
+            z-index: 10;
+            background-color: var(--surface);
+            color: var(--text);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            border: 1px solid var(--border);
+        }
+        [data-tooltip]:hover::before,
+        [data-tooltip]:focus-visible::before {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-12px);
+        }
+        
+        /* 9. BACK-TO-TOP BUTTON */
+        #toTop {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            opacity: 0;
+            transform: translateY(100%);
+            visibility: hidden;
+            transition: opacity var(--timing-base) var(--ease-out-quint), transform var(--timing-base) var(--ease-out-quint), visibility var(--timing-base);
+            z-index: 50;
+        }
+        #toTop.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        #toTop:hover {
+            transform: scale(1.1);
+        }
+        
+        /* 10. REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+            *, *::before, *::after {
+                animation-duration: 1ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 1ms !important;
+                transition-delay: 0ms !important;
+            }
         }
     </style>
 </head>
@@ -84,14 +304,14 @@
                  <span class="hidden sm:inline rounded-full border px-2 py-0.5 text-xs text-white/70" style="border-color: var(--border);">Freiburg</span>
             </a>
             <nav class="hidden md:flex items-center gap-6 text-sm text-white/80">
-                <a class="transition hover:text-white" href="#bikes">Bikes</a>
-                <a class="transition hover:text-white" href="#configurator">Konfigurator</a>
-                <a class="transition hover:text-white" href="#journal">Journal</a>
-                <a class="transition hover:text-white" href="#community">Community</a>
-                <a class="transition hover:text-white" href="#store">Store</a>
+                <a class="transition hover:text-white link" href="#bikes">Bikes</a>
+                <a class="transition hover:text-white link" href="#configurator">Konfigurator</a>
+                <a class="transition hover:text-white link" href="#journal">Journal</a>
+                <a class="transition hover:text-white link" href="#community">Community</a>
+                <a class="transition hover:text-white link" href="#store">Store</a>
             </nav>
             <div class="flex items-center gap-2">
-                <a href="#" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-semibold transition-colors h-9 sm:h-10 px-3 sm:px-4 py-2 text-black" style="background-color: var(--accent);">Online Shop</a>
+                <a href="#" class="btn btn--primary inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-semibold transition-colors h-9 sm:h-10 px-3 sm:px-4 py-2 text-black">Online Shop</a>
             </div>
         </div>
     </header>
@@ -100,7 +320,6 @@
         <!-- Hero Section -->
         <section id="hero" class="relative -mt-16">
             <div class="relative h-screen w-full overflow-hidden flex flex-col">
-                
                 <div id="hero-video-container" class="absolute inset-0">
                     <video id="hero-video" 
                            src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4" 
@@ -109,65 +328,72 @@
                            class="absolute inset-0 h-full w-full object-cover mix-blend-lighten opacity-70 transition-opacity duration-500">
                     </video>
                 </div>
-
                 <div id="hero-gradient" class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b0f10]/50 to-[#0b0f10]"></div>
 
                 <div class="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 mt-auto pb-6 sm:pb-10">
-                    <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">Road Performance</h1>
-                    <p id="hero-tagline" class="mt-2 sm:mt-3 max-w-xl text-white/80 text-lg">Precision. Speed. Silence.</p>
-                     <div class="mt-6 flex flex-wrap gap-2">
-                        <button data-variant="road" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border bg-white text-black border-white">
+                    <div class="reveal">
+                        <h1 id="hero-title" class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white">Road Performance</h1>
+                        <p id="hero-tagline" class="mt-2 sm:mt-3 max-w-xl text-white/80 text-lg">Precision. Speed. Silence.</p>
+                    </div>
+                     <div class="mt-6 flex flex-wrap gap-2 reveal" style="transition-delay: 100ms;">
+                        <button data-variant="road" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border bg-white text-black border-white" data-tooltip="Roadbikes">
                             <iconify-icon icon="lucide:bike" class="inline-block mr-2 text-base align-middle"></iconify-icon>
                             ROAD
                         </button>
-                        <button data-variant="gravel" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border text-white/80 border-white/20 hover:border-white/40">
+                        <button data-variant="gravel" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border text-white/80 border-white/20 hover:border-white/40" data-tooltip="Gravelbikes">
                             <iconify-icon icon="lucide:trees" class="inline-block mr-2 text-base align-middle"></iconify-icon>
                             GRAVEL
                         </button>
-                        <button data-variant="trail" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border text-white/80 border-white/20 hover:border-white/40">
+                        <button data-variant="trail" class="hero-tab-btn px-4 py-2 rounded-full text-sm transition border text-white/80 border-white/20 hover:border-white/40" data-tooltip="Mountainbikes">
                              <iconify-icon icon="lucide:mountain" class="inline-block mr-2 text-base align-middle"></iconify-icon>
                             TRAIL
                         </button>
                     </div>
-                    <div class="mt-6 flex flex-wrap gap-3">
-                        <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base bg-white text-black hover:bg-white/90">Jetzt entdecken</a>
-                        <a href="#configurator" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/40 text-white hover:bg-white/10">Konfigurator Light</a>
+                    <div class="mt-6 flex flex-wrap gap-3 reveal" style="transition-delay: 200ms;">
+                        <a href="#" class="btn btn--primary inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base text-black hover:bg-white/90">Jetzt entdecken</a>
+                        <a href="#configurator" class="btn inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/40 text-white hover:bg-white/10">Konfigurator Light</a>
                     </div>
                 </div>
             </div>
 
             <!-- Signature Tiles -->
             <div class="relative mt-16 z-20 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 reveal">
                     <!-- Road Tile -->
-                    <div class="group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border);">
-                        <img src="https://i.ibb.co/zWTdfVsJ/Road.jpg" alt="Road bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-100 group-hover:opacity-0">
-                        <video src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100"></video>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)]"></div>
-                        <div class="absolute bottom-4 left-4">
+                    <div class="card group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border);">
+                        <div class="img-zoom absolute inset-0">
+                            <img src="https://i.ibb.co/zWTdfVsJ/Road.jpg" alt="Road bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-transform duration-300 opacity-100 group-hover:opacity-0">
+                            <video src="https://cdn.midjourney.com/video/e4ed541c-9962-401b-bb21-f6a90be70c3e/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></video>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)] z-10"></div>
+                        <div class="absolute bottom-4 left-4 z-10">
                             <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
                             <h3 class="text-xl font-bold text-white">Road Performance</h3>
                         </div>
                     </div>
                     <!-- Gravel Tile -->
-                    <div class="group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border);">
-                        <img src="https://i.ibb.co/bjzx7WzT/Gravel.jpg" alt="Gravel bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-100 group-hover:opacity-0">
-                        <video src="https://cdn.midjourney.com/video/756cbb18-00ea-45fb-af7e-6ed55d887064/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100"></video>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)]"></div>
-                        <div class="absolute bottom-4 left-4">
+                    <div class="card group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border); transition-delay: 100ms;">
+                        <div class="img-zoom absolute inset-0">
+                             <img src="https://i.ibb.co/bjzx7WzT/Gravel.jpg" alt="Gravel bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-transform duration-300 opacity-100 group-hover:opacity-0">
+                             <video src="https://cdn.midjourney.com/video/756cbb18-00ea-45fb-af7e-6ed55d887064/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></video>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)] z-10"></div>
+                        <div class="absolute bottom-4 left-4 z-10">
                             <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
                             <h3 class="text-xl font-bold text-white">Gravel Adventure</h3>
                         </div>
                     </div>
                     <!-- Trail Tile -->
-                    <div class="group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border);">
-                        <img src="https://i.ibb.co/9HkKRwM2/Trail.jpg" alt="Trail bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-100 group-hover:opacity-0">
-                        <video src="https://cdn.midjourney.com/video/702d4c81-ad77-4cc8-8c25-6b6e48180cc6/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-all duration-300 opacity-0 group-hover:opacity-100"></video>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)]"></div>
-                        <div class="absolute bottom-4 left-4">
+                    <div class="card group relative h-48 sm:h-56 overflow-hidden rounded-2xl border bg-surface" style="border-color: var(--border); transition-delay: 200ms;">
+                        <div class="img-zoom absolute inset-0">
+                             <img src="https://i.ibb.co/9HkKRwM2/Trail.jpg" alt="Trail bikes" class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-transform duration-300 opacity-100 group-hover:opacity-0">
+                            <video src="https://cdn.midjourney.com/video/702d4c81-ad77-4cc8-8c25-6b6e48180cc6/2.mp4" autoplay loop muted playsinline class="absolute inset-0 h-full w-full object-cover scale-105 group-hover:scale-110 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></video>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                        <div class="absolute inset-0 opacity-70 bg-[radial-gradient(1200px_400px_at_10%_90%,rgba(255,76,36,0.25),transparent)] z-10"></div>
+                        <div class="absolute bottom-4 left-4 z-10">
                             <span class="text-[10px] uppercase tracking-widest text-white/70">Mount7 Selection</span>
                             <h3 class="text-xl font-bold text-white">Trail Experience</h3>
                         </div>
@@ -178,17 +404,17 @@
 
         <!-- Product Showcase Section -->
         <section id="bikes" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-            <div class="flex flex-wrap items-end justify-between gap-4">
+            <div class="reveal flex flex-wrap items-end justify-between gap-4">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-extrabold text-white">Featured Bikes</h2>
                     <p class="mt-2 text-white/70">Kuratierte Highlights – getestet in Freiburg.</p>
                 </div>
-                <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-10 px-5 text-sm border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Alle ansehen</a>
+                <a href="#" class="btn inline-flex items-center justify-center rounded-md font-semibold h-10 px-5 text-sm border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Alle ansehen</a>
             </div>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
                 <!-- Product Card 1 -->
-                <div class="bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col">
-                    <div class="relative h-56">
+                <div class="card bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col">
+                    <div class="relative h-56 img-zoom">
                         <img src="https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png" alt="Cervélo Caledonia 5" class="absolute inset-0 h-full w-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                         <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-white">Carbon • Ultegra Di2</span>
@@ -200,14 +426,14 @@
                         </div>
                         <div class="flex-grow"></div>
                         <div class="mt-4 flex items-center justify-between text-white/70 text-sm">
-                            <div class="flex items-center gap-2"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
-                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black" style="background-color: var(--accent);">Details</a>
+                            <div class="flex items-center gap-2" data-tooltip="Ready to ride"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+                            <a href="#" class="btn btn--primary cta-test-btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black">Details</a>
                         </div>
                     </div>
                 </div>
                 <!-- Product Card 2 -->
-                <div class="bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col">
-                    <div class="relative h-56">
+                <div class="card bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col" style="transition-delay: 100ms;">
+                    <div class="relative h-56 img-zoom">
                         <img src="https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png" alt="Santa Cruz Stigmata" class="absolute inset-0 h-full w-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                         <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-white">Carbon • Rival AXS</span>
@@ -219,14 +445,14 @@
                         </div>
                         <div class="flex-grow"></div>
                         <div class="mt-4 flex items-center justify-between text-white/70 text-sm">
-                            <div class="flex items-center gap-2"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
-                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black" style="background-color: var(--accent);">Details</a>
+                            <div class="flex items-center gap-2" data-tooltip="Ready to ride"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+                            <a href="#" class="btn btn--primary cta-test-btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black">Details</a>
                         </div>
                     </div>
                 </div>
                 <!-- Product Card 3 -->
-                <div class="bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col">
-                    <div class="relative h-56">
+                <div class="card bg-surface border border-white/10 rounded-xl overflow-hidden flex flex-col" style="transition-delay: 200ms;">
+                    <div class="relative h-56 img-zoom">
                         <img src="https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png" alt="Trek Fuel EX 9.8" class="absolute inset-0 h-full w-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                         <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-white">Carbon • 150/140mm</span>
@@ -238,8 +464,8 @@
                         </div>
                         <div class="flex-grow"></div>
                         <div class="mt-4 flex items-center justify-between text-white/70 text-sm">
-                            <div class="flex items-center gap-2"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
-                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black" style="background-color: var(--accent);">Details</a>
+                            <div class="flex items-center gap-2" data-tooltip="Ready to ride"><iconify-icon icon="lucide:wrench" class="h-4 w-4"></iconify-icon> Montage fahrfertig</div>
+                            <a href="#" class="btn btn--primary cta-test-btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black">Details</a>
                         </div>
                     </div>
                 </div>
@@ -250,7 +476,7 @@
         <section id="configurator" class="relative border-y" style="border-color: var(--border);">
             <div class="pattern-bg absolute inset-0"></div>
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
-                <div class="grid gap-8 md:grid-cols-2 items-start">
+                <div class="grid gap-8 md:grid-cols-2 items-start reveal">
                     <div>
                         <h3 class="text-2xl md:text-3xl font-bold text-white">Configurator Light</h3>
                         <p class="mt-2 text-white/70">Drei Angaben – eine kuratierte Empfehlung.</p>
@@ -258,7 +484,7 @@
                         <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-8">
                             <div>
                                 <label for="cfg-terrain" class="text-xs font-medium text-white/90 tracking-wide uppercase">Terrain</label>
-                                <select id="cfg-terrain" class="mt-1 block w-full bg-transparent text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 focus:border-accent px-1 py-2 transition">
+                                <select id="cfg-terrain" class="mt-1 block w-full text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 px-1 py-2 transition">
                                     <option value="gravel">Gravel</option>
                                     <option value="road">Road</option>
                                     <option value="trail">Trail</option>
@@ -266,7 +492,7 @@
                             </div>
                             <div>
                                 <label for="cfg-style" class="text-xs font-medium text-white/90 tracking-wide uppercase">Style</label>
-                                <select id="cfg-style" class="mt-1 block w-full bg-transparent text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 focus:border-accent px-1 py-2 transition">
+                                <select id="cfg-style" class="mt-1 block w-full text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 px-1 py-2 transition">
                                     <option value="endurance">Endurance</option>
                                     <option value="race">Race</option>
                                     <option value="playful">Playful</option>
@@ -274,7 +500,7 @@
                             </div>
                             <div>
                                 <label for="cfg-budget" class="text-xs font-medium text-white/90 tracking-wide uppercase">Budget bis</label>
-                                <select id="cfg-budget" class="mt-1 block w-full bg-transparent text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 focus:border-accent px-1 py-2 transition">
+                                <select id="cfg-budget" class="mt-1 block w-full text-white text-base border-0 border-b-2 border-white/20 focus:ring-0 px-1 py-2 transition">
                                     <option value="6000">€6.000</option>
                                     <option value="4000">€4.000</option>
                                     <option value="10000">€10.000</option>
@@ -283,13 +509,13 @@
                         </div>
         
                         <div class="mt-8 flex items-center gap-3">
-                            <button class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base bg-white text-black hover:bg-white/90">Ergebnis</button>
-                            <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/30 text-white hover:bg-white/10">Termin</a>
+                            <button class="btn btn--primary inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base bg-white text-black hover:bg-white/90">Ergebnis</button>
+                            <a href="#" class="btn inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/30 text-white hover:bg-white/10">Termin</a>
                         </div>
                     </div>
         
-                    <div id="recommendation-card" class="bg-surface border border-white/10 rounded-xl overflow-hidden">
-                        <div class="relative h-64">
+                    <div id="recommendation-card" class="card bg-surface border border-white/10 rounded-xl overflow-hidden">
+                        <div class="relative h-64 img-zoom">
                             <img id="reco-img" src="https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png" alt="Empfohlenes Fahrrad" class="absolute inset-0 h-full w-full object-cover">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                             <span class="absolute left-3 top-3 rounded-full bg-white/10 px-2 py-1 text-[10px] uppercase tracking-widest text-white">Empfehlung</span>
@@ -301,8 +527,8 @@
                             </div>
                             <p id="reco-description" class="text-white/70 text-sm mt-1">Passend: <strong class="text-white">gravel</strong> • endurance • bis 6.000€</p>
                             <div class="mt-4 flex gap-3">
-                                <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black" style="background-color: var(--accent);">Zum Bike</a>
-                                <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/30 text-white hover:bg-white/10">Vergleichen</a>
+                                <a href="#" class="btn btn--primary inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 text-black">Zum Bike</a>
+                                <a href="#" class="btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/30 text-white hover:bg-white/10">Vergleichen</a>
                             </div>
                         </div>
                     </div>
@@ -312,48 +538,48 @@
 
         <!-- Knowledge/Journal Section -->
         <section id="journal" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-            <div class="flex flex-wrap items-end justify-between gap-4">
+            <div class="reveal flex flex-wrap items-end justify-between gap-4">
                 <div>
                     <h3 class="text-2xl md:text-3xl font-bold text-white">Knowledge Layers</h3>
                     <p class="mt-2 text-white/70">Werkstattwissen, Tests & Routen.</p>
                 </div>
-                <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-10 px-5 text-sm border border-white/20 text-white hover:bg-white/10">Alle Artikel</a>
+                <a href="#" class="btn inline-flex items-center justify-center rounded-md font-semibold h-10 px-5 text-sm border border-white/20 text-white hover:bg-white/10">Alle Artikel</a>
             </div>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
                 <!-- Article Card 1 -->
-                <div class="bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col">
-                    <div class="relative h-48">
+                <div class="card bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col">
+                    <div class="relative h-48 img-zoom">
                         <img src="https://i.ibb.co/B26hFncR/Suspension-Setup.png" alt="Fahrrad-Dämpfer" class="absolute inset-0 h-full w-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
                         <h4 class="text-white text-lg font-bold">Suspension Setup: 7 Schritte zur perfekten Dämpfung</h4>
                         <p class="text-white/70 text-sm mt-2 flex-grow">Wie du mit Sag, Rebound und Compression das Maximum herausholst.</p>
-                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md link">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
                     </div>
                 </div>
                 <!-- Article Card 2 -->
-                <div class="bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col">
-                    <div class="relative h-48">
+                <div class="card bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col" style="transition-delay: 100ms;">
+                    <div class="relative h-48 img-zoom">
                         <img src="https://i.ibb.co/jvQZyL6g/Scheibenbremsen-entl-ften.png" alt="Scheibenbremsen entlüften" class="absolute inset-0 h-full w-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
                         <h4 class="text-white text-lg font-bold">Scheibenbremsen entlüften – Werkstattguide</h4>
                         <p class="text-white/70 text-sm mt-2 flex-grow">Saubere Power, keine Fading-Probleme: So geht’s richtig.</p>
-                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md link">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
                     </div>
                 </div>
                 <!-- Article Card 3 -->
-                <div class="bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col">
-                    <div class="relative h-48">
+                <div class="card bg-surface border-white/10 rounded-xl overflow-hidden flex flex-col" style="transition-delay: 200ms;">
+                    <div class="relative h-48 img-zoom">
                         <img src="https://i.ibb.co/FqqkfyV1/Freiburgs-Lieblingsrunden.jpg" alt="Landschaft bei Freiburg" class="absolute inset-0 h-full w-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                     </div>
                     <div class="p-5 flex-grow flex flex-col">
                         <h4 class="text-white text-lg font-bold">Freiburgs Lieblingsrunden: Schauinsland & Kybfelsen</h4>
                         <p class="text-white/70 text-sm mt-2 flex-grow">Unsere GPX-Favoriten – getestet vom Mount7 Team.</p>
-                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
+                        <a href="#" class="mt-2 text-white hover:bg-white/10 px-0 inline-flex items-center self-start -ml-2 p-2 rounded-md link">Weiter lesen <iconify-icon icon="lucide:chevron-right" class="ml-1 h-4 w-4"></iconify-icon></a>
                     </div>
                 </div>
             </div>
@@ -361,8 +587,8 @@
 
         <!-- Community Section -->
         <section id="community" class="relative py-16 border-t" style="border-color: var(--border);">
-            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-8 md:grid-cols-2 items-start">
-                <div class="relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto" style="border: 1px solid var(--border)">
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid gap-8 md:grid-cols-2 items-start reveal">
+                <div class="relative overflow-hidden rounded-2xl aspect-[4/3] md:aspect-auto card" style="border: 1px solid var(--border)">
                     <img src="https://i.ibb.co/NDLjYqT/Ride-with-us.png" alt="Black Forest Map" class="h-full w-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-black/20"></div>
                     <div class="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-black/50 px-3 py-1 text-white text-sm" style="border: 1px solid var(--border)">
@@ -378,7 +604,7 @@
                     <h3 class="text-2xl md:text-3xl font-bold text-white">Ride with us</h3>
                     <p class="mt-2 text-white/70">Wöchentliche Ausfahrten, Workshops & Events.</p>
                     <div class="mt-6 space-y-4">
-                        <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+                        <div class="card flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
                             <div class="flex items-center gap-3 text-white">
                                 <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-white/70 flex-shrink-0"></iconify-icon>
                                 <div>
@@ -386,9 +612,9 @@
                                     <div class="text-xs sm:text-sm text-white/70">Do, 18:30 • Store Freiburg</div>
                                 </div>
                             </div>
-                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
+                            <a href="#" class="btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
                         </div>
-                        <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+                        <div class="card flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
                             <div class="flex items-center gap-3 text-white">
                                 <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-white/70 flex-shrink-0"></iconify-icon>
                                 <div>
@@ -396,9 +622,9 @@
                                     <div class="text-xs sm:text-sm text-white/70">Sa, 11:00 • Werkstatt</div>
                                 </div>
                             </div>
-                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
+                            <a href="#" class="btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
                         </div>
-                        <div class="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
+                        <div class="card flex flex-wrap items-center justify-between gap-3 rounded-xl bg-surface px-4 py-3" style="border: 1px solid var(--border)">
                             <div class="flex items-center gap-3 text-white">
                                 <iconify-icon icon="lucide:calendar" class="h-5 w-5 text-white/70 flex-shrink-0"></iconify-icon>
                                 <div>
@@ -406,7 +632,7 @@
                                     <div class="text-xs sm:text-sm text-white/70">So, 09:00 • Seepark</div>
                                 </div>
                             </div>
-                            <a href="#" class="inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
+                            <a href="#" class="btn inline-flex items-center justify-center rounded-md text-sm font-semibold h-9 px-4 border border-white/20 text-white hover:bg-white/10 flex-shrink-0">Anmelden</a>
                         </div>
                     </div>
                 </div>
@@ -415,21 +641,23 @@
         
         <!-- Store Section -->
         <section id="store" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-            <div class="grid gap-8 md:grid-cols-2 items-center">
+            <div class="grid gap-8 md:grid-cols-2 items-center reveal">
                 <div>
                     <h3 class="text-2xl md:text-3xl font-bold text-white">Store & Werkstatt Freiburg</h3>
                     <p class="mt-2 text-white/70">Bikefitting, Service & Custom Builds – mit obsessiver Sorgfalt.</p>
                     <div class="mt-6 flex flex-wrap gap-3">
-                        <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base text-black" style="background-color: var(--accent);">
+                        <a href="#" class="btn btn--primary inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base text-black">
                            <iconify-icon icon="lucide:wrench" class="mr-2 h-4 w-4"></iconify-icon>Termin
                         </a>
-                        <a href="#" class="inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/30 text-white hover:bg-white/10">
+                        <a href="#" class="btn inline-flex items-center justify-center rounded-md font-semibold h-11 px-6 text-base border border-white/30 text-white hover:bg-white/10">
                             <iconify-icon icon="lucide:map-pin" class="mr-2 h-4 w-4"></iconify-icon>Route
                         </a>
                     </div>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto" style="border: 1px solid var(--border)">
-                    <img src="https://i.ibb.co/DP2Sb5dG/Store-Werkstatt.png" alt="Werkstatt Mount7" class="h-full w-full object-cover">
+                <div class="relative rounded-2xl overflow-hidden aspect-[4/3] md:aspect-auto card" style="border: 1px solid var(--border)">
+                    <div class="img-zoom">
+                        <img src="https://i.ibb.co/DP2Sb5dG/Store-Werkstatt.png" alt="Werkstatt Mount7" class="h-full w-full object-cover">
+                    </div>
                     <div class="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-black/20"></div>
                     <div class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-black/60 px-3 py-1 text-white text-xs sm:text-sm" style="border: 1px solid var(--border)">
                         <iconify-icon icon="lucide:sparkles" class="h-4 w-4"></iconify-icon> Fahrfertig montiert • 100 Tage Rückgabe
@@ -452,26 +680,26 @@
                 <div>
                     <h5 class="font-semibold text-white">Shop</h5>
                     <ul class="mt-3 space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white">Road</a></li>
-                        <li><a href="#" class="hover:text-white">Gravel</a></li>
-                        <li><a href="#" class="hover:text-white">Trail</a></li>
-                        <li><a href="#" class="hover:text-white">Bekleidung</a></li>
+                        <li><a href="#" class="hover:text-white link">Road</a></li>
+                        <li><a href="#" class="hover:text-white link">Gravel</a></li>
+                        <li><a href="#" class="hover:text-white link">Trail</a></li>
+                        <li><a href="#" class="hover:text-white link">Bekleidung</a></li>
                     </ul>
                 </div>
                 <div>
                     <h5 class="font-semibold text-white">Explore</h5>
                     <ul class="mt-3 space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white">Routen & GPX</a></li>
-                        <li><a href="#" class="hover:text-white">Events & Rides</a></li>
-                        <li><a href="#" class="hover:text-white">Journal</a></li>
+                        <li><a href="#" class="hover:text-white link">Routen & GPX</a></li>
+                        <li><a href="#" class="hover:text-white link">Events & Rides</a></li>
+                        <li><a href="#" class="hover:text-white link">Journal</a></li>
                     </ul>
                 </div>
                 <div>
                     <h5 class="font-semibold text-white">Kontakt</h5>
                     <ul class="mt-3 space-y-2 text-sm">
-                        <li><a href="#" class="hover:text-white">Store Freiburg</a></li>
-                        <li><a href="#" class="hover:text-white">Werkstatt Termin</a></li>
-                        <li><a href="#" class="hover:text-white">Impressum</a></li>
+                        <li><a href="#" class="hover:text-white link">Store Freiburg</a></li>
+                        <li><a href="#" class="hover:text-white link">Werkstatt Termin</a></li>
+                        <li><a href="#" class="hover:text-white link">Impressum</a></li>
                     </ul>
                 </div>
             </div>
@@ -480,11 +708,19 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="toTop" class="btn btn--primary h-12 w-12 flex items-center justify-center rounded-full text-black" aria-label="Nach oben scrollen" data-tooltip="Nach oben">
+        <iconify-icon icon="lucide:arrow-up" class="h-6 w-6"></iconify-icon>
+    </button>
 
-    <script>
+
+    <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
 
-        // --- Configuration ---
+        // --- Configuration & State ---
+        const IS_REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
         const HERO_VARIANTS = {
             road: {
                 title: "Road Performance",
@@ -507,21 +743,9 @@
         };
 
         const RECOMMENDATIONS = {
-            road: {
-                title: 'Cervélo Caledonia 5',
-                price: '€9.499',
-                image: 'https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png'
-            },
-            gravel: {
-                title: 'Santa Cruz Stigmata',
-                price: '€6.799',
-                image: 'https://i.ibb.co/BHZL2HsQ/Santa-Cruz-Stigmata.png'
-            },
-            trail: {
-                title: 'Trek Fuel EX 9.8',
-                price: '€7.299',
-                image: 'https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png'
-            }
+            road: { title: 'Cervélo Caledonia 5', price: '€9.499' },
+            gravel: { title: 'Santa Cruz Stigmata', price: '€6.799' },
+            trail: { title: 'Trek Fuel EX 9.8', price: '€7.299' }
         };
         const PRODUCT_IMAGES = [
             'https://i.ibb.co/nsntkLbF/Cerv-lo-Caledonia-5.png',
@@ -529,82 +753,198 @@
             'https://i.ibb.co/Mx4YzT9R/Trek-Fuel-EX-9-8.png'
         ];
 
-        // --- Header Scroll Effect ---
-        const header = document.getElementById('main-header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) { // a small threshold
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        // --- Micro-interaction Initializers ---
 
-        // --- Hero Section Interactivity ---
-        const heroTabButtons = document.querySelectorAll('.hero-tab-btn');
-        const heroTitle = document.getElementById('hero-title');
-        const heroTagline = document.getElementById('hero-tagline');
-        const heroVideo = document.getElementById('hero-video');
-
-        heroTabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const variantKey = button.dataset.variant;
-                const variant = HERO_VARIANTS[variantKey];
-
-                if (!variant) return;
-
-                // Update text content
-                heroTitle.textContent = variant.title;
-                heroTagline.textContent = variant.tagline;
-
-                // Update active button style
-                heroTabButtons.forEach(btn => {
-                    btn.classList.remove('bg-white', 'text-black', 'border-white');
-                    btn.classList.add('text-white/80', 'border-white/20', 'hover:border-white/40');
+        function initReveal(options = {}) {
+            const { rootMargin = '0px 0px -10% 0px', stagger = 80 } = options;
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const children = entry.target.querySelectorAll('.reveal');
+                        if (children.length > 0) {
+                            children.forEach((child, index) => {
+                                child.style.transitionDelay = `${index * stagger}ms`;
+                                child.classList.add('in-view');
+                            });
+                        } else {
+                             entry.target.classList.add('in-view');
+                        }
+                        observer.unobserve(entry.target);
+                    }
                 });
-                button.classList.add('bg-white', 'text-black', 'border-white');
-                button.classList.remove('text-white/80', 'border-white/20', 'hover:border-white/40');
-                
-                // Update video source and poster
-                if (heroVideo.src !== variant.video) {
-                    heroVideo.poster = variant.image;
-                    heroVideo.src = variant.video;
-                    heroVideo.load();
-                    heroVideo.play().catch(error => console.log("Autoplay was prevented:", error));
+            }, { rootMargin });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        }
+
+        function initHeaderShrink({ threshold = 50 } = {}) {
+            const header = document.getElementById('main-header');
+            if (!header) return;
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        header.classList.toggle('is-compact', window.scrollY > threshold);
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
+            }, { passive: true });
+        }
+        
+        function initToTop({ trigger = 0.4 } = {}) {
+            const toTopBtn = document.getElementById('toTop');
+            if (!toTopBtn) return;
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                 if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        const scrollPct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+                        toTopBtn.classList.toggle('is-visible', scrollPct > trigger);
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            toTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: IS_REDUCED_MOTION ? 'auto' : 'smooth' });
             });
-        });
+        }
+        
+        function initCTAStates() {
+            document.querySelectorAll('.cta-test-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (btn.classList.contains('is-loading')) return;
 
-        // --- Configurator Light Interactivity ---
-        const terrainSelect = document.getElementById('cfg-terrain');
-        const styleSelect = document.getElementById('cfg-style');
-        const budgetSelect = document.getElementById('cfg-budget');
-        const recoImg = document.getElementById('reco-img');
-        const recoTitle = document.getElementById('reco-title');
-        const recoPrice = document.getElementById('reco-price');
-        const recoDesc = document.getElementById('reco-description');
+                    btn.classList.add('is-loading');
+                    btn.setAttribute('aria-busy', 'true');
 
-        const updateRecommendation = () => {
-            const terrain = terrainSelect.value;
-            const style = styleSelect.value;
-            const budget = budgetSelect.options[budgetSelect.selectedIndex].text;
+                    setTimeout(() => {
+                        btn.classList.remove('is-loading');
+                        const isSuccess = Math.random() > 0.5;
+                        btn.classList.add(isSuccess ? 'is-success' : 'is-error');
+                        
+                        setTimeout(() => {
+                            btn.classList.remove('is-success', 'is-error');
+                            btn.removeAttribute('aria-busy');
+                        }, 2000);
+                    }, 2000);
+                });
+            });
+        }
+        
+        function initMagneticButtons({ selector = '.btn--primary', max = 6 } = {}){
+          if (IS_REDUCED_MOTION) return;
+          document.querySelectorAll(selector).forEach(btn=>{
+            let frame = null, tx = 0, ty = 0;
+            const update = ()=>{ frame=null; btn.style.transform = `translate3d(${tx}px,${ty}px,0) scale(1.035)`; };
+            btn.addEventListener('mousemove', e=>{
+              const r = btn.getBoundingClientRect();
+              const nx = ((e.clientX - r.left)/r.width - .5) * max * 2;
+              const ny = ((e.clientY - r.top )/r.height- .5) * max * 2;
+              tx = nx; ty = ny;
+              if(!frame) frame = requestAnimationFrame(update);
+            });
+            btn.addEventListener('mouseleave', ()=>{ 
+                cancelAnimationFrame(frame);
+                btn.style.transform = 'translate3d(0,0,0)'; 
+            });
+          });
+        }
+
+        // --- Page-specific Logic ---
+        
+        function swapHeroVideo(url, poster) {
+            const container = document.getElementById('hero-video-container');
+            const v = container.querySelector('video');
+            if (!v) return;
+
+            const clone = v.cloneNode(true);
+            clone.src = url;
+            clone.poster = poster;
+            clone.style.opacity = 0;
+            container.appendChild(clone);
+
+            clone.play().catch(()=>{});
             
-            const recoData = RECOMMENDATIONS[terrain] || RECOMMENDATIONS.gravel;
-
-            recoTitle.textContent = recoData.title;
-            recoPrice.textContent = recoData.price;
-            recoDesc.innerHTML = `Passend: <strong class="text-white">${terrain}</strong> • ${style} • bis ${budget}`;
+            requestAnimationFrame(() => {
+                clone.style.transition = 'opacity 500ms var(--ease-out-quint)';
+                v.style.transition = 'opacity 500ms var(--ease-out-quint)';
+                clone.style.opacity = 0.7; // Same as base opacity
+                v.style.opacity = 0;
+            });
             
-            // Randomly select one of the three main product images
-            const randomImage = PRODUCT_IMAGES[Math.floor(Math.random() * PRODUCT_IMAGES.length)];
-            recoImg.src = randomImage;
-        };
+            clone.addEventListener('transitionend', () => {
+                v.remove();
+                clone.id = 'hero-video';
+            }, { once: true });
+        }
 
-        [terrainSelect, styleSelect, budgetSelect].forEach(select => {
-            select.addEventListener('change', updateRecommendation);
-        });
 
-        // Initial call for configurator
-        updateRecommendation();
+        function initHeroSwitcher() {
+            const heroTabButtons = document.querySelectorAll('.hero-tab-btn');
+            const heroTitle = document.getElementById('hero-title');
+            const heroTagline = document.getElementById('hero-tagline');
+            
+            if (!heroTabButtons.length || !heroTitle) return;
+            
+            heroTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const heroVideo = document.getElementById('hero-video'); // Get current video element
+                    const variantKey = button.dataset.variant;
+                    const variant = HERO_VARIANTS[variantKey];
+                    if (!variant || heroVideo.src === variant.video) return;
+
+                    heroTitle.textContent = variant.title;
+                    heroTagline.textContent = variant.tagline;
+
+                    heroTabButtons.forEach(btn => btn.className = btn.className.replace('bg-white text-black border-white', 'text-white/80 border-white/20 hover:border-white/40'));
+                    button.className = button.className.replace('text-white/80 border-white/20 hover:border-white/40', 'bg-white text-black border-white');
+                    
+                    swapHeroVideo(variant.video, variant.image);
+                });
+            });
+        }
+
+        function initConfigurator() {
+            const form = document.getElementById('configurator');
+            if (!form) return;
+
+            const terrainSelect = form.querySelector('#cfg-terrain');
+            const recoImg = form.querySelector('#reco-img');
+            const recoTitle = form.querySelector('#reco-title');
+            const recoPrice = form.querySelector('#reco-price');
+            const recoDesc = form.querySelector('#reco-description');
+
+            const updateRecommendation = () => {
+                const terrain = terrainSelect.value;
+                const recoData = RECOMMENDATIONS[terrain] || RECOMMENDATIONS.gravel;
+                const randomImage = PRODUCT_IMAGES[Math.floor(Math.random() * PRODUCT_IMAGES.length)];
+
+                recoTitle.textContent = recoData.title;
+                recoPrice.textContent = recoData.price;
+                recoImg.src = randomImage;
+                recoDesc.querySelector('strong').textContent = terrain;
+            };
+
+            form.addEventListener('change', updateRecommendation);
+            updateRecommendation(); // Initial call
+        }
+
+
+        // --- Run All Initializers ---
+        initReveal();
+        initHeaderShrink();
+        initToTop();
+        initCTAStates();
+        initMagneticButtons();
+        
+        initHeroSwitcher();
+        initConfigurator();
     });
     </script>
 </body>
