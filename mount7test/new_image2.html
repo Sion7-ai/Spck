@@ -100,6 +100,23 @@
                 transition: opacity 200ms ease;
             }
         }
+
+        /* --- Gradient Button Style --- */
+        .btn-gradient {
+            background: linear-gradient(90deg, #FBA44E 0%, #D7180C 100%);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('https://sion7-ai.github.io/Spck/mount7/muster_nahtlos_w.svg');
+            background-size: 400px;
+            opacity: 0.1;
+            z-index: -1;
+        }
     </style>
 </head>
 <body class="bg-brand-black text-brand-gray font-sans overflow-x-hidden">
@@ -115,7 +132,7 @@
                     <a href="#worlds" class="hover:text-white transition-colors">Themenwelten</a>
                     <a href="#community" class="hover:text-white transition-colors">Community</a>
                     <a href="#featured" class="hover:text-white transition-colors">Bikes</a>
-                    <a href="#" class="bg-brand-accent text-white font-semibold px-5 py-2 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105">Store Visit</a>
+                    <a href="#" class="btn-gradient text-white font-semibold px-5 py-2 rounded-full transition-all transform hover:scale-105 hover:brightness-110">Store Visit</a>
                 </div>
                 <div class="md:hidden">
                     <button class="text-white">
@@ -229,7 +246,7 @@
                             Mount7 ist mehr als ein Shop. Wir sind eine Community, verankert in Freiburg. Entdecke unsere wöchentlichen Ausfahrten, Events und die besten Routen direkt vor unserer Haustür.
                         </p>
                         <div class="mt-8 flex space-x-4">
-                             <a href="#" class="bg-brand-accent text-white font-semibold px-6 py-3 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105">Events Kalender</a>
+                             <a href="#" class="btn-gradient text-white font-semibold px-6 py-3 rounded-full transition-all transform hover:scale-105 hover:brightness-110">Events Kalender</a>
                              <a href="#" class="bg-white/10 text-white font-semibold px-6 py-3 rounded-full hover:bg-white/20 transition-colors">Community beitreten</a>
                         </div>
                     </div>
@@ -331,7 +348,7 @@
                             Besuche unseren Showroom, lass dich von Experten beraten oder gib deinem Bike in unserer High-End-Werkstatt den Service, den es verdient.
                         </p>
                         <div class="mt-8 flex">
-                             <a href="#" class="bg-brand-accent text-white font-semibold px-6 py-3 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105">Termin buchen</a>
+                             <a href="#" class="btn-gradient text-white font-semibold px-6 py-3 rounded-full transition-all transform hover:scale-105 hover:brightness-110">Termin buchen</a>
                         </div>
                     </div>
                 </div>
