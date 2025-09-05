@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ÜBER MOUNT7</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+        .pulse-dot {
+            animation: pulse-dot 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+<!-- Header Section -->
+<header class="relative bg-gray-100 py-20 text-center text-gray-800">
+    <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('https://placehold.co/1920x1080/E0E0E0/333333?text=Hintergrundbild');"></div>
+    <div class="relative z-10">
+        <div class="flex justify-center items-center mb-4">
+            <svg class="h-12 w-12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.5 19.5l15-15m-15 0l15 15" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12 3l-7.5 7.5L12 18l7.5-7.5L12 3z" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+        </div>
+        <h1 class="text-2xl font-bold tracking-wider mb-2">ÜBER MOUNT7</h1>
+        <p class="max-w-2xl mx-auto text-sm">
+            Wir wollen dir dabei helfen, möglichst viele tolle Momente mit dem Rad zu erleben. Egal ob MTB, Rennrad oder E-Bike, bei uns findest du alles, was du für deinen nächsten Bike-Moment brauchst.
+        </p>
+        <button class="mt-6 px-6 py-2 border border-gray-800 rounded-md text-sm hover:bg-gray-800 hover:text-white transition-colors">
+            mehr erfahren →
+        </button>
+    </div>
+</header>
+
+<main class="container mx-auto px-4 py-16">
+
+    <!-- Section 1: Asymmetrisches Grid -->
+    <section class="mb-16">
+        <h2 class="text-center text-2xl font-bold mb-8">1. Asymmetrisches Grid mit Gewichtung</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Hauptbild: FAHRRADTEILE -->
+            <div class="md:col-span-2 relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9 md:aspect-w-3 md:aspect-h-2">
+                <img id="image1" alt="Nahaufnahme einer Fahrradkette und Schaltung." class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://i.ibb.co/yBBznSZ5/image1.png"/>
+                <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
+                    <h3 class="text-white text-xl font-bold">FAHRRADTEILE</h3>
+                    <a class="mt-2 text-white text-sm font-semibold flex items-center group" href="#">
+                        mehr Infos <span class="material-icons transform group-hover:translate-x-1 transition-transform duration-200">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                <!-- Bild 2: FAHRRADZUBEHÖR -->
+                <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                    <img id="image2" alt="Fahrradhelm, Handschuhe und Trinkflasche auf einem Holztisch." class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://i.ibb.co/99pwP0fG/image2.png"/>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
+                        <h3 class="text-white text-xl font-bold">FAHRRADZUBEHÖR</h3>
+                        <a class="mt-2 text-white text-sm font-semibold flex items-center group" href="#">
+                            mehr Infos <span class="material-icons transform group-hover:translate-x-1 transition-transform duration-200">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bild 3: FAHRRADBEKLEIDUNG -->
+                <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                    <img id="image3" alt="Person in Radbekleidung, die ihre Handschuhe anzieht." class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://i.ibb.co/yn0rQcHn/image3.png"/>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
+                        <h3 class="text-white text-xl font-bold">FAHRRADBEKLEIDUNG</h3>
+                        <a class="mt-2 text-white text-sm font-semibold flex items-center group" href="#">
+                            mehr Infos <span class="material-icons transform group-hover:translate-x-1 transition-transform duration-200">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Card-Design im Flat/Swiss-Style -->
+    <section class="mb-16">
+        <h2 class="text-center text-2xl font-bold mb-8">2. Card-Design im Flat/Swiss-Style</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gray-50 rounded-lg p-8 text-center flex flex-col items-center">
+                <div class="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mb-4">
+                    <span class="material-icons text-teal-600 text-3xl">settings</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2">FAHRRADTEILE</h3>
+                <p class="text-sm text-gray-600 mb-4 flex-grow">Funktional und margenstark für dein Bike.</p>
+                <a class="mt-auto text-teal-600 font-semibold flex items-center group" href="#">
+                    mehr Infos <span class="material-icons transform group-hover:translate-x-1 transition-transform duration-200">arrow_forward</span>
+                </a>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-8 text-center flex flex-col items-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <span class="material-icons text-blue-600 text-3xl">sports_motorsports</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2">FAHRRADZUBEHÖR</h3>
+                <p class="text-sm text-gray-600 mb-4 flex-grow">Alles für deine Sicherheit und Komfort.</p>
+                <a class="mt-auto text-blue-600 font-semibold flex items-center group" href="#">
+                    mehr Infos <span class="material-icons transform group-hover:translate-x-1 transition-transform duration-200">arrow_forward</span>
+                </a>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-8 text-center flex flex-col items-center">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                    <span class="material-icons text-purple-600 text-3xl">checkroom</span>
+                </div>
+                <h3 class="text-lg font-bold mb-2">FAHRRADBEKLEIDUNG</h3>
+                <p class="text-sm text-gray-600 mb-4 flex-grow">Style und Funktion für jede Tour.</p>
+                <a class="mt-auto text-purple-600 font-semibold flex items-center group" href="#">
+                    mehr Infos <span class="material-icons transform group-hover:translate-x-1 transition-transform duration-200">arrow_forward</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Storytelling-Kacheln (Bilder 4, 5, 6) -->
+    <section class="mb-16">
+        <h2 class="text-center text-2xl font-bold mb-8">3. Storytelling-Kacheln</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Bild 4: Upgrade dein Bike -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image4" alt="Nahaufnahme einer Schaltung beim Fahren." class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://i.ibb.co/qMDmwzgm/image4.png"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                    <h3 class="text-white text-xl font-bold">Upgrade dein Bike</h3>
+                    <p class="text-gray-200 text-sm">Die besten Teile für deine nächste Herausforderung.</p>
+                </div>
+            </div>
+
+            <!-- Bild 5: Ride Safe -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image5" alt="Helm wird angezogen." class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://i.ibb.co/6cph5GQg/image5.png"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                    <h3 class="text-white text-xl font-bold">Ride Safe</h3>
+                    <p class="text-gray-200 text-sm">Sicherheit und Zubehör, auf das du dich verlassen kannst.</p>
+                </div>
+            </div>
+
+            <!-- Bild 6: Style on Tour -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image6" alt="Radler vor dem Start." class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" src="https://i.ibb.co/YT8XRfvm/image6.png"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+                    <h3 class="text-white text-xl font-bold">Style on Tour</h3>
+                    <p class="text-gray-200 text-sm">Funktionale Bekleidung mit Stil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Hover-Layer mit Mehrwert -->
+    <section class="mb-16">
+        <h2 class="text-center text-2xl font-bold mb-8">4. Hover-Layer mit Mehrwert</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Bild 7: Fahrradteile -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image7" alt="Fahrradteile." class="w-full h-full object-cover" src="https://i.ibb.co/7NXfcT7k/image7.png"/>
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center">
+                    <div class="text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                        <span class="material-icons text-4xl mb-2">settings</span>
+                        <h3 class="text-xl font-bold">FAHRRADTEILE</h3>
+                        <button class="mt-4 px-5 py-2 bg-teal-500 rounded-md text-sm font-semibold hover:bg-teal-600 transition-colors">
+                            Entdecken →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bild 8: Fahrradzubehör -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image8" alt="Fahrradzubehör." class="w-full h-full object-cover" src="https://i.ibb.co/7xN8vZjd/image8.png"/>
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center">
+                    <div class="text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                        <span class="material-icons text-4xl mb-2">sports_motorsports</span>
+                        <h3 class="text-xl font-bold">FAHRRADZUBEHÖR</h3>
+                        <button class="mt-4 px-5 py-2 bg-teal-500 rounded-md text-sm font-semibold hover:bg-teal-600 transition-colors">
+                            Entdecken →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bild 9: Fahrradbekleidung -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image9" alt="Fahrradbekleidung." class="w-full h-full object-cover" src="https://i.ibb.co/9m0MHMxS/image9.png"/>
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center">
+                    <div class="text-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                        <span class="material-icons text-4xl mb-2">checkroom</span>
+                        <h3 class="text-xl font-bold">FAHRRADBEKLEIDUNG</h3>
+                        <button class="mt-4 px-5 py-2 bg-teal-500 rounded-md text-sm font-semibold hover:bg-teal-600 transition-colors">
+                            Entdecken →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Circular / Icon-first Layout (Bilder 10, 11, 12) -->
+    <section>
+        <h2 class="text-center text-2xl font-bold mb-8">5. Circular / Icon-first Layout</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+
+            <!-- Bild 10: FAHRRADTEILE -->
+            <div class="flex flex-col items-center group">
+                <div class="relative w-48 h-48 rounded-full overflow-hidden shadow-lg mb-4">
+                    <img id="image10" alt="Fahrradteile Detail." class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" src="https://i.ibb.co/cKmyg3Rp/image10.png"/>
+                    <div class="absolute inset-0 bg-teal-800 bg-opacity-50 flex items-center justify-center">
+                        <span class="material-icons text-white text-5xl">settings</span>
+                    </div>
+                </div>
+                <h3 class="text-lg font-bold">FAHRRADTEILE</h3>
+                <a class="text-teal-600 font-semibold flex items-center group-hover:underline" href="#">
+                    Details ansehen
+                </a>
+            </div>
+
+            <!-- Bild 11: FAHRRADZUBEHÖR -->
+            <div class="flex flex-col items-center group">
+                <div class="relative w-48 h-48 rounded-full overflow-hidden shadow-lg mb-4">
+                    <img id="image11" alt="Fahrradhelm Detail." class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" src="https://i.ibb.co/gZvzBd5S/image11.png"/>
+                    <div class="absolute inset-0 bg-blue-800 bg-opacity-50 flex items-center justify-center">
+                        <span class="material-icons text-white text-5xl">sports_motorsports</span>
+                    </div>
+                </div>
+                <h3 class="text-lg font-bold">FAHRRADZUBEHÖR</h3>
+                <a class="text-blue-600 font-semibold flex items-center group-hover:underline" href="#">
+                    Details ansehen
+                </a>
+            </div>
+
+            <!-- Bild 12: FAHRRADBEKLEIDUNG -->
+            <div class="flex flex-col items-center group">
+                <div class="relative w-48 h-48 rounded-full overflow-hidden shadow-lg mb-4">
+                    <img id="image12" alt="Fahrradhandschuh Detail." class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300" src="https://i.ibb.co/xSpCVDsH/image12.png"/>
+                    <div class="absolute inset-0 bg-purple-800 bg-opacity-50 flex items-center justify-center">
+                        <span class="material-icons text-white text-5xl">checkroom</span>
+                    </div>
+                </div>
+                <h3 class="text-lg font-bold">FAHRRADBEKLEIDUNG</h3>
+                <a class="text-purple-600 font-semibold flex items-center group-hover:underline" href="#">
+                    Details ansehen
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Künstlerisches Grid -->
+    <section class="mb-16">
+        <h2 class="text-center text-2xl font-bold mb-8">6. Künstlerisches Grid</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Bild 13: Künstlerische Radfahrerin -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image13" alt="Radfahrerin in einem künstlerischen Stil." class="w-full h-full object-cover" src="https://i.ibb.co/1J2VCP3F/image13.png"/>
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-end p-4">
+                    <h3 class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Style on Tour</h3>
+                </div>
+            </div>
+            <!-- Bild 14: Künstlerischer Schuh -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image14" alt="Ein Schuh in einem kunstvollen Licht." class="w-full h-full object-cover" src="https://i.ibb.co/pHwVMBB/image14.png"/>
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-end p-4">
+                    <h3 class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Ausrüstung</h3>
+                </div>
+            </div>
+            <!-- Bild 15: Künstlerische X-Ray Darstellung -->
+            <div class="relative rounded-lg overflow-hidden group aspect-w-16 aspect-h-9">
+                <img id="image15" alt="Eine X-Ray-Darstellung eines Körpers." class="w-full h-full object-cover" src="https://i.ibb.co/4Zttqx3h/image15.png"/>
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-end p-4">
+                    <h3 class="text-white text-xl font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">Analyse</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Reduziertes Icon-Layout -->
+    <section class="mb-16">
+        <h2 class="text-center text-2xl font-bold mb-8">7. Reduziertes Icon-Layout</h2>
+        <div class="flex flex-wrap justify-center gap-x-12 gap-y-8">
+            <!-- Bild 16: Bundles -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image16" alt="Minimalistische Darstellung eines Bundles." class="w-full h-full object-contain p-2" src="https://i.ibb.co/VYZsRsVK/image16.png"/>
+                </div>
+                <span class="text-xs font-semibold">Bundles</span>
+            </div>
+            <!-- Bild 17: Jerseys -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image17" alt="Minimalistische Darstellung eines Trikots." class="w-full h-full object-contain p-2" src="https://i.ibb.co/bRY3196S/image17.png"/>
+                </div>
+                <span class="text-xs font-semibold">Jerseys</span>
+            </div>
+            <!-- Bild 18: Bibs -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image18" alt="Minimalistische Darstellung einer Trägerhose." class="w-full h-full object-contain p-2" src="https://i.ibb.co/s9SYjZ4w/image18.png"/>
+                </div>
+                <span class="text-xs font-semibold">Bibs</span>
+            </div>
+            <!-- Bild 19: Jackets & Gilet -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image19" alt="Minimalistische Darstellung einer Weste." class="w-full h-full object-contain p-2" src="https://i.ibb.co/8L8g50TL/image19.png"/>
+                </div>
+                <span class="text-xs font-semibold">Jackets & Gilet</span>
+            </div>
+            <!-- Bild 20: Helmets -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image20" alt="Minimalistische Darstellung eines Helms." class="w-full h-full object-contain p-2" src="https://i.ibb.co/8D910Lnd/image20.png"/>
+                </div>
+                <span class="text-xs font-semibold">Helmets</span>
+            </div>
+            <!-- Bild 21: Accessories -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image21" alt="Minimalistische Darstellung von Accessoires." class="w-full h-full object-contain p-2" src="https://i.ibb.co/39F2pjhF/image21.png"/>
+                </div>
+                <span class="text-xs font-semibold">Accessories</span>
+            </div>
+            <!-- Bild 22: Socks -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image22" alt="Minimalistische Darstellung von Socken." class="w-full h-full object-contain p-2" src="https://i.ibb.co/G4xDNgpQ/image22.png"/>
+                </div>
+                <span class="text-xs font-semibold">Socks</span>
+            </div>
+            <!-- Bild 23: Outerwear -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image23" alt="Minimalistische Darstellung von Oberbekleidung." class="w-full h-full object-contain p-2" src="https://i.ibb.co/whzwbrJR/image23.png"/>
+                </div>
+                <span class="text-xs font-semibold">Outerwear</span>
+            </div>
+            <!-- Bild 24: T-Shirts & Training -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image24" alt="Minimalistische Darstellung eines T-Shirts." class="w-full h-full object-contain p-2" src="https://i.ibb.co/cS8r55dd/image24.png"/>
+                </div>
+                <span class="text-xs font-semibold">T-Shirts & Training</span>
+            </div>
+            <!-- Bild 25: T-Shirts -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image25" alt="Minimalistische Darstellung eines T-Shirts." class="w-full h-full object-contain p-2" src="https://i.ibb.co/9mvNBTXb/image25.png"/>
+                </div>
+                <span class="text-xs font-semibold">T-Shirts</span>
+            </div>
+            <!-- Bild 26: Pants & Shorts -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image26" alt="Minimalistische Darstellung einer Hose." class="w-full h-full object-contain p-2" src="https://i.ibb.co/zHSB9jjt/image26.png"/>
+                </div>
+                <span class="text-xs font-semibold">Pants & Shorts</span>
+            </div>
+            <!-- Bild 27: Gym & Training -->
+            <div class="flex flex-col items-center">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden mb-2">
+                    <img id="image27" alt="Minimalistische Darstellung von Trainingsbekleidung." class="w-full h-full object-contain p-2" src="https://i.ibb.co/V0pzP9QB/image27.png"/>
+                </div>
+                <span class="text-xs font-semibold">Gym & Training</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-white py-12">
+    <div class="container mx-auto px-4 flex flex-col items-center">
+        <form class="flex items-center mb-6">
+            <input class="border border-gray-400 rounded-l-md p-2 text-sm w-64 focus:ring-teal-500 focus:border-teal-500" placeholder="Deine E-Mail Adresse..." type="email"/>
+            <button class="bg-teal-600 text-white p-2 rounded-r-md text-sm font-semibold hover:bg-teal-700" type="submit">Newsletter abonnieren</button>
+        </form>
+        <div class="flex space-x-6 text-gray-600">
+            <a class="hover:text-gray-900" href="#"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v2.385z"></path></svg></a>
+            <a class="hover:text-gray-900" href="#"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.359 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.359-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.359-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"></path></svg></a>
+            <a class="hover:text-gray-900" href="#"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path></svg></a>
+        </div>
+    </div>
+</footer>
