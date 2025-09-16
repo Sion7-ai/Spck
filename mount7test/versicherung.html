@@ -196,7 +196,7 @@
         <div>
             <h2 class="text-3xl font-bold mb-6 pb-2 border-b-2 border-[--m7-primary]">3. Anwendungsfall: Detailseite (Pop-up)</h2>
             <div class="bg-white rounded-lg shadow-xl p-8 text-center max-w-6xl mx-auto mt-6">
-                <h3 class="text-2xl font-bold mb-4">Voller Schutz für dein Bike</h3>
+                <h3 class="text-2xl font-bold mb-4 flex items-center justify-center"><span class="iconify w-8 h-8 mr-3 text-[--m7-primary]" data-icon="carbon:bicycle"></span>Voller Schutz für dein Bike</h3>
                 <p class="max-w-2xl mx-auto mb-6">Hier wird das Angebot durch einen Klick auf einen Button in einem Pop-up-Fenster angezeigt. Der Klick kann von einem beliebigen Element auf der Seite kommen.</p>
                 <button id="openModalBtnDetail" class="bg-[--m7-primary] text-white font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-opacity">
                     <span class="iconify w-5 h-5 inline-block mr-2" data-icon="carbon:popup"></span>
@@ -208,23 +208,56 @@
     </main>
     
     <!-- Modal für Versicherungsdetails -->
-    <div id="insuranceModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6 hidden">
-        <div id="modalContent" class="bg-white rounded-lg shadow-2xl w-full max-w-md relative transform transition-all opacity-0 scale-95">
-             <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-400 hover:text-[--m7-primary]"><span class="iconify w-7 h-7" data-icon="carbon:close-outline"></span></button>
-             <div class="p-8 text-center space-y-4">
-                 <span class="iconify w-16 h-16 text-[--m7-accent] mx-auto" data-icon="carbon:shield-check"></span>
-                 <h2 class="text-2xl font-bold">30 Tage kostenlose Versicherung</h2>
-                 <p class="text-sm">Versichert gegen Diebstahl, Vandalismus & Unfallschäden.</p>
-                 <ul class="text-sm text-left space-y-2 py-4">
-                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-green-500" data-icon="carbon:checkmark-outline"></span>Keine Zahlungsdaten notwendig</li>
-                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-green-500" data-icon="carbon:checkmark-outline"></span>Endet automatisch nach 30 Tagen</li>
-                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-green-500" data-icon="carbon:checkmark-outline"></span>Voller Schutz ab dem ersten Tag</li>
-                 </ul>
-                 <label for="addInsuranceModal" class="flex items-center space-x-3 cursor-pointer select-none p-3 rounded-lg hover:bg-gray-50 transition-colors justify-center">
-                    <input type="checkbox" id="addInsuranceModal" class="form-checkbox">
-                    <span class="font-bold text-sm">Ja, Versicherung aktivieren</span>
-                 </label>
-             </div>
+    <div id="insuranceModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div id="modalContent" class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl relative transform transition-all opacity-0 scale-95 flex flex-col md:flex-row overflow-hidden border-4 md:border-8 border-[--m7-primary]">
+            <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-500 hover:text-[--m7-primary] z-10"><span class="iconify w-7 h-7" data-icon="carbon:close-outline"></span></button>
+    
+            <!-- Left side with graphic -->
+            <div class="w-full md:w-2/5 bg-gray-50 p-8 flex items-center justify-center min-h-[300px] md:min-h-0">
+                <div class="relative w-48 h-48" aria-hidden="true">
+                    <!-- Main Shield Icon -->
+                    <span class="iconify text-[--m7-primary] absolute inset-0 w-full h-full" data-icon="carbon:shield"></span>
+                    <!-- Bicycle Icon inside shield -->
+                    <span class="iconify text-[--m7-primary] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" data-icon="carbon:bicycle" style="font-size: 4rem;"></span>
+                    
+                    <!-- Surrounding smaller icons -->
+                    <div title="Diebstahlschutz" class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg border border-gray-200">
+                        <span class="iconify w-6 h-6 text-[--m7-accent]" data-icon="carbon:locked"></span>
+                    </div>
+                    <div title="Schutz bei Vandalismus" class="absolute top-1/4 -right-4 bg-white p-2 rounded-full shadow-lg border border-gray-200">
+                         <span class="iconify w-6 h-6 text-[--m7-accent]" data-icon="carbon:hammer"></span>
+                    </div>
+                    <div title="Schutz bei Unfällen" class="absolute bottom-1/4 -right-4 bg-white p-2 rounded-full shadow-lg border border-gray-200">
+                        <span class="iconify w-6 h-6 text-[--m7-accent]" data-icon="carbon:warning-alt"></span>
+                    </div>
+                     <div title="30 Tage Laufzeit" class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white p-2 rounded-full shadow-lg border border-gray-200">
+                        <span class="iconify w-6 h-6 text-[--m7-accent]" data-icon="carbon:calendar"></span>
+                    </div>
+                    <div title="Schutz für Anbauteile" class="absolute bottom-1/4 -left-4 bg-white p-2 rounded-full shadow-lg border border-gray-200">
+                        <span class="iconify w-6 h-6 text-[--m7-accent]" data-icon="carbon:tool-kit"></span>
+                    </div>
+                     <div title="Elektronik-Schutz" class="absolute top-1/4 -left-4 bg-white p-2 rounded-full shadow-lg border border-gray-200">
+                        <span class="iconify w-6 h-6 text-[--m7-accent]" data-icon="carbon:flash"></span>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Right side with text content -->
+            <div class="w-full md:w-3/5 p-8 md:p-10 flex flex-col justify-center">
+                <h2 class="text-3xl font-bold mb-3">Voller Schutz für dein Bike</h2>
+                <p class="text-gray-600 mb-6">Sichere dein neues Mount7 Bike optimal ab. Unser Partner Bikmo bietet einen umfassenden Schutz, den du jetzt 30 Tage kostenlos testen kannst.</p>
+                
+                <ul class="text-sm space-y-2 py-4 border-t border-b border-gray-200">
+                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-3 text-green-500" data-icon="carbon:checkmark-outline"></span>Keine Zahlungsdaten notwendig</li>
+                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-3 text-green-500" data-icon="carbon:checkmark-outline"></span>Endet automatisch nach 30 Tagen</li>
+                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-3 text-green-500" data-icon="carbon:checkmark-outline"></span>Voller Schutz ab dem ersten Tag</li>
+                </ul>
+    
+                <label for="addInsuranceModal" class="flex items-center space-x-3 cursor-pointer select-none p-4 rounded-lg hover:bg-gray-50 transition-colors justify-center mt-6">
+                   <input type="checkbox" id="addInsuranceModal" class="form-checkbox">
+                   <span class="font-bold text-base">Ja, Versicherung kostenlos aktivieren</span>
+                </label>
+            </div>
         </div>
     </div>
 
