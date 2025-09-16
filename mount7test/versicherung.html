@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mount7 | Demo: Versicherungs-Integration (Alle Sichten)</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Lato & Roboto Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Iconify CDN -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <style>
+        /* Mount7 Corporate Identity Farbvariablen und Basiseinstellungen */
+        :root {
+            --m7-primary: #0A3141;
+            --m7-accent: #FF5722;
+            --m7-green: #28a745; /* Angepasst an Screenshot-Button */
+            --m7-white: #FFFFFF;
+            --m7-light-gray: #F5F5F5;
+            --m7-dark-gray: #333333;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--m7-white);
+            color: var(--m7-dark-gray);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Lato', sans-serif;
+            color: var(--m7-primary);
+        }
+
+        /* Custom Checkbox Styling */
+        .form-checkbox {
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            display: inline-block; vertical-align: middle; background-origin: border-box;
+            user-select: none; flex-shrink: 0;
+            height: 1.25rem; width: 1.25rem;
+            border: 2px solid var(--m7-primary);
+            border-radius: 0.25rem;
+            transition: all 0.15s ease-in-out;
+        }
+        .form-checkbox:checked {
+            background-color: var(--m7-accent); border-color: var(--m7-accent);
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+            background-size: 100% 100%; background-position: center; background-repeat: no-repeat;
+        }
+        .form-checkbox:focus {
+            outline: none; box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.4);
+        }
+        
+        /* Checkout-Fortschrittsanzeige */
+        .checkout-step {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        .checkout-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 1.25rem; /* Vertikale Mitte des Kreises */
+            transform: translateX(1.25rem);
+            width: calc(100% - 2.5rem);
+            height: 2px;
+            background-color: #e5e7eb; /* gray-200 */
+        }
+        .checkout-step.active .step-circle {
+            background-color: var(--m7-green);
+            color: white;
+            border-color: var(--m7-green);
+        }
+        .checkout-step.active .step-label {
+             font-weight: 700;
+             color: var(--m7-green);
+        }
+        .checkout-step.active:not(:last-child)::after {
+            background-color: var(--m7-green);
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="bg-white sticky top-0 z-40 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+             <div class="flex items-center space-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-auto" viewBox="0 0 200 40" fill="#0A3141"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.293 2.5L2.5 21.293V25L12.5 15V40H17.5V15L27.5 25V21.293L21.293 5H23.75L40 21.25V17.5L21.293 0L2.5 18.7929V15L21.293 0L40 18.7929V22.5L23.75 6.25H21.293L2.5 25V28.793L21.293 10L40 28.793V25L21.293 6.20707L2.5 25V21.293L21.293 2.5Z"></path><text x="50" y="28" font-family="Lato, sans-serif" font-size="28" font-weight="700">MOUNT7</text></svg>
+                <h1 class="text-xl font-bold hidden sm:block">Versicherungs-Demo</h1>
+             </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8 space-y-16">
+        
+        <!-- Sektion 1: Produktseite -->
+        <div>
+            <h2 class="text-3xl font-bold mb-6 pb-2 border-b-2 border-[--m7-primary]">1. Anwendungsfall: Produktseite (Widget)</h2>
+            <div class="grid lg:grid-cols-3 gap-8 mt-6">
+                <!-- Linke Spalte: Bilder -->
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-[1fr_4fr] gap-4">
+                    <div class="flex md:flex-col gap-2 overflow-x-auto pb-2">
+                        <img src="https://placehold.co/100x75/e2e8f0/333333?text=Bike" class="rounded-md cursor-pointer border-2 border-transparent hover:border-gray-400" alt="Thumbnail 1">
+                        <img src="https://placehold.co/100x75/e2e8f0/333333?text=Bike" class="rounded-md cursor-pointer border-2 border-gray-400" alt="Thumbnail 2">
+                        <img src="https://placehold.co/100x75/e2e8f0/333333?text=Bike" class="rounded-md cursor-pointer border-2 border-transparent hover:border-gray-400" alt="Thumbnail 3">
+                        <img src="https://placehold.co/100x75/e2e8f0/333333?text=Bike" class="rounded-md cursor-pointer border-2 border-transparent hover:border-gray-400" alt="Thumbnail 4">
+                    </div>
+                    <div>
+                        <img src="https://placehold.co/800x600/e2e8f0/333333?text=Giant+TCR+Advanced" class="rounded-lg w-full" alt="Hauptproduktbild">
+                    </div>
+                </div>
+
+                <!-- Rechte Spalte: Kauf-Box -->
+                <div class="bg-gray-100 rounded-lg p-6 space-y-5 self-start">
+                    <p class="text-sm font-bold text-gray-500">Giant</p>
+                    <h2 class="text-2xl font-bold">TCR Advanced 0 - 2025 S</h2>
+                    <p class="text-3xl font-bold">3.999 €*</p>
+                    
+                    <div class="bg-white rounded-lg border border-gray-200 p-4 space-y-3">
+                         <h3 class="font-bold text-base flex items-center"><span class="iconify w-5 h-5 mr-2 text-[--m7-accent]" data-icon="carbon:shield-check"></span>30 Tage kostenlose Versicherung</h3>
+                         <p class="text-xs text-gray-600">Schutz bei Diebstahl, Vandalismus & Unfallschäden. Endet automatisch. <button id="openModalBtnProduct" class="font-semibold text-[--m7-primary] hover:underline">Mehr erfahren</button></p>
+                         <label for="addInsuranceProduct" class="flex items-center space-x-3 cursor-pointer select-none">
+                             <input type="checkbox" id="addInsuranceProduct" class="form-checkbox">
+                             <span class="font-bold text-sm">Versicherung hinzufügen</span>
+                         </label>
+                    </div>
+                    
+                    <button class="w-full text-white font-bold py-3 px-6 rounded-md hover:opacity-90 transition-opacity flex items-center justify-center" style="background-color: var(--m7-green);">
+                        <span class="iconify w-6 h-6 mr-2" data-icon="carbon:shopping-cart"></span>
+                        In den Warenkorb
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sektion 2: Checkout -->
+        <div>
+            <h2 class="text-3xl font-bold mb-6 pb-2 border-b-2 border-[--m7-primary]">2. Anwendungsfall: Checkout (Checkbox)</h2>
+             <!-- Fortschrittsanzeige -->
+            <div class="my-10">
+                <div class="flex w-full max-w-4xl mx-auto">
+                    <div class="checkout-step active"><div class="step-circle w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center font-bold bg-white z-10">1</div><span class="step-label ml-3 hidden sm:inline">Warenkorb</span></div>
+                    <div class="checkout-step active"><div class="step-circle w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center font-bold bg-white z-10">2</div><span class="step-label ml-3 hidden sm:inline">Adresse</span></div>
+                    <div class="checkout-step active"><div class="step-circle w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center font-bold bg-white z-10">3</div><span class="step-label ml-3 hidden sm:inline">Versand/Zahlungsart</span></div>
+                    <div class="checkout-step active"><div class="step-circle w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center font-bold bg-white z-10">4</div><span class="step-label ml-3 hidden sm:inline">Überprüfen/Absenden</span></div>
+                    <div class="checkout-step"><div class="step-circle w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center font-bold bg-white z-10">5</div><span class="step-label ml-3 hidden sm:inline">Fertig</span></div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-lg shadow-xl max-w-6xl mx-auto">
+                 <h3 class="text-2xl font-bold mb-6 flex items-center"><span class="iconify w-6 h-6 mr-3" data-icon="carbon:information"></span>Bitte prüfe alle Daten, bevor Du deine Bestellung abschließt!</h3>
+                 <div class="mt-8 border-t pt-6">
+                     <h4 class="text-xl font-bold mb-4 flex items-center"><span class="iconify w-6 h-6 mr-3" data-icon="carbon:shopping-cart"></span>Warenkorb</h4>
+                     <div class="flex items-center justify-between py-4 border-b">
+                         <div class="flex items-center gap-4">
+                             <img src="https://placehold.co/80x60/e2e8f0/333333?text=Bike" class="rounded" alt="Produktbild">
+                             <div>
+                                 <p class="font-bold">GIANT TCR Advanced 0 - 2025, S</p>
+                                 <p class="text-sm text-gray-500">Größe: S</p>
+                             </div>
+                         </div>
+                         <div class="text-right">
+                             <p class="font-bold">3.999,00 €</p>
+                         </div>
+                     </div>
+                     
+                    <div class="py-4 border-b">
+                        <label for="addInsuranceCheckout" class="flex items-start space-x-3 cursor-pointer select-none">
+                            <input type="checkbox" id="addInsuranceCheckout" class="form-checkbox mt-1">
+                            <div>
+                                <h5 class="font-bold text-sm">Ja, ich möchte die kostenlose 30-Tage-Versicherung hinzufügen</h5>
+                                <p class="text-xs text-gray-500 mt-1">Schutz bei Diebstahl, Vandalismus & Unfallschäden. Endet automatisch.</p>
+                            </div>
+                        </label>
+                    </div>
+                     <div class="flex justify-end mt-6">
+                         <button class="text-white font-bold py-3 px-8 rounded-md hover:opacity-90 transition-opacity flex items-center justify-center" style="background-color: var(--m7-green);">
+                            <span class="iconify w-5 h-5 mr-2" data-icon="carbon:send-alt"></span>
+                            Jetzt kaufen
+                        </button>
+                    </div>
+                 </div>
+            </div>
+        </div>
+        
+        <!-- Sektion 3: Pop-up -->
+        <div>
+            <h2 class="text-3xl font-bold mb-6 pb-2 border-b-2 border-[--m7-primary]">3. Anwendungsfall: Detailseite (Pop-up)</h2>
+            <div class="bg-white rounded-lg shadow-xl p-8 text-center max-w-6xl mx-auto mt-6">
+                <h3 class="text-2xl font-bold mb-4">Voller Schutz für dein Bike</h3>
+                <p class="max-w-2xl mx-auto mb-6">Hier wird das Angebot durch einen Klick auf einen Button in einem Pop-up-Fenster angezeigt. Der Klick kann von einem beliebigen Element auf der Seite kommen.</p>
+                <button id="openModalBtnDetail" class="bg-[--m7-primary] text-white font-bold py-3 px-8 rounded-lg hover:bg-opacity-90 transition-opacity">
+                    <span class="iconify w-5 h-5 inline-block mr-2" data-icon="carbon:popup"></span>
+                    Pop-up anzeigen
+                </button>
+            </div>
+        </div>
+
+    </main>
+    
+    <!-- Modal für Versicherungsdetails -->
+    <div id="insuranceModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6 hidden">
+        <div id="modalContent" class="bg-white rounded-lg shadow-2xl w-full max-w-md relative transform transition-all opacity-0 scale-95">
+             <button id="closeModalBtn" class="absolute top-3 right-3 text-gray-400 hover:text-[--m7-primary]"><span class="iconify w-7 h-7" data-icon="carbon:close-outline"></span></button>
+             <div class="p-8 text-center space-y-4">
+                 <span class="iconify w-16 h-16 text-[--m7-accent] mx-auto" data-icon="carbon:shield-check"></span>
+                 <h2 class="text-2xl font-bold">30 Tage kostenlose Versicherung</h2>
+                 <p class="text-sm">Versichert gegen Diebstahl, Vandalismus & Unfallschäden.</p>
+                 <ul class="text-sm text-left space-y-2 py-4">
+                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-green-500" data-icon="carbon:checkmark-outline"></span>Keine Zahlungsdaten notwendig</li>
+                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-green-500" data-icon="carbon:checkmark-outline"></span>Endet automatisch nach 30 Tagen</li>
+                     <li class="flex items-center"><span class="iconify w-5 h-5 mr-2 text-green-500" data-icon="carbon:checkmark-outline"></span>Voller Schutz ab dem ersten Tag</li>
+                 </ul>
+                 <label for="addInsuranceModal" class="flex items-center space-x-3 cursor-pointer select-none p-3 rounded-lg hover:bg-gray-50 transition-colors justify-center">
+                    <input type="checkbox" id="addInsuranceModal" class="form-checkbox">
+                    <span class="font-bold text-sm">Ja, Versicherung aktivieren</span>
+                 </label>
+             </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Modal Logik ---
+        const modal = document.getElementById('insuranceModal');
+        const modalContent = document.getElementById('modalContent');
+        const openBtnProduct = document.getElementById('openModalBtnProduct');
+        const openBtnDetail = document.getElementById('openModalBtnDetail');
+        const closeBtn = document.getElementById('closeModalBtn');
+
+        function openModal() {
+            if (modal) modal.classList.remove('hidden');
+            setTimeout(() => { if (modalContent) modalContent.classList.remove('opacity-0', 'scale-95'); }, 10);
+        }
+
+        function closeModal() {
+            if (modalContent) modalContent.classList.add('opacity-0', 'scale-95');
+            setTimeout(() => { if (modal) modal.classList.add('hidden'); }, 200);
+        }
+
+        if (openBtnProduct) openBtnProduct.addEventListener('click', openModal);
+        if (openBtnDetail) openBtnDetail.addEventListener('click', openModal);
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+        if (modal) modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) closeModal(); });
+        
+        // --- Checkbox Synchronisation ---
+        const checkProduct = document.getElementById('addInsuranceProduct');
+        const checkCheckout = document.getElementById('addInsuranceCheckout');
+        const checkModal = document.getElementById('addInsuranceModal');
+
+        if (checkProduct && checkCheckout && checkModal) {
+            const allChecks = [checkProduct, checkCheckout, checkModal];
+            allChecks.forEach(checkbox => {
+                checkbox.addEventListener('change', (e) => {
+                    const isChecked = e.target.checked;
+                    allChecks.forEach(cb => {
+                        if (cb !== e.target) {
+                            cb.checked = isChecked;
+                        }
+                    });
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+
