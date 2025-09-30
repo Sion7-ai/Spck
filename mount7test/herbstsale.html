@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herbst-Sale Mount7.com - Fixes Mockup mit Briefing</title>
+    <!-- Lade Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lato Font geladen (ersetzt Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <!-- Konfiguriere Tailwind: Definiere die Akzentfarbe #A0522D als 'sienna' -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sienna': '#A0522D', // Unsere herbstliche Akzentfarbe (Rostrot-Braun)
+                        'sienna-light': '#D4AA7C', // Für dezente Akzente
+                        'bg-light-gray': '#F7F7F7', // Für Premium Badge Hintergrund
+                        'main-dark': '#212529', // Neue Haupttextfarbe (anstelle von Graustufen)
+                    },
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'], // Font auf Lato umgestellt
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Lato', sans-serif; /* Font auf Lato umgestellt */
+            /* Hintergrund für die gesamte Seite, die den "Arbeitsbereich" umgibt */
+            background-color: #E0E0E0; 
+            overflow-y: auto; /* Erlaubt Scrollen, um das gesamte Artboard zu sehen */
+        }
+
+        /* -------------------------------------------------------- */
+        /* Design Artboard / Canvas Simulation (Fixe Breite und Zentrierung) */
+        /* Alle Inhalte sind in diesem Container fixiert */
+        .design-artboard {
+            width: 1280px; /* Feste Desktop-Breite für das Mockup */
+            margin: 0 auto; /* Zentrierung */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background-color: #FFFFFF; /* Weiße "Zeichenfläche" */
+            min-height: 2400px; /* Genug Platz für alle drei Sektionen */
+        }
+        /* Stil für den durchgestrichenen Preis */
+        .old-price {
+            text-decoration: line-through;
+            text-decoration-thickness: 2px;
+        }
+        /* Spezieller Stil für die Bildkomposition im Hero-Banner */
+        .hero-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.9); /* Bilder leicht abdunkeln für Textkontrast */
+        }
+    </style>
+</head>
+<body class="pt-12 md:pt-16">
+
+    <!-- I. Sticky Ankündigungsbalken (Globales Element) -->
+    <!-- Info: Die Sticky Bar bleibt fixiert im Viewport, unabhängig vom Artboard-Scrollen -->
+    <header class="fixed top-0 left-0 w-full bg-sienna text-white z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-8 py-2 flex justify-between items-center text-sm md:text-base font-semibold">
+            <div class="flex-1 text-center md:text-left">
+                HERBST-SALE: TOP E-BIKES & RENNRÄDER BIS ZU 70 % REDUZIERT | Nur für kurze Zeit
+            </div>
+            <a href="#sale-content" class="ml-4 px-3 py-1 bg-white text-sienna rounded-full hover:bg-gray-100 transition duration-150 whitespace-nowrap text-xs md:text-sm">
+                ZU DEN BIKES
+            </a>
+        </div>
+    </header>
+
+    <!-- Design Artboard / Content Container (Desktop Fixed Width Simulation) -->
+    <main class="design-artboard" id="sale-content">
+        
+        <p class="text-xs text-gray-400 p-4 border-b border-gray-200">
+            **Design-Artboard (Desktop 1280px Breite):** Startseite, Kategorieseite und Produktdetailseite
+        </p>
+        
+        <!-- ###################################################################################### -->
+        <!-- II. Startseite Mockup (Hero-Banner) - BRIEFING -->
+        <!-- ###################################################################################### -->
+        <div class="p-8 pb-4 bg-blue-50 border-l-4 border-blue-500">
+            <h2 class="text-xl font-bold text-gray-900 mb-3">Briefing Sektion 1: Startseite (Hero-Banner)</h2>
+            <div class="text-sm text-gray-700 space-y-2">
+                <p><strong>Anforderung:</strong> Startseite muss Sale sofort als **hochwertiges Event** kommunizieren.</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>**Sticky Ankündigungsbalken:** Fixiert, Akzentfarbe, CTA "ZU DEN BIKES".</li>
+                    <li>**Hero-Banner:** H1/H2, CTA "Angebote entdecken".</li>
+                    <li>**Visuell:** Alle **drei Hero-Bikes** (Madone, 365, Explore) prominent platzieren.</li>
+                </ul>
+                <p class="pt-2 font-semibold text-blue-700">Umgesetzt im Mockup:</p>
+                <ul class="list-disc list-inside ml-4 text-blue-700">
+                    <li>**Sticky Bar:** Oben implementiert (sichtbar im Viewport).</li>
+                    <li>**Hero-Banner:** **Magazin-Layout** mit Collage der 3 Bikes, weißer Farbverlauf zur Text-Klarheit.</li>
+                    <li>**Fokus:** H1, H2 und der Haupt-CTA sind mit der **Sienna-Akzentfarbe** hervorgehoben.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Startseite Mockup (Hero-Banner) - Visualisierung -->
+        <section class="relative w-full h-[600px] mb-12 overflow-hidden bg-bg-light-gray">
+            
+            <!-- Hintergrundbilder als Collage (Magazin-Stil) -->
+            <div class="absolute inset-0">
+                <!-- Bild 1: Diamant 365 (Fokus-Bike, Herbst-Vibe) -->
+                <img src="https://i.ibb.co/5wj3qZ4/DSC06816.jpg" alt="Diamant 365 im Herbstlaub" class="hero-image-overlay w-1/2 h-full object-cover float-right object-center">
+                
+                <!-- Bild 2: Trek Madone (Rennrad) -->
+                <img src="https://i.ibb.co/x8RVq9Jp/A-09092.jpg" alt="Trek Madone Rennrad" class="hero-image-overlay w-1/4 h-1/2 object-cover object-left-top">
+                
+                <!-- Bild 3: Giant Explore (Trekking) -->
+                <img src="https://i.ibb.co/ynhyxMrP/A-08864.jpg" alt="Giant Explore Trekking Bike" class="hero-image-overlay w-1/4 h-1/2 object-cover object-right-bottom ml-1/4">
+            </div>
+
+            <!-- Text/CTA Block (Zentriert und prominent) - Hoher Kontrast für Fokus -->
+            <div class="absolute inset-0 flex items-center p-16 z-10 bg-gradient-to-r from-white/100 to-white/75">
+                <div class="lg:w-2/3">
+                    <p class="text-xl font-medium text-sienna mb-2 uppercase tracking-widest">Premium Event</p>
+                    <h1 class="text-7xl font-extrabold text-main-dark leading-tight mb-4">
+                        HERBST-SALE
+                    </h1>
+                    <h2 class="text-3xl font-light text-main-dark/90 mb-10">
+                        Hochwertige Bikes für **jeden Fahrertyp** jetzt bis zu <span class="font-bold text-sienna-light">70 % reduziert</span>.
+                    </h2>
+                    <!-- CTA steht im Fokus -->
+                    <a href="#" class="inline-block px-16 py-5 bg-sienna text-white text-xl font-bold rounded-full shadow-2xl hover:bg-sienna-light transition duration-300 transform hover:scale-105">
+                        Angebote entdecken
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ###################################################################################### -->
+        <!-- III. Kategorieseite Mockup (Produkt-Raster mit Badges) - BRIEFING -->
+        <!-- ###################################################################################### -->
+        <div class="p-8 pb-4 bg-blue-50 border-l-4 border-blue-500">
+            <h2 class="text-xl font-bold text-gray-900 mb-3">Briefing Sektion 2: Kategorieseite (Badges)</h2>
+            <div class="text-sm text-gray-700 space-y-2">
+                <p><strong>Anforderung:</strong> Sale-Artikel und Top-Deals müssen auf einen Blick erkennbar sein.</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>**Produkt-Verkaufs-Badge:** Sauberes, elegantes Badge für alle reduzierten Produkte.</li>
+                    <li>**Spezial-Badge:** Separates Badge "TOP-ANGEBOT" für Fokus-Produkte (Diamant, Trek).</li>
+                    <li>**Farbe:** Beide Badges müssen die neue Akzentfarbe verwenden.</li>
+                </ul>
+                <p class="pt-2 font-semibold text-blue-700">Umgesetzt im Mockup:</p>
+                <ul class="list-disc list-inside ml-4 text-blue-700">
+                    <li>**Basis-Badge:** Runde **Pille** in **Sienna** ("-XX%") – siehe Produkt 2 & 4.</li>
+                    <li>**Premium-Badge:** Eleganter **Kreis** "TOP-DEAL" mit Sienna-Kontur – siehe Produkt 1 & 3.</li>
+                    <li>Irrelevante Texte (Kategorie, Alter Preis) sind zur **Fokussierung** ausgegraut.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Kategorieseite Mockup (Produkt-Raster mit Badges) - Visualisierung -->
+        <section class="p-8 mb-12">
+            <!-- Sektions-Titel beibehalten -->
+            <h2 class="text-3xl font-bold text-main-dark mb-8 border-b pb-2 border-gray-200">2. Kategorieseite: Produkt-Raster mit Badges</h2>
+            
+            <div class="grid grid-cols-4 gap-6">
+                
+                <!-- Produkt 1: TOP-DEAL (mit beiden Badges) - Diamant 365 -->
+                <div class="bg-bg-light-gray p-3 rounded-xl shadow-lg relative group">
+                    <!-- Badges (Fokus-Elemente) -->
+                    <div class="absolute top-0.5 left-0.5 transform -translate-x-1 -translate-y-1 z-10">
+                        <div class="w-16 h-16 bg-bg-light-gray rounded-full flex items-center justify-center border-2 border-sienna shadow-md">
+                            <span class="text-sienna text-xs font-bold uppercase leading-none text-center">TOP-<br>DEAL</span>
+                        </div>
+                    </div>
+                    <div class="absolute top-2 right-2 z-10 px-3 py-1 bg-sienna text-white text-xs font-bold rounded-full shadow-md">
+                        -40%
+                    </div>
+                    
+                    <img src="https://i.ibb.co/5wj3qZ4/DSC06816.jpg" alt="Diamant 365 Tour Bike" class="w-full h-auto rounded-lg mb-3 object-cover aspect-[4/3]">
+                    <!-- Irrelevante Texte (abgeschwächt) -->
+                    <p class="text-sm text-gray-400">Diamant</p>
+                    <h3 class="font-semibold text-main-dark mb-1">Diamant 365 (Fokus-Bike)</h3>
+                    <div class="flex items-center space-x-2">
+                        <!-- Preis (Fokus-Element) -->
+                        <span class="text-xl font-bold text-sienna">€ 1.299,-</span>
+                        <!-- Alter Preis (abgeschwächt) -->
+                        <span class="text-sm text-gray-400 old-price">€ 2.165,-</span>
+                    </div>
+                </div>
+
+                <!-- Produkt 2: Standard Sale (mit Basis Badge) -->
+                <div class="bg-bg-light-gray p-3 rounded-xl shadow-lg relative group">
+                    <!-- Badge (Fokus-Element) -->
+                    <div class="absolute top-2 right-2 z-10 px-3 py-1 bg-sienna text-white text-xs font-bold rounded-full shadow-md">
+                        -25%
+                    </div>
+                    
+                    <img src="https://placehold.co/400x300/b3b3b3/333?text=MTB+Full+Suspension" alt="MTB Full Suspension" class="w-full h-auto rounded-lg mb-3 object-cover aspect-[4/3]">
+                    <!-- Irrelevante Texte (abgeschwächt) -->
+                    <p class="text-sm text-gray-400">MTB</p>
+                    <h3 class="font-semibold text-main-dark mb-1">Mountainbike Trail Hunter</h3>
+                    <div class="flex items-center space-x-2">
+                         <!-- Preis (Fokus-Element) -->
+                        <span class="text-xl font-bold text-sienna">€ 3.599,-</span>
+                        <!-- Alter Preis (abgeschwächt) -->
+                        <span class="text-sm text-gray-400 old-price">€ 4.799,-</span>
+                    </div>
+                </div>
+
+                <!-- Produkt 3: TOP-DEAL (mit beiden Badges) - Trek Madone -->
+                <div class="bg-bg-light-gray p-3 rounded-xl shadow-lg relative group">
+                    <!-- Badges (Fokus-Elemente) -->
+                    <div class="absolute top-0.5 left-0.5 transform -translate-x-1 -translate-y-1 z-10">
+                        <div class="w-16 h-16 bg-bg-light-gray rounded-full flex items-center justify-center border-2 border-sienna shadow-md">
+                            <span class="text-sienna text-xs font-bold uppercase leading-none text-center">TOP-<br>DEAL</span>
+                        </div>
+                    </div>
+                    <div class="absolute top-2 right-2 z-10 px-3 py-1 bg-sienna text-white text-xs font-bold rounded-full shadow-md">
+                        -70%
+                    </div>
+                    
+                    <img src="https://i.ibb.co/x8RVq9Jp/A-09092.jpg" alt="Trek Madone Rennrad" class="w-full h-auto rounded-lg mb-3 object-cover aspect-[4/3]">
+                    <!-- Irrelevante Texte (abgeschwächt) -->
+                    <p class="text-sm text-gray-400">Trek</p>
+                    <h3 class="font-semibold text-main-dark mb-1">Trek Madone (Fokus-Bike)</h3>
+                    <div class="flex items-center space-x-2">
+                        <!-- Preis (Fokus-Element) -->
+                        <span class="text-xl font-bold text-sienna">€ 2.999,-</span>
+                         <!-- Alter Preis (abgeschwächt) -->
+                        <span class="text-sm text-gray-400 old-price">€ 9.999,-</span>
+                    </div>
+                </div>
+
+                <!-- Produkt 4: Standard Sale (mit Basis Badge) -->
+                <div class="bg-bg-light-gray p-3 rounded-xl shadow-lg relative group">
+                    <!-- Badge (Fokus-Element) -->
+                    <div class="absolute top-2 right-2 z-10 px-3 py-1 bg-sienna text-white text-xs font-bold rounded-full shadow-md">
+                        -15%
+                    </div>
+                    
+                    <img src="https://placehold.co/400x300/b3b3b3/333?text=Urban+Bike" alt="Urban Commuter Bike" class="w-full h-auto rounded-lg mb-3 object-cover aspect-[4/3]">
+                    <!-- Irrelevante Texte (abgeschwächt) -->
+                    <p class="text-sm text-gray-400">Urban</p>
+                    <h3 class="font-semibold text-main-dark mb-1">Urban Commuter 8-Gang</h3>
+                    <div class="flex items-center space-x-2">
+                        <!-- Preis (Fokus-Element) -->
+                        <span class="text-xl font-bold text-sienna">€ 950,-</span>
+                        <!-- Alter Preis (abgeschwächt) -->
+                        <span class="text-sm text-gray-400 old-price">€ 1.118,-</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ###################################################################################### -->
+        <!-- IV. Produktdetailseite Mockup (Dringlichkeit & Preis) - BRIEFING -->
+        <!-- ###################################################################################### -->
+        <div class="p-8 pb-4 bg-blue-50 border-l-4 border-blue-500">
+            <h2 class="text-xl font-bold text-gray-900 mb-3">Briefing Sektion 3: Produktdetailseite</h2>
+            <div class="text-sm text-gray-700 space-y-2">
+                <p><strong>Anforderung:</strong> Wert und Dringlichkeit maximieren, ohne billig zu wirken.</p>
+                <ul class="list-disc list-inside ml-4">
+                    <li>**Verkaufs-Badge:** Gleiches Badge wie auf Kategorieseite, prominent beim Preis/Titel.</li>
+                    <li>**Preisdarstellung:** Neuer Preis muss Wertigkeit und Sparpotenzial maximieren.</li>
+                    <li>**Dringlichkeit:** Optionaler Timer (sollte nicht billig wirken).</li>
+                </ul>
+                <p class="pt-2 font-semibold text-blue-700">Umgesetzt im Mockup:</p>
+                <ul class="list-disc list-inside ml-4 text-blue-700">
+                    <li>**Badge:** **TOP-DEAL** Badge ist prominent neben dem Titel platziert.</li>
+                    <li>**Preis-Hierarchie:** Neuer Preis ist in **Größe und Farbe** (Sienna) maximal dominant.</li>
+                    <li>**Dringlichkeit:** Subtiler **Countdown-Timer** mit Akzent-Border, der die Dringlichkeit unaufdringlich signalisiert.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Produktdetailseite Mockup (Dringlichkeit & Preis) - Visualisierung -->
+        <section class="p-8">
+            <!-- Sektions-Titel beibehalten -->
+            <h2 class="text-3xl font-bold text-main-dark mb-8 border-b pb-2 border-gray-200">3. Produktdetailseite: Fokus-Bike</h2>
+
+            <div class="bg-white p-6 rounded-2xl shadow-xl flex gap-10">
+                <!-- Bild & Galerie (Linkes Drittel) -->
+                <div class="w-1/2">
+                    <img src="https://i.ibb.co/ynhyxMrP/A-08864.jpg" alt="Giant Explore Bike" class="w-full rounded-xl shadow-lg mb-4 object-cover aspect-[4/3]">
+                </div>
+
+                <!-- Details & Kaufblock (Rechtes Drittel) -->
+                <div class="w-1/2">
+                    <h1 class="text-4xl font-extrabold text-main-dark mb-2 flex items-center">
+                        Giant Explore E+ Pro
+                        <!-- TOP-DEAL Badge (Fokus-Element) -->
+                        <span class="ml-4 w-20 h-8 bg-bg-light-gray rounded-full flex items-center justify-center border-2 border-sienna shadow-sm">
+                            <span class="text-sienna text-xs font-bold uppercase">TOP-DEAL</span>
+                        </span>
+                    </h1>
+                    <!-- Beschreibung (abgeschwächt) -->
+                    <p class="text-xl text-gray-400 mb-6">Das hochwertige Trekking E-Bike für jedes Terrain</p>
+
+                    <!-- Preisblock (Hierarchie) -->
+                    <div class="border-t border-b py-4 mb-6 border-gray-200">
+                        <!-- Alter Preis (abgeschwächt) -->
+                        <p class="text-lg text-gray-500 old-price mb-1">UVP: € 4.999,-</p>
+                        <!-- Neuer Preis (Maximaler Fokus) -->
+                        <p class="text-5xl font-extrabold text-sienna leading-none">
+                            € 3.499,-
+                        </p>
+                        <!-- Gesparte Summe (abgeschwächt) -->
+                        <p class="text-sm font-semibold text-sienna-light mt-1">
+                            Sie sparen 30 % (nur im Herbst-Sale)
+                        </p>
+                    </div>
+
+                    <!-- Dringlichkeit (Subtiler Countdown) -->
+                    <div id="countdown" class="p-3 bg-sienna-light/10 text-sienna border-l-4 border-sienna rounded-r-lg mb-6">
+                        <p class="font-semibold text-sm">
+                            ⏳ Dieses Angebot endet in: <span class="font-bold">03 Tage, 14 Stunden, 22 Minuten</span>
+                        </p>
+                    </div>
+
+                    <!-- CTA und Varianten (simuliert) -->
+                    <div class="space-y-4">
+                        <div class="flex space-x-2">
+                            <!-- Haupt-CTA (Maximaler Fokus) -->
+                            <button class="flex-1 py-4 bg-sienna text-white text-lg font-bold rounded-lg hover:bg-sienna-light transition duration-200">
+                                In den Warenkorb
+                            </button>
+                            <!-- Irrelevantes Element 2: Wunschliste (abgeschwächt) -->
+                            <button class="py-4 px-4 border border-gray-200 text-gray-500 rounded-lg hover:bg-gray-50 transition duration-200" title="Auf die Wunschliste setzen">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
